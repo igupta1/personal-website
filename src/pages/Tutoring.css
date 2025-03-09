@@ -1,0 +1,347 @@
+/* Tutoring.css */
+.tutoring-page {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+      Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+    color: #333;
+  }
+  
+  /* Navigation Banner */
+  .tutoring-nav {
+    position: sticky;
+    top: 0;
+    background-color: white;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 100;
+    padding: 1rem 0;
+  }
+  
+  .nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
+  
+  .nav-links {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+  }
+  
+  .nav-links button {
+    background: none;
+    border: none;
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #333;
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+    transition: all 0.2s ease;
+  }
+  
+  .nav-links button:hover {
+    color: #2a7de1;
+  }
+  
+  /* About Section - Removed yellow background */
+  .about-section {
+    background-color: #fff; /* Changed from yellow to white */
+    min-height: 0vh; /* Reduced height */
+    display: flex;
+    align-items: center;
+  }
+  
+  .about-container {
+    max-width: 1000px; /* Reduced from 1200px */
+    margin: 0 auto;
+    padding: 2rem;
+    background-color: #fff; /* Changed from cream to white */
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  }
+  
+  .about-content {
+    display: flex;
+    align-items: center;
+    gap: 2rem; /* Reduced gap */
+  }
+  
+  .about-text {
+    flex: 1;
+  }
+  
+  .about-text h1 {
+    color: #2a7de1; /* Blue color for "Online Tutor" */
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .about-text h2 {
+    color: #29a19c; /* Teal color for "Ishaan Gupta" */
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .about-text p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #555;
+    margin-bottom: 1rem;
+  }
+  
+  .about-images {
+    flex: 0 0 auto; /* Changed from flex: 1 to prevent stretching */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .profile-image {
+    width: 200px; /* Reduced from 350px */
+    margin-bottom: 1rem; /* Reduced from 2rem */
+  }
+  
+  .profile-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  }
+  
+  .logo-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .university-logo {
+    width: 140px; /* Reduced from 150px */
+    height: auto;
+  }
+  
+  .university-logo img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    mix-blend-mode: multiply;
+  }
+  
+  .company-logos {
+    display: flex;
+    justify-content: center;
+    gap: 1rem; /* Reduced from 1.5rem */
+    width: 100%;
+  }
+  
+  .company-logos img {
+    height: 50px; /* Reduced from 40px */
+    width: auto;
+    object-fit: contain;
+    mix-blend-mode: multiply;
+  }
+  
+  /* Services Section */
+  .services-section {
+    padding: 5rem 0;
+    min-height: 90vh;
+    background-color: #f9f9f9;
+  }
+  
+  .section-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+  
+  .services-section h2,
+  .contact-section h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 3rem;
+    color: #333;
+  }
+  
+  /* What We Offer Section */
+  .what-we-offer {
+    margin-bottom: 4rem;
+  }
+  
+  .what-we-offer h3 {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 2.5rem;
+    color: #333;
+  }
+  
+  .offer-items {
+    display: flex;
+    justify-content: space-between;
+    gap: 2rem;
+    margin-top: 2rem;
+  }
+  
+  .offer-item {
+    flex: 1;
+    text-align: center;
+    padding: 1.5rem;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .offer-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  }
+  
+  .offer-image {
+    width: 120px;
+    height: 120px;
+    margin: 0 auto 1.5rem;
+  }
+  
+  .offer-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+  
+  .offer-item h4 {
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+    color: #2a7de1;
+  }
+  
+  .offer-item p {
+    font-size: 1rem;
+    color: #666;
+    line-height: 1.5;
+  }
+  
+  
+  /* Subjects Section */
+.subjects-section {
+    margin-top: 4rem;
+    text-align: center;
+  }
+  
+  .subjects-section h3 {
+    font-size: 2rem;
+    margin-bottom: 2.5rem;
+    color: #333;
+  }
+  
+  .subjects-container {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+  }
+  
+  .subject-item {
+    flex: 1;
+    max-width: 400px; /* Added max-width for better control */
+    padding: 2rem;
+    border-radius: 8px;
+    color: #333;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease;
+  }
+  
+  .subject-item:hover {
+    transform: translateY(-5px);
+  }
+  
+  .subject-item h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    text-align: center;
+  }
+  
+  .subject-item p {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+  }
+  
+  .subject-topics {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    text-align: left;
+    display: inline-block; /* Makes the list only as wide as its content */
+  }
+  
+  .subject-topics li {
+    position: relative;
+    padding-left: 1.5rem;
+    margin-bottom: 0.75rem;
+    font-size: 0.95rem;
+    line-height: 1.4;
+    text-align: left;
+  }
+  
+  .subject-topics li:before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: inherit;
+    font-weight: bold;
+    font-size: 1.2rem;
+  }
+  
+  /* Subject-specific colors */
+  .computer-science {
+    background-color: #e6f7f5; /* Light teal */
+    border-left: 4px solid #11b5a9;
+  }
+  
+  .computer-science .subject-topics li:before {
+    color: #11b5a9;
+  }
+  
+  .general-coding {
+    background-color: #f0e6f7; /* Light purple */
+    border-left: 4px solid #9b59b6;
+  }
+  
+  .general-coding .subject-topics li:before {
+    color: #9b59b6;
+  }
+  
+  .math {
+    background-color: #f7e6e6; /* Light red */
+    border-left: 4px solid #e74c3c;
+  }
+  
+  .math .subject-topics li:before {
+    color: #e74c3c;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 992px) {
+    .subjects-container {
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    
+    .subject-item {
+      flex: 0 0 calc(50% - 1.5rem);
+      max-width: calc(50% - 1.5rem);
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .subjects-container {
+      flex-direction: column;
+      align-items: center;
+    }
+    
+    .subject-item {
+      flex: 0 0 100%;
+      max-width: 100%;
+    }
+  }
+  
+  

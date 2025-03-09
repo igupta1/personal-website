@@ -17,7 +17,7 @@ function About() {
       title: "Incoming Software Engineer Intern",
       company: "Google",
       period: "Summer 2025",
-      description: "Coming soon...",
+      description: "",
       logo: googlelogo, // Add logo path when available
     },
     {
