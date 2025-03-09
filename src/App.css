@@ -1,3 +1,28 @@
+/* App.css */
+:root {
+  --primary-color: #2a7de1;
+  --secondary-color: #29a19c;
+  --accent-color: #f0c14b;
+  --text-dark: #333;
+  --text-light: #666;
+  --background-light: #fff;
+  --background-off: #f9f9f9;
+  --shadow-light: 0 2px 10px rgba(0, 0, 0, 0.1);
+  --shadow-medium: 0 4px 15px rgba(0, 0, 0, 0.1);
+  --transition-standard: all 0.3s ease;
+  --border-radius: 8px;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+    Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  color: var(--text-dark);
+  line-height: 1.6;
+  background-color: var(--background-light);
+  margin: 0;
+  padding: 0;
+}
+
 .app {
   display: flex;
   flex-direction: column;
@@ -6,9 +31,9 @@
 
 /* Header styles */
 .header {
-  background-color: #fff;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  padding: 1rem 0;
+  background-color: var(--background-light);
+  box-shadow: var(--shadow-light);
+  padding: 1.2rem 0;
   position: sticky;
   top: 0;
   z-index: 100;
@@ -18,60 +43,77 @@
   display: flex;
   justify-content: center;
   list-style: none;
-  gap: 2rem;
+  gap: 2.5rem;
+  margin: 0;
+  padding: 0;
 }
 
 .nav-links a {
   text-decoration: none;
-  color: #555;
+  color: var(--text-light);
   font-weight: 500;
-  padding: 0.5rem 1rem;
-  border-radius: 4px;
-  transition: all 0.2s ease;
+  padding: 0.6rem 1.2rem;
+  border-radius: var(--border-radius);
+  transition: var(--transition-standard);
+  position: relative;
 }
 
 .nav-links a:hover {
-  background-color: #f0f0f0;
-  color: #000;
+  color: var(--primary-color);
 }
 
 .nav-links a.active {
-  background-color: #f0f0f0;
-  color: #000;
+  color: var(--primary-color);
   font-weight: 600;
+}
+
+.nav-links a.active::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 30px;
+  height: 3px;
+  background-color: var(--primary-color);
+  border-radius: 3px;
 }
 
 /* Main content */
 .main-content {
   flex: 1;
-  max-width: 800px;
+  max-width: 1200px;
   width: 100%;
   margin: 0 auto;
-  padding: 2rem 1rem;
+  padding: 3rem 1.5rem;
 }
 
 /* About page */
 .about-intro {
-  margin-bottom: 3rem;
+  margin-bottom: 4rem;
   text-align: center;
 }
 
 .about-intro h1 {
-  font-size: 2.5rem;
-  margin-bottom: 1rem;
-  color: #222;
+  font-size: 3rem;
+  margin-bottom: 1.2rem;
+  color: var(--primary-color);
+  font-weight: 700;
 }
 
 .about-intro p {
-  font-size: 1.1rem;
-  color: #555;
-  max-width: 600px;
+  font-size: 1.2rem;
+  color: var(--text-light);
+  max-width: 700px;
   margin: 0 auto;
+  line-height: 1.8;
 }
 
 .about-intro a {
-  color: #0066cc;
+  color: var(--primary-color);
   text-decoration: none;
+  font-weight: 500;
+  transition: var(--transition-standard);
 }
 
 .about-intro a:hover {
@@ -80,225 +122,188 @@
 
 /* Experience section */
 .experience-section {
-  margin-top: 4rem;
+  margin-top: 5rem;
 }
 
 .experience-section h2 {
-  font-size: 1.8rem;
-  margin-bottom: 2rem;
-  color: #222;
-  border-bottom: 2px solid #eaeaea;
-  padding-bottom: 0.5rem;
+  font-size: 2rem;
+  margin-bottom: 3rem;
+  color: var(--text-dark);
+  text-align: center;
+  position: relative;
+  padding-bottom: 1rem;
+}
+
+.experience-section h2::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 3px;
+  background-color: var(--accent-color);
+  border-radius: 3px;
 }
 
 .experience-timeline {
   position: relative;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.experience-timeline::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 20px;
+  width: 2px;
+  background-color: #eaeaea;
 }
 
 .experience-item {
   display: flex;
-  margin-bottom: 2rem;
+  margin-bottom: 3rem;
   position: relative;
+  padding-left: 20px;
 }
 
 .timeline-marker {
-  flex: 0 0 40px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  position: absolute;
+  left: 0;
+  transform: translateX(-50%);
+  z-index: 2;
 }
 
 .timeline-dot {
   width: 16px;
   height: 16px;
-  background-color: #f0c14b;
+  background-color: var(--accent-color);
   border-radius: 50%;
-  margin-top: 8px;
-}
-
-.timeline-line {
-  width: 2px;
-  flex-grow: 1;
-  background-color: #eaeaea;
-  margin-top: 4px;
-}
-
-.experience-content {
-  flex: 1;
-  padding-left: 1.5rem;
-}
-
-.experience-header h3 {
-  font-size: 1.3rem;
-  margin-bottom: 0.25rem;
-  color: #222;
-}
-
-.experience-header h4 {
-  font-size: 1.1rem;
-  font-weight: 500;
-  margin-bottom: 0.25rem;
-  color: #444;
-}
-
-.experience-period {
-  color: #f0c14b;
-  margin-bottom: 0.5rem;
-  font-weight: 500;
-}
-
-.experience-description {
-  color: #666;
-  margin-bottom: 0.5rem;
+  border: 3px solid white;
+  box-shadow: 0 0 0 2px var(--accent-color);
 }
 
 .company-logo {
-  max-width: 80px;
-  margin-top: 1rem;
-}
-
-.company-logo img {
-  width: 100%;
-  height: auto;
-  mix-blend-mode: multiply; /* This makes white backgrounds blend in */
-}
-/* Footer */
-.footer {
-  text-align: center;
-  padding: 2rem 0;
-  background-color: #f0f0f0;
-  margin-top: 3rem;
-  color: #666;
-}
-
-/* Portfolio and Tutoring pages */
-.portfolio-page,
-.tutoring-page {
-  text-align: center;
-  padding: 3rem 0;
-}
-
-.portfolio-page h1,
-.tutoring-page h1 {
-  margin-bottom: 1rem;
-  color: #222;
-}
-
-/* Responsive adjustments */
-@media (max-width: 768px) {
-  .nav-links {
-    gap: 1rem;
-  }
-  
-  .about-intro h1 {
-    font-size: 2rem;
-  }
-  
-  /* Experience item layout */
-.experience-item {
-  display: flex;
-  margin-bottom: 2rem;
-  position: relative;
-  align-items: flex-start;
-}
-
-.timeline-marker {
-  flex: 0 0 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.timeline-dot {
-  width: 16px;
-  height: 16px;
-  background-color: #f0c14b;
-  border-radius: 50%;
-  margin-top: 8px;
-}
-
-.timeline-line {
-  width: 2px;
-  flex-grow: 1;
-  background-color: #eaeaea;
-  margin-top: 4px;
-}
-
-/* Logo styling */
-.company-logo {
-  flex: 0 0 60px;
-  height: 60px;
-  margin-right: 15px;
+  flex: 0 0 80px;
+  height: 80px;
+  margin-right: 25px;
   display: flex;
   align-items: center;
   justify-content: center;
+  background-color: white;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-light);
+  padding: 10px;
 }
 
 .company-logo img {
   max-width: 100%;
   max-height: 100%;
   object-fit: contain;
-  mix-blend-mode: multiply; /* For white backgrounds */
+  mix-blend-mode: multiply;
 }
 
-/* Content styling */
 .experience-content {
   flex: 1;
+  background-color: white;
+  border-radius: var(--border-radius);
+  padding: 1.5rem;
+  box-shadow: var(--shadow-light);
+  transition: var(--transition-standard);
+}
+
+.experience-content:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
 }
 
 .experience-header h3 {
-  font-size: 1.3rem;
-  margin-bottom: 0.25rem;
-  color: #222;
+  font-size: 1.4rem;
+  margin-bottom: 0.5rem;
+  color: var(--primary-color);
 }
 
 .experience-header h4 {
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   font-weight: 500;
-  margin-bottom: 0.25rem;
-  color: #444;
+  margin-bottom: 0.5rem;
+  color: var(--text-dark);
 }
 
 .experience-period {
-  color: #f0c14b;
-  margin-bottom: 0.5rem;
+  color: var(--secondary-color);
+  margin-bottom: 1rem;
   font-weight: 500;
+  font-size: 0.95rem;
 }
 
 .experience-description {
-  color: #666;
-  margin-bottom: 0.5rem;
+  color: var(--text-light);
+  line-height: 1.6;
+}
+
+/* Footer */
+.footer {
+  text-align: center;
+  padding: 2rem 0;
+  background-color: var(--background-off);
+  margin-top: 3rem;
+  color: var(--text-light);
+  font-size: 0.9rem;
 }
 
 /* Responsive adjustments */
-@media (max-width: 768px) {
-  .experience-item {
-    flex-wrap: wrap;
+@media (max-width: 992px) {
+  .main-content {
+    padding: 2rem 1.5rem;
   }
   
-  .timeline-marker {
-    flex: 0 0 20px;
+  .about-intro h1 {
+    font-size: 2.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .nav-links {
+    gap: 1rem;
+  }
+  
+  .about-intro h1 {
+    font-size: 2.2rem;
+  }
+  
+  .about-intro p {
+    font-size: 1.1rem;
+  }
+  
+  .experience-item {
+    flex-direction: column;
   }
   
   .company-logo {
-    order: -1; /* Ensures logo stays at the beginning on mobile */
-    margin-bottom: 10px;
+    margin-bottom: 1rem;
+    margin-right: 0;
+    align-self: flex-start;
+  }
+  
+  .experience-content {
+    width: 100%;
   }
 }
 
-/* Add to App.css */
-.portfolio-page {
-  min-height: 100vh;
-}
-
-/* If you want a dark background like in the screenshot */
-.portfolio-page {
-  background-color: #121212;
-  color: white;
-}
-
-.portfolio-page h1 {
-  color: white;
-}
-
+@media (max-width: 576px) {
+  .nav-links a {
+    padding: 0.5rem 0.8rem;
+    font-size: 0.9rem;
+  }
+  
+  .about-intro h1 {
+    font-size: 2rem;
+  }
+  
+  .experience-section h2 {
+    font-size: 1.8rem;
+  }
 }
