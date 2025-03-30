@@ -13,7 +13,7 @@ import flexibleIcon from '../assets/flexible-hours.png';
 
 function Tutoring() {
   // State for active subject tab
-  const [activeSubject, setActiveSubject] = useState('cs');
+  const [activeSubject, setActiveSubject] = useState('apCSA');
   
   // Create refs for each section
   const aboutRef = useRef(null);
@@ -29,41 +29,69 @@ function Tutoring() {
 
   // Subject content based on active tab
   const subjectContent = {
-    cs: {
-      title: "Computer Science",
-      description: "Master fundamental and advanced Computer Science concepts with personalized guidance. From algorithms to system design, I'll help you build a strong foundation and tackle complex problems with confidence.",
+    apCSA: {
+      title: "AP Computer Science A",
+      description: "Prepare for success in the AP Computer Science A exam with comprehensive coverage of all exam topics. This course focuses on Java programming fundamentals, problem-solving strategies, and test-taking techniques to help you earn a top score.",
       topics: [
-        "AP Computer Science",
+        "Java Programming Basics",
         "Object-Oriented Programming",
-        "Data Structures & Algorithms",
-        "Web Development",
-        "Database Systems",
-        "Software Engineering Principles",
-        "System Design"
+        "Arrays and ArrayList",
+        "Inheritance and Polymorphism",
+        "Recursion and Sorting Algorithms",
+        "AP Exam Practice Questions",
+        "Free Response Question Strategies"
       ]
     },
-    coding: {
-      title: "General Coding",
-      description: "Learn to code from scratch or improve your existing skills with hands-on guidance. I'll help you master programming languages and build real-world projects that showcase your abilities.",
+    python: {
+      title: "Python Programming",
+      description: "From beginner to advanced levels, learn Python programming with personalized instruction. Whether you're just starting out or looking to master advanced concepts, I'll guide you through practical projects and real-world applications.",
       topics: [
-        "Java Development",
-        "Python Programming",
-        "JavaScript & Web Technologies",
-        "C/C++ Programming",
-        "Version Control with Git",
-        "Frontend Frameworks",
-        "Backend Development"
+        "Python Fundamentals (Introductory)",
+        "Data Structures in Python",
+        "Object-Oriented Python",
+        "File I/O and Exception Handling",
+        "Advanced Python Features (Decorators, Generators)",
+        "Python Libraries (NumPy, Pandas, Matplotlib)",
+        "Web Scraping and Automation"
       ]
     },
-    math: {
-      title: "Mathematics",
-      description: "Build a strong foundation in mathematics with clear explanations and problem-solving techniques. From algebra to calculus, I'll help you understand concepts deeply and apply them effectively.",
+    java: {
+      title: "Java Development",
+      description: "Master Java programming at both introductory and advanced levels. Learn core concepts, object-oriented design principles, and advanced topics with hands-on projects tailored to your skill level.",
       topics: [
-        "Algebra",
-        "Geometry",
-        "Pre-Calculus",
-        "AP Calculus (AB & BC)",
-        "AP Statistics"
+        "Java Fundamentals (Introductory)",
+        "Object-Oriented Programming",
+        "Java Collections Framework",
+        "Multithreading and Concurrency",
+        "Advanced Java Topics (Reflection, Annotations)",
+        "Design Patterns",
+        "Enterprise Java Development"
+      ]
+    },
+    machineLearning: {
+      title: "Machine Learning",
+      description: "Demystify the world of AI and machine learning with practical, hands-on instruction. Learn to build and train models, analyze data, and implement machine learning solutions for real-world problems.",
+      topics: [
+        "Machine Learning Fundamentals",
+        "Supervised Learning Algorithms",
+        "Unsupervised Learning Techniques",
+        "Neural Networks and Deep Learning",
+        "Natural Language Processing",
+        "Computer Vision",
+        "Practical ML Project Development"
+      ]
+    },
+    webTech: {
+      title: "JavaScript & Web Technologies",
+      description: "Build dynamic, interactive websites and web applications with comprehensive instruction in modern web development. From front-end frameworks to back-end systems, learn the full stack of technologies needed in today's web ecosystem.",
+      topics: [
+        "HTML and CSS Fundamentals",
+        "JavaScript Essentials",
+        "Front-end Frameworks",
+        "Back-end Development",
+        "RESTful API Design",
+        "Database Integration",
+        "Responsive and Mobile-First Design"
       ]
     }
   };
@@ -74,7 +102,7 @@ function Tutoring() {
       <section className="hero-section">
         <div className="hero-container">
           <div className="hero-content">
-            <h1>Expert Tutoring for Computer Science & Math</h1>
+            <h1>Expert Tutoring for Computer Science & Programming</h1>
             <h2>Personalized learning with a UCLA CS student and Google/Amazon engineer</h2>
           </div>
         </div>
@@ -105,10 +133,7 @@ function Tutoring() {
               I'm a <span className="highlight">Computer Science student at UCLA</span> with experience working at top tech companies including <span className="highlight">Google, Amazon, and Cisco</span>. My passion for teaching stems from my belief that complex concepts can be made accessible to everyone with the right approach.
             </p>
             <p>
-              With over 3 years of tutoring experience, I've helped students of all levels achieve their academic goals, from mastering basic programming concepts to excelling in advanced algorithms and mathematics.
-            </p>
-            <p>
-              My teaching philosophy centers on building strong foundations, developing problem-solving skills, and creating a supportive learning environment where students feel comfortable asking questions and exploring new ideas.
+              With over 3 years of tutoring experience, I've helped students of all levels achieve their goals, from mastering basic programming concepts to developing full-scale applications.
             </p>
             <a href="#contact" className="cta-button" onClick={(e) => {
               e.preventDefault();
@@ -171,27 +196,39 @@ function Tutoring() {
         <div className="subjects-container">
           <div className="subjects-header">
             <h2>What I Teach</h2>
-            <p>Specialized instruction in these key areas</p>
+            <p>Some Example Courses I've Taught Previously</p>
           </div>
           
           <div className="subjects-tabs">
             <button 
-              className={`subject-tab ${activeSubject === 'cs' ? 'active' : ''}`}
-              onClick={() => setActiveSubject('cs')}
+              className={`subject-tab ${activeSubject === 'python' ? 'active' : ''}`}
+              onClick={() => setActiveSubject('python')}
             >
-              Computer Science
+              Python
             </button>
             <button 
-              className={`subject-tab ${activeSubject === 'coding' ? 'active' : ''}`}
-              onClick={() => setActiveSubject('coding')}
+              className={`subject-tab ${activeSubject === 'java' ? 'active' : ''}`}
+              onClick={() => setActiveSubject('java')}
             >
-              General Coding
+              Java
             </button>
             <button 
-              className={`subject-tab ${activeSubject === 'math' ? 'active' : ''}`}
-              onClick={() => setActiveSubject('math')}
+              className={`subject-tab ${activeSubject === 'apCSA' ? 'active' : ''}`}
+              onClick={() => setActiveSubject('apCSA')}
             >
-              Mathematics
+              AP Computer Science A
+            </button>
+            <button 
+              className={`subject-tab ${activeSubject === 'machineLearning' ? 'active' : ''}`}
+              onClick={() => setActiveSubject('machineLearning')}
+            >
+              Machine Learning
+            </button>
+            <button 
+              className={`subject-tab ${activeSubject === 'webTech' ? 'active' : ''}`}
+              onClick={() => setActiveSubject('webTech')}
+            >
+              JavaScript & Web Technologies
             </button>
           </div>
           
@@ -259,7 +296,7 @@ function Tutoring() {
             <div className="testimonial-card">
               <div className="testimonial-content">
                 <p>
-                  "Ishaan's tutoring was instrumental in helping me prepare for my AP Calculus exam. He has a gift for explaining mathematical concepts clearly and making them interesting. I scored a 5 thanks to his help!"
+                  "Ishaan's tutoring was instrumental in helping me prepare for my AP Computer Science Exam. He has a gift for explaining concepts clearly and making them interesting. I scored a 5 thanks to his help!"
                 </p>
               </div>
               <div className="testimonial-author">
@@ -293,7 +330,7 @@ function Tutoring() {
           <div className="contact-info-centered">
             <h2>Get in Touch</h2>
             <p>
-              Ready to boost your skills in Computer Science, Coding, or Math? Contact me today to discuss how I can help you achieve your academic goals.
+              Ready to boost your skills in Computer Science or Programming? Contact me today.
             </p>
             
             <div className="contact-methods">
