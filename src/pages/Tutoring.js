@@ -13,7 +13,7 @@ import flexibleIcon from '../assets/flexible-hours.png';
 
 function Tutoring() {
   // State for active subject tab
-  const [activeSubject, setActiveSubject] = useState('apCSA');
+  const [activeSubject, setActiveSubject] = useState('genAI');
   
   // Create refs for each section
   const aboutRef = useRef(null);
@@ -29,24 +29,24 @@ function Tutoring() {
 
   // Subject content based on active tab
   const subjectContent = {
-    apCSA: {
-      title: "AP Computer Science A",
-      description: "Prepare for success in the AP Computer Science A exam with comprehensive coverage of all exam topics. This course focuses on Java programming fundamentals, problem-solving strategies, and test-taking techniques to help you earn a top score.",
+    genAI: {
+      title: "Generative AI and LLMs",
+      description: "Learn to harness the power of Large Language Models (LLMs) to build innovative applications. This course focuses on practical implementation of AI tools like OpenAI's GPT and DALLE to create useful, real-world projects that demonstrate the capabilities of generative AI.",
       topics: [
-        "Java Programming Basics",
-        "Object-Oriented Programming",
-        "Arrays and ArrayList",
-        "Inheritance and Polymorphism",
-        "Recursion and Sorting Algorithms",
-        "AP Exam Practice Questions",
-        "Free Response Question Strategies"
+        "Fundamentals of Large Language Models",
+        "Prompt Engineering Techniques",
+        "API Integration with OpenAI and Other LLMs",
+        "Building Multi-modal Applications",
+        "Combining AI with Web Development",
+        "Ethical Considerations in AI Development",
+        "Project Planning and Implementation"
       ]
     },
     python: {
       title: "Python Programming",
       description: "From beginner to advanced levels, learn Python programming with personalized instruction. Whether you're just starting out or looking to master advanced concepts, I'll guide you through practical projects and real-world applications.",
       topics: [
-        "Python Fundamentals (Introductory)",
+        "Python Fundamentals",
         "Data Structures in Python",
         "Object-Oriented Python",
         "File I/O and Exception Handling",
@@ -59,39 +59,25 @@ function Tutoring() {
       title: "Java Development",
       description: "Master Java programming at both introductory and advanced levels. Learn core concepts, object-oriented design principles, and advanced topics with hands-on projects tailored to your skill level.",
       topics: [
-        "Java Fundamentals (Introductory)",
+        "Java Fundamentals",
         "Object-Oriented Programming",
         "Java Collections Framework",
         "Multithreading and Concurrency",
         "Advanced Java Topics (Reflection, Annotations)",
-        "Design Patterns",
-        "Enterprise Java Development"
+        "Design Patterns"
       ]
     },
-    machineLearning: {
-      title: "Machine Learning",
-      description: "Demystify the world of AI and machine learning with practical, hands-on instruction. Learn to build and train models, analyze data, and implement machine learning solutions for real-world problems.",
+    apCSA: {
+      title: "AP Computer Science A",
+      description: "Prepare for success in the AP Computer Science A exam with comprehensive coverage of all exam topics. This course focuses on Java programming fundamentals, problem-solving strategies, and test-taking techniques to help you earn a top score.",
       topics: [
-        "Machine Learning Fundamentals",
-        "Supervised Learning Algorithms",
-        "Unsupervised Learning Techniques",
-        "Neural Networks and Deep Learning",
-        "Natural Language Processing",
-        "Computer Vision",
-        "Practical ML Project Development"
-      ]
-    },
-    webTech: {
-      title: "JavaScript & Web Technologies",
-      description: "Build dynamic, interactive websites and web applications with comprehensive instruction in modern web development. From front-end frameworks to back-end systems, learn the full stack of technologies needed in today's web ecosystem.",
-      topics: [
-        "HTML and CSS Fundamentals",
-        "JavaScript Essentials",
-        "Front-end Frameworks",
-        "Back-end Development",
-        "RESTful API Design",
-        "Database Integration",
-        "Responsive and Mobile-First Design"
+        "Java Programming Basics",
+        "Object-Oriented Programming",
+        "Arrays and ArrayList",
+        "Inheritance and Polymorphism",
+        "Recursion and Sorting Algorithms",
+        "AP Exam Practice Questions",
+        "Free Response Question Strategies"
       ]
     }
   };
@@ -143,6 +129,97 @@ function Tutoring() {
         </div>
       </section>
 
+      {/* Subjects Section */}
+      <section ref={subjectsRef} className="subjects-section">
+        <div className="subjects-container">
+          <div className="subjects-header">
+            <h2>Courses</h2>
+          </div>
+          
+          <div className="subjects-tabs">
+            <button 
+              className={`subject-tab ${activeSubject === 'genAI' ? 'active' : ''}`}
+              onClick={() => setActiveSubject('genAI')}
+            >
+              Generative AI and LLMs
+            </button>
+            <button 
+              className={`subject-tab ${activeSubject === 'python' ? 'active' : ''}`}
+              onClick={() => setActiveSubject('python')}
+            >
+              Python
+            </button>
+            <button 
+              className={`subject-tab ${activeSubject === 'java' ? 'active' : ''}`}
+              onClick={() => setActiveSubject('java')}
+            >
+              Java
+            </button>
+            <button 
+              className={`subject-tab ${activeSubject === 'apCSA' ? 'active' : ''}`}
+              onClick={() => setActiveSubject('apCSA')}
+            >
+              AP Computer Science A
+            </button>
+          </div>
+          
+          <div className="subject-content">
+            <div className="subject-details">
+              <div className="subject-info">
+                <h3>{subjectContent[activeSubject].title}</h3>
+                <p>{subjectContent[activeSubject].description}</p>
+                <a href="#contact" className="cta-button" onClick={(e) => {
+                  e.preventDefault();
+                  scrollToSection(contactRef);
+                }}>Inquire About {subjectContent[activeSubject].title}</a>
+              </div>
+              
+              <div className="subject-topics">
+                <h4>Topics Covered:</h4>
+                <ul className="topics-list">
+                  {subjectContent[activeSubject].topics.map((topic, index) => (
+                    <li key={index}>{topic}</li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+            
+            {/* Project Examples Section for Generative AI tab */}
+            {activeSubject === 'genAI' && (
+              <div className="projects-showcase">
+                <h4>Example Student Projects:</h4>
+                <div className="project-examples">
+                  <div className="project-card">
+                    <h5>Comic Strip Generator</h5>
+                    <p>Create custom comic strips using OpenAI and DALL-E APIs</p>
+                  </div>
+                  <div className="project-card">
+                    <h5>Mood Playlist Generator</h5>
+                    <p>Generate custom playlists based on mood using Spotify API and OpenAI</p>
+                  </div>
+                  <div className="project-card">
+                    <h5>AI Flash Card Generator</h5>
+                    <p>Convert study notes into intelligent flashcards with OpenAI and Streamlit</p>
+                  </div>
+                  <div className="project-card">
+                    <h5>Historical Scene Writer</h5>
+                    <p>Generate immersive historical narratives with customizable settings</p>
+                  </div>
+                  <div className="project-card">
+                    <h5>Grade-Level Text Simplifier</h5>
+                    <p>Adapt complex content to different reading levels for educational purposes</p>
+                  </div>
+                  <div className="project-card">
+                    <h5>Template-Based Linkedin Cold Email Generator</h5>
+                    <p>Scrape a target's linkedin page and generate a custom cold email</p>
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+      </section>
+
       {/* Services Section */}
       <section ref={servicesRef} className="services-section">
         <div className="services-container">
@@ -185,71 +262,6 @@ function Tutoring() {
                 <p>
                   Online tutoring with flexible scheduling to fit your busy life. Choose between one-time help, regular weekly sessions, or intensive exam preparation.
                 </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Subjects Section */}
-      <section ref={subjectsRef} className="subjects-section">
-        <div className="subjects-container">
-          <div className="subjects-header">
-            <h2>What I Teach</h2>
-            <p>Some Example Courses I've Taught Previously</p>
-          </div>
-          
-          <div className="subjects-tabs">
-            <button 
-              className={`subject-tab ${activeSubject === 'python' ? 'active' : ''}`}
-              onClick={() => setActiveSubject('python')}
-            >
-              Python
-            </button>
-            <button 
-              className={`subject-tab ${activeSubject === 'java' ? 'active' : ''}`}
-              onClick={() => setActiveSubject('java')}
-            >
-              Java
-            </button>
-            <button 
-              className={`subject-tab ${activeSubject === 'apCSA' ? 'active' : ''}`}
-              onClick={() => setActiveSubject('apCSA')}
-            >
-              AP Computer Science A
-            </button>
-            <button 
-              className={`subject-tab ${activeSubject === 'machineLearning' ? 'active' : ''}`}
-              onClick={() => setActiveSubject('machineLearning')}
-            >
-              Machine Learning
-            </button>
-            <button 
-              className={`subject-tab ${activeSubject === 'webTech' ? 'active' : ''}`}
-              onClick={() => setActiveSubject('webTech')}
-            >
-              JavaScript & Web Technologies
-            </button>
-          </div>
-          
-          <div className="subject-content">
-            <div className="subject-details">
-              <div className="subject-info">
-                <h3>{subjectContent[activeSubject].title}</h3>
-                <p>{subjectContent[activeSubject].description}</p>
-                <a href="#contact" className="cta-button" onClick={(e) => {
-                  e.preventDefault();
-                  scrollToSection(contactRef);
-                }}>Inquire About {subjectContent[activeSubject].title}</a>
-              </div>
-              
-              <div className="subject-topics">
-                <h4>Topics Covered:</h4>
-                <ul className="topics-list">
-                  {subjectContent[activeSubject].topics.map((topic, index) => (
-                    <li key={index}>{topic}</li>
-                  ))}
-                </ul>
               </div>
             </div>
           </div>
