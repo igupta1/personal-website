@@ -1,5 +1,6 @@
 import React, { useState, useRef } from "react";
 import "./Tutoring.css";
+import ProjectModal from "./ProjectModal"; // Import the modal component
 import profilePicture from '../assets/pfp.png';
 import uclaLogo from "../assets/ucla-logo.jpg";
 import googleLogo from '../assets/googlelogo.jpg';
@@ -11,9 +12,24 @@ import knowledgeIcon from '../assets/knowledgeable-teaching.png';
 import resultsIcon from '../assets/improved-results.png';
 import flexibleIcon from '../assets/flexible-hours.png';
 
+// Import project images
+import comicStrip1 from '../assets/projects/comic-strip-1.png';
+import comicStrip2 from '../assets/projects/comic-strip-2.png';
+import emailGenerator1 from '../assets/projects/email-generator-1.png';
+import flashcards1 from '../assets/projects/flashcards-1.png';
+import flashcards2 from '../assets/projects/flashcards-2.png';
+import historicalScene1 from '../assets/projects/historical-scene-1.png';
+import historicalScene2 from '../assets/projects/historical-scene-2.png';
+import moodPlaylist1 from '../assets/projects/mood-playlist-1.png';
+import textSimplifier1 from '../assets/projects/text-simplifier-1.png';
+import textSimplifier2 from '../assets/projects/text-simplifier-2.png';
+
 function Tutoring() {
   // State for active subject tab
   const [activeSubject, setActiveSubject] = useState('genAI');
+  
+  // State for project modal
+  const [selectedProject, setSelectedProject] = useState(null);
   
   // Create refs for each section
   const aboutRef = useRef(null);
@@ -25,6 +41,232 @@ function Tutoring() {
   // Function to scroll to a section
   const scrollToSection = (ref) => {
     ref.current.scrollIntoView({ behavior: "smooth" });
+  };
+  
+  // Function to open a project modal
+  const openProjectModal = (projectKey) => {
+    setSelectedProject(projectKey);
+  };
+  
+  // Function to close the project modal
+  const closeProjectModal = () => {
+    setSelectedProject(null);
+  };
+
+  // Project details data
+  const projectDetails = {
+    comicStrip: {
+      title: "Comic Strip Generator",
+      description: "The Comic Strip Generator is an AI-powered application that transforms written stories into visually engaging comic strips. By leveraging OpenAI's GPT-4 for script breakdown and DALL-E for image generation, this project automatically creates multi-panel comics from simple text input.",
+      skills: [
+        { title: "API Integration", desc: "Connect to OpenAI's GPT and DALL-E APIs" },
+        { title: "Prompt Engineering", desc: "Craft effective prompts for AI image generation" },
+        { title: "Image Processing", desc: "Handle and manipulate images with Python PIL" },
+        { title: "Pipeline Development", desc: "Build multi-stage data processing workflows" }
+      ],
+      highlights: [
+        "Transform any story into a multi-panel comic strip",
+        "Automatically split narratives into visual scenes",
+        "Generate high-quality illustrations with DALL-E 3",
+        "Add text captions to each panel",
+        "Customize panel count and visual style"
+      ],
+      codeSnippet: `# Panel generation example
+def split_into_panels(script):
+    prompt = f"Split the following story into 3-4 short comic panel descriptions. Make each panel visually descriptive:\\n\\n{script}"
+    response = client.chat.completions.create(
+        model="gpt-4",
+        messages=[{"role": "user", "content": prompt}]
+    )
+    text = response.choices[0].message.content
+    panels = text.split('\\n')
+    return [panel.strip("- ").strip() for panel in panels if panel.strip()]`,
+      // Add images
+      sampleImage1: comicStrip1,
+      sampleImage2: comicStrip2
+    },
+    moodPlaylist: {
+      title: "Mood Playlist Generator",
+      description: "Create personalized Spotify playlists based on your current mood using AI. This application combines natural language processing with the Spotify API to analyze mood descriptions and generate the perfect playlist for any emotional state.",
+      skills: [
+        { title: "API Authentication", desc: "Implement OAuth flow with Spotify API" },
+        { title: "Sentiment Analysis", desc: "Analyze mood descriptions with NLP" },
+        { title: "Data Processing", desc: "Filter and organize music recommendations" },
+        { title: "Web Integration", desc: "Create dynamic web interfaces with API data" }
+      ],
+      highlights: [
+        "Generate playlists from natural language mood descriptions",
+        "Customize music genres and energy levels",
+        "Save playlists directly to your Spotify account",
+        "Receive song recommendations with confidence scores",
+        "Adjust recommendations based on feedback"
+      ],
+      codeSnippet: `# GPT-4 generates playlist theme based on mood input
+def get_playlist_description(mood):
+    prompt = f"Suggest a playlist theme and vibe description for someone who is feeling: '{mood}'. Give me a short 1-line theme name and 4-5 genres or artist-style keywords."
+    response = client.chat.completions.create(
+        model="gpt-4",
+        messages=[
+            {"role": "user", "content": prompt}
+        ]
+    )
+    return response.choices[0].message.content.strip()
+
+description = get_playlist_description(mood)
+track_uris = search_tracks(description)
+playlist_url = create_playlist(f"Mood: {mood}", track_uris)`,
+      // Add images
+      sampleImage1: moodPlaylist1
+    },
+    flashcards: {
+      title: "AI Flash Card Generator",
+      description: "Turn your study notes into effective flashcards instantly with AI. This tool analyzes educational content and automatically generates question-answer pairs, making study preparation faster and more efficient.",
+      skills: [
+        { title: "Text Analysis", desc: "Extract key concepts from educational content" },
+        { title: "UI Development", desc: "Create interactive study interfaces with Streamlit" },
+        { title: "Educational Design", desc: "Apply learning principles to flashcard creation" },
+        { title: "Data Persistence", desc: "Save and organize flashcard decks" }
+      ],
+      highlights: [
+        "Generate comprehensive question sets from any text",
+        "Support multiple subjects and difficulty levels",
+        "Interactive study mode with spaced repetition",
+        "Export to popular flashcard formats",
+        "Track learning progress over time"
+      ],
+      codeSnippet: `# GPT-4 prompt for generating flashcards
+prompt = f"""
+You are a helpful study assistant. Turn the following class notes into a list of 
+flashcards with clear Q&A format. Use simple language suitable for high school students.
+
+Subject: {subject if subject else "General"}
+
+Notes:
+{notes_input}
+
+Format:
+Q: ...
+A: ...
+""" 
+
+response = client.chat.completions.create(
+    model="gpt-4",
+    messages=[{"role": "user", "content": prompt}]
+)`,
+      // Add images
+      sampleImage1: flashcards1,
+      sampleImage2: flashcards2
+    },
+    historicalScene: {
+      title: "Historical Scene Writer",
+      description: "Travel through time with AI-generated historical narratives. This application creates immersive scenes from different time periods, complete with historically accurate details, perspectives, and writing styles.",
+      skills: [
+        { title: "Parameter Control", desc: "Fine-tune AI generation with specific controls" },
+        { title: "UI/UX Design", desc: "Create intuitive interfaces for creative applications" },
+        { title: "Historical Research", desc: "Integrate factual context into AI prompts" },
+        { title: "Creative Writing", desc: "Guide AI to produce compelling narratives" }
+      ],
+      highlights: [
+        "Select from dozens of historical periods and cultures",
+        "Choose perspective, tone, and writing style",
+        "Generate detailed descriptions of historical settings",
+        "Create character-driven narratives with period-appropriate dialogue",
+        "Export in multiple formats for educational use"
+      ],
+      codeSnippet: `# Build dynamic prompt based on user selections
+prompt = f"Write a vivid, historically accurate short scene set during {period}."
+if style != "No preference":
+    prompt += f" Write it in the form of a {style.lower()}."
+else:
+    prompt += " Write it in the form of a first-person journal entry."
+if tone != "No preference":
+    prompt += f" Make the tone {tone.lower()}."
+prompt += " It should reflect the events, language, and social atmosphere of that time."`,
+      // Add images
+      sampleImage1: historicalScene1,
+      sampleImage2: historicalScene2
+    },
+    textSimplifier: {
+      title: "Grade-Level Text Simplifier",
+      description: "Make complex content accessible to readers of all levels. This tool automatically adjusts text complexity to match specific reading levels, perfect for educators, content creators, and accessibility advocates.",
+      skills: [
+        { title: "Readability Analysis", desc: "Implement algorithms to measure text complexity" },
+        { title: "Content Adaptation", desc: "Transform text while preserving meaning" },
+        { title: "Educational Standards", desc: "Apply grade-level guidelines to content" },
+        { title: "Vocabulary Control", desc: "Manage word complexity for target audiences" }
+      ],
+      highlights: [
+        "Adjust content for elementary through college reading levels",
+        "Preserve core meaning while simplifying vocabulary and syntax",
+        "Highlight changes between original and simplified text",
+        "Provide readability metrics and statistics",
+        "Process documents in multiple formats"
+      ],
+      codeSnippet: `# Prompt engineering for text simplification
+prompt = f"""
+Simplify the following text so it is easy to read and understand at a {level} reading level. 
+Keep the key ideas, but use vocabulary and sentence structure suitable for that grade.
+
+Text:
+{input_text}
+"""
+response = client.chat.completions.create(
+    model="gpt-4",
+    messages=[{"role": "user", "content": prompt}]
+)`,
+      // Add images
+      sampleImage1: textSimplifier1,
+      sampleImage2: textSimplifier2
+    },
+    emailGenerator: {
+      title: "LinkedIn Cold Email Generator",
+      description: "Boost your networking success with personalized cold emails. This tool scrapes LinkedIn profiles and generates tailored outreach messages based on the recipient's background, experience, and shared connections.",
+      skills: [
+        { title: "Web Scraping", desc: "Extract profile data from LinkedIn pages" },
+        { title: "Personalization AI", desc: "Generate custom messages based on profile analysis" },
+        { title: "Template Design", desc: "Create effective email templates for different scenarios" },
+        { title: "Automation", desc: "Build workflow systems for outreach campaigns" }
+      ],
+      highlights: [
+        "Analyze LinkedIn profiles to identify key talking points",
+        "Generate personalized introductions based on shared interests",
+        "Customize email tone for different industries and roles",
+        "Track open rates and response statistics",
+        "A/B test different message approaches"
+      ],
+      codeSnippet: `// Generate personalized email based on LinkedIn profile
+app.post('/generate-email', async (req, res) => {
+    try {
+        const { profile, template } = req.body;
+        
+        // Build comprehensive prompt with profile and template data
+        const message = await anthropic.messages.create({
+            model: "claude-3-5-haiku-20241022",
+            max_tokens: 500,
+            messages: [
+                {
+                    role: "user",
+                    content: userPrompt
+                }
+            ],
+            system: systemPrompt
+        });
+        
+        // Extract subject line and email body
+        const fullResponse = message.content[0].text.trim();
+        // Processing logic to separate subject and body...
+        
+        res.json({ 
+            email: email, 
+            subject: subject 
+        });
+    } catch (error) {
+        // Error handling...
+    }
+});`,
+      // Add images
+      sampleImage1: emailGenerator1
+    }
   };
 
   // Subject content based on active tab
@@ -189,32 +431,58 @@ function Tutoring() {
               <div className="projects-showcase">
                 <h4>Example Student Projects:</h4>
                 <div className="project-examples">
-                  <div className="project-card">
+                  <div 
+                    className="project-card"
+                    onClick={() => openProjectModal('comicStrip')}
+                  >
                     <h5>Comic Strip Generator</h5>
                     <p>Create custom comic strips using OpenAI and DALL-E APIs</p>
                   </div>
-                  <div className="project-card">
+                  <div 
+                    className="project-card"
+                    onClick={() => openProjectModal('moodPlaylist')}
+                  >
                     <h5>Mood Playlist Generator</h5>
                     <p>Generate custom playlists based on mood using Spotify API and OpenAI</p>
                   </div>
-                  <div className="project-card">
+                  <div 
+                    className="project-card"
+                    onClick={() => openProjectModal('flashcards')}
+                  >
                     <h5>AI Flash Card Generator</h5>
                     <p>Convert study notes into intelligent flashcards with OpenAI and Streamlit</p>
                   </div>
-                  <div className="project-card">
+                  <div 
+                    className="project-card"
+                    onClick={() => openProjectModal('historicalScene')}
+                  >
                     <h5>Historical Scene Writer</h5>
                     <p>Generate immersive historical narratives with customizable settings</p>
                   </div>
-                  <div className="project-card">
+                  <div 
+                    className="project-card"
+                    onClick={() => openProjectModal('textSimplifier')}
+                  >
                     <h5>Grade-Level Text Simplifier</h5>
                     <p>Adapt complex content to different reading levels for educational purposes</p>
                   </div>
-                  <div className="project-card">
+                  <div 
+                    className="project-card"
+                    onClick={() => openProjectModal('emailGenerator')}
+                  >
                     <h5>Template-Based Linkedin Cold Email Generator</h5>
                     <p>Scrape a target's linkedin page and generate a custom cold email</p>
                   </div>
                 </div>
               </div>
+            )}
+            
+            {/* Project Modal */}
+            {selectedProject && (
+              <ProjectModal 
+                project={projectDetails[selectedProject]} 
+                onClose={closeProjectModal}
+              />
             )}
           </div>
         </div>
