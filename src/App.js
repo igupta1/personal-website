@@ -6,6 +6,7 @@ import Footer from "./components/Footer";
 import About from "./pages/About";
 import Portfolio from "./pages/Portfolio";
 import Tutoring from "./pages/Tutoring";
+import AiConsulting from "./pages/AiConsulting";
 import "./App.css";  // Use the existing App.css
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
             <Route path="/about" element={<About />} />
             <Route path="/portfolio" element={<Portfolio />} />
             <Route path="/tutoring" element={<Tutoring />} />
+            <Route path="/ai-consulting" element={<AiConsulting />} />
             <Route path="*" element={<Navigate to="/about" replace />} />
           </Routes>
         </main>
