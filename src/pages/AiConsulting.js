@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Brain, Zap, TrendingUp, Users, CheckCircle, Mail, Calendar, ArrowRight, Star, Building, ChevronRight } from 'lucide-react';
+import headshotImage from '../assets/BV_GRAD-01.jpg';
 
 function AiConsulting() {
   const [formData, setFormData] = useState({
@@ -111,7 +112,7 @@ function AiConsulting() {
               </div>
               <h3 className="text-2xl font-bold text-primary-text mb-4">AI Readiness & Strategy</h3>
               <p className="text-gray-600 mb-6 leading-relaxed">
-              A 90-minute audit to identify your top 3 AI opportunities. We'll build a clear implementation roadmap with a focus on immediate ROI and security.
+              A 90-minute audit to identify your top AI opportunities. We'll build a clear implementation roadmap with a focus on immediate ROI and security.
               </p>
               <ul className="space-y-2">
                 <li className="flex items-center gap-2 text-sm text-gray-600">
@@ -266,11 +267,12 @@ function AiConsulting() {
             </div>
             <div className="relative">
               <div className="bg-white rounded-2xl shadow-2xl p-8 flex items-center justify-center min-h-[400px]">
-                <div className="text-center text-gray-400">
-                  <div className="w-32 h-32 mx-auto mb-4 bg-gray-100 rounded-full flex items-center justify-center">
-                    <span className="text-gray-500 text-sm">Headshot</span>
-                  </div>
-                  <p className="text-sm">Professional headshot placeholder</p>
+                <div className="text-center">
+                  <img 
+                    src={headshotImage} 
+                    alt="Ishaan Gupta - AI Consultant" 
+                    className="w-64 h-64 mx-auto object-cover rounded-full shadow-lg"
+                  />
                 </div>
               </div>
             </div>
