@@ -20,6 +20,7 @@ function App() {
             <Route path="/portfolio" element={<Portfolio />} />
             <Route path="/tutoring" element={<Tutoring />} />
             <Route path="/ai-consulting" element={<AiConsulting />} />
+            <Route path="/ai-tools" element={<Navigate to="/ai-consulting#blog" replace />} />
             <Route path="*" element={<Navigate to="/about" replace />} />
           </Routes>
         </main>
