@@ -84,27 +84,27 @@ function AiConsulting() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50 font-inter">
       {/* Hero Section */}
-      <section className="relative py-24 bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 overflow-hidden">
+      <section className="relative pt-24 pb-8 bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-r from-blue-900/20 to-purple-900/20"></div>
         <div className="absolute inset-0">
           <div className="absolute top-10 left-10 w-72 h-72 bg-blue-400/10 rounded-full blur-3xl"></div>
           <div className="absolute bottom-10 right-10 w-96 h-96 bg-purple-400/10 rounded-full blur-3xl"></div>
         </div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-5xl md:text-7xl font-bold text-white mb-8 leading-tight">
+          <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
             AI Services That
             <span className="block bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
               Drive Results
             </span>
           </h1>
-          <p className="text-xl md:text-2xl text-slate-300 max-w-4xl mx-auto mb-12 leading-relaxed">
+          <p className="text-xl md:text-2xl text-slate-300 max-w-4xl mx-auto mb-6 leading-relaxed">
             Leveraging my experience building GenAI at Google, I deliver practical, secure, and high-ROI AI solutions that automate tasks, save costs, and drive real business results.
           </p>
         </div>
       </section>
 
       {/* Services Section */}
-      <section id="services" className="py-24 relative">
+      <section id="services" className="pt-8 pb-24 relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           
           {/* About Section */}
@@ -278,7 +278,7 @@ function AiConsulting() {
           <div className="text-center mb-20">
             <div className="inline-flex items-center px-4 py-2 bg-blue-50 border border-blue-200 rounded-full mb-8">
               <BookOpen className="w-5 h-5 text-blue-600 mr-2" />
-              <span className="text-blue-700 text-sm font-medium">Implementation Guide</span>
+              <span className="text-blue-700 text-sm font-medium">Blog Post</span>
             </div>
             <h2 className="text-4xl md:text-6xl font-bold text-slate-900 mb-6 leading-tight">
               Strategic Adoption of
@@ -295,7 +295,7 @@ function AiConsulting() {
                 <div className="p-8 lg:p-12">
                   <div className="prose prose-lg max-w-none mb-8">
                     <p className="text-gray-700 leading-relaxed">
-                      91% of small and medium businesses using AI say it directly boosts their revenue, and 86% report improved profit margins. Yet currently only about 28% of SMBs have adopted AI at all. In other words, seven out of ten businesses are leaving money on the table while <strong>AI-enabled competitors race ahead — closing deals faster, personalizing marketing at scale, and running leaner operations</strong>. Every quarter you wait, that gap widens. But how do you actually implement AI in everyday business workflows, beyond the consumer-centric web version of ChatGPT? Below, we break down some of the top AI-powered tools that can help you <strong>find more leads, close those leads, and deliver better service</strong> to reduce customer churn.
+                      91% of small and medium businesses using AI say it directly boosts their revenue, and 86% report improved profit margins. Yet currently only about 28% of SMBs have adopted AI at all. In other words, seven out of ten businesses are leaving money on the table while <strong>AI-enabled competitors race ahead by closing deals faster, personalizing marketing at scale, and running leaner operations</strong>. Every quarter you wait, that gap widens. But how do you actually implement AI in everyday business workflows, beyond the consumer-centric web version of ChatGPT? Below, we break down some of the top AI-powered tools that can help you <strong>find more leads, close those leads, and deliver better service</strong> to reduce customer churn.
                     </p>
                   </div>
                   
