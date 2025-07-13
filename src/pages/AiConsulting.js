@@ -275,7 +275,7 @@ function AiConsulting() {
       <section id="blog" className="py-24 bg-gradient-to-b from-slate-50 to-white relative">
         <div className="absolute inset-0 bg-grid-slate-100 [mask-image:linear-gradient(0deg,white,rgba(255,255,255,0.6))]"></div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-20">
+          <div className="text-center mb-12">
             <div className="inline-flex items-center px-4 py-2 bg-blue-50 border border-blue-200 rounded-full mb-8">
               <BookOpen className="w-5 h-5 text-blue-600 mr-2" />
               <span className="text-blue-700 text-sm font-medium">Blog Post</span>
@@ -284,9 +284,6 @@ function AiConsulting() {
               Strategic Adoption of
               <span className="block text-blue-600">AI Technologies</span>
             </h2>
-            <p className="text-xl text-slate-600 max-w-5xl mx-auto leading-relaxed">
-              A comprehensive guide to using AI for boosting leads, conversions, and customer retention for SMBs
-            </p>
           </div>
           
           <div className="bg-white rounded-3xl shadow-2xl overflow-hidden border border-slate-200">
@@ -294,35 +291,74 @@ function AiConsulting() {
               <div className="bg-white rounded-3xl">
                 <div className="p-8 lg:p-12">
                   <div className="prose prose-lg max-w-none mb-8">
-                    <div className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-2xl p-6 mb-6 border border-blue-100">
-                      <h3 className="text-2xl font-bold text-slate-900 mb-4">The AI Opportunity Gap</h3>
-                      <div className="grid md:grid-cols-2 gap-6 mb-6">
-                        <div className="bg-white rounded-xl p-4 shadow-sm">
-                          <div className="text-3xl font-bold text-blue-600 mb-2">91%</div>
-                          <p className="text-slate-700 text-sm">of SMBs using AI report direct revenue boosts</p>
+                    <div className="relative bg-gradient-to-r from-slate-900 to-slate-800 rounded-3xl p-8 mb-8 shadow-2xl overflow-hidden">
+                      <div className="absolute inset-0 bg-gradient-to-r from-blue-900/20 to-purple-900/20"></div>
+                      <div className="absolute top-4 right-4 w-32 h-32 bg-blue-400/10 rounded-full blur-2xl"></div>
+                      <div className="absolute bottom-4 left-4 w-24 h-24 bg-purple-400/10 rounded-full blur-2xl"></div>
+                      
+                      <div className="relative">
+                        <div className="flex items-center gap-3 mb-6">
+                          <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-600 rounded-xl flex items-center justify-center shadow-lg">
+                            <TrendingUp className="w-6 h-6 text-white" />
+                          </div>
+                          <h3 className="text-3xl font-bold text-white">The AI Opportunity Gap</h3>
                         </div>
-                        <div className="bg-white rounded-xl p-4 shadow-sm">
-                          <div className="text-3xl font-bold text-green-600 mb-2">86%</div>
-                          <p className="text-slate-700 text-sm">see improved profit margins</p>
+                        
+                        <div className="grid md:grid-cols-3 gap-4 mb-6">
+                          <div className="group relative bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20 hover:border-blue-400/50 transition-all duration-300 hover:transform hover:scale-105">
+                            <div className="absolute inset-0 bg-gradient-to-r from-blue-500/5 to-purple-500/5 rounded-2xl"></div>
+                            <div className="relative">
+                              <div className="text-4xl font-bold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent mb-2">91%</div>
+                              <p className="text-slate-300 text-sm leading-relaxed">of SMBs that use AI have reported direct revenue boosts</p>
+                            </div>
+                          </div>
+                          
+                          <div className="group relative bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20 hover:border-green-400/50 transition-all duration-300 hover:transform hover:scale-105">
+                            <div className="absolute inset-0 bg-gradient-to-r from-green-500/5 to-emerald-500/5 rounded-2xl"></div>
+                            <div className="relative">
+                              <div className="text-4xl font-bold bg-gradient-to-r from-green-400 to-emerald-400 bg-clip-text text-transparent mb-2">86%</div>
+                              <p className="text-slate-300 text-sm leading-relaxed">of those companies see improved profit margins</p>
+                            </div>
+                          </div>
+                          
+                          <div className="group relative bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20 hover:border-red-400/50 transition-all duration-300 hover:transform hover:scale-105">
+                            <div className="absolute inset-0 bg-gradient-to-r from-red-500/5 to-orange-500/5 rounded-2xl"></div>
+                            <div className="relative">
+                              <div className="text-4xl font-bold bg-gradient-to-r from-red-400 to-orange-400 bg-clip-text text-transparent mb-2">28%</div>
+                              <p className="text-slate-300 text-sm leading-relaxed">of SMBs have adopted AI at all</p>
+                            </div>
+                          </div>
                         </div>
-                      </div>
-                      <div className="bg-red-50 rounded-xl p-4 border border-red-200">
-                        <div className="text-3xl font-bold text-red-600 mb-2">Only 28%</div>
-                        <p className="text-slate-700 text-sm">of SMBs have adopted AI at all</p>
+                        
+                        <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10">
+                          <div className="flex items-start gap-4">
+                            <div className="w-8 h-8 bg-gradient-to-r from-yellow-500 to-orange-500 rounded-lg flex items-center justify-center mt-1 shadow-lg">
+                              <span className="text-white font-bold text-sm">⚠️</span>
+                            </div>
+                            <div>
+                                                             <h4 className="text-xl text-white mb-2">Seven out of ten businesses are leaving money on the table while AI-enabled competitors race ahead by <strong>closing deals faster, personalizing marketing at scale, and running leaner operations</strong>.</h4>
+                            </div>
+                          </div>
+                        </div>
                       </div>
                     </div>
                     
-                    <p className="text-gray-700 leading-relaxed text-lg">
-                      <strong>Seven out of ten businesses are leaving money on the table</strong> while AI-enabled competitors race ahead by closing deals faster, personalizing marketing at scale, and running leaner operations.
-                    </p>
-                    
-                    <p className="text-gray-700 leading-relaxed">
-                      Every quarter you wait, that gap widens. But how do you actually implement AI in everyday business workflows, beyond the consumer-centric web version of ChatGPT?
-                    </p>
-                    
-                    <p className="text-gray-700 leading-relaxed">
-                      Below, we break down the top AI-powered tools that can help you <strong>find more leads, close those leads, and deliver better service</strong> to reduce customer churn.
-                    </p>
+                    <div className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-2xl p-6 mb-6 border border-blue-200/50 shadow-lg">
+                      <div className="flex items-center gap-3 mb-4">
+                        <div className="w-10 h-10 bg-gradient-to-r from-blue-500 to-purple-600 rounded-xl flex items-center justify-center shadow-lg">
+                          <Zap className="w-5 h-5 text-white" />
+                        </div>
+                        <h4 className="text-xl font-semibold text-slate-900">The Implementation Challenge</h4>
+                      </div>
+                      <p className="text-slate-700 leading-relaxed mb-4">
+                        Every quarter you wait, that gap widens. But how do you actually implement AI in everyday business workflows, beyond the consumer-centric web version of ChatGPT?
+                      </p>
+                      <div className="bg-white/70 backdrop-blur-sm rounded-xl p-4 border border-white/50">
+                        <p className="text-slate-700 leading-relaxed font-medium">
+                          Below, we break down the top AI-powered tools that can help you <strong className="text-blue-700">find more leads, close those leads, and deliver better service</strong> to reduce customer churn.
+                        </p>
+                      </div>
+                    </div>
                   </div>
                   
                   {/* Tab Navigation */}
