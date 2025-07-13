@@ -294,8 +294,34 @@ function AiConsulting() {
               <div className="bg-white rounded-3xl">
                 <div className="p-8 lg:p-12">
                   <div className="prose prose-lg max-w-none mb-8">
+                    <div className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-2xl p-6 mb-6 border border-blue-100">
+                      <h3 className="text-2xl font-bold text-slate-900 mb-4">The AI Opportunity Gap</h3>
+                      <div className="grid md:grid-cols-2 gap-6 mb-6">
+                        <div className="bg-white rounded-xl p-4 shadow-sm">
+                          <div className="text-3xl font-bold text-blue-600 mb-2">91%</div>
+                          <p className="text-slate-700 text-sm">of SMBs using AI report direct revenue boosts</p>
+                        </div>
+                        <div className="bg-white rounded-xl p-4 shadow-sm">
+                          <div className="text-3xl font-bold text-green-600 mb-2">86%</div>
+                          <p className="text-slate-700 text-sm">see improved profit margins</p>
+                        </div>
+                      </div>
+                      <div className="bg-red-50 rounded-xl p-4 border border-red-200">
+                        <div className="text-3xl font-bold text-red-600 mb-2">Only 28%</div>
+                        <p className="text-slate-700 text-sm">of SMBs have adopted AI at all</p>
+                      </div>
+                    </div>
+                    
+                    <p className="text-gray-700 leading-relaxed text-lg">
+                      <strong>Seven out of ten businesses are leaving money on the table</strong> while AI-enabled competitors race ahead by closing deals faster, personalizing marketing at scale, and running leaner operations.
+                    </p>
+                    
                     <p className="text-gray-700 leading-relaxed">
-                      91% of small and medium businesses using AI say it directly boosts their revenue, and 86% report improved profit margins. Yet currently only about 28% of SMBs have adopted AI at all. In other words, seven out of ten businesses are leaving money on the table while <strong>AI-enabled competitors race ahead by closing deals faster, personalizing marketing at scale, and running leaner operations</strong>. Every quarter you wait, that gap widens. But how do you actually implement AI in everyday business workflows, beyond the consumer-centric web version of ChatGPT? Below, we break down some of the top AI-powered tools that can help you <strong>find more leads, close those leads, and deliver better service</strong> to reduce customer churn.
+                      Every quarter you wait, that gap widens. But how do you actually implement AI in everyday business workflows, beyond the consumer-centric web version of ChatGPT?
+                    </p>
+                    
+                    <p className="text-gray-700 leading-relaxed">
+                      Below, we break down the top AI-powered tools that can help you <strong>find more leads, close those leads, and deliver better service</strong> to reduce customer churn.
                     </p>
                   </div>
                   
