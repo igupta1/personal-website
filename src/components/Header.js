@@ -24,7 +24,7 @@ function Header() {
         <ul className="nav-links">
           <li>
             <NavLink
-              to="/about"
+              to="/"
               className={({ isActive }) => (isActive ? "active" : "")}
             >
               Home

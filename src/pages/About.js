@@ -1,6 +1,6 @@
 //About.js
 import React from "react";
-import pfpImage from '../assets/pfp.png';
+import pfpImage from '../assets/headshot.jpg';
 
 // Company logos
 import googlelogo from '../assets/googlelogo.jpg';
