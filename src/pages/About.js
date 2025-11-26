@@ -1,85 +1,169 @@
 //About.js
 import React from "react";
-import ExperienceItem from "../components/ExperienceItem";
+import pfpImage from '../assets/pfp.png';
 
-// You can import company logos here
-// import vestLogo from '../assets/vest-logo.png';
-// import lookbkLogo from '../assets/lookbk-logo.png';
-// etc.
+// Company logos
 import googlelogo from '../assets/googlelogo.jpg';
 import amazonlogo from '../assets/amazonlogo.webp';
 import ciscologo from '../assets/ciscologo.png';
-import wonderlogo from '../assets/wonderlogo.png';
-import skalablelogo from '../assets/skalablelogo.png';
+
+// Project logos
+import linkmailLogo from '../assets/linkmail-logo.png';
+import cscoLogo from '../assets/csco-logo.png';
+import jellypodLogo from '../assets/jellypod-logo.png';
 
 function About() {
+
   const experiences = [
     {
-      title: "Incoming Software Engineer Intern",
+      title: "Software Engineer Intern",
       company: "Google",
       period: "Summer 2025",
-      description: "",
-      logo: googlelogo, // Add logo path when available
+      description: "Generative AI in Gmail and Google Chat",
+      logo: googlelogo,
     },
     {
       title: "Software Engineer Intern",
       company: "Amazon",
       period: "Summer 2024",
       description: "Promise Evaluation Team",
-      logo: amazonlogo, // Add logo path when available
+      logo: amazonlogo,
     },
     {
       title: "Software Engineer Intern",
       company: "Cisco",
       period: "Spring 2024",
-      description: "Distributed Systems Engineering Team",
-      logo: ciscologo, // Add logo path when available
-    },
-    {
-      title: "Software Engineer Intern",
-      company: "Wonder Dynamics",
-      period: "Summer 2023",
-      description:
-        "Computer Vision for CGI & VFX Automation",
-      logo: wonderlogo, // Add logo path when available
-    },
-    {
-      title: "Software Engineer Intern",
-      company: "Skalable Technologies",
-      period: "Summer 2022",
-      description:
-        "Automated Invoice Processing for Workplace Efficiency",
-      logo: skalablelogo, // Add logo path when available
+      description: "Distributed Systems Engineering",
+      logo: ciscologo,
     },
   ];
 
-  return (
-    <div className="about-page">
-      <section className="about-intro">
-        <h1>Hey I'm Ishaan!</h1>
-        <p>
-          A software engineer, a builder, and an escape room fanatic. I'm
-          currently a junior at UCLA studying Computer Science. Feel free to
-          reach out at{" "}
-          <a href="mailto:ishaangpta@g.ucla.edu">ishaangpta@g.ucla.edu</a>!
-        </p>
-      </section>
+  const projects = [
+    {
+      id: 1,
+      title: "Linkmail",
+      description: "Bridging LinkedIn and Gmail with AI Email Generation",
+      icon: linkmailLogo,
+      isImage: true,
+      link: "https://github.com/Jaysontian/linkmail",
+    },
+    {
+      id: 2,
+      title: "CSCO",
+      description: "Your Personal Media Board Meets AI",
+      icon: cscoLogo,
+      isImage: true,
+      link: "https://github.com/cs35l-group/csco",
+    },
+    {
+      id: 3,
+      title: "UCLA Swipes",
+      description: "Helps UCLA Kids Stay On Track With Their Meal Plan",
+      icon: "🍔",
+      link: "https://github.com/nitinsubz/ucla-swipes",
+    },
+    {
+      id: 4,
+      title: "Jellypod x UCLA",
+      description: "UCLA Hub for Jellypod Podcasts For Classes",
+      icon: jellypodLogo,
+      isImage: true,
+      link: "https://github.com/3eif/jelly",
+    },
+    {
+      id: 5,
+      title: "Visual Advertisement Detection",
+      description: "Web Crawler that Locates Visual Ads and Reads Their Contents",
+      icon: "🔍",
+      link: "https://github.com/igupta1/VisualAdvertisementDetection",
+    },
+    {
+      id: 6,
+      title: "Drowsiness Detection",
+      description: "Real-time detection for Alerting Drowsy Drivers",
+      icon: "👁️",
+      link: "https://github.com/igupta1/DrowsinessDetection",
+    },
+    {
+      id: 7,
+      title: "Sensor Fusion",
+      description: "Combined Computer Vision, Ultrasonic, Infrared, and Light Sensors",
+      icon: "🔬",
+      link: "https://github.com/igupta1/SensorFusion",
+    },
+  ];
 
-      <section className="experience-section">
-        <h2>Work Experience</h2>
-        <div className="experience-timeline">
-          {experiences.map((exp, index) => (
-            <ExperienceItem
-              key={index}
-              title={exp.title}
-              company={exp.company}
-              period={exp.period}
-              description={exp.description}
-              logo={exp.logo}
-            />
-          ))}
+  const handleProjectClick = (link) => {
+    window.open(link, "_blank", "noopener,noreferrer");
+  };
+
+  return (
+    <div className="about-page-combined">
+      <div className="about-container">
+        {/* Left Column */}
+        <div className="about-left-column">
+          {/* Profile Section */}
+          <section id="home" className="profile-section">
+            <div className="profile-header">
+              <img src={pfpImage} alt="Ishaan Gupta" className="profile-image" />
+              <div className="profile-info">
+                <h1>Ishaan Gupta</h1>
+                <p>Software engineer. Problem-solver. Builder.
+                <br /> <br />
+                I love both ends of the spectrum — from contributing to large-scale systems at Gmail and Amazon.com, to building products that help people in their everyday workflows. I love turning complex problems into clean, intuitive tools.</p>
+              </div>
+            </div>
+          </section>
+
+          {/* Work Experience Section */}
+          <section id="about" className="work-experience-section">
+            <h2>Work Experience</h2>
+            <div className="experience-list">
+              {experiences.map((exp, index) => (
+                <div key={index} className="experience-card">
+                  <div className="experience-logo">
+                    <img src={exp.logo} alt={`${exp.company} logo`} />
+                  </div>
+                  <div className="experience-details">
+                    <h3>{exp.title}</h3>
+                    <h4 className="company-name">{exp.company}</h4>
+                    <p className="period">{exp.period}</p>
+                    {exp.description && <p className="description">{exp.description}</p>}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
         </div>
-      </section>
+
+        {/* Right Column - Projects */}
+        <div className="about-right-column">
+          <section id="projects" className="projects-section">
+            <h2>Projects</h2>
+            <div className="projects-list">
+              {projects.map((project) => (
+                <div
+                  key={project.id}
+                  className="project-card"
+                  onClick={() => handleProjectClick(project.link)}
+                >
+                  <div className="project-icon">
+                    {project.isImage ? (
+                      <img src={project.icon} alt={project.title} className="project-icon-img" />
+                    ) : (
+                      project.icon
+                    )}
+                  </div>
+                  <div className="project-content">
+                    <h3>{project.title}</h3>
+                    <p>{project.description}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
+        </div>
+      </div>
     </div>
   );
 }

@@ -4,9 +4,6 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-d
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import About from "./pages/About";
-import Portfolio from "./pages/Portfolio";
-import Tutoring from "./pages/Tutoring";
-import AiConsulting from "./pages/AiConsulting";
 import "./App.css";  // Use the existing App.css
 
 function App() {
@@ -17,10 +14,7 @@ function App() {
         <main className="main-content">
           <Routes>
             <Route path="/about" element={<About />} />
-            <Route path="/portfolio" element={<Portfolio />} />
-            <Route path="/tutoring" element={<Tutoring />} />
-            <Route path="/ai-consulting" element={<AiConsulting />} />
-            <Route path="/ai-tools" element={<Navigate to="/ai-consulting#blog" replace />} />
+            <Route path="/portfolio" element={<Navigate to="/about" replace />} />
             <Route path="*" element={<Navigate to="/about" replace />} />
           </Routes>
         </main>
