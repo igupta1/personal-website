@@ -45,7 +45,7 @@ function About() {
       description: "Bridging LinkedIn and Gmail with AI Email Generation",
       icon: linkmailLogo,
       isImage: true,
-      link: "https://github.com/Jaysontian/linkmail",
+      link: "https://linkmail.dev/students",
     },
     {
       id: 2,
@@ -60,7 +60,7 @@ function About() {
       title: "UCLA Swipes",
       description: "Helps UCLA Kids Stay On Track With Their Meal Plan",
       icon: "🍔",
-      link: "https://github.com/nitinsubz/ucla-swipes",
+      link: "https://uclaswipes.com",
     },
     {
       id: 4,
