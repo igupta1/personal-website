@@ -1,0 +1,8 @@
+{
+  "functions": {
+    "api/generate-icebreaker.js": {
+      "maxDuration": 60
+    }
+  }
+}
+

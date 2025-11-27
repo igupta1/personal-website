@@ -8,8 +8,8 @@ import googlelogo from '../assets/googlelogo.jpg';
 import amazonlogo from '../assets/amazonlogo.webp';
 import ciscologo from '../assets/ciscologo.png';
 
-// API endpoint for the backend
-const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:3001';
+// API endpoint - uses relative path for Vercel deployment
+const API_URL = '';
 
 // Cycling status messages to show what the AI is doing
 const STATUS_MESSAGES = [
