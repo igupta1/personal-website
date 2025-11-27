@@ -197,38 +197,16 @@ Full Dataset (450 leads):
 
 
 ╔═══════════════════════════════════════════════════════════════════════════╗
-║                    KEY DIFFERENCES FROM N8N WORKFLOW                      ║
+║                              KEY FEATURES                                 ║
 ╚═══════════════════════════════════════════════════════════════════════════╝
 
-┌─────────────────────┬─────────────────────┬──────────────────────┐
-│ Component           │ n8n Workflow        │ Python Script        │
-├─────────────────────┼─────────────────────┼──────────────────────┤
-│ Input Source        │ Google Sheets       │ Local CSV            │
-│ Lead Discovery      │ Apify scraper       │ Direct from CSV      │
-│ HTTP Requests       │ Sequential          │ Async/Concurrent     │
-│ HTML Parsing        │ n8n HTML node       │ BeautifulSoup        │
-│ Link Filtering      │ Filter + Code nodes │ Python function      │
-│ Content Format      │ Raw HTML            │ Markdown             │
-│ AI Model            │ GPT-4.1             │ GPT-4o               │
-│ Output              │ Google Sheets       │ Local CSV            │
-│ Error Handling      │ Continue on error   │ Try/except + logging │
-│ Progress Tracking   │ n8n UI              │ Console output       │
-│ Deployment          │ n8n server          │ Local/CLI            │
-└─────────────────────┴─────────────────────┴──────────────────────┘
-
-Advantages of Python Version:
-    ✅ Faster (async/concurrent)
-    ✅ More portable (no n8n needed)
-    ✅ Better error visibility
-    ✅ Easier to debug & modify
+Features:
+    ✅ Fast async/concurrent processing
+    ✅ Portable (just Python + OpenAI API)
+    ✅ Clear error visibility via console
+    ✅ Easy to debug & modify
     ✅ Version control friendly
-    ✅ No external dependencies (Apify, Google Sheets)
-
-Kept from n8n:
-    ✅ Exact link filtering logic
-    ✅ Same AI prompts & examples
-    ✅ Same output format
-    ✅ Same error handling approach
+    ✅ No external dependencies beyond OpenAI
 
 
 ╔═══════════════════════════════════════════════════════════════════════════╗
