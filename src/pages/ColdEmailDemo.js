@@ -1,5 +1,5 @@
 //ColdEmailDemo.js
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
 import pfpImage from '../assets/headshot.jpg';
 
@@ -10,6 +10,20 @@ import ciscologo from '../assets/ciscologo.png';
 
 // API endpoint for the backend
 const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:3001';
+
+// Cycling status messages to show what the AI is doing
+const STATUS_MESSAGES = [
+  { icon: "🌐", text: "Connecting to website..." },
+  { icon: "📄", text: "Fetching homepage content..." },
+  { icon: "🔗", text: "Discovering internal pages..." },
+  { icon: "📖", text: "Reading about services..." },
+  { icon: "🔍", text: "Analyzing company values..." },
+  { icon: "🧠", text: "Understanding brand voice..." },
+  { icon: "💡", text: "Identifying unique differentiators..." },
+  { icon: "✍️", text: "Crafting personalized opener..." },
+  { icon: "🎯", text: "Finding specific details..." },
+  { icon: "✨", text: "Polishing the icebreaker..." }
+];
 
 // Demo data from marketing_agencies.csv (first 20 rows)
 const DEMO_LEADS = [
@@ -43,10 +57,31 @@ function ColdEmailDemo() {
   const [processedLeads, setProcessedLeads] = useState([]);
   const [currentLead, setCurrentLead] = useState(null);
   const [processingStatus, setProcessingStatus] = useState('');
+  const [statusIndex, setStatusIndex] = useState(0);
   const [skippedCount, setSkippedCount] = useState(0);
   const [dragActive, setDragActive] = useState(false);
   const [error, setError] = useState(null);
   const fileInputRef = useRef(null);
+
+  // Cycle through status messages while processing
+  useEffect(() => {
+    let interval;
+    if (stage === 'processing' && currentLead) {
+      interval = setInterval(() => {
+        setStatusIndex(prev => (prev + 1) % STATUS_MESSAGES.length);
+      }, 2000); // Change message every 2 seconds
+    }
+    return () => {
+      if (interval) clearInterval(interval);
+    };
+  }, [stage, currentLead]);
+
+  // Reset status index when lead changes
+  useEffect(() => {
+    if (currentLead) {
+      setStatusIndex(0);
+    }
+  }, [currentLead]);
 
   const experiences = [
     { title: "Software Engineer Intern", company: "Google", period: "Summer 2025", description: "Generative AI in Gmail and Google Chat", logo: googlelogo },
@@ -143,15 +178,11 @@ function ColdEmailDemo() {
     
     let successCount = 0;
     const maxLeads = Math.min(leadsToProcess.length, 20);
-    const targetSuccess = 10;
+    const targetSuccess = 5;
 
     for (let i = 0; i < maxLeads && successCount < targetSuccess; i++) {
       const lead = leadsToProcess[i];
       setCurrentLead(lead);
-      setProcessingStatus('scraping');
-      await new Promise(r => setTimeout(r, 500));
-      setProcessingStatus('analyzing');
-      await new Promise(r => setTimeout(r, 500));
       setProcessingStatus('generating');
 
       const result = await generateIcebreaker(lead);
@@ -216,13 +247,8 @@ function ColdEmailDemo() {
     setError(null);
   };
 
-  const getStatusText = () => {
-    switch (processingStatus) {
-      case 'scraping': return 'Scraping website...';
-      case 'analyzing': return 'Analyzing content...';
-      case 'generating': return 'Generating icebreaker...';
-      default: return 'Processing...';
-    }
+  const getCurrentStatus = () => {
+    return STATUS_MESSAGES[statusIndex];
   };
 
   return (
@@ -278,20 +304,20 @@ function ColdEmailDemo() {
                 <div className="demo-how-it-works">
                   <h3>How It Works</h3>
                   <div className="demo-steps-grid">
-                    <div className="demo-step"><span className="demo-step-num">1</span><span className="demo-step-text">Upload Leads</span></div>
-                    <div className="demo-step"><span className="demo-step-num">2</span><span className="demo-step-text">AI Scrapes</span></div>
-                    <div className="demo-step"><span className="demo-step-num">3</span><span className="demo-step-text">Analyze</span></div>
-                    <div className="demo-step"><span className="demo-step-num">4</span><span className="demo-step-text">Icebreaker</span></div>
+                    <div className="demo-step"><span className="demo-step-num">1</span><span className="demo-step-text">Upload Leads as a CSV File</span></div>
+                    <div className="demo-step"><span className="demo-step-num">2</span><span className="demo-step-text">AI Scrapes Web for Deep Insights</span></div>
+                    <div className="demo-step"><span className="demo-step-num">3</span><span className="demo-step-text">Analyze Themes and Metrics</span></div>
+                    <div className="demo-step"><span className="demo-step-num">4</span><span className="demo-step-text">Generate AI Personalized Icebreaker</span></div>
                   </div>
                 </div>
 
-                <button className="demo-try-button" onClick={useDemoData}>Try Demo with 10 Real Leads</button>
+                <button className="demo-try-button" onClick={useDemoData}>Try a Demo with 5 Leads</button>
 
                 <div className="demo-or-divider"><span>OR</span></div>
 
                 <div className={'demo-upload-zone' + (dragActive ? ' drag-active' : '')} onDragEnter={handleDrag} onDragLeave={handleDrag} onDragOver={handleDrag} onDrop={handleDrop} onClick={() => fileInputRef.current?.click()}>
                   <input ref={fileInputRef} type="file" accept=".csv" onChange={handleFileInput} style={{ display: 'none' }} />
-                  <div className="demo-upload-icon">Upload</div>
+                  <div className="demo-upload-icon">📁</div>
                   <h4>Upload Your CSV</h4>
                   <p>Drag and drop or click to browse</p>
                   <span className="demo-upload-hint">Required columns: {REQUIRED_COLUMNS.join(', ')}</span>
@@ -306,26 +332,29 @@ function ColdEmailDemo() {
                   <div className="demo-progress-bar">
                     <div className="demo-progress-fill" style={{ width: ((processedLeads.length + skippedCount) / Math.min(leads.length, 20)) * 100 + '%' }} />
                   </div>
-                  <p className="demo-progress-text">{processedLeads.length} of 10 icebreakers generated{skippedCount > 0 && ' (' + skippedCount + ' skipped)'}</p>
+                  <p className="demo-progress-text">{processedLeads.length} of 5 icebreakers generated</p>
                 </div>
 
                 {currentLead && (
                   <div className="demo-current-lead">
                     <div className="demo-input-card">
-                      <h4>Current Lead</h4>
+                      <h4 className="demo-generating-title">Generating Icebreaker<span className="demo-animated-dots"><span>.</span><span>.</span><span>.</span></span></h4>
                       <div className="demo-input-row"><span className="demo-input-label">Name:</span><span>{currentLead.firstName} {currentLead.lastName}</span></div>
                       <div className="demo-input-row"><span className="demo-input-label">Title:</span><span>{currentLead.title || 'N/A'}</span></div>
                       <div className="demo-input-row"><span className="demo-input-label">Company:</span><span>{currentLead.companyName || 'N/A'}</span></div>
-                      <div className="demo-input-row"><span className="demo-input-label">Email:</span><span>{currentLead.email}</span></div>
                       <div className="demo-input-row"><span className="demo-input-label">Website:</span><span className="demo-highlight">{currentLead.website}</span></div>
                     </div>
+                    
                     <div className="demo-processing-indicator">
-                      <span className="demo-ai-badge">{getStatusText()}</span>
-                      <div className="demo-dots"><span></span><span></span><span></span></div>
-                    </div>
-                    <div className="demo-output-card">
-                      <h4>Generating...</h4>
-                      <div className="demo-skeleton"><div className="demo-skeleton-line"></div><div className="demo-skeleton-line"></div><div className="demo-skeleton-line short"></div></div>
+                      <div className="demo-status-animation">
+                        <div className="demo-status-icon">{getCurrentStatus().icon}</div>
+                        <div className="demo-status-text">{getCurrentStatus().text}</div>
+                      </div>
+                      <div className="demo-progress-steps">
+                        {STATUS_MESSAGES.slice(0, 5).map((_, idx) => (
+                          <div key={idx} className={`demo-progress-dot ${idx <= statusIndex % 5 ? 'active' : ''}`} />
+                        ))}
+                      </div>
                     </div>
                   </div>
                 )}
