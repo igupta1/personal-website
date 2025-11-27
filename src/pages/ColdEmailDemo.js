@@ -8,266 +8,243 @@ import googlelogo from '../assets/googlelogo.jpg';
 import amazonlogo from '../assets/amazonlogo.webp';
 import ciscologo from '../assets/ciscologo.png';
 
-// Sample data from leads_with_icebreakers.csv (first 10)
-const SAMPLE_DATA = [
-  {
-    first_name: "Junior",
-    last_name: "Nyemb",
-    email: "junior@grioagency.com",
-    website_url: "https://grioagency.com",
-    headline: "Founder, CEO",
-    icebreaker: `Hey Junior — went down a rabbit hole on Grio's site. The part about blending data and empathy in "the Grio way" to understand what employees, customers, and investors value caught my eye. Your focus on empathy-led, mission-driven branding stuck with me.`
-  },
-  {
-    first_name: "Rebecca",
-    last_name: "Epperson",
-    email: "repperson@chartwellagency.com",
-    website_url: "https://chartwellagency.com",
-    headline: "Founder/CEO",
-    icebreaker: `Hey Rebecca — went down a rabbit hole on Chartwell's site. The part about using qualitative and quantitative research to shape sector-specific branding really caught my eye. Your focus on outcome‑driven, integrated strategy stuck with me.`
-  },
-  {
-    first_name: "Parker",
-    last_name: "Warren",
-    email: "parker@pwa-media.org",
-    website_url: "https://pwa-media.org",
-    headline: "Agency Owner",
-    icebreaker: `Hey Parker — went down a rabbit hole on PWA's site. The part about driving Utah businesses' growth with data-driven PPC case studies like the 200% sales lift and 45% CPA drop caught my eye. Your focus on transparent, ROI-focused reporting stuck with me.`
-  },
-  {
-    first_name: "Rachel",
-    last_name: "Svoboda",
-    email: "rachel@sundaybrunchagency.com",
-    website_url: "https://sundaybrunchagency.com",
-    headline: "CEO",
-    icebreaker: `Hey Rachel — went down a rabbit hole on SundayBrunch's site. The part about offering AI optimization from stacking and prompt engineering through custom workflows and training caught my eye. Your focus on white-glove, bespoke support for independently owned businesses stuck with me.`
-  },
-  {
-    first_name: "Steven",
-    last_name: "Jumper",
-    email: "steven@ghostnoteagency.com",
-    website_url: "https://ghostnoteagency.com",
-    headline: "Co-founder and Chief Executive Officer",
-    icebreaker: `Hey Steven — went down a rabbit hole on Ghost Note's site. The part about co-building platforms with culture and reducing the translation burden for tastemakers caught my eye. Your focus on cultural fluency that actually earns trust stuck with me.`
-  },
-  {
-    first_name: "Newton",
-    last_name: "Agency",
-    email: "robby@newtonagency.be",
-    website_url: "https://newtonagency.be",
-    headline: "CEO",
-    icebreaker: `Hey Newton — went down a rabbit hole on Newton's site. The part about plugging into a flexible freelancer network to pair a Usability Expert with Stef Boey's rebranding really caught my eye. Your focus on transparent, no-nonsense communication stuck with me.`
-  },
-  {
-    first_name: "Josh",
-    last_name: "Daunt",
-    email: "josh@undauntedvisuals.com",
-    website_url: "https://undauntedagency.com",
-    headline: "Owner, Video Editor, Motion Graphics Artist",
-    icebreaker: `Hey Josh — went down a rabbit hole on Undaunted's site. The part about building audience-driven websites that inform, guide, and convert really caught my eye. Your focus on advertising with purpose stuck with me.`
-  },
-  {
-    first_name: "Marty",
-    last_name: "Engel",
-    email: "martye@hhagency.co",
-    website_url: "https://hhagency.co",
-    headline: "Partner / Chief Revenue Officer",
-    icebreaker: `Hey Marty — went down a rabbit hole on HH's site. The part about tying Digital, Analog, and Experiential into one end-to-end brand-experiences stack caught my eye. Your focus on turning creativity into tangible, measurable outcomes stuck with me.`
-  },
-  {
-    first_name: "Steve",
-    last_name: "Gray",
-    email: "steve.gray@spireagency.com",
-    website_url: "https://spireagency.com",
-    headline: "Co-Owner",
-    icebreaker: `Hey Steve — went down a rabbit hole on Spire's site. The part about using customer interviews and audience segmentation to sharpen B2B messaging caught my eye. Your focus on aligning every brand expression to a strategic foundation stuck with me.`
-  },
-  {
-    first_name: "Seth",
-    last_name: "Gruen",
-    email: "seth.gruen@thebranded.agency",
-    website_url: "https://thebranded.agency",
-    headline: "Co-Founder",
-    icebreaker: `Hey Seth — went down a rabbit hole on Branded's site. The way you frame content as "journalism-level" and position clients as news outlets themselves caught my eye. Your focus on becoming "experts at becoming experts" through rapid immersion really stuck with me.`
-  }
+// API endpoint for the backend
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:3001';
+
+// Demo data from marketing_agencies.csv (first 20 rows)
+const DEMO_LEADS = [
+  { firstName: "Junior", lastName: "Nyemb", title: "Founder, CEO", companyName: "the grio agency", email: "junior@grioagency.com", website: "https://grioagency.com" },
+  { firstName: "Rebecca", lastName: "Epperson", title: "Founder/CEO", companyName: "Chartwell Agency", email: "repperson@chartwellagency.com", website: "https://chartwellagency.com" },
+  { firstName: "Nicole", lastName: "Greige", title: "Founder", companyName: "Glyff Agency", email: "nicolegreige@itsglyff.com", website: "https://itsglyff.com" },
+  { firstName: "Alonso", lastName: "Arias", title: "Founder - CCO", companyName: "the non agency", email: "alonso@thenonagency.com", website: "https://thenonagency.com" },
+  { firstName: "Parker", lastName: "Warren", title: "Agency Owner", companyName: "PWA Media", email: "parker@pwa-media.org", website: "https://pwa-media.org" },
+  { firstName: "Rachel", lastName: "Svoboda", title: "CEO", companyName: "Sunday Brunch Agency", email: "rachel@sundaybrunchagency.com", website: "https://sundaybrunchagency.com" },
+  { firstName: "Steven", lastName: "Jumper", title: "Co-founder and CEO", companyName: "Ghost Note Agency", email: "steven@ghostnoteagency.com", website: "https://ghostnoteagency.com" },
+  { firstName: "Newton", lastName: "Agency", title: "CEO", companyName: "Newton Agency", email: "robby@newtonagency.be", website: "https://newtonagency.be" },
+  { firstName: "Josh", lastName: "Daunt", title: "Owner", companyName: "Undaunted Agency", email: "josh@undauntedvisuals.com", website: "https://undauntedagency.com" },
+  { firstName: "Marty", lastName: "Engel", title: "Partner / CRO", companyName: "HH Agency", email: "martye@hhagency.co", website: "https://hhagency.co" },
+  { firstName: "Steve", lastName: "Gray", title: "Co-Owner", companyName: "Spire Agency", email: "steve.gray@spireagency.com", website: "https://spireagency.com" },
+  { firstName: "Seth", lastName: "Gruen", title: "Co-Founder", companyName: "The Branded Agency", email: "seth.gruen@thebranded.agency", website: "https://thebranded.agency" },
+  { firstName: "Guillermo", lastName: "Plehn", title: "CEO", companyName: "M4 Agency Group", email: "gplehn@m4agency.com", website: "https://m4agency.com" },
+  { firstName: "Aaron", lastName: "Gobidas", title: "CEO", companyName: "GoBeRewarded", email: "aaron@goberewarded.com", website: "https://goberewarded.com" },
+  { firstName: "James", lastName: "Toon", title: "Co-Founder + CCO", companyName: "Solution Agency", email: "jt@yoursolutiondesign.com", website: "https://solutionagency.com" },
+  { firstName: "Shane", lastName: "Bell", title: "CIO", companyName: "HotSpot Agency", email: "shane@urgentfury.com", website: "https://hotspots.agency" },
+  { firstName: "Ashley", lastName: "Kohama", title: "Agency Owner", companyName: "Kohama Marketing", email: "ashley@kohamamarketing.com", website: "https://kohamamarketing.com" },
+  { firstName: "Cheryl", lastName: "Russell", title: "Agency Owner", companyName: "Dot2", email: "cheryl@dot2.studio", website: "https://dot2.studio" },
+  { firstName: "Gerry", lastName: "McGillvray", title: "President and Founder", companyName: "Blackiron Agency", email: "gerry@blackiron.agency", website: "https://blackiron.agency" },
+  { firstName: "Chris", lastName: "Nelson", title: "Founder", companyName: "InCampaign Agency", email: "chris@incampaignagency.com", website: "https://incampaignagency.com" }
 ];
 
+const REQUIRED_COLUMNS = ['First Name', 'Last Name', 'Title', 'Company Name', 'Email', 'Website'];
+
 function ColdEmailDemo() {
-  const [stage, setStage] = useState('upload'); // 'upload', 'processing', 'results'
+  const [stage, setStage] = useState('upload');
   const [leads, setLeads] = useState([]);
   const [processedLeads, setProcessedLeads] = useState([]);
-  const [currentProcessingIndex, setCurrentProcessingIndex] = useState(-1);
+  const [currentLead, setCurrentLead] = useState(null);
+  const [processingStatus, setProcessingStatus] = useState('');
+  const [skippedCount, setSkippedCount] = useState(0);
   const [dragActive, setDragActive] = useState(false);
+  const [error, setError] = useState(null);
   const fileInputRef = useRef(null);
 
   const experiences = [
-    {
-      title: "Software Engineer Intern",
-      company: "Google",
-      period: "Summer 2025",
-      description: "Generative AI in Gmail and Google Chat",
-      logo: googlelogo,
-    },
-    {
-      title: "Software Engineer Intern",
-      company: "Amazon",
-      period: "Summer 2024",
-      description: "Developing Infrastructure for Amazon.com",
-      logo: amazonlogo,
-    },
-    {
-      title: "Software Engineer Intern",
-      company: "Cisco",
-      period: "Spring 2024",
-      description: "Distributed Systems Engineering",
-      logo: ciscologo,
-    },
+    { title: "Software Engineer Intern", company: "Google", period: "Summer 2025", description: "Generative AI in Gmail and Google Chat", logo: googlelogo },
+    { title: "Software Engineer Intern", company: "Amazon", period: "Summer 2024", description: "Developing Infrastructure for Amazon.com", logo: amazonlogo },
+    { title: "Software Engineer Intern", company: "Cisco", period: "Spring 2024", description: "Distributed Systems Engineering", logo: ciscologo }
   ];
 
   const parseCSV = (text) => {
     const lines = text.trim().split('\n');
-    const headers = lines[0].split(',').map(h => h.trim().toLowerCase().replace(/['"]/g, ''));
-    
-    const nameIndex = headers.findIndex(h => (h.includes('name') && h.includes('first')) || h === 'first_name');
-    const lastNameIndex = headers.findIndex(h => (h.includes('name') && h.includes('last')) || h === 'last_name');
-    const emailIndex = headers.findIndex(h => h.includes('email'));
-    const websiteIndex = headers.findIndex(h => h.includes('website') || h.includes('url'));
-    
-    if (emailIndex === -1 || websiteIndex === -1) {
-      alert('CSV must contain email and website columns');
-      return [];
+    if (lines.length < 2) return { error: 'CSV file is empty or has no data rows' };
+
+    const parseRow = (row) => {
+      const result = [];
+      let current = '';
+      let inQuotes = false;
+      for (let i = 0; i < row.length; i++) {
+        const char = row[i];
+        if (char === '"') inQuotes = !inQuotes;
+        else if (char === ',' && !inQuotes) { result.push(current.trim()); current = ''; }
+        else current += char;
+      }
+      result.push(current.trim());
+      return result;
+    };
+
+    const headers = parseRow(lines[0]);
+    const findColumn = (name) => headers.findIndex(h => h.toLowerCase().replace(/['"]/g, '').trim() === name.toLowerCase());
+
+    const columnIndices = {
+      firstName: findColumn('First Name'),
+      lastName: findColumn('Last Name'),
+      title: findColumn('Title'),
+      companyName: findColumn('Company Name'),
+      email: findColumn('Email'),
+      website: findColumn('Website')
+    };
+
+    const missingColumns = [];
+    if (columnIndices.firstName === -1) missingColumns.push('First Name');
+    if (columnIndices.lastName === -1) missingColumns.push('Last Name');
+    if (columnIndices.title === -1) missingColumns.push('Title');
+    if (columnIndices.companyName === -1) missingColumns.push('Company Name');
+    if (columnIndices.email === -1) missingColumns.push('Email');
+    if (columnIndices.website === -1) missingColumns.push('Website');
+
+    if (missingColumns.length > 0) {
+      return { error: 'Missing required columns: ' + missingColumns.join(', ') + '. Your CSV must have these columns: ' + REQUIRED_COLUMNS.join(', ') };
     }
 
     const parsed = [];
-    for (let i = 1; i < Math.min(lines.length, 11); i++) {
-      const values = lines[i].split(',').map(v => v.trim().replace(/['"]/g, ''));
-      if (values[emailIndex] && values[websiteIndex]) {
+    for (let i = 1; i < lines.length && parsed.length < 20; i++) {
+      const values = parseRow(lines[i]);
+      const firstName = values[columnIndices.firstName]?.replace(/['"]/g, '').trim();
+      const lastName = values[columnIndices.lastName]?.replace(/['"]/g, '').trim();
+      const email = values[columnIndices.email]?.replace(/['"]/g, '').trim();
+      const website = values[columnIndices.website]?.replace(/['"]/g, '').trim();
+      
+      if (firstName && email && website) {
         parsed.push({
-          first_name: values[nameIndex] || 'Unknown',
-          last_name: values[lastNameIndex] || '',
-          email: values[emailIndex],
-          website_url: values[websiteIndex],
-          headline: '',
-          icebreaker: null
+          firstName,
+          lastName: lastName || '',
+          title: values[columnIndices.title]?.replace(/['"]/g, '').trim() || '',
+          companyName: values[columnIndices.companyName]?.replace(/['"]/g, '').trim() || '',
+          email,
+          website
         });
       }
     }
-    return parsed;
+
+    if (parsed.length === 0) return { error: 'No valid rows found.' };
+    return { data: parsed };
+  };
+
+  const generateIcebreaker = async (lead) => {
+    try {
+      const response = await fetch(API_URL + '/api/generate-icebreaker', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ lead })
+      });
+      if (!response.ok) throw new Error('HTTP error! status: ' + response.status);
+      return await response.json();
+    } catch (err) {
+      console.error('Error generating icebreaker:', err);
+      return { success: false, error: err.message };
+    }
+  };
+
+  const processLeads = async (leadsToProcess) => {
+    setStage('processing');
+    setProcessedLeads([]);
+    setSkippedCount(0);
+    setError(null);
+    
+    let successCount = 0;
+    const maxLeads = Math.min(leadsToProcess.length, 20);
+    const targetSuccess = 10;
+
+    for (let i = 0; i < maxLeads && successCount < targetSuccess; i++) {
+      const lead = leadsToProcess[i];
+      setCurrentLead(lead);
+      setProcessingStatus('scraping');
+      await new Promise(r => setTimeout(r, 500));
+      setProcessingStatus('analyzing');
+      await new Promise(r => setTimeout(r, 500));
+      setProcessingStatus('generating');
+
+      const result = await generateIcebreaker(lead);
+
+      if (result.success && result.icebreaker) {
+        successCount++;
+        setProcessedLeads(prev => [...prev, { ...lead, icebreaker: result.icebreaker }]);
+      } else {
+        setSkippedCount(prev => prev + 1);
+      }
+    }
+
+    setCurrentLead(null);
+    setProcessingStatus('');
+    setStage('results');
   };
 
   const handleDrag = (e) => {
     e.preventDefault();
     e.stopPropagation();
-    if (e.type === "dragenter" || e.type === "dragover") {
-      setDragActive(true);
-    } else if (e.type === "dragleave") {
-      setDragActive(false);
-    }
+    if (e.type === "dragenter" || e.type === "dragover") setDragActive(true);
+    else if (e.type === "dragleave") setDragActive(false);
   };
 
   const handleDrop = (e) => {
     e.preventDefault();
     e.stopPropagation();
     setDragActive(false);
-    if (e.dataTransfer.files && e.dataTransfer.files[0]) {
-      handleFile(e.dataTransfer.files[0]);
-    }
+    if (e.dataTransfer.files && e.dataTransfer.files[0]) handleFile(e.dataTransfer.files[0]);
   };
 
   const handleFileInput = (e) => {
-    if (e.target.files && e.target.files[0]) {
-      handleFile(e.target.files[0]);
-    }
+    if (e.target.files && e.target.files[0]) handleFile(e.target.files[0]);
   };
 
   const handleFile = (file) => {
-    if (!file.name.endsWith('.csv')) {
-      alert('Please upload a CSV file');
-      return;
-    }
+    setError(null);
+    if (!file.name.endsWith('.csv')) { setError('Please upload a CSV file'); return; }
     const reader = new FileReader();
     reader.onload = (e) => {
-      const parsed = parseCSV(e.target.result);
-      if (parsed.length > 0) {
-        setLeads(parsed);
-        startProcessing(parsed, true);
-      }
+      const result = parseCSV(e.target.result);
+      if (result.error) { setError(result.error); return; }
+      setLeads(result.data);
+      processLeads(result.data);
     };
     reader.readAsText(file);
   };
 
-  const useSampleData = () => {
-    setLeads(SAMPLE_DATA);
-    startProcessing(SAMPLE_DATA, false);
-  };
-
-  const startProcessing = (dataToProcess, isUserData) => {
-    setStage('processing');
-    setProcessedLeads([]);
-    setCurrentProcessingIndex(0);
-    
-    dataToProcess.forEach((lead, index) => {
-      setTimeout(() => {
-        setCurrentProcessingIndex(index);
-        
-        setTimeout(() => {
-          setProcessedLeads(prev => [...prev, {
-            ...lead,
-            icebreaker: isUserData 
-              ? generateDemoIcebreaker(lead)
-              : lead.icebreaker
-          }]);
-          
-          if (index === dataToProcess.length - 1) {
-            setTimeout(() => {
-              setStage('results');
-            }, 500);
-          }
-        }, 800);
-      }, index * 1200);
-    });
-  };
-
-  const generateDemoIcebreaker = (lead) => {
-    const domain = lead.website_url.replace(/https?:\/\//, '').replace('www.', '').split('/')[0];
-    const companyName = domain.split('.')[0].charAt(0).toUpperCase() + domain.split('.')[0].slice(1);
-    return `Hey ${lead.first_name} — went down a rabbit hole on ${companyName}'s site. Your approach to serving clients with personalized solutions caught my eye. Your focus on delivering real value stuck with me.`;
+  const useDemoData = () => {
+    setError(null);
+    setLeads(DEMO_LEADS);
+    processLeads(DEMO_LEADS);
   };
 
   const resetDemo = () => {
     setStage('upload');
     setLeads([]);
     setProcessedLeads([]);
-    setCurrentProcessingIndex(-1);
+    setCurrentLead(null);
+    setProcessingStatus('');
+    setSkippedCount(0);
+    setError(null);
+  };
+
+  const getStatusText = () => {
+    switch (processingStatus) {
+      case 'scraping': return 'Scraping website...';
+      case 'analyzing': return 'Analyzing content...';
+      case 'generating': return 'Generating icebreaker...';
+      default: return 'Processing...';
+    }
   };
 
   return (
     <div className="about-page-combined">
       <div className="about-container">
-        {/* Left Column - Profile & Experience */}
         <div className="about-left-column">
-          {/* Profile Section */}
           <section id="home" className="profile-section">
             <div className="profile-header">
               <img src={pfpImage} alt="Ishaan Gupta" className="profile-image" />
               <div className="profile-info">
                 <h1>Ishaan Gupta</h1>
-                <p>Software Engineer • Problem Solver • Builder
-                <br /> <br />
-                From large-scale systems at Gmail and Amazon.com to the tools I build for everyday users, I focus on transforming complex problems into clear, usable solutions.</p>
+                <p>Software Engineer - Problem Solver - Builder<br /><br />From large-scale systems at Gmail and Amazon.com to the tools I build for everyday users, I focus on transforming complex problems into clear, usable solutions.</p>
               </div>
             </div>
           </section>
 
-          {/* Work Experience Section */}
           <section id="about" className="work-experience-section">
             <h2>Work Experience</h2>
             <div className="experience-list">
               {experiences.map((exp, index) => (
                 <div key={index} className="experience-card">
-                  <div className="experience-logo">
-                    <img src={exp.logo} alt={`${exp.company} logo`} />
-                  </div>
+                  <div className="experience-logo"><img src={exp.logo} alt={exp.company + ' logo'} /></div>
                   <div className="experience-details">
                     <h3>{exp.title}</h3>
                     <h4 className="company-name">{exp.company}</h4>
@@ -280,199 +257,125 @@ function ColdEmailDemo() {
           </section>
         </div>
 
-        {/* Right Column - Demo Content */}
         <div className="about-right-column">
           <section className="demo-section">
-            {/* Demo Header */}
             <div className="demo-section-header">
-              <Link to="/ai-tools" className="back-link-inline">
-                ← Back to AI Tools
-              </Link>
+              <Link to="/ai-tools" className="back-link-inline">Back to AI Tools</Link>
               <h2>Cold Email Deep Personalization</h2>
-              <p className="demo-section-subtitle">
-                Watch AI Analyze Websites and Generate Hyper-Personalized Icebreakers
-              </p>
+              <p className="demo-section-subtitle">Watch AI Analyze Websites and Generate Hyper-Personalized Icebreakers</p>
             </div>
 
-            {/* Upload Stage */}
+            {error && (
+              <div className="demo-error">
+                <span className="demo-error-icon">Warning</span>
+                <span>{error}</span>
+                <button onClick={() => setError(null)} className="demo-error-close">x</button>
+              </div>
+            )}
+
             {stage === 'upload' && (
               <div className="demo-upload-stage">
-                {/* How It Works */}
                 <div className="demo-how-it-works">
                   <h3>How It Works</h3>
                   <div className="demo-steps-grid">
-                    <div className="demo-step">
-                      <span className="demo-step-num">1</span>
-                      <span className="demo-step-icon">📋</span>
-                      <span className="demo-step-text">Upload Leads</span>
-                    </div>
-                    <div className="demo-step">
-                      <span className="demo-step-num">2</span>
-                      <span className="demo-step-icon">🔍</span>
-                      <span className="demo-step-text">AI Scrapes</span>
-                    </div>
-                    <div className="demo-step">
-                      <span className="demo-step-num">3</span>
-                      <span className="demo-step-icon">🧠</span>
-                      <span className="demo-step-text">Analyze</span>
-                    </div>
-                    <div className="demo-step">
-                      <span className="demo-step-num">4</span>
-                      <span className="demo-step-icon">✨</span>
-                      <span className="demo-step-text">Icebreaker</span>
-                    </div>
+                    <div className="demo-step"><span className="demo-step-num">1</span><span className="demo-step-text">Upload Leads</span></div>
+                    <div className="demo-step"><span className="demo-step-num">2</span><span className="demo-step-text">AI Scrapes</span></div>
+                    <div className="demo-step"><span className="demo-step-num">3</span><span className="demo-step-text">Analyze</span></div>
+                    <div className="demo-step"><span className="demo-step-num">4</span><span className="demo-step-text">Icebreaker</span></div>
                   </div>
                 </div>
 
-                {/* Demo Button First */}
-                <button className="demo-try-button" onClick={useSampleData}>
-                  <span>🚀</span>
-                  Try Demo with 10 Real Leads
-                </button>
+                <button className="demo-try-button" onClick={useDemoData}>Try Demo with 10 Real Leads</button>
 
-                <div className="demo-or-divider">
-                  <span>OR</span>
-                </div>
+                <div className="demo-or-divider"><span>OR</span></div>
 
-                {/* Upload Zone */}
-                <div 
-                  className={`demo-upload-zone ${dragActive ? 'drag-active' : ''}`}
-                  onDragEnter={handleDrag}
-                  onDragLeave={handleDrag}
-                  onDragOver={handleDrag}
-                  onDrop={handleDrop}
-                  onClick={() => fileInputRef.current?.click()}
-                >
-                  <input
-                    ref={fileInputRef}
-                    type="file"
-                    accept=".csv"
-                    onChange={handleFileInput}
-                    style={{ display: 'none' }}
-                  />
-                  <div className="demo-upload-icon">📁</div>
+                <div className={'demo-upload-zone' + (dragActive ? ' drag-active' : '')} onDragEnter={handleDrag} onDragLeave={handleDrag} onDragOver={handleDrag} onDrop={handleDrop} onClick={() => fileInputRef.current?.click()}>
+                  <input ref={fileInputRef} type="file" accept=".csv" onChange={handleFileInput} style={{ display: 'none' }} />
+                  <div className="demo-upload-icon">Upload</div>
                   <h4>Upload Your CSV</h4>
-                  <p>Drag & drop or click to browse</p>
-                  <span className="demo-upload-hint">Requires: name, email, website</span>
+                  <p>Drag and drop or click to browse</p>
+                  <span className="demo-upload-hint">Required columns: {REQUIRED_COLUMNS.join(', ')}</span>
                 </div>
               </div>
             )}
 
-            {/* Processing Stage */}
             {stage === 'processing' && (
               <div className="demo-processing-stage">
                 <div className="demo-progress-header">
                   <h3>Generating Icebreakers</h3>
                   <div className="demo-progress-bar">
-                    <div 
-                      className="demo-progress-fill" 
-                      style={{ width: `${((currentProcessingIndex + 1) / leads.length) * 100}%` }}
-                    />
+                    <div className="demo-progress-fill" style={{ width: ((processedLeads.length + skippedCount) / Math.min(leads.length, 20)) * 100 + '%' }} />
                   </div>
-                  <p className="demo-progress-text">
-                    Processing {currentProcessingIndex + 1} of {leads.length}...
-                  </p>
+                  <p className="demo-progress-text">{processedLeads.length} of 10 icebreakers generated{skippedCount > 0 && ' (' + skippedCount + ' skipped)'}</p>
                 </div>
 
-                {currentProcessingIndex >= 0 && leads[currentProcessingIndex] && (
+                {currentLead && (
                   <div className="demo-current-lead">
                     <div className="demo-input-card">
-                      <h4>📊 Input</h4>
-                      <div className="demo-input-row">
-                        <span className="demo-input-label">Name:</span>
-                        <span>{leads[currentProcessingIndex].first_name} {leads[currentProcessingIndex].last_name}</span>
-                      </div>
-                      <div className="demo-input-row">
-                        <span className="demo-input-label">Email:</span>
-                        <span>{leads[currentProcessingIndex].email}</span>
-                      </div>
-                      <div className="demo-input-row">
-                        <span className="demo-input-label">Website:</span>
-                        <span className="demo-highlight">{leads[currentProcessingIndex].website_url}</span>
-                      </div>
+                      <h4>Current Lead</h4>
+                      <div className="demo-input-row"><span className="demo-input-label">Name:</span><span>{currentLead.firstName} {currentLead.lastName}</span></div>
+                      <div className="demo-input-row"><span className="demo-input-label">Title:</span><span>{currentLead.title || 'N/A'}</span></div>
+                      <div className="demo-input-row"><span className="demo-input-label">Company:</span><span>{currentLead.companyName || 'N/A'}</span></div>
+                      <div className="demo-input-row"><span className="demo-input-label">Email:</span><span>{currentLead.email}</span></div>
+                      <div className="demo-input-row"><span className="demo-input-label">Website:</span><span className="demo-highlight">{currentLead.website}</span></div>
                     </div>
-
                     <div className="demo-processing-indicator">
-                      <span className="demo-ai-badge">🤖 AI Processing</span>
-                      <div className="demo-dots">
-                        <span></span><span></span><span></span>
-                      </div>
+                      <span className="demo-ai-badge">{getStatusText()}</span>
+                      <div className="demo-dots"><span></span><span></span><span></span></div>
                     </div>
-
                     <div className="demo-output-card">
-                      <h4>✨ Output</h4>
-                      <div className="demo-skeleton">
-                        <div className="demo-skeleton-line"></div>
-                        <div className="demo-skeleton-line"></div>
-                        <div className="demo-skeleton-line short"></div>
-                      </div>
+                      <h4>Generating...</h4>
+                      <div className="demo-skeleton"><div className="demo-skeleton-line"></div><div className="demo-skeleton-line"></div><div className="demo-skeleton-line short"></div></div>
                     </div>
                   </div>
                 )}
 
-                <div className="demo-completed-list">
-                  <h4>Completed ({processedLeads.length}/{leads.length})</h4>
-                  <div className="demo-completed-items">
-                    {processedLeads.map((lead, index) => (
-                      <span key={index} className="demo-completed-item">
-                        ✓ {lead.first_name}
-                      </span>
-                    ))}
+                {processedLeads.length > 0 && (
+                  <div className="demo-live-results">
+                    <h4>Completed Icebreakers ({processedLeads.length})</h4>
+                    <div className="demo-live-results-list">
+                      {processedLeads.map((lead, index) => (
+                        <div key={index} className="demo-live-result-card">
+                          <div className="demo-live-result-header">
+                            <div className="demo-result-avatar">{lead.firstName.charAt(0)}{lead.lastName.charAt(0) || ''}</div>
+                            <div className="demo-live-result-name"><strong>{lead.firstName} {lead.lastName}</strong><span>{lead.companyName}</span></div>
+                            <span className="demo-live-result-check">Done</span>
+                          </div>
+                          <p className="demo-live-result-icebreaker">{lead.icebreaker}</p>
+                        </div>
+                      ))}
+                    </div>
                   </div>
-                </div>
+                )}
+
+                <button className="demo-cancel-button" onClick={resetDemo}>Cancel</button>
               </div>
             )}
 
-            {/* Results Stage */}
             {stage === 'results' && (
               <div className="demo-results-stage">
                 <div className="demo-results-header">
-                  <h3>🎉 All Icebreakers Generated!</h3>
-                  <button className="demo-reset-button" onClick={resetDemo}>
-                    ← Run Again
-                  </button>
+                  <h3>{processedLeads.length} Icebreakers Generated!</h3>
                 </div>
 
                 <div className="demo-results-list">
                   {processedLeads.map((lead, index) => (
                     <div key={index} className="demo-result-card">
                       <div className="demo-result-header">
-                        <div className="demo-result-avatar">
-                          {lead.first_name.charAt(0)}{lead.last_name.charAt(0)}
-                        </div>
-                        <div className="demo-result-info">
-                          <h4>{lead.first_name} {lead.last_name}</h4>
-                          <span>{lead.headline || 'Professional'}</span>
-                        </div>
+                        <div className="demo-result-avatar">{lead.firstName.charAt(0)}{lead.lastName.charAt(0) || ''}</div>
+                        <div className="demo-result-info"><h4>{lead.firstName} {lead.lastName}</h4><span>{lead.title || 'Professional'} of {lead.companyName}</span></div>
                         <span className="demo-result-num">#{index + 1}</span>
                       </div>
-
                       <div className="demo-result-inputs">
-                        <div className="demo-result-input">
-                          <span className="demo-result-label">Email</span>
-                          <span className="demo-result-value">{lead.email}</span>
-                        </div>
-                        <div className="demo-result-input">
-                          <span className="demo-result-label">Website</span>
-                          <span className="demo-result-value">{lead.website_url}</span>
-                        </div>
+                        <div className="demo-result-input"><span className="demo-result-label">Email</span><span className="demo-result-value">{lead.email}</span></div>
+                        <div className="demo-result-input"><span className="demo-result-label">Website</span><span className="demo-result-value">{lead.website}</span></div>
                       </div>
-
-                      <div className="demo-result-arrow">↓ AI Personalization</div>
-
                       <div className="demo-result-icebreaker">
-                        <div className="demo-icebreaker-label">✨ Generated Icebreaker</div>
+                        <div className="demo-icebreaker-label">AI Personalized Icebreaker</div>
                         <p>{lead.icebreaker}</p>
                       </div>
                     </div>
                   ))}
-                </div>
-
-                <div className="demo-cta">
-                  <h4>Ready to personalize at scale?</h4>
-                  <a href="mailto:ishaangup@g.ucla.edu" className="demo-cta-button">
-                    Get Access →
-                  </a>
                 </div>
               </div>
             )}
