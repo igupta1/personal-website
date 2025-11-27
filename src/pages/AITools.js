@@ -1,5 +1,6 @@
-//About.js
+//AITools.js
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import pfpImage from '../assets/headshot.jpg';
 
 // Company logos
@@ -7,12 +8,8 @@ import googlelogo from '../assets/googlelogo.jpg';
 import amazonlogo from '../assets/amazonlogo.webp';
 import ciscologo from '../assets/ciscologo.png';
 
-// Project logos
-import linkmailLogo from '../assets/linkmail-logo.png';
-import cscoLogo from '../assets/csco-logo.png';
-import jellypodLogo from '../assets/jellypod-logo.png';
-
-function About() {
+function AITools() {
+  const navigate = useNavigate();
 
   const experiences = [
     {
@@ -38,63 +35,32 @@ function About() {
     },
   ];
 
-  const projects = [
+  const aiTools = [
     {
       id: 1,
-      title: "Linkmail",
-      description: "Bridging LinkedIn and Gmail with AI Email Generation",
-      icon: linkmailLogo,
-      isImage: true,
-      link: "https://linkmail.dev/students",
+      title: "Cold Email Deep Personalization",
+      description: "Mass Email Leads While Using AI to Personalize Each Email",
+      icon: "✉️",
+      link: "/ai-tools/cold-email-deep-personalization",
     },
     {
       id: 2,
-      title: "CSCO",
-      description: "Your Personal Media Board Meets AI",
-      icon: cscoLogo,
-      isImage: true,
-      link: "https://github.com/cs35l-group/csco",
+      title: "LinkedIn Cold Message Personalization Tool",
+      description: "Automatically Find Emails and Send a Personalized Message Instantly.",
+      icon: "💼",
     },
     {
       id: 3,
-      title: "UCLA Swipes",
-      description: "Helps UCLA Kids Stay On Track With Their Meal Plan",
-      icon: "🍔",
-      link: "https://uclaswipes.com",
-    },
-    {
-      id: 4,
-      title: "Jellypod x UCLA",
-      description: "UCLA Hub for Jellypod Podcasts For Classes",
-      icon: jellypodLogo,
-      isImage: true,
-      link: "https://github.com/3eif/jelly",
-    },
-    {
-      id: 5,
-      title: "Visual Advertisement Detection",
-      description: "Web Crawler that Locates Visual Ads and Reads Their Contents",
-      icon: "🔍",
-      link: "https://github.com/igupta1/VisualAdvertisementDetection",
-    },
-    {
-      id: 6,
-      title: "Drowsiness Detection",
-      description: "Real-time detection for Alerting Drowsy Drivers",
-      icon: "👁️",
-      link: "https://github.com/igupta1/DrowsinessDetection",
-    },
-    {
-      id: 7,
-      title: "Sensor Fusion",
-      description: "Combined Computer Vision, Ultrasonic, Infrared, and Light Sensors",
-      icon: "🔬",
-      link: "https://github.com/igupta1/SensorFusion",
+      title: "More Coming Soon...",
+      description: "Stay tuned for more AI-powered tools",
+      icon: "🚀",
     },
   ];
 
-  const handleProjectClick = (link) => {
-    window.open(link, "_blank", "noopener,noreferrer");
+  const handleToolClick = (link) => {
+    if (link) {
+      navigate(link);
+    }
   };
 
   return (
@@ -136,28 +102,26 @@ function About() {
           </section>
         </div>
 
-        {/* Right Column - Projects */}
+        {/* Right Column - AI Tools */}
         <div className="about-right-column">
-          <section id="projects" className="projects-section">
-            <h2>Personal Projects</h2>
+          <section id="ai-tools" className="projects-section">
+            <h2>AI Tools</h2>
             <div className="projects-list">
-              {projects.map((project) => (
+              {aiTools.map((tool) => (
                 <div
-                  key={project.id}
-                  className="project-card"
-                  onClick={() => handleProjectClick(project.link)}
+                  key={tool.id}
+                  className={`project-card ${tool.link ? 'clickable' : 'non-clickable'}`}
+                  onClick={() => handleToolClick(tool.link)}
+                  style={{ cursor: tool.link ? 'pointer' : 'default' }}
                 >
                   <div className="project-icon">
-                    {project.isImage ? (
-                      <img src={project.icon} alt={project.title} className="project-icon-img" />
-                    ) : (
-                      project.icon
-                    )}
+                    {tool.icon}
                   </div>
                   <div className="project-content">
-                    <h3>{project.title}</h3>
-                    <p>{project.description}</p>
+                    <h3>{tool.title}</h3>
+                    <p>{tool.description}</p>
                   </div>
+                  {tool.link && <span className="try-it-badge">Try It →</span>}
                 </div>
               ))}
             </div>
@@ -168,4 +132,5 @@ function About() {
   );
 }
 
-export default About;
+export default AITools;
+

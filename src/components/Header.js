@@ -30,6 +30,14 @@ function Header() {
               Home
             </NavLink>
           </li>
+          <li>
+            <NavLink
+              to="/ai-tools"
+              className={({ isActive }) => (isActive ? "active" : "")}
+            >
+              AI Tools
+            </NavLink>
+          </li>
         </ul>
       </nav>
     </header>
