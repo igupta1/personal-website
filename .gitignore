@@ -17,10 +17,10 @@
 .env.development.local
 .env.test.local
 .env.production.local
-.env
 
-# Secrets / API keys
-ColdEmailPersonalization/
+# Secrets / API keys - ignore .env files everywhere
+.env
+**/venv/
 
 npm-debug.log*
 yarn-debug.log*
