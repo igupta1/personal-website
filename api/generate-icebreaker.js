@@ -2,25 +2,14 @@
  * Vercel Serverless Function for Cold Email Icebreaker Generation
  */
 
-import OpenAI from 'openai';
-import axios from 'axios';
-import * as cheerio from 'cheerio';
-import TurndownService from 'turndown';
-
-// Initialize OpenAI client
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY
-});
-
-// Initialize Turndown for HTML to Markdown conversion
-const turndownService = new TurndownService({
-  headingStyle: 'atx',
-  codeBlockStyle: 'fenced'
-});
+const OpenAI = require('openai');
+const axios = require('axios');
+const cheerio = require('cheerio');
+const TurndownService = require('turndown');
 
 // Configuration
 const MAX_LINKS_PER_SITE = 3;
-const TIMEOUT = 25000; // 25 seconds (Vercel has 30s limit)
+const TIMEOUT = 25000;
 
 /**
  * Fetch URL content with error handling
@@ -36,7 +25,7 @@ async function fetchUrl(url) {
     });
     return response.data;
   } catch (error) {
-    console.log(`Failed to fetch: ${url}`);
+    console.log(`Failed to fetch: ${url}`, error.message);
     return null;
   }
 }
@@ -114,11 +103,16 @@ function filterAndNormalizeLinks(links, baseUrl) {
  */
 function htmlToMarkdown(html) {
   try {
+    const turndownService = new TurndownService({
+      headingStyle: 'atx',
+      codeBlockStyle: 'fenced'
+    });
     const $ = cheerio.load(html);
     $('script, style, nav, footer, header, aside').remove();
     const bodyHtml = $('body').html() || html;
     return turndownService.turndown(bodyHtml);
-  } catch {
+  } catch (err) {
+    console.log('HTML to markdown error:', err.message);
     return '';
   }
 }
@@ -126,7 +120,7 @@ function htmlToMarkdown(html) {
 /**
  * Summarize page content using GPT
  */
-async function summarizePage(markdownContent) {
+async function summarizePage(openai, markdownContent) {
   try {
     const response = await openai.chat.completions.create({
       model: 'gpt-4o-mini',
@@ -168,7 +162,7 @@ Rules:
 /**
  * Generate icebreaker using GPT
  */
-async function generateIcebreakerText(firstName, lastName, headline, abstracts) {
+async function generateIcebreakerText(openai, firstName, lastName, headline, abstracts) {
   try {
     const websiteContent = abstracts.join('\n\n');
 
@@ -212,7 +206,7 @@ RULES:
 /**
  * Process a single lead through the entire pipeline
  */
-async function processLead(lead) {
+async function processLead(openai, lead) {
   let websiteUrl = lead.website;
   const firstName = lead.firstName;
   const lastName = lead.lastName;
@@ -237,7 +231,7 @@ async function processLead(lead) {
   if (filteredLinks.length === 0) {
     const markdown = htmlToMarkdown(homeHtml);
     if (markdown.trim()) {
-      const abstract = await summarizePage(markdown);
+      const abstract = await summarizePage(openai, markdown);
       if (abstract && abstract !== 'no content') {
         abstracts.push(abstract);
       }
@@ -249,7 +243,7 @@ async function processLead(lead) {
       if (pageHtml) {
         const markdown = htmlToMarkdown(pageHtml);
         if (markdown.trim()) {
-          const abstract = await summarizePage(markdown);
+          const abstract = await summarizePage(openai, markdown);
           if (abstract && abstract !== 'no content') {
             abstracts.push(abstract);
           }
@@ -262,7 +256,7 @@ async function processLead(lead) {
     return { success: false, error: 'No content found on website' };
   }
 
-  const icebreaker = await generateIcebreakerText(firstName, lastName, headline, abstracts);
+  const icebreaker = await generateIcebreakerText(openai, firstName, lastName, headline, abstracts);
 
   if (icebreaker) {
     return {
@@ -285,7 +279,7 @@ async function processLead(lead) {
 /**
  * Vercel Serverless Handler
  */
-export default async function handler(req, res) {
+module.exports = async function handler(req, res) {
   // Set CORS headers
   res.setHeader('Access-Control-Allow-Credentials', true);
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -302,7 +296,18 @@ export default async function handler(req, res) {
     return res.status(405).json({ success: false, error: 'Method not allowed' });
   }
 
+  // Check for API key
+  if (!process.env.OPENAI_API_KEY) {
+    console.error('OPENAI_API_KEY is not set');
+    return res.status(500).json({ success: false, error: 'Server configuration error' });
+  }
+
   try {
+    // Initialize OpenAI client inside handler
+    const openai = new OpenAI({
+      apiKey: process.env.OPENAI_API_KEY
+    });
+
     const { lead } = req.body;
 
     if (!lead || !lead.firstName || !lead.email || !lead.website) {
@@ -314,14 +319,13 @@ export default async function handler(req, res) {
 
     console.log(`New icebreaker request: ${lead.firstName} ${lead.lastName}`);
 
-    const result = await processLead(lead);
-    res.json(result);
+    const result = await processLead(openai, lead);
+    return res.status(200).json(result);
   } catch (error) {
     console.error('Error processing lead:', error);
-    res.status(500).json({
+    return res.status(500).json({
       success: false,
-      error: error.message
+      error: error.message || 'Internal server error'
     });
   }
-}
-
+};
