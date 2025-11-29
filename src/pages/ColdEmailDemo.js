@@ -289,6 +289,7 @@ function ColdEmailDemo() {
               <Link to="/ai-tools" className="back-link-inline">Back to AI Tools</Link>
               <h2>Cold Email Deep Personalization</h2>
               <p className="demo-section-subtitle">Watch AI Analyze Websites and Generate Hyper-Personalized Icebreakers</p>
+              <p className="demo-script-link">Check Out The Full Script <a href="https://github.com/igupta1/personal-website/blob/master/ColdEmailPersonalization/main.py" target="_blank" rel="noopener noreferrer">Here</a></p>
             </div>
 
             {error && (
