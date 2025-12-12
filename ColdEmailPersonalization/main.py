@@ -24,8 +24,8 @@ load_dotenv()
 client = AsyncOpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 # Configuration
-INPUT_CSV = "leads_without_icebreakers.csv"
-OUTPUT_CSV = "recovered_icebreakers.csv"
+INPUT_CSV = "marketing_agencies_sf.csv"
+OUTPUT_CSV = "marketing_agencies_sf_with_icebreakers.csv"
 MAX_LINKS_PER_SITE = 3
 TIMEOUT = 30  # seconds
 MAX_CONCURRENT_REQUESTS = 10  # Concurrent requests per lead

@@ -1,0 +1,257 @@
+
+🚀 Starting SMB Marketing Lead Finder for: Greater Los Angeles area
+
+======================================================================
+🎯 SMB Marketing Lead Finder
+📍 City: Greater Los Angeles area
+======================================================================
+✅ OpenAI API key found
+
+======================================================================
+📋 STEP 1: Searching Indeed for marketing job postings...
+======================================================================
+
+  📍 Searching in: Los Angeles, CA
+  📋 Indeed: Searching 'Marketing Manager' in Los Angeles, CA...
+    ✅ Found 15 leads from Indeed for 'Marketing Manager'
+    ➕ Added 13 new unique leads
+  📋 Indeed: Searching 'Social Media Manager' in Los Angeles, CA...
+    ✅ Found 15 leads from Indeed for 'Social Media Manager'
+    ➕ Added 10 new unique leads
+  📋 Indeed: Searching 'Digital Marketing Specialist' in Los Angeles, CA...
+    ✅ Found 14 leads from Indeed for 'Digital Marketing Specialist'
+    ➕ Added 12 new unique leads
+  📋 Indeed: Searching 'Content Marketer' in Los Angeles, CA...
+    ✅ Found 14 leads from Indeed for 'Content Marketer'
+    ➕ Added 5 new unique leads
+
+  📊 Total unique leads after Indeed: 40
+
+======================================================================
+📊 STEP 2: Enriching leads with company info and contacts...
+======================================================================
+
+[1/40]  📊 Enriching: Wilshire Law Firm
+    ✅ Found website: https://www.wilshirelawfirm.com
+    ⚠️  Gemini error: 404 models/gemini-1.5-flash-latest is not found for API version v1beta, or is no
+    🎯 Found via OpenAI fallback
+    ✅ Found contact: Neal D. Dempsey - Founder
+
+[2/40]  📊 Enriching: ALO
+    ✅ Found website: https://www.alo.com
+    ⚠️  Gemini error: 404 models/gemini-1.5-flash-latest is not found for API version v1beta, or is no
+    ⚠️  No contact found
+
+[3/40]  📊 Enriching: Universal Music Group
+    ✅ Found website: https://www.universalmusic.com
+    ⚠️  Gemini error: 404 models/gemini-1.5-flash-latest is not found for API version v1beta, or is no
+    🎯 Found via OpenAI fallback
+    ✅ Found contact: Lucian Grainge - Chairman and CEO
+
+[4/40]  📊 Enriching: Live Nation
+    ✅ Found website: https://www.livenation.com
+    ⚠️  Gemini error: 404 models/gemini-1.5-flash-latest is not found for API version v1beta, or is no
+    🎯 Found via OpenAI fallback
+    ✅ Found contact: Michael Rapino - President and CEO
+
+[5/40]  📊 Enriching: KOSTIV AND ASSOCIATES
+    ⚠️  No website found
+    ⚠️  Gemini error: 404 models/gemini-1.5-flash-latest is not found for API version v1beta, or is no
+    ⚠️  No contact found
+
+[6/40]  📊 Enriching: The LAB Anti-Mall
+    ⚠️  No website found
+    ⚠️  Gemini error: 404 models/gemini-1.5-flash-latest is not found for API version v1beta, or is no
+    ⚠️  No contact found
+
+[7/40]  📊 Enriching: REVOLVE
+    ✅ Found website: https://www.revolve.co
+    ⚠️  Gemini error: 404 models/gemini-1.5-flash-latest is not found for API version v1beta, or is no
+    🎯 Found via OpenAI fallback
+    ✅ Found contact: Michael Mente - Co-Founder and Co-CEO
+
+[8/40]  📊 Enriching: Los Angeles Dodgers LLC
+    ✅ Found website: https://losangelesdodgers.com
+    ⚠️  Gemini error: 404 models/gemini-1.5-flash-latest is not found for API version v1beta, or is no
+    🎯 Found via OpenAI fallback
+    ✅ Found contact: Mark Walter - CEO
+
+[9/40]  📊 Enriching: Sawhorse Productions
+    ⚠️  No website found
+    ⚠️  Gemini error: 404 models/gemini-1.5-flash-latest is not found for API version v1beta, or is no
+    ⚠️  No contact found
+
+[10/40]  📊 Enriching: Nourmand & Associates
+    ⚠️  No website found
+    ⚠️  Gemini error: 404 models/gemini-1.5-flash-latest is not found for API version v1beta, or is no
+    ⚠️  No contact found
+
+[11/40]  📊 Enriching: Goodwill Southern California
+    ⚠️  No website found
+    ⚠️  Gemini error: 404 models/gemini-1.5-flash-latest is not found for API version v1beta, or is no
+    🎯 Found via OpenAI fallback
+    ✅ Found contact: Doug D. McCauley - President & CEO
+
+[12/40]  📊 Enriching: Hourglass Cosmetics
+    ✅ Found website: https://www.hourglasscosmetics.com
+    ⚠️  Gemini error: 404 models/gemini-1.5-flash-latest is not found for API version v1beta, or is no
+    🎯 Found via OpenAI fallback
+    ✅ Found contact: Carisa Janes - Founder & CEO
+
+[13/40]  📊 Enriching: Niagen Bioscience
+    ✅ Found website: https://www.niagenbioscience.com
+    ⚠️  Gemini error: 404 models/gemini-1.5-flash-latest is not found for API version v1beta, or is no
+    ⚠️  No contact found
+
+[14/40]  📊 Enriching: STUCK SOAP
+    ✅ Found website: https://www.stucksoap.com
+    ⚠️  Gemini error: 404 models/gemini-1.5-flash-latest is not found for API version v1beta, or is no
+    ⚠️  No contact found
+
+[15/40]  📊 Enriching: SuperOrdinary Talent LLC
+    ⚠️  No website found
+    ⚠️  Gemini error: 404 models/gemini-1.5-flash-latest is not found for API version v1beta, or is no
+    ⚠️  No contact found
+
+[16/40]  📊 Enriching: MediaCo Holding Inc
+    ✅ Found website: https://mediacoholding.com
+    ⚠️  Gemini error: 404 models/gemini-1.5-flash-latest is not found for API version v1beta, or is no
+    ⚠️  No contact found
+
+[17/40]  📊 Enriching: 12th Tribe
+    ✅ Found website: https://www.12thtribe.com
+    ⚠️  Gemini error: 404 models/gemini-1.5-flash-latest is not found for API version v1beta, or is no
+    ⚠️  No contact found
+
+[18/40]  📊 Enriching: Oliveda International Inc.
+    ⚠️  No website found
+    ⚠️  Gemini error: 404 models/gemini-1.5-flash-latest is not found for API version v1beta, or is no
+    ⚠️  No contact found
+
+[19/40]  📊 Enriching: Jewel Diamant Inc.
+    ⚠️  No website found
+    ⚠️  Gemini error: 404 models/gemini-1.5-flash-latest is not found for API version v1beta, or is no
+    ⚠️  No contact found
+
+[20/40]  📊 Enriching: Absolutely Nuts Inc
+    ✅ Found website: https://www.absolutelynuts.com
+    ⚠️  Gemini error: 404 models/gemini-1.5-flash-latest is not found for API version v1beta, or is no
+    ⚠️  No contact found
+
+[21/40]  📊 Enriching: Dropouts Media
+    ⚠️  No website found
+    ⚠️  Gemini error: 404 models/gemini-1.5-flash-latest is not found for API version v1beta, or is no
+    ⚠️  No contact found
+
+[22/40]  📊 Enriching: ARRAY NOW
+    ✅ Found website: https://www.arraynow.com
+    ⚠️  Gemini error: 404 models/gemini-1.5-flash-latest is not found for API version v1beta, or is no
+    ⚠️  No contact found
+
+[23/40]  📊 Enriching: Living Advantage, Inc.
+    ✅ Found website: https://www.livingadvantage.com
+    ⚠️  Gemini error: 404 models/gemini-1.5-flash-latest is not found for API version v1beta, or is no
+    ⚠️  No contact found
+
+[24/40]  📊 Enriching: TLO INC
+    ⚠️  No website found
+    ⚠️  Gemini error: 404 models/gemini-1.5-flash-latest is not found for API version v1beta, or is no
+    ⚠️  No contact found
+
+[25/40]  📊 Enriching: Resume Inc.
+    ✅ Found website: https://www.resume.com
+    ⚠️  Gemini error: 404 models/gemini-1.5-flash-latest is not found for API version v1beta, or is no
+    ⚠️  No contact found
+
+[26/40]  📊 Enriching: The Wonderful Company
+    ⚠️  No website found
+    ⚠️  Gemini error: 404 models/gemini-1.5-flash-latest is not found for API version v1beta, or is no
+    🎯 Found via OpenAI fallback
+    ✅ Found contact: Adam S. Lowy - CEO
+
+[27/40]  📊 Enriching: Los Angeles Sparks
+    ⚠️  No website found
+    ⚠️  Gemini error: 404 models/gemini-1.5-flash-latest is not found for API version v1beta, or is no
+    🎯 Found via OpenAI fallback
+    ✅ Found contact: Eric Holoman - President
+
+[28/40]  📊 Enriching: VITAMIN WORLD USA CORPORATION
+    ⚠️  No website found
+    ⚠️  Gemini error: 404 models/gemini-1.5-flash-latest is not found for API version v1beta, or is no
+    ⚠️  No contact found
+
+[29/40]  📊 Enriching: Wismettac Asian Foods, Inc.
+    ⚠️  No website found
+    ⚠️  Gemini error: 404 models/gemini-1.5-flash-latest is not found for API version v1beta, or is no
+    🎯 Found via OpenAI fallback
+    ✅ Found contact: Kiyoshi Wismettac - CEO
+
+[30/40]  📊 Enriching: Boichik Bagels
+    ✅ Found website: https://www.boichikbagels.com
+    ⚠️  Gemini error: 404 models/gemini-1.5-flash-latest is not found for API version v1beta, or is no
+    ⚠️  No contact found
+
+[31/40]  📊 Enriching: 株式会社Morght
+    ⚠️  No website found
+    ⚠️  Gemini error: 404 models/gemini-1.5-flash-latest is not found for API version v1beta, or is no
+    ⚠️  No contact found
+
+[32/40]  📊 Enriching: Los Angeles Times
+    ⚠️  No website found
+    ⚠️  Gemini error: 404 models/gemini-1.5-flash-latest is not found for API version v1beta, or is no
+    🎯 Found via OpenAI fallback
+    ✅ Found contact: Chris Argentieri - President
+
+[33/40]  📊 Enriching: Univision communications inc
+    ⚠️  No website found
+    ⚠️  Gemini error: 404 models/gemini-1.5-flash-latest is not found for API version v1beta, or is no
+    🎯 Found via OpenAI fallback
+    ✅ Found contact: Wade Davis - CEO
+
+[34/40]  📊 Enriching: Rize Beyond Banking
+    ⚠️  No website found
+    ⚠️  Gemini error: 404 models/gemini-1.5-flash-latest is not found for API version v1beta, or is no
+    ⚠️  No contact found
+
+[35/40]  📊 Enriching: Pompadour
+    ⚠️  No website found
+    ⚠️  Gemini error: 404 models/gemini-1.5-flash-latest is not found for API version v1beta, or is no
+    ⚠️  No contact found
+
+[36/40]  📊 Enriching: LA28 (Web)
+    ⚠️  No website found
+    ⚠️  Gemini error: 404 models/gemini-1.5-flash-latest is not found for API version v1beta, or is no
+    🎯 Found via OpenAI fallback
+    ✅ Found contact: Kathy Carter - President
+
+[37/40]  📊 Enriching: LA28
+    ⚠️  No website found
+    ⚠️  Gemini error: 404 models/gemini-1.5-flash-latest is not found for API version v1beta, or is no
+    🎯 Found via OpenAI fallback
+    ✅ Found contact: Kathy Carter - President
+
+[38/40]  📊 Enriching: Borekas Sephardic Pastries
+    ⚠️  No website found
+    ⚠️  Gemini error: 404 models/gemini-1.5-flash-latest is not found for API version v1beta, or is no
+    ⚠️  No contact found
+
+[39/40]  📊 Enriching: Moira Cosmetics Inc
+    ✅ Found website: https://www.moiracosmetics.com
+    ⚠️  Gemini error: 404 models/gemini-1.5-flash-latest is not found for API version v1beta, or is no
+    ⚠️  No contact found
+
+[40/40]  📊 Enriching: David&Goliath
+    ⚠️  No website found
+    ⚠️  Gemini error: 404 models/gemini-1.5-flash-latest is not found for API version v1beta, or is no
+    🎯 Found via OpenAI fallback
+    ✅ Found contact: David Angelo - Founder & Chief Creative Officer
+
+  📊 Enrichment summary: 17 websites found, 15 contacts found
+
+======================================================================
+💾 STEP 3: Saving results...
+======================================================================
+  📊 Saved 20 leads to smb_marketing_leads.csv
+
+✅ Complete! Found 20 qualified leads.
+📄 Results saved to: smb_marketing_leads.csv
