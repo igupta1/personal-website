@@ -88,7 +88,7 @@ MAX_CONCURRENT_REQUESTS = 5
 WAIT_BETWEEN_REQUESTS = 1.0  # seconds
 
 # Target number of leads
-TARGET_LEADS = 10
+TARGET_LEADS = 5
 
 # Employee size thresholds for SMBs
 SMB_MAX_EMPLOYEES = 100
@@ -151,6 +151,8 @@ class Lead:
     source_links: str = ""
     contact_name: str = ""
     contact_title: str = ""
+    contact_email: str = ""
+    contact_linkedin: str = ""
     raw_data: Dict = field(default_factory=dict)
 
     def to_dict(self) -> Dict:
@@ -160,7 +162,10 @@ class Lead:
         return {
             "Contact Name": self.contact_name,
             "Contact Title": self.contact_title,
+            "Contact Email": self.contact_email,
+            "Contact LinkedIn": self.contact_linkedin,
             "Company Name": self.company_name,
+            "Company Size": self.company_size,
             "Website": self.website,
             "City / Neighborhood": clean_city,
             "Evidence They Need Marketing Help": self.evidence,
@@ -640,15 +645,21 @@ class CompanyEnricher:
         """Enrich a lead with contact information and website"""
         print(f"  📊 Enriching: {lead.company_name}")
 
-        # Find contact person and website using Gemini with Google Search
+        # Find contact person, website, email, LinkedIn, and company size using Gemini with Google Search
         if not lead.contact_name:
-            contact_name, contact_title, website = await self.find_contact(lead.company_name, lead.website)
+            contact_name, contact_title, website, email, linkedin, company_size = await self.find_contact(lead.company_name, lead.website)
             if contact_name:
                 lead.contact_name = contact_name
                 lead.contact_title = contact_title
+                lead.contact_email = email
+                lead.contact_linkedin = linkedin
+                lead.company_size = company_size
                 print(f"    ✅ Found contact: {contact_name} - {contact_title}")
             else:
                 print(f"    ⚠️  No contact found")
+                # Still store company size even if no contact found
+                if company_size and company_size != "unknown":
+                    lead.company_size = company_size
 
             # Update website if Gemini found one and we don't already have one
             if website and not lead.website:
@@ -739,10 +750,10 @@ class CompanyEnricher:
         
         return ""
 
-    async def find_contact(self, company_name: str, website: str = "") -> Tuple[str, str, str]:
-        """Find a key contact and website using Gemini with Google Search grounding"""
+    async def find_contact(self, company_name: str, website: str = "") -> Tuple[str, str, str, str, str, str]:
+        """Find a key contact, website, email, LinkedIn, and company size using Gemini with Google Search grounding"""
         try:
-            prompt = f"""Find the current key decision-maker and official website for:
+            prompt = f"""Find the current key decision-maker, contact information, official website, and company size for:
 Company: {company_name}
 Current Website: {website}
 
@@ -754,6 +765,9 @@ Target roles (in strict order):
 INSTRUCTIONS:
 - Use Google Search to verify the CURRENT person in this role.
 - Also find the official company website (the main homepage URL).
+- Try to find the person's work email address (not generic support@).
+- Try to find the person's LinkedIn profile URL.
+- Estimate the approximate number of employees at this company (e.g., "10-50", "50-100", "100-250", "unknown").
 - If you find a generic email (support@) or generic name, return empty strings.
 - Return valid JSON only.
 
@@ -761,7 +775,10 @@ Return JSON format:
 {{
   "name": "Full Name",
   "title": "Exact Job Title",
-  "website": "https://www.company.com"
+  "website": "https://www.company.com",
+  "email": "person@company.com",
+  "linkedin": "https://www.linkedin.com/in/username",
+  "company_size": "10-50 employees"
 }}"""
 
             # Use Gemini with Google Search grounding (ASYNC + correct tool)
@@ -785,6 +802,9 @@ Return JSON format:
             name = result.get('name', '').strip()
             title = result.get('title', '').strip()
             found_website = result.get('website', '').strip()
+            email = result.get('email', '').strip()
+            linkedin = result.get('linkedin', '').strip()
+            company_size = result.get('company_size', 'unknown').strip()
 
             # Verify grounding was actually used
             has_grounding = False
@@ -798,59 +818,19 @@ Return JSON format:
                 print(f"    🎯 Found via {source}: {name} ({title})")
                 if found_website:
                     print(f"    🌐 Found website: {found_website}")
-                return name, title, found_website
+                if email:
+                    print(f"    📧 Found email: {email}")
+                if linkedin:
+                    print(f"    💼 Found LinkedIn: {linkedin}")
+                if company_size and company_size != 'unknown':
+                    print(f"    🏢 Company size: {company_size}")
+                return name, title, found_website, email, linkedin, company_size
 
         except Exception as e:
             print(f"    ⚠️  Gemini error: {str(e)[:80]}")
 
-        return "", "", ""
+        return "", "", "", "", "", "unknown"
 
-
-
-class AILeadAnalyzer:
-    """Use AI to analyze and validate leads"""
-    
-    async def validate_lead(self, lead: Lead) -> Tuple[bool, str]:
-        """Validate if a lead is a genuine SMB needing marketing help"""
-        try:
-            prompt = f"""Analyze this potential lead and determine if it's a valid SMB (small-medium business with <100 employees) that genuinely needs marketing help.
-
-Company: {lead.company_name}
-Website: {lead.website}
-Evidence: {lead.evidence}
-Location: {lead.city_neighborhood}
-Company Size: {lead.company_size}
-
-Return a JSON object with:
-- "is_valid": true/false
-- "reason": brief explanation
-
-Invalid reasons include:
-- It's a marketing agency/firm itself
-- It's a large enterprise (Fortune 500, etc.)
-- It's a franchise location
-- The evidence doesn't indicate marketing needs
-- It's a fake/test company
-
-Be strict - only return true for genuine SMBs with clear marketing needs."""
-
-            response = await client.chat.completions.create(
-                model="gpt-4o-mini",
-                messages=[
-                    {"role": "system", "content": "You are a lead qualification expert. Return only valid JSON."},
-                    {"role": "user", "content": prompt}
-                ],
-                response_format={"type": "json_object"},
-                max_tokens=100,
-                temperature=0
-            )
-            
-            result = json.loads(response.choices[0].message.content)
-            return result.get('is_valid', False), result.get('reason', '')
-            
-        except Exception as e:
-            print(f"    ⚠️  Validation error: {str(e)[:50]}")
-            return True, "Could not validate"  # Default to including
 
 
 # ============================================================================
@@ -930,9 +910,9 @@ class MarketingLeadFinder:
                     print(f"  ⚠️  Indeed search error: {str(e)[:50]}")
                 
                 # Stop if we have enough leads from Indeed
-                if len(self.leads) >= TARGET_LEADS * 2:
+                if len(self.leads) >= TARGET_LEADS:
                     break
-            if len(self.leads) >= TARGET_LEADS * 2:
+            if len(self.leads) >= TARGET_LEADS:
                 break
         
         print(f"\n  📊 Total unique leads after Indeed: {len(self.leads)}")
@@ -943,7 +923,7 @@ class MarketingLeadFinder:
         print("=" * 70)
         
         enriched_leads = []
-        leads_to_process = self.leads[:TARGET_LEADS * 2]
+        leads_to_process = self.leads[:TARGET_LEADS]
 
         for i, lead in enumerate(leads_to_process):
             print(f"\n[{i+1}/{len(leads_to_process)}]", end="")
@@ -972,10 +952,80 @@ class MarketingLeadFinder:
         print("=" * 70)
         
         self._save_to_csv()
-        
+
+        # Step 4: Show statistics
+        print("\n" + "=" * 70)
+        print("📈 STATISTICS")
+        print("=" * 70)
+
+        total = len(self.leads)
+        if total > 0:
+            # Calculate fill rates for each column
+            contact_names = sum(1 for l in self.leads if l.contact_name)
+            contact_titles = sum(1 for l in self.leads if l.contact_title)
+            contact_emails = sum(1 for l in self.leads if l.contact_email)
+            contact_linkedins = sum(1 for l in self.leads if l.contact_linkedin)
+            websites = sum(1 for l in self.leads if l.website)
+            company_sizes = sum(1 for l in self.leads if l.company_size and l.company_size != "unknown" and l.company_size != "unknown but appears SMB")
+
+            print(f"\n📊 Column Fill Rates (out of {total} total leads):")
+            print(f"  • Contact Names:    {contact_names}/{total} ({contact_names/total*100:.1f}%)")
+            print(f"  • Contact Titles:   {contact_titles}/{total} ({contact_titles/total*100:.1f}%)")
+            print(f"  • Contact Emails:   {contact_emails}/{total} ({contact_emails/total*100:.1f}%)")
+            print(f"  • Contact LinkedIn: {contact_linkedins}/{total} ({contact_linkedins/total*100:.1f}%)")
+            print(f"  • Websites:         {websites}/{total} ({websites/total*100:.1f}%)")
+            print(f"  • Company Sizes:    {company_sizes}/{total} ({company_sizes/total*100:.1f}%)")
+
+            # Filter for businesses with <100 employees AND valid contact name and title
+            smb_with_contacts = []
+            for lead in self.leads:
+                # Check if has valid contact
+                if not lead.contact_name or not lead.contact_title:
+                    continue
+
+                # Check company size
+                size_str = lead.company_size.lower()
+                is_small = False
+
+                # Parse different company size formats
+                if "unknown" in size_str:
+                    continue  # Skip unknowns
+
+                # Check for various patterns indicating <100 employees
+                if any(x in size_str for x in ["1-10", "10-50", "50-100"]):
+                    is_small = True
+                elif "employees" in size_str:
+                    # Try to extract numbers
+                    import re
+                    numbers = re.findall(r'\d+', size_str.replace(',', ''))
+                    if numbers:
+                        # Get the first number (lower bound)
+                        first_num = int(numbers[0])
+                        if first_num < 100:
+                            is_small = True
+
+                if is_small:
+                    smb_with_contacts.append(lead)
+
+            print(f"\n🎯 Businesses with <100 employees AND valid contact: {len(smb_with_contacts)}/{total} ({len(smb_with_contacts)/total*100:.1f}%)")
+
+            if smb_with_contacts:
+                print("\n📋 List of qualifying businesses:")
+                print("-" * 70)
+                for i, lead in enumerate(smb_with_contacts, 1):
+                    print(f"\n{i}. {lead.company_name}")
+                    print(f"   Contact: {lead.contact_name} - {lead.contact_title}")
+                    if lead.contact_email:
+                        print(f"   Email: {lead.contact_email}")
+                    if lead.contact_linkedin:
+                        print(f"   LinkedIn: {lead.contact_linkedin}")
+                    print(f"   Company Size: {lead.company_size}")
+                    print(f"   Website: {lead.website}")
+                    print(f"   Location: {lead.city_neighborhood}")
+
         print(f"\n✅ Complete! Found {len(self.leads)} qualified leads.")
         print(f"📄 Results saved to: {OUTPUT_CSV}")
-        
+
         return self.leads
     
     def _save_to_csv(self):
