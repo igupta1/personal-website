@@ -3,7 +3,8 @@
  * Scrapes Indeed + Gemini API enrichment with 2-day caching
  */
 
-const playwright = require('playwright-aws-lambda');
+const puppeteer = require('puppeteer-core');
+const chromium = require('@sparticuz/chromium');
 const { GoogleGenerativeAI } = require('@google/generative-ai');
 const { put, list } = require('@vercel/blob');
 
@@ -172,15 +173,16 @@ class IndeedScraper {
    * Scrape Indeed for job postings
    */
   async searchJobs(location, jobTitle, maxResults = 15) {
-    const browser = await playwright.launchChromium({
-      args: playwright.args,
-      executablePath: await playwright.executablePath,
-      headless: playwright.headless
+    const browser = await puppeteer.launch({
+      args: chromium.args,
+      defaultViewport: chromium.defaultViewport,
+      executablePath: await chromium.executablePath(),
+      headless: chromium.headless
     });
 
     try {
       const page = await browser.newPage();
-      page.setDefaultTimeout(10000);
+      await page.setDefaultNavigationTimeout(10000);
 
       const query = encodeURIComponent(jobTitle);
       const loc = encodeURIComponent(location);
@@ -190,7 +192,13 @@ class IndeedScraper {
       await page.goto(url, { waitUntil: 'domcontentloaded' });
 
       // Wait for job cards
-      await page.waitForSelector('div.job_seen_beacon, div.jobsearch-ResultsList > div', { timeout: 5000 });
+      try {
+        await page.waitForSelector('div.job_seen_beacon, div.jobsearch-ResultsList > div', { timeout: 5000 });
+      } catch (e) {
+        console.log('  Timeout waiting for job cards');
+        await browser.close();
+        return [];
+      }
 
       // Extract job cards
       const leads = await page.evaluate(() => {
