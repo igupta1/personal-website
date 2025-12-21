@@ -35,7 +35,7 @@ function Header() {
               to="/ai-tools"
               className={({ isActive }) => (isActive ? "active" : "")}
             >
-              AI Tools
+              AI Tools For Businesses
             </NavLink>
           </li>
         </ul>

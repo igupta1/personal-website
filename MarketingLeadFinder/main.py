@@ -88,7 +88,7 @@ MAX_CONCURRENT_REQUESTS = 5
 WAIT_BETWEEN_REQUESTS = 1.0  # seconds
 
 # Target number of leads
-TARGET_LEADS = 5
+TARGET_LEADS = 20
 
 # Employee size thresholds for SMBs
 SMB_MAX_EMPLOYEES = 200
@@ -889,9 +889,9 @@ class MarketingLeadFinder:
         return None
 
     def _categorize_and_output_lead(self, lead: Lead) -> bool:
-        """Categorize lead by employee count and output if it has a contact name. Returns True if lead was outputted."""
-        # Only output leads with contact names
-        if not lead.contact_name:
+        """Categorize lead by employee count and output if it has a contact name AND email. Returns True if lead was outputted."""
+        # Only output leads with contact names AND emails
+        if not lead.contact_name or not lead.contact_email:
             return False
 
         employee_count = self._get_employee_count(lead)

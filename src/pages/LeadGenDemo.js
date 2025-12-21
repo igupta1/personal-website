@@ -51,9 +51,9 @@ function LeadGenDemo() {
   }, [currentLead]);
 
   const experiences = [
-    { title: "Software Engineer Intern", company: "Google", period: "Summer 2025", description: "Generative AI in Gmail and Google Chat", logo: googlelogo },
-    { title: "Software Engineer Intern", company: "Amazon", period: "Summer 2024", description: "Developing Infrastructure for Amazon.com", logo: amazonlogo },
-    { title: "Software Engineer Intern", company: "Cisco", period: "Spring 2024", description: "Distributed Systems Engineering", logo: ciscologo }
+    { title: "Software Engineer", company: "Google", description: "Generative AI in Gmail and Google Chat", logo: googlelogo },
+    { title: "Software Engineer", company: "Amazon", description: "Developing Infrastructure for Amazon.com", logo: amazonlogo },
+    { title: "Software Engineer", company: "Cisco", description: "Distributed Systems Engineering", logo: ciscologo }
   ];
 
   const generateLeads = async (location) => {
@@ -286,7 +286,6 @@ function LeadGenDemo() {
                   <div className="experience-details">
                     <h3>{exp.title}</h3>
                     <h4 className="company-name">{exp.company}</h4>
-                    <p className="period">{exp.period}</p>
                     {exp.description && <p className="description">{exp.description}</p>}
                   </div>
                 </div>
@@ -374,21 +373,21 @@ function LeadGenDemo() {
                   </div>
                 )}
 
-                {/* Category: ≤100 Employees */}
+                {/* Category: Less Than 100 Employees */}
                 <div className="demo-category-section">
-                  <h4 className="demo-category-header">Companies with ≤100 Employees ({leadsSmall.length})</h4>
+                  <h4 className="demo-category-header">Companies With Less Than 100 Employees</h4>
                   {leadsSmall.length > 0 ? (
                     <div className="demo-live-results-list">
                       {leadsSmall.map((lead, index) => (
                         <div key={index} className="demo-live-result-card">
                           <div className="demo-live-result-header">
                             <div className="demo-result-avatar">{lead.firstName.charAt(0)}{lead.lastName.charAt(0) || ''}</div>
-                            <div className="demo-live-result-name"><strong>{lead.firstName} {lead.lastName}</strong><span>{lead.companyName}</span></div>
+                            <div className="demo-live-result-name"><strong>{lead.firstName} {lead.lastName}</strong><span>{lead.title || 'Professional'} at {lead.companyName}</span></div>
                             <span className="demo-live-result-check">✓</span>
                           </div>
                           <div className="demo-live-result-details">
                             <span>{lead.email}</span>
-                            <span>{lead.companySize}</span>
+                            <span>{lead.website}</span>
                           </div>
                         </div>
                       ))}
@@ -398,21 +397,21 @@ function LeadGenDemo() {
                   )}
                 </div>
 
-                {/* Category: 101-250 Employees */}
+                {/* Category: Between 100 and 250 Employees */}
                 <div className="demo-category-section">
-                  <h4 className="demo-category-header">Companies with 101-250 Employees ({leadsMedium.length})</h4>
+                  <h4 className="demo-category-header">Companies Between 100 and 250 Employees</h4>
                   {leadsMedium.length > 0 ? (
                     <div className="demo-live-results-list">
                       {leadsMedium.map((lead, index) => (
                         <div key={index} className="demo-live-result-card">
                           <div className="demo-live-result-header">
                             <div className="demo-result-avatar">{lead.firstName.charAt(0)}{lead.lastName.charAt(0) || ''}</div>
-                            <div className="demo-live-result-name"><strong>{lead.firstName} {lead.lastName}</strong><span>{lead.companyName}</span></div>
+                            <div className="demo-live-result-name"><strong>{lead.firstName} {lead.lastName}</strong><span>{lead.title || 'Professional'} at {lead.companyName}</span></div>
                             <span className="demo-live-result-check">✓</span>
                           </div>
                           <div className="demo-live-result-details">
                             <span>{lead.email}</span>
-                            <span>{lead.companySize}</span>
+                            <span>{lead.website}</span>
                           </div>
                         </div>
                       ))}
@@ -422,21 +421,21 @@ function LeadGenDemo() {
                   )}
                 </div>
 
-                {/* Category: 251+ Employees */}
+                {/* Category: More Than 250 Employees */}
                 <div className="demo-category-section">
-                  <h4 className="demo-category-header">Companies with 251+ Employees ({leadsLarge.length})</h4>
+                  <h4 className="demo-category-header">Companies With More Than 250 Employees</h4>
                   {leadsLarge.length > 0 ? (
                     <div className="demo-live-results-list">
                       {leadsLarge.map((lead, index) => (
                         <div key={index} className="demo-live-result-card">
                           <div className="demo-live-result-header">
                             <div className="demo-result-avatar">{lead.firstName.charAt(0)}{lead.lastName.charAt(0) || ''}</div>
-                            <div className="demo-live-result-name"><strong>{lead.firstName} {lead.lastName}</strong><span>{lead.companyName}</span></div>
+                            <div className="demo-live-result-name"><strong>{lead.firstName} {lead.lastName}</strong><span>{lead.title || 'Professional'} at {lead.companyName}</span></div>
                             <span className="demo-live-result-check">✓</span>
                           </div>
                           <div className="demo-live-result-details">
                             <span>{lead.email}</span>
-                            <span>{lead.companySize}</span>
+                            <span>{lead.website}</span>
                           </div>
                         </div>
                       ))}
@@ -453,71 +452,61 @@ function LeadGenDemo() {
             {stage === 'results' && (
               <div className="demo-results-stage">
                 <div className="demo-results-header">
-                  <h3>{leadsSmall.length + leadsMedium.length + leadsLarge.length} Leads Found!</h3>
                   <button className="demo-reset-button" onClick={resetDemo}>New Search</button>
                 </div>
 
-                {/* Category: ≤100 Employees */}
+                {/* Category: Less Than 100 Employees */}
                 <div className="demo-results-category">
-                  <h4 className="demo-results-category-title">Companies with ≤100 Employees ({leadsSmall.length})</h4>
+                  <h4 className="demo-results-category-title">Companies With Less Than 100 Employees</h4>
                   <div className="demo-results-list">
                     {leadsSmall.map((lead, index) => (
                       <div key={index} className="demo-result-card">
                         <div className="demo-result-header">
                           <div className="demo-result-avatar">{lead.firstName.charAt(0)}{lead.lastName.charAt(0) || ''}</div>
                           <div className="demo-result-info"><h4>{lead.firstName} {lead.lastName}</h4><span>{lead.title || 'Professional'} at {lead.companyName}</span></div>
-                          <span className="demo-result-num">#{index + 1}</span>
                         </div>
                         <div className="demo-result-inputs">
                           <div className="demo-result-input"><span className="demo-result-label">Email</span><span className="demo-result-value">{lead.email}</span></div>
                           <div className="demo-result-input"><span className="demo-result-label">Website</span><span className="demo-result-value">{lead.website}</span></div>
-                          <div className="demo-result-input"><span className="demo-result-label">Company Size</span><span className="demo-result-value">{lead.companySize}</span></div>
-                          <div className="demo-result-input"><span className="demo-result-label">Location</span><span className="demo-result-value">{lead.location}</span></div>
                         </div>
                       </div>
                     ))}
                   </div>
                 </div>
 
-                {/* Category: 101-250 Employees */}
+                {/* Category: Between 100 and 250 Employees */}
                 <div className="demo-results-category">
-                  <h4 className="demo-results-category-title">Companies with 101-250 Employees ({leadsMedium.length})</h4>
+                  <h4 className="demo-results-category-title">Companies Between 100 and 250 Employees</h4>
                   <div className="demo-results-list">
                     {leadsMedium.map((lead, index) => (
                       <div key={index} className="demo-result-card">
                         <div className="demo-result-header">
                           <div className="demo-result-avatar">{lead.firstName.charAt(0)}{lead.lastName.charAt(0) || ''}</div>
                           <div className="demo-result-info"><h4>{lead.firstName} {lead.lastName}</h4><span>{lead.title || 'Professional'} at {lead.companyName}</span></div>
-                          <span className="demo-result-num">#{index + 1}</span>
                         </div>
                         <div className="demo-result-inputs">
                           <div className="demo-result-input"><span className="demo-result-label">Email</span><span className="demo-result-value">{lead.email}</span></div>
                           <div className="demo-result-input"><span className="demo-result-label">Website</span><span className="demo-result-value">{lead.website}</span></div>
-                          <div className="demo-result-input"><span className="demo-result-label">Company Size</span><span className="demo-result-value">{lead.companySize}</span></div>
-                          <div className="demo-result-input"><span className="demo-result-label">Location</span><span className="demo-result-value">{lead.location}</span></div>
                         </div>
                       </div>
                     ))}
                   </div>
                 </div>
 
-                {/* Category: 251+ Employees */}
+                {/* Category: More Than 250 Employees */}
                 {leadsLarge.length > 0 && (
                   <div className="demo-results-category">
-                    <h4 className="demo-results-category-title">Companies with 251+ Employees ({leadsLarge.length})</h4>
+                    <h4 className="demo-results-category-title">Companies With More Than 250 Employees</h4>
                     <div className="demo-results-list">
                       {leadsLarge.map((lead, index) => (
                         <div key={index} className="demo-result-card">
                           <div className="demo-result-header">
                             <div className="demo-result-avatar">{lead.firstName.charAt(0)}{lead.lastName.charAt(0) || ''}</div>
                             <div className="demo-result-info"><h4>{lead.firstName} {lead.lastName}</h4><span>{lead.title || 'Professional'} at {lead.companyName}</span></div>
-                            <span className="demo-result-num">#{index + 1}</span>
                           </div>
                           <div className="demo-result-inputs">
                             <div className="demo-result-input"><span className="demo-result-label">Email</span><span className="demo-result-value">{lead.email}</span></div>
                             <div className="demo-result-input"><span className="demo-result-label">Website</span><span className="demo-result-value">{lead.website}</span></div>
-                            <div className="demo-result-input"><span className="demo-result-label">Company Size</span><span className="demo-result-value">{lead.companySize}</span></div>
-                            <div className="demo-result-input"><span className="demo-result-label">Location</span><span className="demo-result-value">{lead.location}</span></div>
                           </div>
                         </div>
                       ))}

@@ -84,9 +84,9 @@ function ColdEmailDemo() {
   }, [currentLead]);
 
   const experiences = [
-    { title: "Software Engineer Intern", company: "Google", period: "Summer 2025", description: "Generative AI in Gmail and Google Chat", logo: googlelogo },
-    { title: "Software Engineer Intern", company: "Amazon", period: "Summer 2024", description: "Developing Infrastructure for Amazon.com", logo: amazonlogo },
-    { title: "Software Engineer Intern", company: "Cisco", period: "Spring 2024", description: "Distributed Systems Engineering", logo: ciscologo }
+    { title: "Software Engineer", company: "Google", description: "Generative AI in Gmail and Google Chat", logo: googlelogo },
+    { title: "Software Engineer", company: "Amazon", description: "Developing Infrastructure for Amazon.com", logo: amazonlogo },
+    { title: "Software Engineer", company: "Cisco", description: "Distributed Systems Engineering", logo: ciscologo }
   ];
 
   const parseCSV = (text) => {
@@ -274,7 +274,6 @@ function ColdEmailDemo() {
                   <div className="experience-details">
                     <h3>{exp.title}</h3>
                     <h4 className="company-name">{exp.company}</h4>
-                    <p className="period">{exp.period}</p>
                     {exp.description && <p className="description">{exp.description}</p>}
                   </div>
                 </div>

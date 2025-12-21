@@ -70,9 +70,10 @@ def read_leads_from_csv(filepath: str) -> list:
     with open(filepath, 'r', encoding='utf-8') as f:
         reader = csv.DictReader(f)
         for row in reader:
-            # Skip leads without a contact name
+            # Skip leads without a contact name AND email
             contact_name = row.get('Contact Name', '').strip()
-            if not contact_name:
+            contact_email = row.get('Contact Email', '').strip()
+            if not contact_name or not contact_email:
                 continue
 
             # Parse name into first/last

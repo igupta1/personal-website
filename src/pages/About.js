@@ -16,23 +16,20 @@ function About() {
 
   const experiences = [
     {
-      title: "Software Engineer Intern",
+      title: "Software Engineer",
       company: "Google",
-      period: "Summer 2025",
       description: "Generative AI in Gmail and Google Chat",
       logo: googlelogo,
     },
     {
-      title: "Software Engineer Intern",
+      title: "Software Engineer",
       company: "Amazon",
-      period: "Summer 2024",
       description: "Developing Infrastructure for Amazon.com",
       logo: amazonlogo,
     },
     {
-      title: "Software Engineer Intern",
+      title: "Software Engineer",
       company: "Cisco",
-      period: "Spring 2024",
       description: "Distributed Systems Engineering",
       logo: ciscologo,
     },
@@ -127,7 +124,6 @@ function About() {
                   <div className="experience-details">
                     <h3>{exp.title}</h3>
                     <h4 className="company-name">{exp.company}</h4>
-                    <p className="period">{exp.period}</p>
                     {exp.description && <p className="description">{exp.description}</p>}
                   </div>
                 </div>
