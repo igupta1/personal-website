@@ -24,6 +24,23 @@ API_URL = "https://www.ishaangpta.com/api/upload-leads"
 CSV_FILE = "smb_marketing_leads.csv"
 LOCATION = "Greater Los Angeles Area"
 
+def convert_category(category_str: str) -> str:
+    """Convert CSV category to API category (small/medium/large)"""
+    if not category_str:
+        return 'small'
+
+    cat = category_str.strip().lower()
+
+    # Handle the category values from main.py
+    if '≤100' in category_str or '<=100' in cat or cat == 'small':
+        return 'small'
+    elif '101-250' in category_str or '101' in cat or cat == 'medium':
+        return 'medium'
+    elif '251' in category_str or '251+' in category_str or cat == 'large':
+        return 'large'
+
+    return 'small'  # Default
+
 def get_category_from_size(company_size: str) -> str:
     """Convert company size string to category (small/medium/large)"""
     if not company_size or company_size.lower() == 'unknown':
@@ -63,9 +80,14 @@ def read_leads_from_csv(filepath: str) -> list:
             first_name = name_parts[0] if name_parts else ''
             last_name = name_parts[1] if len(name_parts) > 1 else ''
 
-            # Determine category from company size
+            # Determine category - prefer the Category column from CSV
             company_size = row.get('Company Size', '')
-            category = row.get('Category', '') or get_category_from_size(company_size)
+            csv_category = row.get('Category', '')
+
+            if csv_category:
+                category = convert_category(csv_category)
+            else:
+                category = get_category_from_size(company_size)
 
             lead = {
                 'firstName': first_name,
