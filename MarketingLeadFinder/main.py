@@ -31,6 +31,8 @@ from playwright.async_api import async_playwright, TimeoutError as PlaywrightTim
 from google import genai
 from google.genai import types
 
+from metro_config import get_metro_config, MetroConfig
+
 # Load environment variables
 load_dotenv()
 
@@ -45,42 +47,10 @@ gemini_client = genai.Client(api_key=os.getenv("GOOGLE_GEMINI_API_KEY"))
 # ============================================================================
 
 # City to search (can be parameterized later)
-DEFAULT_CITY = "Greater Los Angeles area"
+DEFAULT_CITY = "Greater Los Angeles Area"
 
 # Output file
 OUTPUT_CSV = "smb_marketing_leads.csv"
-
-# Location validation - cities/areas that count as "Greater Los Angeles area"
-# NOTE: These are used with WORD BOUNDARY matching to avoid false positives like "Atlanta" matching "la"
-LA_AREA_CITIES = [
-    # Core LA
-    "los angeles",
-    # LA neighborhoods and cities
-    "hollywood", "west hollywood", "beverly hills",
-    "santa monica", "venice", "culver city", "marina del rey",
-    "pasadena", "glendale", "burbank", "north hollywood", "studio city",
-    "sherman oaks", "encino", "van nuys", "woodland hills", "calabasas",
-    "malibu", "brentwood", "westwood", "century city", "koreatown",
-    "silver lake", "echo park", "los feliz", "eagle rock", "highland park",
-    "atwater village", "boyle heights", "watts",
-    "compton", "inglewood", "hawthorne", "el segundo", "manhattan beach",
-    "hermosa beach", "redondo beach", "torrance", "carson", "long beach",
-    "lakewood", "downey", "whittier", "cerritos", "norwalk",
-    "la mirada", "fullerton", "anaheim", "irvine", "costa mesa",
-    "newport beach", "huntington beach", "orange", "tustin", "santa ana",
-    # Valleys and outlying areas
-    "pomona", "covina", "west covina", "diamond bar", "claremont", 
-    "azusa", "monrovia", "arcadia", "alhambra", "monterey park", 
-    "el monte", "baldwin park", "san dimas", "glendora", "duarte",
-    "rancho cucamonga", "ontario", "upland", "fontana",
-    # Ventura County (close to LA)
-    "ventura", "oxnard", "thousand oaks", "simi valley", "camarillo",
-]
-
-# LA area zip code prefixes (900xx, 901xx, 902xx, 903xx, 904xx, 905xx, 906xx, 907xx, 908xx, 909xx, 910xx-919xx, 90xxx, 91xxx, 92xxx for OC)
-LA_ZIP_PREFIXES = ["900", "901", "902", "903", "904", "905", "906", "907", "908", "909", 
-                   "910", "911", "912", "913", "914", "915", "916", "917", "918", "919",
-                   "920", "921", "922", "923", "924", "925", "926", "927", "928"]
 
 # Scraping settings
 TIMEOUT = 30
@@ -88,7 +58,7 @@ MAX_CONCURRENT_REQUESTS = 5
 WAIT_BETWEEN_REQUESTS = 1.0  # seconds
 
 # Target number of leads
-TARGET_LEADS = 20
+TARGET_LEADS = 5
 
 # Employee size thresholds for SMBs
 SMB_MAX_EMPLOYEES = 200
@@ -205,49 +175,43 @@ class BaseScraper:
 
 class IndeedScraper(BaseScraper):
     """Scrape Indeed for marketing job postings"""
-    
-    def _is_in_target_area(self, location: str, target_city: str) -> bool:
-        """Check if the location is within the target city/area using word boundary matching"""
+
+    def __init__(self, metro_config: MetroConfig):
+        super().__init__()
+        self.metro_config = metro_config
+
+    def _is_in_target_area(self, location: str) -> bool:
+        """Check if the location is within the target metro area using word boundary matching"""
         if not location:
             return False
-        
+
         location_lower = location.lower().strip()
-        
-        # For Greater Los Angeles area, use strict matching
-        if "los angeles" in target_city.lower():
-            # Check for LA area cities using word boundary matching
-            for city in LA_AREA_CITIES:
-                # Use word boundary regex to avoid "la" matching "atlanta"
-                pattern = r'\b' + re.escape(city) + r'\b'
-                if re.search(pattern, location_lower):
-                    return True
-            
-            # Check for LA area zip codes
-            zip_match = re.search(r'\b(\d{5})\b', location)
-            if zip_match:
-                zip_code = zip_match.group(1)
-                if any(zip_code.startswith(prefix) for prefix in LA_ZIP_PREFIXES):
-                    return True
-            
-            # Check for ", CA" or ", California" at the end (but only after city check failed)
-            # This catches LA area cities we might have missed
-            if re.search(r',\s*ca\b', location_lower) or 'california' in location_lower:
-                # Additional check: make sure it's not in other CA cities we don't want
-                non_la_ca_cities = ['san francisco', 'san jose', 'oakland', 'sacramento', 
-                                     'san diego', 'fresno', 'bakersfield', 'palo alto',
-                                     'mountain view', 'sunnyvale', 'cupertino', 'berkeley',
-                                     'walnut creek', 'concord', 'fremont', 'hayward']
-                for non_la_city in non_la_ca_cities:
-                    if non_la_city in location_lower:
-                        return False
-                # If it's CA and not a known non-LA city, include it
+
+        # Check for metro area cities using word boundary matching
+        for city in self.metro_config.area_cities:
+            # Use word boundary regex to avoid false positives (e.g., "la" matching "atlanta")
+            pattern = r'\b' + re.escape(city) + r'\b'
+            if re.search(pattern, location_lower):
                 return True
-            
-            return False
-        
-        # For other cities, use word boundary matching
-        pattern = r'\b' + re.escape(target_city.lower()) + r'\b'
-        return bool(re.search(pattern, location_lower))
+
+        # Check for metro area zip codes
+        zip_match = re.search(r'\b(\d{5})\b', location)
+        if zip_match:
+            zip_code = zip_match.group(1)
+            if any(zip_code.startswith(prefix) for prefix in self.metro_config.zip_prefixes):
+                return True
+
+        # Check for state abbreviation at the end
+        state_pattern = rf',\s*{self.metro_config.state_abbrev}\b'
+        if re.search(state_pattern, location_lower, re.IGNORECASE):
+            # Exclude cities from other metros in the same state
+            for non_metro_city in self.metro_config.non_metro_cities:
+                if non_metro_city in location_lower:
+                    return False
+            # If it's in the right state and not a known non-metro city, include it
+            return True
+
+        return False
     
     async def search_jobs(self, city: str, job_title: str) -> List[Lead]:
         """Search Indeed for job postings"""
@@ -290,7 +254,7 @@ class IndeedScraper(BaseScraper):
                         location_text = await location_elem.inner_text() if location_elem else ""
                         
                         # Filter by location - only include if in target area
-                        if not self._is_in_target_area(location_text, city):
+                        if not self._is_in_target_area(location_text):
                             continue
                         
                         # Extract job link
@@ -844,6 +808,7 @@ class MarketingLeadFinder:
 
     def __init__(self, city: str = DEFAULT_CITY):
         self.city = city
+        self.metro_config = get_metro_config(city)
         self.leads: List[Lead] = []
         self.seen_companies: Set[str] = set()
 
@@ -852,7 +817,7 @@ class MarketingLeadFinder:
         self.leads_medium: List[Lead] = []  # 101-250 employees
         self.leads_large: List[Lead] = []  # 251+ employees
 
-        self.indeed_scraper = IndeedScraper()
+        self.indeed_scraper = IndeedScraper(self.metro_config)
         self.enricher = CompanyEnricher()
     
     def _normalize_company_name(self, name: str) -> str:
@@ -990,10 +955,8 @@ class MarketingLeadFinder:
             "Marketing Coordinator",
         ]
 
-        # For LA area, search with specific CA locations
-        search_locations = ["Los Angeles, CA"]
-        if "los angeles" in self.city.lower():
-            search_locations.extend(["Santa Monica, CA", "Burbank, CA", "Pasadena, CA", "Irvine, CA"])
+        # Get search locations from metro config
+        search_locations = self.metro_config.search_locations
 
         # Track qualifying leads count (small + medium only)
         max_iterations = 50  # Safety limit to prevent infinite loops

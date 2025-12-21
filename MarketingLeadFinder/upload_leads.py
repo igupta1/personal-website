@@ -4,13 +4,16 @@ Upload leads to the website cache.
 Run this after main.py generates leads.
 
 Usage:
-    python upload_leads.py
+    python upload_leads.py                                    # Uses default location (Greater Los Angeles Area)
+    python upload_leads.py "Greater New York Area"            # Upload for specific location
+    python upload_leads.py --location "Greater Chicago Area"  # Alternative syntax
 
 Requirements:
     - Set LEADS_UPLOAD_API_KEY environment variable (same as in Vercel)
     - Run main.py first to generate smb_marketing_leads.csv
 """
 
+import argparse
 import csv
 import json
 import os
@@ -22,7 +25,7 @@ load_dotenv()
 # Configuration
 API_URL = "https://www.ishaangpta.com/api/upload-leads"
 CSV_FILE = "smb_marketing_leads.csv"
-LOCATION = "Greater Los Angeles Area"
+DEFAULT_LOCATION = "Greater Los Angeles Area"
 
 def convert_category(category_str: str) -> str:
     """Convert CSV category to API category (small/medium/large)"""
@@ -134,6 +137,17 @@ def upload_leads(leads: list, location: str, api_key: str) -> bool:
         return False
 
 def main():
+    # Parse arguments
+    parser = argparse.ArgumentParser(description='Upload leads to the website cache')
+    parser.add_argument('location', nargs='?', default=DEFAULT_LOCATION,
+                        help=f'Location/metro area name (default: {DEFAULT_LOCATION})')
+    parser.add_argument('--location', '-l', dest='location_flag',
+                        help='Location/metro area name (alternative syntax)')
+    args = parser.parse_args()
+
+    # Use --location flag if provided, otherwise use positional argument
+    location = args.location_flag if args.location_flag else args.location
+
     # Check for API key
     api_key = os.getenv('LEADS_UPLOAD_API_KEY')
     if not api_key:
@@ -166,8 +180,8 @@ def main():
     print(f"  - Large (251+ employees): {large}")
 
     # Upload to API
-    print(f"\nUploading to {API_URL}...")
-    success = upload_leads(leads, LOCATION, api_key)
+    print(f"\nUploading to {API_URL} for location: {location}...")
+    success = upload_leads(leads, location, api_key)
 
     if success:
         print("\nDone! The website will now show these leads.")

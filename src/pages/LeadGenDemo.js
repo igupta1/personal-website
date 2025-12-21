@@ -19,6 +19,24 @@ const STATUS_MESSAGES = [
   { icon: "✨", text: "Finalizing lead details..." }
 ];
 
+// Available metro areas for lead generation
+const METRO_OPTIONS = [
+  "Greater Atlanta Area",
+  "Greater Austin Area",
+  "Greater Bay Area",
+  "Greater Boston Area",
+  "Greater Chicago Area",
+  "Greater Dallas Area",
+  "Greater Houston Area",
+  "Greater Los Angeles Area",
+  "Greater Miami Area",
+  "Greater New York Area",
+  "Greater Philadelphia Area",
+  "Greater Phoenix Area",
+  "Greater San Diego Area",
+  "Greater Seattle Area"
+];
+
 function LeadGenDemo() {
   const [stage, setStage] = useState('upload');
   const [location, setLocation] = useState('Greater Los Angeles Area');
@@ -316,10 +334,10 @@ function LeadGenDemo() {
                 <div className="demo-how-it-works">
                   <h3>How It Works</h3>
                   <div className="demo-steps-grid">
-                    <div className="demo-step"><span className="demo-step-num">1</span><span className="demo-step-text">Choose Location</span></div>
-                    <div className="demo-step"><span className="demo-step-num">2</span><span className="demo-step-text">AI Scrapes Indeed to Find Companies Looking for Marketing Help</span></div>
-                    <div className="demo-step"><span className="demo-step-num">3</span><span className="demo-step-text">Extract Contact Information</span></div>
-                    <div className="demo-step"><span className="demo-step-num">4</span><span className="demo-step-text">Generate Qualified Lead List</span></div>
+                    <div className="demo-step"><span className="demo-step-num">1</span><span className="demo-step-text">Select Your Target Location</span></div>
+                    <div className="demo-step"><span className="demo-step-num">2</span><span className="demo-step-text">AI Finds Companies Hiring Marketing Roles</span></div>
+                    <div className="demo-step"><span className="demo-step-num">3</span><span className="demo-step-text">Extract Decision-Maker Contact Details</span></div>
+                    <div className="demo-step"><span className="demo-step-num">4</span><span className="demo-step-text">Get Your Qualified Lead List</span></div>
                   </div>
                 </div>
 
@@ -331,7 +349,9 @@ function LeadGenDemo() {
                     onChange={(e) => setLocation(e.target.value)}
                     className="demo-location-dropdown"
                   >
-                    <option value="Greater Los Angeles Area">Greater Los Angeles Area</option>
+                    {METRO_OPTIONS.map(metro => (
+                      <option key={metro} value={metro}>{metro}</option>
+                    ))}
                   </select>
                 </div>
 
