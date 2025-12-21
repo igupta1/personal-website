@@ -91,7 +91,7 @@ WAIT_BETWEEN_REQUESTS = 1.0  # seconds
 TARGET_LEADS = 5
 
 # Employee size thresholds for SMBs
-SMB_MAX_EMPLOYEES = 100
+SMB_MAX_EMPLOYEES = 200
 
 # Marketing-related job titles to search for
 MARKETING_JOB_TITLES = [
@@ -153,6 +153,7 @@ class Lead:
     contact_title: str = ""
     contact_email: str = ""
     contact_linkedin: str = ""
+    category: str = ""  # Employee count category
     raw_data: Dict = field(default_factory=dict)
 
     def to_dict(self) -> Dict:
@@ -160,6 +161,7 @@ class Lead:
         clean_city = self.city_neighborhood.replace('\n', ' ').replace('\r', ' ').strip() if self.city_neighborhood else ""
 
         return {
+            "Category": self.category,
             "Contact Name": self.contact_name,
             "Contact Title": self.contact_title,
             "Contact Email": self.contact_email,
@@ -839,11 +841,16 @@ Return JSON format:
 
 class MarketingLeadFinder:
     """Main orchestrator for finding SMB marketing leads"""
-    
+
     def __init__(self, city: str = DEFAULT_CITY):
         self.city = city
         self.leads: List[Lead] = []
         self.seen_companies: Set[str] = set()
+
+        # Categorized leads by employee count
+        self.leads_small: List[Lead] = []  # <= 100 employees
+        self.leads_medium: List[Lead] = []  # 101-250 employees
+        self.leads_large: List[Lead] = []  # 251+ employees
 
         self.indeed_scraper = IndeedScraper()
         self.enricher = CompanyEnricher()
@@ -861,90 +868,218 @@ class MarketingLeadFinder:
         self.leads.append(lead)
         return True
     
+    def _get_employee_count(self, lead: Lead) -> Optional[int]:
+        """Extract employee count from company size string"""
+        size_str = lead.company_size.lower()
+
+        # Skip unknowns
+        if "unknown" in size_str:
+            return None
+
+        # Parse different company size formats
+        # Try to extract numbers
+        numbers = re.findall(r'\d+', size_str.replace(',', ''))
+        if numbers:
+            # If there's a range (e.g., "50-100"), use the upper bound
+            if len(numbers) >= 2:
+                return int(numbers[1])
+            # Otherwise use the single number
+            return int(numbers[0])
+
+        return None
+
+    def _categorize_and_output_lead(self, lead: Lead) -> bool:
+        """Categorize lead by employee count and output if it has a contact name. Returns True if lead was outputted."""
+        # Only output leads with contact names
+        if not lead.contact_name:
+            return False
+
+        employee_count = self._get_employee_count(lead)
+
+        # Skip leads without valid employee count
+        if employee_count is None:
+            return False
+
+        # Categorize and output
+        if employee_count <= 100:
+            self.leads_small.append(lead)
+            category = "≤ 100 Employees"
+            lead.category = "≤100"
+        elif employee_count <= 250:
+            self.leads_medium.append(lead)
+            category = "101-250 Employees"
+            lead.category = "101-250"
+        else:
+            self.leads_large.append(lead)
+            category = "251+ Employees"
+            lead.category = "251+"
+
+        # Output the lead immediately
+        print(f"\n{'='*70}")
+        print(f"✨ NEW LEAD - {category}")
+        print(f"{'='*70}")
+        print(f"Company: {lead.company_name}")
+        print(f"Contact: {lead.contact_name} - {lead.contact_title}")
+        if lead.contact_email:
+            print(f"Email: {lead.contact_email}")
+        if lead.contact_linkedin:
+            print(f"LinkedIn: {lead.contact_linkedin}")
+        print(f"Company Size: {lead.company_size}")
+        print(f"Website: {lead.website}")
+        print(f"Location: {lead.city_neighborhood}")
+        print(f"Evidence: {lead.evidence}")
+        print(f"{'='*70}\n")
+
+        return True
+
+    def _is_qualifying_lead(self, lead: Lead) -> bool:
+        """Check if lead meets qualification criteria: <200 employees AND valid contact"""
+        # Must have valid contact name and title
+        if not lead.contact_name or not lead.contact_title:
+            return False
+
+        # Check company size
+        size_str = lead.company_size.lower()
+
+        # Skip unknowns
+        if "unknown" in size_str:
+            return False
+
+        # Parse different company size formats and check if <200 employees
+        # Check for various patterns indicating <200 employees
+        if any(x in size_str for x in ["1-10", "10-50", "50-100", "100-150", "150-200"]):
+            return True
+
+        if "employees" in size_str:
+            # Try to extract numbers
+            numbers = re.findall(r'\d+', size_str.replace(',', ''))
+            if numbers:
+                # Get the first number (lower bound)
+                first_num = int(numbers[0])
+                if first_num < SMB_MAX_EMPLOYEES:
+                    return True
+
+        return False
+
     async def run(self) -> List[Lead]:
         """Run the full lead finding process"""
         print("=" * 70)
         print(f"🎯 SMB Marketing Lead Finder")
         print(f"📍 City: {self.city}")
+        print(f"🎯 Goal: Find {TARGET_LEADS} companies in ≤100 and 101-250 employee categories (combined)")
         print("=" * 70)
-        
+
         # Check OpenAI API key
         if not os.getenv("OPENAI_API_KEY"):
             print("⚠️  Warning: OPENAI_API_KEY not set. Some features will be limited.")
         else:
             print("✅ OpenAI API key found")
-        
+
         # Step 1: Search Indeed for marketing jobs
         print("\n" + "=" * 70)
         print("📋 STEP 1: Searching Indeed for marketing job postings...")
         print("=" * 70)
-        
+
         job_titles_to_search = [
             "Marketing Manager",
-            "Social Media Manager", 
+            "Social Media Manager",
             "Digital Marketing Specialist",
             "Content Marketer",
             "Growth Marketer",
             "Brand Manager",
             "Marketing Coordinator",
         ]
-        
+
         # For LA area, search with specific CA locations
         search_locations = ["Los Angeles, CA"]
         if "los angeles" in self.city.lower():
             search_locations.extend(["Santa Monica, CA", "Burbank, CA", "Pasadena, CA", "Irvine, CA"])
-        
+
+        # Track qualifying leads count (small + medium only)
+        max_iterations = 50  # Safety limit to prevent infinite loops
+        iteration = 0
+
         for location in search_locations:
+            target_count = len(self.leads_small) + len(self.leads_medium)
+            if target_count >= TARGET_LEADS or iteration >= max_iterations:
+                break
+
             print(f"\n  📍 Searching in: {location}")
             for job_title in job_titles_to_search:
+                target_count = len(self.leads_small) + len(self.leads_medium)
+                if target_count >= TARGET_LEADS or iteration >= max_iterations:
+                    break
+
                 try:
+                    iteration += 1
                     indeed_leads = await self.indeed_scraper.search_jobs(location, job_title)
                     added = 0
                     for lead in indeed_leads:
                         if self._add_lead(lead):
                             added += 1
                     if added > 0:
-                        print(f"    ➕ Added {added} new unique leads")
+                        print(f"    ➕ Added {added} new unique leads (total: {len(self.leads)})")
                     await asyncio.sleep(WAIT_BETWEEN_REQUESTS * 2)
                 except Exception as e:
                     print(f"  ⚠️  Indeed search error: {str(e)[:50]}")
-                
-                # Stop if we have enough leads from Indeed
-                if len(self.leads) >= TARGET_LEADS:
-                    break
-            if len(self.leads) >= TARGET_LEADS:
-                break
-        
-        print(f"\n  📊 Total unique leads after Indeed: {len(self.leads)}")
 
-        # Step 2: Enrich leads with company info and contacts
-        print("\n" + "=" * 70)
-        print("📊 STEP 2: Enriching leads with company info and contacts...")
-        print("=" * 70)
-        
-        enriched_leads = []
-        leads_to_process = self.leads[:TARGET_LEADS]
+                # Enrich and categorize leads
+                # Process the newly added leads
+                unenriched_leads = [l for l in self.leads if not l.contact_name]
+                if unenriched_leads:
+                    print(f"\n  📊 Enriching {len(unenriched_leads)} new leads...")
+                    for lead in unenriched_leads:
+                        try:
+                            await self.enricher.enrich_lead(lead, self.city)
+                            # Categorize and output if lead has contact name
+                            self._categorize_and_output_lead(lead)
+                        except Exception as e:
+                            print(f"    ⚠️  Enrichment error for {lead.company_name}: {str(e)[:50]}")
+                        await asyncio.sleep(0.3)
 
-        for i, lead in enumerate(leads_to_process):
-            print(f"\n[{i+1}/{len(leads_to_process)}]", end="")
-            try:
-                enriched = await self.enricher.enrich_lead(lead, self.city)
-                enriched_leads.append(enriched)
-            except Exception as e:
-                print(f"  ⚠️  Enrichment error: {str(e)[:50]}")
-                enriched_leads.append(lead)
+                        # Check if we've reached our goal
+                        target_count = len(self.leads_small) + len(self.leads_medium)
+                        if target_count >= TARGET_LEADS:
+                            break
 
-            await asyncio.sleep(0.3)
+                    # Show progress
+                    target_count = len(self.leads_small) + len(self.leads_medium)
+                    print(f"\n  🎯 Progress: {target_count}/{TARGET_LEADS} target leads found (≤100: {len(self.leads_small)}, 101-250: {len(self.leads_medium)})")
 
-        self.leads = enriched_leads
-        
+        target_count = len(self.leads_small) + len(self.leads_medium)
+        print(f"\n  📊 Total unique leads collected: {len(self.leads)}")
+        print(f"  🎯 Target leads found (≤250 employees with contact): {target_count}")
+
+        # Step 2: Final enrichment if we haven't reached target
+        if target_count < TARGET_LEADS:
+            print("\n" + "=" * 70)
+            print("📊 STEP 2: Final enrichment check...")
+            print("=" * 70)
+
+            unenriched_leads = [l for l in self.leads if not l.contact_name]
+            if unenriched_leads:
+                print(f"  Enriching {len(unenriched_leads)} remaining leads...")
+                for i, lead in enumerate(unenriched_leads):
+                    print(f"\n[{i+1}/{len(unenriched_leads)}]", end="")
+                    try:
+                        enriched = await self.enricher.enrich_lead(lead, self.city)
+                        # Categorize and output if lead has contact name
+                        self._categorize_and_output_lead(enriched)
+                    except Exception as e:
+                        print(f"  ⚠️  Enrichment error: {str(e)[:50]}")
+                    await asyncio.sleep(0.3)
+
+                    # Check if we've reached our goal
+                    target_count = len(self.leads_small) + len(self.leads_medium)
+                    if target_count >= TARGET_LEADS:
+                        break
+        else:
+            print("\n  ✅ Target reached! Skipping final enrichment.")
+
         # Summary of enrichment
-        websites_found = sum(1 for l in enriched_leads if l.website)
-        contacts_found = sum(1 for l in enriched_leads if l.contact_name)
+        websites_found = sum(1 for l in self.leads if l.website)
+        contacts_found = sum(1 for l in self.leads if l.contact_name)
         print(f"\n  📊 Enrichment summary: {websites_found} websites found, {contacts_found} contacts found")
-
-        # Save all enriched leads (no filtering)
-        self.leads = enriched_leads
 
         # Step 3: Save results
         print("\n" + "=" * 70)
@@ -953,91 +1088,78 @@ class MarketingLeadFinder:
         
         self._save_to_csv()
 
-        # Step 4: Show statistics
+        # Step 4: Show statistics by category
         print("\n" + "=" * 70)
-        print("📈 STATISTICS")
+        print("📈 STATISTICS BY CATEGORY")
         print("=" * 70)
 
-        total = len(self.leads)
-        if total > 0:
-            # Calculate fill rates for each column
-            contact_names = sum(1 for l in self.leads if l.contact_name)
-            contact_titles = sum(1 for l in self.leads if l.contact_title)
-            contact_emails = sum(1 for l in self.leads if l.contact_email)
-            contact_linkedins = sum(1 for l in self.leads if l.contact_linkedin)
-            websites = sum(1 for l in self.leads if l.website)
-            company_sizes = sum(1 for l in self.leads if l.company_size and l.company_size != "unknown" and l.company_size != "unknown but appears SMB")
+        print(f"\n🏢 COMPANIES WITH ≤ 100 EMPLOYEES: {len(self.leads_small)}")
+        print("=" * 70)
+        if self.leads_small:
+            for i, lead in enumerate(self.leads_small, 1):
+                print(f"\n{i}. {lead.company_name}")
+                print(f"   Contact: {lead.contact_name} - {lead.contact_title}")
+                if lead.contact_email:
+                    print(f"   Email: {lead.contact_email}")
+                if lead.contact_linkedin:
+                    print(f"   LinkedIn: {lead.contact_linkedin}")
+                print(f"   Company Size: {lead.company_size}")
+                print(f"   Website: {lead.website}")
+                print(f"   Location: {lead.city_neighborhood}")
 
-            print(f"\n📊 Column Fill Rates (out of {total} total leads):")
-            print(f"  • Contact Names:    {contact_names}/{total} ({contact_names/total*100:.1f}%)")
-            print(f"  • Contact Titles:   {contact_titles}/{total} ({contact_titles/total*100:.1f}%)")
-            print(f"  • Contact Emails:   {contact_emails}/{total} ({contact_emails/total*100:.1f}%)")
-            print(f"  • Contact LinkedIn: {contact_linkedins}/{total} ({contact_linkedins/total*100:.1f}%)")
-            print(f"  • Websites:         {websites}/{total} ({websites/total*100:.1f}%)")
-            print(f"  • Company Sizes:    {company_sizes}/{total} ({company_sizes/total*100:.1f}%)")
+        print(f"\n\n🏢 COMPANIES WITH 101-250 EMPLOYEES: {len(self.leads_medium)}")
+        print("=" * 70)
+        if self.leads_medium:
+            for i, lead in enumerate(self.leads_medium, 1):
+                print(f"\n{i}. {lead.company_name}")
+                print(f"   Contact: {lead.contact_name} - {lead.contact_title}")
+                if lead.contact_email:
+                    print(f"   Email: {lead.contact_email}")
+                if lead.contact_linkedin:
+                    print(f"   LinkedIn: {lead.contact_linkedin}")
+                print(f"   Company Size: {lead.company_size}")
+                print(f"   Website: {lead.website}")
+                print(f"   Location: {lead.city_neighborhood}")
 
-            # Filter for businesses with <100 employees AND valid contact name and title
-            smb_with_contacts = []
-            for lead in self.leads:
-                # Check if has valid contact
-                if not lead.contact_name or not lead.contact_title:
-                    continue
+        print(f"\n\n🏢 COMPANIES WITH 251+ EMPLOYEES: {len(self.leads_large)}")
+        print("=" * 70)
+        if self.leads_large:
+            for i, lead in enumerate(self.leads_large, 1):
+                print(f"\n{i}. {lead.company_name}")
+                print(f"   Contact: {lead.contact_name} - {lead.contact_title}")
+                if lead.contact_email:
+                    print(f"   Email: {lead.contact_email}")
+                if lead.contact_linkedin:
+                    print(f"   LinkedIn: {lead.contact_linkedin}")
+                print(f"   Company Size: {lead.company_size}")
+                print(f"   Website: {lead.website}")
+                print(f"   Location: {lead.city_neighborhood}")
 
-                # Check company size
-                size_str = lead.company_size.lower()
-                is_small = False
-
-                # Parse different company size formats
-                if "unknown" in size_str:
-                    continue  # Skip unknowns
-
-                # Check for various patterns indicating <100 employees
-                if any(x in size_str for x in ["1-10", "10-50", "50-100"]):
-                    is_small = True
-                elif "employees" in size_str:
-                    # Try to extract numbers
-                    import re
-                    numbers = re.findall(r'\d+', size_str.replace(',', ''))
-                    if numbers:
-                        # Get the first number (lower bound)
-                        first_num = int(numbers[0])
-                        if first_num < 100:
-                            is_small = True
-
-                if is_small:
-                    smb_with_contacts.append(lead)
-
-            print(f"\n🎯 Businesses with <100 employees AND valid contact: {len(smb_with_contacts)}/{total} ({len(smb_with_contacts)/total*100:.1f}%)")
-
-            if smb_with_contacts:
-                print("\n📋 List of qualifying businesses:")
-                print("-" * 70)
-                for i, lead in enumerate(smb_with_contacts, 1):
-                    print(f"\n{i}. {lead.company_name}")
-                    print(f"   Contact: {lead.contact_name} - {lead.contact_title}")
-                    if lead.contact_email:
-                        print(f"   Email: {lead.contact_email}")
-                    if lead.contact_linkedin:
-                        print(f"   LinkedIn: {lead.contact_linkedin}")
-                    print(f"   Company Size: {lead.company_size}")
-                    print(f"   Website: {lead.website}")
-                    print(f"   Location: {lead.city_neighborhood}")
-
-        print(f"\n✅ Complete! Found {len(self.leads)} qualified leads.")
+        target_count = len(self.leads_small) + len(self.leads_medium)
+        print(f"\n✅ Complete!")
+        print(f"   Total leads found: {len(self.leads)}")
+        print(f"   ≤100 employees: {len(self.leads_small)}")
+        print(f"   101-250 employees: {len(self.leads_medium)}")
+        print(f"   251+ employees: {len(self.leads_large)}")
+        print(f"   Target category total (≤100 + 101-250): {target_count}")
         print(f"📄 Results saved to: {OUTPUT_CSV}")
 
         return self.leads
     
     def _save_to_csv(self):
-        """Save leads to CSV file"""
-        if not self.leads:
-            print("  ⚠️  No leads to save")
+        """Save categorized leads to CSV file"""
+        # Combine all categorized leads in order: small, medium, large
+        categorized_leads = self.leads_small + self.leads_medium + self.leads_large
+
+        if not categorized_leads:
+            print("  ⚠️  No categorized leads to save")
             return
-        
-        rows = [lead.to_dict() for lead in self.leads]
+
+        rows = [lead.to_dict() for lead in categorized_leads]
         df = pd.DataFrame(rows)
         df.to_csv(OUTPUT_CSV, index=False)
-        print(f"  📊 Saved {len(self.leads)} leads to {OUTPUT_CSV}")
+        print(f"  📊 Saved {len(categorized_leads)} categorized leads to {OUTPUT_CSV}")
+        print(f"       ≤100: {len(self.leads_small)}, 101-250: {len(self.leads_medium)}, 251+: {len(self.leads_large)}")
 
 
 # ============================================================================
