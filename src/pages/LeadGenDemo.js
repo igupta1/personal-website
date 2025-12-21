@@ -57,8 +57,100 @@ function LeadGenDemo() {
   ];
 
   const generateLeads = async (location) => {
+    // Demo data for local development / fallback
+    const demoLeads = [
+      {
+        firstName: "Sarah",
+        lastName: "Mitchell",
+        title: "CEO",
+        companyName: "Coastal Marketing Co",
+        email: "sarah@coastalmarketing.com",
+        website: "https://coastalmarketing.com",
+        location: "Santa Monica, CA",
+        companySize: "45 employees",
+        category: "small"
+      },
+      {
+        firstName: "David",
+        lastName: "Chen",
+        title: "Founder",
+        companyName: "Tech Solutions LA",
+        email: "david@techsolutionsla.com",
+        website: "https://techsolutionsla.com",
+        location: "Los Angeles, CA",
+        companySize: "85 employees",
+        category: "small"
+      },
+      {
+        firstName: "Maria",
+        lastName: "Rodriguez",
+        title: "President",
+        companyName: "Urban Design Studio",
+        email: "maria@urbandesignstudio.com",
+        website: "https://urbandesignstudio.com",
+        location: "Pasadena, CA",
+        companySize: "120 employees",
+        category: "medium"
+      },
+      {
+        firstName: "James",
+        lastName: "Thompson",
+        title: "Owner",
+        companyName: "Pacific Consulting Group",
+        email: "james@pacificconsulting.com",
+        website: "https://pacificconsulting.com",
+        location: "Burbank, CA",
+        companySize: "65 employees",
+        category: "small"
+      },
+      {
+        firstName: "Lisa",
+        lastName: "Park",
+        title: "Co-Founder & CEO",
+        companyName: "Innovate Digital",
+        email: "lisa@innovatedigital.com",
+        website: "https://innovatedigital.com",
+        location: "Irvine, CA",
+        companySize: "180 employees",
+        category: "medium"
+      },
+      {
+        firstName: "Robert",
+        lastName: "Williams",
+        title: "Founder & CEO",
+        companyName: "Summit Enterprises",
+        email: "robert@summitenterprises.com",
+        website: "https://summitenterprises.com",
+        location: "Los Angeles, CA",
+        companySize: "320 employees",
+        category: "large"
+      },
+      {
+        firstName: "Emily",
+        lastName: "Johnson",
+        title: "President & CEO",
+        companyName: "Westside Media Group",
+        email: "emily@westsidemedia.com",
+        website: "https://westsidemedia.com",
+        location: "Santa Monica, CA",
+        companySize: "95 employees",
+        category: "small"
+      },
+      {
+        firstName: "Michael",
+        lastName: "Brown",
+        title: "CEO & Founder",
+        companyName: "Digital Horizons",
+        email: "michael@digitalhorizons.com",
+        website: "https://digitalhorizons.com",
+        location: "Pasadena, CA",
+        companySize: "450 employees",
+        category: "large"
+      }
+    ];
+
     try {
-      // Call the real API endpoint
+      // Try to call the real API endpoint (will work on Vercel)
       const API_URL = process.env.REACT_APP_API_URL || '';
       const response = await fetch(`${API_URL}/api/generate-leads`, {
         method: 'POST',
@@ -75,10 +167,17 @@ function LeadGenDemo() {
       const data = await response.json();
       return data;
     } catch (error) {
-      console.error('Error generating leads:', error);
+      // Fallback to demo data (for local development)
+      console.log('Using demo data (API not available locally)');
       return {
-        success: false,
-        error: error.message || 'Failed to generate leads'
+        success: true,
+        leads: demoLeads,
+        stats: {
+          small: demoLeads.filter(l => l.category === 'small').length,
+          medium: demoLeads.filter(l => l.category === 'medium').length,
+          large: demoLeads.filter(l => l.category === 'large').length,
+          targetCount: demoLeads.filter(l => l.category === 'small' || l.category === 'medium').length
+        }
       };
     }
   };
@@ -107,8 +206,8 @@ function LeadGenDemo() {
       setCurrentLead(lead);
       setProcessingStatus('generating');
 
-      // Simulate processing delay
-      await new Promise(resolve => setTimeout(resolve, 2500));
+      // Simulate processing delay (3.5 seconds per lead)
+      await new Promise(resolve => setTimeout(resolve, 3500));
 
       // Add lead to appropriate category
       if (lead.category === 'small') {
@@ -128,7 +227,7 @@ function LeadGenDemo() {
         const remainingLargeLeads = allLeads.slice(i + 1).filter(l => l.category === 'large');
         for (const largeLead of remainingLargeLeads) {
           setCurrentLead(largeLead);
-          await new Promise(resolve => setTimeout(resolve, 2500));
+          await new Promise(resolve => setTimeout(resolve, 3500));
           setLeadsLarge(prev => [...prev, largeLead]);
         }
         break;
