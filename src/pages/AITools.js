@@ -51,6 +51,13 @@ function AITools() {
     },
     {
       id: 3,
+      title: "Marketing Agency Lead Generation",
+      description: "Find Marketing Agencies and Their Contact Information Instantly",
+      icon: "🎯",
+      link: "/ai-tools/lead-gen",
+    },
+    {
+      id: 4,
       title: "More Coming Soon...",
       description: "Stay tuned for more AI-powered tools",
       icon: "🚀",
