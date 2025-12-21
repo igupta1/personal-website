@@ -189,20 +189,31 @@ class IndeedScraper {
       const url = `https://www.indeed.com/jobs?q=${query}&l=${loc}&fromage=14`;
 
       console.log(`Scraping Indeed: ${url}`);
-      await page.goto(url, { waitUntil: 'domcontentloaded' });
+      await page.goto(url, { waitUntil: 'networkidle2', timeout: 15000 });
 
-      // Wait for job cards
-      try {
-        await page.waitForSelector('div.job_seen_beacon, div.jobsearch-ResultsList > div', { timeout: 5000 });
-      } catch (e) {
-        console.log('  Timeout waiting for job cards');
-        await browser.close();
-        return [];
-      }
+      // Give page a moment to render
+      await new Promise(resolve => setTimeout(resolve, 2000));
 
-      // Extract job cards
+      // Debug: Check what's on the page
+      const html = await page.content();
+      console.log(`  Page title: ${await page.title()}`);
+      console.log(`  Page loaded, content length: ${html.length}`);
+
+      // Extract job cards - try multiple selectors
       const leads = await page.evaluate(() => {
-        const cards = Array.from(document.querySelectorAll('div.job_seen_beacon, div.jobsearch-ResultsList > div'));
+        // Try multiple selector patterns Indeed might use
+        let cards = Array.from(document.querySelectorAll('div.job_seen_beacon'));
+        if (cards.length === 0) {
+          cards = Array.from(document.querySelectorAll('.jobsearch-ResultsList > div'));
+        }
+        if (cards.length === 0) {
+          cards = Array.from(document.querySelectorAll('[data-testid="job-result"]'));
+        }
+        if (cards.length === 0) {
+          cards = Array.from(document.querySelectorAll('.slider_container > div'));
+        }
+
+        console.log(`Found ${cards.length} job cards`);
         const results = [];
 
         for (const card of cards.slice(0, 15)) {
