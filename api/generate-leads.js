@@ -3,7 +3,7 @@
  * Scrapes Indeed + Gemini API enrichment with 2-day caching
  */
 
-const chromium = require('playwright-aws-lambda');
+const playwright = require('playwright-aws-lambda');
 const { GoogleGenerativeAI } = require('@google/generative-ai');
 const { put, list } = require('@vercel/blob');
 
@@ -172,10 +172,10 @@ class IndeedScraper {
    * Scrape Indeed for job postings
    */
   async searchJobs(location, jobTitle, maxResults = 15) {
-    const browser = await chromium.launch({
-      args: chromium.args,
-      executablePath: await chromium.executablePath,
-      headless: chromium.headless
+    const browser = await playwright.launchChromium({
+      args: playwright.args,
+      executablePath: await playwright.executablePath,
+      headless: playwright.headless
     });
 
     try {
