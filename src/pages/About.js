@@ -12,25 +12,31 @@ import linkmailLogo from '../assets/linkmail-logo.png';
 import cscoLogo from '../assets/csco-logo.png';
 import jellypodLogo from '../assets/jellypod-logo.png';
 
+// Icons
+import { HiOutlineShoppingCart } from "react-icons/hi";
+import { HiOutlineEye } from "react-icons/hi";
+import { HiOutlineEmojiSad } from "react-icons/hi";
+import { HiOutlineChip } from "react-icons/hi";
+
 function About() {
 
   const experiences = [
     {
       title: "Software Engineer",
       company: "Google",
-      description: "Generative AI in Gmail and Google Chat",
+      description: "Built Generative AI Features for Gmail and Google Chat",
       logo: googlelogo,
     },
     {
       title: "Software Engineer",
       company: "Amazon",
-      description: "Developing Infrastructure for Amazon.com",
+      description: "Developed AI Infrastructure for Amazon.com",
       logo: amazonlogo,
     },
     {
       title: "Software Engineer",
       company: "Cisco",
-      description: "Distributed Systems Engineering",
+      description: "Implemented Distributed System Architecture for Networking Solutions",
       logo: ciscologo,
     },
   ];
@@ -56,7 +62,8 @@ function About() {
       id: 3,
       title: "UCLA Swipes",
       description: "Helps UCLA Kids Stay On Track With Their Meal Plan",
-      icon: "🍔",
+      icon: <HiOutlineShoppingCart size={34} color="#f5f5f5" />,
+      isReactIcon: true,
       link: "https://uclaswipes.com",
     },
     {
@@ -71,21 +78,24 @@ function About() {
       id: 5,
       title: "Visual Advertisement Detection",
       description: "Web Crawler that Locates Visual Ads and Reads Their Contents",
-      icon: "🔍",
+      icon: <HiOutlineEye size={34} color="#f5f5f5" />,
+      isReactIcon: true,
       link: "https://github.com/igupta1/VisualAdvertisementDetection",
     },
     {
       id: 6,
       title: "Drowsiness Detection",
       description: "Real-time detection for Alerting Drowsy Drivers",
-      icon: "👁️",
+      icon: <HiOutlineEmojiSad size={34} color="#f5f5f5" />,
+      isReactIcon: true,
       link: "https://github.com/igupta1/DrowsinessDetection",
     },
     {
       id: 7,
       title: "Sensor Fusion",
       description: "Combined Computer Vision, Ultrasonic, Infrared, and Light Sensors",
-      icon: "🔬",
+      icon: <HiOutlineChip size={34} color="#f5f5f5" />,
+      isReactIcon: true,
       link: "https://github.com/igupta1/SensorFusion",
     },
   ];
@@ -105,9 +115,9 @@ function About() {
               <img src={pfpImage} alt="Ishaan Gupta" className="profile-image" />
               <div className="profile-info">
                 <h1>Ishaan Gupta</h1>
-                <p>Software Engineer • Problem Solver • Builder
+                <p>Software Engineer - Problem Solver - Builder
                 <br /> <br />
-                From large-scale systems at Gmail and Amazon.com to the tools I build for everyday users, I focus on transforming complex problems into clear, usable solutions.</p>
+                I focus on turning complex problems into clear, practical solutions — from large-scale systems at Gmail and Amazon.com to tools for everyday users.</p>
               </div>
             </div>
           </section>

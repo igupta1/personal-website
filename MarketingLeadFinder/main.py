@@ -124,6 +124,8 @@ class Lead:
     contact_email: str = ""
     contact_linkedin: str = ""
     category: str = ""  # Employee count category
+    job_role: str = ""  # The marketing role they're hiring for
+    job_link: str = ""  # Direct link to the job posting
     raw_data: Dict = field(default_factory=dict)
 
     def to_dict(self) -> Dict:
@@ -142,6 +144,8 @@ class Lead:
             "City / Neighborhood": clean_city,
             "Evidence They Need Marketing Help": self.evidence,
             "Source Link(s)": self.source_links,
+            "Job Role": self.job_role,
+            "Job Link": self.job_link,
         }
 
 
@@ -269,6 +273,8 @@ class IndeedScraper(BaseScraper):
                             city_neighborhood=location_text.strip() if location_text else city,
                             evidence=f"Indeed posting for {job_title} (last 14 days)",
                             source_links=job_link,
+                            job_role=job_title.strip() if job_title else "",
+                            job_link=job_link,
                         )
                         leads.append(lead)
                         

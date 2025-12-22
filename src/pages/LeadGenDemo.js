@@ -1,5 +1,5 @@
 //LeadGenDemo.js
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import pfpImage from '../assets/headshot.jpg';
 
@@ -7,17 +7,6 @@ import pfpImage from '../assets/headshot.jpg';
 import googlelogo from '../assets/googlelogo.jpg';
 import amazonlogo from '../assets/amazonlogo.webp';
 import ciscologo from '../assets/ciscologo.png';
-
-// Cycling status messages to show what the AI is doing
-const STATUS_MESSAGES = [
-  { icon: "🔍", text: "Searching for marketing agencies..." },
-  { icon: "📍", text: "Finding locations..." },
-  { icon: "💼", text: "Extracting job titles..." },
-  { icon: "👤", text: "Identifying contact names..." },
-  { icon: "📧", text: "Gathering contact information..." },
-  { icon: "🌐", text: "Collecting website data..." },
-  { icon: "✨", text: "Finalizing lead details..." }
-];
 
 // Available metro areas for lead generation
 const METRO_OPTIONS = [
@@ -44,34 +33,13 @@ function LeadGenDemo() {
   const [leadsMedium, setLeadsMedium] = useState([]);
   const [leadsLarge, setLeadsLarge] = useState([]);
   const [currentLead, setCurrentLead] = useState(null);
-  const [processingStatus, setProcessingStatus] = useState('');
-  const [statusIndex, setStatusIndex] = useState(0);
+  const [processingPhase, setProcessingPhase] = useState('job'); // 'job' or 'contact'
   const [error, setError] = useState(null);
 
-  // Cycle through status messages while processing
-  useEffect(() => {
-    let interval;
-    if (stage === 'processing' && currentLead) {
-      interval = setInterval(() => {
-        setStatusIndex(prev => (prev + 1) % STATUS_MESSAGES.length);
-      }, 2000); // Change message every 2 seconds
-    }
-    return () => {
-      if (interval) clearInterval(interval);
-    };
-  }, [stage, currentLead]);
-
-  // Reset status index when lead changes
-  useEffect(() => {
-    if (currentLead) {
-      setStatusIndex(0);
-    }
-  }, [currentLead]);
-
   const experiences = [
-    { title: "Software Engineer", company: "Google", description: "Generative AI in Gmail and Google Chat", logo: googlelogo },
-    { title: "Software Engineer", company: "Amazon", description: "Developing Infrastructure for Amazon.com", logo: amazonlogo },
-    { title: "Software Engineer", company: "Cisco", description: "Distributed Systems Engineering", logo: ciscologo }
+    { title: "Software Engineer", company: "Google", description: "Built Generative AI Features for Gmail and Google Chat", logo: googlelogo },
+    { title: "Software Engineer", company: "Amazon", description: "Developed AI Infrastructure for Amazon.com", logo: amazonlogo },
+    { title: "Software Engineer", company: "Cisco", description: "Implemented Distributed System Architecture for Networking Solutions", logo: ciscologo }
   ];
 
   const generateLeads = async (location) => {
@@ -82,88 +50,104 @@ function LeadGenDemo() {
         lastName: "Mitchell",
         title: "CEO",
         companyName: "Coastal Marketing Co",
+        jobRole: "Marketing Manager",
         email: "sarah@coastalmarketing.com",
         website: "https://coastalmarketing.com",
         location: "Santa Monica, CA",
         companySize: "45 employees",
-        category: "small"
+        category: "small",
+        jobLink: "" // Demo data - real leads will have actual Indeed links
       },
       {
         firstName: "David",
         lastName: "Chen",
         title: "Founder",
         companyName: "Tech Solutions LA",
+        jobRole: "Social Media Manager",
         email: "david@techsolutionsla.com",
         website: "https://techsolutionsla.com",
         location: "Los Angeles, CA",
         companySize: "85 employees",
-        category: "small"
+        category: "small",
+        jobLink: ""
       },
       {
         firstName: "Maria",
         lastName: "Rodriguez",
         title: "President",
         companyName: "Urban Design Studio",
+        jobRole: "Digital Marketing Specialist",
         email: "maria@urbandesignstudio.com",
         website: "https://urbandesignstudio.com",
         location: "Pasadena, CA",
         companySize: "120 employees",
-        category: "medium"
+        category: "medium",
+        jobLink: ""
       },
       {
         firstName: "James",
         lastName: "Thompson",
         title: "Owner",
         companyName: "Pacific Consulting Group",
+        jobRole: "Content Marketing Manager",
         email: "james@pacificconsulting.com",
         website: "https://pacificconsulting.com",
         location: "Burbank, CA",
         companySize: "65 employees",
-        category: "small"
+        category: "small",
+        jobLink: ""
       },
       {
         firstName: "Lisa",
         lastName: "Park",
         title: "Co-Founder & CEO",
         companyName: "Innovate Digital",
+        jobRole: "Growth Marketing Lead",
         email: "lisa@innovatedigital.com",
         website: "https://innovatedigital.com",
         location: "Irvine, CA",
         companySize: "180 employees",
-        category: "medium"
+        category: "medium",
+        jobLink: ""
       },
       {
         firstName: "Robert",
         lastName: "Williams",
         title: "Founder & CEO",
         companyName: "Summit Enterprises",
+        jobRole: "Marketing Manager",
         email: "robert@summitenterprises.com",
         website: "https://summitenterprises.com",
         location: "Los Angeles, CA",
         companySize: "320 employees",
-        category: "large"
+        category: "large",
+        jobLink: ""
       },
       {
         firstName: "Emily",
         lastName: "Johnson",
         title: "President & CEO",
         companyName: "Westside Media Group",
+        jobRole: "Social Media Manager",
         email: "emily@westsidemedia.com",
         website: "https://westsidemedia.com",
         location: "Santa Monica, CA",
         companySize: "95 employees",
-        category: "small"
+        category: "small",
+        jobLink: ""
       },
       {
         firstName: "Michael",
         lastName: "Brown",
         title: "CEO & Founder",
         companyName: "Digital Horizons",
+        jobRole: "Digital Marketing Specialist",
         email: "michael@digitalhorizons.com",
         website: "https://digitalhorizons.com",
         location: "Pasadena, CA",
         companySize: "450 employees",
-        category: "large"
+        category: "large",
+        jobLink: ""
       }
     ];
 
@@ -221,11 +205,15 @@ function LeadGenDemo() {
     // Simulate streaming - add leads one at a time with delay
     for (let i = 0; i < allLeads.length; i++) {
       const lead = allLeads[i];
-      setCurrentLead(lead);
-      setProcessingStatus('generating');
 
-      // Simulate processing delay (3.5 seconds per lead)
-      await new Promise(resolve => setTimeout(resolve, 3500));
+      // Phase 1: Show "[Company] is looking for a [Role]" for 2 seconds
+      setCurrentLead(lead);
+      setProcessingPhase('job');
+      await new Promise(resolve => setTimeout(resolve, 2000));
+
+      // Phase 2: Show "Finding Contact Information" for 2 seconds
+      setProcessingPhase('contact');
+      await new Promise(resolve => setTimeout(resolve, 2000));
 
       // Add lead to appropriate category
       if (lead.category === 'small') {
@@ -245,7 +233,10 @@ function LeadGenDemo() {
         const remainingLargeLeads = allLeads.slice(i + 1).filter(l => l.category === 'large');
         for (const largeLead of remainingLargeLeads) {
           setCurrentLead(largeLead);
-          await new Promise(resolve => setTimeout(resolve, 3500));
+          setProcessingPhase('job');
+          await new Promise(resolve => setTimeout(resolve, 2000));
+          setProcessingPhase('contact');
+          await new Promise(resolve => setTimeout(resolve, 2000));
           setLeadsLarge(prev => [...prev, largeLead]);
         }
         break;
@@ -253,16 +244,12 @@ function LeadGenDemo() {
     }
 
     setCurrentLead(null);
-    setProcessingStatus('');
+    setProcessingPhase('job');
     setStage('results');
   };
 
   const useDemoData = () => {
     setError(null);
-    processLeads();
-  };
-
-  const handleSearch = () => {
     processLeads();
   };
 
@@ -273,12 +260,8 @@ function LeadGenDemo() {
     setLeadsMedium([]);
     setLeadsLarge([]);
     setCurrentLead(null);
-    setProcessingStatus('');
+    setProcessingPhase('job');
     setError(null);
-  };
-
-  const getCurrentStatus = () => {
-    return STATUS_MESSAGES[statusIndex];
   };
 
   return (
@@ -290,7 +273,7 @@ function LeadGenDemo() {
               <img src={pfpImage} alt="Ishaan Gupta" className="profile-image" />
               <div className="profile-info">
                 <h1>Ishaan Gupta</h1>
-                <p>Software Engineer - Problem Solver - Builder<br /><br />From large-scale systems at Gmail and Amazon.com to the tools I build for everyday users, I focus on transforming complex problems into clear, usable solutions.</p>
+                <p>Software Engineer - Problem Solver - Builder<br /><br />I focus on turning complex problems into clear, practical solutions — from large-scale systems at Gmail and Amazon.com to tools for everyday users.</p>
               </div>
             </div>
           </section>
@@ -355,40 +338,21 @@ function LeadGenDemo() {
                   </select>
                 </div>
 
-                <button className="demo-try-button" onClick={useDemoData}>Try a Demo with 5 Leads</button>
+                <button className="demo-try-button" onClick={useDemoData}>Try Demo</button>
               </div>
             )}
 
             {stage === 'processing' && (
               <div className="demo-processing-stage">
-                <div className="demo-progress-header">
-                  <h3>Finding Leads</h3>
-                  <div className="demo-progress-bar">
-                    <div className="demo-progress-fill" style={{ width: ((leadsSmall.length + leadsMedium.length) / 5) * 100 + '%' }} />
-                  </div>
-                  <p className="demo-progress-text">{leadsSmall.length + leadsMedium.length} of 5 target leads found</p>
-                </div>
-
                 {currentLead && (
                   <div className="demo-current-lead">
-                    <div className="demo-input-card">
-                      <h4 className="demo-generating-title">Finding Lead<span className="demo-animated-dots"><span>.</span><span>.</span><span>.</span></span></h4>
-                      <div className="demo-input-row"><span className="demo-input-label">Name:</span><span>{currentLead.firstName} {currentLead.lastName}</span></div>
-                      <div className="demo-input-row"><span className="demo-input-label">Title:</span><span>{currentLead.title || 'N/A'}</span></div>
-                      <div className="demo-input-row"><span className="demo-input-label">Company:</span><span>{currentLead.companyName || 'N/A'}</span></div>
-                      <div className="demo-input-row"><span className="demo-input-label">Company Size:</span><span className="demo-highlight">{currentLead.companySize}</span></div>
-                    </div>
-
-                    <div className="demo-processing-indicator">
-                      <div className="demo-status-animation">
-                        <div className="demo-status-icon">{getCurrentStatus().icon}</div>
-                        <div className="demo-status-text">{getCurrentStatus().text}</div>
-                      </div>
-                      <div className="demo-progress-steps">
-                        {STATUS_MESSAGES.slice(0, 5).map((_, idx) => (
-                          <div key={idx} className={`demo-progress-dot ${idx <= statusIndex % 5 ? 'active' : ''}`} />
-                        ))}
-                      </div>
+                    <div className="demo-processing-message">
+                      <p className="demo-phase-text">
+                        <span className="demo-company-highlight">{currentLead.companyName}</span> is looking for a <span className="demo-role-highlight">{currentLead.jobRole || 'Marketing Manager'}</span>{processingPhase === 'job' && <span className="demo-animated-dots"><span>.</span><span>.</span><span>.</span></span>}
+                      </p>
+                      <p className="demo-phase-text">
+                        Finding Contact Information{processingPhase === 'contact' && <span className="demo-animated-dots"><span>.</span><span>.</span><span>.</span></span>}
+                      </p>
                     </div>
                   </div>
                 )}
@@ -408,6 +372,8 @@ function LeadGenDemo() {
                           <div className="demo-live-result-details">
                             <span>{lead.email}</span>
                             <span>{lead.website}</span>
+                            {lead.jobRole && <span>Hiring for: {lead.jobRole}</span>}
+                            {lead.jobLink && <span><a href={lead.jobLink} target="_blank" rel="noopener noreferrer">View Job Posting →</a></span>}
                           </div>
                         </div>
                       ))}
@@ -432,6 +398,8 @@ function LeadGenDemo() {
                           <div className="demo-live-result-details">
                             <span>{lead.email}</span>
                             <span>{lead.website}</span>
+                            {lead.jobRole && <span>Hiring for: {lead.jobRole}</span>}
+                            {lead.jobLink && <span><a href={lead.jobLink} target="_blank" rel="noopener noreferrer">View Job Posting →</a></span>}
                           </div>
                         </div>
                       ))}
@@ -456,6 +424,8 @@ function LeadGenDemo() {
                           <div className="demo-live-result-details">
                             <span>{lead.email}</span>
                             <span>{lead.website}</span>
+                            {lead.jobRole && <span>Hiring for: {lead.jobRole}</span>}
+                            {lead.jobLink && <span><a href={lead.jobLink} target="_blank" rel="noopener noreferrer">View Job Posting →</a></span>}
                           </div>
                         </div>
                       ))}
@@ -488,6 +458,12 @@ function LeadGenDemo() {
                         <div className="demo-result-inputs">
                           <div className="demo-result-input"><span className="demo-result-label">Email</span><span className="demo-result-value">{lead.email}</span></div>
                           <div className="demo-result-input"><span className="demo-result-label">Website</span><span className="demo-result-value">{lead.website}</span></div>
+                          {lead.jobRole && (
+                            <div className="demo-result-input"><span className="demo-result-label">Hiring for</span><span className="demo-result-value">{lead.jobRole}</span></div>
+                          )}
+                          {lead.jobLink && (
+                            <div className="demo-result-input"><span className="demo-result-label">Job Posting</span><span className="demo-result-value"><a href={lead.jobLink} target="_blank" rel="noopener noreferrer">View on Indeed →</a></span></div>
+                          )}
                         </div>
                       </div>
                     ))}
@@ -507,6 +483,12 @@ function LeadGenDemo() {
                         <div className="demo-result-inputs">
                           <div className="demo-result-input"><span className="demo-result-label">Email</span><span className="demo-result-value">{lead.email}</span></div>
                           <div className="demo-result-input"><span className="demo-result-label">Website</span><span className="demo-result-value">{lead.website}</span></div>
+                          {lead.jobRole && (
+                            <div className="demo-result-input"><span className="demo-result-label">Hiring for</span><span className="demo-result-value">{lead.jobRole}</span></div>
+                          )}
+                          {lead.jobLink && (
+                            <div className="demo-result-input"><span className="demo-result-label">Job Posting</span><span className="demo-result-value"><a href={lead.jobLink} target="_blank" rel="noopener noreferrer">View on Indeed →</a></span></div>
+                          )}
                         </div>
                       </div>
                     ))}
@@ -527,6 +509,12 @@ function LeadGenDemo() {
                           <div className="demo-result-inputs">
                             <div className="demo-result-input"><span className="demo-result-label">Email</span><span className="demo-result-value">{lead.email}</span></div>
                             <div className="demo-result-input"><span className="demo-result-label">Website</span><span className="demo-result-value">{lead.website}</span></div>
+                            {lead.jobRole && (
+                              <div className="demo-result-input"><span className="demo-result-label">Hiring for</span><span className="demo-result-value">{lead.jobRole}</span></div>
+                            )}
+                            {lead.jobLink && (
+                              <div className="demo-result-input"><span className="demo-result-label">Job Posting</span><span className="demo-result-value"><a href={lead.jobLink} target="_blank" rel="noopener noreferrer">View on Indeed →</a></span></div>
+                            )}
                           </div>
                         </div>
                       ))}

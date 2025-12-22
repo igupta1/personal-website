@@ -81,7 +81,9 @@ def read_leads_from_csv(filepath: str) -> List[Dict[str, Any]]:
                 'location': row.get('City/Neighborhood', ''),
                 'companySize': row.get('Company Size', ''),
                 'category': category,
-                'evidence': row.get('Evidence', '')
+                'evidence': row.get('Evidence', ''),
+                'jobRole': row.get('Job Role', ''),
+                'jobLink': row.get('Job Link', '')
             }
             leads.append(lead)
 

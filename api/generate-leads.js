@@ -16,8 +16,14 @@ async function getCachedLeads(location) {
       return null;
     }
 
-    // Get the latest blob
-    const latestBlob = blobs[0];
+    // Sort by uploadedAt descending to get the latest blob
+    const sortedBlobs = blobs.sort((a, b) =>
+      new Date(b.uploadedAt) - new Date(a.uploadedAt)
+    );
+    const latestBlob = sortedBlobs[0];
+
+    console.log(`Found ${blobs.length} blobs, using latest from ${latestBlob.uploadedAt}`);
+
     const response = await fetch(latestBlob.url);
     const data = await response.json();
 

@@ -371,8 +371,8 @@ body {
 }
 
 .project-card:nth-child(3) .project-icon {
-  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-  box-shadow: 0 8px 20px rgba(79, 172, 254, 0.3);
+  background: linear-gradient(135deg, #2d5a87 0%, #1a3a5c 100%);
+  box-shadow: 0 8px 20px rgba(45, 90, 135, 0.4);
 }
 
 .project-card:nth-child(4) .project-icon {
@@ -381,18 +381,24 @@ body {
 }
 
 .project-card:nth-child(5) .project-icon {
-  background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
-  box-shadow: 0 8px 20px rgba(250, 112, 154, 0.3);
+  background: linear-gradient(135deg, #8b4a5e 0%, #5c3d4a 100%);
+  box-shadow: 0 8px 20px rgba(139, 74, 94, 0.4);
 }
 
 .project-card:nth-child(6) .project-icon {
-  background: linear-gradient(135deg, #30cfd0 0%, #330867 100%);
-  box-shadow: 0 8px 20px rgba(48, 207, 208, 0.3);
+  background: linear-gradient(135deg, #2a6b6c 0%, #1a3d4d 100%);
+  box-shadow: 0 8px 20px rgba(42, 107, 108, 0.4);
 }
 
 .project-card:nth-child(7) .project-icon {
-  background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
-  box-shadow: 0 8px 20px rgba(168, 237, 234, 0.3);
+  background: linear-gradient(135deg, #4a5568 0%, #2d3748 100%);
+  box-shadow: 0 8px 20px rgba(74, 85, 104, 0.4);
+}
+
+/* LinkedIn tool specific styling (for AI Tools page) */
+.project-card.linkedin-tool .project-icon {
+  background: #1559a6;
+  box-shadow: 0 8px 20px rgba(14, 47, 86, 0.4);
 }
 
 .project-content h3 {
@@ -822,6 +828,31 @@ body {
   display: flex;
   flex-direction: column;
   gap: 1rem;
+}
+
+.demo-processing-message {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(102, 126, 234, 0.3);
+  border-radius: 12px;
+  padding: 1.5rem;
+  text-align: center;
+}
+
+.demo-phase-text {
+  font-size: 1.2rem;
+  color: rgba(255, 255, 255, 0.9);
+  margin: 0;
+  line-height: 1.6;
+}
+
+.demo-company-highlight {
+  color: #60a5fa;
+  font-weight: 600;
+}
+
+.demo-role-highlight {
+  color: #a78bfa;
+  font-weight: 600;
 }
 
 .demo-input-card,
@@ -1321,6 +1352,17 @@ body {
 
 .demo-live-result-details span:first-child {
   color: rgba(255, 255, 255, 0.8);
+}
+
+.demo-live-result-details a {
+  color: #60a5fa;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.demo-live-result-details a:hover {
+  color: #93c5fd;
+  text-decoration: underline;
 }
 
 .demo-live-result-icebreaker {
