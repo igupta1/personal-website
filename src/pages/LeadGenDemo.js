@@ -43,111 +43,124 @@ function LeadGenDemo() {
   ];
 
   const generateLeads = async (location) => {
-    // Demo data for local development / fallback
+    // Demo data for local development / fallback - using real data from smb_marketing_leads.csv
     const demoLeads = [
       {
-        firstName: "Sarah",
-        lastName: "Mitchell",
-        title: "CEO",
-        companyName: "Coastal Marketing Co",
+        firstName: "Lacey",
+        lastName: "Clark",
+        title: "Principal / Owner",
+        companyName: "NW Recruiting Partners",
         jobRole: "Marketing Manager",
-        email: "sarah@coastalmarketing.com",
-        website: "https://coastalmarketing.com",
-        location: "Santa Monica, CA",
-        companySize: "45 employees",
+        email: "laceyc@nwrecruitingpartners.com",
+        website: "https://nwrecruitingpartners.com",
+        location: "Los Angeles, CA 90041",
+        companySize: "10-50 employees",
         category: "small",
-        jobLink: "" // Demo data - real leads will have actual Indeed links
+        jobLink: "https://www.indeed.com/pagead/clk?mo=r&ad=-6NYlbfkN0AnVjGjnSyNF8IBfNb--AMl867kMIwBSscSrglcDFQnJb3bL0IVYEu78LtHLo_qqr0jhBZACcxNSAfa2x95ORqSwMgjJJ8kgbhSa5KY7hBgMMTV5WdS6xakW6L3VNu457k-hQJ9-hAaVtk4ghcYIebXfS0goO_lP2YSZijQT8J89zzrt0h1hWXb5NAPOhKKK43qverLSiT-MJrOF1ES7W43_uRUN-jRtm5MepvQ7fgfn0TF6hDzlhFkIzDEUHzqMohj8_XRrduUjNP1TALVD6EowYU7RLOas9H_UFFrUnYb3D8-0gBBK6LkjtTtq7MdQnVZiggFp7qGqz6-Bui-g-BfvwktWL6sQ1os1c45T-vm_N2hegf44KgpbGV3ufUzag0m1t2qSd4-hVoAcqixhq9-SDvdgOj-D9PunmfTmD5jDF-juIKUqUQgW8ue3Tul5gaAh0Iii3wbExUEJIHMdpvC4KY6HDNKWopSVv5kaDrMgLGJPahouDvgOc_-CpE1pwgveWzyKbPWn7s5BDb8J39yg1KKEal9nP8lVWf1v3NjquQymbLH-TuwsBbgGq62J7YJQJwZI90FDXcFRG5_wu4iFjT8rABMu9WqJ3HaegH6Es5ijCQpUMmBBsPgQseRr3le7xMikAC3T_6W6v8lLEpfxHvUvGt4rz0slwlf2K2pKtAmMMNTUvyYe-pPXOhEcG9t4iKbXJvYjJPYxQN1XRjEMCBjAOQfBPmXEAnv9gJ7ZA=="
+      },
+      {
+        firstName: "Vaheh",
+        lastName: "Manoukian",
+        title: "Founder & Lead Attorney",
+        companyName: "MANOUKIAN LAW FIRM, P.C.",
+        jobRole: "Social Media Manager",
+        email: "contact@manoukianlaw.com",
+        website: "https://www.manoukianlaw.com",
+        location: "Hybrid work in Chatsworth, CA 91311",
+        companySize: "1-10 employees",
+        category: "small",
+        jobLink: "https://www.indeed.com/rc/clk?jk=1b149c322be5b9c8&bb=8-_eo_ZYQj5o3FMGyBD5GXZcQ59GCTBcRu1uG_XD-2-DSUUZNzxIkHht7iQoIoeAwlAs2JOQvMtfaUNgh3Hh0ul5pTjpqDxFeJlX1lLlgAFdySEag6wPyZjo1nMmH9RqFCH9aid-SNO0qoJyDJedy0TzzhVvz3Ed"
+      },
+      {
+        firstName: "Ashley",
+        lastName: "Carlson",
+        title: "Founder and CEO",
+        companyName: "Elevate Business Support",
+        jobRole: "Social Media Manager",
+        email: "ashley@elevatevbsolutions.com",
+        website: "https://elevatevbsolutions.com/",
+        location: "Hybrid work in Gardena, CA 90248",
+        companySize: "10-19 employees",
+        category: "small",
+        jobLink: "https://www.indeed.com/rc/clk?jk=840c67222ae628a4&bb=8-_eo_ZYQj5o3FMGyBD5Gb3lBojWPq39dK8E5OLSVAdwp30oZgKrfx97RP8IzL_KLJXtgyBwp1iHluugCvdi-Y1Z17j974Rl8d4gdyf-BupHXCj2uYSHXmgUBxCIjzi13Voqex3piChD2XgaeRIDjvHp7lDODmT0"
+      },
+      {
+        firstName: "Roya",
+        lastName: "Ghafouri, MD",
+        title: "Owner / Oculoplastic & Reconstructive Surgeon",
+        companyName: "Roya Ghafouri, MD",
+        jobRole: "Marketing Coordinator",
+        email: "roya@royamd.com",
+        website: "https://www.royamd.com",
+        location: "Beverly Hills, CA",
+        companySize: "1-10 employees",
+        category: "small",
+        jobLink: "https://www.indeed.com/rc/clk?jk=d1423a36d623e435&bb=JQZt2D0517W_ThEfR5RSA1iAGhgLAu6NJ_oL8-A-MZEh4637GD7ZKKB8jsYV70_HufoQjmPZF9yPzXkHlxD8BQDJZl_ljivlQebE26rHwqCAX62_aAe-6qIFioir6dK6uv58N5kuO8va47GKOj0mXM3Ylum7ZH1O"
       },
       {
         firstName: "David",
-        lastName: "Chen",
-        title: "Founder",
-        companyName: "Tech Solutions LA",
-        jobRole: "Social Media Manager",
-        email: "david@techsolutionsla.com",
-        website: "https://techsolutionsla.com",
-        location: "Los Angeles, CA",
-        companySize: "85 employees",
+        lastName: "Yerushalmi",
+        title: "Attorney / Founder",
+        companyName: "Yerushalmi Law Firm",
+        jobRole: "Growth Marketer",
+        email: "info@injuryneeds.com",
+        website: "http://www.injuryneeds.com/",
+        location: "Beverly Hills, CA 90212",
+        companySize: "1-10 employees",
         category: "small",
-        jobLink: ""
+        jobLink: "https://www.indeed.com/pagead/clk?mo=r&ad=-6NYlbfkN0DmbvpZmwu_8ru03qfVhJtao4Kc_AjKK-lMi5y9y6L-5A8oIa_bhL6uDoTZN4-MH0G0XZIUv0CEUFsnMmjeIHMbWDsoEEIeJako8Iku7Ynysd--8VRWJ6hkN9XuqESN3_ZyH82EZF2S0cRpEXj4Gts65qBeAUxrlHBID7N0AgwDmvt4prr8h9aVGR4-CzII43-rHLHJ4Wc0Z0yybUddmSotQnl4eRGwSwaTlTbWZTeHgJcmWjlaHDtjWXDAfEkh1Bzr2AOE6qvO5ZcnXmop8oJX-XCtyNx-P3eFJ0KXPnS63iTWy7O7n06pEGmj7abkzZn0WD8qyXud4AIPOFRx6AXWJjce1YJ4a3hZK8jFETfegaFNSgDkO-Gvds1XibWzBmltaeO7Gd1MA6s_x9nD--A-5rGb-lg_pbgq3CuayR0X9XkJmJ5OtCv00CJnLZ67dEJHKVq7Im33G40YElK7OkqKG5uX8xUM5RbwF81kMupmsD7en_w3OThmbr_Rt9776ieu0WEDpSDH5aR2-6PWp77s5XxE0lLcti5KKU5GsQsuOIiteDMra5pPRk8kHfrE-ZgoiGgz9JeLtJYg8HL40NNoWZsxtsCZlAiZf63IwF3agTKoY_FAzg9-2xAslMJ76C4gEJWtqg5e5-x66QNMYdV5YIEqJa4tPb0j__pdphGcSCrNYHKJaVyXS4dpgrxgptO_ZxbDEMfPBMK7d4y5duGrLvDS67uJn3VWjifaK6Yrww=="
       },
       {
-        firstName: "Maria",
-        lastName: "Rodriguez",
-        title: "President",
-        companyName: "Urban Design Studio",
-        jobRole: "Digital Marketing Specialist",
-        email: "maria@urbandesignstudio.com",
-        website: "https://urbandesignstudio.com",
-        location: "Pasadena, CA",
-        companySize: "120 employees",
-        category: "medium",
-        jobLink: ""
-      },
-      {
-        firstName: "James",
-        lastName: "Thompson",
-        title: "Owner",
-        companyName: "Pacific Consulting Group",
-        jobRole: "Content Marketing Manager",
-        email: "james@pacificconsulting.com",
-        website: "https://pacificconsulting.com",
-        location: "Burbank, CA",
-        companySize: "65 employees",
-        category: "small",
-        jobLink: ""
-      },
-      {
-        firstName: "Lisa",
-        lastName: "Park",
-        title: "Co-Founder & CEO",
-        companyName: "Innovate Digital",
-        jobRole: "Growth Marketing Lead",
-        email: "lisa@innovatedigital.com",
-        website: "https://innovatedigital.com",
-        location: "Irvine, CA",
-        companySize: "180 employees",
-        category: "medium",
-        jobLink: ""
-      },
-      {
-        firstName: "Robert",
-        lastName: "Williams",
-        title: "Founder & CEO",
-        companyName: "Summit Enterprises",
+        firstName: "Carl",
+        lastName: "McLarand",
+        title: "Founder and Chairman Emeritus",
+        companyName: "MVE & Partners, INC.",
         jobRole: "Marketing Manager",
-        email: "robert@summitenterprises.com",
-        website: "https://summitenterprises.com",
-        location: "Los Angeles, CA",
-        companySize: "320 employees",
-        category: "large",
-        jobLink: ""
+        email: "cmclarand@mve-architects.com",
+        website: "https://www.mve-architects.com",
+        location: "Irvine, CA 92614",
+        companySize: "51-200 employees",
+        category: "medium",
+        jobLink: "https://www.indeed.com/rc/clk?jk=87dbca53130ce15c&bb=DSI1fiAZBHUkwJDckxuEZSgc6aV2rlrz3GywFFWM_QIO6OqOUe5sAxVrOeRfN4sx-ywlkVzItNXvL345RRcVUzTi5BeW0VcUfkGtBr7Rp83__KS3g4Tz54UwEHZsnPBKK3xnhazAxYKC_C5Wr3Lj1a9y7sssQyD4"
       },
       {
-        firstName: "Emily",
-        lastName: "Johnson",
-        title: "President & CEO",
-        companyName: "Westside Media Group",
-        jobRole: "Social Media Manager",
-        email: "emily@westsidemedia.com",
-        website: "https://westsidemedia.com",
-        location: "Santa Monica, CA",
-        companySize: "95 employees",
-        category: "small",
-        jobLink: ""
-      },
-      {
-        firstName: "Michael",
-        lastName: "Brown",
-        title: "CEO & Founder",
-        companyName: "Digital Horizons",
+        firstName: "Jerry",
+        lastName: "Battipaglia",
+        title: "Co-Founder & CEO",
+        companyName: "Whitecap Search",
         jobRole: "Digital Marketing Specialist",
-        email: "michael@digitalhorizons.com",
-        website: "https://digitalhorizons.com",
-        location: "Pasadena, CA",
-        companySize: "450 employees",
+        email: "jbattipaglia@whitecapsearch.com",
+        website: "https://www.whitecapsearch.com",
+        location: "Remote in Century City, CA",
+        companySize: "100-250 employees",
+        category: "medium",
+        jobLink: "https://www.indeed.com/pagead/clk?mo=r&ad=-6NYlbfkN0Cp3za1qLcVC1e2ICPInAVbA_8ws4pGmEjrc9xvG5TXP7JVVOg79MvQCUOYoV66uFWYOPbwL-W33ghmoxknRLaDgavntE3bNY1UxWTEzMqUQWSqUKzFlQ2Qufn-c692efN_sA_0FCuGQYnGyxpRglDhh_rAd0Z9BVd-INJsm3lOO5XWT1LGQRsCrWUlBStKJjrmxX58nO0XNLGbRNf3hGuhZ62gcGmsZqeMhNNwuP8-s-Bv94oHpHjEVpK_gU9Ox24rF3rYbrrtFDPZ1y7pIa_fHJTePlBgf9UZVbqkoupCUnJwarGO2WwaG-OllTEjO5M8QIdlVO4kmA_wTIC8psieOpjDhExgEYtU8k9esTvyg5cgHIjcLDzbxYNYQx5mWAWAN8IgDRBHRvDqFu4sKYOseqfnqoIAJL1vdIkBg-Krl_Zlb3hjTI7PbqtYWm3c870NqitjV-Zn4a6BppbShaE3UAN6zND0LBqqz1DN7_jhe3psMRC5JNA_dqAQFmsnTcrpZbio_OQrCTL7RRAZnfnqkxyc3LofYC6c3umTF4AITL8GjX7BKkjMYd3zphihCRgN_7JQMn6Z23OeDluRuHyMPFjXB6koR5SwLV_RCMR0akGpo-twExzoSE-yWzgauVMt1VOS6ZUvuDxO7XHvl265QylPLxRAzZJ-NRz6x-YiI46H9GrQ4fML1GpaGYHGIvE="
+      },
+      {
+        firstName: "Courtney",
+        lastName: "Siegel",
+        title: "President & Chief Executive Officer",
+        companyName: "Oakmont Senior Living",
+        jobRole: "Social Media Manager",
+        email: "courtney.siegel@oakmontmg.com",
+        website: "https://www.oakmontseniorliving.com",
+        location: "Irvine, CA 92614",
+        companySize: "1000-5000 employees",
         category: "large",
-        jobLink: ""
+        jobLink: "https://www.indeed.com/pagead/clk?mo=r&ad=-6NYlbfkN0DGUq6kWQMojRqnS_MHd4LuVjA-lKl7scDdGGR-PUueRJC2hOe1qjdAMohwHEI1Syj6QMwEHQaz50_N3yEMmfs96TDnFoUJ8P61kQncGpZ1Gs1QymjRUkSguE-jgylcpns-Ij_NuMzlUVo_ZkDUwjxfBUK0_OW_d3pmBB5wUvr4PdZJtUnJ9RuBzAH5mstY_ZLQhfFyhDMIoa1BeZyD5679a2yQNuq3BqVOYj7UnYs6ytTaKNAoVQzsft11ZU4uxNGUkqLT7b1N0KogQpo2_dt3oqgifnLiN4ignzt_7KIc69VxOtctkGnDp63nBm4ZJBfWK4aML9iBifipuEpIbwXDRY_QFbu44D_l567gnpDWYWV9LVnD8-3DSCOURarmS2sEjp8rM63ZahSizs6__VhqwlorjT90flqYbk2SB-xhj6RtmGr0carn2kmR3ikaF4ukJr1kfNkWP7kMyi_0UvPVEm4YIrFVSCrh0G_4BppxGVq7SM0Bmzp0JUQ15QYn4uGYshZCwVXVVvDpUNVdDiKfgH6gf-LlT0JGNgZIcbCDNkDsfXeM316TM2BGnhNIGpVrpGwFayC5Iycj2Mfvhsfz4qWzDprDEO23Kl_SdQq21LP7hEE-ggTqaktqjIpEiNNpl3HcYBtVh5eVMrI9H3dSqOEb8hGHGhGxU-bBzlmBBCsC5ZeY_yFz3IUevadfCkJlge7heOtHbVk6vgJN5XMMpvQQSzYqL3KgSK_P17Y2RzgwxW3Ok7QVr0eW90LXFloApCifPBodP1Quroq15U9nM2QBp7vZoNYXY9hN5Ri0Dhal9PHR0Ckrn8AjFGVoaNc="
+      },
+      {
+        firstName: "Jack",
+        lastName: "Haldrup",
+        title: "Founder & CEO",
+        companyName: "Dr. Squatch",
+        jobRole: "Marketing Manager",
+        email: "jack.haldrup@drsquatch.com",
+        website: "https://www.drsquatch.com",
+        location: "Hybrid work in Marina del Rey, CA",
+        companySize: "300-500 employees",
+        category: "large",
+        jobLink: "https://www.indeed.com/rc/clk?jk=0898ef95c1ec1729&bb=wj9HCgwE828SBHn1hutHmQ3emGH-H-2P_aU22iVdA7Gy3DQQrYAxP0JYmZuzDmrSGuHU6LAW9OBws-t9Yfxr7aqp9PXwwMiVPAXxfhx3O-LP3blJvSS4b2tZ_8waI8FwnpwS2aQi7L9vKAjqghylVqEWZ252V3Q2"
       }
     ];
 
@@ -375,6 +388,12 @@ function LeadGenDemo() {
                             {lead.jobRole && <span>Hiring for: {lead.jobRole}</span>}
                             {lead.jobLink && <span><a href={lead.jobLink} target="_blank" rel="noopener noreferrer">View Job Posting →</a></span>}
                           </div>
+                          {lead.icebreaker && (
+                            <div className="demo-icebreaker">
+                              <span className="demo-icebreaker-label">📝 Icebreaker:</span>
+                              <p className="demo-icebreaker-text">{lead.icebreaker}</p>
+                            </div>
+                          )}
                         </div>
                       ))}
                     </div>
@@ -401,6 +420,12 @@ function LeadGenDemo() {
                             {lead.jobRole && <span>Hiring for: {lead.jobRole}</span>}
                             {lead.jobLink && <span><a href={lead.jobLink} target="_blank" rel="noopener noreferrer">View Job Posting →</a></span>}
                           </div>
+                          {lead.icebreaker && (
+                            <div className="demo-icebreaker">
+                              <span className="demo-icebreaker-label">📝 Icebreaker:</span>
+                              <p className="demo-icebreaker-text">{lead.icebreaker}</p>
+                            </div>
+                          )}
                         </div>
                       ))}
                     </div>
@@ -464,6 +489,9 @@ function LeadGenDemo() {
                           {lead.jobLink && (
                             <div className="demo-result-input"><span className="demo-result-label">Job Posting</span><span className="demo-result-value"><a href={lead.jobLink} target="_blank" rel="noopener noreferrer">View on Indeed →</a></span></div>
                           )}
+                          {lead.icebreaker && (
+                            <div className="demo-result-input demo-result-icebreaker"><span className="demo-result-label">📝 Icebreaker</span><span className="demo-result-value demo-icebreaker-value">{lead.icebreaker}</span></div>
+                          )}
                         </div>
                       </div>
                     ))}
@@ -488,6 +516,9 @@ function LeadGenDemo() {
                           )}
                           {lead.jobLink && (
                             <div className="demo-result-input"><span className="demo-result-label">Job Posting</span><span className="demo-result-value"><a href={lead.jobLink} target="_blank" rel="noopener noreferrer">View on Indeed →</a></span></div>
+                          )}
+                          {lead.icebreaker && (
+                            <div className="demo-result-input demo-result-icebreaker"><span className="demo-result-label">📝 Icebreaker</span><span className="demo-result-value demo-icebreaker-value">{lead.icebreaker}</span></div>
                           )}
                         </div>
                       </div>

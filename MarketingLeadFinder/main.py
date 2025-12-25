@@ -25,11 +25,13 @@ from urllib.parse import quote_plus, urljoin, urlparse
 import aiohttp
 import pandas as pd
 import requests
+from bs4 import BeautifulSoup
 from dotenv import load_dotenv
 from openai import AsyncOpenAI
 from playwright.async_api import async_playwright, TimeoutError as PlaywrightTimeout
 from google import genai
 from google.genai import types
+import html2text
 
 from metro_config import get_metro_config, MetroConfig
 
@@ -126,6 +128,7 @@ class Lead:
     category: str = ""  # Employee count category
     job_role: str = ""  # The marketing role they're hiring for
     job_link: str = ""  # Direct link to the job posting
+    icebreaker: str = ""  # Personalized cold email icebreaker
     raw_data: Dict = field(default_factory=dict)
 
     def to_dict(self) -> Dict:
@@ -146,6 +149,7 @@ class Lead:
             "Source Link(s)": self.source_links,
             "Job Role": self.job_role,
             "Job Link": self.job_link,
+            "Icebreaker": self.icebreaker,
         }
 
 
@@ -804,6 +808,247 @@ Return JSON format:
         return "", "", "", "", "", "unknown"
 
 
+class IcebreakerGenerator:
+    """Generate personalized cold email icebreakers by scraping company websites"""
+
+    def __init__(self):
+        self.semaphore = asyncio.Semaphore(10)  # Limit concurrent requests
+        self.html_converter = html2text.HTML2Text()
+        self.html_converter.ignore_links = False
+        self.html_converter.ignore_images = True
+        self.html_converter.ignore_emphasis = False
+        self.max_links_per_site = 3
+        self.timeout = 30
+
+    async def fetch_url(self, session: aiohttp.ClientSession, url: str) -> Optional[str]:
+        """Fetch URL content with error handling"""
+        try:
+            async with self.semaphore:
+                async with session.get(url, timeout=aiohttp.ClientTimeout(total=self.timeout), allow_redirects=True) as response:
+                    if response.status == 200:
+                        return await response.text()
+                    return None
+        except:
+            return None
+
+    def extract_links(self, html: str) -> List[str]:
+        """Extract all href attributes from anchor tags"""
+        soup = BeautifulSoup(html, 'html.parser')
+        links = []
+        for a_tag in soup.find_all('a', href=True):
+            links.append(a_tag['href'])
+        return links
+
+    def normalize_domain(self, domain: str) -> str:
+        """Normalize domain by removing www. prefix for comparison"""
+        return domain.lower().removeprefix('www.')
+
+    def filter_and_normalize_links(self, links: List[str], base_url: str) -> List[str]:
+        """Filter and normalize links to same-domain paths"""
+        normalized = []
+
+        for link in links:
+            if not link:
+                continue
+
+            # Case 1: Starts with '/' - already relative
+            if link.startswith('/'):
+                normalized.append(link)
+
+            # Case 2: Absolute URL (http or https)
+            elif link.startswith('http://') or link.startswith('https://'):
+                try:
+                    parsed = urlparse(link)
+                    base_parsed = urlparse(base_url)
+                    if self.normalize_domain(parsed.netloc) == self.normalize_domain(base_parsed.netloc):
+                        path = parsed.path
+                        if path != '/' and path.endswith('/'):
+                            path = path[:-1]
+                        if path:
+                            normalized.append(path if path else '/')
+                except Exception:
+                    continue
+
+        # Filter only those starting with '/'
+        filtered = [link for link in normalized if link.startswith('/')]
+
+        # Deduplicate while preserving order
+        seen = set()
+        deduplicated = []
+        for link in filtered:
+            if link not in seen:
+                seen.add(link)
+                deduplicated.append(link)
+
+        return deduplicated[:self.max_links_per_site]
+
+    def html_to_markdown(self, html: str) -> str:
+        """Convert HTML to Markdown"""
+        try:
+            return self.html_converter.handle(html)
+        except:
+            return ""
+
+    async def summarize_page(self, markdown_content: str) -> str:
+        """Summarize a page's content using GPT"""
+        try:
+            response = await client.chat.completions.create(
+                model="gpt-4.1-nano",
+                messages=[
+                    {
+                        "role": "system",
+                        "content": "You're a helpful, intelligent website scraping assistant."
+                    },
+                    {
+                        "role": "user",
+                        "content": """You're provided a Markdown scrape of a website page. Your task is to provide a two-paragraph abstract of what this page is about.
+
+Return in this JSON format:
+
+{"abstract":"your abstract goes here"}
+
+Rules:
+- Your extract should be comprehensive—similar level of detail as an abstract to a published paper.
+- Use a straightforward, spartan tone of voice.
+- If it's empty, just say "no content"."""
+                    },
+                    {
+                        "role": "user",
+                        "content": markdown_content[:10000]  # Limit content length
+                    }
+                ],
+                response_format={"type": "json_object"},
+                temperature=1.0
+            )
+
+            result = json.loads(response.choices[0].message.content)
+            abstract = result.get("abstract", "no content")
+            return abstract
+        except Exception as e:
+            print(f"        ⚠️  Summarize error: {str(e)[:100]}")
+            return "no content"
+
+    async def generate_icebreaker_text(self, first_name: str, last_name: str, headline: str, abstracts: List[str]) -> str:
+        """Generate personalized icebreaker from page summaries"""
+        try:
+            website_content = "\n\n".join(abstracts)
+
+            response = await client.chat.completions.create(
+                model="gpt-4.1",
+                messages=[
+                    {
+                        "role": "system",
+                        "content": """You're a senior outbound copywriter specializing in hyper-personalized cold email icebreakers. You are given multiple summaries of a company's website. Your job is to generate a single icebreaker that clearly shows we studied the recipient's site.
+
+Return ONLY valid JSON in this exact format:
+
+{"icebreaker":"Hey {name} — went down a rabbit hole on {ShortCompanyName}'s site. The part about {specific_niche_detail} caught my eye. Your focus on {core_value_or_theme} stuck with me."}
+
+RULES:
+- {ShortCompanyName}: shorten multi-word company names to one clean word (e.g., "Maki Agency" → "Maki", "Chartwell Agency" → "Chartwell").
+- {specific_niche_detail}: choose ONE sharp, concrete detail from the summaries (a specific process, case study, philosophy, niche service, repeated phrase, or concept).
+- {core_value_or_theme}: choose ONE recurring value or theme that appears multiple times across the summaries (e.g., empathy, clarity, storytelling, precision, long-term thinking, craftsmanship, community impact, rigor).
+- Both variables MUST directly come from the summaries. No inventing or guessing.
+- Tone: concise, calm, founder-to-founder.
+- Avoid generic compliments ("love your site", "great work").
+- Do not alter the template — only fill in the variables."""
+                    },
+                    {
+                        "role": "user",
+                        "content": f"=Profile: {first_name} {last_name} {headline}\n\nWebsite Summaries:\n{website_content}"
+                    }
+                ],
+                response_format={"type": "json_object"},
+                temperature=0.5
+            )
+
+            result = json.loads(response.choices[0].message.content)
+            icebreaker = result.get("icebreaker", "")
+            return icebreaker
+        except Exception as e:
+            print(f"        ⚠️  Icebreaker error: {str(e)[:100]}")
+            return ""
+
+    async def generate_icebreaker(self, lead: Lead) -> str:
+        """Generate an icebreaker for a lead by scraping their website"""
+        website_url = lead.website
+        first_name = lead.contact_name.split()[0] if lead.contact_name else ""
+        last_name = " ".join(lead.contact_name.split()[1:]) if lead.contact_name and len(lead.contact_name.split()) > 1 else ""
+
+        if not website_url:
+            return ""
+
+        print(f"     🔄 Generating icebreaker for {lead.company_name}...")
+
+        # Ensure URL has scheme
+        if not website_url.startswith('http'):
+            website_url = 'https://' + website_url
+
+        connector = aiohttp.TCPConnector(limit=10)
+        timeout = aiohttp.ClientTimeout(total=self.timeout)
+
+        async with aiohttp.ClientSession(
+            connector=connector,
+            timeout=timeout,
+            headers={'User-Agent': USER_AGENT}
+        ) as session:
+            # Step 1: Scrape home page
+            home_html = await self.fetch_url(session, website_url)
+            if not home_html:
+                print(f"        ❌ Failed to fetch {website_url}")
+                return ""
+
+            print(f"        ✅ Fetched homepage ({len(home_html)} chars)")
+
+            # Step 2: Extract and filter links
+            all_links = self.extract_links(home_html)
+            filtered_links = self.filter_and_normalize_links(all_links, website_url)
+
+            abstracts = []
+
+            if not filtered_links:
+                print(f"        🔄 Using fallback (no internal links)")
+                # FALLBACK: Use homepage content
+                markdown = self.html_to_markdown(home_html)
+                if markdown.strip():
+                    abstract = await self.summarize_page(markdown)
+                    if abstract and abstract != "no content":
+                        abstracts.append(abstract)
+                        print(f"        ✅ Got homepage abstract")
+            else:
+                print(f"        🔄 Scraping {len(filtered_links)} sub-pages")
+                # Step 3: Scrape and summarize sub-pages
+                for path in filtered_links:
+                    full_url = urljoin(website_url, path)
+                    page_html = await self.fetch_url(session, full_url)
+                    if page_html:
+                        markdown = self.html_to_markdown(page_html)
+                        if markdown.strip():
+                            abstract = await self.summarize_page(markdown)
+                            if abstract and abstract != "no content":
+                                abstracts.append(abstract)
+                print(f"        ✅ Got {len(abstracts)} abstracts")
+
+            if not abstracts:
+                print(f"        ❌ No content to summarize")
+                return ""
+
+            # Step 4: Generate icebreaker
+            print(f"        🔄 Generating icebreaker text...")
+            icebreaker = await self.generate_icebreaker_text(
+                first_name,
+                last_name,
+                lead.contact_title,
+                abstracts
+            )
+
+            if icebreaker:
+                print(f"        ✅ Generated icebreaker")
+            else:
+                print(f"        ❌ Failed to generate icebreaker")
+
+            return icebreaker
+
 
 # ============================================================================
 # MAIN ORCHESTRATOR
@@ -825,6 +1070,7 @@ class MarketingLeadFinder:
 
         self.indeed_scraper = IndeedScraper(self.metro_config)
         self.enricher = CompanyEnricher()
+        self.icebreaker_generator = IcebreakerGenerator()
     
     def _normalize_company_name(self, name: str) -> str:
         """Normalize company name for deduplication"""
@@ -899,6 +1145,9 @@ class MarketingLeadFinder:
         print(f"Website: {lead.website}")
         print(f"Location: {lead.city_neighborhood}")
         print(f"Evidence: {lead.evidence}")
+        if lead.icebreaker:
+            print(f"\n📝 Icebreaker:")
+            print(f"   {lead.icebreaker}")
         print(f"{'='*70}\n")
 
         return True
@@ -1000,6 +1249,12 @@ class MarketingLeadFinder:
                     for lead in unenriched_leads:
                         try:
                             await self.enricher.enrich_lead(lead, self.city)
+                            # Generate icebreaker only for target categories (≤250 employees)
+                            if lead.website and lead.contact_name:
+                                employee_count = self._get_employee_count(lead)
+                                if employee_count is not None and employee_count <= 250:
+                                    icebreaker = await self.icebreaker_generator.generate_icebreaker(lead)
+                                    lead.icebreaker = icebreaker
                             # Categorize and output if lead has contact name
                             self._categorize_and_output_lead(lead)
                         except Exception as e:
@@ -1032,6 +1287,12 @@ class MarketingLeadFinder:
                     print(f"\n[{i+1}/{len(unenriched_leads)}]", end="")
                     try:
                         enriched = await self.enricher.enrich_lead(lead, self.city)
+                        # Generate icebreaker only for target categories (≤250 employees)
+                        if enriched.website and enriched.contact_name:
+                            employee_count = self._get_employee_count(enriched)
+                            if employee_count is not None and employee_count <= 250:
+                                icebreaker = await self.icebreaker_generator.generate_icebreaker(enriched)
+                                enriched.icebreaker = icebreaker
                         # Categorize and output if lead has contact name
                         self._categorize_and_output_lead(enriched)
                     except Exception as e:
@@ -1075,6 +1336,8 @@ class MarketingLeadFinder:
                 print(f"   Company Size: {lead.company_size}")
                 print(f"   Website: {lead.website}")
                 print(f"   Location: {lead.city_neighborhood}")
+                if lead.icebreaker:
+                    print(f"   📝 Icebreaker: {lead.icebreaker}")
 
         print(f"\n\n🏢 COMPANIES WITH 101-250 EMPLOYEES: {len(self.leads_medium)}")
         print("=" * 70)
@@ -1089,6 +1352,8 @@ class MarketingLeadFinder:
                 print(f"   Company Size: {lead.company_size}")
                 print(f"   Website: {lead.website}")
                 print(f"   Location: {lead.city_neighborhood}")
+                if lead.icebreaker:
+                    print(f"   📝 Icebreaker: {lead.icebreaker}")
 
         print(f"\n\n🏢 COMPANIES WITH 251+ EMPLOYEES: {len(self.leads_large)}")
         print("=" * 70)
@@ -1103,6 +1368,8 @@ class MarketingLeadFinder:
                 print(f"   Company Size: {lead.company_size}")
                 print(f"   Website: {lead.website}")
                 print(f"   Location: {lead.city_neighborhood}")
+                if lead.icebreaker:
+                    print(f"   📝 Icebreaker: {lead.icebreaker}")
 
         target_count = len(self.leads_small) + len(self.leads_medium)
         print(f"\n✅ Complete!")
