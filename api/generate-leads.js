@@ -36,8 +36,9 @@ export default async function handler(req, res) {
       const response = await fetch(latestBlob.url);
       const cacheData = await response.json();
 
-      // Extract leads from cached data structure
-      const leads = cacheData.leads || [];
+      // Extract leads from cached data structure and filter to only those with emails
+      const allLeads = cacheData.leads || [];
+      const leads = allLeads.filter(l => l.email && l.email.trim() !== '');
 
       // Categorize leads by size
       const leadsSmall = leads.filter(l => l.category === 'small');
