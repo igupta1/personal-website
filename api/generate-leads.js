@@ -29,8 +29,11 @@ export default async function handler(req, res) {
         });
       }
 
-      // Get the most recent blob
-      const latestBlob = blobs[0];
+      // Sort by uploadedAt descending to get the most recent blob
+      const sortedBlobs = blobs.sort((a, b) =>
+        new Date(b.uploadedAt) - new Date(a.uploadedAt)
+      );
+      const latestBlob = sortedBlobs[0];
 
       // Fetch the blob content
       const response = await fetch(latestBlob.url);
