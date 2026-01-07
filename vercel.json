@@ -1,8 +1,7 @@
 {
   "functions": {
-    "api/generate-leads.js": {
-      "maxDuration": 60,
-      "memory": 1024
+    "api/upload-leads.js": {
+      "maxDuration": 60
     }
   }
 }
