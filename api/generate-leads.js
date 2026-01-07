@@ -13,12 +13,13 @@ export default async function handler(req, res) {
     }
 
     // Fetch leads from Vercel Blob Storage
-    const blobPath = `leads-${location}.json`;
+    // Upload API stores as leads-cache-{location}.json
+    const blobPath = `leads-cache-${location}.json`;
 
     try {
       // List all blobs to find the one we need
       const { blobs } = await list({
-        prefix: `leads-${location}`
+        prefix: `leads-cache-${location}`
       });
 
       if (!blobs || blobs.length === 0) {
@@ -33,7 +34,10 @@ export default async function handler(req, res) {
 
       // Fetch the blob content
       const response = await fetch(latestBlob.url);
-      const leads = await response.json();
+      const cacheData = await response.json();
+
+      // Extract leads from cached data structure
+      const leads = cacheData.leads || [];
 
       // Categorize leads by size
       const leadsSmall = leads.filter(l => l.category === 'small');

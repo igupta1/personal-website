@@ -53,7 +53,8 @@ module.exports = async function handler(req, res) {
       category: lead.category || 'small', // small, medium, large
       evidence: lead.evidence || '',
       jobRole: lead.jobRole || '',
-      jobLink: lead.jobLink || ''
+      jobLink: lead.jobLink || '',
+      icebreaker: lead.icebreaker || ''
     }));
 
     // Count by category
