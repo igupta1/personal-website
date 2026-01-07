@@ -1,8 +1,5 @@
 {
   "functions": {
-    "api/generate-icebreaker.js": {
-      "maxDuration": 60
-    },
     "api/generate-leads.js": {
       "maxDuration": 60,
       "memory": 1024
