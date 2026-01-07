@@ -1,0 +1,69 @@
+import { list, head } from '@vercel/blob';
+
+export default async function handler(req, res) {
+  if (req.method !== 'POST') {
+    return res.status(405).json({ error: 'Method not allowed' });
+  }
+
+  try {
+    const { location } = req.body;
+
+    if (!location) {
+      return res.status(400).json({ error: 'Location is required' });
+    }
+
+    // Fetch leads from Vercel Blob Storage
+    const blobPath = `leads-${location}.json`;
+
+    try {
+      // List all blobs to find the one we need
+      const { blobs } = await list({
+        prefix: `leads-${location}`
+      });
+
+      if (!blobs || blobs.length === 0) {
+        return res.status(404).json({
+          success: false,
+          error: 'No leads found for this location'
+        });
+      }
+
+      // Get the most recent blob
+      const latestBlob = blobs[0];
+
+      // Fetch the blob content
+      const response = await fetch(latestBlob.url);
+      const leads = await response.json();
+
+      // Categorize leads by size
+      const leadsSmall = leads.filter(l => l.category === 'small');
+      const leadsMedium = leads.filter(l => l.category === 'medium');
+      const leadsLarge = leads.filter(l => l.category === 'large');
+
+      return res.status(200).json({
+        success: true,
+        leads: leads,
+        stats: {
+          small: leadsSmall.length,
+          medium: leadsMedium.length,
+          large: leadsLarge.length,
+          targetCount: leadsSmall.length + leadsMedium.length
+        }
+      });
+
+    } catch (blobError) {
+      console.error('Blob fetch error:', blobError);
+      return res.status(404).json({
+        success: false,
+        error: 'No leads found for this location'
+      });
+    }
+
+  } catch (error) {
+    console.error('Error fetching leads:', error);
+    return res.status(500).json({
+      success: false,
+      error: 'Failed to fetch leads'
+    });
+  }
+}

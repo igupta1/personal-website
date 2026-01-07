@@ -2,6 +2,9 @@
   "functions": {
     "api/upload-leads.js": {
       "maxDuration": 60
+    },
+    "api/generate-leads.js": {
+      "maxDuration": 10
     }
   }
 }
