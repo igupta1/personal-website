@@ -36,9 +36,16 @@ export default async function handler(req, res) {
       const response = await fetch(latestBlob.url);
       const cacheData = await response.json();
 
-      // Extract leads from cached data structure and filter to only those with emails
+      // Extract leads from cached data structure and filter to only those with valid emails
       const allLeads = cacheData.leads || [];
-      const leads = allLeads.filter(l => l.email && l.email.trim() !== '');
+      const leads = allLeads.filter(l => {
+        if (!l.email) return false;
+        const email = l.email.trim().toLowerCase();
+        // Must contain @ and a dot, and not be a placeholder like "N/A" or "Not Found"
+        if (!email.includes('@') || !email.includes('.')) return false;
+        if (email.includes('n/a') || email.includes('not found') || email.includes('not available')) return false;
+        return true;
+      });
 
       // Categorize leads by size
       const leadsSmall = leads.filter(l => l.category === 'small');
