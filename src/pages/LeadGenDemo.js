@@ -1,5 +1,5 @@
 //LeadGenDemo.js
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import pfpImage from '../assets/headshot.jpg';
 
@@ -8,33 +8,15 @@ import googlelogo from '../assets/googlelogo.jpg';
 import amazonlogo from '../assets/amazonlogo.webp';
 import ciscologo from '../assets/ciscologo.png';
 
-// Available metro areas for lead generation
-const METRO_OPTIONS = [
-  "Greater Atlanta Area",
-  "Greater Austin Area",
-  "Greater Bay Area",
-  "Greater Boston Area",
-  "Greater Chicago Area",
-  "Greater Dallas Area",
-  "Greater Houston Area",
-  "Greater Los Angeles Area",
-  "Greater Miami Area",
-  "Greater New York Area",
-  "Greater Philadelphia Area",
-  "Greater Phoenix Area",
-  "Greater San Diego Area",
-  "Greater Seattle Area"
-];
-
 function LeadGenDemo() {
-  const [stage, setStage] = useState('upload');
-  const [location, setLocation] = useState('Greater Los Angeles Area');
+  const [stage, setStage] = useState('processing');
   const [leadsSmall, setLeadsSmall] = useState([]);
   const [leadsMedium, setLeadsMedium] = useState([]);
   const [leadsLarge, setLeadsLarge] = useState([]);
   const [currentLead, setCurrentLead] = useState(null);
   const [processingPhase, setProcessingPhase] = useState('job'); // 'job' or 'contact'
   const [error, setError] = useState(null);
+  const [hasStarted, setHasStarted] = useState(false);
 
   const experiences = [
     { title: "Software Engineer", company: "Google", description: "Built Generative AI Features for Gmail and Google Chat", logo: googlelogo },
@@ -42,7 +24,8 @@ function LeadGenDemo() {
     { title: "Software Engineer", company: "Cisco", description: "Implemented Distributed System Architecture for Networking Solutions", logo: ciscologo }
   ];
 
-  const generateLeads = async (location) => {
+  const generateLeads = async () => {
+    const location = "demo"; // Hardcoded location for demo
     // Demo data for local development / fallback - matches smb_marketing_leads.csv exactly
     const demoLeads = [
       // ≤100 employees (3 leads)
@@ -184,13 +167,14 @@ function LeadGenDemo() {
     setLeadsMedium([]);
     setLeadsLarge([]);
     setError(null);
+    setHasStarted(true);
 
     // Fetch all leads from API
-    const result = await generateLeads(location);
+    const result = await generateLeads();
 
     if (!result.success) {
       setError(result.error || 'Failed to generate leads');
-      setStage('upload');
+      // Stay in processing stage but show error
       return;
     }
 
@@ -242,21 +226,25 @@ function LeadGenDemo() {
     setStage('results');
   };
 
-  const useDemoData = () => {
-    setError(null);
-    processLeads();
-  };
-
   const resetDemo = () => {
-    setStage('upload');
-    setLocation('Greater Los Angeles Area');
+    setStage('processing');
     setLeadsSmall([]);
     setLeadsMedium([]);
     setLeadsLarge([]);
     setCurrentLead(null);
     setProcessingPhase('job');
     setError(null);
+    // Restart the demo
+    processLeads();
   };
+
+  // Auto-start demo on page load
+  useEffect(() => {
+    if (!hasStarted) {
+      processLeads();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div className="about-page-combined">
@@ -293,8 +281,7 @@ function LeadGenDemo() {
           <section className="demo-section">
             <div className="demo-section-header">
               <Link to="/ai-tools" className="back-link-inline">Back to AI Tools</Link>
-              <h2>Marketing Agency Lead Generation</h2>
-              <p className="demo-section-subtitle">AI-Powered Lead Discovery for Marketing Agencies</p>
+              <h2>Lead Discovery for Marketing Agencies</h2>
               <p className="demo-script-link">Check Out The Full Script <a href="https://github.com/igupta1/personal-website/blob/master/MarketingLeadFinder/main.py" target="_blank" rel="noopener noreferrer">Here</a></p>
             </div>
 
@@ -306,35 +293,24 @@ function LeadGenDemo() {
               </div>
             )}
 
-            {stage === 'upload' && (
-              <div className="demo-upload-stage">
-                <div className="demo-how-it-works">
-                  <h3>How It Works</h3>
-                  <div className="demo-steps-grid">
-                    <div className="demo-step"><span className="demo-step-num">1</span><span className="demo-step-text">Select Your Target Location</span></div>
-                    <div className="demo-step"><span className="demo-step-num">2</span><span className="demo-step-text">AI Finds Companies Hiring Marketing Roles</span></div>
-                    <div className="demo-step"><span className="demo-step-num">3</span><span className="demo-step-text">Extract Decision-Maker Contact Details</span></div>
-                    <div className="demo-step"><span className="demo-step-num">4</span><span className="demo-step-text">Get Your Qualified Lead List</span></div>
-                  </div>
+            {/* How It Works - always visible */}
+            <div className="demo-how-it-works">
+              <h3>How It Works</h3>
+              <div className="demo-steps-grid">
+                <div className="demo-step">
+                  <span className="demo-step-num">1</span>
+                  <span className="demo-step-text">Find Companies Hiring Marketing Roles</span>
                 </div>
-
-                <div className="demo-location-selector">
-                  <label htmlFor="location-select">Select Location:</label>
-                  <select
-                    id="location-select"
-                    value={location}
-                    onChange={(e) => setLocation(e.target.value)}
-                    className="demo-location-dropdown"
-                  >
-                    {METRO_OPTIONS.map(metro => (
-                      <option key={metro} value={metro}>{metro}</option>
-                    ))}
-                  </select>
+                <div className="demo-step">
+                  <span className="demo-step-num">2</span>
+                  <span className="demo-step-text">Extract Decision-Maker Contact Details</span>
                 </div>
-
-                <button className="demo-try-button" onClick={useDemoData}>Try Demo</button>
+                <div className="demo-step">
+                  <span className="demo-step-num">3</span>
+                  <span className="demo-step-text">Obtain Qualified Lead List</span>
+                </div>
               </div>
-            )}
+            </div>
 
             {stage === 'processing' && (
               <div className="demo-processing-stage">
@@ -351,12 +327,11 @@ function LeadGenDemo() {
                   </div>
                 )}
 
-                {/* Category: Less Than 100 Employees */}
+                {/* All Leads Combined */}
                 <div className="demo-category-section">
-                  <h4 className="demo-category-header">Companies With Less Than 100 Employees</h4>
-                  {leadsSmall.length > 0 ? (
+                  {[...leadsSmall, ...leadsMedium, ...leadsLarge].length > 0 ? (
                     <div className="demo-live-results-list">
-                      {leadsSmall.map((lead, index) => (
+                      {[...leadsSmall, ...leadsMedium, ...leadsLarge].map((lead, index) => (
                         <div key={index} className="demo-live-result-card">
                           <div className="demo-live-result-header">
                             <div className="demo-result-avatar">{lead.firstName.charAt(0)}{lead.lastName.charAt(0) || ''}</div>
@@ -375,64 +350,6 @@ function LeadGenDemo() {
                               <p className="demo-icebreaker-text">{lead.icebreaker}</p>
                             </div>
                           )}
-                        </div>
-                      ))}
-                    </div>
-                  ) : (
-                    <p className="demo-category-empty">No leads yet...</p>
-                  )}
-                </div>
-
-                {/* Category: Between 100 and 250 Employees */}
-                <div className="demo-category-section">
-                  <h4 className="demo-category-header">Companies Between 100 and 250 Employees</h4>
-                  {leadsMedium.length > 0 ? (
-                    <div className="demo-live-results-list">
-                      {leadsMedium.map((lead, index) => (
-                        <div key={index} className="demo-live-result-card">
-                          <div className="demo-live-result-header">
-                            <div className="demo-result-avatar">{lead.firstName.charAt(0)}{lead.lastName.charAt(0) || ''}</div>
-                            <div className="demo-live-result-name"><strong>{lead.firstName} {lead.lastName}</strong><span>{lead.title || 'Professional'} at {lead.companyName}</span></div>
-                            <span className="demo-live-result-check">✓</span>
-                          </div>
-                          <div className="demo-live-result-details">
-                            <span>{lead.email}</span>
-                            <span>{lead.website}</span>
-                            {lead.jobRole && <span>Hiring for: {lead.jobRole}</span>}
-                            {lead.jobLink && <span><a href={lead.jobLink} target="_blank" rel="noopener noreferrer">View Job Posting →</a></span>}
-                          </div>
-                          {lead.icebreaker && (
-                            <div className="demo-icebreaker">
-                              <span className="demo-icebreaker-label">📝 Icebreaker:</span>
-                              <p className="demo-icebreaker-text">{lead.icebreaker}</p>
-                            </div>
-                          )}
-                        </div>
-                      ))}
-                    </div>
-                  ) : (
-                    <p className="demo-category-empty">No leads yet...</p>
-                  )}
-                </div>
-
-                {/* Category: More Than 250 Employees */}
-                <div className="demo-category-section">
-                  <h4 className="demo-category-header">Companies With More Than 250 Employees</h4>
-                  {leadsLarge.length > 0 ? (
-                    <div className="demo-live-results-list">
-                      {leadsLarge.map((lead, index) => (
-                        <div key={index} className="demo-live-result-card">
-                          <div className="demo-live-result-header">
-                            <div className="demo-result-avatar">{lead.firstName.charAt(0)}{lead.lastName.charAt(0) || ''}</div>
-                            <div className="demo-live-result-name"><strong>{lead.firstName} {lead.lastName}</strong><span>{lead.title || 'Professional'} at {lead.companyName}</span></div>
-                            <span className="demo-live-result-check">✓</span>
-                          </div>
-                          <div className="demo-live-result-details">
-                            <span>{lead.email}</span>
-                            <span>{lead.website}</span>
-                            {lead.jobRole && <span>Hiring for: {lead.jobRole}</span>}
-                            {lead.jobLink && <span><a href={lead.jobLink} target="_blank" rel="noopener noreferrer">View Job Posting →</a></span>}
-                          </div>
                         </div>
                       ))}
                     </div>
@@ -448,14 +365,13 @@ function LeadGenDemo() {
             {stage === 'results' && (
               <div className="demo-results-stage">
                 <div className="demo-results-header">
-                  <button className="demo-reset-button" onClick={resetDemo}>New Search</button>
+                  <button className="demo-reset-button" onClick={resetDemo}>Refresh Search</button>
                 </div>
 
-                {/* Category: Less Than 100 Employees */}
+                {/* All Leads Combined */}
                 <div className="demo-results-category">
-                  <h4 className="demo-results-category-title">Companies With Less Than 100 Employees</h4>
                   <div className="demo-results-list">
-                    {leadsSmall.map((lead, index) => (
+                    {[...leadsSmall, ...leadsMedium, ...leadsLarge].map((lead, index) => (
                       <div key={index} className="demo-result-card">
                         <div className="demo-result-header">
                           <div className="demo-result-avatar">{lead.firstName.charAt(0)}{lead.lastName.charAt(0) || ''}</div>
@@ -478,61 +394,6 @@ function LeadGenDemo() {
                     ))}
                   </div>
                 </div>
-
-                {/* Category: Between 100 and 250 Employees */}
-                <div className="demo-results-category">
-                  <h4 className="demo-results-category-title">Companies Between 100 and 250 Employees</h4>
-                  <div className="demo-results-list">
-                    {leadsMedium.map((lead, index) => (
-                      <div key={index} className="demo-result-card">
-                        <div className="demo-result-header">
-                          <div className="demo-result-avatar">{lead.firstName.charAt(0)}{lead.lastName.charAt(0) || ''}</div>
-                          <div className="demo-result-info"><h4>{lead.firstName} {lead.lastName}</h4><span>{lead.title || 'Professional'} at {lead.companyName}</span></div>
-                        </div>
-                        <div className="demo-result-inputs">
-                          <div className="demo-result-input"><span className="demo-result-label">Email</span><span className="demo-result-value">{lead.email}</span></div>
-                          <div className="demo-result-input"><span className="demo-result-label">Website</span><span className="demo-result-value">{lead.website}</span></div>
-                          {lead.jobRole && (
-                            <div className="demo-result-input"><span className="demo-result-label">Hiring for</span><span className="demo-result-value">{lead.jobRole}</span></div>
-                          )}
-                          {lead.jobLink && (
-                            <div className="demo-result-input"><span className="demo-result-label">Job Posting</span><span className="demo-result-value"><a href={lead.jobLink} target="_blank" rel="noopener noreferrer">View on Indeed →</a></span></div>
-                          )}
-                          {lead.icebreaker && (
-                            <div className="demo-result-input demo-result-icebreaker"><span className="demo-result-label">📝 Icebreaker</span><span className="demo-result-value demo-icebreaker-value">{lead.icebreaker}</span></div>
-                          )}
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Category: More Than 250 Employees */}
-                {leadsLarge.length > 0 && (
-                  <div className="demo-results-category">
-                    <h4 className="demo-results-category-title">Companies With More Than 250 Employees</h4>
-                    <div className="demo-results-list">
-                      {leadsLarge.map((lead, index) => (
-                        <div key={index} className="demo-result-card">
-                          <div className="demo-result-header">
-                            <div className="demo-result-avatar">{lead.firstName.charAt(0)}{lead.lastName.charAt(0) || ''}</div>
-                            <div className="demo-result-info"><h4>{lead.firstName} {lead.lastName}</h4><span>{lead.title || 'Professional'} at {lead.companyName}</span></div>
-                          </div>
-                          <div className="demo-result-inputs">
-                            <div className="demo-result-input"><span className="demo-result-label">Email</span><span className="demo-result-value">{lead.email}</span></div>
-                            <div className="demo-result-input"><span className="demo-result-label">Website</span><span className="demo-result-value">{lead.website}</span></div>
-                            {lead.jobRole && (
-                              <div className="demo-result-input"><span className="demo-result-label">Hiring for</span><span className="demo-result-value">{lead.jobRole}</span></div>
-                            )}
-                            {lead.jobLink && (
-                              <div className="demo-result-input"><span className="demo-result-label">Job Posting</span><span className="demo-result-value"><a href={lead.jobLink} target="_blank" rel="noopener noreferrer">View on Indeed →</a></span></div>
-                            )}
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                )}
               </div>
             )}
           </section>

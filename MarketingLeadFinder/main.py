@@ -12,34 +12,25 @@ Outputs a comprehensive CSV with company info, evidence, and contact details.
 """
 
 import asyncio
-import csv
 import json
 import os
 import re
-import time
 from dataclasses import dataclass, field
-from datetime import datetime
 from typing import Dict, List, Optional, Set, Tuple
-from urllib.parse import quote_plus, urljoin, urlparse
+from urllib.parse import quote_plus, urlparse
 
 import aiohttp
 import pandas as pd
 import requests
-from bs4 import BeautifulSoup
 from dotenv import load_dotenv
-from openai import AsyncOpenAI
 from playwright.async_api import async_playwright, TimeoutError as PlaywrightTimeout
 from google import genai
 from google.genai import types
-import html2text
 
 from metro_config import get_metro_config, MetroConfig
 
 # Load environment variables
 load_dotenv()
-
-# Initialize OpenAI client
-client = AsyncOpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 # Initialize Gemini client
 gemini_client = genai.Client(api_key=os.getenv("GOOGLE_GEMINI_API_KEY"))
@@ -57,10 +48,10 @@ OUTPUT_CSV = "smb_marketing_leads.csv"
 # Scraping settings
 TIMEOUT = 30
 MAX_CONCURRENT_REQUESTS = 5
-WAIT_BETWEEN_REQUESTS = 1.0  # seconds
+WAIT_BETWEEN_REQUESTS = 5.0  # seconds - increased for safe testing
 
 # Target number of leads
-TARGET_LEADS = 5
+TARGET_LEADS = 3
 
 # Employee size thresholds for SMBs
 SMB_MAX_EMPLOYEES = 200
@@ -128,7 +119,6 @@ class Lead:
     category: str = ""  # Employee count category
     job_role: str = ""  # The marketing role they're hiring for
     job_link: str = ""  # Direct link to the job posting
-    icebreaker: str = ""  # Personalized cold email icebreaker
     raw_data: Dict = field(default_factory=dict)
 
     def to_dict(self) -> Dict:
@@ -149,7 +139,6 @@ class Lead:
             "Source Link(s)": self.source_links,
             "Job Role": self.job_role,
             "Job Link": self.job_link,
-            "Icebreaker": self.icebreaker,
         }
 
 
@@ -234,17 +223,23 @@ class IndeedScraper(BaseScraper):
         
         try:
             async with async_playwright() as p:
-                browser = await p.chromium.launch(headless=True)
+                browser = await p.chromium.launch(headless=False)
                 context = await browser.new_context(user_agent=USER_AGENT)
                 page = await context.new_page()
                 
                 await page.goto(url, wait_until="domcontentloaded", timeout=30000)
                 await page.wait_for_timeout(3000)
-                
+
+                # Check for captcha/block page
+                if await page.query_selector('#challenge-form, .captcha, [data-ray-id]'):
+                    print("⚠️ CAPTCHA DETECTED - Aborting to protect IP")
+                    await browser.close()
+                    return []
+
                 # Get job cards
                 job_cards = await page.query_selector_all('div.job_seen_beacon, div.jobsearch-ResultsList > div')
                 
-                for card in job_cards[:15]:  # Limit to first 15 per search
+                for card in job_cards[:5]:  # Reduced for safe testing
                     try:
                         # Extract company name
                         company_elem = await card.query_selector('[data-testid="company-name"], .companyName, .company')
@@ -295,315 +290,6 @@ class IndeedScraper(BaseScraper):
     
     def _is_excluded_company(self, company_name: str) -> bool:
         """Check if company should be excluded"""
-        name_lower = company_name.lower()
-        for pattern in EXCLUDED_COMPANY_PATTERNS:
-            if re.search(pattern, name_lower):
-                return True
-        return False
-
-
-class GoogleSearchScraper(BaseScraper):
-    """Scrape Google Search for various marketing-related signals"""
-    
-    def __init__(self):
-        super().__init__()
-        self.browser = None
-        self.browser_context = None
-    
-    async def initialize_browser(self):
-        """Initialize a reusable browser instance"""
-        if self.browser is None:
-            p = await async_playwright().start()
-            self.browser = await p.chromium.launch(headless=True)
-            self.browser_context = await self.browser.new_context(user_agent=USER_AGENT)
-    
-    async def close_browser(self):
-        """Close the browser when done"""
-        if self.browser:
-            await self.browser.close()
-            self.browser = None
-            self.browser_context = None
-    
-    async def search(self, query: str, num_results: int = 20) -> List[Dict]:
-        """Perform a search using DuckDuckGo (more reliable for automation)"""
-        results = []
-        
-        print(f"  🔍 Searching: '{query[:55]}...'")
-        
-        try:
-            await self.initialize_browser()
-            page = await self.browser_context.new_page()
-            
-            # Use DuckDuckGo instead of Google (more automation-friendly)
-            formatted_query = quote_plus(query)
-            url = f"https://duckduckgo.com/?q={formatted_query}"
-            
-            await page.goto(url, wait_until="domcontentloaded", timeout=30000)
-            await page.wait_for_timeout(2500)
-            
-            # Scroll to load more results
-            for _ in range(2):
-                await page.evaluate('window.scrollTo(0, document.body.scrollHeight)')
-                await page.wait_for_timeout(800)
-            
-            # DuckDuckGo result selectors
-            result_elements = await page.query_selector_all('article[data-testid="result"]')
-            
-            for elem in result_elements:
-                try:
-                    # Get title
-                    title_elem = await elem.query_selector('h2, a[data-testid="result-title-a"]')
-                    title = await title_elem.inner_text() if title_elem else ""
-                    
-                    # Get URL
-                    link_elem = await elem.query_selector('a[data-testid="result-title-a"], a[href^="http"]')
-                    link = await link_elem.get_attribute('href') if link_elem else ""
-                    
-                    # Get snippet
-                    snippet_elem = await elem.query_selector('div[data-result="snippet"], span')
-                    snippet = await snippet_elem.inner_text() if snippet_elem else ""
-                    
-                    if title and link:
-                        results.append({
-                            "title": title,
-                            "url": link,
-                            "snippet": snippet,
-                        })
-                except Exception as e:
-                    continue
-            
-            # If DuckDuckGo didn't work, try Bing as fallback
-            if len(results) == 0:
-                await page.goto(f"https://www.bing.com/search?q={formatted_query}", wait_until="domcontentloaded", timeout=30000)
-                await page.wait_for_timeout(2000)
-                
-                bing_results = await page.query_selector_all('li.b_algo')
-                for elem in bing_results:
-                    try:
-                        title_elem = await elem.query_selector('h2 a')
-                        title = await title_elem.inner_text() if title_elem else ""
-                        link = await title_elem.get_attribute('href') if title_elem else ""
-                        snippet_elem = await elem.query_selector('p')
-                        snippet = await snippet_elem.inner_text() if snippet_elem else ""
-                        
-                        if title and link:
-                            results.append({
-                                "title": title,
-                                "url": link,
-                                "snippet": snippet,
-                            })
-                    except:
-                        continue
-            
-            await page.close()
-            print(f"    📊 Found {len(results)} search results")
-                
-        except Exception as e:
-            print(f"    ⚠️  Search error: {str(e)[:100]}")
-        
-        return results
-    
-    async def search_job_postings(self, city: str) -> List[Lead]:
-        """Search for marketing job postings via web search"""
-        leads = []
-        
-        # Use city-specific queries for LA
-        city_short = "Los Angeles" if "los angeles" in city.lower() else city
-        
-        queries = [
-            f'hiring marketing manager {city_short}',
-            f'marketing job opening {city_short}',
-            f'digital marketing position {city_short}',
-            f'marketing coordinator careers {city_short}',
-        ]
-        
-        print(f"\n  🔍 Searching for job postings ({len(queries)} queries)...")
-        
-        for query in queries:
-            results = await self.search(query)
-            
-            added_from_query = 0
-            for result in results:
-                # Skip blocked domains
-                if any(domain in result['url'].lower() for domain in BLOCKED_DOMAINS):
-                    continue
-                
-                # Extract company name from title
-                company_name = self._extract_company_from_title(result['title'])
-                if not company_name:
-                    # Try from URL
-                    company_name = self._extract_company_from_url(result['url'])
-                
-                if not company_name:
-                    continue
-                
-                # Check if excluded
-                if self._is_excluded_company(company_name):
-                    continue
-                
-                lead = Lead(
-                    company_name=company_name,
-                    website=self._get_base_url(result['url']),
-                    city_neighborhood=city,
-                    evidence=f"Google: Job posting - {result['title'][:80]}",
-                    source_links=result['url'],
-                )
-                leads.append(lead)
-                added_from_query += 1
-            
-            if added_from_query > 0:
-                print(f"    ✅ Added {added_from_query} leads from query")
-            
-            await asyncio.sleep(WAIT_BETWEEN_REQUESTS)
-        
-        print(f"  📊 Total leads from Google job search: {len(leads)}")
-        return leads
-    
-    async def search_rfps(self, city: str) -> List[Lead]:
-        """Search for RFPs and RFQs for marketing services"""
-        leads = []
-        
-        city_short = "Los Angeles" if "los angeles" in city.lower() else city
-        
-        queries = [
-            f'RFP marketing services {city_short}',
-            f'marketing RFQ {city_short}',
-            f'seeking marketing agency {city_short}',
-        ]
-        
-        print(f"\n  🔍 Searching for RFPs ({len(queries)} queries)...")
-        
-        for query in queries:
-            results = await self.search(query)
-            
-            added_from_query = 0
-            for result in results:
-                if any(domain in result['url'].lower() for domain in BLOCKED_DOMAINS):
-                    continue
-                
-                company_name = self._extract_company_from_title(result['title'])
-                if not company_name:
-                    company_name = self._extract_company_from_url(result['url'])
-                
-                if not company_name or self._is_excluded_company(company_name):
-                    continue
-                
-                snippet_text = result['snippet'][:120] if result['snippet'] else result['title'][:80]
-                lead = Lead(
-                    company_name=company_name,
-                    website=self._get_base_url(result['url']),
-                    city_neighborhood=city,
-                    evidence=f"Google: RFP/RFQ - {snippet_text}",
-                    source_links=result['url'],
-                )
-                leads.append(lead)
-                added_from_query += 1
-            
-            if added_from_query > 0:
-                print(f"    ✅ Added {added_from_query} leads from RFP query")
-            
-            await asyncio.sleep(WAIT_BETWEEN_REQUESTS)
-        
-        print(f"  📊 Total leads from Google RFP search: {len(leads)}")
-        return leads
-    
-    async def search_rebrands_campaigns(self, city: str) -> List[Lead]:
-        """Search for companies announcing rebrands or major campaigns"""
-        leads = []
-        
-        city_short = "Los Angeles" if "los angeles" in city.lower() else city
-        
-        queries = [
-            f'company rebrand {city_short} 2024',
-            f'new marketing campaign launch {city_short}',
-            f'brand refresh {city_short}',
-        ]
-        
-        print(f"\n  🔍 Searching for rebrands/campaigns ({len(queries)} queries)...")
-        
-        for query in queries:
-            results = await self.search(query)
-            
-            added_from_query = 0
-            for result in results:
-                if any(domain in result['url'].lower() for domain in BLOCKED_DOMAINS):
-                    continue
-                
-                company_name = self._extract_company_from_title(result['title'])
-                if not company_name:
-                    company_name = self._extract_company_from_url(result['url'])
-                
-                if not company_name or self._is_excluded_company(company_name):
-                    continue
-                
-                snippet_text = result['snippet'][:120] if result['snippet'] else result['title'][:80]
-                lead = Lead(
-                    company_name=company_name,
-                    website=self._get_base_url(result['url']),
-                    city_neighborhood=city,
-                    evidence=f"Google: Rebrand/Campaign - {snippet_text}",
-                    source_links=result['url'],
-                )
-                leads.append(lead)
-                added_from_query += 1
-            
-            if added_from_query > 0:
-                print(f"    ✅ Added {added_from_query} leads from rebrand query")
-            
-            await asyncio.sleep(WAIT_BETWEEN_REQUESTS)
-        
-        print(f"  📊 Total leads from Google rebrand search: {len(leads)}")
-        return leads
-    
-    def _extract_company_from_title(self, title: str) -> Optional[str]:
-        """Extract company name from search result title"""
-        # Common patterns: "Company Name | Job Title" or "Job Title at Company Name"
-        patterns = [
-            r'^([^|]+)\s*\|',  # Before pipe
-            r'at\s+([A-Z][^-]+)',  # "at Company Name"
-            r'^([A-Z][A-Za-z0-9\s&]+)(?:\s*-|\s*\|)',  # Start with caps before dash/pipe
-            r'([A-Z][A-Za-z0-9\s&]{2,30})\s+(?:is\s+)?(?:hiring|seeking|looking)',  # Company is hiring
-        ]
-        
-        for pattern in patterns:
-            match = re.search(pattern, title)
-            if match:
-                name = match.group(1).strip()
-                # Clean up
-                name = re.sub(r'\s*[-|].*$', '', name)
-                name = name.strip()
-                if len(name) > 2 and len(name) < 50:
-                    return name
-        
-        return None
-    
-    def _extract_company_from_url(self, url: str) -> Optional[str]:
-        """Extract company name from URL domain"""
-        try:
-            parsed = urlparse(url)
-            domain = parsed.netloc.replace('www.', '')
-            # Remove TLD
-            name = domain.split('.')[0]
-            # Convert to title case
-            name = name.replace('-', ' ').replace('_', ' ').title()
-            if len(name) > 2:
-                return name
-        except:
-            pass
-        return None
-    
-    def _get_base_url(self, url: str) -> str:
-        """Extract base URL from full URL"""
-        try:
-            parsed = urlparse(url)
-            return f"{parsed.scheme}://{parsed.netloc}"
-        except:
-            return url
-    
-    def _is_excluded_company(self, company_name: str) -> bool:
-        """Check if company should be excluded"""
-        if not company_name:
-            return True
         name_lower = company_name.lower()
         for pattern in EXCLUDED_COMPANY_PATTERNS:
             if re.search(pattern, name_lower):
@@ -808,248 +494,6 @@ Return JSON format:
         return "", "", "", "", "", "unknown"
 
 
-class IcebreakerGenerator:
-    """Generate personalized cold email icebreakers by scraping company websites"""
-
-    def __init__(self):
-        self.semaphore = asyncio.Semaphore(10)  # Limit concurrent requests
-        self.html_converter = html2text.HTML2Text()
-        self.html_converter.ignore_links = False
-        self.html_converter.ignore_images = True
-        self.html_converter.ignore_emphasis = False
-        self.max_links_per_site = 3
-        self.timeout = 30
-
-    async def fetch_url(self, session: aiohttp.ClientSession, url: str) -> Optional[str]:
-        """Fetch URL content with error handling"""
-        try:
-            async with self.semaphore:
-                async with session.get(url, timeout=aiohttp.ClientTimeout(total=self.timeout), allow_redirects=True) as response:
-                    if response.status == 200:
-                        return await response.text()
-                    return None
-        except:
-            return None
-
-    def extract_links(self, html: str) -> List[str]:
-        """Extract all href attributes from anchor tags"""
-        soup = BeautifulSoup(html, 'html.parser')
-        links = []
-        for a_tag in soup.find_all('a', href=True):
-            links.append(a_tag['href'])
-        return links
-
-    def normalize_domain(self, domain: str) -> str:
-        """Normalize domain by removing www. prefix for comparison"""
-        return domain.lower().removeprefix('www.')
-
-    def filter_and_normalize_links(self, links: List[str], base_url: str) -> List[str]:
-        """Filter and normalize links to same-domain paths"""
-        normalized = []
-
-        for link in links:
-            if not link:
-                continue
-
-            # Case 1: Starts with '/' - already relative
-            if link.startswith('/'):
-                normalized.append(link)
-
-            # Case 2: Absolute URL (http or https)
-            elif link.startswith('http://') or link.startswith('https://'):
-                try:
-                    parsed = urlparse(link)
-                    base_parsed = urlparse(base_url)
-                    if self.normalize_domain(parsed.netloc) == self.normalize_domain(base_parsed.netloc):
-                        path = parsed.path
-                        if path != '/' and path.endswith('/'):
-                            path = path[:-1]
-                        if path:
-                            normalized.append(path if path else '/')
-                except Exception:
-                    continue
-
-        # Filter only those starting with '/'
-        filtered = [link for link in normalized if link.startswith('/')]
-
-        # Deduplicate while preserving order
-        seen = set()
-        deduplicated = []
-        for link in filtered:
-            if link not in seen:
-                seen.add(link)
-                deduplicated.append(link)
-
-        return deduplicated[:self.max_links_per_site]
-
-    def html_to_markdown(self, html: str) -> str:
-        """Convert HTML to Markdown"""
-        try:
-            return self.html_converter.handle(html)
-        except:
-            return ""
-
-    async def summarize_page(self, markdown_content: str) -> str:
-        """Summarize a page's content using GPT"""
-        try:
-            response = await client.chat.completions.create(
-                model="gpt-4.1-nano",
-                messages=[
-                    {
-                        "role": "system",
-                        "content": "You're a helpful, intelligent website scraping assistant."
-                    },
-                    {
-                        "role": "user",
-                        "content": """You're provided a Markdown scrape of a website page. Your task is to provide a two-paragraph abstract of what this page is about.
-
-Return in this JSON format:
-
-{"abstract":"your abstract goes here"}
-
-Rules:
-- Your extract should be comprehensive—similar level of detail as an abstract to a published paper.
-- Use a straightforward, spartan tone of voice.
-- If it's empty, just say "no content"."""
-                    },
-                    {
-                        "role": "user",
-                        "content": markdown_content[:10000]  # Limit content length
-                    }
-                ],
-                response_format={"type": "json_object"},
-                temperature=1.0
-            )
-
-            result = json.loads(response.choices[0].message.content)
-            abstract = result.get("abstract", "no content")
-            return abstract
-        except Exception as e:
-            print(f"        ⚠️  Summarize error: {str(e)[:100]}")
-            return "no content"
-
-    async def generate_icebreaker_text(self, first_name: str, last_name: str, headline: str, abstracts: List[str]) -> str:
-        """Generate personalized icebreaker from page summaries"""
-        try:
-            website_content = "\n\n".join(abstracts)
-
-            response = await client.chat.completions.create(
-                model="gpt-4.1",
-                messages=[
-                    {
-                        "role": "system",
-                        "content": """You're a senior outbound copywriter specializing in hyper-personalized cold email icebreakers. You are given multiple summaries of a company's website. Your job is to generate a single icebreaker that clearly shows we studied the recipient's site.
-
-Return ONLY valid JSON in this exact format:
-
-{"icebreaker":"Hey {name} — went down a rabbit hole on {ShortCompanyName}'s site. The part about {specific_niche_detail} caught my eye. Your focus on {core_value_or_theme} stuck with me."}
-
-RULES:
-- {ShortCompanyName}: shorten multi-word company names to one clean word (e.g., "Maki Agency" → "Maki", "Chartwell Agency" → "Chartwell").
-- {specific_niche_detail}: choose ONE sharp, concrete detail from the summaries (a specific process, case study, philosophy, niche service, repeated phrase, or concept).
-- {core_value_or_theme}: choose ONE recurring value or theme that appears multiple times across the summaries (e.g., empathy, clarity, storytelling, precision, long-term thinking, craftsmanship, community impact, rigor).
-- Both variables MUST directly come from the summaries. No inventing or guessing.
-- Tone: concise, calm, founder-to-founder.
-- Avoid generic compliments ("love your site", "great work").
-- Do not alter the template — only fill in the variables."""
-                    },
-                    {
-                        "role": "user",
-                        "content": f"=Profile: {first_name} {last_name} {headline}\n\nWebsite Summaries:\n{website_content}"
-                    }
-                ],
-                response_format={"type": "json_object"},
-                temperature=0.5
-            )
-
-            result = json.loads(response.choices[0].message.content)
-            icebreaker = result.get("icebreaker", "")
-            return icebreaker
-        except Exception as e:
-            print(f"        ⚠️  Icebreaker error: {str(e)[:100]}")
-            return ""
-
-    async def generate_icebreaker(self, lead: Lead) -> str:
-        """Generate an icebreaker for a lead by scraping their website"""
-        website_url = lead.website
-        first_name = lead.contact_name.split()[0] if lead.contact_name else ""
-        last_name = " ".join(lead.contact_name.split()[1:]) if lead.contact_name and len(lead.contact_name.split()) > 1 else ""
-
-        if not website_url:
-            return ""
-
-        print(f"     🔄 Generating icebreaker for {lead.company_name}...")
-
-        # Ensure URL has scheme
-        if not website_url.startswith('http'):
-            website_url = 'https://' + website_url
-
-        connector = aiohttp.TCPConnector(limit=10)
-        timeout = aiohttp.ClientTimeout(total=self.timeout)
-
-        async with aiohttp.ClientSession(
-            connector=connector,
-            timeout=timeout,
-            headers={'User-Agent': USER_AGENT}
-        ) as session:
-            # Step 1: Scrape home page
-            home_html = await self.fetch_url(session, website_url)
-            if not home_html:
-                print(f"        ❌ Failed to fetch {website_url}")
-                return ""
-
-            print(f"        ✅ Fetched homepage ({len(home_html)} chars)")
-
-            # Step 2: Extract and filter links
-            all_links = self.extract_links(home_html)
-            filtered_links = self.filter_and_normalize_links(all_links, website_url)
-
-            abstracts = []
-
-            if not filtered_links:
-                print(f"        🔄 Using fallback (no internal links)")
-                # FALLBACK: Use homepage content
-                markdown = self.html_to_markdown(home_html)
-                if markdown.strip():
-                    abstract = await self.summarize_page(markdown)
-                    if abstract and abstract != "no content":
-                        abstracts.append(abstract)
-                        print(f"        ✅ Got homepage abstract")
-            else:
-                print(f"        🔄 Scraping {len(filtered_links)} sub-pages")
-                # Step 3: Scrape and summarize sub-pages
-                for path in filtered_links:
-                    full_url = urljoin(website_url, path)
-                    page_html = await self.fetch_url(session, full_url)
-                    if page_html:
-                        markdown = self.html_to_markdown(page_html)
-                        if markdown.strip():
-                            abstract = await self.summarize_page(markdown)
-                            if abstract and abstract != "no content":
-                                abstracts.append(abstract)
-                print(f"        ✅ Got {len(abstracts)} abstracts")
-
-            if not abstracts:
-                print(f"        ❌ No content to summarize")
-                return ""
-
-            # Step 4: Generate icebreaker
-            print(f"        🔄 Generating icebreaker text...")
-            icebreaker = await self.generate_icebreaker_text(
-                first_name,
-                last_name,
-                lead.contact_title,
-                abstracts
-            )
-
-            if icebreaker:
-                print(f"        ✅ Generated icebreaker")
-            else:
-                print(f"        ❌ Failed to generate icebreaker")
-
-            return icebreaker
-
-
 # ============================================================================
 # MAIN ORCHESTRATOR
 # ============================================================================
@@ -1070,7 +514,6 @@ class MarketingLeadFinder:
 
         self.indeed_scraper = IndeedScraper(self.metro_config)
         self.enricher = CompanyEnricher()
-        self.icebreaker_generator = IcebreakerGenerator()
     
     def _normalize_company_name(self, name: str) -> str:
         """Normalize company name for deduplication"""
@@ -1145,9 +588,6 @@ class MarketingLeadFinder:
         print(f"Website: {lead.website}")
         print(f"Location: {lead.city_neighborhood}")
         print(f"Evidence: {lead.evidence}")
-        if lead.icebreaker:
-            print(f"\n📝 Icebreaker:")
-            print(f"   {lead.icebreaker}")
         print(f"{'='*70}\n")
 
         return True
@@ -1189,12 +629,6 @@ class MarketingLeadFinder:
         print(f"🎯 Goal: Find {TARGET_LEADS} companies in ≤100 and 101-250 employee categories (combined)")
         print("=" * 70)
 
-        # Check OpenAI API key
-        if not os.getenv("OPENAI_API_KEY"):
-            print("⚠️  Warning: OPENAI_API_KEY not set. Some features will be limited.")
-        else:
-            print("✅ OpenAI API key found")
-
         # Step 1: Search Indeed for marketing jobs
         print("\n" + "=" * 70)
         print("📋 STEP 1: Searching Indeed for marketing job postings...")
@@ -1202,12 +636,7 @@ class MarketingLeadFinder:
 
         job_titles_to_search = [
             "Marketing Manager",
-            "Social Media Manager",
             "Digital Marketing Specialist",
-            "Content Marketer",
-            "Growth Marketer",
-            "Brand Manager",
-            "Marketing Coordinator",
         ]
 
         # Get search locations from metro config
@@ -1249,12 +678,6 @@ class MarketingLeadFinder:
                     for lead in unenriched_leads:
                         try:
                             await self.enricher.enrich_lead(lead, self.city)
-                            # Generate icebreaker only for target categories (≤250 employees)
-                            if lead.website and lead.contact_name:
-                                employee_count = self._get_employee_count(lead)
-                                if employee_count is not None and employee_count <= 250:
-                                    icebreaker = await self.icebreaker_generator.generate_icebreaker(lead)
-                                    lead.icebreaker = icebreaker
                             # Categorize and output if lead has contact name
                             self._categorize_and_output_lead(lead)
                         except Exception as e:
@@ -1287,12 +710,6 @@ class MarketingLeadFinder:
                     print(f"\n[{i+1}/{len(unenriched_leads)}]", end="")
                     try:
                         enriched = await self.enricher.enrich_lead(lead, self.city)
-                        # Generate icebreaker only for target categories (≤250 employees)
-                        if enriched.website and enriched.contact_name:
-                            employee_count = self._get_employee_count(enriched)
-                            if employee_count is not None and employee_count <= 250:
-                                icebreaker = await self.icebreaker_generator.generate_icebreaker(enriched)
-                                enriched.icebreaker = icebreaker
                         # Categorize and output if lead has contact name
                         self._categorize_and_output_lead(enriched)
                     except Exception as e:
@@ -1336,8 +753,6 @@ class MarketingLeadFinder:
                 print(f"   Company Size: {lead.company_size}")
                 print(f"   Website: {lead.website}")
                 print(f"   Location: {lead.city_neighborhood}")
-                if lead.icebreaker:
-                    print(f"   📝 Icebreaker: {lead.icebreaker}")
 
         print(f"\n\n🏢 COMPANIES WITH 101-250 EMPLOYEES: {len(self.leads_medium)}")
         print("=" * 70)
@@ -1352,8 +767,6 @@ class MarketingLeadFinder:
                 print(f"   Company Size: {lead.company_size}")
                 print(f"   Website: {lead.website}")
                 print(f"   Location: {lead.city_neighborhood}")
-                if lead.icebreaker:
-                    print(f"   📝 Icebreaker: {lead.icebreaker}")
 
         print(f"\n\n🏢 COMPANIES WITH 251+ EMPLOYEES: {len(self.leads_large)}")
         print("=" * 70)
@@ -1368,8 +781,6 @@ class MarketingLeadFinder:
                 print(f"   Company Size: {lead.company_size}")
                 print(f"   Website: {lead.website}")
                 print(f"   Location: {lead.city_neighborhood}")
-                if lead.icebreaker:
-                    print(f"   📝 Icebreaker: {lead.icebreaker}")
 
         target_count = len(self.leads_small) + len(self.leads_medium)
         print(f"\n✅ Complete!")

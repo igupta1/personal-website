@@ -1,8 +1,15 @@
+# Cold Email Icebreaker Generator - Dependencies
+
+# Data processing
 pandas>=2.0.0
-requests>=2.31.0
+
+# Web scraping
 aiohttp>=3.9.0
 beautifulsoup4>=4.12.0
-openai>=1.12.0
-python-dotenv>=1.0.0
 html2text>=2020.1.16
 
+# AI/LLM (GPT for summarization and icebreaker generation)
+openai>=1.12.0
+
+# Environment variables
+python-dotenv>=1.0.0
