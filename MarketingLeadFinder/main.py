@@ -618,10 +618,7 @@ class MarketingLeadFinder:
         print("📋 STEP 1: Searching Indeed for marketing job postings...")
         print("=" * 70)
 
-        job_titles_to_search = [
-            "Marketing Manager",
-            "Digital Marketing Specialist",
-        ]
+        job_titles_to_search = MARKETING_JOB_TITLES
 
         # Track qualifying leads count (small + medium only)
         max_iterations = 20  # Safety limit to prevent infinite loops

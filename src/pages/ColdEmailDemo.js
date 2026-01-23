@@ -56,6 +56,7 @@ function ColdEmailDemo() {
   const [leads, setLeads] = useState([]);
   const [processedLeads, setProcessedLeads] = useState([]);
   const [currentLead, setCurrentLead] = useState(null);
+  // eslint-disable-next-line no-unused-vars
   const [processingStatus, setProcessingStatus] = useState('');
   const [statusIndex, setStatusIndex] = useState(0);
   const [skippedCount, setSkippedCount] = useState(0);
