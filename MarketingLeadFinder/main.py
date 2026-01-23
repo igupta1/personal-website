@@ -27,8 +27,6 @@ from playwright.async_api import async_playwright, TimeoutError as PlaywrightTim
 from google import genai
 from google.genai import types
 
-from metro_config import get_metro_config, MetroConfig
-
 # Load environment variables
 load_dotenv()
 
@@ -39,37 +37,31 @@ gemini_client = genai.Client(api_key=os.getenv("GOOGLE_GEMINI_API_KEY"))
 # CONFIGURATION
 # ============================================================================
 
-# City to search (can be parameterized later)
-DEFAULT_CITY = "Greater Los Angeles Area"
-
 # Output file
 OUTPUT_CSV = "smb_marketing_leads.csv"
 
 # Scraping settings
 TIMEOUT = 30
 MAX_CONCURRENT_REQUESTS = 5
-WAIT_BETWEEN_REQUESTS = 5.0  # seconds - increased for safe testing
+WAIT_BETWEEN_REQUESTS = 8.0  # seconds - increased for safe testing and avoiding blocks
 
 # Target number of leads
 TARGET_LEADS = 3
+
+# Wait time between job searches (to avoid rate limiting)
+WAIT_BETWEEN_JOB_SEARCHES = 10.0  # seconds
 
 # Employee size thresholds for SMBs
 SMB_MAX_EMPLOYEES = 200
 
 # Marketing-related job titles to search for
 MARKETING_JOB_TITLES = [
-    "Marketing Manager",
-    "Digital Marketing Specialist",
-    "Social Media Manager",
-    "Content Marketer",
     "Growth Marketer",
-    "Marketing Coordinator",
-    "Brand Manager",
     "Marketing Director",
-    "SEO Specialist",
-    "PPC Specialist",
-    "Email Marketing Manager",
-    "Marketing Analyst",
+    "Demand Generation Manager",
+    "Head of Growth",
+    "Performance Marketing Manager",
+    "Paid Media Manager",
 ]
 
 # Exclude these types of companies (agencies, franchises, large enterprises)
@@ -173,118 +165,112 @@ class BaseScraper:
 class IndeedScraper(BaseScraper):
     """Scrape Indeed for marketing job postings"""
 
-    def __init__(self, metro_config: MetroConfig):
+    def __init__(self):
         super().__init__()
-        self.metro_config = metro_config
-
-    def _is_in_target_area(self, location: str) -> bool:
-        """Check if the location is within the target metro area using word boundary matching"""
-        if not location:
-            return False
-
-        location_lower = location.lower().strip()
-
-        # Check for metro area cities using word boundary matching
-        for city in self.metro_config.area_cities:
-            # Use word boundary regex to avoid false positives (e.g., "la" matching "atlanta")
-            pattern = r'\b' + re.escape(city) + r'\b'
-            if re.search(pattern, location_lower):
-                return True
-
-        # Check for metro area zip codes
-        zip_match = re.search(r'\b(\d{5})\b', location)
-        if zip_match:
-            zip_code = zip_match.group(1)
-            if any(zip_code.startswith(prefix) for prefix in self.metro_config.zip_prefixes):
-                return True
-
-        # Check for state abbreviation at the end
-        state_pattern = rf',\s*{self.metro_config.state_abbrev}\b'
-        if re.search(state_pattern, location_lower, re.IGNORECASE):
-            # Exclude cities from other metros in the same state
-            for non_metro_city in self.metro_config.non_metro_cities:
-                if non_metro_city in location_lower:
-                    return False
-            # If it's in the right state and not a known non-metro city, include it
-            return True
-
-        return False
     
-    async def search_jobs(self, city: str, job_title: str) -> List[Lead]:
-        """Search Indeed for job postings"""
+    async def search_jobs(self, job_title: str, max_results: int = 10) -> List[Lead]:
+        """Search Indeed for job postings without location filtering"""
         leads = []
-        
-        # Format search URL
+
+        # Format search URL - no location parameter for nationwide search
         query = quote_plus(job_title)
-        location = quote_plus(city)
-        url = f"https://www.indeed.com/jobs?q={query}&l={location}&fromage=14"  # Last 14 days
-        
-        print(f"  📋 Indeed: Searching '{job_title}' in {city}...")
-        
+        url = f"https://www.indeed.com/jobs?q={query}&fromage=14"  # Last 14 days, any location
+
+        print(f"  📋 Indeed: Searching '{job_title}' (all locations)...")
+
         try:
             async with async_playwright() as p:
-                browser = await p.chromium.launch(headless=False)
-                context = await browser.new_context(user_agent=USER_AGENT)
+                # Launch browser with additional stealth options
+                browser = await p.chromium.launch(
+                    headless=False,
+                    args=['--disable-blink-features=AutomationControlled']
+                )
+                context = await browser.new_context(
+                    user_agent=USER_AGENT,
+                    viewport={'width': 1920, 'height': 1080},
+                    locale='en-US',
+                    timezone_id='America/New_York'
+                )
+
+                # Add stealth scripts to avoid detection
+                await context.add_init_script("""
+                    Object.defineProperty(navigator, 'webdriver', {
+                        get: () => undefined
+                    });
+                """)
+
                 page = await context.new_page()
-                
+
+                # Navigate with random delay before action
                 await page.goto(url, wait_until="domcontentloaded", timeout=30000)
-                await page.wait_for_timeout(3000)
+
+                # Longer wait with random component to appear more human
+                await page.wait_for_timeout(4000 + (asyncio.get_event_loop().time() % 1000))
 
                 # Check for captcha/block page
                 if await page.query_selector('#challenge-form, .captcha, [data-ray-id]'):
-                    print("⚠️ CAPTCHA DETECTED - Aborting to protect IP")
+                    print("    ⚠️  CAPTCHA DETECTED - Aborting to protect IP")
                     await browser.close()
                     return []
 
-                # Get job cards
-                job_cards = await page.query_selector_all('div.job_seen_beacon, div.jobsearch-ResultsList > div')
-                
-                for card in job_cards[:5]:  # Reduced for safe testing
+                # Get job cards with error handling
+                try:
+                    job_cards = await page.query_selector_all('div.job_seen_beacon, div.jobsearch-ResultsList > div')
+                except Exception as e:
+                    print(f"    ⚠️  Could not find job cards: {str(e)[:50]}")
+                    await browser.close()
+                    return []
+
+                print(f"    📊 Found {len(job_cards)} job cards to process")
+
+                for i, card in enumerate(job_cards[:max_results]):
                     try:
                         # Extract company name
                         company_elem = await card.query_selector('[data-testid="company-name"], .companyName, .company')
                         company_name = await company_elem.inner_text() if company_elem else None
-                        
+
                         if not company_name:
                             continue
-                        
+
                         # Check if it's an excluded company
                         if self._is_excluded_company(company_name):
                             continue
-                        
-                        # Extract location
+
+                        # Extract location (keep it, but don't filter by it)
                         location_elem = await card.query_selector('[data-testid="text-location"], .companyLocation')
                         location_text = await location_elem.inner_text() if location_elem else ""
-                        
-                        # Filter by location - only include if in target area
-                        if not self._is_in_target_area(location_text):
-                            continue
-                        
+
                         # Extract job link
                         link_elem = await card.query_selector('a[data-jk], a.jcs-JobTitle')
                         job_link = await link_elem.get_attribute('href') if link_elem else ""
                         if job_link and not job_link.startswith('http'):
                             job_link = f"https://www.indeed.com{job_link}"
-                        
+
                         # Create lead
                         lead = Lead(
                             company_name=company_name.strip(),
-                            city_neighborhood=location_text.strip() if location_text else city,
+                            city_neighborhood=location_text.strip() if location_text else "Remote/Unspecified",
                             evidence=f"Indeed posting for {job_title} (last 14 days)",
                             source_links=job_link,
                             job_role=job_title.strip() if job_title else "",
                             job_link=job_link,
                         )
                         leads.append(lead)
-                        
+
+                        # Small delay between processing cards
+                        if i % 5 == 0:
+                            await page.wait_for_timeout(500)
+
                     except Exception as e:
                         continue
-                
+
+                # Wait before closing to appear more natural
+                await page.wait_for_timeout(1000)
                 await browser.close()
-                
+
         except Exception as e:
             print(f"    ⚠️  Indeed error: {str(e)[:100]}")
-        
+
         print(f"    ✅ Found {len(leads)} leads from Indeed for '{job_title}'")
         return leads
     
@@ -303,7 +289,7 @@ class CompanyEnricher:
     def __init__(self):
         self.session: Optional[aiohttp.ClientSession] = None
 
-    async def enrich_lead(self, lead: Lead, city: str) -> Lead:
+    async def enrich_lead(self, lead: Lead) -> Lead:
         """Enrich a lead with contact information and website"""
         print(f"  📊 Enriching: {lead.company_name}")
 
@@ -329,22 +315,22 @@ class CompanyEnricher:
 
         return lead
     
-    async def _find_company_website(self, company_name: str, city: str) -> str:
+    async def _find_company_website(self, company_name: str) -> str:
         """Find company website via DuckDuckGo (more reliable than Google for automation)"""
         try:
             # Try DuckDuckGo first (less likely to block)
             website = await self._search_duckduckgo(company_name)
             if website:
                 return website
-            
+
             # Fallback to direct domain guessing
             website = await self._guess_domain(company_name)
             if website:
                 return website
-                
+
         except Exception as e:
             print(f"    ⚠️  Website search error: {str(e)[:80]}")
-        
+
         return ""
     
     async def _search_duckduckgo(self, company_name: str) -> str:
@@ -501,9 +487,7 @@ Return JSON format:
 class MarketingLeadFinder:
     """Main orchestrator for finding SMB marketing leads"""
 
-    def __init__(self, city: str = DEFAULT_CITY):
-        self.city = city
-        self.metro_config = get_metro_config(city)
+    def __init__(self):
         self.leads: List[Lead] = []
         self.seen_companies: Set[str] = set()
 
@@ -512,7 +496,7 @@ class MarketingLeadFinder:
         self.leads_medium: List[Lead] = []  # 101-250 employees
         self.leads_large: List[Lead] = []  # 251+ employees
 
-        self.indeed_scraper = IndeedScraper(self.metro_config)
+        self.indeed_scraper = IndeedScraper()
         self.enricher = CompanyEnricher()
     
     def _normalize_company_name(self, name: str) -> str:
@@ -624,8 +608,8 @@ class MarketingLeadFinder:
     async def run(self) -> List[Lead]:
         """Run the full lead finding process"""
         print("=" * 70)
-        print(f"🎯 SMB Marketing Lead Finder")
-        print(f"📍 City: {self.city}")
+        print(f"🎯 SMB Marketing Lead Finder - Location Independent")
+        print(f"🌎 Searching: All locations nationwide")
         print(f"🎯 Goal: Find {TARGET_LEADS} companies in ≤100 and 101-250 employee categories (combined)")
         print("=" * 70)
 
@@ -639,59 +623,55 @@ class MarketingLeadFinder:
             "Digital Marketing Specialist",
         ]
 
-        # Get search locations from metro config
-        search_locations = self.metro_config.search_locations
-
         # Track qualifying leads count (small + medium only)
-        max_iterations = 50  # Safety limit to prevent infinite loops
+        max_iterations = 20  # Safety limit to prevent infinite loops
         iteration = 0
 
-        for location in search_locations:
+        for job_title in job_titles_to_search:
             target_count = len(self.leads_small) + len(self.leads_medium)
             if target_count >= TARGET_LEADS or iteration >= max_iterations:
                 break
 
-            print(f"\n  📍 Searching in: {location}")
-            for job_title in job_titles_to_search:
-                target_count = len(self.leads_small) + len(self.leads_medium)
-                if target_count >= TARGET_LEADS or iteration >= max_iterations:
-                    break
+            try:
+                iteration += 1
+                print(f"\n  🔍 Searching for: {job_title}")
+                indeed_leads = await self.indeed_scraper.search_jobs(job_title, max_results=15)
+                added = 0
+                for lead in indeed_leads:
+                    if self._add_lead(lead):
+                        added += 1
+                if added > 0:
+                    print(f"    ➕ Added {added} new unique leads (total: {len(self.leads)})")
 
-                try:
-                    iteration += 1
-                    indeed_leads = await self.indeed_scraper.search_jobs(location, job_title)
-                    added = 0
-                    for lead in indeed_leads:
-                        if self._add_lead(lead):
-                            added += 1
-                    if added > 0:
-                        print(f"    ➕ Added {added} new unique leads (total: {len(self.leads)})")
-                    await asyncio.sleep(WAIT_BETWEEN_REQUESTS * 2)
-                except Exception as e:
-                    print(f"  ⚠️  Indeed search error: {str(e)[:50]}")
+                # Wait between job title searches to avoid rate limiting
+                print(f"    ⏳ Waiting {WAIT_BETWEEN_JOB_SEARCHES}s before next search...")
+                await asyncio.sleep(WAIT_BETWEEN_JOB_SEARCHES)
 
-                # Enrich and categorize leads
-                # Process the newly added leads
-                unenriched_leads = [l for l in self.leads if not l.contact_name]
-                if unenriched_leads:
-                    print(f"\n  📊 Enriching {len(unenriched_leads)} new leads...")
-                    for lead in unenriched_leads:
-                        try:
-                            await self.enricher.enrich_lead(lead, self.city)
-                            # Categorize and output if lead has contact name
-                            self._categorize_and_output_lead(lead)
-                        except Exception as e:
-                            print(f"    ⚠️  Enrichment error for {lead.company_name}: {str(e)[:50]}")
-                        await asyncio.sleep(0.3)
+            except Exception as e:
+                print(f"  ⚠️  Indeed search error: {str(e)[:50]}")
 
-                        # Check if we've reached our goal
-                        target_count = len(self.leads_small) + len(self.leads_medium)
-                        if target_count >= TARGET_LEADS:
-                            break
+            # Enrich and categorize leads
+            # Process the newly added leads
+            unenriched_leads = [l for l in self.leads if not l.contact_name]
+            if unenriched_leads:
+                print(f"\n  📊 Enriching {len(unenriched_leads)} new leads...")
+                for lead in unenriched_leads:
+                    try:
+                        await self.enricher.enrich_lead(lead)
+                        # Categorize and output if lead has contact name
+                        self._categorize_and_output_lead(lead)
+                    except Exception as e:
+                        print(f"    ⚠️  Enrichment error for {lead.company_name}: {str(e)[:50]}")
+                    await asyncio.sleep(0.5)  # Increased delay for API rate limiting
 
-                    # Show progress
+                    # Check if we've reached our goal
                     target_count = len(self.leads_small) + len(self.leads_medium)
-                    print(f"\n  🎯 Progress: {target_count}/{TARGET_LEADS} target leads found (≤100: {len(self.leads_small)}, 101-250: {len(self.leads_medium)})")
+                    if target_count >= TARGET_LEADS:
+                        break
+
+                # Show progress
+                target_count = len(self.leads_small) + len(self.leads_medium)
+                print(f"\n  🎯 Progress: {target_count}/{TARGET_LEADS} target leads found (≤100: {len(self.leads_small)}, 101-250: {len(self.leads_medium)})")
 
         target_count = len(self.leads_small) + len(self.leads_medium)
         print(f"\n  📊 Total unique leads collected: {len(self.leads)}")
@@ -709,12 +689,12 @@ class MarketingLeadFinder:
                 for i, lead in enumerate(unenriched_leads):
                     print(f"\n[{i+1}/{len(unenriched_leads)}]", end="")
                     try:
-                        enriched = await self.enricher.enrich_lead(lead, self.city)
+                        enriched = await self.enricher.enrich_lead(lead)
                         # Categorize and output if lead has contact name
                         self._categorize_and_output_lead(enriched)
                     except Exception as e:
                         print(f"  ⚠️  Enrichment error: {str(e)[:50]}")
-                    await asyncio.sleep(0.3)
+                    await asyncio.sleep(0.5)
 
                     # Check if we've reached our goal
                     target_count = len(self.leads_small) + len(self.leads_medium)
@@ -732,7 +712,7 @@ class MarketingLeadFinder:
         print("\n" + "=" * 70)
         print("💾 STEP 3: Saving results...")
         print("=" * 70)
-        
+
         self._save_to_csv()
 
         # Step 4: Show statistics by category
@@ -810,22 +790,109 @@ class MarketingLeadFinder:
 
 
 # ============================================================================
+# WEBSITE UPLOAD
+# ============================================================================
+
+async def upload_leads_to_api(leads: List[Lead], api_key: str, api_url: str) -> dict:
+    """Upload leads to Vercel Blob via the website API"""
+    formatted_leads = []
+    for lead in leads:
+        # Split contact name into first/last
+        name_parts = lead.contact_name.split() if lead.contact_name else []
+        first_name = name_parts[0] if name_parts else ""
+        last_name = " ".join(name_parts[1:]) if len(name_parts) > 1 else ""
+
+        # Map category to expected format
+        category = lead.category.lower() if lead.category else "small"
+        if "100" in category and "101" not in category:
+            category = "small"
+        elif "101" in category or "250" in category:
+            category = "medium"
+        elif "251" in category or "+" in category:
+            category = "large"
+
+        formatted_leads.append({
+            "firstName": first_name,
+            "lastName": last_name,
+            "title": lead.contact_title or "",
+            "companyName": lead.company_name or "",
+            "email": lead.contact_email or "",
+            "website": lead.website or "",
+            "location": lead.city_neighborhood or "",
+            "companySize": lead.company_size or "",
+            "category": category,
+            "jobRole": lead.job_role or "",
+            "jobLink": lead.job_link or "",
+            "icebreaker": ""  # Can be generated separately if needed
+        })
+
+    print(f"\n📤 Uploading {len(formatted_leads)} leads to {api_url}...")
+
+    try:
+        async with aiohttp.ClientSession() as session:
+            async with session.post(
+                f"{api_url}/api/upload-leads",
+                json={"location": "demo", "leads": formatted_leads},
+                headers={
+                    "X-API-Key": api_key,
+                    "Content-Type": "application/json"
+                },
+                timeout=aiohttp.ClientTimeout(total=60)
+            ) as response:
+                if response.status == 200:
+                    result = await response.json()
+                    print(f"✅ Upload successful!")
+                    print(f"   Stats: {result.get('stats', {})}")
+                    return result
+                else:
+                    error_text = await response.text()
+                    print(f"❌ Upload failed: HTTP {response.status}")
+                    print(f"   Error: {error_text[:200]}")
+                    return {"error": error_text, "status": response.status}
+    except Exception as e:
+        print(f"❌ Upload error: {str(e)}")
+        return {"error": str(e)}
+
+
+# ============================================================================
 # ENTRY POINT
 # ============================================================================
 
-async def main(city: str = DEFAULT_CITY):
+async def main(upload_to_website: bool = False):
     """Main entry point"""
-    finder = MarketingLeadFinder(city)
+    finder = MarketingLeadFinder()
     leads = await finder.run()
+
+    # Upload to website if requested
+    if upload_to_website:
+        api_key = os.getenv("LEADS_UPLOAD_API_KEY")
+        api_url = os.getenv("VERCEL_API_URL", "https://www.ishaangpta.com")
+
+        if api_key:
+            # Filter to only leads with valid emails
+            valid_leads = [l for l in leads if l.contact_email and "@" in l.contact_email]
+            if valid_leads:
+                await upload_leads_to_api(valid_leads, api_key, api_url)
+                print(f"\n📊 Uploaded {len(valid_leads)} leads with valid emails to website")
+            else:
+                print("\n⚠️  No leads with valid emails to upload")
+        else:
+            print("\n⚠️  LEADS_UPLOAD_API_KEY not set, skipping upload")
+
     return leads
 
 
 if __name__ == "__main__":
-    import sys
-    
-    # Allow city to be passed as command line argument
-    city = sys.argv[1] if len(sys.argv) > 1 else DEFAULT_CITY
-    
-    print(f"\n🚀 Starting SMB Marketing Lead Finder for: {city}\n")
-    asyncio.run(main(city))
+    import argparse
+
+    parser = argparse.ArgumentParser(description="SMB Marketing Lead Finder")
+    parser.add_argument(
+        "--upload",
+        action="store_true",
+        help="Upload results to website (requires LEADS_UPLOAD_API_KEY env var)"
+    )
+    args = parser.parse_args()
+
+    print(f"\n🚀 Starting SMB Marketing Lead Finder (Location Independent)\n")
+    asyncio.run(main(upload_to_website=args.upload))
 

@@ -1,0 +1,88 @@
+name: Daily Marketing Lead Scraper
+
+on:
+  schedule:
+    # Run daily at 2 PM UTC (6 AM PST / 9 AM EST)
+    - cron: '0 14 * * *'
+  workflow_dispatch:
+    # Allow manual trigger with optional parameters
+    inputs:
+      target_leads:
+        description: 'Number of target leads to find'
+        required: false
+        default: '10'
+      dry_run:
+        description: 'Skip upload to website (test mode)'
+        required: false
+        default: 'false'
+        type: boolean
+
+jobs:
+  scrape-leads:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10  # CRITICAL: Stay within free tier budget (2000 min/month)
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+          cache-dependency-path: 'MarketingLeadFinder/requirements.txt'
+
+      - name: Install Python dependencies
+        run: |
+          cd MarketingLeadFinder
+          pip install -r requirements.txt
+
+      - name: Install Playwright browsers
+        run: |
+          playwright install chromium --with-deps
+
+      - name: Run lead scraper
+        env:
+          GOOGLE_GEMINI_API_KEY: ${{ secrets.GOOGLE_GEMINI_API_KEY }}
+          LEADS_UPLOAD_API_KEY: ${{ secrets.LEADS_UPLOAD_API_KEY }}
+          VERCEL_API_URL: https://www.ishaangpta.com
+        run: |
+          cd MarketingLeadFinder
+
+          # Determine if we should upload
+          UPLOAD_FLAG=""
+          if [[ "${{ github.event.inputs.dry_run }}" != "true" ]]; then
+            UPLOAD_FLAG="--upload"
+          fi
+
+          # Run with xvfb for headless display
+          xvfb-run --auto-servernum --server-args="-screen 0 1920x1080x24" \
+            python main.py $UPLOAD_FLAG
+
+      - name: Show scraper results
+        if: always()
+        run: |
+          echo "=== Scraper Output ==="
+          if [ -f MarketingLeadFinder/smb_marketing_leads.csv ]; then
+            echo "CSV file created successfully"
+            wc -l MarketingLeadFinder/smb_marketing_leads.csv
+            head -20 MarketingLeadFinder/smb_marketing_leads.csv
+          else
+            echo "No CSV file generated"
+          fi
+
+      - name: Upload CSV artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: leads-${{ github.run_id }}-${{ github.run_attempt }}
+          path: MarketingLeadFinder/smb_marketing_leads.csv
+          retention-days: 30
+          if-no-files-found: warn
+
+      - name: Notify on failure
+        if: failure()
+        run: |
+          echo "::error::Lead scraper workflow failed. Check logs for details."
+          # TODO: Add Slack/email notification here if needed
