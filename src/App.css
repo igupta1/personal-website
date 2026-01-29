@@ -1668,3 +1668,248 @@ body {
   0%, 60%, 100% { opacity: 0; }
   30% { opacity: 1; }
 }
+
+/* Lead Gen Demo - Loading State */
+.demo-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 1rem;
+  gap: 1rem;
+}
+
+.demo-loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid rgba(255, 255, 255, 0.1);
+  border-top-color: #667eea;
+  border-radius: 50%;
+  animation: demoSpin 1s linear infinite;
+}
+
+@keyframes demoSpin {
+  to { transform: rotate(360deg); }
+}
+
+.demo-loading p {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+/* Lead Gen Demo - Company-Centric Layout */
+.lead-gen-companies-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.lead-gen-company-card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 1.25rem;
+  transition: all 0.3s ease;
+}
+
+.lead-gen-company-card:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Company Header */
+.lead-gen-company-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+  gap: 1rem;
+}
+
+.lead-gen-company-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.lead-gen-company-name {
+  color: white;
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0 0 0.25rem 0;
+}
+
+.lead-gen-company-website {
+  color: #60a5fa;
+  font-size: 0.8rem;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.lead-gen-company-website:hover {
+  color: #93c5fd;
+}
+
+.lead-gen-roles-count {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.2) 0%, rgba(118, 75, 162, 0.2) 100%);
+  border: 1px solid rgba(102, 126, 234, 0.3);
+  border-radius: 10px;
+  padding: 0.5rem 0.75rem;
+  min-width: 50px;
+}
+
+.lead-gen-roles-number {
+  color: white;
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.lead-gen-roles-label {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Section Title */
+.lead-gen-section-title {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin: 0 0 0.5rem 0;
+}
+
+/* Roles Section */
+.lead-gen-roles-section {
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.lead-gen-roles-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.lead-gen-role-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.5rem 0.75rem;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+}
+
+.lead-gen-role-title {
+  flex: 1;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 0.85rem;
+}
+
+.lead-gen-role-date {
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 0.75rem;
+  white-space: nowrap;
+}
+
+.lead-gen-role-link {
+  color: #60a5fa;
+  font-size: 0.75rem;
+  text-decoration: none;
+  padding: 0.2rem 0.5rem;
+  background: rgba(96, 165, 250, 0.1);
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.lead-gen-role-link:hover {
+  background: rgba(96, 165, 250, 0.2);
+  color: #93c5fd;
+}
+
+/* Decision Maker Section */
+.lead-gen-dm-section {
+  margin-top: 0.5rem;
+}
+
+.lead-gen-dm-card {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.08) 0%, rgba(118, 75, 162, 0.08) 100%);
+  border: 1px solid rgba(102, 126, 234, 0.15);
+  border-radius: 10px;
+}
+
+.lead-gen-dm-avatar {
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.8rem;
+  color: white;
+  flex-shrink: 0;
+}
+
+.lead-gen-dm-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.lead-gen-dm-name {
+  color: white;
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: 0.1rem;
+}
+
+.lead-gen-dm-title {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.8rem;
+  margin-bottom: 0.25rem;
+}
+
+.lead-gen-dm-email {
+  color: #60a5fa;
+  font-size: 0.75rem;
+}
+
+.lead-gen-dm-links {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 0.35rem;
+}
+
+.lead-gen-dm-links a {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.7rem;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.lead-gen-dm-links a:hover {
+  color: #60a5fa;
+}
+
+.lead-gen-dm-confidence {
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 0.25rem 0.5rem;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 6px;
+  align-self: flex-start;
+}
