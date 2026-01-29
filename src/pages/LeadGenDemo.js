@@ -10,11 +10,9 @@ import ciscologo from '../assets/ciscologo.png';
 
 function LeadGenDemo() {
   const [stage, setStage] = useState('processing');
-  const [leadsSmall, setLeadsSmall] = useState([]);
-  const [leadsMedium, setLeadsMedium] = useState([]);
-  const [leadsLarge, setLeadsLarge] = useState([]);
+  const [leads, setLeads] = useState([]);
   const [currentLead, setCurrentLead] = useState(null);
-  const [processingPhase, setProcessingPhase] = useState('job'); // 'job' or 'contact'
+  const [processingPhase, setProcessingPhase] = useState('job');
   const [error, setError] = useState(null);
   const [hasStarted, setHasStarted] = useState(false);
 
@@ -25,111 +23,92 @@ function LeadGenDemo() {
   ];
 
   const generateLeads = async () => {
-    const location = "demo"; // Hardcoded location for demo
-    // Demo data for local development / fallback - matches smb_marketing_leads.csv exactly
+    const location = "marketing-discovery";
+    // Demo data for local development / fallback
     const demoLeads = [
-      // ≤100 employees (3 leads)
       {
-        firstName: "Lacey",
-        lastName: "Clark",
-        title: "Principal / Owner",
-        companyName: "NW Recruiting Partners",
-        jobRole: "Marketing Manager",
-        email: "laceyc@nwrecruitingpartners.com",
-        website: "https://nwrecruitingpartners.com",
-        location: "Los Angeles, CA 90041",
-        companySize: "11-50 employees",
+        firstName: "Sarah",
+        lastName: "Chen",
+        title: "VP of Marketing",
+        companyName: "TechStartup Inc",
+        jobRole: "Marketing Director",
+        email: "sarah.chen@techstartup.com",
+        website: "https://techstartup.com",
+        location: "San Francisco, CA",
+        companySize: "50 employees",
         category: "small",
-        jobLink: "https://www.indeed.com/viewjob?jk=example1",
-        icebreaker: "Hey Lacey — went down a rabbit hole on NWRecruiting's site. The part about your contract-to-hire solution letting businesses trial candidates before permanent decisions caught my eye. Your focus on tailored recruitment and strong client fit stuck with me."
+        jobLink: "https://boards.greenhouse.io/techstartup/jobs/123",
+        postingDate: "2025-01-15",
+        linkedinUrl: "https://linkedin.com/in/sarah-chen",
+        confidence: "High"
       },
       {
-        firstName: "Jason Y.",
-        lastName: "Lee",
-        title: "Founder, CEO",
-        companyName: "Jubilee Media",
-        jobRole: "Social Media Manager",
-        email: "jason@jubileemedia.com",
-        website: "https://www.jubileemedia.com",
-        location: "Los Angeles, CA 90045 (Westchester area)",
-        companySize: "50-100 employees",
+        firstName: "Michael",
+        lastName: "Rodriguez",
+        title: "Head of Growth",
+        companyName: "ScaleUp Labs",
+        jobRole: "Growth Marketing Manager",
+        email: "michael@scaleuplabs.io",
+        website: "https://scaleuplabs.io",
+        location: "Austin, TX",
+        companySize: "75 employees",
         category: "small",
-        jobLink: "https://www.indeed.com/viewjob?jk=example2",
-        icebreaker: "Hey Jason — went down a rabbit hole on Jubilee's site. The part about using discomfort and conflict in shows like Middle Ground to spark real dialogue caught my eye. Your focus on fostering empathy through challenging social norms stuck with me."
+        jobLink: "https://jobs.lever.co/scaleuplabs/456",
+        postingDate: "2025-01-20",
+        linkedinUrl: "https://linkedin.com/in/michael-rodriguez",
+        confidence: "High"
       },
       {
-        firstName: "Ashley",
-        lastName: "Carlson",
-        title: "Founder and CEO",
-        companyName: "Elevate Business Support",
-        jobRole: "Social Media Manager",
-        email: "ashley@elevatevbsolutions.com",
-        website: "https://elevatevbsolutions.com/",
-        location: "Hybrid work in Gardena, CA 90248",
-        companySize: "10-50 employees",
-        category: "small",
-        jobLink: "https://www.indeed.com/viewjob?jk=example3",
-        icebreaker: "Hey Ashley — went down a rabbit hole on Elevate's site. The part about your 'Get It Done' service for streamlining admin tasks caught my eye. Your focus on boosting productivity through delegation stuck with me."
-      },
-      // 101-250 employees (2 leads)
-      {
-        firstName: "Jaret",
-        lastName: "Matthews",
-        title: "Founder & CEO",
-        companyName: "Astrolab",
-        jobRole: "Marketing Manager",
-        email: "jaret.matthews@venturiastrolab.com",
-        website: "https://www.astrolab.com",
-        location: "Hawthorne, CA 90250",
-        companySize: "100-250 employees",
+        firstName: "Emma",
+        lastName: "Thompson",
+        title: "CMO",
+        companyName: "FinanceFlow",
+        jobRole: "Senior Content Marketing Manager",
+        email: "emma.t@financeflow.com",
+        website: "https://financeflow.com",
+        location: "New York, NY",
+        companySize: "150 employees",
         category: "medium",
-        jobLink: "https://www.indeed.com/viewjob?jk=example4"
+        jobLink: "https://boards.greenhouse.io/financeflow/jobs/789",
+        postingDate: "2025-01-18",
+        linkedinUrl: "https://linkedin.com/in/emma-thompson",
+        confidence: "Medium"
       },
       {
-        firstName: "Rohshann",
-        lastName: "Pilla",
-        title: "President, Aquent Talent",
-        companyName: "Aquent Talent",
-        jobRole: "Marketing Manager",
-        email: "rpilla@aquent.com",
-        website: "https://aquenttalent.com/",
-        location: "Hybrid work in Glendale, CA 91222",
-        companySize: "100-250 employees",
+        firstName: "David",
+        lastName: "Kim",
+        title: "Director of Marketing",
+        companyName: "HealthTech Solutions",
+        jobRole: "Digital Marketing Specialist",
+        email: "dkim@healthtechsolutions.com",
+        website: "https://healthtechsolutions.com",
+        location: "Boston, MA",
+        companySize: "200 employees",
         category: "medium",
-        jobLink: "https://www.indeed.com/viewjob?jk=example5",
-        icebreaker: "Hey Rohshann — went down a rabbit hole on Aquent's site. The part about VFX artists evaluating AI-generated images for realism and accuracy caught my eye. Your focus on flexible, empowering work environments stuck with me."
-      },
-      // 251+ employees (2 leads)
-      {
-        firstName: "Dr. Ryan",
-        lastName: "Cornner",
-        title: "Superintendent/President",
-        companyName: "Glendale Community College",
-        jobRole: "Marketing Manager",
-        email: "rcornner@glendale.edu",
-        website: "https://www.glendale.edu",
-        location: "Glendale, CA 91208 (Glendale area)",
-        companySize: "250-500 employees",
-        category: "large",
-        jobLink: "https://www.indeed.com/viewjob?jk=example6"
+        jobLink: "https://jobs.ashbyhq.com/healthtech/abc",
+        postingDate: "2025-01-22",
+        linkedinUrl: "https://linkedin.com/in/david-kim",
+        confidence: "High"
       },
       {
-        firstName: "Jay",
-        lastName: "Penske",
-        title: "Chairman, Founder & Chief Executive Officer",
-        companyName: "Penske Media Corp.",
-        jobRole: "Marketing Manager",
-        email: "jpenske@pmc.com",
-        website: "https://www.pmc.com",
-        location: "Los Angeles, CA 90025 (Westwood area)",
-        companySize: "1000-2500 employees",
+        firstName: "Jennifer",
+        lastName: "Patel",
+        title: "VP of Growth",
+        companyName: "Enterprise Corp",
+        jobRole: "Marketing Operations Manager",
+        email: "jpatel@enterprisecorp.com",
+        website: "https://enterprisecorp.com",
+        location: "Seattle, WA",
+        companySize: "500 employees",
         category: "large",
-        jobLink: "https://www.indeed.com/viewjob?jk=example7"
+        jobLink: "https://careers.smartrecruiters.com/enterprise/def",
+        postingDate: "2025-01-25",
+        linkedinUrl: "https://linkedin.com/in/jennifer-patel",
+        confidence: "High"
       }
     ];
 
     try {
-      // Try to call the real API endpoint (will work on Vercel)
       const API_URL = process.env.REACT_APP_API_URL || '';
       const response = await fetch(`${API_URL}/api/generate-leads`, {
         method: 'POST',
@@ -146,7 +125,6 @@ function LeadGenDemo() {
       const data = await response.json();
       return data;
     } catch (error) {
-      // Fallback to demo data (for local development)
       console.log('Using demo data (API not available locally)');
       return {
         success: true,
@@ -163,18 +141,14 @@ function LeadGenDemo() {
 
   const processLeads = async () => {
     setStage('processing');
-    setLeadsSmall([]);
-    setLeadsMedium([]);
-    setLeadsLarge([]);
+    setLeads([]);
     setError(null);
     setHasStarted(true);
 
-    // Fetch all leads from API
     const result = await generateLeads();
 
     if (!result.success) {
       setError(result.error || 'Failed to generate leads');
-      // Stay in processing stage but show error
       return;
     }
 
@@ -184,41 +158,17 @@ function LeadGenDemo() {
     for (let i = 0; i < allLeads.length; i++) {
       const lead = allLeads[i];
 
-      // Phase 1: Show "[Company] is looking for a [Role]" for 2 seconds
+      // Phase 1: Show company and role
       setCurrentLead(lead);
       setProcessingPhase('job');
-      await new Promise(resolve => setTimeout(resolve, 2000));
+      await new Promise(resolve => setTimeout(resolve, 1500));
 
-      // Phase 2: Show "Finding Contact Information" for 2 seconds
+      // Phase 2: Finding decision maker
       setProcessingPhase('contact');
-      await new Promise(resolve => setTimeout(resolve, 2000));
+      await new Promise(resolve => setTimeout(resolve, 1500));
 
-      // Add lead to appropriate category
-      if (lead.category === 'small') {
-        setLeadsSmall(prev => [...prev, lead]);
-      } else if (lead.category === 'medium') {
-        setLeadsMedium(prev => [...prev, lead]);
-      } else if (lead.category === 'large') {
-        setLeadsLarge(prev => [...prev, lead]);
-      }
-
-      // Stop after we have 5 in small + medium combined
-      const currentSmallCount = i < allLeads.length ? allLeads.slice(0, i + 1).filter(l => l.category === 'small').length : 0;
-      const currentMediumCount = i < allLeads.length ? allLeads.slice(0, i + 1).filter(l => l.category === 'medium').length : 0;
-
-      if (currentSmallCount + currentMediumCount >= 5 && lead.category !== 'large') {
-        // Continue to show any large leads
-        const remainingLargeLeads = allLeads.slice(i + 1).filter(l => l.category === 'large');
-        for (const largeLead of remainingLargeLeads) {
-          setCurrentLead(largeLead);
-          setProcessingPhase('job');
-          await new Promise(resolve => setTimeout(resolve, 2000));
-          setProcessingPhase('contact');
-          await new Promise(resolve => setTimeout(resolve, 2000));
-          setLeadsLarge(prev => [...prev, largeLead]);
-        }
-        break;
-      }
+      // Add lead to list
+      setLeads(prev => [...prev, lead]);
     }
 
     setCurrentLead(null);
@@ -228,13 +178,10 @@ function LeadGenDemo() {
 
   const resetDemo = () => {
     setStage('processing');
-    setLeadsSmall([]);
-    setLeadsMedium([]);
-    setLeadsLarge([]);
+    setLeads([]);
     setCurrentLead(null);
     setProcessingPhase('job');
     setError(null);
-    // Restart the demo
     processLeads();
   };
 
@@ -245,6 +192,34 @@ function LeadGenDemo() {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  const formatDate = (dateStr) => {
+    if (!dateStr) return null;
+    try {
+      const date = new Date(dateStr);
+      return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+    } catch {
+      return dateStr;
+    }
+  };
+
+  const getCategoryLabel = (category) => {
+    switch (category) {
+      case 'small': return '≤100 employees';
+      case 'medium': return '101-250 employees';
+      case 'large': return '250+ employees';
+      default: return category;
+    }
+  };
+
+  const getCategoryColor = (category) => {
+    switch (category) {
+      case 'small': return '#4ade80'; // green
+      case 'medium': return '#fbbf24'; // amber
+      case 'large': return '#60a5fa'; // blue
+      default: return '#94a3b8';
+    }
+  };
 
   return (
     <div className="about-page-combined">
@@ -281,8 +256,8 @@ function LeadGenDemo() {
           <section className="demo-section">
             <div className="demo-section-header">
               <Link to="/ai-tools" className="back-link-inline">Back to AI Tools</Link>
-              <h2>Lead Discovery for Marketing Agencies</h2>
-              <p className="demo-script-link">Check Out The Full Script <a href="https://github.com/igupta1/personal-website/blob/master/MarketingLeadFinder/main.py" target="_blank" rel="noopener noreferrer">Here</a></p>
+              <h2>Marketing Lead Discovery</h2>
+              <p className="demo-script-link">Powered by AI-driven ATS detection & decision maker identification</p>
             </div>
 
             {error && (
@@ -293,21 +268,21 @@ function LeadGenDemo() {
               </div>
             )}
 
-            {/* How It Works - always visible */}
+            {/* How It Works */}
             <div className="demo-how-it-works">
               <h3>How It Works</h3>
               <div className="demo-steps-grid">
                 <div className="demo-step">
                   <span className="demo-step-num">1</span>
-                  <span className="demo-step-text">Find Companies Hiring Marketing Roles</span>
+                  <span className="demo-step-text">Detect ATS & Find Marketing Jobs</span>
                 </div>
                 <div className="demo-step">
                   <span className="demo-step-num">2</span>
-                  <span className="demo-step-text">Extract Decision-Maker Contact Details</span>
+                  <span className="demo-step-text">Identify Decision Makers via AI</span>
                 </div>
                 <div className="demo-step">
                   <span className="demo-step-num">3</span>
-                  <span className="demo-step-text">Obtain Qualified Lead List</span>
+                  <span className="demo-step-text">Enrich with Verified Emails</span>
                 </div>
               </div>
             </div>
@@ -318,43 +293,42 @@ function LeadGenDemo() {
                   <div className="demo-current-lead">
                     <div className="demo-processing-message">
                       <p className="demo-phase-text">
-                        <span className="demo-company-highlight">{currentLead.companyName}</span> is looking for a <span className="demo-role-highlight">{currentLead.jobRole || 'Marketing Manager'}</span>{processingPhase === 'job' && <span className="demo-animated-dots"><span>.</span><span>.</span><span>.</span></span>}
+                        <span className="demo-company-highlight">{currentLead.companyName}</span> is hiring for <span className="demo-role-highlight">{currentLead.jobRole || 'Marketing'}</span>{processingPhase === 'job' && <span className="demo-animated-dots"><span>.</span><span>.</span><span>.</span></span>}
                       </p>
                       <p className="demo-phase-text">
-                        Finding Contact Information{processingPhase === 'contact' && <span className="demo-animated-dots"><span>.</span><span>.</span><span>.</span></span>}
+                        {processingPhase === 'contact' ? 'Finding Decision Maker' : 'Analyzing Job Posting'}{processingPhase === 'contact' && <span className="demo-animated-dots"><span>.</span><span>.</span><span>.</span></span>}
                       </p>
                     </div>
                   </div>
                 )}
 
-                {/* All Leads Combined */}
                 <div className="demo-category-section">
-                  {[...leadsSmall, ...leadsMedium, ...leadsLarge].length > 0 ? (
+                  {leads.length > 0 ? (
                     <div className="demo-live-results-list">
-                      {[...leadsSmall, ...leadsMedium, ...leadsLarge].map((lead, index) => (
+                      {leads.map((lead, index) => (
                         <div key={index} className="demo-live-result-card">
                           <div className="demo-live-result-header">
-                            <div className="demo-result-avatar">{lead.firstName.charAt(0)}{lead.lastName.charAt(0) || ''}</div>
-                            <div className="demo-live-result-name"><strong>{lead.firstName} {lead.lastName}</strong><span>{lead.title || 'Professional'} at {lead.companyName}</span></div>
+                            <div className="demo-result-avatar" style={{ background: `linear-gradient(135deg, ${getCategoryColor(lead.category)}, #667eea)` }}>
+                              {lead.firstName.charAt(0)}{lead.lastName ? lead.lastName.charAt(0) : ''}
+                            </div>
+                            <div className="demo-live-result-name">
+                              <strong>{lead.firstName} {lead.lastName}</strong>
+                              <span>{lead.title || 'Decision Maker'} at {lead.companyName}</span>
+                            </div>
                             <span className="demo-live-result-check">✓</span>
                           </div>
                           <div className="demo-live-result-details">
-                            <span>{lead.email}</span>
-                            <span>{lead.website}</span>
-                            {lead.jobRole && <span>Hiring for: {lead.jobRole}</span>}
-                            {lead.jobLink && <span><a href={lead.jobLink} target="_blank" rel="noopener noreferrer">View Job Posting →</a></span>}
+                            {lead.email && <span>📧 {lead.email}</span>}
+                            {lead.website && <span>🌐 {lead.website}</span>}
+                            {lead.jobRole && <span>📋 Hiring: {lead.jobRole}</span>}
+                            {lead.postingDate && <span>📅 Posted: {formatDate(lead.postingDate)}</span>}
+                            {lead.confidence && <span style={{ color: lead.confidence === 'High' ? '#4ade80' : '#fbbf24' }}>⭐ {lead.confidence} Confidence</span>}
                           </div>
-                          {lead.icebreaker && (
-                            <div className="demo-icebreaker">
-                              <span className="demo-icebreaker-label">📝 Icebreaker:</span>
-                              <p className="demo-icebreaker-text">{lead.icebreaker}</p>
-                            </div>
-                          )}
                         </div>
                       ))}
                     </div>
                   ) : (
-                    <p className="demo-category-empty">No leads yet...</p>
+                    <p className="demo-category-empty">Discovering leads...</p>
                   )}
                 </div>
 
@@ -365,29 +339,83 @@ function LeadGenDemo() {
             {stage === 'results' && (
               <div className="demo-results-stage">
                 <div className="demo-results-header">
+                  <div className="demo-results-stats">
+                    <span className="demo-stat">
+                      <strong>{leads.length}</strong> Leads Found
+                    </span>
+                    <span className="demo-stat">
+                      <strong>{leads.filter(l => l.email).length}</strong> with Emails
+                    </span>
+                  </div>
                   <button className="demo-reset-button" onClick={resetDemo}>Refresh Search</button>
                 </div>
 
-                {/* All Leads Combined */}
                 <div className="demo-results-category">
                   <div className="demo-results-list">
-                    {[...leadsSmall, ...leadsMedium, ...leadsLarge].map((lead, index) => (
+                    {leads.map((lead, index) => (
                       <div key={index} className="demo-result-card">
                         <div className="demo-result-header">
-                          <div className="demo-result-avatar">{lead.firstName.charAt(0)}{lead.lastName.charAt(0) || ''}</div>
-                          <div className="demo-result-info"><h4>{lead.firstName} {lead.lastName}</h4><span>{lead.title || 'Professional'} at {lead.companyName}</span></div>
+                          <div className="demo-result-avatar" style={{ background: `linear-gradient(135deg, ${getCategoryColor(lead.category)}, #667eea)` }}>
+                            {lead.firstName.charAt(0)}{lead.lastName ? lead.lastName.charAt(0) : ''}
+                          </div>
+                          <div className="demo-result-info">
+                            <h4>{lead.firstName} {lead.lastName}</h4>
+                            <span>{lead.title || 'Decision Maker'} at {lead.companyName}</span>
+                            <span className="demo-result-category-tag" style={{ color: getCategoryColor(lead.category) }}>
+                              {getCategoryLabel(lead.category)}
+                            </span>
+                          </div>
+                          {lead.confidence && (
+                            <span className="demo-confidence-badge" style={{
+                              background: lead.confidence === 'High' ? 'rgba(74, 222, 128, 0.2)' : 'rgba(251, 191, 36, 0.2)',
+                              color: lead.confidence === 'High' ? '#4ade80' : '#fbbf24'
+                            }}>
+                              {lead.confidence}
+                            </span>
+                          )}
                         </div>
                         <div className="demo-result-inputs">
-                          <div className="demo-result-input"><span className="demo-result-label">Email</span><span className="demo-result-value">{lead.email}</span></div>
-                          <div className="demo-result-input"><span className="demo-result-label">Website</span><span className="demo-result-value">{lead.website}</span></div>
+                          {lead.email && (
+                            <div className="demo-result-input">
+                              <span className="demo-result-label">Email</span>
+                              <span className="demo-result-value">{lead.email}</span>
+                            </div>
+                          )}
+                          {lead.linkedinUrl && (
+                            <div className="demo-result-input">
+                              <span className="demo-result-label">LinkedIn</span>
+                              <span className="demo-result-value">
+                                <a href={lead.linkedinUrl} target="_blank" rel="noopener noreferrer">View Profile →</a>
+                              </span>
+                            </div>
+                          )}
+                          {lead.website && (
+                            <div className="demo-result-input">
+                              <span className="demo-result-label">Company</span>
+                              <span className="demo-result-value">
+                                <a href={lead.website} target="_blank" rel="noopener noreferrer">{lead.website.replace('https://', '')}</a>
+                              </span>
+                            </div>
+                          )}
                           {lead.jobRole && (
-                            <div className="demo-result-input"><span className="demo-result-label">Hiring for</span><span className="demo-result-value">{lead.jobRole}</span></div>
+                            <div className="demo-result-input">
+                              <span className="demo-result-label">Hiring For</span>
+                              <span className="demo-result-value">{lead.jobRole}</span>
+                            </div>
+                          )}
+                          {lead.postingDate && (
+                            <div className="demo-result-input">
+                              <span className="demo-result-label">Posted</span>
+                              <span className="demo-result-value">{formatDate(lead.postingDate)}</span>
+                            </div>
                           )}
                           {lead.jobLink && (
-                            <div className="demo-result-input"><span className="demo-result-label">Job Posting</span><span className="demo-result-value"><a href={lead.jobLink} target="_blank" rel="noopener noreferrer">View on Indeed →</a></span></div>
-                          )}
-                          {lead.icebreaker && (
-                            <div className="demo-result-input demo-result-icebreaker"><span className="demo-result-label">📝 Icebreaker</span><span className="demo-result-value demo-icebreaker-value">{lead.icebreaker}</span></div>
+                            <div className="demo-result-input">
+                              <span className="demo-result-label">Job Posting</span>
+                              <span className="demo-result-value">
+                                <a href={lead.jobLink} target="_blank" rel="noopener noreferrer">View Job →</a>
+                              </span>
+                            </div>
                           )}
                         </div>
                       </div>

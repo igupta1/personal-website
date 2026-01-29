@@ -121,6 +121,31 @@ class ChangeReport:
 
 
 @dataclass
+class DecisionMakerResult:
+    """Result of a decision maker lookup for one company."""
+
+    company_name: str
+    person_name: Optional[str] = None
+    title: Optional[str] = None
+    source_url: Optional[str] = None
+    confidence: Optional[str] = None  # "High", "Medium", or None
+    not_found_reason: Optional[str] = None  # Populated when lookup failed
+    raw_text: Optional[str] = None  # Raw Gemini output for debugging
+
+
+@dataclass
+class EmailLookupResult:
+    """Result of an Apollo email lookup for one decision maker."""
+
+    company_name: str
+    person_name: str
+    email: Optional[str] = None
+    linkedin_url: Optional[str] = None
+    apollo_title: Optional[str] = None  # For cross-referencing with Gemini title
+    not_found_reason: Optional[str] = None
+
+
+@dataclass
 class RunSummary:
     """Summary of a complete discovery run."""
 

@@ -5,6 +5,11 @@ from pathlib import Path
 from dataclasses import dataclass, field
 from typing import Optional
 
+from dotenv import load_dotenv
+
+# Load .env from the MarketingJobDiscovery package directory
+load_dotenv(Path(__file__).parent / ".env")
+
 
 @dataclass
 class Config:
@@ -34,6 +39,17 @@ class Config:
     # Pipeline settings
     max_jobs_per_company: int = 100
 
+    # Gemini Decision Maker settings
+    gemini_api_key: Optional[str] = None
+    gemini_model: str = "gemini-2.5-flash"
+    gemini_batch_size: int = 5
+    enable_decision_maker_lookup: bool = True
+
+    # Apollo Email Lookup settings
+    apollo_api_key: Optional[str] = None
+    apollo_batch_size: int = 10
+    enable_email_lookup: bool = True
+
     def __post_init__(self):
         """Set default paths based on base_dir."""
         if self.db_path is None:
@@ -41,7 +57,7 @@ class Config:
         if self.cache_path is None:
             self.cache_path = self.base_dir / "data" / "cache"
         if self.input_csv_path is None:
-            self.input_csv_path = self.base_dir / "apollo-accounts-export (4).csv"
+            self.input_csv_path = self.base_dir / "initial_list.csv"
 
         # Ensure cache directory exists
         self.cache_path.mkdir(parents=True, exist_ok=True)
@@ -55,4 +71,17 @@ class Config:
             delay_between_companies=float(os.getenv("DELAY_BETWEEN_COMPANIES", "2.0")),
             relevance_threshold=float(os.getenv("RELEVANCE_THRESHOLD", "60.0")),
             max_jobs_per_company=int(os.getenv("MAX_JOBS_PER_COMPANY", "100")),
+            gemini_api_key=os.getenv("GEMINI_API_KEY"),
+            gemini_model=os.getenv("GEMINI_MODEL", "gemini-2.5-flash"),
+            gemini_batch_size=int(os.getenv("GEMINI_BATCH_SIZE", "5")),
+            enable_decision_maker_lookup=os.getenv(
+                "ENABLE_DECISION_MAKER_LOOKUP", "true"
+            ).lower()
+            == "true",
+            apollo_api_key=os.getenv("APOLLO_API_KEY"),
+            apollo_batch_size=int(os.getenv("APOLLO_BATCH_SIZE", "10")),
+            enable_email_lookup=os.getenv(
+                "ENABLE_EMAIL_LOOKUP", "true"
+            ).lower()
+            == "true",
         )

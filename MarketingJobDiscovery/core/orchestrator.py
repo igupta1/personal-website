@@ -14,6 +14,8 @@ from .models import Company, JobPosting, ATSDetectionResult
 from .caching import ATSDetectionCache
 from .change_detector import ChangeDetector
 from .relevance_scorer import RoleRelevanceScorer
+from .decision_maker import DecisionMakerFinder
+from .email_finder import ApolloEmailFinder
 from ..ats.enhanced_detector import EnhancedATSDetector
 from ..ats.greenhouse import GreenhouseClient
 from ..ats.lever import LeverClient
@@ -21,6 +23,9 @@ from ..ats.ashby import AshbyClient
 from ..ats.workable import WorkableClient
 from ..ats.jobvite import JobviteClient
 from ..ats.smartrecruiters import SmartRecruitersClient
+from ..ats.recruitee import RecruiteeClient
+from ..ats.breezyhr import BreezyHRClient
+from ..ats.personio import PersonioClient
 from ..scrapers.robots_checker import RobotsChecker
 
 logger = logging.getLogger(__name__)
@@ -49,6 +54,9 @@ class JobDiscoveryOrchestrator:
         "workable": WorkableClient,
         "jobvite": JobviteClient,
         "smartrecruiters": SmartRecruitersClient,
+        "recruitee": RecruiteeClient,
+        "breezyhr": BreezyHRClient,
+        "personio": PersonioClient,
     }
 
     def __init__(
@@ -130,6 +138,155 @@ class JobDiscoveryOrchestrator:
                             "error": str(e),
                         }
                     )
+
+        # Decision Maker Lookup (after all companies processed)
+        if self.config.enable_decision_maker_lookup and self.config.gemini_api_key:
+            successful_with_jobs = [
+                r
+                for r in results
+                if r.get("status") == "success" and r.get("jobs_found", 0) > 0
+            ]
+
+            if successful_with_jobs:
+                print(
+                    f"\n--- Looking up decision makers for "
+                    f"{len(successful_with_jobs)} companies ---"
+                )
+                try:
+                    finder = DecisionMakerFinder(
+                        api_key=self.config.gemini_api_key,
+                        model=self.config.gemini_model,
+                        batch_size=self.config.gemini_batch_size,
+                    )
+                    dm_results = await finder.find_decision_makers(
+                        successful_with_jobs
+                    )
+
+                    # Attach results to corresponding company result dicts
+                    dm_by_company = {dm.company_name: dm for dm in dm_results}
+                    for result in results:
+                        company_name = result.get("company")
+                        if company_name in dm_by_company:
+                            dm = dm_by_company[company_name]
+                            result["decision_maker"] = {
+                                "person_name": dm.person_name,
+                                "title": dm.title,
+                                "source_url": dm.source_url,
+                                "confidence": dm.confidence,
+                                "not_found_reason": dm.not_found_reason,
+                            }
+
+                    # Store in database if not dry run
+                    if not self.dry_run:
+                        for dm in dm_results:
+                            if not dm.person_name:
+                                continue
+                            company_result = next(
+                                (
+                                    r
+                                    for r in results
+                                    if r.get("company") == dm.company_name
+                                ),
+                                None,
+                            )
+                            if company_result:
+                                self.db.upsert_decision_maker(
+                                    company_id=company_result["company_id"],
+                                    person_name=dm.person_name,
+                                    title=dm.title,
+                                    source_url=dm.source_url,
+                                    confidence=dm.confidence,
+                                )
+
+                except Exception as e:
+                    logger.error(f"Decision maker lookup failed: {e}")
+                    print(f"  Decision maker lookup failed: {e}")
+
+        elif self.config.enable_decision_maker_lookup and not self.config.gemini_api_key:
+            logger.warning(
+                "Decision maker lookup enabled but GEMINI_API_KEY not set. "
+                "Skipping."
+            )
+
+        # Apollo Email Lookup (after decision makers are found)
+        if self.config.enable_email_lookup and self.config.apollo_api_key:
+            # Collect decision makers that were found
+            dm_results_for_email = [
+                r
+                for r in results
+                if r.get("decision_maker", {}).get("person_name")
+            ]
+
+            if dm_results_for_email:
+                print(
+                    f"\n--- Looking up emails for "
+                    f"{len(dm_results_for_email)} decision makers ---"
+                )
+                try:
+                    from .models import DecisionMakerResult as DMR
+
+                    dm_objects = [
+                        DMR(
+                            company_name=r["company"],
+                            person_name=r["decision_maker"]["person_name"],
+                            title=r["decision_maker"].get("title"),
+                        )
+                        for r in dm_results_for_email
+                    ]
+
+                    email_finder = ApolloEmailFinder(
+                        api_key=self.config.apollo_api_key,
+                        batch_size=self.config.apollo_batch_size,
+                    )
+                    email_results = await email_finder.find_emails(
+                        dm_objects, results
+                    )
+
+                    # Attach email results to company result dicts
+                    email_by_company = {
+                        er.company_name: er for er in email_results
+                    }
+                    for result in results:
+                        company_name = result.get("company")
+                        if company_name in email_by_company:
+                            er = email_by_company[company_name]
+                            dm = result.get("decision_maker", {})
+                            dm["email"] = er.email
+                            dm["linkedin_url"] = er.linkedin_url
+
+                    # Persist emails to database if not dry run
+                    if not self.dry_run:
+                        for er in email_results:
+                            if not er.email:
+                                continue
+                            company_result = next(
+                                (
+                                    r
+                                    for r in results
+                                    if r.get("company") == er.company_name
+                                ),
+                                None,
+                            )
+                            if company_result and company_result.get("decision_maker"):
+                                dm = company_result["decision_maker"]
+                                self.db.upsert_decision_maker(
+                                    company_id=company_result["company_id"],
+                                    person_name=dm.get("person_name", ""),
+                                    title=dm.get("title"),
+                                    source_url=dm.get("source_url"),
+                                    confidence=dm.get("confidence"),
+                                    email=er.email,
+                                    linkedin_url=er.linkedin_url,
+                                )
+
+                except Exception as e:
+                    logger.error(f"Apollo email lookup failed: {e}")
+                    print(f"  Apollo email lookup failed: {e}")
+
+        elif self.config.enable_email_lookup and not self.config.apollo_api_key:
+            logger.warning(
+                "Email lookup enabled but APOLLO_API_KEY not set. Skipping."
+            )
 
         # Generate summary
         elapsed = (datetime.now() - start_time).total_seconds()
@@ -278,15 +435,36 @@ class JobDiscoveryOrchestrator:
             self.db.update_company_ats(
                 company_id, ats_result.provider, ats_result.board_token
             )
+            # Update urgency score (count of marketing jobs)
+            self.db.update_company_urgency(company_id, len(relevant_jobs))
+
+        # Collect job details for reporting
+        job_details = [
+            {
+                "title": job["title"],
+                "posting_date": job.get("posting_date"),
+            }
+            for job in relevant_jobs
+        ]
+
+        # Collect removed job details from change report
+        removed_job_details = [
+            {"title": job.title, "external_id": job.external_id}
+            for job in change_report.removed_jobs
+        ]
 
         return {
             "company": company["name"],
+            "company_id": company_id,
+            "domain": company["domain"],
             "status": "success",
             "ats": ats_result.provider,
             "total_jobs": len(jobs),
             "jobs_found": len(relevant_jobs),
             "new_jobs": len(change_report.new_jobs),
             "removed_jobs": len(change_report.removed_jobs),
+            "job_details": job_details,
+            "removed_job_details": removed_job_details,
         }
 
     async def _detect_ats_for_company(
@@ -332,6 +510,16 @@ class JobDiscoveryOrchestrator:
             "total_jobs_found": sum(r.get("jobs_found", 0) for r in successful),
             "total_new_jobs": sum(r.get("new_jobs", 0) for r in successful),
             "total_removed_jobs": sum(r.get("removed_jobs", 0) for r in successful),
+            "decision_makers_found": sum(
+                1
+                for r in results
+                if r.get("decision_maker", {}).get("person_name")
+            ),
+            "emails_found": sum(
+                1
+                for r in results
+                if r.get("decision_maker", {}).get("email")
+            ),
             "by_status": self._count_by_key(results, "status"),
             "by_ats": self._count_by_key(successful, "ats"),
             "details": results,
@@ -357,6 +545,8 @@ class JobDiscoveryOrchestrator:
         print(f"Jobs Found: {summary['total_jobs_found']}")
         print(f"New Jobs: {summary['total_new_jobs']}")
         print(f"Removed Jobs: {summary['total_removed_jobs']}")
+        print(f"Decision Makers Found: {summary.get('decision_makers_found', 0)}")
+        print(f"Emails Found: {summary.get('emails_found', 0)}")
         print("\n--- By Status ---")
         for status, count in summary["by_status"].items():
             print(f"  {status}: {count}")
@@ -364,3 +554,74 @@ class JobDiscoveryOrchestrator:
         for ats, count in summary["by_ats"].items():
             print(f"  {ats}: {count}")
         print("=" * 70)
+
+        # Print detailed marketing jobs by company (sorted by urgency/job count)
+        self._print_jobs_by_company(summary["details"])
+
+    def _print_jobs_by_company(self, results: List[Dict]) -> None:
+        """Print detailed marketing jobs grouped by company, sorted by urgency."""
+        # Filter to only successful results with jobs
+        companies_with_jobs = [
+            r for r in results
+            if r.get("status") == "success" and r.get("jobs_found", 0) > 0
+        ]
+
+        if not companies_with_jobs:
+            return
+
+        # Sort by number of marketing jobs (urgency) descending
+        companies_with_jobs.sort(key=lambda x: x.get("jobs_found", 0), reverse=True)
+
+        print("\n" + "=" * 70)
+        print("MARKETING JOBS BY COMPANY (Sorted by Urgency)")
+        print("=" * 70)
+
+        for result in companies_with_jobs:
+            company_name = result.get("company", "Unknown")
+            job_count = result.get("jobs_found", 0)
+            job_details = result.get("job_details", [])
+
+            print(f"\n{company_name} ({job_count} marketing roles)")
+            print("-" * 50)
+
+            # Print active jobs with posting dates
+            for job in job_details:
+                title = job.get("title", "Unknown")
+                date = job.get("posting_date")
+                if date:
+                    # Parse ISO date to readable format (YYYY-MM-DD)
+                    try:
+                        parsed = datetime.fromisoformat(date)
+                        date_str = parsed.strftime("%Y-%m-%d")
+                    except:
+                        date_str = date[:10] if len(date) >= 10 else date
+                    print(f"  - {title} (Posted: {date_str})")
+                else:
+                    print(f"  - {title} (Posted: Unknown)")
+
+            # Print removed jobs if any
+            removed_details = result.get("removed_job_details", [])
+            if removed_details:
+                print(f"\n  Recently Removed ({len(removed_details)} roles):")
+                for job in removed_details:
+                    print(f"    × {job.get('title', 'Unknown')}")
+
+            # Print decision maker if available
+            dm = result.get("decision_maker")
+            if dm and dm.get("person_name"):
+                print(
+                    f"  Decision Maker: {dm['person_name']} "
+                    f"- {dm.get('title', 'N/A')}"
+                )
+                if dm.get("email"):
+                    print(f"    Email: {dm['email']}")
+                if dm.get("linkedin_url"):
+                    print(f"    LinkedIn: {dm['linkedin_url']}")
+                if dm.get("source_url"):
+                    print(f"    Source: {dm['source_url']}")
+                if dm.get("confidence"):
+                    print(f"    Confidence: {dm['confidence']}")
+            elif dm and dm.get("not_found_reason"):
+                print(f"  Decision Maker: {dm['not_found_reason']}")
+
+        print("\n" + "=" * 70)

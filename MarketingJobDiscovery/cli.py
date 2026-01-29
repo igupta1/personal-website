@@ -44,6 +44,10 @@ def cmd_run(args):
         print("DRY RUN MODE - No database writes will be made")
 
     config = Config.from_env()
+    if args.skip_decision_makers:
+        config.enable_decision_maker_lookup = False
+    if args.skip_email_lookup:
+        config.enable_email_lookup = False
     db = Database(config.db_path)
 
     orchestrator = JobDiscoveryOrchestrator(
@@ -138,6 +142,153 @@ def cmd_export(args):
         db.close()
 
 
+def cmd_upload(args):
+    """Export leads in website format and upload to Vercel Blob."""
+    import json
+    import requests
+
+    config = Config.from_env()
+
+    if not config.db_path.exists():
+        print("No database found. Run 'cli.py run' first to initialize.")
+        sys.exit(1)
+
+    db = Database(config.db_path)
+
+    try:
+        # Get companies with decision makers
+        cursor = db.conn.cursor()
+        cursor.execute(
+            """
+            SELECT DISTINCT
+                c.id,
+                c.name as company_name,
+                c.domain,
+                c.employee_count,
+                dm.person_name,
+                dm.title,
+                dm.email,
+                dm.linkedin_url,
+                dm.source_url,
+                dm.confidence
+            FROM companies c
+            JOIN decision_makers dm ON dm.company_id = c.id
+            WHERE dm.person_name IS NOT NULL
+            ORDER BY c.urgency_score DESC
+            """
+        )
+        companies = cursor.fetchall()
+
+        if not companies:
+            print("No decision makers found. Run 'cli.py run' first.")
+            sys.exit(1)
+
+        # Transform to website lead format
+        leads = []
+        for row in companies:
+            # Split name into first/last
+            full_name = row[4] or ""
+            name_parts = full_name.strip().split()
+            first_name = name_parts[0] if name_parts else ""
+            last_name = " ".join(name_parts[1:]) if len(name_parts) > 1 else ""
+
+            # Determine category based on employee count
+            emp_count = row[3] or 0
+            if emp_count <= 100:
+                category = "small"
+            elif emp_count <= 250:
+                category = "medium"
+            else:
+                category = "large"
+
+            # Get top job for this company
+            cursor.execute(
+                """
+                SELECT title, job_url, posting_date
+                FROM jobs
+                WHERE company_id = ? AND is_active = 1
+                ORDER BY relevance_score DESC
+                LIMIT 1
+                """,
+                (row[0],),
+            )
+            job = cursor.fetchone()
+
+            lead = {
+                "firstName": first_name,
+                "lastName": last_name,
+                "title": row[5] or "",
+                "companyName": row[1] or "",
+                "email": row[6] or "",
+                "website": f"https://{row[2]}" if row[2] else "",
+                "location": "",
+                "companySize": f"{emp_count} employees" if emp_count else "Unknown",
+                "category": category,
+                "jobRole": job[0] if job else "",
+                "jobLink": job[1] if job else "",
+                "postingDate": job[2] if job else "",
+                "linkedinUrl": row[7] or "",
+                "sourceUrl": row[8] or "",
+                "confidence": row[9] or "",
+            }
+            leads.append(lead)
+
+        print(f"Found {len(leads)} leads to upload")
+
+        # Count by category
+        small = len([l for l in leads if l["category"] == "small"])
+        medium = len([l for l in leads if l["category"] == "medium"])
+        large = len([l for l in leads if l["category"] == "large"])
+        print(f"  Small (≤100): {small}")
+        print(f"  Medium (101-250): {medium}")
+        print(f"  Large (251+): {large}")
+
+        if args.dry_run:
+            print("\nDRY RUN - Would upload the following leads:")
+            for lead in leads[:5]:
+                print(f"  - {lead['firstName']} {lead['lastName']} ({lead['title']}) at {lead['companyName']}")
+            if len(leads) > 5:
+                print(f"  ... and {len(leads) - 5} more")
+            return
+
+        # Upload to Vercel Blob via API
+        import os
+        api_key = args.api_key or os.getenv("LEADS_UPLOAD_API_KEY")
+        vercel_url = os.getenv("VERCEL_API_URL", "https://www.ishaangpta.com")
+        api_url = args.api_url or f"{vercel_url}/api/upload-leads"
+
+        if not api_key:
+            print("Error: --api-key or LEADS_UPLOAD_API_KEY env var is required")
+            sys.exit(1)
+
+        payload = {
+            "location": args.location or "marketing-discovery",
+            "leads": leads,
+        }
+
+        response = requests.post(
+            api_url,
+            json=payload,
+            headers={
+                "Content-Type": "application/json",
+                "X-API-Key": api_key,
+            },
+        )
+
+        if response.status_code == 200:
+            result = response.json()
+            print(f"\nUpload successful!")
+            print(f"  Message: {result.get('message')}")
+            print(f"  Stats: {result.get('stats')}")
+        else:
+            print(f"\nUpload failed: {response.status_code}")
+            print(f"  Response: {response.text}")
+            sys.exit(1)
+
+    finally:
+        db.close()
+
+
 def main():
     parser = argparse.ArgumentParser(
         prog="python -m MarketingJobDiscovery.cli",
@@ -162,6 +313,16 @@ def main():
     run_parser.add_argument(
         "-v", "--verbose", action="store_true", help="Enable verbose logging"
     )
+    run_parser.add_argument(
+        "--skip-decision-makers",
+        action="store_true",
+        help="Skip Gemini-based decision maker lookup",
+    )
+    run_parser.add_argument(
+        "--skip-email-lookup",
+        action="store_true",
+        help="Skip Apollo-based email lookup",
+    )
     run_parser.set_defaults(func=cmd_run)
 
     # Status command
@@ -181,6 +342,32 @@ def main():
         "--all", action="store_true", help="Include non-relevant jobs"
     )
     export_parser.set_defaults(func=cmd_export)
+
+    # Upload command
+    upload_parser = subparsers.add_parser(
+        "upload", help="Upload leads to website (Vercel Blob)"
+    )
+    upload_parser.add_argument(
+        "--api-key",
+        required=False,
+        help="API key for upload endpoint (LEADS_UPLOAD_API_KEY)",
+    )
+    upload_parser.add_argument(
+        "--api-url",
+        default="https://www.ishaangpta.com/api/upload-leads",
+        help="Upload API URL",
+    )
+    upload_parser.add_argument(
+        "--location",
+        default="marketing-discovery",
+        help="Location identifier for the leads cache",
+    )
+    upload_parser.add_argument(
+        "--dry-run",
+        action="store_true",
+        help="Show what would be uploaded without uploading",
+    )
+    upload_parser.set_defaults(func=cmd_upload)
 
     args = parser.parse_args()
 

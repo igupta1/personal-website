@@ -4,7 +4,7 @@ import asyncio
 import re
 import logging
 from typing import Optional, List, Tuple, Set
-from urllib.parse import urlparse, quote_plus
+from urllib.parse import urlparse
 import httpx
 
 from ..core.models import ATSDetectionResult
@@ -138,11 +138,13 @@ class EnhancedATSDetector:
 
     def generate_token_variations(self, company_name: str, domain: str, linkedin_slug: Optional[str] = None) -> List[str]:
         """
-        Generate smart board token variations from company name and domain.
+        Generate board token variations from company name and domain.
+
+        Balanced for speed and accuracy: generates ~5-10 most likely tokens.
 
         Examples:
-            "LlamaIndex" + "llamaindex.ai" -> ["llamaindex", "llama-index", "llamaindexai", ...]
-            "Fitt Insider" + "fittinsider.com" -> ["fittinsider", "fitt-insider", "fitt", ...]
+            "LlamaIndex" + "llamaindex.ai" -> ["llamaindex", "llama-index"]
+            "Fitt Insider" + "fittinsider.com" -> ["fittinsider", "fitt-insider", "fitt"]
         """
         variations: Set[str] = set()
 
@@ -150,74 +152,38 @@ class EnhancedATSDetector:
         domain_base = domain.split(".")[0].lower()
         variations.add(domain_base)
         variations.add(domain_base.replace("-", ""))
-        variations.add(domain_base.replace("_", ""))
 
-        # Add LinkedIn slug if available (often matches the ATS token)
-        if linkedin_slug:
-            variations.add(linkedin_slug.lower())
-            variations.add(linkedin_slug.lower().replace("-", ""))
-
-        # From company name
+        # From company name (no spaces, with hyphens)
         name_clean = re.sub(r'[^a-zA-Z0-9\s-]', '', company_name)
         name_lower = name_clean.lower()
-
-        # No spaces (skip underscore variant - causes SSL errors on subdomain-based ATS)
         variations.add(name_lower.replace(" ", ""))
         variations.add(name_lower.replace(" ", "-"))
 
-        # First word only (for multi-word companies)
+        # First word only (for multi-word companies like "Fitt Insider" -> "fitt")
         words = name_lower.split()
         if words:
             variations.add(words[0])
-            if len(words) > 1:
-                # First two words
-                variations.add("".join(words[:2]))
-                variations.add("-".join(words[:2]))
-                # Last word (sometimes used)
-                variations.add(words[-1])
 
-        # CamelCase variations
-        camel = re.sub(r'(?<!^)(?=[A-Z])', '-', company_name).lower()
-        variations.add(camel.replace(" ", "").replace("--", "-"))
-
-        # Common hiring-related token patterns
-        for base in [domain_base, name_lower.replace(" ", "")]:
-            if len(base) > 2:
-                variations.add(f"{base}careers")
-                variations.add(f"{base}-careers")
-                variations.add(f"{base}jobs")
-                variations.add(f"{base}-jobs")
-
-        # Remove common suffixes
-        for suffix in ["inc", "co", "io", "ai", "hq", "app", "labs", "tech", "llc", "ltd", "corp"]:
-            for v in list(variations):
-                if v.endswith(suffix) and len(v) > len(suffix) + 2:
-                    variations.add(v[:-len(suffix)])
-                    variations.add(v[:-len(suffix)].rstrip("-_"))
-
-        # Handle acronyms (e.g., "New York Foundation for the Arts" -> "nyfa")
+        # Acronyms for long names (e.g., "New York Foundation for the Arts" -> "nyfa")
         if len(words) >= 3:
             acronym = "".join(w[0] for w in words if len(w) > 0)
             if len(acronym) >= 3:
                 variations.add(acronym)
 
-        # Filter out invalid tokens:
-        # - Too short or too long
-        # - Contains underscores (invalid in subdomain-based ATS URLs)
-        # - Contains special chars that break URLs (parentheses, commas, ampersands, etc.)
-        # - Ends with a period or hyphen
+        # Add LinkedIn slug if available (often matches the ATS token)
+        if linkedin_slug:
+            variations.add(linkedin_slug.lower())
+
+        # Filter out invalid tokens
         valid_variations = set()
         for v in variations:
             v = v.strip()
             if len(v) <= 2 or len(v) >= 50:
                 continue
-            # Skip tokens with underscores (causes SSL errors on subdomain-based ATS)
             if '_' in v:
                 continue
-            # Skip tokens with invalid URL characters
             if any(c in v for c in '()&,. '):
                 continue
-            # Skip tokens ending with hyphen
             if v.endswith('-'):
                 continue
             valid_variations.add(v)
@@ -284,12 +250,7 @@ class EnhancedATSDetector:
         if careers_result.provider:
             return careers_result
 
-        # Step 5: Google search for careers page
-        google_result = await self._google_search_careers(company_name, domain)
-        if google_result.provider:
-            return google_result
-
-        # Step 6: Fall back to LinkedIn-only (we already extracted the slug at the start)
+        # Step 5: Fall back to LinkedIn-only (we already extracted the slug at the start)
         if linkedin_slug:
             return ATSDetectionResult(
                 provider="linkedin_only",
@@ -618,50 +579,6 @@ class EnhancedATSDetector:
                     )
 
         return ATSDetectionResult(None, None, 0.0, "url_redirect")
-
-    async def _google_search_careers(
-        self,
-        company_name: str,
-        domain: str
-    ) -> ATSDetectionResult:
-        """Use Google search to discover careers page or ATS."""
-        # Construct search query
-        queries = [
-            f'site:{domain} careers jobs',
-            f'"{company_name}" careers greenhouse OR lever OR ashby',
-        ]
-
-        for query in queries:
-            try:
-                # Use Google's JSON API (limited but works without scraping)
-                search_url = f"https://www.google.com/search?q={quote_plus(query)}"
-
-                response = await self.client.get(
-                    search_url,
-                    headers={
-                        "User-Agent": "Mozilla/5.0 (compatible; MarketingJobDiscovery/1.0)",
-                    },
-                    timeout=10.0,
-                    follow_redirects=True,
-                )
-
-                if response.status_code == 200:
-                    # Look for ATS URLs in search results
-                    result = self._fingerprint_html(response.text)
-                    if result.provider and result.board_token:
-                        result = ATSDetectionResult(
-                            provider=result.provider,
-                            board_token=result.board_token,
-                            confidence=0.8,
-                            detection_method="google_search",
-                        )
-                        return result
-
-            except (httpx.HTTPError, httpx.TimeoutException) as e:
-                logger.debug(f"Google search failed: {e}")
-                continue
-
-        return ATSDetectionResult(None, None, 0.0, "google_search")
 
     async def _extract_linkedin_slug(self, domain: str) -> Optional[str]:
         """Try to extract LinkedIn company slug from homepage (fast, single request)."""

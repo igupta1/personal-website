@@ -27,6 +27,7 @@ class Database:
         ats_board_token TEXT,
         careers_page_url TEXT,
         last_checked_at TEXT,
+        urgency_score INTEGER DEFAULT 0,
         created_at TEXT DEFAULT (datetime('now')),
         updated_at TEXT DEFAULT (datetime('now'))
     );
@@ -84,12 +85,26 @@ class Database:
         expires_at TEXT
     );
 
+    -- Decision maker contacts found via Gemini lookup
+    CREATE TABLE IF NOT EXISTS decision_makers (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        company_id INTEGER NOT NULL UNIQUE,
+        person_name TEXT NOT NULL,
+        title TEXT,
+        source_url TEXT,
+        confidence TEXT,
+        looked_up_at TEXT DEFAULT (datetime('now')),
+        updated_at TEXT DEFAULT (datetime('now')),
+        FOREIGN KEY (company_id) REFERENCES companies(id)
+    );
+
     -- Indexes for performance
     CREATE INDEX IF NOT EXISTS idx_jobs_company ON jobs(company_id);
     CREATE INDEX IF NOT EXISTS idx_jobs_active ON jobs(is_active);
     CREATE INDEX IF NOT EXISTS idx_jobs_relevance ON jobs(relevance_score);
     CREATE INDEX IF NOT EXISTS idx_changes_run ON job_changes(run_id);
     CREATE INDEX IF NOT EXISTS idx_companies_domain ON companies(domain);
+    CREATE INDEX IF NOT EXISTS idx_dm_company ON decision_makers(company_id);
     """
 
     def __init__(self, db_path: Path):
@@ -102,6 +117,20 @@ class Database:
     def _init_schema(self):
         """Create database schema."""
         self.conn.executescript(self.SCHEMA)
+        self.conn.commit()
+        self._run_migrations()
+
+    def _run_migrations(self):
+        """Run schema migrations for existing databases."""
+        cursor = self.conn.cursor()
+        # Add email and linkedin_url columns to decision_makers if missing
+        cursor.execute("PRAGMA table_info(decision_makers)")
+        existing_cols = {row[1] for row in cursor.fetchall()}
+        for col in [("email", "TEXT"), ("linkedin_url", "TEXT")]:
+            if col[0] not in existing_cols:
+                cursor.execute(
+                    f"ALTER TABLE decision_makers ADD COLUMN {col[0]} {col[1]}"
+                )
         self.conn.commit()
 
     def close(self):
@@ -177,6 +206,92 @@ class Database:
             (ats_provider, board_token, now, now, company_id),
         )
         self.conn.commit()
+
+    def update_company_urgency(self, company_id: int, urgency_score: int):
+        """Update company's urgency score (count of marketing jobs)."""
+        now = datetime.now().isoformat()
+        self.conn.execute(
+            """
+            UPDATE companies SET urgency_score = ?, updated_at = ?
+            WHERE id = ?
+            """,
+            (urgency_score, now, company_id),
+        )
+        self.conn.commit()
+
+    # Decision maker operations
+
+    def upsert_decision_maker(
+        self,
+        company_id: int,
+        person_name: str,
+        title: Optional[str] = None,
+        source_url: Optional[str] = None,
+        confidence: Optional[str] = None,
+        email: Optional[str] = None,
+        linkedin_url: Optional[str] = None,
+    ) -> int:
+        """Insert or update decision maker for a company."""
+        now = datetime.now().isoformat()
+        cursor = self.conn.cursor()
+        cursor.execute(
+            """
+            INSERT INTO decision_makers (
+                company_id, person_name, title, source_url, confidence,
+                email, linkedin_url, looked_up_at, updated_at
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+            ON CONFLICT(company_id) DO UPDATE SET
+                person_name = excluded.person_name,
+                title = excluded.title,
+                source_url = excluded.source_url,
+                confidence = excluded.confidence,
+                email = excluded.email,
+                linkedin_url = excluded.linkedin_url,
+                updated_at = excluded.updated_at
+            """,
+            (company_id, person_name, title, source_url, confidence, email, linkedin_url, now, now),
+        )
+        self.conn.commit()
+        return cursor.lastrowid
+
+    def get_decision_maker_for_company(self, company_id: int) -> Optional[Dict]:
+        """Get decision maker info for a company."""
+        cursor = self.conn.cursor()
+        cursor.execute(
+            "SELECT * FROM decision_makers WHERE company_id = ?",
+            (company_id,),
+        )
+        row = cursor.fetchone()
+        return dict(row) if row else None
+
+    def get_top_companies_by_urgency(self, limit: int = 10) -> List[Dict]:
+        """Get top companies by marketing job urgency score."""
+        cursor = self.conn.cursor()
+        cursor.execute(
+            """
+            SELECT c.id, c.name, c.domain, c.urgency_score, c.ats_provider
+            FROM companies c
+            WHERE c.urgency_score > 0
+            ORDER BY c.urgency_score DESC
+            LIMIT ?
+            """,
+            (limit,),
+        )
+        return [dict(row) for row in cursor.fetchall()]
+
+    def get_jobs_for_company_by_id(self, company_id: int) -> List[Dict]:
+        """Get all active jobs for a company by ID."""
+        cursor = self.conn.cursor()
+        cursor.execute(
+            """
+            SELECT title, category, relevance_score, job_url
+            FROM jobs
+            WHERE company_id = ? AND is_active = 1
+            ORDER BY relevance_score DESC
+            """,
+            (company_id,),
+        )
+        return [dict(row) for row in cursor.fetchall()]
 
     def get_company_by_domain(self, domain: str) -> Optional[Dict]:
         """Get company by domain."""
@@ -388,9 +503,16 @@ class Database:
                 j.posting_date,
                 j.discovered_at,
                 j.relevance_score,
-                j.is_active
+                j.is_active,
+                dm.person_name as decision_maker_name,
+                dm.title as decision_maker_title,
+                dm.source_url as decision_maker_source,
+                dm.confidence as decision_maker_confidence,
+                dm.email as decision_maker_email,
+                dm.linkedin_url as decision_maker_linkedin
             FROM jobs j
             JOIN companies c ON j.company_id = c.id
+            LEFT JOIN decision_makers dm ON dm.company_id = c.id
             WHERE j.is_active = 1
         """
 
@@ -425,9 +547,16 @@ class Database:
                 j.posting_date,
                 j.discovered_at,
                 j.relevance_score,
-                j.is_active
+                j.is_active,
+                dm.person_name as decision_maker_name,
+                dm.title as decision_maker_title,
+                dm.source_url as decision_maker_source,
+                dm.confidence as decision_maker_confidence,
+                dm.email as decision_maker_email,
+                dm.linkedin_url as decision_maker_linkedin
             FROM jobs j
             JOIN companies c ON j.company_id = c.id
+            LEFT JOIN decision_makers dm ON dm.company_id = c.id
             WHERE j.is_active = 1
         """
 
