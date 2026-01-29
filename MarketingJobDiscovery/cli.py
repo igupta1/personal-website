@@ -201,47 +201,72 @@ def cmd_upload(args):
             else:
                 category = "large"
 
-            # Get top job for this company
+            # Get ALL active jobs for this company
             cursor.execute(
                 """
                 SELECT title, job_url, posting_date
                 FROM jobs
                 WHERE company_id = ? AND is_active = 1
                 ORDER BY relevance_score DESC
-                LIMIT 1
                 """,
                 (row[0],),
             )
-            job = cursor.fetchone()
+            jobs = cursor.fetchall()
 
-            lead = {
-                "firstName": first_name,
-                "lastName": last_name,
-                "title": row[5] or "",
-                "companyName": row[1] or "",
-                "email": row[6] or "",
-                "website": f"https://{row[2]}" if row[2] else "",
-                "location": "",
-                "companySize": f"{emp_count} employees" if emp_count else "Unknown",
-                "category": category,
-                "jobRole": job[0] if job else "",
-                "jobLink": job[1] if job else "",
-                "postingDate": job[2] if job else "",
-                "linkedinUrl": row[7] or "",
-                "sourceUrl": row[8] or "",
-                "confidence": row[9] or "",
-            }
-            leads.append(lead)
+            # Create a lead entry for each job (frontend groups by company)
+            if jobs:
+                for job in jobs:
+                    lead = {
+                        "firstName": first_name,
+                        "lastName": last_name,
+                        "title": row[5] or "",
+                        "companyName": row[1] or "",
+                        "email": row[6] or "",
+                        "website": f"https://{row[2]}" if row[2] else "",
+                        "location": "",
+                        "companySize": f"{emp_count} employees" if emp_count else "Unknown",
+                        "category": category,
+                        "jobRole": job[0] if job else "",
+                        "jobLink": job[1] if job else "",
+                        "postingDate": job[2] if job else "",
+                        "linkedinUrl": row[7] or "",
+                        "sourceUrl": row[8] or "",
+                        "confidence": row[9] or "",
+                    }
+                    leads.append(lead)
+            else:
+                # Company with decision maker but no active jobs
+                lead = {
+                    "firstName": first_name,
+                    "lastName": last_name,
+                    "title": row[5] or "",
+                    "companyName": row[1] or "",
+                    "email": row[6] or "",
+                    "website": f"https://{row[2]}" if row[2] else "",
+                    "location": "",
+                    "companySize": f"{emp_count} employees" if emp_count else "Unknown",
+                    "category": category,
+                    "jobRole": "",
+                    "jobLink": "",
+                    "postingDate": "",
+                    "linkedinUrl": row[7] or "",
+                    "sourceUrl": row[8] or "",
+                    "confidence": row[9] or "",
+                }
+                leads.append(lead)
 
-        print(f"Found {len(leads)} leads to upload")
+        # Count unique companies and total job entries
+        unique_companies = len(set(l["companyName"] for l in leads))
+        total_roles = len([l for l in leads if l["jobRole"]])
+        print(f"Found {unique_companies} companies with {total_roles} total roles to upload")
 
         # Count by category
         small = len([l for l in leads if l["category"] == "small"])
         medium = len([l for l in leads if l["category"] == "medium"])
         large = len([l for l in leads if l["category"] == "large"])
-        print(f"  Small (≤100): {small}")
-        print(f"  Medium (101-250): {medium}")
-        print(f"  Large (251+): {large}")
+        print(f"  Small (≤100): {small} entries")
+        print(f"  Medium (101-250): {medium} entries")
+        print(f"  Large (251+): {large} entries")
 
         if args.dry_run:
             print("\nDRY RUN - Would upload the following leads:")
