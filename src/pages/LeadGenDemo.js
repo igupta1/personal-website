@@ -12,6 +12,7 @@ function LeadGenDemo() {
   const [companies, setCompanies] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [expandedCompanies, setExpandedCompanies] = useState({});
 
   const experiences = [
     { title: "Software Engineer", company: "Google", description: "Built Generative AI Features for Gmail and Google Chat", logo: googlelogo },
@@ -41,14 +42,21 @@ function LeadGenDemo() {
     } catch (error) {
       console.log('Using demo data (API not available locally)');
       // Demo data matching the run output format
+      // Use dynamic dates relative to today for demo
+      const today = new Date();
+      const formatDate = (daysAgo) => {
+        const d = new Date(today);
+        d.setDate(d.getDate() - daysAgo);
+        return d.toISOString().split('T')[0];
+      };
       return {
         success: true,
         leads: [
-          { companyName: "Inspira Education", firstName: "Xavier", lastName: "Portillo", title: "Co-Founder Senior Advisor", jobRole: "Copy Editor", confidence: "Medium", website: "https://inspiraeducation.com", postingDate: "2026-01-06" },
-          { companyName: "Inspira Education", firstName: "Xavier", lastName: "Portillo", title: "Co-Founder Senior Advisor", jobRole: "Growth Marketing Manager", confidence: "Medium", website: "https://inspiraeducation.com", postingDate: "2026-01-28" },
-          { companyName: "Emergent", firstName: "Mukund", lastName: "Jha", title: "CEO", jobRole: "Head of Growth", confidence: "High", website: "https://emergent.com", postingDate: "2026-01-21" },
-          { companyName: "Emergent", firstName: "Mukund", lastName: "Jha", title: "CEO", jobRole: "Growth Manager", confidence: "High", website: "https://emergent.com", postingDate: "2026-01-21" },
-          { companyName: "Feastables", firstName: "Ryan", lastName: "Brisco", title: "Vice President Of Marketing", jobRole: "Shopper Marketing Manager", confidence: "High", website: "https://feastables.com", postingDate: "2026-01-20" },
+          { companyName: "Inspira Education", firstName: "Xavier", lastName: "Portillo", title: "Co-Founder Senior Advisor", jobRole: "Copy Editor", confidence: "Medium", website: "https://inspiraeducation.com", postingDate: formatDate(23), mostRecentPostingDate: formatDate(1) },
+          { companyName: "Inspira Education", firstName: "Xavier", lastName: "Portillo", title: "Co-Founder Senior Advisor", jobRole: "Growth Marketing Manager", confidence: "Medium", website: "https://inspiraeducation.com", postingDate: formatDate(1), mostRecentPostingDate: formatDate(1) },
+          { companyName: "Emergent", firstName: "Mukund", lastName: "Jha", title: "CEO", jobRole: "Head of Growth", confidence: "High", website: "https://emergent.com", postingDate: formatDate(8), mostRecentPostingDate: formatDate(8) },
+          { companyName: "Emergent", firstName: "Mukund", lastName: "Jha", title: "CEO", jobRole: "Growth Manager", confidence: "High", website: "https://emergent.com", postingDate: formatDate(8), mostRecentPostingDate: formatDate(8) },
+          { companyName: "Feastables", firstName: "Ryan", lastName: "Brisco", title: "Vice President Of Marketing", jobRole: "Shopper Marketing Manager", confidence: "High", website: "https://feastables.com", postingDate: formatDate(9), mostRecentPostingDate: formatDate(9) },
         ]
       };
     }
@@ -63,6 +71,7 @@ function LeadGenDemo() {
         grouped[companyName] = {
           companyName,
           website: lead.website,
+          mostRecentPostingDate: lead.mostRecentPostingDate || lead.postingDate || '',
           decisionMaker: {
             firstName: lead.firstName,
             lastName: lead.lastName,
@@ -75,6 +84,11 @@ function LeadGenDemo() {
           roles: []
         };
       }
+      // Update mostRecentPostingDate - check both mostRecentPostingDate and postingDate
+      const leadDate = lead.mostRecentPostingDate || lead.postingDate || '';
+      if (leadDate && leadDate > grouped[companyName].mostRecentPostingDate) {
+        grouped[companyName].mostRecentPostingDate = leadDate;
+      }
       if (lead.jobRole) {
         grouped[companyName].roles.push({
           title: lead.jobRole,
@@ -84,8 +98,14 @@ function LeadGenDemo() {
       }
     });
 
-    // Convert to array and sort by number of roles (descending)
-    return Object.values(grouped).sort((a, b) => b.roles.length - a.roles.length);
+    // Convert to array and sort by most recent posting date (newest first)
+    const result = Object.values(grouped).sort((a, b) => {
+      const aDate = a.mostRecentPostingDate ? new Date(a.mostRecentPostingDate) : new Date(0);
+      const bDate = b.mostRecentPostingDate ? new Date(b.mostRecentPostingDate) : new Date(0);
+      return bDate - aDate;
+    });
+
+    return result;
   };
 
   useEffect(() => {
@@ -119,6 +139,30 @@ function LeadGenDemo() {
     if (confidence === 'High') return '#4ade80';
     if (confidence === 'Medium') return '#fbbf24';
     return '#94a3b8';
+  };
+
+  const getDaysAgo = (dateStr) => {
+    if (!dateStr) return null;
+    try {
+      const posted = new Date(dateStr);
+      // Check if date is valid
+      if (isNaN(posted.getTime())) return null;
+      const now = new Date();
+      const diffTime = now - posted;
+      const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+      // Return null for negative days (future dates) or very old dates
+      if (diffDays < 0) return 0; // Treat future dates as "today"
+      return diffDays;
+    } catch {
+      return null;
+    }
+  };
+
+  const toggleCompanyExpanded = (companyName) => {
+    setExpandedCompanies(prev => ({
+      ...prev,
+      [companyName]: !prev[companyName]
+    }));
   };
 
   return (
@@ -206,87 +250,112 @@ function LeadGenDemo() {
                 </div>
 
                 <div className="lead-gen-companies-list">
-                  {companies.map((company, index) => (
-                    <div key={index} className="lead-gen-company-card">
-                      {/* Company Header */}
-                      <div className="lead-gen-company-header">
-                        <div className="lead-gen-company-info">
-                          <h3 className="lead-gen-company-name">{company.companyName}</h3>
-                          {company.website && (
-                            <a href={company.website} target="_blank" rel="noopener noreferrer" className="lead-gen-company-website">
-                              {company.website.replace('https://', '')}
-                            </a>
-                          )}
-                        </div>
-                        <div className="lead-gen-roles-count">
-                          <span className="lead-gen-roles-number">{company.roles.length}</span>
-                          <span className="lead-gen-roles-label">roles</span>
-                        </div>
-                      </div>
+                  {companies.map((company, index) => {
+                    const daysAgo = getDaysAgo(company.mostRecentPostingDate);
+                    const isExpanded = expandedCompanies[company.companyName];
 
-                      {/* Roles Section */}
-                      <div className="lead-gen-roles-section">
-                        <h4 className="lead-gen-section-title">Open Positions</h4>
-                        <div className="lead-gen-roles-list">
-                          {company.roles.map((role, roleIndex) => (
-                            <div key={roleIndex} className="lead-gen-role-item">
-                              <span className="lead-gen-role-title">{role.title}</span>
-                              {role.postingDate && formatDate(role.postingDate) && (
-                                <span className="lead-gen-role-date">{formatDate(role.postingDate)}</span>
-                              )}
-                              {role.jobLink && (
-                                <a href={role.jobLink} target="_blank" rel="noopener noreferrer" className="lead-gen-role-link">
-                                  View →
-                                </a>
-                              )}
-                            </div>
-                          ))}
+                    return (
+                      <div key={index} className="lead-gen-company-card">
+                        {/* Company Header */}
+                        <div className="lead-gen-company-header">
+                          <div className="lead-gen-company-info">
+                            <h3 className="lead-gen-company-name">{company.companyName}</h3>
+                            {company.website && (
+                              <a href={company.website} target="_blank" rel="noopener noreferrer" className="lead-gen-company-website">
+                                {company.website.replace('https://', '')}
+                              </a>
+                            )}
+                            {daysAgo !== null && (
+                              <span className="lead-gen-posted-badge">
+                                Role Posted {daysAgo} {daysAgo === 1 ? 'Day' : 'Days'} Ago
+                                {daysAgo <= 1 && <span className="lead-gen-fire-emoji"> 🔥</span>}
+                              </span>
+                            )}
+                          </div>
+                          <div className="lead-gen-roles-count">
+                            <span className="lead-gen-roles-number">{company.roles.length}</span>
+                            <span className="lead-gen-roles-label">roles</span>
+                          </div>
                         </div>
-                      </div>
 
-                      {/* Decision Maker Section */}
-                      {company.decisionMaker && company.decisionMaker.firstName && (
-                        <div className="lead-gen-dm-section">
-                          <h4 className="lead-gen-section-title">Decision Maker</h4>
-                          <div className="lead-gen-dm-card">
-                            <div className="lead-gen-dm-avatar">
-                              {company.decisionMaker.firstName.charAt(0)}
-                              {company.decisionMaker.lastName ? company.decisionMaker.lastName.charAt(0) : ''}
+                        {/* Roles Section - Collapsible */}
+                        {company.roles.length > 0 && (
+                          <div className="lead-gen-roles-section">
+                            <div
+                              className="lead-gen-roles-header"
+                              onClick={() => toggleCompanyExpanded(company.companyName)}
+                            >
+                              <h4 className="lead-gen-section-title">
+                                Open Positions ({company.roles.length})
+                              </h4>
+                              <span className={`lead-gen-roles-chevron ${isExpanded ? 'expanded' : ''}`}>
+                                ▼
+                              </span>
                             </div>
-                            <div className="lead-gen-dm-info">
-                              <div className="lead-gen-dm-name">
-                                {company.decisionMaker.firstName} {company.decisionMaker.lastName}
-                              </div>
-                              <div className="lead-gen-dm-title">{company.decisionMaker.title}</div>
-                              {company.decisionMaker.email && (
-                                <div className="lead-gen-dm-email">{company.decisionMaker.email}</div>
-                              )}
-                              <div className="lead-gen-dm-links">
-                                {company.decisionMaker.linkedinUrl && (
-                                  <a href={company.decisionMaker.linkedinUrl} target="_blank" rel="noopener noreferrer">
-                                    LinkedIn
-                                  </a>
-                                )}
-                                {company.decisionMaker.sourceUrl && (
-                                  <a href={company.decisionMaker.sourceUrl} target="_blank" rel="noopener noreferrer">
-                                    Source
-                                  </a>
-                                )}
-                              </div>
-                            </div>
-                            {company.decisionMaker.confidence && (
-                              <div
-                                className="lead-gen-dm-confidence"
-                                style={{ color: getConfidenceColor(company.decisionMaker.confidence) }}
-                              >
-                                {company.decisionMaker.confidence}
+                            {isExpanded && (
+                              <div className="lead-gen-roles-list">
+                                {company.roles.map((role, roleIndex) => (
+                                  <div key={roleIndex} className="lead-gen-role-item">
+                                    <span className="lead-gen-role-title">{role.title}</span>
+                                    {role.postingDate && formatDate(role.postingDate) && (
+                                      <span className="lead-gen-role-date">{formatDate(role.postingDate)}</span>
+                                    )}
+                                    {role.jobLink && (
+                                      <a href={role.jobLink} target="_blank" rel="noopener noreferrer" className="lead-gen-role-link">
+                                        View →
+                                      </a>
+                                    )}
+                                  </div>
+                                ))}
                               </div>
                             )}
                           </div>
-                        </div>
-                      )}
-                    </div>
-                  ))}
+                        )}
+
+                        {/* Decision Maker Section */}
+                        {company.decisionMaker && company.decisionMaker.firstName && (
+                          <div className="lead-gen-dm-section">
+                            <h4 className="lead-gen-section-title">Decision Maker</h4>
+                            <div className="lead-gen-dm-card">
+                              <div className="lead-gen-dm-avatar">
+                                {company.decisionMaker.firstName.charAt(0)}
+                                {company.decisionMaker.lastName ? company.decisionMaker.lastName.charAt(0) : ''}
+                              </div>
+                              <div className="lead-gen-dm-info">
+                                <div className="lead-gen-dm-name">
+                                  {company.decisionMaker.firstName} {company.decisionMaker.lastName}
+                                </div>
+                                <div className="lead-gen-dm-title">{company.decisionMaker.title}</div>
+                                {company.decisionMaker.email && (
+                                  <div className="lead-gen-dm-email">{company.decisionMaker.email}</div>
+                                )}
+                                <div className="lead-gen-dm-links">
+                                  {company.decisionMaker.linkedinUrl && (
+                                    <a href={company.decisionMaker.linkedinUrl} target="_blank" rel="noopener noreferrer">
+                                      LinkedIn
+                                    </a>
+                                  )}
+                                  {company.decisionMaker.sourceUrl && (
+                                    <a href={company.decisionMaker.sourceUrl} target="_blank" rel="noopener noreferrer">
+                                      Source
+                                    </a>
+                                  )}
+                                </div>
+                              </div>
+                              {company.decisionMaker.confidence && (
+                                <div
+                                  className="lead-gen-dm-confidence"
+                                  style={{ color: getConfidenceColor(company.decisionMaker.confidence) }}
+                                >
+                                  {company.decisionMaker.confidence}
+                                </div>
+                              )}
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    );
+                  })}
                 </div>
               </div>
             )}

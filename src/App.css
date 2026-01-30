@@ -1913,3 +1913,68 @@ body {
   border-radius: 6px;
   align-self: flex-start;
 }
+
+/* Posted Badge */
+.lead-gen-posted-badge {
+  display: inline-block;
+  margin-top: 0.35rem;
+  padding: 0.25rem 0.6rem;
+  background: linear-gradient(135deg, rgba(251, 191, 36, 0.15) 0%, rgba(245, 158, 11, 0.15) 100%);
+  border: 1px solid rgba(251, 191, 36, 0.3);
+  border-radius: 12px;
+  font-size: 0.7rem;
+  color: #fbbf24;
+  font-weight: 500;
+}
+
+.lead-gen-fire-emoji {
+  font-size: 0.8rem;
+}
+
+/* Collapsible Roles Header */
+.lead-gen-roles-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  padding: 0.6rem 0.75rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  margin-bottom: 0.5rem;
+}
+
+.lead-gen-roles-header:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.lead-gen-roles-header .lead-gen-section-title {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.lead-gen-roles-header .lead-gen-section-title::before {
+  content: "📋";
+  font-size: 0.85rem;
+}
+
+.lead-gen-roles-chevron {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.65rem;
+  transition: transform 0.2s ease;
+  padding: 0.25rem 0.5rem;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+}
+
+.lead-gen-roles-chevron.expanded {
+  transform: rotate(180deg);
+}
+
+.lead-gen-roles-header:hover .lead-gen-roles-chevron {
+  background: rgba(255, 255, 255, 0.15);
+}

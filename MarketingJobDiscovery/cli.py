@@ -201,17 +201,24 @@ def cmd_upload(args):
             else:
                 category = "large"
 
-            # Get ALL active jobs for this company
+            # Get ALL active jobs for this company, sorted by posting date (newest first)
             cursor.execute(
                 """
                 SELECT title, job_url, posting_date
                 FROM jobs
                 WHERE company_id = ? AND is_active = 1
-                ORDER BY relevance_score DESC
+                ORDER BY posting_date DESC, relevance_score DESC
                 """,
                 (row[0],),
             )
             jobs = cursor.fetchall()
+
+            # Find the most recent posting date for this company
+            most_recent_date = ""
+            if jobs:
+                for job in jobs:
+                    if job[2] and (not most_recent_date or job[2] > most_recent_date):
+                        most_recent_date = job[2]
 
             # Create a lead entry for each job (frontend groups by company)
             if jobs:
@@ -229,6 +236,7 @@ def cmd_upload(args):
                         "jobRole": job[0] if job else "",
                         "jobLink": job[1] if job else "",
                         "postingDate": job[2] if job else "",
+                        "mostRecentPostingDate": most_recent_date,
                         "linkedinUrl": row[7] or "",
                         "sourceUrl": row[8] or "",
                         "confidence": row[9] or "",
@@ -249,11 +257,19 @@ def cmd_upload(args):
                     "jobRole": "",
                     "jobLink": "",
                     "postingDate": "",
+                    "mostRecentPostingDate": "",
                     "linkedinUrl": row[7] or "",
                     "sourceUrl": row[8] or "",
                     "confidence": row[9] or "",
                 }
                 leads.append(lead)
+
+        # Sort leads by mostRecentPostingDate (newest first)
+        # This ensures companies with recent job postings appear first
+        leads.sort(
+            key=lambda l: l.get("mostRecentPostingDate") or "",
+            reverse=True
+        )
 
         # Count unique companies and total job entries
         unique_companies = len(set(l["companyName"] for l in leads))

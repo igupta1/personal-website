@@ -54,7 +54,12 @@ module.exports = async function handler(req, res) {
       evidence: lead.evidence || '',
       jobRole: lead.jobRole || '',
       jobLink: lead.jobLink || '',
-      icebreaker: lead.icebreaker || ''
+      icebreaker: lead.icebreaker || '',
+      postingDate: lead.postingDate || '',
+      mostRecentPostingDate: lead.mostRecentPostingDate || '',
+      linkedinUrl: lead.linkedinUrl || '',
+      sourceUrl: lead.sourceUrl || '',
+      confidence: lead.confidence || ''
     }));
 
     // Count by category
