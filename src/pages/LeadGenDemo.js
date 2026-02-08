@@ -8,6 +8,11 @@ import googlelogo from '../assets/googlelogo.jpg';
 import amazonlogo from '../assets/amazonlogo.webp';
 import ciscologo from '../assets/ciscologo.png';
 
+const parseLocalDate = (dateStr) => {
+  const [year, month, day] = dateStr.split('-').map(Number);
+  return new Date(year, month - 1, day);
+};
+
 function LeadGenDemo() {
   const [companies, setCompanies] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -60,11 +65,6 @@ function LeadGenDemo() {
         ]
       };
     }
-  };
-
-  const parseLocalDate = (dateStr) => {
-    const [year, month, day] = dateStr.split('-').map(Number);
-    return new Date(year, month - 1, day);
   };
 
   const groupByCompany = (leads) => {
