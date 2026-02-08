@@ -1916,8 +1916,9 @@ body {
 
 /* Posted Badge */
 .lead-gen-posted-badge {
-  display: inline-block;
-  margin-top: 0.35rem;
+  display: block;
+  width: fit-content;
+  margin-top: 0.75rem;
   padding: 0.25rem 0.6rem;
   background: linear-gradient(135deg, rgba(251, 191, 36, 0.15) 0%, rgba(245, 158, 11, 0.15) 100%);
   border: 1px solid rgba(251, 191, 36, 0.3);

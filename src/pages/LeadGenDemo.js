@@ -62,6 +62,11 @@ function LeadGenDemo() {
     }
   };
 
+  const parseLocalDate = (dateStr) => {
+    const [year, month, day] = dateStr.split('-').map(Number);
+    return new Date(year, month - 1, day);
+  };
+
   const groupByCompany = (leads) => {
     const grouped = {};
 
@@ -100,12 +105,21 @@ function LeadGenDemo() {
 
     // Convert to array and sort by most recent posting date (newest first)
     const result = Object.values(grouped).sort((a, b) => {
-      const aDate = a.mostRecentPostingDate ? new Date(a.mostRecentPostingDate) : new Date(0);
-      const bDate = b.mostRecentPostingDate ? new Date(b.mostRecentPostingDate) : new Date(0);
+      const aDate = a.mostRecentPostingDate ? parseLocalDate(a.mostRecentPostingDate) : new Date(0);
+      const bDate = b.mostRecentPostingDate ? parseLocalDate(b.mostRecentPostingDate) : new Date(0);
       return bDate - aDate;
     });
 
-    return result;
+    // Filter out companies where the most recent role was posted more than 9 days ago
+    const now = new Date();
+    const filtered = result.filter(company => {
+      if (!company.mostRecentPostingDate) return false;
+      const postDate = parseLocalDate(company.mostRecentPostingDate);
+      const diffDays = Math.floor((now - postDate) / (1000 * 60 * 60 * 24));
+      return diffDays <= 9;
+    });
+
+    return filtered;
   };
 
   useEffect(() => {
@@ -128,7 +142,7 @@ function LeadGenDemo() {
   const formatDate = (dateStr) => {
     if (!dateStr || dateStr === 'Unknown') return null;
     try {
-      const date = new Date(dateStr);
+      const date = parseLocalDate(dateStr);
       return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
     } catch {
       return dateStr;
@@ -144,7 +158,7 @@ function LeadGenDemo() {
   const getDaysAgo = (dateStr) => {
     if (!dateStr) return null;
     try {
-      const posted = new Date(dateStr);
+      const posted = parseLocalDate(dateStr);
       // Check if date is valid
       if (isNaN(posted.getTime())) return null;
       const now = new Date();
@@ -333,11 +347,6 @@ function LeadGenDemo() {
                                   {company.decisionMaker.linkedinUrl && (
                                     <a href={company.decisionMaker.linkedinUrl} target="_blank" rel="noopener noreferrer">
                                       LinkedIn
-                                    </a>
-                                  )}
-                                  {company.decisionMaker.sourceUrl && (
-                                    <a href={company.decisionMaker.sourceUrl} target="_blank" rel="noopener noreferrer">
-                                      Source
                                     </a>
                                   )}
                                 </div>

@@ -50,6 +50,12 @@ class Config:
     apollo_batch_size: int = 10
     enable_email_lookup: bool = True
 
+    # Job verification settings
+    enable_job_verification: bool = True
+    job_verification_timeout: float = 5.0
+    job_verification_batch_size: int = 20
+
+
     def __post_init__(self):
         """Set default paths based on base_dir."""
         if self.db_path is None:
@@ -84,4 +90,14 @@ class Config:
                 "ENABLE_EMAIL_LOOKUP", "true"
             ).lower()
             == "true",
+            enable_job_verification=os.getenv(
+                "ENABLE_JOB_VERIFICATION", "true"
+            ).lower()
+            == "true",
+            job_verification_timeout=float(
+                os.getenv("JOB_VERIFICATION_TIMEOUT", "5.0")
+            ),
+            job_verification_batch_size=int(
+                os.getenv("JOB_VERIFICATION_BATCH_SIZE", "20")
+            ),
         )

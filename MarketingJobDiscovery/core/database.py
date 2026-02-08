@@ -5,7 +5,7 @@ import json
 import csv
 from datetime import datetime
 from pathlib import Path
-from typing import List, Dict, Optional, Any
+from typing import List, Dict, Optional, Any, Tuple
 
 from .models import Company, JobPosting
 
@@ -123,6 +123,7 @@ class Database:
     def _run_migrations(self):
         """Run schema migrations for existing databases."""
         cursor = self.conn.cursor()
+
         # Add email and linkedin_url columns to decision_makers if missing
         cursor.execute("PRAGMA table_info(decision_makers)")
         existing_cols = {row[1] for row in cursor.fetchall()}
@@ -131,6 +132,28 @@ class Database:
                 cursor.execute(
                     f"ALTER TABLE decision_makers ADD COLUMN {col[0]} {col[1]}"
                 )
+
+        # Add daily run tracking columns to companies table
+        cursor.execute("PRAGMA table_info(companies)")
+        company_cols = {row[1] for row in cursor.fetchall()}
+        for col in [
+            ("first_seen_date", "TEXT"),  # When company first appeared in any CSV
+            ("last_csv_date", "TEXT"),  # Most recent CSV containing this company
+            ("current_run_id", "TEXT"),  # Marks companies active in today's run
+        ]:
+            if col[0] not in company_cols:
+                cursor.execute(
+                    f"ALTER TABLE companies ADD COLUMN {col[0]} {col[1]}"
+                )
+
+        # Add verification_status column to jobs table
+        cursor.execute("PRAGMA table_info(jobs)")
+        job_cols = {row[1] for row in cursor.fetchall()}
+        if "verification_status" not in job_cols:
+            cursor.execute(
+                "ALTER TABLE jobs ADD COLUMN verification_status TEXT DEFAULT 'unverified'"
+            )
+
         self.conn.commit()
 
     def close(self):
@@ -139,25 +162,41 @@ class Database:
 
     # Company operations
 
-    def upsert_company(self, company: Dict) -> int:
-        """Insert or update a company, return its ID."""
-        cursor = self.conn.cursor()
+    def upsert_company(self, company: Dict, run_id: str = None) -> Tuple[int, bool]:
+        """
+        Insert or update a company, return (ID, is_new_or_resurfacing).
 
-        # Check if exists
+        Args:
+            company: Company data dict with name, domain, etc.
+            run_id: Optional run ID to mark this company as part of today's run.
+
+        Returns:
+            Tuple of (company_id, should_process_ats) where should_process_ats
+            is True if company is new or resurfacing (not seen in previous run).
+        """
+        cursor = self.conn.cursor()
+        today = datetime.now().date().isoformat()
+        now = datetime.now().isoformat()
+
+        # Check if exists and get last_csv_date
         cursor.execute(
-            "SELECT id FROM companies WHERE domain = ?", (company["domain"],)
+            "SELECT id, last_csv_date FROM companies WHERE domain = ?",
+            (company["domain"],),
         )
         row = cursor.fetchone()
 
-        now = datetime.now().isoformat()
-
         if row:
-            # Update existing
+            # Existing company - check if resurfacing (last seen on different day)
+            last_csv_date = row["last_csv_date"]
+            is_resurfacing = last_csv_date != today if last_csv_date else True
+
+            # Update existing company with new CSV date and run_id
             cursor.execute(
                 """
                 UPDATE companies SET
                     name = ?, website = ?, industry = ?, keywords = ?,
-                    employee_count = ?, updated_at = ?
+                    employee_count = ?, last_csv_date = ?, current_run_id = ?,
+                    updated_at = ?
                 WHERE id = ?
                 """,
                 (
@@ -166,18 +205,23 @@ class Database:
                     company.get("industry"),
                     company.get("keywords"),
                     company.get("employee_count"),
+                    today,
+                    run_id,
                     now,
                     row["id"],
                 ),
             )
             self.conn.commit()
-            return row["id"]
+            return row["id"], is_resurfacing
         else:
-            # Insert new
+            # Insert new company with first_seen_date and last_csv_date
             cursor.execute(
                 """
-                INSERT INTO companies (name, domain, website, industry, keywords, employee_count)
-                VALUES (?, ?, ?, ?, ?, ?)
+                INSERT INTO companies (
+                    name, domain, website, industry, keywords, employee_count,
+                    first_seen_date, last_csv_date, current_run_id
+                )
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
                 """,
                 (
                     company["name"],
@@ -186,10 +230,13 @@ class Database:
                     company.get("industry"),
                     company.get("keywords"),
                     company.get("employee_count"),
+                    today,  # first_seen_date
+                    today,  # last_csv_date
+                    run_id,
                 ),
             )
             self.conn.commit()
-            return cursor.lastrowid
+            return cursor.lastrowid, True  # New company = always process
 
     def update_company_ats(
         self, company_id: int, ats_provider: str, board_token: Optional[str]
@@ -277,6 +324,32 @@ class Database:
             """,
             (limit,),
         )
+        return [dict(row) for row in cursor.fetchall()]
+
+    def get_companies_sorted_by_recency(self, limit: int = None) -> List[Dict]:
+        """
+        Get companies sorted by most recent job posting date.
+
+        Sorting:
+        1. Most recent job posting date (primary, descending)
+        2. Number of active marketing roles (tiebreaker, descending)
+
+        Returns companies with their most recent posting date and job count.
+        Only includes companies with at least one active job.
+        """
+        cursor = self.conn.cursor()
+        query = """
+            SELECT c.*,
+                   MAX(j.posting_date) as most_recent_posting,
+                   COUNT(j.id) as active_job_count
+            FROM companies c
+            INNER JOIN jobs j ON j.company_id = c.id AND j.is_active = 1
+            GROUP BY c.id
+            ORDER BY most_recent_posting DESC, active_job_count DESC
+        """
+        if limit:
+            query += f" LIMIT {limit}"
+        cursor.execute(query)
         return [dict(row) for row in cursor.fetchall()]
 
     def get_jobs_for_company_by_id(self, company_id: int) -> List[Dict]:
@@ -367,6 +440,44 @@ class Database:
             "UPDATE jobs SET last_seen_at = ? WHERE id = ?", (now, job_id)
         )
         self.conn.commit()
+
+    # Job verification
+
+    def update_job_verification(self, job_id: int, status: str):
+        """Update job verification status ('verified', 'stale', or 'unverified')."""
+        self.conn.execute(
+            "UPDATE jobs SET verification_status = ? WHERE id = ?",
+            (status, job_id),
+        )
+        self.conn.commit()
+
+    def get_jobs_for_verification(self, company_id: int = None) -> List[Dict]:
+        """
+        Get jobs needing verification (status is 'unverified' and is_active=1).
+
+        Args:
+            company_id: Optional - filter to specific company. If None, get all.
+
+        Returns:
+            List of dicts with id and job_url for verification.
+        """
+        cursor = self.conn.cursor()
+        if company_id:
+            cursor.execute(
+                """
+                SELECT id, job_url FROM jobs
+                WHERE company_id = ? AND is_active = 1 AND verification_status = 'unverified'
+                """,
+                (company_id,),
+            )
+        else:
+            cursor.execute(
+                """
+                SELECT id, job_url FROM jobs
+                WHERE is_active = 1 AND verification_status = 'unverified'
+                """
+            )
+        return [{"id": row[0], "job_url": row[1]} for row in cursor.fetchall()]
 
     # Change tracking
 
@@ -486,7 +597,7 @@ class Database:
     # Export
 
     def export_to_csv(self, output_path: str, only_relevant: bool = True):
-        """Export jobs to CSV."""
+        """Export jobs to CSV, sorted by most recent posting date."""
         cursor = self.conn.cursor()
 
         query = """
@@ -494,6 +605,8 @@ class Database:
                 c.name as company_name,
                 c.domain as company_domain,
                 c.ats_provider,
+                c.first_seen_date,
+                c.last_csv_date,
                 j.title as job_title,
                 j.category as job_category,
                 j.department,
@@ -503,7 +616,7 @@ class Database:
                 j.posting_date,
                 j.discovered_at,
                 j.relevance_score,
-                j.is_active,
+                j.verification_status,
                 dm.person_name as decision_maker_name,
                 dm.title as decision_maker_title,
                 dm.source_url as decision_maker_source,
@@ -514,12 +627,14 @@ class Database:
             JOIN companies c ON j.company_id = c.id
             LEFT JOIN decision_makers dm ON dm.company_id = c.id
             WHERE j.is_active = 1
+            AND (j.verification_status IS NULL OR j.verification_status != 'stale')
         """
 
         if only_relevant:
             query += " AND j.relevance_score >= 60"
 
-        query += " ORDER BY j.relevance_score DESC, c.name"
+        # Sort by most recent posting date (recency-first), then by company name
+        query += " ORDER BY j.posting_date DESC, c.name"
 
         cursor.execute(query)
         rows = cursor.fetchall()
@@ -530,7 +645,7 @@ class Database:
             writer.writerows(rows)
 
     def export_to_json(self, output_path: str, only_relevant: bool = True):
-        """Export jobs to JSON."""
+        """Export jobs to JSON, sorted by most recent posting date."""
         cursor = self.conn.cursor()
 
         query = """
@@ -538,6 +653,8 @@ class Database:
                 c.name as company_name,
                 c.domain as company_domain,
                 c.ats_provider,
+                c.first_seen_date,
+                c.last_csv_date,
                 j.title as job_title,
                 j.category as job_category,
                 j.department,
@@ -547,7 +664,7 @@ class Database:
                 j.posting_date,
                 j.discovered_at,
                 j.relevance_score,
-                j.is_active,
+                j.verification_status,
                 dm.person_name as decision_maker_name,
                 dm.title as decision_maker_title,
                 dm.source_url as decision_maker_source,
@@ -558,12 +675,14 @@ class Database:
             JOIN companies c ON j.company_id = c.id
             LEFT JOIN decision_makers dm ON dm.company_id = c.id
             WHERE j.is_active = 1
+            AND (j.verification_status IS NULL OR j.verification_status != 'stale')
         """
 
         if only_relevant:
             query += " AND j.relevance_score >= 60"
 
-        query += " ORDER BY j.relevance_score DESC, c.name"
+        # Sort by most recent posting date (recency-first), then by company name
+        query += " ORDER BY j.posting_date DESC, c.name"
 
         cursor.execute(query)
         rows = cursor.fetchall()
@@ -571,8 +690,10 @@ class Database:
         jobs = []
         for row in rows:
             job = dict(row)
-            job["is_new"] = False  # Would need change tracking
-            job["is_removed"] = False
+            # Determine if company is new (first seen today = last csv date)
+            first_seen = job.get("first_seen_date")
+            last_csv = job.get("last_csv_date")
+            job["is_new_company"] = first_seen == last_csv if first_seen and last_csv else False
             jobs.append(job)
 
         with open(output_path, "w", encoding="utf-8") as f:

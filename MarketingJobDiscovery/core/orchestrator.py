@@ -83,6 +83,9 @@ class JobDiscoveryOrchestrator:
         """Execute the full job discovery pipeline."""
         start_time = datetime.now()
 
+        # Generate unique run_id for this daily run
+        self.run_id = datetime.now().strftime("%Y%m%d_%H%M%S")
+
         # Load companies from CSV
         companies = self._load_companies_from_csv()
         logger.info(f"Loaded {len(companies)} companies from Apollo CSV")
@@ -140,17 +143,41 @@ class JobDiscoveryOrchestrator:
                     )
 
         # Decision Maker Lookup (after all companies processed)
+        # Only enrich top 10 companies by recency that don't have existing DMs
         if self.config.enable_decision_maker_lookup and self.config.gemini_api_key:
-            successful_with_jobs = [
-                r
-                for r in results
-                if r.get("status") == "success" and r.get("jobs_found", 0) > 0
+            # Get top 10 companies sorted by most recent posting date
+            top_companies = self.db.get_companies_sorted_by_recency(limit=10)
+            top_company_ids = {c["id"] for c in top_companies}
+
+            # Filter results to only companies in top 10
+            companies_in_top_10 = [
+                r for r in results
+                if r.get("company_id") in top_company_ids
+                and r.get("status") == "success"
+                and r.get("jobs_found", 0) > 0
             ]
 
-            if successful_with_jobs:
+            # Only enrich companies that don't already have a decision maker
+            companies_needing_enrichment = []
+            for r in companies_in_top_10:
+                existing_dm = self.db.get_decision_maker_for_company(r["company_id"])
+                if not existing_dm or not existing_dm.get("person_name"):
+                    companies_needing_enrichment.append(r)
+                else:
+                    # Attach existing DM to results for reporting
+                    r["decision_maker"] = {
+                        "person_name": existing_dm.get("person_name"),
+                        "title": existing_dm.get("title"),
+                        "source_url": existing_dm.get("source_url"),
+                        "confidence": existing_dm.get("confidence"),
+                        "email": existing_dm.get("email"),
+                        "linkedin_url": existing_dm.get("linkedin_url"),
+                    }
+
+            if companies_needing_enrichment:
                 print(
                     f"\n--- Looking up decision makers for "
-                    f"{len(successful_with_jobs)} companies ---"
+                    f"{len(companies_needing_enrichment)} new top-10 companies ---"
                 )
                 try:
                     finder = DecisionMakerFinder(
@@ -159,7 +186,7 @@ class JobDiscoveryOrchestrator:
                         batch_size=self.config.gemini_batch_size,
                     )
                     dm_results = await finder.find_decision_makers(
-                        successful_with_jobs
+                        companies_needing_enrichment
                     )
 
                     # Attach results to corresponding company result dicts
@@ -201,6 +228,8 @@ class JobDiscoveryOrchestrator:
                 except Exception as e:
                     logger.error(f"Decision maker lookup failed: {e}")
                     print(f"  Decision maker lookup failed: {e}")
+            else:
+                print("\n--- All top-10 companies already have decision makers ---")
 
         elif self.config.enable_decision_maker_lookup and not self.config.gemini_api_key:
             logger.warning(
@@ -209,18 +238,20 @@ class JobDiscoveryOrchestrator:
             )
 
         # Apollo Email Lookup (after decision makers are found)
+        # Only lookup emails for decision makers that don't already have one
         if self.config.enable_email_lookup and self.config.apollo_api_key:
-            # Collect decision makers that were found
+            # Collect decision makers that need email lookup (have name but no email)
             dm_results_for_email = [
                 r
                 for r in results
                 if r.get("decision_maker", {}).get("person_name")
+                and not r.get("decision_maker", {}).get("email")
             ]
 
             if dm_results_for_email:
                 print(
                     f"\n--- Looking up emails for "
-                    f"{len(dm_results_for_email)} decision makers ---"
+                    f"{len(dm_results_for_email)} decision makers without emails ---"
                 )
                 try:
                     from .models import DecisionMakerResult as DMR
@@ -351,35 +382,36 @@ class JobDiscoveryOrchestrator:
         """Process a single company through the pipeline."""
         logger.info(f"Processing: {company['name']} ({company['domain']})")
 
-        # Step 1: Ensure company exists in database
-        company_id = self.db.upsert_company(company)
+        # Step 1: Ensure company exists in database and check if new/resurfacing
+        company_id, is_new_or_resurfacing = self.db.upsert_company(
+            company, run_id=self.run_id
+        )
 
         # Step 2: Check robots.txt for domain
         primary_url = f"https://{company['domain']}/careers"
         if not await self.robots_checker.can_fetch(primary_url):
             logger.warning(f"Blocked by robots.txt: {company['domain']}")
-            return {"company": company["name"], "status": "blocked_robots"}
+            return {"company": company["name"], "company_id": company_id, "status": "blocked_robots"}
 
         # Step 3: Detect ATS using enhanced detector (API probing first)
+        # Only run ATS detection if company is new or resurfacing today
         ats_result = await self._detect_ats_for_company(client, company)
 
-        # Handle linkedin_only classification
-        if ats_result.provider == "linkedin_only":
-            logger.info(f"LinkedIn-only for {company['name']}")
-            # Store the LinkedIn info in database
-            if not self.dry_run:
+        # Handle linkedin_only or unknown ATS
+        if ats_result.provider == "linkedin_only" or not ats_result.provider or ats_result.provider == "unknown":
+            status_type = "linkedin_only" if ats_result.provider == "linkedin_only" else "unknown_ats"
+            logger.info(f"{status_type} for {company['name']}")
+
+            if not self.dry_run and ats_result.provider == "linkedin_only":
                 self.db.update_company_ats(
                     company_id, "linkedin_only", ats_result.board_token
                 )
             return {
                 "company": company["name"],
-                "status": "linkedin_only",
-                "linkedin_slug": ats_result.board_token,
+                "company_id": company_id,
+                "status": status_type,
+                "linkedin_slug": ats_result.board_token if ats_result.provider == "linkedin_only" else None,
             }
-
-        if not ats_result.provider or ats_result.provider == "unknown":
-            logger.info(f"Unknown ATS for {company['name']}")
-            return {"company": company["name"], "status": "unknown_ats"}
 
         # Step 5: Fetch jobs from ATS
         ats_client_class = self.ATS_CLIENTS.get(ats_result.provider)

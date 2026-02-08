@@ -156,7 +156,7 @@ def cmd_upload(args):
     db = Database(config.db_path)
 
     try:
-        # Get companies with decision makers
+        # Get companies with decision makers, sorted by most recent posting date
         cursor = db.conn.cursor()
         cursor.execute(
             """
@@ -170,11 +170,14 @@ def cmd_upload(args):
                 dm.email,
                 dm.linkedin_url,
                 dm.source_url,
-                dm.confidence
+                dm.confidence,
+                c.first_seen_date,
+                c.last_csv_date,
+                (SELECT MAX(j.posting_date) FROM jobs j WHERE j.company_id = c.id AND j.is_active = 1) as most_recent_posting
             FROM companies c
             JOIN decision_makers dm ON dm.company_id = c.id
             WHERE dm.person_name IS NOT NULL
-            ORDER BY c.urgency_score DESC
+            ORDER BY most_recent_posting DESC, c.urgency_score DESC
             """
         )
         companies = cursor.fetchall()
@@ -201,17 +204,23 @@ def cmd_upload(args):
             else:
                 category = "large"
 
-            # Get ALL active jobs for this company, sorted by posting date (newest first)
+            # Get ALL active jobs for this company, excluding stale jobs
             cursor.execute(
                 """
-                SELECT title, job_url, posting_date
+                SELECT title, job_url, posting_date, verification_status
                 FROM jobs
                 WHERE company_id = ? AND is_active = 1
+                AND (verification_status IS NULL OR verification_status != 'stale')
                 ORDER BY posting_date DESC, relevance_score DESC
                 """,
                 (row[0],),
             )
             jobs = cursor.fetchall()
+
+            # Determine if this is a new company (first seen today)
+            first_seen_date = row[10] if len(row) > 10 else None
+            last_csv_date = row[11] if len(row) > 11 else None
+            is_new_company = first_seen_date == last_csv_date if first_seen_date and last_csv_date else False
 
             # Find the most recent posting date for this company
             most_recent_date = ""
@@ -240,6 +249,9 @@ def cmd_upload(args):
                         "linkedinUrl": row[7] or "",
                         "sourceUrl": row[8] or "",
                         "confidence": row[9] or "",
+                        "isNewCompany": is_new_company,
+                        "firstSeenDate": first_seen_date or "",
+                        "verificationStatus": job[3] if len(job) > 3 and job[3] else "unverified",
                     }
                     leads.append(lead)
             else:
@@ -261,6 +273,9 @@ def cmd_upload(args):
                     "linkedinUrl": row[7] or "",
                     "sourceUrl": row[8] or "",
                     "confidence": row[9] or "",
+                    "isNewCompany": is_new_company,
+                    "firstSeenDate": first_seen_date or "",
+                    "verificationStatus": "unverified",
                 }
                 leads.append(lead)
 
