@@ -1979,3 +1979,17 @@ body {
 .lead-gen-roles-header:hover .lead-gen-roles-chevron {
   background: rgba(255, 255, 255, 0.15);
 }
+
+.lead-gen-see-more {
+  background: none;
+  border: none;
+  color: #60a5fa;
+  cursor: pointer;
+  font-size: 0.85rem;
+  padding: 6px 0;
+  margin-top: 4px;
+}
+
+.lead-gen-see-more:hover {
+  color: #93bbfc;
+}

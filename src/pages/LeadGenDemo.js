@@ -94,7 +94,7 @@ function LeadGenDemo() {
       if (leadDate && leadDate > grouped[companyName].mostRecentPostingDate) {
         grouped[companyName].mostRecentPostingDate = leadDate;
       }
-      if (lead.jobRole) {
+      if (lead.jobRole && !grouped[companyName].roles.some(r => r.title === lead.jobRole)) {
         grouped[companyName].roles.push({
           title: lead.jobRole,
           jobLink: lead.jobLink,
@@ -147,12 +147,6 @@ function LeadGenDemo() {
     } catch {
       return dateStr;
     }
-  };
-
-  const getConfidenceColor = (confidence) => {
-    if (confidence === 'High') return '#4ade80';
-    if (confidence === 'Medium') return '#fbbf24';
-    return '#94a3b8';
   };
 
   const getDaysAgo = (dateStr) => {
@@ -281,7 +275,7 @@ function LeadGenDemo() {
                             )}
                             {daysAgo !== null && (
                               <span className="lead-gen-posted-badge">
-                                Role Posted {daysAgo} {daysAgo === 1 ? 'Day' : 'Days'} Ago
+                                {daysAgo === 0 ? 'Role Posted Today' : `Role Posted ${daysAgo} ${daysAgo === 1 ? 'Day' : 'Days'} Ago`}
                                 {daysAgo <= 1 && <span className="lead-gen-fire-emoji"> 🔥</span>}
                               </span>
                             )}
@@ -292,36 +286,47 @@ function LeadGenDemo() {
                           </div>
                         </div>
 
-                        {/* Roles Section - Collapsible */}
+                        {/* Roles Section - First 3 visible, rest behind "See more" */}
                         {company.roles.length > 0 && (
                           <div className="lead-gen-roles-section">
-                            <div
-                              className="lead-gen-roles-header"
-                              onClick={() => toggleCompanyExpanded(company.companyName)}
-                            >
-                              <h4 className="lead-gen-section-title">
-                                Open Positions ({company.roles.length})
-                              </h4>
-                              <span className={`lead-gen-roles-chevron ${isExpanded ? 'expanded' : ''}`}>
-                                ▼
-                              </span>
+                            <h4 className="lead-gen-section-title">
+                              Open Positions ({company.roles.length})
+                            </h4>
+                            <div className="lead-gen-roles-list">
+                              {company.roles.slice(0, 3).map((role, roleIndex) => (
+                                <div key={roleIndex} className="lead-gen-role-item">
+                                  <span className="lead-gen-role-title">{role.title}</span>
+                                  {role.postingDate && formatDate(role.postingDate) && (
+                                    <span className="lead-gen-role-date">{formatDate(role.postingDate)}</span>
+                                  )}
+                                  {role.jobLink && (
+                                    <a href={role.jobLink} target="_blank" rel="noopener noreferrer" className="lead-gen-role-link">
+                                      View →
+                                    </a>
+                                  )}
+                                </div>
+                              ))}
+                              {isExpanded && company.roles.slice(3).map((role, roleIndex) => (
+                                <div key={roleIndex + 3} className="lead-gen-role-item">
+                                  <span className="lead-gen-role-title">{role.title}</span>
+                                  {role.postingDate && formatDate(role.postingDate) && (
+                                    <span className="lead-gen-role-date">{formatDate(role.postingDate)}</span>
+                                  )}
+                                  {role.jobLink && (
+                                    <a href={role.jobLink} target="_blank" rel="noopener noreferrer" className="lead-gen-role-link">
+                                      View →
+                                    </a>
+                                  )}
+                                </div>
+                              ))}
                             </div>
-                            {isExpanded && (
-                              <div className="lead-gen-roles-list">
-                                {company.roles.map((role, roleIndex) => (
-                                  <div key={roleIndex} className="lead-gen-role-item">
-                                    <span className="lead-gen-role-title">{role.title}</span>
-                                    {role.postingDate && formatDate(role.postingDate) && (
-                                      <span className="lead-gen-role-date">{formatDate(role.postingDate)}</span>
-                                    )}
-                                    {role.jobLink && (
-                                      <a href={role.jobLink} target="_blank" rel="noopener noreferrer" className="lead-gen-role-link">
-                                        View →
-                                      </a>
-                                    )}
-                                  </div>
-                                ))}
-                              </div>
+                            {company.roles.length > 3 && (
+                              <button
+                                className="lead-gen-see-more"
+                                onClick={() => toggleCompanyExpanded(company.companyName)}
+                              >
+                                {isExpanded ? 'Show less' : `See ${company.roles.length - 3} more role${company.roles.length - 3 === 1 ? '' : 's'}`}
+                              </button>
                             )}
                           </div>
                         )}
@@ -351,14 +356,6 @@ function LeadGenDemo() {
                                   )}
                                 </div>
                               </div>
-                              {company.decisionMaker.confidence && (
-                                <div
-                                  className="lead-gen-dm-confidence"
-                                  style={{ color: getConfidenceColor(company.decisionMaker.confidence) }}
-                                >
-                                  {company.decisionMaker.confidence}
-                                </div>
-                              )}
                             </div>
                           </div>
                         )}
