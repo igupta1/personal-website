@@ -356,7 +356,10 @@ class Database:
             FROM companies c
             INNER JOIN jobs j ON j.company_id = c.id AND j.is_active = 1
             GROUP BY c.id
-            ORDER BY most_recent_posting DESC, active_job_count DESC
+            ORDER BY
+                CASE WHEN COALESCE(c.employee_count, 0) > 250 THEN 1 ELSE 0 END ASC,
+                most_recent_posting DESC,
+                active_job_count DESC
         """
         if limit:
             query += f" LIMIT {limit}"

@@ -103,7 +103,7 @@ class ListDiscoveryOrchestrator:
 
         # Decision Maker Lookup
         if self.config.enable_decision_maker_lookup and self.config.gemini_api_key:
-            top_companies = self.db.get_companies_sorted_by_recency(limit=10)
+            top_companies = self.db.get_companies_sorted_by_recency(limit=30)
             top_company_ids = {c["id"] for c in top_companies}
 
             companies_in_top = [
