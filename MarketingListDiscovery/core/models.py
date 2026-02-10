@@ -143,6 +143,7 @@ class DecisionMakerResult:
     title: Optional[str] = None
     source_url: Optional[str] = None
     confidence: Optional[str] = None  # "High", "Medium", or None
+    employee_count: Optional[int] = None  # Approximate company size from Gemini
     not_found_reason: Optional[str] = None  # Populated when lookup failed
     raw_text: Optional[str] = None  # Raw Gemini output for debugging
 

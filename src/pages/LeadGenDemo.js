@@ -1,12 +1,6 @@
 //LeadGenDemo.js
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import pfpImage from '../assets/headshot.jpg';
-
-// Company logos
-import googlelogo from '../assets/googlelogo.jpg';
-import amazonlogo from '../assets/amazonlogo.webp';
-import ciscologo from '../assets/ciscologo.png';
 
 const parseLocalDate = (dateStr) => {
   const [year, month, day] = dateStr.split('-').map(Number);
@@ -18,12 +12,6 @@ function LeadGenDemo() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [expandedCompanies, setExpandedCompanies] = useState({});
-
-  const experiences = [
-    { title: "Software Engineer", company: "Google", description: "Built Generative AI Features for Gmail and Google Chat", logo: googlelogo },
-    { title: "Software Engineer", company: "Amazon", description: "Developed AI Infrastructure for Amazon.com", logo: amazonlogo },
-    { title: "Software Engineer", company: "Cisco", description: "Implemented Distributed System Architecture for Networking Solutions", logo: ciscologo }
-  ];
 
   const fetchLeads = async () => {
     const location = "marketing-discovery";
@@ -76,6 +64,7 @@ function LeadGenDemo() {
         grouped[companyName] = {
           companyName,
           website: lead.website,
+          category: lead.category || '',
           mostRecentPostingDate: lead.mostRecentPostingDate || lead.postingDate || '',
           decisionMaker: {
             firstName: lead.firstName,
@@ -103,8 +92,12 @@ function LeadGenDemo() {
       }
     });
 
-    // Convert to array and sort by most recent posting date (newest first)
+    // Convert to array and sort: large companies (>250 employees) go to bottom,
+    // then by most recent posting date (newest first)
     const result = Object.values(grouped).sort((a, b) => {
+      const aLarge = a.category === 'large' ? 1 : 0;
+      const bLarge = b.category === 'large' ? 1 : 0;
+      if (aLarge !== bLarge) return aLarge - bLarge;
       const aDate = a.mostRecentPostingDate ? parseLocalDate(a.mostRecentPostingDate) : new Date(0);
       const bDate = b.mostRecentPostingDate ? parseLocalDate(b.mostRecentPostingDate) : new Date(0);
       return bDate - aDate;
@@ -175,41 +168,29 @@ function LeadGenDemo() {
 
   return (
     <div className="about-page-combined">
-      <div className="about-container">
-        <div className="about-left-column">
-          <section id="home" className="profile-section">
-            <div className="profile-header">
-              <img src={pfpImage} alt="Ishaan Gupta" className="profile-image" />
-              <div className="profile-info">
-                <h1>Ishaan Gupta</h1>
-                <p>Software Engineer - Problem Solver - Builder<br /><br />I focus on turning complex problems into clear, practical solutions — from large-scale systems at Gmail and Amazon.com to tools for everyday users.</p>
-              </div>
-            </div>
-          </section>
-
-          <section id="about" className="work-experience-section">
-            <h2>Work Experience</h2>
-            <div className="experience-list">
-              {experiences.map((exp, index) => (
-                <div key={index} className="experience-card">
-                  <div className="experience-logo"><img src={exp.logo} alt={exp.company + ' logo'} /></div>
-                  <div className="experience-details">
-                    <h3>{exp.title}</h3>
-                    <h4 className="company-name">{exp.company}</h4>
-                    {exp.description && <p className="description">{exp.description}</p>}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </section>
-        </div>
-
+      <div className="about-container" style={{ gridTemplateColumns: '1fr' }}>
         <div className="about-right-column">
           <section className="demo-section">
-            <div className="demo-section-header">
-              <Link to="/ai-tools" className="back-link-inline">Back to AI Tools</Link>
-              <h2>Marketing Lead Discovery</h2>
-              <p className="demo-script-link">AI-powered ATS detection & decision maker identification</p>
+            <div className="demo-top-row">
+              <div className="demo-section-header">
+                <Link to="/ai-tools" className="back-link-inline">Back to AI Tools</Link>
+                <h2>Marketing Lead Discovery</h2>
+                <p className="demo-script-link">AI-powered ATS detection & decision maker identification</p>
+              </div>
+
+              <div className="demo-how-it-works">
+                <h3>How It Works</h3>
+                <div className="demo-steps-grid">
+                  <div className="demo-step">
+                    <span className="demo-step-num">1</span>
+                    <span className="demo-step-text">Detect ATS & Find Marketing Jobs</span>
+                  </div>
+                  <div className="demo-step">
+                    <span className="demo-step-num">2</span>
+                    <span className="demo-step-text">Identify Decision Makers via AI</span>
+                  </div>
+                </div>
+              </div>
             </div>
 
             {error && (
@@ -219,25 +200,6 @@ function LeadGenDemo() {
                 <button onClick={() => setError(null)} className="demo-error-close">x</button>
               </div>
             )}
-
-            {/* How It Works */}
-            <div className="demo-how-it-works">
-              <h3>How It Works</h3>
-              <div className="demo-steps-grid">
-                <div className="demo-step">
-                  <span className="demo-step-num">1</span>
-                  <span className="demo-step-text">Detect ATS & Find Marketing Jobs</span>
-                </div>
-                <div className="demo-step">
-                  <span className="demo-step-num">2</span>
-                  <span className="demo-step-text">Identify Decision Makers via AI</span>
-                </div>
-                <div className="demo-step">
-                  <span className="demo-step-num">3</span>
-                  <span className="demo-step-text">Enrich with Verified Emails</span>
-                </div>
-              </div>
-            </div>
 
             {loading ? (
               <div className="demo-loading">

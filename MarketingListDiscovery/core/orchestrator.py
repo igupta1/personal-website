@@ -172,6 +172,12 @@ class ListDiscoveryOrchestrator:
                                     source_url=dm.source_url,
                                     confidence=dm.confidence,
                                 )
+                                if dm.employee_count:
+                                    self.db.conn.execute(
+                                        "UPDATE companies SET employee_count = ? WHERE id = ?",
+                                        (dm.employee_count, company_result["company_id"]),
+                                    )
+                                    self.db.conn.commit()
 
                 except Exception as e:
                     logger.error(f"Decision maker lookup failed: {e}")

@@ -25,10 +25,9 @@ class DecisionMakerFinder:
         'You have access to Google Search grounding. Your task is to identify '
         'the single most appropriate current decision maker responsible for '
         'marketing, growth, or go-to-market at each of the companies listed '
-        'below. All companies have fewer than 200 employees. Each company is '
-        'listed with its website domain — use this domain to disambiguate '
-        'companies with generic names and to anchor your searches to the '
-        'correct organization.\n\n'
+        'below. Each company is listed with its website domain — use this '
+        'domain to disambiguate companies with generic names and to anchor '
+        'your searches to the correct organization.\n\n'
         'For each company, return exactly one person, chosen using this '
         'strict priority order:\n'
         '1. STRONGLY PREFER a dedicated marketing or growth leader: CMO, '
@@ -52,15 +51,18 @@ class DecisionMakerFinder:
         'senior marketing owner at the company. Exclude recruiters, HR, '
         'engineers, designers, consultants, agencies, and former employees.\n\n'
         'For each company, output the company name, the decision maker\'s full '
-        'name, exact current title, a source URL proving the role, and a '
+        'name, exact current title, a source URL proving the role, a '
         'confidence level (High if the LinkedIn title clearly matches and is '
-        'current, Medium if there is one strong but slightly ambiguous source). '
+        'current, Medium if there is one strong but slightly ambiguous source), '
+        'and the approximate employee count for the company (use LinkedIn or '
+        'other public sources; return as an integer, e.g. 50, 150, 500). '
         'Prefer accuracy over completeness, and use hiring context only to '
         'infer which function owns growth, never to guess identities.\n\n'
         'IMPORTANT: Return your results as a JSON array. Each element must be '
         'an object with these exact keys: "company_name", "person_name", '
-        '"title", "source_url", "confidence". If not identifiable, set '
-        'person_name to "Not confidently identifiable" and add a "reason" key.\n\n'
+        '"title", "source_url", "confidence", "employee_count". If not '
+        'identifiable, set person_name to "Not confidently identifiable" and '
+        'add a "reason" key.\n\n'
         'Companies:\n{company_list}'
     )
 
@@ -196,12 +198,19 @@ class DecisionMakerFinder:
                         raw_text=str(entry),
                     )
                 else:
+                    emp_count = entry.get("employee_count")
+                    if emp_count is not None:
+                        try:
+                            emp_count = int(emp_count)
+                        except (ValueError, TypeError):
+                            emp_count = None
                     results_by_company[matched] = DecisionMakerResult(
                         company_name=matched,
                         person_name=person or None,
                         title=entry.get("title"),
                         source_url=entry.get("source_url"),
                         confidence=entry.get("confidence"),
+                        employee_count=emp_count,
                         raw_text=str(entry),
                     )
         else:
