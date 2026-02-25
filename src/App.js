@@ -5,7 +5,6 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import About from "./pages/About";
 import AITools from "./pages/AITools";
-import ColdEmailDemo from "./pages/ColdEmailDemo";
 import LeadGenDemo from "./pages/LeadGenDemo";
 import "./App.css";  // Use the existing App.css
 
@@ -18,8 +17,7 @@ function App() {
           <Routes>
             <Route path="/" element={<About />} />
             <Route path="/ai-tools" element={<AITools />} />
-            <Route path="/ai-tools/cold-email-deep-personalization" element={<ColdEmailDemo />} />
-            <Route path="/ai-tools/lead-gen" element={<LeadGenDemo />} />
+<Route path="/ai-tools/lead-gen" element={<LeadGenDemo />} />
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </main>

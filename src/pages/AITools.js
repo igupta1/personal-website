@@ -13,7 +13,6 @@ import linkmailLogo from '../assets/linkmail-logo.png';
 
 // Icons
 import { HiOutlineUserGroup } from "react-icons/hi";
-import { HiOutlineMail } from "react-icons/hi";
 import { HiOutlineSparkles } from "react-icons/hi";
 
 function AITools() {
@@ -48,14 +47,6 @@ function AITools() {
       icon: <HiOutlineUserGroup size={34} color="#f5f5f5" />,
       isReactIcon: true,
       link: "/ai-tools/lead-gen",
-    },
-    {
-      id: 2,
-      title: "Cold Email Deep Personalization",
-      description: "Mass Email Leads While Using AI to Personalize Each Email",
-      icon: <HiOutlineMail size={34} color="#f5f5f5" />,
-      isReactIcon: true,
-      link: "/ai-tools/cold-email-deep-personalization",
     },
     {
       id: 3,
