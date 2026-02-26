@@ -7,11 +7,29 @@ const parseLocalDate = (dateStr) => {
   return new Date(year, month - 1, day);
 };
 
+const INDUSTRY_OPTIONS = [
+  "Home Services", "Healthcare", "Legal", "Financial Services",
+  "Food & Beverage", "Real Estate", "Automotive", "SaaS / Technology",
+  "Education", "Fitness & Wellness", "Nonprofits", "Professional Services",
+  "Retail / E-commerce", "Other"
+];
+
+const SIZE_RANGES = [
+  { label: "1-10", min: 1, max: 10 },
+  { label: "11-25", min: 11, max: 25 },
+  { label: "26-50", min: 26, max: 50 },
+  { label: "51-100", min: 51, max: 100 },
+  { label: "101-250", min: 101, max: 250 },
+];
+
 function LeadGenDemo() {
   const [companies, setCompanies] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [expandedCompanies, setExpandedCompanies] = useState({});
+  const [selectedIndustries, setSelectedIndustries] = useState([]);
+  const [selectedSizeRanges, setSelectedSizeRanges] = useState([]);
+  const [filtersExpanded, setFiltersExpanded] = useState(false);
 
   const fetchLeads = async () => {
     const location = "marketing-discovery";
@@ -34,8 +52,6 @@ function LeadGenDemo() {
       return data;
     } catch (error) {
       console.log('Using demo data (API not available locally)');
-      // Demo data matching the run output format
-      // Use dynamic dates relative to today for demo
       const today = new Date();
       const formatDate = (daysAgo) => {
         const d = new Date(today);
@@ -45,11 +61,11 @@ function LeadGenDemo() {
       return {
         success: true,
         leads: [
-          { companyName: "Inspira Education", firstName: "Xavier", lastName: "Portillo", title: "Co-Founder Senior Advisor", jobRole: "Copy Editor", confidence: "Medium", website: "https://inspiraeducation.com", postingDate: formatDate(23), mostRecentPostingDate: formatDate(1) },
-          { companyName: "Inspira Education", firstName: "Xavier", lastName: "Portillo", title: "Co-Founder Senior Advisor", jobRole: "Growth Marketing Manager", confidence: "Medium", website: "https://inspiraeducation.com", postingDate: formatDate(1), mostRecentPostingDate: formatDate(1) },
-          { companyName: "Emergent", firstName: "Mukund", lastName: "Jha", title: "CEO", jobRole: "Head of Growth", confidence: "High", website: "https://emergent.com", postingDate: formatDate(8), mostRecentPostingDate: formatDate(8) },
-          { companyName: "Emergent", firstName: "Mukund", lastName: "Jha", title: "CEO", jobRole: "Growth Manager", confidence: "High", website: "https://emergent.com", postingDate: formatDate(8), mostRecentPostingDate: formatDate(8) },
-          { companyName: "Feastables", firstName: "Ryan", lastName: "Brisco", title: "Vice President Of Marketing", jobRole: "Shopper Marketing Manager", confidence: "High", website: "https://feastables.com", postingDate: formatDate(9), mostRecentPostingDate: formatDate(9) },
+          { companyName: "Inspira Education", firstName: "Xavier", lastName: "Portillo", title: "Co-Founder Senior Advisor", jobRole: "Copy Editor", confidence: "Medium", website: "https://inspiraeducation.com", postingDate: formatDate(23), mostRecentPostingDate: formatDate(1), industry: "Education", employeeCount: 45 },
+          { companyName: "Inspira Education", firstName: "Xavier", lastName: "Portillo", title: "Co-Founder Senior Advisor", jobRole: "Growth Marketing Manager", confidence: "Medium", website: "https://inspiraeducation.com", postingDate: formatDate(1), mostRecentPostingDate: formatDate(1), industry: "Education", employeeCount: 45 },
+          { companyName: "Emergent", firstName: "Mukund", lastName: "Jha", title: "CEO", jobRole: "Head of Growth", confidence: "High", website: "https://emergent.com", postingDate: formatDate(8), mostRecentPostingDate: formatDate(8), industry: "SaaS / Technology", employeeCount: 120 },
+          { companyName: "Emergent", firstName: "Mukund", lastName: "Jha", title: "CEO", jobRole: "Growth Manager", confidence: "High", website: "https://emergent.com", postingDate: formatDate(8), mostRecentPostingDate: formatDate(8), industry: "SaaS / Technology", employeeCount: 120 },
+          { companyName: "Feastables", firstName: "Ryan", lastName: "Brisco", title: "Vice President Of Marketing", jobRole: "Shopper Marketing Manager", confidence: "High", website: "https://feastables.com", postingDate: formatDate(9), mostRecentPostingDate: formatDate(9), industry: "Food & Beverage", employeeCount: 80 },
         ]
       };
     }
@@ -65,6 +81,8 @@ function LeadGenDemo() {
           companyName,
           website: lead.website,
           category: lead.category || '',
+          industry: lead.industry || '',
+          employeeCount: lead.employeeCount || 0,
           mostRecentPostingDate: lead.mostRecentPostingDate || lead.postingDate || '',
           decisionMaker: {
             firstName: lead.firstName,
@@ -92,25 +110,39 @@ function LeadGenDemo() {
       }
     });
 
-    // Convert to array and sort: large companies (>250 employees) go to bottom,
-    // then by most recent posting date (newest first)
+    // Sort by most recent posting date (newest first)
     const result = Object.values(grouped).sort((a, b) => {
-      const aLarge = a.category === 'large' ? 1 : 0;
-      const bLarge = b.category === 'large' ? 1 : 0;
-      if (aLarge !== bLarge) return aLarge - bLarge;
       const aDate = a.mostRecentPostingDate ? parseLocalDate(a.mostRecentPostingDate) : new Date(0);
       const bDate = b.mostRecentPostingDate ? parseLocalDate(b.mostRecentPostingDate) : new Date(0);
       return bDate - aDate;
     });
 
-    // Filter out companies where the most recent role was posted more than 9 days ago
+    // Filter out companies where the most recent role was posted more than 7 days ago
     const now = new Date();
     const filtered = result.filter(company => {
       if (!company.mostRecentPostingDate) return false;
       const postDate = parseLocalDate(company.mostRecentPostingDate);
       const diffDays = Math.floor((now - postDate) / (1000 * 60 * 60 * 24));
-      return diffDays <= 9;
+      return diffDays <= 7;
     });
+
+    return filtered;
+  };
+
+  const getFilteredCompanies = () => {
+    let filtered = companies;
+
+    if (selectedIndustries.length > 0) {
+      filtered = filtered.filter(c => selectedIndustries.includes(c.industry));
+    }
+
+    if (selectedSizeRanges.length > 0) {
+      filtered = filtered.filter(c => {
+        const count = c.employeeCount;
+        if (!count || count === 0) return false;
+        return selectedSizeRanges.some(range => count >= range.min && count <= range.max);
+      });
+    }
 
     return filtered;
   };
@@ -166,6 +198,9 @@ function LeadGenDemo() {
     }));
   };
 
+  const filteredCompanies = getFilteredCompanies();
+  const activeFilterCount = selectedIndustries.length + selectedSizeRanges.length;
+
   return (
     <div className="about-page-combined">
       <div className="about-container" style={{ gridTemplateColumns: '1fr' }}>
@@ -211,16 +246,95 @@ function LeadGenDemo() {
                 <div className="demo-results-header">
                   <div className="demo-results-stats">
                     <span className="demo-stat">
-                      <strong>{companies.length}</strong> Companies
+                      <strong>{filteredCompanies.length}</strong> Companies
+                      {filteredCompanies.length !== companies.length && (
+                        <span className="lead-gen-filter-note"> (of {companies.length})</span>
+                      )}
                     </span>
                     <span className="demo-stat">
-                      <strong>{companies.reduce((sum, c) => sum + c.roles.length, 0)}</strong> Open Roles
+                      <strong>{filteredCompanies.reduce((sum, c) => sum + c.roles.length, 0)}</strong> Open Roles
                     </span>
                   </div>
                 </div>
 
+                {/* Filter Panel */}
+                <div className="lead-gen-filter-panel">
+                  <button
+                    className="lead-gen-filter-toggle"
+                    onClick={() => setFiltersExpanded(!filtersExpanded)}
+                  >
+                    Filters
+                    {activeFilterCount > 0 && (
+                      <span className="lead-gen-filter-count">{activeFilterCount}</span>
+                    )}
+                    <span className={`lead-gen-filter-chevron ${filtersExpanded ? 'expanded' : ''}`}>
+                      &#9660;
+                    </span>
+                  </button>
+
+                  {filtersExpanded && (
+                    <div className="lead-gen-filter-content">
+                      <div className="lead-gen-filter-group">
+                        <h5 className="lead-gen-filter-group-title">Industry</h5>
+                        <div className="lead-gen-filter-options">
+                          {INDUSTRY_OPTIONS.map(industry => (
+                            <label key={industry} className="lead-gen-filter-checkbox">
+                              <input
+                                type="checkbox"
+                                checked={selectedIndustries.includes(industry)}
+                                onChange={() => {
+                                  setSelectedIndustries(prev =>
+                                    prev.includes(industry)
+                                      ? prev.filter(i => i !== industry)
+                                      : [...prev, industry]
+                                  );
+                                }}
+                              />
+                              <span>{industry}</span>
+                            </label>
+                          ))}
+                        </div>
+                      </div>
+
+                      <div className="lead-gen-filter-group">
+                        <h5 className="lead-gen-filter-group-title">Company Size</h5>
+                        <div className="lead-gen-filter-options">
+                          {SIZE_RANGES.map(range => (
+                            <label key={range.label} className="lead-gen-filter-checkbox">
+                              <input
+                                type="checkbox"
+                                checked={selectedSizeRanges.some(r => r.label === range.label)}
+                                onChange={() => {
+                                  setSelectedSizeRanges(prev =>
+                                    prev.some(r => r.label === range.label)
+                                      ? prev.filter(r => r.label !== range.label)
+                                      : [...prev, range]
+                                  );
+                                }}
+                              />
+                              <span>{range.label} employees</span>
+                            </label>
+                          ))}
+                        </div>
+                      </div>
+
+                      {activeFilterCount > 0 && (
+                        <button
+                          className="lead-gen-filter-clear"
+                          onClick={() => {
+                            setSelectedIndustries([]);
+                            setSelectedSizeRanges([]);
+                          }}
+                        >
+                          Clear all filters
+                        </button>
+                      )}
+                    </div>
+                  )}
+                </div>
+
                 <div className="lead-gen-companies-list">
-                  {companies.map((company, index) => {
+                  {filteredCompanies.map((company, index) => {
                     const daysAgo = getDaysAgo(company.mostRecentPostingDate);
                     const isExpanded = expandedCompanies[company.companyName];
 

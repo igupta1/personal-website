@@ -59,7 +59,9 @@ module.exports = async function handler(req, res) {
       mostRecentPostingDate: lead.mostRecentPostingDate || '',
       linkedinUrl: lead.linkedinUrl || '',
       sourceUrl: lead.sourceUrl || '',
-      confidence: lead.confidence || ''
+      confidence: lead.confidence || '',
+      industry: lead.industry || '',
+      employeeCount: lead.employeeCount || 0
     }));
 
     // Count by category

@@ -172,10 +172,17 @@ class ListDiscoveryOrchestrator:
                                     source_url=dm.source_url,
                                     confidence=dm.confidence,
                                 )
+                                updates = {}
                                 if dm.employee_count:
+                                    updates["employee_count"] = dm.employee_count
+                                if dm.industry:
+                                    updates["industry"] = dm.industry
+                                if updates:
+                                    set_clause = ", ".join(f"{k} = ?" for k in updates)
+                                    values = list(updates.values()) + [company_result["company_id"]]
                                     self.db.conn.execute(
-                                        "UPDATE companies SET employee_count = ? WHERE id = ?",
-                                        (dm.employee_count, company_result["company_id"]),
+                                        f"UPDATE companies SET {set_clause} WHERE id = ?",
+                                        values,
                                     )
                                     self.db.conn.commit()
 

@@ -6,6 +6,7 @@ Usage:
     python -m MarketingListDiscovery status
     python -m MarketingListDiscovery export [--format csv|json] [--output FILE]
     python -m MarketingListDiscovery upload [--api-key KEY] [--dry-run]
+    python -m MarketingListDiscovery enrich [--dry-run]
     python -m MarketingListDiscovery reset
 """
 
@@ -174,7 +175,7 @@ def cmd_upload(args):
     db = Database(config.db_path)
 
     try:
-        # Get all companies, sorted by most recent posting date
+        # Get companies with recent jobs (<=7 days) and <=250 employees
         cursor = db.conn.cursor()
         cursor.execute(
             """
@@ -191,9 +192,16 @@ def cmd_upload(args):
                 dm.confidence,
                 c.first_seen_date,
                 c.last_csv_date,
+                c.industry,
                 (SELECT MAX(j.posting_date) FROM jobs j WHERE j.company_id = c.id AND j.is_active = 1) as most_recent_posting
             FROM companies c
             LEFT JOIN decision_makers dm ON dm.company_id = c.id
+            WHERE (c.employee_count IS NULL OR c.employee_count <= 250)
+              AND EXISTS (
+                SELECT 1 FROM jobs j
+                WHERE j.company_id = c.id AND j.is_active = 1
+                  AND j.posting_date >= date('now', '-7 days')
+              )
             ORDER BY most_recent_posting DESC, c.urgency_score DESC
             """
         )
@@ -216,18 +224,16 @@ def cmd_upload(args):
             emp_count = row[3] or 0
             if emp_count <= 100:
                 category = "small"
-            elif emp_count <= 250:
-                category = "medium"
             else:
-                category = "large"
+                category = "medium"
 
-            # Get ALL active jobs for this company, excluding stale jobs
+            # Get active jobs posted within last 7 days
             cursor.execute(
                 """
                 SELECT title, job_url, posting_date, verification_status
                 FROM jobs
                 WHERE company_id = ? AND is_active = 1
-                AND (verification_status IS NULL OR verification_status != 'stale')
+                AND posting_date >= date('now', '-7 days')
                 ORDER BY posting_date DESC, relevance_score DESC
                 """,
                 (row[0],),
@@ -259,6 +265,8 @@ def cmd_upload(args):
                         "location": "",
                         "companySize": f"{emp_count} employees" if emp_count else "Unknown",
                         "category": category,
+                        "industry": row[12] or "",
+                        "employeeCount": emp_count,
                         "jobRole": job[0] if job else "",
                         "jobLink": job[1] if job else "",
                         "postingDate": job[2] if job else "",
@@ -283,6 +291,8 @@ def cmd_upload(args):
                     "location": "",
                     "companySize": f"{emp_count} employees" if emp_count else "Unknown",
                     "category": category,
+                    "industry": row[12] or "",
+                    "employeeCount": emp_count,
                     "jobRole": "",
                     "jobLink": "",
                     "postingDate": "",
@@ -356,6 +366,161 @@ def cmd_upload(args):
             print(f"\nUpload failed: {response.status_code}")
             print(f"  Response: {response.text}")
             sys.exit(1)
+
+    finally:
+        db.close()
+
+
+def cmd_enrich(args):
+    """Backfill industry and employee count for existing companies using Gemini."""
+    import json
+    import re
+
+    from google import genai
+    from google.genai import types
+    from .core.decision_maker import VALID_INDUSTRIES
+
+    setup_logging(args.verbose)
+
+    config = Config.from_env()
+
+    if not config.db_path.exists():
+        print("No database found. Run 'run' first to initialize.")
+        sys.exit(1)
+
+    if not config.gemini_api_key:
+        print("Error: GEMINI_API_KEY environment variable is required")
+        sys.exit(1)
+
+    db = Database(config.db_path)
+
+    try:
+        cursor = db.conn.cursor()
+        cursor.execute(
+            "SELECT id, name, domain FROM companies WHERE industry IS NULL OR industry = ''"
+        )
+        companies = cursor.fetchall()
+
+        if not companies:
+            print("All companies already have industry data.")
+            return
+
+        print(f"Found {len(companies)} companies needing industry enrichment")
+
+        if args.dry_run:
+            for row in companies[:20]:
+                print(f"  - {row[1]} ({row[2]})")
+            if len(companies) > 20:
+                print(f"  ... and {len(companies) - 20} more")
+            return
+
+        async def _run_enrichment():
+            client = genai.Client(api_key=config.gemini_api_key)
+            batch_size = config.gemini_batch_size or 5
+            batches = [
+                companies[i : i + batch_size]
+                for i in range(0, len(companies), batch_size)
+            ]
+
+            enriched = 0
+            for batch_idx, batch in enumerate(batches, 1):
+                company_list = "\n".join(
+                    f"- {row[1]} (website: {row[2]})" for row in batch
+                )
+                prompt = (
+                    'You have access to Google Search grounding. For each company below, '
+                    'determine:\n'
+                    '1. The industry category (choose exactly one from: Home Services, '
+                    'Healthcare, Legal, Financial Services, Food & Beverage, Real Estate, '
+                    'Automotive, SaaS / Technology, Education, Fitness & Wellness, '
+                    'Nonprofits, Professional Services, Retail / E-commerce, Other)\n'
+                    '2. The approximate employee count (integer, use LinkedIn or other '
+                    'public sources)\n\n'
+                    'IMPORTANT: Return a JSON array with objects having these exact keys: '
+                    '"company_name", "industry", "employee_count".\n\n'
+                    f'Companies:\n{company_list}'
+                )
+
+                gen_config = types.GenerateContentConfig(
+                    tools=[types.Tool(google_search=types.GoogleSearch())],
+                    temperature=0.0,
+                )
+
+                try:
+                    response = await client.aio.models.generate_content(
+                        model=config.gemini_model or "gemini-2.5-flash",
+                        contents=prompt,
+                        config=gen_config,
+                    )
+                    raw_text = response.text
+
+                    # Parse JSON from response
+                    cleaned = raw_text.strip()
+                    if cleaned.startswith("```"):
+                        lines = cleaned.split("\n")
+                        cleaned = "\n".join(lines[1:-1]).strip()
+
+                    parsed = None
+                    try:
+                        parsed = json.loads(cleaned)
+                    except json.JSONDecodeError:
+                        match = re.search(r"\[[\s\S]*\]", raw_text)
+                        if match:
+                            try:
+                                parsed = json.loads(match.group())
+                            except json.JSONDecodeError:
+                                pass
+
+                    if not parsed:
+                        print(f"  Batch {batch_idx}/{len(batches)}: Failed to parse response")
+                        continue
+
+                    # Update database
+                    for entry in parsed:
+                        name = entry.get("company_name", "")
+                        industry = entry.get("industry", "")
+                        emp_count = entry.get("employee_count")
+
+                        if industry and industry not in VALID_INDUSTRIES:
+                            industry = "Other"
+
+                        if emp_count is not None:
+                            try:
+                                emp_count = int(emp_count)
+                            except (ValueError, TypeError):
+                                emp_count = None
+
+                        # Find matching company in batch
+                        matched_row = None
+                        name_lower = name.lower().strip()
+                        for row in batch:
+                            if row[1].lower() == name_lower or name_lower in row[1].lower() or row[1].lower() in name_lower:
+                                matched_row = row
+                                break
+
+                        if matched_row and industry:
+                            updates = {"industry": industry}
+                            if emp_count:
+                                updates["employee_count"] = emp_count
+                            set_clause = ", ".join(f"{k} = ?" for k in updates)
+                            values = list(updates.values()) + [matched_row[0]]
+                            cursor.execute(
+                                f"UPDATE companies SET {set_clause} WHERE id = ?",
+                                values,
+                            )
+                            enriched += 1
+
+                    db.conn.commit()
+                    print(f"  Batch {batch_idx}/{len(batches)}: enriched {len(parsed)} companies")
+
+                except Exception as e:
+                    print(f"  Batch {batch_idx}/{len(batches)}: Error - {e}")
+                    continue
+
+            return enriched
+
+        enriched = asyncio.run(_run_enrichment())
+        print(f"\nEnrichment complete: {enriched} companies updated")
 
     finally:
         db.close()
@@ -474,6 +639,18 @@ def main():
         help="Show what would be uploaded without uploading",
     )
     upload_parser.set_defaults(func=cmd_upload)
+
+    # Enrich command
+    enrich_parser = subparsers.add_parser(
+        "enrich", help="Backfill industry/employee data for existing companies"
+    )
+    enrich_parser.add_argument(
+        "--dry-run", action="store_true", help="Show what would be enriched"
+    )
+    enrich_parser.add_argument(
+        "-v", "--verbose", action="store_true", help="Enable verbose logging"
+    )
+    enrich_parser.set_defaults(func=cmd_enrich)
 
     # Reset command
     reset_parser = subparsers.add_parser(

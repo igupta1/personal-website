@@ -13,6 +13,14 @@ from .models import DecisionMakerResult
 logger = logging.getLogger(__name__)
 
 
+VALID_INDUSTRIES = {
+    "Home Services", "Healthcare", "Legal", "Financial Services",
+    "Food & Beverage", "Real Estate", "Automotive", "SaaS / Technology",
+    "Education", "Fitness & Wellness", "Nonprofits", "Professional Services",
+    "Retail / E-commerce", "Other",
+}
+
+
 class DecisionMakerFinder:
     """
     Find marketing decision makers at companies using Google Gemini
@@ -56,13 +64,18 @@ class DecisionMakerFinder:
         'current, Medium if there is one strong but slightly ambiguous source), '
         'and the approximate employee count for the company (use LinkedIn or '
         'other public sources; return as an integer, e.g. 50, 150, 500). '
+        'Also determine the industry category for each company. Choose exactly '
+        'one from this list: Home Services, Healthcare, Legal, Financial Services, '
+        'Food & Beverage, Real Estate, Automotive, SaaS / Technology, Education, '
+        'Fitness & Wellness, Nonprofits, Professional Services, '
+        'Retail / E-commerce, Other. If uncertain, use "Other".\n\n'
         'Prefer accuracy over completeness, and use hiring context only to '
         'infer which function owns growth, never to guess identities.\n\n'
         'IMPORTANT: Return your results as a JSON array. Each element must be '
         'an object with these exact keys: "company_name", "person_name", '
-        '"title", "source_url", "confidence", "employee_count". If not '
-        'identifiable, set person_name to "Not confidently identifiable" and '
-        'add a "reason" key.\n\n'
+        '"title", "source_url", "confidence", "employee_count", "industry". '
+        'If not identifiable, set person_name to "Not confidently identifiable" '
+        'and add a "reason" key.\n\n'
         'Companies:\n{company_list}'
     )
 
@@ -204,6 +217,9 @@ class DecisionMakerFinder:
                             emp_count = int(emp_count)
                         except (ValueError, TypeError):
                             emp_count = None
+                    industry = entry.get("industry")
+                    if industry and industry not in VALID_INDUSTRIES:
+                        industry = "Other"
                     results_by_company[matched] = DecisionMakerResult(
                         company_name=matched,
                         person_name=person or None,
@@ -211,6 +227,7 @@ class DecisionMakerFinder:
                         source_url=entry.get("source_url"),
                         confidence=entry.get("confidence"),
                         employee_count=emp_count,
+                        industry=industry,
                         raw_text=str(entry),
                     )
         else:

@@ -2032,3 +2032,132 @@ body {
 .lead-gen-see-more:hover {
   color: #93bbfc;
 }
+
+/* Lead Gen Filters */
+.lead-gen-filter-panel {
+  margin-bottom: 0.75rem;
+}
+
+.lead-gen-filter-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.7);
+  padding: 0.5rem 0.75rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.78rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.lead-gen-filter-toggle:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.18);
+}
+
+.lead-gen-filter-count {
+  background: rgba(96, 165, 250, 0.2);
+  color: #60a5fa;
+  border-radius: 10px;
+  padding: 0.1rem 0.4rem;
+  font-size: 0.65rem;
+  font-weight: 600;
+}
+
+.lead-gen-filter-chevron {
+  font-size: 0.5rem;
+  transition: transform 0.2s ease;
+  margin-left: auto;
+}
+
+.lead-gen-filter-chevron.expanded {
+  transform: rotate(180deg);
+}
+
+.lead-gen-filter-content {
+  margin-top: 0.5rem;
+  padding: 0.75rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.lead-gen-filter-group-title {
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 0.65rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin: 0 0 0.35rem 0;
+}
+
+.lead-gen-filter-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+}
+
+.lead-gen-filter-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.25rem 0.5rem;
+  background: rgba(0, 0, 0, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.lead-gen-filter-checkbox:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+.lead-gen-filter-checkbox input[type="checkbox"] {
+  width: 12px;
+  height: 12px;
+  accent-color: #60a5fa;
+  cursor: pointer;
+}
+
+.lead-gen-filter-checkbox span {
+  color: rgba(255, 255, 255, 0.65);
+  font-size: 0.7rem;
+  white-space: nowrap;
+}
+
+.lead-gen-filter-checkbox:has(input:checked) {
+  background: rgba(96, 165, 250, 0.1);
+  border-color: rgba(96, 165, 250, 0.25);
+}
+
+.lead-gen-filter-checkbox:has(input:checked) span {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.lead-gen-filter-clear {
+  background: none;
+  border: none;
+  color: rgba(96, 165, 250, 0.7);
+  cursor: pointer;
+  font-size: 0.7rem;
+  padding: 0.25rem 0;
+  align-self: flex-start;
+}
+
+.lead-gen-filter-clear:hover {
+  color: #93c5fd;
+}
+
+.lead-gen-filter-note {
+  color: rgba(255, 255, 255, 0.3);
+  font-size: 0.7rem;
+  font-weight: 400;
+}
