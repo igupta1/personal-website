@@ -1769,14 +1769,14 @@ body {
 }
 
 .lead-gen-company-website {
-  color: rgba(255, 255, 255, 0.35);
+  color: #60a5fa;
   font-size: 0.7rem;
   text-decoration: none;
   transition: color 0.2s ease;
 }
 
 .lead-gen-company-website:hover {
-  color: #60a5fa;
+  color: #93bbfd;
 }
 
 .lead-gen-roles-count {
@@ -2042,7 +2042,7 @@ body {
   display: flex;
   align-items: center;
   gap: 0.6rem;
-  width: 100%;
+  width: 25%;
   background: rgba(96, 165, 250, 0.08);
   border: 1px solid rgba(96, 165, 250, 0.25);
   color: rgba(255, 255, 255, 0.9);
