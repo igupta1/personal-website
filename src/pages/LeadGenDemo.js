@@ -7,13 +7,6 @@ const parseLocalDate = (dateStr) => {
   return new Date(year, month - 1, day);
 };
 
-const INDUSTRY_OPTIONS = [
-  "Home Services", "Healthcare", "Legal", "Financial Services",
-  "Food & Beverage", "Real Estate", "Automotive", "SaaS / Technology",
-  "Education", "Fitness & Wellness", "Nonprofits", "Professional Services",
-  "Retail / E-commerce", "Other"
-];
-
 const SIZE_RANGES = [
   { label: "1-10", min: 1, max: 10 },
   { label: "11-25", min: 11, max: 25 },
@@ -201,6 +194,13 @@ function LeadGenDemo() {
   const filteredCompanies = getFilteredCompanies();
   const activeFilterCount = selectedIndustries.length + selectedSizeRanges.length;
 
+  // Derive available filter options from actual data
+  const availableIndustries = [...new Set(companies.map(c => c.industry).filter(Boolean))].sort();
+  const availableSizeRanges = SIZE_RANGES.filter(range =>
+    companies.some(c => c.employeeCount && c.employeeCount >= range.min && c.employeeCount <= range.max)
+  );
+  const hasAnyFilters = availableIndustries.length > 0 || availableSizeRanges.length > 0;
+
   return (
     <div className="about-page-combined">
       <div className="about-container" style={{ gridTemplateColumns: '1fr' }}>
@@ -257,7 +257,8 @@ function LeadGenDemo() {
                   </div>
                 </div>
 
-                {/* Filter Panel */}
+                {/* Filter Panel - only show if data has filterable fields */}
+                {hasAnyFilters && (
                 <div className="lead-gen-filter-panel">
                   <button
                     className="lead-gen-filter-toggle"
@@ -274,10 +275,11 @@ function LeadGenDemo() {
 
                   {filtersExpanded && (
                     <div className="lead-gen-filter-content">
+                      {availableIndustries.length > 0 && (
                       <div className="lead-gen-filter-group">
                         <h5 className="lead-gen-filter-group-title">Industry</h5>
                         <div className="lead-gen-filter-options">
-                          {INDUSTRY_OPTIONS.map(industry => (
+                          {availableIndustries.map(industry => (
                             <label key={industry} className="lead-gen-filter-checkbox">
                               <input
                                 type="checkbox"
@@ -295,11 +297,13 @@ function LeadGenDemo() {
                           ))}
                         </div>
                       </div>
+                      )}
 
+                      {availableSizeRanges.length > 0 && (
                       <div className="lead-gen-filter-group">
                         <h5 className="lead-gen-filter-group-title">Company Size</h5>
                         <div className="lead-gen-filter-options">
-                          {SIZE_RANGES.map(range => (
+                          {availableSizeRanges.map(range => (
                             <label key={range.label} className="lead-gen-filter-checkbox">
                               <input
                                 type="checkbox"
@@ -317,6 +321,7 @@ function LeadGenDemo() {
                           ))}
                         </div>
                       </div>
+                      )}
 
                       {activeFilterCount > 0 && (
                         <button
@@ -332,6 +337,7 @@ function LeadGenDemo() {
                     </div>
                   )}
                 </div>
+                )}
 
                 <div className="lead-gen-companies-list">
                   {filteredCompanies.map((company, index) => {
