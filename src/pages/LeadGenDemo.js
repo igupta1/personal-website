@@ -209,22 +209,7 @@ function LeadGenDemo() {
             <div className="demo-top-row">
               <div className="demo-section-header">
                 <Link to="/ai-tools" className="back-link-inline">Back to AI Tools</Link>
-                <h2>Marketing Lead Discovery</h2>
-                <p className="demo-script-link">AI-powered ATS detection & decision maker identification</p>
-              </div>
-
-              <div className="demo-how-it-works">
-                <h3>How It Works</h3>
-                <div className="demo-steps-grid">
-                  <div className="demo-step">
-                    <span className="demo-step-num">1</span>
-                    <span className="demo-step-text">Detect ATS & Find Marketing Jobs</span>
-                  </div>
-                  <div className="demo-step">
-                    <span className="demo-step-num">2</span>
-                    <span className="demo-step-text">Identify Decision Makers via AI</span>
-                  </div>
-                </div>
+                <h2>Find Companies Needing Marketing Help</h2>
               </div>
             </div>
 
@@ -243,20 +228,6 @@ function LeadGenDemo() {
               </div>
             ) : (
               <div className="demo-results-stage">
-                <div className="demo-results-header">
-                  <div className="demo-results-stats">
-                    <span className="demo-stat">
-                      <strong>{filteredCompanies.length}</strong> Companies
-                      {filteredCompanies.length !== companies.length && (
-                        <span className="lead-gen-filter-note"> (of {companies.length})</span>
-                      )}
-                    </span>
-                    <span className="demo-stat">
-                      <strong>{filteredCompanies.reduce((sum, c) => sum + c.roles.length, 0)}</strong> Open Roles
-                    </span>
-                  </div>
-                </div>
-
                 {/* Filter Panel - only show if data has filterable fields */}
                 {hasAnyFilters && (
                 <div className="lead-gen-filter-panel">
@@ -361,10 +332,6 @@ function LeadGenDemo() {
                                 {daysAgo <= 1 && <span className="lead-gen-fire-emoji"> 🔥</span>}
                               </span>
                             )}
-                          </div>
-                          <div className="lead-gen-roles-count">
-                            <span className="lead-gen-roles-number">{company.roles.length}</span>
-                            <span className="lead-gen-roles-label">roles</span>
                           </div>
                         </div>
 

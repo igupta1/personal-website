@@ -2035,40 +2035,41 @@ body {
 
 /* Lead Gen Filters */
 .lead-gen-filter-panel {
-  margin-bottom: 0.75rem;
+  margin-bottom: 1rem;
 }
 
 .lead-gen-filter-toggle {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  color: rgba(255, 255, 255, 0.7);
-  padding: 0.5rem 0.75rem;
-  border-radius: 8px;
+  gap: 0.6rem;
+  width: 100%;
+  background: rgba(96, 165, 250, 0.08);
+  border: 1px solid rgba(96, 165, 250, 0.25);
+  color: rgba(255, 255, 255, 0.9);
+  padding: 0.75rem 1rem;
+  border-radius: 10px;
   cursor: pointer;
-  font-size: 0.78rem;
-  font-weight: 500;
+  font-size: 0.95rem;
+  font-weight: 600;
   transition: all 0.2s ease;
 }
 
 .lead-gen-filter-toggle:hover {
-  background: rgba(255, 255, 255, 0.08);
-  border-color: rgba(255, 255, 255, 0.18);
+  background: rgba(96, 165, 250, 0.14);
+  border-color: rgba(96, 165, 250, 0.4);
 }
 
 .lead-gen-filter-count {
-  background: rgba(96, 165, 250, 0.2);
+  background: rgba(96, 165, 250, 0.25);
   color: #60a5fa;
   border-radius: 10px;
-  padding: 0.1rem 0.4rem;
-  font-size: 0.65rem;
+  padding: 0.15rem 0.5rem;
+  font-size: 0.75rem;
   font-weight: 600;
 }
 
 .lead-gen-filter-chevron {
-  font-size: 0.5rem;
+  font-size: 0.6rem;
   transition: transform 0.2s ease;
   margin-left: auto;
 }
