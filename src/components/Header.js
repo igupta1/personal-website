@@ -32,10 +32,10 @@ function Header() {
           </li>
           <li>
             <NavLink
-              to="/ai-tools"
+              to="/gtm"
               className={({ isActive }) => (isActive ? "active" : "")}
             >
-              AI Tools For Businesses
+              GTM Systems for Businesses
             </NavLink>
           </li>
         </ul>

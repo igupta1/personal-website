@@ -46,7 +46,7 @@ function AITools() {
       description: "Find Marketing Agencies and Their Contact Information Instantly",
       icon: <HiOutlineUserGroup size={34} color="#f5f5f5" />,
       isReactIcon: true,
-      link: "/ai-tools/lead-gen",
+      link: "/gtm/marketing-agency",
     },
     {
       id: 3,
@@ -117,7 +117,7 @@ function AITools() {
         {/* Right Column - AI Tools */}
         <div className="about-right-column">
           <section id="ai-tools" className="projects-section">
-            <h2>AI Tools For Businesses</h2>
+            <h2>GTM Systems for Businesses</h2>
             <div className="projects-list">
               {aiTools.map((tool) => (
                 <div

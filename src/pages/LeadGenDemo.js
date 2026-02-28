@@ -208,7 +208,7 @@ function LeadGenDemo() {
           <section className="demo-section">
             <div className="demo-top-row">
               <div className="demo-section-header">
-                <Link to="/ai-tools" className="back-link-inline">Back to AI Tools</Link>
+                <Link to="/gtm" className="back-link-inline">Back to GTM Systems</Link>
                 <h2>Find Companies Needing Marketing Help</h2>
               </div>
             </div>

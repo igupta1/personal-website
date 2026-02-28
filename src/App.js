@@ -16,8 +16,8 @@ function App() {
         <main className="main-content">
           <Routes>
             <Route path="/" element={<About />} />
-            <Route path="/ai-tools" element={<AITools />} />
-<Route path="/ai-tools/lead-gen" element={<LeadGenDemo />} />
+            <Route path="/gtm" element={<AITools />} />
+<Route path="/gtm/marketing-agency" element={<LeadGenDemo />} />
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </main>
