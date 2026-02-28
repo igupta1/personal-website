@@ -6,6 +6,7 @@ import Footer from "./components/Footer";
 import About from "./pages/About";
 import AITools from "./pages/AITools";
 import LeadGenDemo from "./pages/LeadGenDemo";
+import ItMspDemo from "./pages/ItMspDemo";
 import "./App.css";  // Use the existing App.css
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
             <Route path="/" element={<About />} />
             <Route path="/gtm" element={<AITools />} />
 <Route path="/gtm/marketing-agency" element={<LeadGenDemo />} />
+            <Route path="/gtm/it-msp" element={<ItMspDemo />} />
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </main>

@@ -49,6 +49,14 @@ function AITools() {
       link: "/gtm/marketing-agency",
     },
     {
+      id: 2,
+      title: "IT Managed Service Provider Lead Generation",
+      description: "Find IT MSPs and Their Contact Information Instantly",
+      icon: <HiOutlineUserGroup size={34} color="#f5f5f5" />,
+      isReactIcon: true,
+      link: "/gtm/it-msp",
+    },
+    {
       id: 3,
       title: "LinkedIn Cold Message Personalization Tool",
       description: "Automatically Find Emails and Send a Personalized Message Instantly.",
