@@ -332,7 +332,7 @@ function ItMspDemo() {
                         {company.roles.length > 0 && (
                           <div className="lead-gen-roles-section">
                             <h4 className="lead-gen-section-title">
-                              IT Roles Being Hired ({company.roles.length})
+                              IT Roles Being Hired
                             </h4>
                             <div className="lead-gen-roles-list">
                               {company.roles.slice(0, 3).map((role, roleIndex) => (
