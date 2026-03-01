@@ -1,0 +1,44 @@
+name: Daily MSP Sales Discovery
+
+on:
+  schedule:
+    - cron: '30 1 * * *'  # 5:30 PM PST = 1:30 AM UTC (offset from IT MSP discovery)
+  workflow_dispatch:  # Allow manual trigger
+
+permissions:
+  contents: write
+
+jobs:
+  discover-msp-sales:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      TZ: America/Los_Angeles
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+          cache: 'pip'
+          cache-dependency-path: 'MSPSalesDiscovery/requirements.txt'
+
+      - name: Install dependencies
+        run: pip install -r MSPSalesDiscovery/requirements.txt
+
+      - name: Run MSP sales discovery pipeline
+        env:
+          SERPAPI_API_KEY: ${{ secrets.SERPAPI_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: python -m MSPSalesDiscovery run --verbose
+
+      - name: Commit updated CSV and state files
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add MSPSalesDiscovery/output/msp_sales_leads.csv MSPSalesDiscovery/seen_companies.json MSPSalesDiscovery/metro_state.json
+          git diff --cached --quiet || git commit -m "Update MSP sales leads [skip ci]"
+          git push
