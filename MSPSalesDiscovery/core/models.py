@@ -35,3 +35,15 @@ class DecisionMakerResult:
     company_website: Optional[str] = None
     not_found_reason: Optional[str] = None
     raw_text: Optional[str] = None
+
+
+@dataclass
+class EmailLookupResult:
+    """Result of an Apollo email lookup for one decision maker."""
+
+    company_name: str
+    person_name: str
+    email: Optional[str] = None
+    linkedin_url: Optional[str] = None
+    apollo_title: Optional[str] = None
+    not_found_reason: Optional[str] = None
