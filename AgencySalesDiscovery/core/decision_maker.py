@@ -1,5 +1,6 @@
 """Decision maker lookup using Google Gemini with Search grounding for agency sales pipeline."""
 
+import asyncio
 import json
 import logging
 import re
@@ -134,9 +135,9 @@ class AgencyDecisionMakerFinder:
         return all_results
 
     async def _process_batch(
-        self, batch: List[Dict[str, Any]]
+        self, batch: List[Dict[str, Any]], max_retries: int = 2
     ) -> List[DecisionMakerResult]:
-        """Process a single batch of companies via Gemini."""
+        """Process a single batch of companies via Gemini with retry on empty responses."""
         lines = []
         for c in batch:
             lines.append(f"- {c['company']}")
@@ -148,13 +149,56 @@ class AgencyDecisionMakerFinder:
             temperature=0.0,
         )
 
-        response = await self.client.aio.models.generate_content(
-            model=self.model,
-            contents=prompt,
-            config=config,
-        )
+        for attempt in range(1, max_retries + 1):
+            response = await self.client.aio.models.generate_content(
+                model=self.model,
+                contents=prompt,
+                config=config,
+            )
 
-        # Extract text — response.text can be None with Google Search grounding
+            # Log finish reason for debugging
+            try:
+                candidates = response.candidates or []
+                if candidates:
+                    finish_reason = getattr(candidates[0], "finish_reason", None)
+                    logger.info(f"Gemini finish_reason: {finish_reason}")
+                else:
+                    logger.warning("Gemini response has no candidates")
+            except (IndexError, AttributeError):
+                pass
+
+            # Extract text — response.text can be None with Google Search grounding
+            raw_text = self._extract_text(response)
+
+            if raw_text:
+                break
+
+            if attempt < max_retries:
+                logger.warning(
+                    f"Gemini returned empty response (attempt {attempt}/{max_retries}), retrying in 3s..."
+                )
+                await asyncio.sleep(3)
+            else:
+                logger.warning(
+                    f"Gemini returned empty response after {max_retries} attempts"
+                )
+
+        if not raw_text:
+            return [
+                DecisionMakerResult(
+                    company_name=c["company"],
+                    not_found_reason="Empty Gemini response",
+                )
+                for c in batch
+            ]
+
+        logger.debug(f"Gemini raw response:\n{raw_text}")
+
+        return self._parse_response(raw_text, batch)
+
+    @staticmethod
+    def _extract_text(response) -> Optional[str]:
+        """Extract text from a Gemini response, handling various response formats."""
         raw_text = None
         try:
             raw_text = response.text
@@ -162,7 +206,6 @@ class AgencyDecisionMakerFinder:
             pass
 
         if not raw_text:
-            # Try extracting from candidates
             try:
                 candidates = response.candidates or []
                 for candidate in candidates:
@@ -175,21 +218,9 @@ class AgencyDecisionMakerFinder:
                         raw_text = "".join(texts)
                         break
             except (IndexError, AttributeError, TypeError):
-                raw_text = ""
+                pass
 
-        if not raw_text:
-            logger.warning("Gemini returned empty response for batch")
-            return [
-                DecisionMakerResult(
-                    company_name=c["company"],
-                    not_found_reason="Empty Gemini response",
-                )
-                for c in batch
-            ]
-
-        logger.debug(f"Gemini raw response:\n{raw_text}")
-
-        return self._parse_response(raw_text, batch)
+        return raw_text
 
     def _parse_response(
         self,

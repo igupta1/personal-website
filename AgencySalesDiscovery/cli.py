@@ -19,7 +19,8 @@ from typing import Dict, List, Set
 from .config import Config
 from .core.serpapi_client import SerpAPIJobClient
 from .core.decision_maker import AgencyDecisionMakerFinder
-from .core.models import SerpJobListing, DecisionMakerResult
+from .core.models import SerpJobListing, DecisionMakerResult, EmailLookupResult
+from .core.email_finder import ApolloEmailFinder
 
 logger = logging.getLogger(__name__)
 
@@ -65,6 +66,7 @@ CSV_COLUMNS = [
     "Decision Maker Name",
     "Decision Maker Title",
     "Decision Maker LinkedIn",
+    "Decision Maker Email",
     "Employee Count",
     "Confidence",
     "Search Metro",
@@ -152,6 +154,7 @@ async def run_pipeline(config: Config, dry_run: bool = False, max_searches: int 
     print("=" * 70)
 
     enriched_rows: List[Dict] = []
+    dm_by_company: Dict[str, DecisionMakerResult] = {}
 
     if config.gemini_api_key:
         finder = AgencyDecisionMakerFinder(
@@ -213,6 +216,7 @@ async def run_pipeline(config: Config, dry_run: bool = False, max_searches: int 
                 "Decision Maker Name": person_name,
                 "Decision Maker Title": (dm.title if dm else "") or "",
                 "Decision Maker LinkedIn": (dm.source_url if dm else "") or "",
+                "Decision Maker Email": "",
                 "Employee Count": dm.employee_count if dm and dm.employee_count else "",
                 "Confidence": (dm.confidence if dm else "") or "",
                 "Search Metro": listing.search_metro or "",
@@ -238,6 +242,7 @@ async def run_pipeline(config: Config, dry_run: bool = False, max_searches: int 
                 "Decision Maker Name": "",
                 "Decision Maker Title": "",
                 "Decision Maker LinkedIn": "",
+                "Decision Maker Email": "",
                 "Employee Count": "",
                 "Confidence": "",
                 "Search Metro": listing.search_metro or "",
@@ -245,9 +250,51 @@ async def run_pipeline(config: Config, dry_run: bool = False, max_searches: int 
             }
             enriched_rows.append(row)
 
-    # Step 4: Write CSV and update seen companies
+    # Step 4: Apollo email enrichment
+    if config.apollo_api_key and enriched_rows:
+        # Collect decision makers that have names for email lookup
+        dm_for_email: List[DecisionMakerResult] = []
+        for row in enriched_rows:
+            if row["Decision Maker Name"]:
+                norm = row["Company Name"].lower().strip()
+                dm = dm_by_company.get(norm)
+                if dm:
+                    dm_for_email.append(dm)
+
+        if dm_for_email:
+            print("\n" + "=" * 70)
+            print(f"Step 4: Apollo email enrichment for {len(dm_for_email)} decision makers...")
+            print("=" * 70)
+
+            email_finder = ApolloEmailFinder(api_key=config.apollo_api_key)
+            email_results = await email_finder.find_emails(dm_for_email)
+
+            # Build lookup: normalized company name -> email
+            email_by_company: Dict[str, str] = {}
+            found_count = 0
+            for er in email_results:
+                if er.email:
+                    email_by_company[er.company_name.lower().strip()] = er.email
+                    found_count += 1
+                    print(f"  FOUND: {er.person_name} @ {er.company_name} → {er.email}")
+                else:
+                    print(f"  MISS:  {er.person_name} @ {er.company_name} — {er.not_found_reason or 'unknown'}")
+
+            # Merge emails into enriched rows
+            for row in enriched_rows:
+                norm = row["Company Name"].lower().strip()
+                if norm in email_by_company:
+                    row["Decision Maker Email"] = email_by_company[norm]
+
+            print(f"\n  Emails found: {found_count}/{len(dm_for_email)}")
+        else:
+            print("\n  Skipping email enrichment — no decision makers with names to look up")
+    elif not config.apollo_api_key:
+        print("\n  Skipping email enrichment (APOLLO_API_KEY not set)")
+
+    # Step 5: Write CSV and update seen companies
     print("\n" + "=" * 70)
-    print("Step 4: Writing results...")
+    print("Step 5: Writing results...")
     print("=" * 70)
 
     if enriched_rows and not dry_run:

@@ -31,6 +31,9 @@ class Config:
     gemini_model: str = "gemini-2.5-flash"
     gemini_batch_size: int = 5
 
+    # Apollo email enrichment
+    apollo_api_key: Optional[str] = None
+
     # Company size filter
     max_employee_count: int = 100
 
@@ -71,5 +74,6 @@ class Config:
             gemini_api_key=os.getenv("GEMINI_API_KEY"),
             gemini_model=os.getenv("GEMINI_MODEL", "gemini-2.5-flash"),
             gemini_batch_size=int(os.getenv("GEMINI_BATCH_SIZE", "5")),
+            apollo_api_key=os.getenv("APOLLO_API_KEY"),
             max_employee_count=int(os.getenv("MAX_EMPLOYEE_COUNT", "100")),
         )
