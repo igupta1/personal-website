@@ -262,20 +262,21 @@ class Database:
     # Seen listings tracking (dedup across runs)
 
     def is_listing_seen(self, dedup_key: str) -> bool:
-        """Check if a listing has been seen in any previous run."""
+        """Check if a listing has been seen within the last 7 days."""
         cursor = self.conn.cursor()
         cursor.execute(
-            "SELECT 1 FROM seen_listings WHERE dedup_key = ?", (dedup_key,)
+            "SELECT 1 FROM seen_listings WHERE dedup_key = ? AND created_at >= datetime('now', '-7 days')",
+            (dedup_key,),
         )
         return cursor.fetchone() is not None
 
     def mark_listing_seen(
         self, dedup_key: str, company_name: str, job_title: str, run_id: str
     ):
-        """Mark a listing as seen."""
+        """Mark a listing as seen (refreshes created_at so the 7-day window resets)."""
         self.conn.execute(
             """
-            INSERT OR IGNORE INTO seen_listings
+            INSERT OR REPLACE INTO seen_listings
             (dedup_key, company_name, job_title, run_id)
             VALUES (?, ?, ?, ?)
             """,

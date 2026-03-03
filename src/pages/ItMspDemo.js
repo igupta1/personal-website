@@ -22,6 +22,7 @@ function ItMspDemo() {
   const [selectedIndustries, setSelectedIndustries] = useState([]);
   const [selectedSizeRanges, setSelectedSizeRanges] = useState([]);
   const [filtersExpanded, setFiltersExpanded] = useState(false);
+  const [lastUpdated, setLastUpdated] = useState(null);
 
   const fetchLeads = async () => {
     const location = "it-msp-discovery";
@@ -144,6 +145,7 @@ function ItMspDemo() {
       if (result.success) {
         const groupedCompanies = groupByCompany(result.leads || []);
         setCompanies(groupedCompanies);
+        setLastUpdated(result.lastUpdated || null);
       } else {
         setError(result.error || 'Failed to load leads');
       }
@@ -178,6 +180,22 @@ function ItMspDemo() {
     }
   };
 
+  const getLastUpdatedLabel = (isoStr) => {
+    if (!isoStr) return null;
+    try {
+      const updated = new Date(isoStr);
+      const now = new Date();
+      const diffMs = now - updated;
+      const diffHours = Math.floor(diffMs / (1000 * 60 * 60));
+      if (diffHours < 1) return 'Updated less than an hour ago';
+      if (diffHours < 24) return `Updated ${diffHours}h ago`;
+      const diffDays = Math.floor(diffHours / 24);
+      return `Updated ${diffDays}d ago`;
+    } catch {
+      return null;
+    }
+  };
+
   const toggleCompanyExpanded = (companyName) => {
     setExpandedCompanies(prev => ({
       ...prev,
@@ -203,6 +221,11 @@ function ItMspDemo() {
               <div className="demo-section-header">
                 <Link to="/gtm" className="back-link-inline">Back to GTM Systems</Link>
                 <h2>Find Small Businesses Hiring IT Roles</h2>
+                {lastUpdated && getLastUpdatedLabel(lastUpdated) && (
+                  <p style={{ fontSize: '0.75rem', color: 'var(--text-muted, #888)', margin: '2px 0 0' }}>
+                    {getLastUpdatedLabel(lastUpdated)}
+                  </p>
+                )}
               </div>
             </div>
 
