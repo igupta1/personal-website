@@ -1811,33 +1811,14 @@ body {
 }
 
 .lead-gen-insight-card {
-  display: flex;
-  align-items: flex-start;
-  gap: 0.5rem;
-  padding: 0.5rem;
-  background: rgba(139, 92, 246, 0.06);
-  border: 1px solid rgba(139, 92, 246, 0.1);
-  border-radius: 8px;
-}
-
-.lead-gen-insight-icon {
-  width: 32px;
-  height: 32px;
-  background: linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%);
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 700;
-  font-size: 0.6rem;
-  color: white;
-  flex-shrink: 0;
+  padding: 0.35rem 0.5rem;
+  background: rgba(0, 0, 0, 0.15);
+  border-radius: 6px;
 }
 
 .lead-gen-insight-text {
-  color: rgba(255, 255, 255, 0.65);
-  font-size: 0.72rem;
-  font-style: italic;
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 0.75rem;
   line-height: 1.4;
   margin: 0;
 }

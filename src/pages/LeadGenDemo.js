@@ -415,7 +415,6 @@ function LeadGenDemo() {
                           <div className="lead-gen-insight-section">
                             <h4 className="lead-gen-section-title">Agency Insight</h4>
                             <div className="lead-gen-insight-card">
-                              <div className="lead-gen-insight-icon">AI</div>
                               <p className="lead-gen-insight-text">{company.insight}</p>
                             </div>
                           </div>
