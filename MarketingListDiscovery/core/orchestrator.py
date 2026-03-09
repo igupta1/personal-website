@@ -66,6 +66,7 @@ class ListDiscoveryOrchestrator:
 
             if not companies_with_jobs:
                 print("No new companies to process.")
+                await self._generate_insights_if_needed()
                 elapsed = (datetime.now() - start_time).total_seconds()
                 return self._generate_summary([], elapsed)
 
@@ -263,53 +264,59 @@ class ListDiscoveryOrchestrator:
         elif self.config.enable_email_lookup and not self.config.apollo_api_key:
             logger.warning("Email lookup enabled but APOLLO_API_KEY not set. Skipping.")
 
-        # --- Insight Generation ---
-        if self.config.enable_insight_generation and self.config.gemini_api_key:
-            top_companies = self.db.get_companies_sorted_by_recency(limit=30)
-            top_company_ids = [c["id"] for c in top_companies]
-            companies_needing_insights = self.db.get_companies_needing_insights(top_company_ids)
-
-            if companies_needing_insights:
-                print(
-                    f"\n--- Generating insights for "
-                    f"{len(companies_needing_insights)} companies ---"
-                )
-                try:
-                    insight_input = []
-                    for comp in companies_needing_insights:
-                        jobs = self.db.get_jobs_for_company_by_id(comp["id"])
-                        role_titles = [j["title"] for j in jobs]
-                        insight_input.append({
-                            "company_name": comp["name"],
-                            "domain": comp["domain"],
-                            "roles": role_titles,
-                        })
-
-                    generator = InsightGenerator(
-                        api_key=self.config.gemini_api_key,
-                        model=self.config.gemini_model,
-                        batch_size=10,
-                    )
-                    insights = await generator.generate_insights(insight_input)
-
-                    if not self.dry_run:
-                        for comp in companies_needing_insights:
-                            insight_text = insights.get(comp["name"])
-                            if insight_text:
-                                self.db.update_company_insight(comp["id"], insight_text)
-
-                    print(f"  Generated {len(insights)} insights")
-                except Exception as e:
-                    logger.error(f"Insight generation failed: {e}")
-                    print(f"  Insight generation failed: {e}")
-            else:
-                print("\n--- All top companies already have insights ---")
+        await self._generate_insights_if_needed()
 
         # Generate summary
         elapsed = (datetime.now() - start_time).total_seconds()
         summary = self._generate_summary(results, elapsed)
         self._print_summary(summary)
         return summary
+
+    async def _generate_insights_if_needed(self):
+        """Generate AI insights for companies that don't have one yet."""
+        if not self.config.enable_insight_generation or not self.config.gemini_api_key:
+            return
+
+        top_companies = self.db.get_companies_sorted_by_recency()
+        top_company_ids = [c["id"] for c in top_companies]
+        companies_needing_insights = self.db.get_companies_needing_insights(top_company_ids)
+
+        if not companies_needing_insights:
+            print("\n--- All top companies already have insights ---")
+            return
+
+        print(
+            f"\n--- Generating insights for "
+            f"{len(companies_needing_insights)} companies ---"
+        )
+        try:
+            insight_input = []
+            for comp in companies_needing_insights:
+                jobs = self.db.get_jobs_for_company_by_id(comp["id"])
+                role_titles = [j["title"] for j in jobs]
+                insight_input.append({
+                    "company_name": comp["name"],
+                    "domain": comp["domain"],
+                    "roles": role_titles,
+                })
+
+            generator = InsightGenerator(
+                api_key=self.config.gemini_api_key,
+                model=self.config.gemini_model,
+                batch_size=10,
+            )
+            insights = await generator.generate_insights(insight_input)
+
+            if not self.dry_run:
+                for comp in companies_needing_insights:
+                    insight_text = insights.get(comp["name"])
+                    if insight_text:
+                        self.db.update_company_insight(comp["id"], insight_text)
+
+            print(f"  Generated {len(insights)} insights")
+        except Exception as e:
+            logger.error(f"Insight generation failed: {e}")
+            print(f"  Insight generation failed: {e}")
 
     async def _load_companies_from_github(
         self, client: httpx.AsyncClient
