@@ -1806,12 +1806,32 @@ body {
 }
 
 /* AI Insight */
-.lead-gen-insight {
-  margin-bottom: 0.6rem;
-  padding: 0.45rem 0.6rem;
+.lead-gen-insight-section {
+  padding-top: 0.5rem;
+}
+
+.lead-gen-insight-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  padding: 0.5rem;
   background: rgba(139, 92, 246, 0.06);
-  border-left: 2px solid rgba(139, 92, 246, 0.3);
-  border-radius: 0 6px 6px 0;
+  border: 1px solid rgba(139, 92, 246, 0.1);
+  border-radius: 8px;
+}
+
+.lead-gen-insight-icon {
+  width: 32px;
+  height: 32px;
+  background: linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.6rem;
+  color: white;
+  flex-shrink: 0;
 }
 
 .lead-gen-insight-text {
