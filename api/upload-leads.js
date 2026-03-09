@@ -61,7 +61,8 @@ module.exports = async function handler(req, res) {
       sourceUrl: lead.sourceUrl || '',
       confidence: lead.confidence || '',
       industry: lead.industry || '',
-      employeeCount: lead.employeeCount || 0
+      employeeCount: lead.employeeCount || 0,
+      insight: lead.insight || ''
     }));
 
     // Count by category
