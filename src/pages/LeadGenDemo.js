@@ -336,13 +336,6 @@ function LeadGenDemo() {
                           </div>
                         </div>
 
-                        {/* AI Insight */}
-                        {company.insight && (
-                          <div className="lead-gen-insight">
-                            <p className="lead-gen-insight-text">{company.insight}</p>
-                          </div>
-                        )}
-
                         {/* Roles Section - First 3 visible, rest behind "See more" */}
                         {company.roles.length > 0 && (
                           <div className="lead-gen-roles-section">
@@ -414,6 +407,14 @@ function LeadGenDemo() {
                                 </div>
                               </div>
                             </div>
+                          </div>
+                        )}
+
+                        {/* AI Insight */}
+                        {company.insight && (
+                          <div className="lead-gen-insight">
+                            <h4 className="lead-gen-section-title">Agency Insight</h4>
+                            <p className="lead-gen-insight-text">{company.insight}</p>
                           </div>
                         )}
                       </div>
