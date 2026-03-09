@@ -52,6 +52,9 @@ class Config:
     apollo_batch_size: int = 10
     enable_email_lookup: bool = True
 
+    # Insight generation settings
+    enable_insight_generation: bool = True
+
     # Job verification settings
     enable_job_verification: bool = True
     job_verification_timeout: float = 5.0
@@ -91,6 +94,10 @@ class Config:
             apollo_batch_size=int(os.getenv("APOLLO_BATCH_SIZE", "10")),
             enable_email_lookup=os.getenv(
                 "ENABLE_EMAIL_LOOKUP", "true"
+            ).lower()
+            == "true",
+            enable_insight_generation=os.getenv(
+                "ENABLE_INSIGHT_GENERATION", "true"
             ).lower()
             == "true",
             enable_job_verification=os.getenv(

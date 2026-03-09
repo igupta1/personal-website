@@ -151,6 +151,7 @@ class Database:
             ("first_seen_date", "TEXT"),  # When company first appeared in any CSV
             ("last_csv_date", "TEXT"),  # Most recent CSV containing this company
             ("current_run_id", "TEXT"),  # Marks companies active in today's run
+            ("insight", "TEXT"),  # AI-generated outreach insight
         ]:
             if col[0] not in company_cols:
                 cursor.execute(
@@ -391,6 +392,28 @@ class Database:
         """Get all companies."""
         cursor = self.conn.cursor()
         cursor.execute("SELECT * FROM companies ORDER BY name")
+        return [dict(row) for row in cursor.fetchall()]
+
+    def update_company_insight(self, company_id: int, insight: str):
+        """Update company's AI-generated insight."""
+        now = datetime.now().isoformat()
+        self.conn.execute(
+            "UPDATE companies SET insight = ?, updated_at = ? WHERE id = ?",
+            (insight, now, company_id),
+        )
+        self.conn.commit()
+
+    def get_companies_needing_insights(self, company_ids: list) -> List[Dict]:
+        """Get companies from the given IDs that don't yet have insights."""
+        if not company_ids:
+            return []
+        placeholders = ",".join("?" * len(company_ids))
+        cursor = self.conn.cursor()
+        cursor.execute(
+            f"""SELECT id, name, domain FROM companies
+                WHERE id IN ({placeholders}) AND (insight IS NULL OR insight = '')""",
+            company_ids,
+        )
         return [dict(row) for row in cursor.fetchall()]
 
     # Job operations

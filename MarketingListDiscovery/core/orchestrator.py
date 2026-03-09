@@ -13,6 +13,7 @@ from .database import Database
 from .models import GitHubListing
 from .decision_maker import DecisionMakerFinder
 from .email_finder import ApolloEmailFinder
+from .insight_generator import InsightGenerator
 from ..scrapers.github_scraper import GitHubReadmeScraper
 
 logger = logging.getLogger(__name__)
@@ -261,6 +262,48 @@ class ListDiscoveryOrchestrator:
 
         elif self.config.enable_email_lookup and not self.config.apollo_api_key:
             logger.warning("Email lookup enabled but APOLLO_API_KEY not set. Skipping.")
+
+        # --- Insight Generation ---
+        if self.config.enable_insight_generation and self.config.gemini_api_key:
+            top_companies = self.db.get_companies_sorted_by_recency(limit=30)
+            top_company_ids = [c["id"] for c in top_companies]
+            companies_needing_insights = self.db.get_companies_needing_insights(top_company_ids)
+
+            if companies_needing_insights:
+                print(
+                    f"\n--- Generating insights for "
+                    f"{len(companies_needing_insights)} companies ---"
+                )
+                try:
+                    insight_input = []
+                    for comp in companies_needing_insights:
+                        jobs = self.db.get_jobs_for_company_by_id(comp["id"])
+                        role_titles = [j["title"] for j in jobs]
+                        insight_input.append({
+                            "company_name": comp["name"],
+                            "domain": comp["domain"],
+                            "roles": role_titles,
+                        })
+
+                    generator = InsightGenerator(
+                        api_key=self.config.gemini_api_key,
+                        model=self.config.gemini_model,
+                        batch_size=10,
+                    )
+                    insights = await generator.generate_insights(insight_input)
+
+                    if not self.dry_run:
+                        for comp in companies_needing_insights:
+                            insight_text = insights.get(comp["name"])
+                            if insight_text:
+                                self.db.update_company_insight(comp["id"], insight_text)
+
+                    print(f"  Generated {len(insights)} insights")
+                except Exception as e:
+                    logger.error(f"Insight generation failed: {e}")
+                    print(f"  Insight generation failed: {e}")
+            else:
+                print("\n--- All top companies already have insights ---")
 
         # Generate summary
         elapsed = (datetime.now() - start_time).total_seconds()

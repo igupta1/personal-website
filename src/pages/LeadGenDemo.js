@@ -77,6 +77,7 @@ function LeadGenDemo() {
           industry: lead.industry || '',
           employeeCount: lead.employeeCount || 0,
           mostRecentPostingDate: lead.mostRecentPostingDate || lead.postingDate || '',
+          insight: lead.insight || '',
           decisionMaker: {
             firstName: lead.firstName,
             lastName: lead.lastName,
@@ -334,6 +335,13 @@ function LeadGenDemo() {
                             )}
                           </div>
                         </div>
+
+                        {/* AI Insight */}
+                        {company.insight && (
+                          <div className="lead-gen-insight">
+                            <p className="lead-gen-insight-text">{company.insight}</p>
+                          </div>
+                        )}
 
                         {/* Roles Section - First 3 visible, rest behind "See more" */}
                         {company.roles.length > 0 && (

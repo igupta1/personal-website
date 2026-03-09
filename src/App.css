@@ -1805,6 +1805,23 @@ body {
   letter-spacing: 0.5px;
 }
 
+/* AI Insight */
+.lead-gen-insight {
+  margin-bottom: 0.6rem;
+  padding: 0.45rem 0.6rem;
+  background: rgba(139, 92, 246, 0.06);
+  border-left: 2px solid rgba(139, 92, 246, 0.3);
+  border-radius: 0 6px 6px 0;
+}
+
+.lead-gen-insight-text {
+  color: rgba(255, 255, 255, 0.65);
+  font-size: 0.72rem;
+  font-style: italic;
+  line-height: 1.4;
+  margin: 0;
+}
+
 /* Section Title */
 .lead-gen-section-title {
   color: rgba(255, 255, 255, 0.35);
