@@ -1817,8 +1817,9 @@ body {
 }
 
 .lead-gen-insight-text {
-  color: rgba(255, 255, 255, 0.85);
+  color: rgba(255, 255, 255, 0.6);
   font-size: 0.75rem;
+  font-style: italic;
   line-height: 1.4;
   margin: 0;
 }

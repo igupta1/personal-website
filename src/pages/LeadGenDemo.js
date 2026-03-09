@@ -413,7 +413,7 @@ function LeadGenDemo() {
                         {/* AI Insight */}
                         {company.insight && (
                           <div className="lead-gen-insight-section">
-                            <h4 className="lead-gen-section-title">Agency Insight</h4>
+                            <h4 className="lead-gen-section-title">How A Marketing Agency Can Help</h4>
                             <div className="lead-gen-insight-card">
                               <p className="lead-gen-insight-text">{company.insight}</p>
                             </div>
