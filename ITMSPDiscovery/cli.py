@@ -44,6 +44,8 @@ def cmd_run(args):
     config = Config.from_env()
     if args.skip_decision_makers:
         config.enable_decision_maker_lookup = False
+    if args.skip_insights:
+        config.enable_insight_generation = False
 
     db = Database(config.db_path)
 
@@ -182,6 +184,7 @@ def cmd_upload(args):
                         "isNewCompany": False,
                         "firstSeenDate": row["first_seen_date"] or "",
                         "verificationStatus": "unverified",
+                        "insight": row["insight"] or "",
                     }
                     leads.append(lead)
             else:
@@ -210,6 +213,7 @@ def cmd_upload(args):
                     "isNewCompany": False,
                     "firstSeenDate": row["first_seen_date"] or "",
                     "verificationStatus": "unverified",
+                    "insight": row["insight"] or "",
                 }
                 leads.append(lead)
 
@@ -306,6 +310,11 @@ def main():
         "--skip-decision-makers",
         action="store_true",
         help="Skip Gemini-based decision maker lookup",
+    )
+    run_parser.add_argument(
+        "--skip-insights",
+        action="store_true",
+        help="Skip AI insight generation",
     )
     run_parser.set_defaults(func=cmd_run)
 

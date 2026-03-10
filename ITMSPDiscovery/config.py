@@ -31,6 +31,9 @@ class Config:
     gemini_batch_size: int = 5
     enable_decision_maker_lookup: bool = True
 
+    # Insight generation settings
+    enable_insight_generation: bool = True
+
     # Upload settings
     upload_api_key: Optional[str] = None
     vercel_api_url: str = "https://www.ishaangpta.com"
@@ -74,6 +77,9 @@ class Config:
             gemini_batch_size=int(os.getenv("GEMINI_BATCH_SIZE", "5")),
             enable_decision_maker_lookup=os.getenv(
                 "ENABLE_DECISION_MAKER_LOOKUP", "true"
+            ).lower() == "true",
+            enable_insight_generation=os.getenv(
+                "ENABLE_INSIGHT_GENERATION", "true"
             ).lower() == "true",
             upload_api_key=os.getenv("LEADS_UPLOAD_API_KEY"),
             vercel_api_url=os.getenv("VERCEL_API_URL", "https://www.ishaangpta.com"),

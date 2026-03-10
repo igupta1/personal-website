@@ -96,6 +96,22 @@ class Database:
         """Create database schema."""
         self.conn.executescript(self.SCHEMA)
         self.conn.commit()
+        self._run_migrations()
+
+    def _run_migrations(self):
+        """Add columns that don't exist yet."""
+        cursor = self.conn.cursor()
+        cursor.execute("PRAGMA table_info(companies)")
+        cols = {row[1] for row in cursor.fetchall()}
+        for col_name, col_type in [
+            ("insight", "TEXT"),
+            ("dm_lookup_attempted_at", "TEXT"),
+        ]:
+            if col_name not in cols:
+                cursor.execute(
+                    f"ALTER TABLE companies ADD COLUMN {col_name} {col_type}"
+                )
+        self.conn.commit()
 
     def close(self):
         """Close database connection."""
@@ -259,6 +275,63 @@ class Database:
         )
         return [dict(row) for row in cursor.fetchall()]
 
+    def get_companies_needing_dm_lookup(self, max_employee_count: int = 100) -> List[Dict]:
+        """Get upload-eligible companies that haven't had a DM lookup attempted."""
+        cursor = self.conn.cursor()
+        cursor.execute(
+            """
+            SELECT c.id, c.name, c.domain
+            FROM companies c
+            LEFT JOIN decision_makers dm ON dm.company_id = c.id
+            WHERE (c.employee_count IS NULL OR c.employee_count <= ?)
+              AND EXISTS (
+                SELECT 1 FROM jobs j
+                WHERE j.company_id = c.id AND j.is_active = 1
+                  AND j.posting_date >= date('now', '-7 days')
+              )
+              AND dm.id IS NULL
+              AND c.dm_lookup_attempted_at IS NULL
+            """,
+            (max_employee_count,),
+        )
+        return [dict(row) for row in cursor.fetchall()]
+
+    def mark_dm_lookup_attempted(self, company_id: int):
+        """Mark that a DM lookup was attempted for this company."""
+        self.conn.execute(
+            "UPDATE companies SET dm_lookup_attempted_at = ? WHERE id = ?",
+            (datetime.now().isoformat(), company_id),
+        )
+        self.conn.commit()
+
+    def update_company_insight(self, company_id: int, insight: str):
+        """Update company's AI-generated insight."""
+        now = datetime.now().isoformat()
+        self.conn.execute(
+            "UPDATE companies SET insight = ?, updated_at = ? WHERE id = ?",
+            (insight, now, company_id),
+        )
+        self.conn.commit()
+
+    def get_companies_needing_insights(self, max_employee_count: int = 100) -> List[Dict]:
+        """Get upload-eligible companies that don't yet have insights."""
+        cursor = self.conn.cursor()
+        cursor.execute(
+            """
+            SELECT c.id, c.name, c.domain
+            FROM companies c
+            WHERE (c.employee_count IS NULL OR c.employee_count <= ?)
+              AND EXISTS (
+                SELECT 1 FROM jobs j
+                WHERE j.company_id = c.id AND j.is_active = 1
+                  AND j.posting_date >= date('now', '-7 days')
+              )
+              AND (c.insight IS NULL OR c.insight = '')
+            """,
+            (max_employee_count,),
+        )
+        return [dict(row) for row in cursor.fetchall()]
+
     # Seen listings tracking (dedup across runs)
 
     def is_listing_seen(self, dedup_key: str) -> bool:
@@ -387,7 +460,8 @@ class Database:
                 dm.source_url,
                 dm.confidence,
                 (SELECT MAX(j.posting_date) FROM jobs j
-                 WHERE j.company_id = c.id AND j.is_active = 1) as most_recent_posting
+                 WHERE j.company_id = c.id AND j.is_active = 1) as most_recent_posting,
+                c.insight
             FROM companies c
             LEFT JOIN decision_makers dm ON dm.company_id = c.id
             WHERE (c.employee_count IS NULL OR c.employee_count <= ?)

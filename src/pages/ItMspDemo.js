@@ -86,6 +86,7 @@ function ItMspDemo() {
             sourceUrl: lead.sourceUrl,
             confidence: lead.confidence
           },
+          insight: lead.insight || '',
           roles: []
         };
       }
@@ -421,6 +422,16 @@ function ItMspDemo() {
                                   )}
                                 </div>
                               </div>
+                            </div>
+                          </div>
+                        )}
+
+                        {/* IT MSP Insight */}
+                        {company.insight && (
+                          <div className="lead-gen-insight-section">
+                            <h4 className="lead-gen-section-title">How An IT MSP Can Help</h4>
+                            <div className="lead-gen-insight-card">
+                              <p className="lead-gen-insight-text">{company.insight}</p>
                             </div>
                           </div>
                         )}

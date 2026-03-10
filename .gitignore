@@ -33,3 +33,4 @@ __pycache__/
 *.pyc
 *.db
 !list_discovery.db
+!ITMSPDiscovery/it_msp_discovery.db
