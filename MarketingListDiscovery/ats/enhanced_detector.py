@@ -200,9 +200,9 @@ class EnhancedATSDetector:
         Detect ATS for a company using prioritized detection methods.
 
         Args:
-            company_name: Company name from Apollo
+            company_name: Company name
             domain: Company domain (e.g., llamaindex.ai)
-            technologies: Technologies field from Apollo (may hint at ATS)
+            technologies: Technologies field (may hint at ATS)
 
         Returns:
             ATSDetectionResult with provider, board_token, and confidence

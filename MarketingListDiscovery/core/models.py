@@ -150,18 +150,6 @@ class DecisionMakerResult:
 
 
 @dataclass
-class EmailLookupResult:
-    """Result of an Apollo email lookup for one decision maker."""
-
-    company_name: str
-    person_name: str
-    email: Optional[str] = None
-    linkedin_url: Optional[str] = None
-    apollo_title: Optional[str] = None  # For cross-referencing with Gemini title
-    not_found_reason: Optional[str] = None
-
-
-@dataclass
 class RunSummary:
     """Summary of a complete discovery run."""
 

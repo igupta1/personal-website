@@ -12,7 +12,6 @@ from ..config import Config
 from .database import Database
 from .models import GitHubListing
 from .decision_maker import DecisionMakerFinder
-from .email_finder import ApolloEmailFinder
 from .insight_generator import InsightGenerator
 from ..scrapers.github_scraper import GitHubReadmeScraper
 
@@ -66,6 +65,7 @@ class ListDiscoveryOrchestrator:
 
             if not companies_with_jobs:
                 print("No new companies to process.")
+                await self._find_decision_makers_if_needed()
                 await self._generate_insights_if_needed()
                 elapsed = (datetime.now() - start_time).total_seconds()
                 return self._generate_summary([], elapsed)
@@ -103,166 +103,7 @@ class ListDiscoveryOrchestrator:
                         }
                     )
 
-        # Decision Maker Lookup
-        if self.config.enable_decision_maker_lookup and self.config.gemini_api_key:
-            top_companies = self.db.get_companies_sorted_by_recency(limit=30)
-            top_company_ids = {c["id"] for c in top_companies}
-
-            companies_in_top = [
-                r for r in results
-                if r.get("company_id") in top_company_ids
-                and r.get("status") == "success"
-                and r.get("jobs_found", 0) > 0
-            ]
-
-            companies_needing_enrichment = []
-            for r in companies_in_top:
-                existing_dm = self.db.get_decision_maker_for_company(r["company_id"])
-                if not existing_dm or not existing_dm.get("person_name"):
-                    companies_needing_enrichment.append(r)
-                else:
-                    r["decision_maker"] = {
-                        "person_name": existing_dm.get("person_name"),
-                        "title": existing_dm.get("title"),
-                        "source_url": existing_dm.get("source_url"),
-                        "confidence": existing_dm.get("confidence"),
-                        "email": existing_dm.get("email"),
-                        "linkedin_url": existing_dm.get("linkedin_url"),
-                    }
-
-            if companies_needing_enrichment:
-                print(
-                    f"\n--- Looking up decision makers for "
-                    f"{len(companies_needing_enrichment)} companies ---"
-                )
-                try:
-                    finder = DecisionMakerFinder(
-                        api_key=self.config.gemini_api_key,
-                        model=self.config.gemini_model,
-                        batch_size=self.config.gemini_batch_size,
-                    )
-                    dm_results = await finder.find_decision_makers(
-                        companies_needing_enrichment
-                    )
-
-                    dm_by_company = {dm.company_name: dm for dm in dm_results}
-                    for result in results:
-                        company_name = result.get("company")
-                        if company_name in dm_by_company:
-                            dm = dm_by_company[company_name]
-                            result["decision_maker"] = {
-                                "person_name": dm.person_name,
-                                "title": dm.title,
-                                "source_url": dm.source_url,
-                                "confidence": dm.confidence,
-                                "not_found_reason": dm.not_found_reason,
-                            }
-
-                    if not self.dry_run:
-                        for dm in dm_results:
-                            if not dm.person_name:
-                                continue
-                            company_result = next(
-                                (r for r in results if r.get("company") == dm.company_name),
-                                None,
-                            )
-                            if company_result:
-                                self.db.upsert_decision_maker(
-                                    company_id=company_result["company_id"],
-                                    person_name=dm.person_name,
-                                    title=dm.title,
-                                    source_url=dm.source_url,
-                                    confidence=dm.confidence,
-                                )
-                                updates = {}
-                                if dm.employee_count:
-                                    updates["employee_count"] = dm.employee_count
-                                if dm.industry:
-                                    updates["industry"] = dm.industry
-                                if updates:
-                                    set_clause = ", ".join(f"{k} = ?" for k in updates)
-                                    values = list(updates.values()) + [company_result["company_id"]]
-                                    self.db.conn.execute(
-                                        f"UPDATE companies SET {set_clause} WHERE id = ?",
-                                        values,
-                                    )
-                                    self.db.conn.commit()
-
-                except Exception as e:
-                    logger.error(f"Decision maker lookup failed: {e}")
-                    print(f"  Decision maker lookup failed: {e}")
-            else:
-                print("\n--- All top companies already have decision makers ---")
-
-        elif self.config.enable_decision_maker_lookup and not self.config.gemini_api_key:
-            logger.warning("Decision maker lookup enabled but GEMINI_API_KEY not set. Skipping.")
-
-        # Apollo Email Lookup
-        if self.config.enable_email_lookup and self.config.apollo_api_key:
-            dm_results_for_email = [
-                r for r in results
-                if r.get("decision_maker", {}).get("person_name")
-                and not r.get("decision_maker", {}).get("email")
-            ]
-
-            if dm_results_for_email:
-                print(
-                    f"\n--- Looking up emails for "
-                    f"{len(dm_results_for_email)} decision makers without emails ---"
-                )
-                try:
-                    from .models import DecisionMakerResult as DMR
-
-                    dm_objects = [
-                        DMR(
-                            company_name=r["company"],
-                            person_name=r["decision_maker"]["person_name"],
-                            title=r["decision_maker"].get("title"),
-                        )
-                        for r in dm_results_for_email
-                    ]
-
-                    email_finder = ApolloEmailFinder(
-                        api_key=self.config.apollo_api_key,
-                        batch_size=self.config.apollo_batch_size,
-                    )
-                    email_results = await email_finder.find_emails(dm_objects, results)
-
-                    email_by_company = {er.company_name: er for er in email_results}
-                    for result in results:
-                        company_name = result.get("company")
-                        if company_name in email_by_company:
-                            er = email_by_company[company_name]
-                            dm = result.get("decision_maker", {})
-                            dm["email"] = er.email
-                            dm["linkedin_url"] = er.linkedin_url
-
-                    if not self.dry_run:
-                        for er in email_results:
-                            if not er.email:
-                                continue
-                            company_result = next(
-                                (r for r in results if r.get("company") == er.company_name),
-                                None,
-                            )
-                            if company_result and company_result.get("decision_maker"):
-                                dm = company_result["decision_maker"]
-                                self.db.upsert_decision_maker(
-                                    company_id=company_result["company_id"],
-                                    person_name=dm.get("person_name", ""),
-                                    title=dm.get("title"),
-                                    source_url=dm.get("source_url"),
-                                    confidence=dm.get("confidence"),
-                                    email=er.email,
-                                    linkedin_url=er.linkedin_url,
-                                )
-
-                except Exception as e:
-                    logger.error(f"Apollo email lookup failed: {e}")
-                    print(f"  Apollo email lookup failed: {e}")
-
-        elif self.config.enable_email_lookup and not self.config.apollo_api_key:
-            logger.warning("Email lookup enabled but APOLLO_API_KEY not set. Skipping.")
+        await self._find_decision_makers_if_needed()
 
         await self._generate_insights_if_needed()
 
@@ -271,6 +112,81 @@ class ListDiscoveryOrchestrator:
         summary = self._generate_summary(results, elapsed)
         self._print_summary(summary)
         return summary
+
+    async def _find_decision_makers_if_needed(self):
+        """Find decision makers for all upload-eligible companies missing one."""
+        if not self.config.enable_decision_maker_lookup or not self.config.gemini_api_key:
+            if self.config.enable_decision_maker_lookup and not self.config.gemini_api_key:
+                logger.warning("Decision maker lookup enabled but GEMINI_API_KEY not set.")
+            return
+
+        companies_needing_dm = self.db.get_companies_needing_dm_lookup()
+
+        if not companies_needing_dm:
+            print("\n--- All companies already have decision maker lookups ---")
+            return
+
+        print(
+            f"\n--- Looking up decision makers for "
+            f"{len(companies_needing_dm)} companies ---"
+        )
+
+        # Format for DecisionMakerFinder (expects 'company' and 'domain' keys)
+        lookup_list = [
+            {"company": c["name"], "domain": c.get("domain", ""), "company_id": c["id"]}
+            for c in companies_needing_dm
+        ]
+
+        try:
+            finder = DecisionMakerFinder(
+                api_key=self.config.gemini_api_key,
+                model=self.config.gemini_model,
+                batch_size=self.config.gemini_batch_size,
+            )
+            dm_results = await finder.find_decision_makers(lookup_list)
+
+            found_count = 0
+            dm_by_company = {dm.company_name: dm for dm in dm_results}
+
+            for company_info in lookup_list:
+                company_id = company_info["company_id"]
+                company_name = company_info["company"]
+                dm = dm_by_company.get(company_name)
+
+                if dm and dm.person_name:
+                    found_count += 1
+                    if not self.dry_run:
+                        self.db.upsert_decision_maker(
+                            company_id=company_id,
+                            person_name=dm.person_name,
+                            title=dm.title,
+                            source_url=dm.source_url,
+                            confidence=dm.confidence,
+                        )
+                        # Update employee_count and industry if available
+                        updates = {}
+                        if dm.employee_count:
+                            updates["employee_count"] = dm.employee_count
+                        if dm.industry:
+                            updates["industry"] = dm.industry
+                        if updates:
+                            set_clause = ", ".join(f"{k} = ?" for k in updates)
+                            values = list(updates.values()) + [company_id]
+                            self.db.conn.execute(
+                                f"UPDATE companies SET {set_clause} WHERE id = ?",
+                                values,
+                            )
+                            self.db.conn.commit()
+
+                # Mark attempt regardless of success/failure
+                if not self.dry_run:
+                    self.db.mark_dm_lookup_attempted(company_id)
+
+            print(f"  Found {found_count}/{len(companies_needing_dm)} decision makers")
+
+        except Exception as e:
+            logger.error(f"Decision maker lookup failed: {e}")
+            print(f"  Decision maker lookup failed: {e}")
 
     async def _generate_insights_if_needed(self):
         """Generate AI insights for companies that don't have one yet."""

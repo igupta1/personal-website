@@ -47,11 +47,6 @@ class Config:
     gemini_batch_size: int = 5
     enable_decision_maker_lookup: bool = True
 
-    # Apollo Email Lookup settings
-    apollo_api_key: Optional[str] = None
-    apollo_batch_size: int = 10
-    enable_email_lookup: bool = True
-
     # Insight generation settings
     enable_insight_generation: bool = True
 
@@ -88,12 +83,6 @@ class Config:
             gemini_batch_size=int(os.getenv("GEMINI_BATCH_SIZE", "5")),
             enable_decision_maker_lookup=os.getenv(
                 "ENABLE_DECISION_MAKER_LOOKUP", "true"
-            ).lower()
-            == "true",
-            apollo_api_key=os.getenv("APOLLO_API_KEY"),
-            apollo_batch_size=int(os.getenv("APOLLO_BATCH_SIZE", "10")),
-            enable_email_lookup=os.getenv(
-                "ENABLE_EMAIL_LOOKUP", "true"
             ).lower()
             == "true",
             enable_insight_generation=os.getenv(

@@ -152,6 +152,7 @@ class Database:
             ("last_csv_date", "TEXT"),  # Most recent CSV containing this company
             ("current_run_id", "TEXT"),  # Marks companies active in today's run
             ("insight", "TEXT"),  # AI-generated outreach insight
+            ("dm_lookup_attempted_at", "TEXT"),  # When DM lookup was last attempted
         ]:
             if col[0] not in company_cols:
                 cursor.execute(
@@ -415,6 +416,32 @@ class Database:
             company_ids,
         )
         return [dict(row) for row in cursor.fetchall()]
+
+    def get_companies_needing_dm_lookup(self) -> List[Dict]:
+        """Get upload-eligible companies that haven't had a DM lookup attempted."""
+        cursor = self.conn.cursor()
+        cursor.execute("""
+            SELECT c.id, c.name, c.domain
+            FROM companies c
+            LEFT JOIN decision_makers dm ON dm.company_id = c.id
+            WHERE (c.employee_count IS NULL OR c.employee_count <= 250)
+              AND EXISTS (
+                SELECT 1 FROM jobs j
+                WHERE j.company_id = c.id AND j.is_active = 1
+                  AND j.posting_date >= date('now', '-7 days')
+              )
+              AND dm.id IS NULL
+              AND c.dm_lookup_attempted_at IS NULL
+        """)
+        return [dict(row) for row in cursor.fetchall()]
+
+    def mark_dm_lookup_attempted(self, company_id: int):
+        """Mark that a DM lookup was attempted for this company."""
+        self.conn.execute(
+            "UPDATE companies SET dm_lookup_attempted_at = ? WHERE id = ?",
+            (datetime.now().isoformat(), company_id),
+        )
+        self.conn.commit()
 
     # Job operations
 

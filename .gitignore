@@ -32,3 +32,4 @@ yarn-error.log*
 __pycache__/
 *.pyc
 *.db
+!list_discovery.db
