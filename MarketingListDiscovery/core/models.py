@@ -29,8 +29,6 @@ class Company:
     industry: Optional[str] = None
     keywords: Optional[str] = None
     employee_count: Optional[int] = None
-    ats_provider: Optional[str] = None
-    ats_board_token: Optional[str] = None
     careers_page_url: Optional[str] = None
     id: Optional[int] = None
 
@@ -87,16 +85,6 @@ class JobPosting:
     discovered_at: Optional[datetime] = None
     last_seen_at: Optional[datetime] = None
     is_active: bool = True
-
-
-@dataclass
-class ATSDetectionResult:
-    """Result of ATS detection for a company."""
-
-    provider: Optional[str]  # greenhouse, lever, ashby, workable, jobvite, unknown
-    board_token: Optional[str]  # Company identifier for API calls
-    confidence: float  # 0-1 confidence score
-    detection_method: str  # url_pattern, html_signature, api_probe, redirect
 
 
 @dataclass
@@ -162,5 +150,4 @@ class RunSummary:
     total_new_jobs: int
     total_removed_jobs: int
     by_status: Dict[str, int]
-    by_ats: Dict[str, int]
     details: List[Dict[str, Any]]

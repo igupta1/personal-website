@@ -23,12 +23,14 @@ class ListDiscoveryOrchestrator:
     Main orchestrator for the list discovery pipeline.
 
     Pipeline:
-    1. Scrape GitHub README for today's job listings
-    2. Filter out already-seen companies
-    3. Store companies and their jobs directly from GitHub
-    4. Enrich with decision makers and emails
-    5. Mark companies as seen
-    6. Generate summary report
+    1. Clean up stale data (>7 days old)
+    2. Scrape GitHub README for today's job listings
+    3. Filter out companies with no new jobs
+    4. Store companies and their jobs directly from GitHub
+    5. Enrich with decision makers
+    6. Generate insights for new companies
+    7. Mark companies as seen
+    8. Generate summary report
     """
 
     def __init__(
@@ -45,6 +47,8 @@ class ListDiscoveryOrchestrator:
         self.target_date = target_date or date.today()
         self.include_all_days = include_all_days
         self.github_scraper = GitHubReadmeScraper(repo=config.github_repo)
+        self._new_company_ids: List[int] = []
+        self._errors: List[Dict[str, str]] = []
 
     async def run(self) -> Dict[str, Any]:
         """Execute the full list discovery pipeline."""
@@ -52,6 +56,18 @@ class ListDiscoveryOrchestrator:
 
         # Generate unique run_id for this daily run
         self.run_id = datetime.now().strftime("%Y%m%d_%H%M%S")
+
+        # Clean up stale data before processing
+        if not self.dry_run:
+            counts = self.db.cleanup_old_data()
+            total = sum(counts.values())
+            if total > 0:
+                print(
+                    f"Cleanup: removed {counts['jobs']} old jobs, "
+                    f"{counts['companies']} companies, "
+                    f"{counts['decision_makers']} decision makers, "
+                    f"{counts['seen_companies']} seen entries"
+                )
 
         # Initialize HTTP client
         limits = httpx.Limits(max_keepalive_connections=5, max_connections=10)
@@ -95,6 +111,7 @@ class ListDiscoveryOrchestrator:
 
                 except Exception as e:
                     logger.error(f"Error processing {company['name']}: {e}")
+                    self._record_error("processing", f"{company['name']}: {e}")
                     results.append(
                         {
                             "company": company["name"],
@@ -189,6 +206,7 @@ class ListDiscoveryOrchestrator:
 
         except Exception as e:
             logger.error(f"Decision maker lookup failed: {e}")
+            self._record_error("decision_makers", f"Decision maker lookup failed: {e}", critical=True)
             print(f"  Decision maker lookup failed: {e}")
 
     async def _backfill_linkedin_urls(self):
@@ -245,13 +263,15 @@ class ListDiscoveryOrchestrator:
             print(f"  LinkedIn URL backfill failed: {e}")
 
     async def _generate_insights_if_needed(self):
-        """Generate AI insights for companies that don't have one yet."""
+        """Generate AI insights for newly added companies that don't have one yet."""
         if not self.config.enable_insight_generation or not self.config.gemini_api_key:
             return
 
-        top_companies = self.db.get_companies_sorted_by_recency()
-        top_company_ids = [c["id"] for c in top_companies]
-        companies_needing_insights = self.db.get_companies_needing_insights(top_company_ids)
+        # Only generate insights for companies processed in this run
+        # Falls back to all companies with missing insights if no new ones
+        companies_needing_insights = self.db.get_companies_with_missing_insights(
+            self._new_company_ids if self._new_company_ids else None
+        )
 
         if not companies_needing_insights:
             print("\n--- All top companies already have insights ---")
@@ -288,6 +308,7 @@ class ListDiscoveryOrchestrator:
             print(f"  Generated {len(insights)} insights")
         except Exception as e:
             logger.error(f"Insight generation failed: {e}")
+            self._record_error("insights", f"Insight generation failed: {e}")
             print(f"  Insight generation failed: {e}")
 
     async def _load_companies_from_github(
@@ -309,6 +330,9 @@ class ListDiscoveryOrchestrator:
                 f"Fetched {len(listings)} listings from GitHub "
                 f"for {self.target_date.isoformat()}"
             )
+
+        if not listings:
+            self._record_error("github_scrape", "No listings found from GitHub README", critical=True)
 
         # Group listings by company domain
         companies: Dict[str, Dict] = {}  # domain -> company dict
@@ -332,17 +356,22 @@ class ListDiscoveryOrchestrator:
 
         print(f"Unique companies: {len(companies)}")
 
-        # Filter out already-seen companies
+        # Filter out companies with no new jobs
         result = []
         skipped = 0
         for domain, company in companies.items():
-            if self.db.is_company_seen(domain):
+            # Compute external_ids for all jobs (same MD5 logic as _store_company_and_jobs)
+            job_external_ids = [
+                hashlib.md5(listing.job_url.encode()).hexdigest()[:16]
+                for listing in company_jobs[domain]
+            ]
+            if not self.db.has_new_jobs(domain, job_external_ids):
                 skipped += 1
                 continue
             result.append((company, company_jobs[domain]))
 
         if skipped > 0:
-            print(f"Skipped {skipped} already-seen companies")
+            print(f"Skipped {skipped} companies with no new jobs")
 
         return result
 
@@ -352,6 +381,7 @@ class ListDiscoveryOrchestrator:
         """Store a company and its GitHub-sourced jobs in the database."""
         # Upsert company
         company_id, _ = self.db.upsert_company(company, run_id=self.run_id)
+        self._new_company_ids.append(company_id)
 
         # Store each job listing directly
         stored_count = 0
@@ -380,9 +410,14 @@ class ListDiscoveryOrchestrator:
                 "posting_date": listing.date_posted.isoformat(),
             })
 
-        # Update urgency score
+        # Update urgency score and reset DM lookup for re-enrichment
         if not self.dry_run:
             self.db.update_company_urgency(company_id, stored_count)
+            self.db.conn.execute(
+                "UPDATE companies SET dm_lookup_attempted_at = NULL WHERE id = ?",
+                (company_id,),
+            )
+            self.db.conn.commit()
 
         return {
             "company": company["name"],
@@ -394,6 +429,14 @@ class ListDiscoveryOrchestrator:
             "removed_jobs": 0,
             "job_details": job_details,
         }
+
+    def _record_error(self, stage: str, message: str, critical: bool = False):
+        """Record an error for end-of-run reporting."""
+        self._errors.append({
+            "stage": stage,
+            "message": message,
+            "severity": "critical" if critical else "warning",
+        })
 
     def _generate_summary(self, results: List[Dict], elapsed: float) -> Dict[str, Any]:
         """Generate run summary."""
@@ -411,12 +454,12 @@ class ListDiscoveryOrchestrator:
                 1 for r in results
                 if r.get("decision_maker", {}).get("person_name")
             ),
-            "emails_found": sum(
-                1 for r in results
-                if r.get("decision_maker", {}).get("email")
-            ),
             "by_status": self._count_by_key(results, "status"),
             "details": results,
+            "errors": self._errors,
+            "has_critical_errors": any(
+                e["severity"] == "critical" for e in self._errors
+            ),
         }
 
     def _count_by_key(self, items: List[Dict], key: str) -> Dict[str, int]:
@@ -438,10 +481,15 @@ class ListDiscoveryOrchestrator:
         )
         print(f"Jobs Found: {summary['total_jobs_found']}")
         print(f"Decision Makers Found: {summary.get('decision_makers_found', 0)}")
-        print(f"Emails Found: {summary.get('emails_found', 0)}")
         print("\n--- By Status ---")
         for status, count in summary["by_status"].items():
             print(f"  {status}: {count}")
+
+        if self._errors:
+            print("\n--- Errors ---")
+            for err in self._errors:
+                prefix = "CRITICAL" if err["severity"] == "critical" else "WARNING"
+                print(f"  [{prefix}] {err['stage']}: {err['message']}")
         print("=" * 70)
 
         # Print jobs by company
@@ -482,8 +530,6 @@ class ListDiscoveryOrchestrator:
                     f"  Decision Maker: {dm['person_name']} "
                     f"- {dm.get('title', 'N/A')}"
                 )
-                if dm.get("email"):
-                    print(f"    Email: {dm['email']}")
                 if dm.get("linkedin_url"):
                     print(f"    LinkedIn: {dm['linkedin_url']}")
 

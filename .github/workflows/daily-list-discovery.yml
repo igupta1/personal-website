@@ -50,3 +50,9 @@ jobs:
           git add list_discovery.db
           git diff --cached --quiet || git commit -m "Update list_discovery.db [skip ci]"
           git push
+
+      - name: Pipeline summary
+        if: always()
+        run: |
+          echo "## List Discovery Summary" >> $GITHUB_STEP_SUMMARY
+          echo "Run completed at $(date)" >> $GITHUB_STEP_SUMMARY

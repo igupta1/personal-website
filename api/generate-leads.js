@@ -40,15 +40,7 @@ export default async function handler(req, res) {
       const cacheData = await response.json();
 
       // Extract leads from cached data structure
-      const allLeads = cacheData.leads || [];
-      // Filter out leads with invalid placeholder emails, but keep leads without emails
-      const leads = allLeads.filter(l => {
-        if (!l.email) return true; // Keep leads without emails
-        const email = l.email.trim().toLowerCase();
-        // Filter out placeholder values
-        if (email.includes('n/a') || email.includes('not found') || email.includes('not available')) return false;
-        return true;
-      });
+      const leads = cacheData.leads || [];
 
       // Categorize leads by size
       const leadsSmall = leads.filter(l => l.category === 'small');

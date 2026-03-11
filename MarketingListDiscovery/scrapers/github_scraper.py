@@ -241,7 +241,7 @@ class GitHubReadmeScraper:
         """Extract domain from a company URL.
 
         Returns empty string for social media profiles (LinkedIn, etc.)
-        since those can't be used for ATS detection.
+        since those are not useful company domains.
         """
         if not url:
             return ""

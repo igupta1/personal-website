@@ -82,7 +82,6 @@ function LeadGenDemo() {
             firstName: lead.firstName,
             lastName: lead.lastName,
             title: lead.title,
-            email: lead.email,
             linkedinUrl: lead.linkedinUrl,
             sourceUrl: lead.sourceUrl,
             confidence: lead.confidence
@@ -111,16 +110,7 @@ function LeadGenDemo() {
       return bDate - aDate;
     });
 
-    // Filter out companies where the most recent role was posted more than 7 days ago
-    const now = new Date();
-    const filtered = result.filter(company => {
-      if (!company.mostRecentPostingDate) return false;
-      const postDate = parseLocalDate(company.mostRecentPostingDate);
-      const diffDays = Math.floor((now - postDate) / (1000 * 60 * 60 * 24));
-      return diffDays <= 7;
-    });
-
-    return filtered;
+    return result;
   };
 
   const getFilteredCompanies = () => {
@@ -395,9 +385,6 @@ function LeadGenDemo() {
                                   {company.decisionMaker.firstName} {company.decisionMaker.lastName}
                                 </div>
                                 <div className="lead-gen-dm-title">{company.decisionMaker.title}</div>
-                                {company.decisionMaker.email && (
-                                  <div className="lead-gen-dm-email">{company.decisionMaker.email}</div>
-                                )}
                                 <div className="lead-gen-dm-links">
                                   {company.decisionMaker.linkedinUrl && (
                                     <a href={company.decisionMaker.linkedinUrl} target="_blank" rel="noopener noreferrer">

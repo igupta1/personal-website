@@ -46,7 +46,6 @@ module.exports = async function handler(req, res) {
       lastName: lead.lastName || '',
       title: lead.title || '',
       companyName: lead.companyName || '',
-      email: lead.email || '',
       website: lead.website || '',
       location: lead.location || '',
       companySize: lead.companySize || '',

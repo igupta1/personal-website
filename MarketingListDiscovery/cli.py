@@ -75,11 +75,24 @@ def cmd_run(args):
     )
 
     try:
-        asyncio.run(orchestrator.run())
+        summary = asyncio.run(orchestrator.run())
+
+        # Emit GitHub Actions annotations for errors
+        if summary.get("errors"):
+            for err in summary["errors"]:
+                if err["severity"] == "critical":
+                    print(f"::error title={err['stage']}::{err['message']}")
+                else:
+                    print(f"::warning title={err['stage']}::{err['message']}")
+
+        if summary.get("has_critical_errors"):
+            print("\nPipeline completed with critical errors.")
+            sys.exit(1)
     except KeyboardInterrupt:
         print("\nInterrupted by user")
         sys.exit(1)
     except Exception as e:
+        print(f"::error title=pipeline_crash::{e}")
         print(f"\nError: {e}")
         if args.verbose:
             import traceback
@@ -114,13 +127,6 @@ def cmd_status(args):
         print(f"\nLast run: {stats['last_run_date'] or 'Never'}")
         print(f"New jobs (last run): {stats['last_run_new']}")
         print(f"Removed jobs (last run): {stats['last_run_removed']}")
-
-        if stats["by_ats"]:
-            print("\n--- Jobs by ATS Provider ---")
-            for provider, count in sorted(
-                stats["by_ats"].items(), key=lambda x: x[1], reverse=True
-            ):
-                print(f"  {provider}: {count}")
 
         if stats["by_category"]:
             print("\n--- Jobs by Category ---")
@@ -186,7 +192,6 @@ def cmd_upload(args):
                 c.employee_count,
                 dm.person_name,
                 dm.title,
-                dm.email,
                 dm.linkedin_url,
                 dm.source_url,
                 dm.confidence,
@@ -242,8 +247,8 @@ def cmd_upload(args):
             jobs = cursor.fetchall()
 
             # Determine if this is a new company (first seen today)
-            first_seen_date = row[10] if len(row) > 10 else None
-            last_csv_date = row[11] if len(row) > 11 else None
+            first_seen_date = row[9] if len(row) > 9 else None
+            last_csv_date = row[10] if len(row) > 10 else None
             is_new_company = first_seen_date == last_csv_date if first_seen_date and last_csv_date else False
 
             # Find the most recent posting date for this company
@@ -261,24 +266,23 @@ def cmd_upload(args):
                         "lastName": last_name,
                         "title": row[5] or "",
                         "companyName": row[1] or "",
-                        "email": row[6] or "",
                         "website": f"https://{row[2]}" if row[2] else "",
                         "location": "",
                         "companySize": f"{emp_count} employees" if emp_count else "Unknown",
                         "category": category,
-                        "industry": row[12] or "",
+                        "industry": row[11] or "",
                         "employeeCount": emp_count,
                         "jobRole": job[0] if job else "",
                         "jobLink": job[1] if job else "",
                         "postingDate": job[2] if job else "",
                         "mostRecentPostingDate": most_recent_date,
-                        "linkedinUrl": row[7] or "",
-                        "sourceUrl": row[8] or "",
-                        "confidence": row[9] or "",
+                        "linkedinUrl": row[6] or "",
+                        "sourceUrl": row[7] or "",
+                        "confidence": row[8] or "",
                         "isNewCompany": is_new_company,
                         "firstSeenDate": first_seen_date or "",
                         "verificationStatus": job[3] if len(job) > 3 and job[3] else "unverified",
-                        "insight": row[14] or "",
+                        "insight": row[13] or "",
                     }
                     leads.append(lead)
             else:
@@ -288,24 +292,23 @@ def cmd_upload(args):
                     "lastName": last_name,
                     "title": row[5] or "",
                     "companyName": row[1] or "",
-                    "email": row[6] or "",
                     "website": f"https://{row[2]}" if row[2] else "",
                     "location": "",
                     "companySize": f"{emp_count} employees" if emp_count else "Unknown",
                     "category": category,
-                    "industry": row[12] or "",
+                    "industry": row[11] or "",
                     "employeeCount": emp_count,
                     "jobRole": "",
                     "jobLink": "",
                     "postingDate": "",
                     "mostRecentPostingDate": "",
-                    "linkedinUrl": row[7] or "",
-                    "sourceUrl": row[8] or "",
-                    "confidence": row[9] or "",
+                    "linkedinUrl": row[6] or "",
+                    "sourceUrl": row[7] or "",
+                    "confidence": row[8] or "",
                     "isNewCompany": is_new_company,
                     "firstSeenDate": first_seen_date or "",
                     "verificationStatus": "unverified",
-                    "insight": row[14] or "",
+                    "insight": row[13] or "",
                 }
                 leads.append(lead)
 
@@ -366,6 +369,7 @@ def cmd_upload(args):
             print(f"  Message: {result.get('message')}")
             print(f"  Stats: {result.get('stats')}")
         else:
+            print(f"::error title=upload_failed::Upload failed with status {response.status_code}")
             print(f"\nUpload failed: {response.status_code}")
             print(f"  Response: {response.text}")
             sys.exit(1)

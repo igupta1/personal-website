@@ -76,15 +76,6 @@ class Database:
         FOREIGN KEY (job_id) REFERENCES jobs(id)
     );
 
-    -- ATS detection cache
-    CREATE TABLE IF NOT EXISTS ats_cache (
-        domain TEXT PRIMARY KEY,
-        ats_provider TEXT,
-        board_token TEXT,
-        detected_at TEXT DEFAULT (datetime('now')),
-        expires_at TEXT
-    );
-
     -- Decision maker contacts found via Gemini lookup
     CREATE TABLE IF NOT EXISTS decision_makers (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -251,22 +242,6 @@ class Database:
             self.conn.commit()
             return cursor.lastrowid, True  # New company = always process
 
-    def update_company_ats(
-        self, company_id: int, ats_provider: str, board_token: Optional[str]
-    ):
-        """Update company's ATS information."""
-        now = datetime.now().isoformat()
-        self.conn.execute(
-            """
-            UPDATE companies SET
-                ats_provider = ?, ats_board_token = ?,
-                last_checked_at = ?, updated_at = ?
-            WHERE id = ?
-            """,
-            (ats_provider, board_token, now, now, company_id),
-        )
-        self.conn.commit()
-
     def update_company_urgency(self, company_id: int, urgency_score: int):
         """Update company's urgency score (count of marketing jobs)."""
         now = datetime.now().isoformat()
@@ -288,7 +263,6 @@ class Database:
         title: Optional[str] = None,
         source_url: Optional[str] = None,
         confidence: Optional[str] = None,
-        email: Optional[str] = None,
         linkedin_url: Optional[str] = None,
     ) -> int:
         """Insert or update decision maker for a company."""
@@ -298,18 +272,17 @@ class Database:
             """
             INSERT INTO decision_makers (
                 company_id, person_name, title, source_url, confidence,
-                email, linkedin_url, looked_up_at, updated_at
-            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+                linkedin_url, looked_up_at, updated_at
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
             ON CONFLICT(company_id) DO UPDATE SET
                 person_name = excluded.person_name,
                 title = excluded.title,
                 source_url = excluded.source_url,
                 confidence = excluded.confidence,
-                email = excluded.email,
                 linkedin_url = excluded.linkedin_url,
                 updated_at = excluded.updated_at
             """,
-            (company_id, person_name, title, source_url, confidence, email, linkedin_url, now, now),
+            (company_id, person_name, title, source_url, confidence, linkedin_url, now, now),
         )
         self.conn.commit()
         return cursor.lastrowid
@@ -415,6 +388,25 @@ class Database:
                 WHERE id IN ({placeholders}) AND (insight IS NULL OR insight = '')""",
             company_ids,
         )
+        return [dict(row) for row in cursor.fetchall()]
+
+    def get_companies_with_missing_insights(self, company_ids: List[int] = None) -> List[Dict]:
+        """Get companies that need insights, optionally scoped to given IDs."""
+        cursor = self.conn.cursor()
+        if company_ids:
+            placeholders = ",".join("?" * len(company_ids))
+            cursor.execute(
+                f"""SELECT id, name, domain FROM companies
+                    WHERE id IN ({placeholders})
+                    AND (insight IS NULL OR insight = '')""",
+                company_ids,
+            )
+        else:
+            cursor.execute("""
+                SELECT c.id, c.name, c.domain FROM companies c
+                WHERE (c.insight IS NULL OR c.insight = '')
+                AND EXISTS (SELECT 1 FROM jobs j WHERE j.company_id = c.id AND j.is_active = 1)
+            """)
         return [dict(row) for row in cursor.fetchall()]
 
     def get_companies_needing_dm_lookup(self) -> List[Dict]:
@@ -619,18 +611,6 @@ class Database:
         )
         last_run = cursor.fetchone()
 
-        # Jobs by ATS
-        cursor.execute(
-            """
-            SELECT c.ats_provider, COUNT(j.id)
-            FROM jobs j
-            JOIN companies c ON j.company_id = c.id
-            WHERE j.is_active = 1
-            GROUP BY c.ats_provider
-            """
-        )
-        by_ats = {row[0] or "unknown": row[1] for row in cursor.fetchall()}
-
         # Jobs by category
         cursor.execute(
             """
@@ -665,7 +645,6 @@ class Database:
             "last_run_date": last_run[0] if last_run else None,
             "last_run_new": last_run[1] if last_run else 0,
             "last_run_removed": last_run[2] if last_run else 0,
-            "by_ats": by_ats,
             "by_category": by_category,
             "recent_changes": recent_changes,
         }
@@ -680,7 +659,6 @@ class Database:
             SELECT
                 c.name as company_name,
                 c.domain as company_domain,
-                c.ats_provider,
                 c.first_seen_date,
                 c.last_csv_date,
                 j.title as job_title,
@@ -697,7 +675,6 @@ class Database:
                 dm.title as decision_maker_title,
                 dm.source_url as decision_maker_source,
                 dm.confidence as decision_maker_confidence,
-                dm.email as decision_maker_email,
                 dm.linkedin_url as decision_maker_linkedin
             FROM jobs j
             JOIN companies c ON j.company_id = c.id
@@ -728,7 +705,6 @@ class Database:
             SELECT
                 c.name as company_name,
                 c.domain as company_domain,
-                c.ats_provider,
                 c.first_seen_date,
                 c.last_csv_date,
                 j.title as job_title,
@@ -745,7 +721,6 @@ class Database:
                 dm.title as decision_maker_title,
                 dm.source_url as decision_maker_source,
                 dm.confidence as decision_maker_confidence,
-                dm.email as decision_maker_email,
                 dm.linkedin_url as decision_maker_linkedin
             FROM jobs j
             JOIN companies c ON j.company_id = c.id
@@ -783,6 +758,27 @@ class Database:
         cursor.execute("SELECT 1 FROM seen_companies WHERE domain = ?", (domain,))
         return cursor.fetchone() is not None
 
+    def has_new_jobs(self, domain: str, job_external_ids: List[str]) -> bool:
+        """Check if any of the given job external_ids are new for this company.
+
+        Returns True if the company doesn't exist yet OR has at least one unseen job.
+        """
+        cursor = self.conn.cursor()
+        cursor.execute("SELECT id FROM companies WHERE domain = ?", (domain,))
+        company_row = cursor.fetchone()
+        if not company_row:
+            return True  # Brand new company
+
+        company_id = company_row["id"]
+        placeholders = ",".join("?" * len(job_external_ids))
+        cursor.execute(
+            f"""SELECT external_id FROM jobs
+                WHERE company_id = ? AND external_id IN ({placeholders})""",
+            [company_id] + job_external_ids,
+        )
+        existing = {row["external_id"] for row in cursor.fetchall()}
+        return len(existing) < len(job_external_ids)
+
     def mark_company_seen(
         self, domain: str, company_name: str, github_date: str, run_id: str
     ):
@@ -790,7 +786,7 @@ class Database:
         cursor = self.conn.cursor()
         cursor.execute(
             """
-            INSERT OR IGNORE INTO seen_companies
+            INSERT OR REPLACE INTO seen_companies
             (company_name, domain, github_listing_date, run_id)
             VALUES (?, ?, ?, ?)
             """,
@@ -808,3 +804,53 @@ class Database:
         """Reset the seen companies table (for re-processing)."""
         self.conn.execute("DELETE FROM seen_companies")
         self.conn.commit()
+
+    def cleanup_old_data(self, max_age_days: int = 7) -> Dict[str, int]:
+        """Remove jobs older than max_age_days and cascade-delete orphaned records."""
+        cursor = self.conn.cursor()
+        counts = {}
+
+        # 1. Delete old jobs
+        cursor.execute(
+            "DELETE FROM jobs WHERE posting_date < date('now', ?)",
+            (f'-{max_age_days} days',),
+        )
+        counts["jobs"] = cursor.rowcount
+
+        # 2. Delete companies with no remaining active jobs
+        cursor.execute("""
+            DELETE FROM companies
+            WHERE id NOT IN (SELECT DISTINCT company_id FROM jobs)
+        """)
+        counts["companies"] = cursor.rowcount
+
+        # 3. Delete orphaned decision_makers
+        cursor.execute("""
+            DELETE FROM decision_makers
+            WHERE company_id NOT IN (SELECT id FROM companies)
+        """)
+        counts["decision_makers"] = cursor.rowcount
+
+        # 4. Delete orphaned seen_companies
+        cursor.execute("""
+            DELETE FROM seen_companies
+            WHERE domain NOT IN (SELECT domain FROM companies)
+        """)
+        counts["seen_companies"] = cursor.rowcount
+
+        # 5. Delete orphaned run_snapshots
+        cursor.execute("""
+            DELETE FROM run_snapshots
+            WHERE company_id NOT IN (SELECT id FROM companies)
+        """)
+        counts["run_snapshots"] = cursor.rowcount
+
+        # 6. Delete orphaned job_changes
+        cursor.execute("""
+            DELETE FROM job_changes
+            WHERE job_id NOT IN (SELECT id FROM jobs)
+        """)
+        counts["job_changes"] = cursor.rowcount
+
+        self.conn.commit()
+        return counts

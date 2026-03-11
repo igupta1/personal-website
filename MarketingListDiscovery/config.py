@@ -32,9 +32,6 @@ class Config:
     delay_between_requests: float = 1.0  # seconds
     delay_between_companies: float = 2.0  # seconds
 
-    # ATS detection
-    ats_cache_ttl_days: int = 7
-
     # Relevance scoring
     relevance_threshold: float = 60.0
 
