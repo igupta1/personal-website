@@ -443,6 +443,18 @@ class Database:
         )
         self.conn.commit()
 
+    def get_companies_needing_linkedin_url(self) -> List[Dict]:
+        """Get companies that have a DM but no LinkedIn URL."""
+        cursor = self.conn.cursor()
+        cursor.execute("""
+            SELECT c.id, c.name, c.domain
+            FROM companies c
+            JOIN decision_makers dm ON dm.company_id = c.id
+            WHERE dm.linkedin_url IS NULL
+              AND dm.person_name IS NOT NULL
+        """)
+        return [dict(row) for row in cursor.fetchall()]
+
     # Job operations
 
     def get_active_jobs_for_company(self, company_id: int) -> List[Dict]:

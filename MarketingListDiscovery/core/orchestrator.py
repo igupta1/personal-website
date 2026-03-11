@@ -105,6 +105,8 @@ class ListDiscoveryOrchestrator:
 
         await self._find_decision_makers_if_needed()
 
+        await self._backfill_linkedin_urls()
+
         await self._generate_insights_if_needed()
 
         # Generate summary
@@ -162,6 +164,7 @@ class ListDiscoveryOrchestrator:
                             title=dm.title,
                             source_url=dm.source_url,
                             confidence=dm.confidence,
+                            linkedin_url=dm.linkedin_url,
                         )
                         # Update employee_count and industry if available
                         updates = {}
@@ -187,6 +190,59 @@ class ListDiscoveryOrchestrator:
         except Exception as e:
             logger.error(f"Decision maker lookup failed: {e}")
             print(f"  Decision maker lookup failed: {e}")
+
+    async def _backfill_linkedin_urls(self):
+        """Re-run DM lookup for existing decision makers missing LinkedIn URLs."""
+        if not self.config.enable_decision_maker_lookup or not self.config.gemini_api_key:
+            return
+
+        companies = self.db.get_companies_needing_linkedin_url()
+        if not companies:
+            print("\n--- All decision makers already have LinkedIn URLs ---")
+            return
+
+        print(
+            f"\n--- Backfilling LinkedIn URLs for "
+            f"{len(companies)} decision makers ---"
+        )
+
+        lookup_list = [
+            {"company": c["name"], "domain": c.get("domain", ""), "company_id": c["id"]}
+            for c in companies
+        ]
+
+        try:
+            finder = DecisionMakerFinder(
+                api_key=self.config.gemini_api_key,
+                model=self.config.gemini_model,
+                batch_size=self.config.gemini_batch_size,
+            )
+            dm_results = await finder.find_decision_makers(lookup_list)
+
+            filled_count = 0
+            dm_by_company = {dm.company_name: dm for dm in dm_results}
+
+            for company_info in lookup_list:
+                company_id = company_info["company_id"]
+                company_name = company_info["company"]
+                dm = dm_by_company.get(company_name)
+
+                if dm and dm.person_name and dm.linkedin_url and not self.dry_run:
+                    filled_count += 1
+                    self.db.upsert_decision_maker(
+                        company_id=company_id,
+                        person_name=dm.person_name,
+                        title=dm.title,
+                        source_url=dm.source_url,
+                        confidence=dm.confidence,
+                        linkedin_url=dm.linkedin_url,
+                    )
+
+            print(f"  Filled {filled_count}/{len(companies)} LinkedIn URLs")
+
+        except Exception as e:
+            logger.error(f"LinkedIn URL backfill failed: {e}")
+            print(f"  LinkedIn URL backfill failed: {e}")
 
     async def _generate_insights_if_needed(self):
         """Generate AI insights for companies that don't have one yet."""

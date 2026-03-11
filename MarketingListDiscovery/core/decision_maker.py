@@ -1,5 +1,6 @@
 """Decision maker lookup using Google Gemini with Search grounding."""
 
+import asyncio
 import json
 import logging
 import re
@@ -71,9 +72,11 @@ class DecisionMakerFinder:
         'Retail / E-commerce, Other. If uncertain, use "Other".\n\n'
         'Prefer accuracy over completeness, and use hiring context only to '
         'infer which function owns growth, never to guess identities.\n\n'
+        'Also return the person\'s LinkedIn profile URL as "linkedin_url" if found '
+        'during your search. If no LinkedIn profile is found, set it to null.\n\n'
         'IMPORTANT: Return your results as a JSON array. Each element must be '
         'an object with these exact keys: "company_name", "person_name", '
-        '"title", "source_url", "confidence", "employee_count", "industry". '
+        '"title", "source_url", "linkedin_url", "confidence", "employee_count", "industry". '
         'If not identifiable, set person_name to "Not confidently identifiable" '
         'and add a "reason" key.\n\n'
         'Companies:\n{company_list}'
@@ -147,6 +150,10 @@ class DecisionMakerFinder:
                             not_found_reason=f"API error: {e}",
                         )
                     )
+
+            # Brief delay between batches to avoid rate limiting
+            if batch_idx < len(batches):
+                await asyncio.sleep(1)
 
         return all_results
 
@@ -225,6 +232,7 @@ class DecisionMakerFinder:
                         person_name=person or None,
                         title=entry.get("title"),
                         source_url=entry.get("source_url"),
+                        linkedin_url=self._validate_linkedin_url(entry.get("linkedin_url")),
                         confidence=entry.get("confidence"),
                         employee_count=emp_count,
                         industry=industry,
@@ -273,6 +281,16 @@ class DecisionMakerFinder:
                 pass
 
         return None
+
+    @staticmethod
+    def _validate_linkedin_url(url: Optional[str]) -> Optional[str]:
+        """Validate a LinkedIn URL format, returning None if invalid."""
+        if not url or not isinstance(url, str):
+            return None
+        url = url.strip()
+        if not re.match(r"https?://(www\.)?linkedin\.com/in/.+", url):
+            return None
+        return url
 
     @staticmethod
     def _match_company_name(name: str, candidates: set) -> Optional[str]:

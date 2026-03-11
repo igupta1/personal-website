@@ -142,6 +142,7 @@ class DecisionMakerResult:
     person_name: Optional[str] = None
     title: Optional[str] = None
     source_url: Optional[str] = None
+    linkedin_url: Optional[str] = None
     confidence: Optional[str] = None  # "High", "Medium", or None
     employee_count: Optional[int] = None  # Approximate company size from Gemini
     industry: Optional[str] = None  # Company industry category from Gemini
