@@ -104,8 +104,15 @@ function LeadGenDemo() {
       }
     });
 
-    // Sort by most recent posting date (newest first)
+    // Sort by: 1) Priority tier (P1 first, P5 last), 2) Has decision maker, 3) Most recent posting date
+    const priorityOrder = { 'P1': 1, 'P2': 2, 'P3': 3, 'P4': 4, 'P5': 5 };
     const result = Object.values(grouped).sort((a, b) => {
+      const aPriority = priorityOrder[a.priorityTier] || 6;
+      const bPriority = priorityOrder[b.priorityTier] || 6;
+      if (aPriority !== bPriority) return aPriority - bPriority;
+      const aHasDM = a.decisionMaker && a.decisionMaker.firstName ? 1 : 0;
+      const bHasDM = b.decisionMaker && b.decisionMaker.firstName ? 1 : 0;
+      if (aHasDM !== bHasDM) return bHasDM - aHasDM;
       const aDate = a.mostRecentPostingDate ? parseLocalDate(a.mostRecentPostingDate) : new Date(0);
       const bDate = b.mostRecentPostingDate ? parseLocalDate(b.mostRecentPostingDate) : new Date(0);
       return bDate - aDate;
