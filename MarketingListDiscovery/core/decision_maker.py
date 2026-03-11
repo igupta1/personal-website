@@ -182,7 +182,7 @@ class DecisionMakerFinder:
             config=config,
         )
 
-        raw_text = response.text
+        raw_text = response.text or ""
         logger.debug(f"Gemini raw response:\n{raw_text}")
 
         return self._parse_response(raw_text, batch)
