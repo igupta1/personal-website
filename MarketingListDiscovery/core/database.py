@@ -145,6 +145,9 @@ class Database:
             ("insight", "TEXT"),  # AI-generated outreach insight
             ("dm_lookup_attempted_at", "TEXT"),  # When DM lookup was last attempted
             ("priority_tier", "TEXT"),  # P1-P5 priority classification
+            ("website_summary", "TEXT"),  # Scraped website summary
+            ("compliment", "TEXT"),  # AI-generated compliment sentence
+            ("outreach_draft", "TEXT"),  # Assembled outreach draft
         ]:
             if col[0] not in company_cols:
                 cursor.execute(
@@ -440,6 +443,40 @@ class Database:
         self.conn.execute(
             "UPDATE companies SET priority_tier = ?, updated_at = ? WHERE id = ?",
             (priority_tier, now, company_id),
+        )
+        self.conn.commit()
+
+    def get_companies_needing_outreach(self, company_ids: List[int] = None) -> List[Dict]:
+        """Get companies that need outreach draft generation."""
+        cursor = self.conn.cursor()
+        if company_ids:
+            placeholders = ",".join("?" * len(company_ids))
+            cursor.execute(
+                f"""
+                SELECT c.id, c.name, c.domain
+                FROM companies c
+                WHERE c.id IN ({placeholders})
+                AND (c.outreach_draft IS NULL OR c.outreach_draft = '')
+                """,
+                company_ids,
+            )
+        else:
+            cursor.execute("""
+                SELECT c.id, c.name, c.domain
+                FROM companies c
+                WHERE (c.outreach_draft IS NULL OR c.outreach_draft = '')
+                AND EXISTS (SELECT 1 FROM jobs j WHERE j.company_id = c.id AND j.is_active = 1)
+            """)
+        return [dict(row) for row in cursor.fetchall()]
+
+    def update_company_outreach(
+        self, company_id: int, summary: str, compliment: str, outreach_draft: str
+    ):
+        """Update company's outreach draft data."""
+        now = datetime.now().isoformat()
+        self.conn.execute(
+            "UPDATE companies SET website_summary = ?, compliment = ?, outreach_draft = ?, updated_at = ? WHERE id = ?",
+            (summary, compliment, outreach_draft, now, company_id),
         )
         self.conn.commit()
 

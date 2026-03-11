@@ -62,7 +62,8 @@ module.exports = async function handler(req, res) {
       industry: lead.industry || '',
       employeeCount: lead.employeeCount || 0,
       insight: lead.insight || '',
-      priorityTier: lead.priorityTier || ''
+      priorityTier: lead.priorityTier || '',
+      outreachDraft: lead.outreachDraft || ''
     }));
 
     // Count by category

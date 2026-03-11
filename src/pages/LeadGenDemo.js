@@ -79,6 +79,7 @@ function LeadGenDemo() {
           mostRecentPostingDate: lead.mostRecentPostingDate || lead.postingDate || '',
           insight: lead.insight || '',
           priorityTier: lead.priorityTier || '',
+          outreachDraft: lead.outreachDraft || '',
           decisionMaker: {
             firstName: lead.firstName,
             lastName: lead.lastName,
@@ -418,6 +419,22 @@ function LeadGenDemo() {
                             <h4 className="lead-gen-section-title">How A Marketing Agency Can Help</h4>
                             <div className="lead-gen-insight-card">
                               <p className="lead-gen-insight-text">{company.insight}</p>
+                            </div>
+                          </div>
+                        )}
+
+                        {/* Outreach Draft */}
+                        {company.outreachDraft && (
+                          <div className="lead-gen-outreach-section">
+                            <h4 className="lead-gen-section-title">Personalized Introduction Copy</h4>
+                            <div className="lead-gen-outreach-card">
+                              <p className="lead-gen-outreach-text">{company.outreachDraft}</p>
+                              <button
+                                className="lead-gen-copy-btn"
+                                onClick={() => navigator.clipboard.writeText(company.outreachDraft)}
+                              >
+                                Copy
+                              </button>
                             </div>
                           </div>
                         )}

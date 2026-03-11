@@ -66,6 +66,8 @@ def cmd_run(args):
         config.enable_insight_generation = False
     if args.skip_priority:
         config.enable_priority_classification = False
+    if args.skip_outreach:
+        config.enable_outreach_generation = False
     db = Database(config.db_path)
 
     orchestrator = ListDiscoveryOrchestrator(
@@ -203,7 +205,8 @@ def cmd_upload(args):
                 c.industry,
                 (SELECT MAX(j.posting_date) FROM jobs j WHERE j.company_id = c.id AND j.is_active = 1) as most_recent_posting,
                 c.insight,
-                c.priority_tier
+                c.priority_tier,
+                c.outreach_draft
             FROM companies c
             LEFT JOIN decision_makers dm ON dm.company_id = c.id
             WHERE (c.employee_count IS NULL OR c.employee_count <= 250)
@@ -288,6 +291,7 @@ def cmd_upload(args):
                         "verificationStatus": job[3] if len(job) > 3 and job[3] else "unverified",
                         "insight": row[13] or "",
                         "priorityTier": row[14] or "",
+                        "outreachDraft": row[15] or "",
                     }
                     leads.append(lead)
             else:
@@ -315,6 +319,7 @@ def cmd_upload(args):
                     "verificationStatus": "unverified",
                     "insight": row[13] or "",
                     "priorityTier": row[14] or "",
+                    "outreachDraft": row[15] or "",
                 }
                 leads.append(lead)
 
@@ -611,6 +616,11 @@ def main():
         "--skip-priority",
         action="store_true",
         help="Skip priority tier classification",
+    )
+    run_parser.add_argument(
+        "--skip-outreach",
+        action="store_true",
+        help="Skip outreach draft generation",
     )
     run_parser.add_argument(
         "--max-companies",

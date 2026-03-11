@@ -1824,6 +1824,44 @@ body {
   margin: 0;
 }
 
+/* Outreach Draft */
+.lead-gen-outreach-section {
+  padding-top: 0.5rem;
+}
+
+.lead-gen-outreach-card {
+  padding: 0.35rem 0.5rem;
+  background: rgba(0, 0, 0, 0.15);
+  border-radius: 6px;
+  position: relative;
+}
+
+.lead-gen-outreach-text {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.75rem;
+  line-height: 1.4;
+  margin: 0;
+  padding-right: 3rem;
+}
+
+.lead-gen-copy-btn {
+  position: absolute;
+  top: 0.35rem;
+  right: 0.35rem;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.65rem;
+  padding: 0.15rem 0.4rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.lead-gen-copy-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  color: rgba(255, 255, 255, 0.8);
+}
+
 /* Section Title */
 .lead-gen-section-title {
   color: rgba(255, 255, 255, 0.35);
