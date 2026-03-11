@@ -144,6 +144,7 @@ class Database:
             ("current_run_id", "TEXT"),  # Marks companies active in today's run
             ("insight", "TEXT"),  # AI-generated outreach insight
             ("dm_lookup_attempted_at", "TEXT"),  # When DM lookup was last attempted
+            ("priority_tier", "TEXT"),  # P1-P5 priority classification
         ]:
             if col[0] not in company_cols:
                 cursor.execute(
@@ -409,6 +410,39 @@ class Database:
             """)
         return [dict(row) for row in cursor.fetchall()]
 
+    def get_companies_needing_priority_classification(self, company_ids: List[int] = None) -> List[Dict]:
+        """Get companies that need priority tier classification."""
+        cursor = self.conn.cursor()
+        if company_ids:
+            placeholders = ",".join("?" * len(company_ids))
+            cursor.execute(f"""
+                SELECT c.id, c.name, c.domain, c.industry, c.employee_count,
+                       CASE WHEN dm.person_name IS NOT NULL THEN 1 ELSE 0 END as has_decision_maker
+                FROM companies c
+                LEFT JOIN decision_makers dm ON dm.company_id = c.id
+                WHERE c.id IN ({placeholders})
+                AND (c.priority_tier IS NULL OR c.priority_tier = '')
+            """, company_ids)
+        else:
+            cursor.execute("""
+                SELECT c.id, c.name, c.domain, c.industry, c.employee_count,
+                       CASE WHEN dm.person_name IS NOT NULL THEN 1 ELSE 0 END as has_decision_maker
+                FROM companies c
+                LEFT JOIN decision_makers dm ON dm.company_id = c.id
+                WHERE (c.priority_tier IS NULL OR c.priority_tier = '')
+                AND EXISTS (SELECT 1 FROM jobs j WHERE j.company_id = c.id AND j.is_active = 1)
+            """)
+        return [dict(row) for row in cursor.fetchall()]
+
+    def update_company_priority_tier(self, company_id: int, priority_tier: str):
+        """Update company's priority tier (P1-P5)."""
+        now = datetime.now().isoformat()
+        self.conn.execute(
+            "UPDATE companies SET priority_tier = ?, updated_at = ? WHERE id = ?",
+            (priority_tier, now, company_id),
+        )
+        self.conn.commit()
+
     def get_companies_needing_dm_lookup(self) -> List[Dict]:
         """Get upload-eligible companies that haven't had a DM lookup attempted."""
         cursor = self.conn.cursor()
@@ -446,6 +480,35 @@ class Database:
               AND dm.person_name IS NOT NULL
         """)
         return [dict(row) for row in cursor.fetchall()]
+
+    def get_decision_makers_with_linkedin_urls(self, company_ids: List[int] = None) -> List[Dict]:
+        """Get decision makers that have a LinkedIn URL set."""
+        cursor = self.conn.cursor()
+        if company_ids:
+            placeholders = ",".join("?" * len(company_ids))
+            cursor.execute(f"""
+                SELECT dm.id, dm.company_id, dm.person_name, dm.linkedin_url, c.name as company_name
+                FROM decision_makers dm
+                JOIN companies c ON c.id = dm.company_id
+                WHERE dm.linkedin_url IS NOT NULL AND dm.linkedin_url != ''
+                AND dm.company_id IN ({placeholders})
+            """, company_ids)
+        else:
+            cursor.execute("""
+                SELECT dm.id, dm.company_id, dm.person_name, dm.linkedin_url, c.name as company_name
+                FROM decision_makers dm
+                JOIN companies c ON c.id = dm.company_id
+                WHERE dm.linkedin_url IS NOT NULL AND dm.linkedin_url != ''
+            """)
+        return [dict(row) for row in cursor.fetchall()]
+
+    def clear_linkedin_url(self, dm_id: int):
+        """Clear the LinkedIn URL for a decision maker (set to NULL)."""
+        self.conn.execute(
+            "UPDATE decision_makers SET linkedin_url = NULL, updated_at = ? WHERE id = ?",
+            (datetime.now().isoformat(), dm_id),
+        )
+        self.conn.commit()
 
     # Job operations
 

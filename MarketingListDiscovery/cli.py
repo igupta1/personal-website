@@ -64,6 +64,8 @@ def cmd_run(args):
         config.enable_decision_maker_lookup = False
     if args.skip_insights:
         config.enable_insight_generation = False
+    if args.skip_priority:
+        config.enable_priority_classification = False
     db = Database(config.db_path)
 
     orchestrator = ListDiscoveryOrchestrator(
@@ -72,6 +74,7 @@ def cmd_run(args):
         dry_run=args.dry_run,
         target_date=target_date,
         include_all_days=args.include_all_days,
+        max_companies=args.max_companies,
     )
 
     try:
@@ -199,7 +202,8 @@ def cmd_upload(args):
                 c.last_csv_date,
                 c.industry,
                 (SELECT MAX(j.posting_date) FROM jobs j WHERE j.company_id = c.id AND j.is_active = 1) as most_recent_posting,
-                c.insight
+                c.insight,
+                c.priority_tier
             FROM companies c
             LEFT JOIN decision_makers dm ON dm.company_id = c.id
             WHERE (c.employee_count IS NULL OR c.employee_count <= 250)
@@ -283,6 +287,7 @@ def cmd_upload(args):
                         "firstSeenDate": first_seen_date or "",
                         "verificationStatus": job[3] if len(job) > 3 and job[3] else "unverified",
                         "insight": row[13] or "",
+                        "priorityTier": row[14] or "",
                     }
                     leads.append(lead)
             else:
@@ -309,6 +314,7 @@ def cmd_upload(args):
                     "firstSeenDate": first_seen_date or "",
                     "verificationStatus": "unverified",
                     "insight": row[13] or "",
+                    "priorityTier": row[14] or "",
                 }
                 leads.append(lead)
 
@@ -600,6 +606,17 @@ def main():
         "--skip-insights",
         action="store_true",
         help="Skip AI insight generation",
+    )
+    run_parser.add_argument(
+        "--skip-priority",
+        action="store_true",
+        help="Skip priority tier classification",
+    )
+    run_parser.add_argument(
+        "--max-companies",
+        type=int,
+        default=0,
+        help="Limit number of companies to process (0 = no limit)",
     )
     run_parser.set_defaults(func=cmd_run)
 

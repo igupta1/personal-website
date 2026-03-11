@@ -13,6 +13,7 @@ from .database import Database
 from .models import GitHubListing
 from .decision_maker import DecisionMakerFinder
 from .insight_generator import InsightGenerator
+from .priority_classifier import PriorityClassifier
 from ..scrapers.github_scraper import GitHubReadmeScraper
 
 logger = logging.getLogger(__name__)
@@ -40,12 +41,14 @@ class ListDiscoveryOrchestrator:
         dry_run: bool = False,
         target_date: Optional[date] = None,
         include_all_days: bool = False,
+        max_companies: int = 0,
     ):
         self.config = config
         self.db = database
         self.dry_run = dry_run
         self.target_date = target_date or date.today()
         self.include_all_days = include_all_days
+        self.max_companies = max_companies
         self.github_scraper = GitHubReadmeScraper(repo=config.github_repo)
         self._new_company_ids: List[int] = []
         self._errors: List[Dict[str, str]] = []
@@ -124,7 +127,11 @@ class ListDiscoveryOrchestrator:
 
         await self._backfill_linkedin_urls()
 
+        await self._validate_linkedin_urls()
+
         await self._generate_insights_if_needed()
+
+        await self._classify_priority_tiers()
 
         # Generate summary
         elapsed = (datetime.now() - start_time).total_seconds()
@@ -262,6 +269,59 @@ class ListDiscoveryOrchestrator:
             logger.error(f"LinkedIn URL backfill failed: {e}")
             print(f"  LinkedIn URL backfill failed: {e}")
 
+    async def _validate_linkedin_urls(self):
+        """Validate LinkedIn URLs by checking if they resolve to real profiles."""
+        company_ids = self._new_company_ids if self._new_company_ids else None
+        dms = self.db.get_decision_makers_with_linkedin_urls(company_ids)
+        if not dms:
+            print("\n--- No LinkedIn URLs to validate ---")
+            return
+
+        print(f"\n--- Validating {len(dms)} LinkedIn URLs ---")
+
+        cleared = 0
+        browser_ua = (
+            "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
+            "AppleWebKit/537.36 (KHTML, like Gecko) "
+            "Chrome/120.0.0.0 Safari/537.36"
+        )
+
+        try:
+            async with httpx.AsyncClient(
+                timeout=httpx.Timeout(10.0),
+                headers={"User-Agent": browser_ua},
+                follow_redirects=True,
+            ) as client:
+                for dm in dms:
+                    url = dm["linkedin_url"]
+                    try:
+                        resp = await client.get(url)
+                        body = resp.text[:5000].lower()
+
+                        if resp.status_code == 404:
+                            if not self.dry_run:
+                                self.db.clear_linkedin_url(dm["id"])
+                            cleared += 1
+                            logger.info(f"Cleared invalid LinkedIn URL (404): {url}")
+                        elif resp.status_code == 200 and (
+                            "page not found" in body
+                            or "profile is not available" in body
+                            or "this page doesn" in body
+                        ):
+                            if not self.dry_run:
+                                self.db.clear_linkedin_url(dm["id"])
+                            cleared += 1
+                            logger.info(f"Cleared invalid LinkedIn URL (not found): {url}")
+                    except Exception as e:
+                        logger.debug(f"LinkedIn validation error for {url}: {e}")
+
+                    await asyncio.sleep(2)
+
+            print(f"  Cleared {cleared}/{len(dms)} invalid LinkedIn URLs")
+        except Exception as e:
+            logger.error(f"LinkedIn URL validation failed: {e}")
+            self._record_error("linkedin_validation", f"LinkedIn URL validation failed: {e}")
+
     async def _generate_insights_if_needed(self):
         """Generate AI insights for newly added companies that don't have one yet."""
         if not self.config.enable_insight_generation or not self.config.gemini_api_key:
@@ -310,6 +370,56 @@ class ListDiscoveryOrchestrator:
             logger.error(f"Insight generation failed: {e}")
             self._record_error("insights", f"Insight generation failed: {e}")
             print(f"  Insight generation failed: {e}")
+
+    async def _classify_priority_tiers(self):
+        """Classify priority tiers for companies that don't have one yet."""
+        if not self.config.enable_priority_classification or not self.config.gemini_api_key:
+            return
+
+        companies = self.db.get_companies_needing_priority_classification(
+            self._new_company_ids if self._new_company_ids else None
+        )
+
+        if not companies:
+            print("\n--- All companies already have priority tiers ---")
+            return
+
+        print(f"\n--- Classifying priority tiers for {len(companies)} companies ---")
+
+        try:
+            classifier_input = []
+            for comp in companies:
+                jobs = self.db.get_jobs_for_company_by_id(comp["id"])
+                role_titles = [j["title"] for j in jobs]
+                classifier_input.append({
+                    "company_name": comp["name"],
+                    "domain": comp["domain"],
+                    "industry": comp.get("industry") or "",
+                    "employee_count": comp.get("employee_count"),
+                    "roles": role_titles,
+                    "has_decision_maker": bool(comp.get("has_decision_maker")),
+                })
+
+            classifier = PriorityClassifier(
+                api_key=self.config.gemini_api_key,
+                model=self.config.gemini_model,
+                batch_size=10,
+            )
+            results = await classifier.classify_priorities(classifier_input)
+
+            if not self.dry_run:
+                for comp in companies:
+                    result = results.get(comp["name"])
+                    if result:
+                        self.db.update_company_priority_tier(
+                            comp["id"], result["priority_tier"]
+                        )
+
+            print(f"  Classified {len(results)} companies")
+        except Exception as e:
+            logger.error(f"Priority classification failed: {e}")
+            self._record_error("priority_classification", f"Priority classification failed: {e}")
+            print(f"  Priority classification failed: {e}")
 
     async def _load_companies_from_github(
         self, client: httpx.AsyncClient
@@ -372,6 +482,10 @@ class ListDiscoveryOrchestrator:
 
         if skipped > 0:
             print(f"Skipped {skipped} companies with no new jobs")
+
+        if self.max_companies > 0 and len(result) > self.max_companies:
+            print(f"Limiting to {self.max_companies} companies (from {len(result)})")
+            result = result[:self.max_companies]
 
         return result
 

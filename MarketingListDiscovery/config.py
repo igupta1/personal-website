@@ -47,6 +47,9 @@ class Config:
     # Insight generation settings
     enable_insight_generation: bool = True
 
+    # Priority classification settings
+    enable_priority_classification: bool = True
+
     # Job verification settings
     enable_job_verification: bool = True
     job_verification_timeout: float = 5.0
@@ -84,6 +87,10 @@ class Config:
             == "true",
             enable_insight_generation=os.getenv(
                 "ENABLE_INSIGHT_GENERATION", "true"
+            ).lower()
+            == "true",
+            enable_priority_classification=os.getenv(
+                "ENABLE_PRIORITY_CLASSIFICATION", "true"
             ).lower()
             == "true",
             enable_job_verification=os.getenv(

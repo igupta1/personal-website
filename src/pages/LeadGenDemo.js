@@ -78,6 +78,7 @@ function LeadGenDemo() {
           employeeCount: lead.employeeCount || 0,
           mostRecentPostingDate: lead.mostRecentPostingDate || lead.postingDate || '',
           insight: lead.insight || '',
+          priorityTier: lead.priorityTier || '',
           decisionMaker: {
             firstName: lead.firstName,
             lastName: lead.lastName,
@@ -311,7 +312,14 @@ function LeadGenDemo() {
                         {/* Company Header */}
                         <div className="lead-gen-company-header">
                           <div className="lead-gen-company-info">
-                            <h3 className="lead-gen-company-name">{company.companyName}</h3>
+                            <h3 className="lead-gen-company-name">
+                              {company.companyName}
+                              {company.priorityTier && (
+                                <span className={`lead-gen-priority-badge lead-gen-priority-${company.priorityTier.toLowerCase()}`}>
+                                  {company.priorityTier}
+                                </span>
+                              )}
+                            </h3>
                             {company.website && (
                               <a href={company.website} target="_blank" rel="noopener noreferrer" className="lead-gen-company-website">
                                 {company.website.replace('https://', '')}
