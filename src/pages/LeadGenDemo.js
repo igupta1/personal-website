@@ -105,9 +105,9 @@ function LeadGenDemo() {
       }
     });
 
-    // Sort by: 1) Priority tier (P1 first, P5 last), 2) Has decision maker, 3) Most recent posting date
-    const priorityOrder = { 'P1': 1, 'P2': 2, 'P3': 3, 'P4': 4, 'P5': 5 };
-    const result = Object.values(grouped).sort((a, b) => {
+    // Filter out P5 companies, then sort by: 1) Priority tier, 2) Has decision maker, 3) Most recent posting date
+    const priorityOrder = { 'P1': 1, 'P2': 2, 'P3': 3, 'P4': 4 };
+    const result = Object.values(grouped).filter(c => c.priorityTier !== 'P5').sort((a, b) => {
       const aPriority = priorityOrder[a.priorityTier] || 6;
       const bPriority = priorityOrder[b.priorityTier] || 6;
       if (aPriority !== bPriority) return aPriority - bPriority;

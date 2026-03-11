@@ -466,6 +466,7 @@ class ListDiscoveryOrchestrator:
                             result.get("summary", ""),
                             result.get("compliment", ""),
                             result.get("outreach_draft", ""),
+                            result.get("role_classification", ""),
                         )
 
             generated = sum(1 for r in results.values() if r.get("outreach_draft"))

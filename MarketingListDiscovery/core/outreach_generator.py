@@ -29,21 +29,67 @@ COMPLIMENT_PROMPT = (
     'Return as JSON: {"compliment": "your compliment here"}. '
     "Rules: One sentence only. Reference something specific and non-obvious from the summary. "
     "Do NOT say generic things like 'Love your website' or 'Great company'. "
-    "Write in a casual, human tone. Shorten company names where natural. "
-    'Do NOT use em dashes. If summary is \'none\', return {"compliment": "none"}'
+    "Write in a matter-of-fact, peer-to-peer tone. Do NOT use gushing language like "
+    "'It's genuinely impressive,' 'It's really cool,' 'It's fantastic how,' or "
+    "'I was really impressed.' State the observation directly without filler praise. "
+    "For example, instead of 'It's genuinely impressive how EXL achieves a 90% success rate' "
+    "write 'EXL's 90% success rate on enterprise AI initiatives is a strong proof point.' "
+    "Shorten company names where natural. "
+    "Do NOT use em dashes (\u2014) anywhere. "
+    'If the summary is \'none\', return {"compliment": "none"}'
 )
 
-OUTREACH_TEMPLATE_WITH_COMPLIMENT = (
+OUTREACH_AGENCY_WITH_COMPLIMENT = (
     "{compliment} Noticed you're looking for a {role}. Before you commit to a "
     "full-time hire, would it be worth exploring whether an agency could deliver "
     "the same results at a fraction of the cost?"
 )
 
-OUTREACH_TEMPLATE_WITHOUT_COMPLIMENT = (
+OUTREACH_AGENCY_WITHOUT_COMPLIMENT = (
     "Noticed you're looking for a {role}. Before you commit to a full-time hire, "
     "would it be worth exploring whether an agency could deliver the same results "
     "at a fraction of the cost?"
 )
+
+OUTREACH_NON_AGENCY_WITH_COMPLIMENT = (
+    "{compliment} Noticed you're looking for a {role}. If your team is also "
+    "stretched thin on digital marketing or content, that's something an agency "
+    "could take off your plate while you focus on hiring for the in-person side."
+)
+
+OUTREACH_NON_AGENCY_WITHOUT_COMPLIMENT = (
+    "Noticed you're looking for a {role}. If your team is also stretched thin on "
+    "digital marketing or content, that's something an agency could take off your "
+    "plate while you focus on hiring for the in-person side."
+)
+
+# Keywords for role classification (checked case-insensitively against role title)
+_NOT_AGENCY_KEYWORDS = [
+    "brand ambassador", "promotions representative", "field marketing",
+    "event coordinator", "canvasser", "door hanger", "retail",
+    "on-call", "shift", "community outreach", "merchandising", "sales",
+]
+
+_AGENCY_KEYWORDS = [
+    "marketing coordinator", "social media", "content strategist",
+    "content coordinator", "seo", "paid media", "paid search",
+    "digital marketing", "pr ", "public relations", "comms ",
+    "communications", "growth marketing", "email marketing",
+    "ecommerce", "e-commerce", "retention marketing", "web content",
+    "digital merchandising", "market analyst", "marketing analyst",
+    "marketing associate", "copywriter", "marketing specialist",
+    "marketing manager", "media planning", "media planner",
+    "ad operations", "advertising operations",
+]
+
+
+def _classify_role(role_title: str) -> str:
+    """Classify a role as agency_replaceable or not_agency_replaceable."""
+    lower = role_title.lower()
+    for kw in _NOT_AGENCY_KEYWORDS:
+        if kw in lower:
+            return "not_agency_replaceable"
+    return "agency_replaceable"
 
 # Paths to skip when extracting internal links
 SKIP_PATHS = {
@@ -101,6 +147,7 @@ class OutreachGenerator:
             domain = company.get("domain", "")
             roles = company.get("roles", [])
             role_title = roles[0] if roles else "marketing role"
+            role_class = _classify_role(role_title)
 
             try:
                 print(f"  [{i+1}/{len(companies)}] {name}: scraping {domain}...")
@@ -118,23 +165,24 @@ class OutreachGenerator:
                 else:
                     compliment = "none"
 
-                draft = self._assemble_draft(compliment, role_title)
+                draft = self._assemble_draft(compliment, role_title, role_class)
 
                 results[name] = {
                     "summary": summary or "none",
                     "compliment": compliment or "none",
                     "outreach_draft": draft,
+                    "role_classification": role_class,
                 }
                 print(f"  [{i+1}/{len(companies)}] {name}: done")
 
             except Exception as e:
                 logger.error(f"Outreach generation failed for {name}: {e}")
-                # Fall back to no-compliment version
-                draft = self._assemble_draft("none", role_title)
+                draft = self._assemble_draft("none", role_title, role_class)
                 results[name] = {
                     "summary": "none",
                     "compliment": "none",
                     "outreach_draft": draft,
+                    "role_classification": role_class,
                 }
 
             if i < len(companies) - 1:
@@ -288,13 +336,18 @@ class OutreachGenerator:
         return "none"
 
     @staticmethod
-    def _assemble_draft(compliment: str, role_title: str) -> str:
-        """Assemble the final outreach draft from compliment and role title."""
-        if compliment and compliment != "none":
-            draft = OUTREACH_TEMPLATE_WITH_COMPLIMENT.format(
-                compliment=compliment, role=role_title
-            )
+    def _assemble_draft(compliment: str, role_title: str, role_classification: str = "agency_replaceable") -> str:
+        """Assemble the final outreach draft from compliment, role title, and role classification."""
+        has_compliment = compliment and compliment != "none"
+        is_agency = role_classification == "agency_replaceable"
+
+        if is_agency and has_compliment:
+            draft = OUTREACH_AGENCY_WITH_COMPLIMENT.format(compliment=compliment, role=role_title)
+        elif is_agency:
+            draft = OUTREACH_AGENCY_WITHOUT_COMPLIMENT.format(role=role_title)
+        elif has_compliment:
+            draft = OUTREACH_NON_AGENCY_WITH_COMPLIMENT.format(compliment=compliment, role=role_title)
         else:
-            draft = OUTREACH_TEMPLATE_WITHOUT_COMPLIMENT.format(role=role_title)
+            draft = OUTREACH_NON_AGENCY_WITHOUT_COMPLIMENT.format(role=role_title)
 
         return _strip_em_dashes(draft)

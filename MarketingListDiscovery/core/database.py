@@ -148,6 +148,7 @@ class Database:
             ("website_summary", "TEXT"),  # Scraped website summary
             ("compliment", "TEXT"),  # AI-generated compliment sentence
             ("outreach_draft", "TEXT"),  # Assembled outreach draft
+            ("role_classification", "TEXT"),  # agency_replaceable or not_agency_replaceable
         ]:
             if col[0] not in company_cols:
                 cursor.execute(
@@ -470,13 +471,14 @@ class Database:
         return [dict(row) for row in cursor.fetchall()]
 
     def update_company_outreach(
-        self, company_id: int, summary: str, compliment: str, outreach_draft: str
+        self, company_id: int, summary: str, compliment: str, outreach_draft: str,
+        role_classification: str = "",
     ):
         """Update company's outreach draft data."""
         now = datetime.now().isoformat()
         self.conn.execute(
-            "UPDATE companies SET website_summary = ?, compliment = ?, outreach_draft = ?, updated_at = ? WHERE id = ?",
-            (summary, compliment, outreach_draft, now, company_id),
+            "UPDATE companies SET website_summary = ?, compliment = ?, outreach_draft = ?, role_classification = ?, updated_at = ? WHERE id = ?",
+            (summary, compliment, outreach_draft, role_classification, now, company_id),
         )
         self.conn.commit()
 

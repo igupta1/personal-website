@@ -206,7 +206,8 @@ def cmd_upload(args):
                 (SELECT MAX(j.posting_date) FROM jobs j WHERE j.company_id = c.id AND j.is_active = 1) as most_recent_posting,
                 c.insight,
                 c.priority_tier,
-                c.outreach_draft
+                c.outreach_draft,
+                c.role_classification
             FROM companies c
             LEFT JOIN decision_makers dm ON dm.company_id = c.id
             WHERE (c.employee_count IS NULL OR c.employee_count <= 250)
@@ -292,6 +293,7 @@ def cmd_upload(args):
                         "insight": row[13] or "",
                         "priorityTier": row[14] or "",
                         "outreachDraft": row[15] or "",
+                        "roleClassification": row[16] or "",
                     }
                     leads.append(lead)
             else:
@@ -320,6 +322,7 @@ def cmd_upload(args):
                     "insight": row[13] or "",
                     "priorityTier": row[14] or "",
                     "outreachDraft": row[15] or "",
+                    "roleClassification": row[16] or "",
                 }
                 leads.append(lead)
 
