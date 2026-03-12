@@ -34,6 +34,17 @@ class Config:
     # Insight generation settings
     enable_insight_generation: bool = True
 
+    # Priority classification settings
+    enable_priority_classification: bool = True
+
+    # Outreach draft generation settings
+    enable_outreach_generation: bool = True
+
+    # Job verification settings
+    enable_job_verification: bool = True
+    job_verification_timeout: float = 5.0
+    job_verification_batch_size: int = 20
+
     # Upload settings
     upload_api_key: Optional[str] = None
     vercel_api_url: str = "https://www.ishaangpta.com"
@@ -81,6 +92,17 @@ class Config:
             enable_insight_generation=os.getenv(
                 "ENABLE_INSIGHT_GENERATION", "true"
             ).lower() == "true",
+            enable_priority_classification=os.getenv(
+                "ENABLE_PRIORITY_CLASSIFICATION", "true"
+            ).lower() == "true",
+            enable_outreach_generation=os.getenv(
+                "ENABLE_OUTREACH_GENERATION", "true"
+            ).lower() == "true",
+            enable_job_verification=os.getenv(
+                "ENABLE_JOB_VERIFICATION", "true"
+            ).lower() == "true",
+            job_verification_timeout=float(os.getenv("JOB_VERIFICATION_TIMEOUT", "5.0")),
+            job_verification_batch_size=int(os.getenv("JOB_VERIFICATION_BATCH_SIZE", "20")),
             upload_api_key=os.getenv("LEADS_UPLOAD_API_KEY"),
             vercel_api_url=os.getenv("VERCEL_API_URL", "https://www.ishaangpta.com"),
             max_employee_count=int(os.getenv("MAX_EMPLOYEE_COUNT", "100")),

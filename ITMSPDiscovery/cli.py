@@ -46,6 +46,10 @@ def cmd_run(args):
         config.enable_decision_maker_lookup = False
     if args.skip_insights:
         config.enable_insight_generation = False
+    if args.skip_priority:
+        config.enable_priority_classification = False
+    if args.skip_outreach:
+        config.enable_outreach_generation = False
 
     db = Database(config.db_path)
 
@@ -178,13 +182,15 @@ def cmd_upload(args):
                         "jobLink": job["job_url"] or "",
                         "postingDate": job["posting_date"] or "",
                         "mostRecentPostingDate": most_recent_date,
-                        "linkedinUrl": "",
+                        "linkedinUrl": row["linkedin_url"] or "",
                         "sourceUrl": row["source_url"] or "",
                         "confidence": row["confidence"] or "",
                         "isNewCompany": False,
                         "firstSeenDate": row["first_seen_date"] or "",
-                        "verificationStatus": "unverified",
+                        "verificationStatus": job.get("verification_status") or "unverified",
                         "insight": row["insight"] or "",
+                        "priorityTier": row["priority_tier"] or "",
+                        "outreachDraft": row["outreach_draft"] or "",
                     }
                     leads.append(lead)
             else:
@@ -207,13 +213,15 @@ def cmd_upload(args):
                     "jobLink": "",
                     "postingDate": "",
                     "mostRecentPostingDate": "",
-                    "linkedinUrl": "",
+                    "linkedinUrl": row["linkedin_url"] or "",
                     "sourceUrl": row["source_url"] or "",
                     "confidence": row["confidence"] or "",
                     "isNewCompany": False,
                     "firstSeenDate": row["first_seen_date"] or "",
                     "verificationStatus": "unverified",
                     "insight": row["insight"] or "",
+                    "priorityTier": row["priority_tier"] or "",
+                    "outreachDraft": row["outreach_draft"] or "",
                 }
                 leads.append(lead)
 
@@ -315,6 +323,16 @@ def main():
         "--skip-insights",
         action="store_true",
         help="Skip AI insight generation",
+    )
+    run_parser.add_argument(
+        "--skip-priority",
+        action="store_true",
+        help="Skip priority tier classification",
+    )
+    run_parser.add_argument(
+        "--skip-outreach",
+        action="store_true",
+        help="Skip outreach draft generation",
     )
     run_parser.set_defaults(func=cmd_run)
 

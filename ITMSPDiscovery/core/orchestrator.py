@@ -1,14 +1,20 @@
 """Main orchestrator for the IT MSP discovery pipeline."""
 
+import asyncio
 import logging
 from datetime import datetime
 from typing import List, Dict, Any
+
+import httpx
 
 from ..config import Config
 from .database import Database
 from .serpapi_client import SerpAPIJobClient
 from .decision_maker import ITDecisionMakerFinder
 from .insight_generator import InsightGenerator
+from .priority_classifier import PriorityClassifier
+from .outreach_generator import OutreachGenerator
+from .job_verifier import JobVerifier
 
 logger = logging.getLogger(__name__)
 
@@ -20,7 +26,13 @@ class ITMSPOrchestrator:
     2. Deduplicate listings (within run + across previous runs)
     3. Store companies and jobs in SQLite
     4. Gemini lookup for decision makers + employee count + industry
-    5. Generate summary
+    5. Backfill LinkedIn URLs for DMs missing them
+    6. Validate LinkedIn URLs
+    7. Generate AI insights
+    8. Classify priority tiers (P1-P5)
+    9. Generate personalized outreach drafts
+    10. Verify job URLs
+    11. Record run snapshot
     """
 
     def __init__(
@@ -131,11 +143,28 @@ class ITMSPOrchestrator:
         if self.dry_run:
             print("  (DRY RUN - no database writes)")
 
-        # Step 3: Decision makers + insights for all eligible companies
+        # Step 3: Decision makers
         dm_found = await self._find_decision_makers_if_needed()
+
+        # Step 4: LinkedIn URL backfill
+        await self._backfill_linkedin_urls()
+
+        # Step 5: LinkedIn URL validation
+        await self._validate_linkedin_urls()
+
+        # Step 6: Insights
         await self._generate_insights_if_needed()
 
-        # Step 4: Record run and print summary
+        # Step 7: Priority classification
+        await self._classify_priority_tiers()
+
+        # Step 8: Outreach drafts
+        await self._generate_outreach_if_needed()
+
+        # Step 9: Job verification
+        await self._verify_jobs_if_needed()
+
+        # Step 10: Record run and print summary
         if not self.dry_run:
             self.db.record_run_snapshot(
                 run_id=self.run_id,
@@ -170,9 +199,9 @@ class ITMSPOrchestrator:
         """Find decision makers for all upload-eligible companies missing one."""
         if not self.config.enable_decision_maker_lookup or not self.config.gemini_api_key:
             if self.config.enable_decision_maker_lookup and not self.config.gemini_api_key:
-                print("\nStep 3: Skipping (GEMINI_API_KEY not set)")
+                print("\n--- Skipping decision makers (GEMINI_API_KEY not set) ---")
             else:
-                print("\nStep 3: Skipping (decision maker lookup disabled)")
+                print("\n--- Skipping decision makers (disabled) ---")
             return 0
 
         companies_needing_dm = self.db.get_companies_needing_dm_lookup(
@@ -180,15 +209,13 @@ class ITMSPOrchestrator:
         )
 
         if not companies_needing_dm:
-            print("\nStep 3: All companies already have decision maker lookups")
+            print("\n--- All companies already have decision maker lookups ---")
             return 0
 
-        print("\n" + "=" * 70)
         print(
-            f"Step 3: Looking up decision makers for "
-            f"{len(companies_needing_dm)} companies..."
+            f"\n--- Looking up decision makers for "
+            f"{len(companies_needing_dm)} companies ---"
         )
-        print("=" * 70)
 
         lookup_list = [
             {"company": c["name"], "domain": c.get("domain") or "", "company_id": c["id"]}
@@ -224,6 +251,7 @@ class ITMSPOrchestrator:
                             title=dm.title,
                             source_url=dm.source_url,
                             confidence=dm.confidence,
+                            linkedin_url=dm.linkedin_url,
                         )
                     print(
                         f"  {dm.company_name}: {dm.person_name} "
@@ -249,6 +277,113 @@ class ITMSPOrchestrator:
             print(f"  Decision maker lookup failed: {e}")
 
         return dm_found
+
+    async def _backfill_linkedin_urls(self):
+        """Re-run DM lookup for existing decision makers missing LinkedIn URLs."""
+        if not self.config.enable_decision_maker_lookup or not self.config.gemini_api_key:
+            return
+
+        companies = self.db.get_companies_needing_linkedin_url(
+            max_employee_count=self.config.max_employee_count
+        )
+        if not companies:
+            print("\n--- All decision makers already have LinkedIn URLs ---")
+            return
+
+        print(
+            f"\n--- Backfilling LinkedIn URLs for "
+            f"{len(companies)} decision makers ---"
+        )
+
+        lookup_list = [
+            {"company": c["name"], "domain": c.get("domain") or "", "company_id": c["id"]}
+            for c in companies
+        ]
+
+        try:
+            finder = ITDecisionMakerFinder(
+                api_key=self.config.gemini_api_key,
+                model=self.config.gemini_model,
+                batch_size=self.config.gemini_batch_size,
+            )
+            dm_results = await finder.find_decision_makers(lookup_list)
+
+            filled_count = 0
+            dm_by_company = {dm.company_name: dm for dm in dm_results}
+
+            for company_info in lookup_list:
+                company_id = company_info["company_id"]
+                company_name = company_info["company"]
+                dm = dm_by_company.get(company_name)
+
+                if dm and dm.person_name and dm.linkedin_url and not self.dry_run:
+                    filled_count += 1
+                    self.db.upsert_decision_maker(
+                        company_id=company_id,
+                        person_name=dm.person_name,
+                        title=dm.title,
+                        source_url=dm.source_url,
+                        confidence=dm.confidence,
+                        linkedin_url=dm.linkedin_url,
+                    )
+
+            print(f"  Filled {filled_count}/{len(companies)} LinkedIn URLs")
+
+        except Exception as e:
+            logger.error(f"LinkedIn URL backfill failed: {e}")
+            print(f"  LinkedIn URL backfill failed: {e}")
+
+    async def _validate_linkedin_urls(self):
+        """Validate LinkedIn URLs by checking if they resolve to real profiles."""
+        dms = self.db.get_decision_makers_with_linkedin_urls()
+        if not dms:
+            print("\n--- No LinkedIn URLs to validate ---")
+            return
+
+        print(f"\n--- Validating {len(dms)} LinkedIn URLs ---")
+
+        cleared = 0
+        browser_ua = (
+            "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
+            "AppleWebKit/537.36 (KHTML, like Gecko) "
+            "Chrome/120.0.0.0 Safari/537.36"
+        )
+
+        try:
+            async with httpx.AsyncClient(
+                timeout=httpx.Timeout(10.0),
+                headers={"User-Agent": browser_ua},
+                follow_redirects=True,
+            ) as client:
+                for dm in dms:
+                    url = dm["linkedin_url"]
+                    try:
+                        resp = await client.get(url)
+                        body = resp.text[:5000].lower()
+
+                        if resp.status_code == 404:
+                            if not self.dry_run:
+                                self.db.clear_linkedin_url(dm["id"])
+                            cleared += 1
+                            logger.info(f"Cleared invalid LinkedIn URL (404): {url}")
+                        elif resp.status_code == 200 and (
+                            "page not found" in body
+                            or "profile is not available" in body
+                            or "this page doesn" in body
+                        ):
+                            if not self.dry_run:
+                                self.db.clear_linkedin_url(dm["id"])
+                            cleared += 1
+                            logger.info(f"Cleared invalid LinkedIn URL (not found): {url}")
+                    except Exception as e:
+                        logger.debug(f"LinkedIn validation error for {url}: {e}")
+
+                    await asyncio.sleep(2)
+
+            print(f"  Cleared {cleared}/{len(dms)} invalid LinkedIn URLs")
+        except Exception as e:
+            logger.error(f"LinkedIn URL validation failed: {e}")
+            print(f"  LinkedIn URL validation failed: {e}")
 
     async def _generate_insights_if_needed(self):
         """Generate AI insights for companies that don't have one yet."""
@@ -295,6 +430,142 @@ class ITMSPOrchestrator:
         except Exception as e:
             logger.error(f"Insight generation failed: {e}")
             print(f"  Insight generation failed: {e}")
+
+    async def _classify_priority_tiers(self):
+        """Classify priority tiers for companies that don't have one yet."""
+        if not self.config.enable_priority_classification or not self.config.gemini_api_key:
+            return
+
+        companies = self.db.get_companies_needing_priority_classification(
+            max_employee_count=self.config.max_employee_count
+        )
+
+        if not companies:
+            print("\n--- All companies already have priority tiers ---")
+            return
+
+        print(f"\n--- Classifying priority tiers for {len(companies)} companies ---")
+
+        try:
+            classifier_input = []
+            for comp in companies:
+                jobs = self.db.get_jobs_for_company(comp["id"])
+                role_titles = [j["title"] for j in jobs]
+                classifier_input.append({
+                    "company_name": comp["name"],
+                    "domain": comp.get("domain") or "",
+                    "industry": comp.get("industry") or "",
+                    "employee_count": comp.get("employee_count"),
+                    "roles": role_titles,
+                    "has_decision_maker": bool(comp.get("has_decision_maker")),
+                })
+
+            classifier = PriorityClassifier(
+                api_key=self.config.gemini_api_key,
+                model=self.config.gemini_model,
+                batch_size=10,
+            )
+            results = await classifier.classify_priorities(classifier_input)
+
+            if not self.dry_run:
+                for comp in companies:
+                    result = results.get(comp["name"])
+                    if result:
+                        self.db.update_company_priority_tier(
+                            comp["id"], result["priority_tier"]
+                        )
+
+            print(f"  Classified {len(results)} companies")
+        except Exception as e:
+            logger.error(f"Priority classification failed: {e}")
+            print(f"  Priority classification failed: {e}")
+
+    async def _generate_outreach_if_needed(self):
+        """Generate personalized outreach drafts for companies missing them."""
+        if not self.config.enable_outreach_generation or not self.config.gemini_api_key:
+            return
+
+        companies = self.db.get_companies_needing_outreach(
+            max_employee_count=self.config.max_employee_count
+        )
+
+        if not companies:
+            print("\n--- All companies already have outreach drafts ---")
+            return
+
+        print(f"\n--- Generating outreach drafts for {len(companies)} companies ---")
+
+        try:
+            outreach_input = []
+            for comp in companies:
+                jobs = self.db.get_jobs_for_company(comp["id"])
+                role_titles = [j["title"] for j in jobs]
+                outreach_input.append({
+                    "company_name": comp["name"],
+                    "domain": comp.get("domain") or "",
+                    "roles": role_titles,
+                    "company_id": comp["id"],
+                })
+
+            generator = OutreachGenerator(
+                api_key=self.config.gemini_api_key,
+                model=self.config.gemini_model,
+            )
+            results = await generator.generate_outreach(outreach_input)
+
+            if not self.dry_run:
+                for comp in companies:
+                    result = results.get(comp["name"])
+                    if result:
+                        self.db.update_company_outreach(
+                            comp["id"],
+                            result.get("summary", ""),
+                            result.get("compliment", ""),
+                            result.get("outreach_draft", ""),
+                            result.get("role_classification", ""),
+                        )
+
+            generated = sum(1 for r in results.values() if r.get("outreach_draft"))
+            print(f"  Generated {generated} outreach drafts")
+        except Exception as e:
+            logger.error(f"Outreach generation failed: {e}")
+            print(f"  Outreach generation failed: {e}")
+
+    async def _verify_jobs_if_needed(self):
+        """Verify job URLs are still live using HEAD requests."""
+        if not self.config.enable_job_verification:
+            return
+
+        jobs = self.db.get_jobs_for_verification()
+
+        if not jobs:
+            print("\n--- No jobs to verify ---")
+            return
+
+        print(f"\n--- Verifying {len(jobs)} job URLs ---")
+
+        try:
+            verifier = JobVerifier(
+                timeout=self.config.job_verification_timeout,
+                batch_size=self.config.job_verification_batch_size,
+            )
+            results = await verifier.verify_jobs(jobs)
+
+            verified = stale = unverified = 0
+            if not self.dry_run:
+                for job_id, status in results:
+                    self.db.update_job_verification(job_id, status)
+                    if status == "verified":
+                        verified += 1
+                    elif status == "stale":
+                        stale += 1
+                    else:
+                        unverified += 1
+
+            print(f"  Verified: {verified}, Stale: {stale}, Unverified: {unverified}")
+        except Exception as e:
+            logger.error(f"Job verification failed: {e}")
+            print(f"  Job verification failed: {e}")
 
     def _print_summary(self, **kwargs):
         """Print run summary."""

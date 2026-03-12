@@ -12,6 +12,8 @@ from .models import DecisionMakerResult
 
 logger = logging.getLogger(__name__)
 
+_LINKEDIN_URL_PATTERN = re.compile(r"https?://(www\.)?linkedin\.com/in/.+")
+
 
 VALID_INDUSTRIES = {
     "Healthcare", "Legal", "Financial Services", "Manufacturing",
@@ -57,10 +59,13 @@ class ITDecisionMakerFinder:
         'one from this list: Healthcare, Legal, Financial Services, Manufacturing, '
         'Professional Services, Construction, Real Estate, '
         'Retail / E-commerce, Education, Nonprofits, Food & Beverage, Other.\n\n'
+        'Also return the person\'s LinkedIn profile URL as "linkedin_url" if found '
+        'during your search. If no LinkedIn profile is found, set it to null.\n\n'
         'Prefer accuracy over completeness.\n\n'
         'IMPORTANT: Return your results as a JSON array. Each element must be '
         'an object with these exact keys: "company_name", "person_name", '
-        '"title", "source_url", "confidence", "employee_count", "industry". '
+        '"title", "source_url", "confidence", "employee_count", "industry", '
+        '"linkedin_url". '
         'If not identifiable, set person_name to "Not confidently identifiable" '
         'and add a "reason" key.\n\n'
         'Companies:\n{company_list}'
@@ -192,6 +197,9 @@ class ITDecisionMakerFinder:
                     industry = entry.get("industry")
                     if industry and industry not in VALID_INDUSTRIES:
                         industry = "Other"
+                    linkedin_url = self._validate_linkedin_url(
+                        entry.get("linkedin_url")
+                    )
                     results_by_company[matched] = DecisionMakerResult(
                         company_name=matched,
                         person_name=person or None,
@@ -200,6 +208,7 @@ class ITDecisionMakerFinder:
                         confidence=entry.get("confidence"),
                         employee_count=emp_count,
                         industry=industry,
+                        linkedin_url=linkedin_url,
                         raw_text=str(entry),
                     )
         else:
@@ -255,6 +264,16 @@ class ITDecisionMakerFinder:
                 return candidate
             if name_lower in candidate.lower() or candidate.lower() in name_lower:
                 return candidate
+        return None
+
+    @staticmethod
+    def _validate_linkedin_url(url: Optional[str]) -> Optional[str]:
+        """Validate a LinkedIn profile URL. Returns URL if valid, None otherwise."""
+        if not url or not isinstance(url, str):
+            return None
+        url = url.strip()
+        if _LINKEDIN_URL_PATTERN.match(url):
+            return url
         return None
 
     def _regex_parse(

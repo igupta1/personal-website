@@ -54,11 +54,11 @@ function ItMspDemo() {
       return {
         success: true,
         leads: [
-          { companyName: "Smith & Associates Law", firstName: "John", lastName: "Smith", title: "Managing Partner", jobRole: "IT Manager", confidence: "High", website: "https://smithlawfirm.com", postingDate: formatDate(1), mostRecentPostingDate: formatDate(1), industry: "Legal", employeeCount: 35 },
-          { companyName: "Smith & Associates Law", firstName: "John", lastName: "Smith", title: "Managing Partner", jobRole: "Help Desk Technician", confidence: "High", website: "https://smithlawfirm.com", postingDate: formatDate(2), mostRecentPostingDate: formatDate(1), industry: "Legal", employeeCount: 35 },
-          { companyName: "Greenfield Dental Group", firstName: "Sarah", lastName: "Chen", title: "Office Manager", jobRole: "Systems Administrator", confidence: "Medium", website: "https://greenfieldental.com", postingDate: formatDate(0), mostRecentPostingDate: formatDate(0), industry: "Healthcare", employeeCount: 18 },
-          { companyName: "Pacific Construction Co", firstName: "Mike", lastName: "Rodriguez", title: "CEO", jobRole: "Network Administrator", confidence: "High", website: "https://pacificconstruction.com", postingDate: formatDate(3), mostRecentPostingDate: formatDate(3), industry: "Construction", employeeCount: 65 },
-          { companyName: "Summit Financial Advisors", firstName: "David", lastName: "Park", title: "Founder", jobRole: "IT Support Specialist", confidence: "High", website: "https://summitfa.com", postingDate: formatDate(5), mostRecentPostingDate: formatDate(5), industry: "Financial Services", employeeCount: 12 },
+          { companyName: "Smith & Associates Law", firstName: "John", lastName: "Smith", title: "Managing Partner", jobRole: "IT Manager", confidence: "High", website: "https://smithlawfirm.com", postingDate: formatDate(1), mostRecentPostingDate: formatDate(1), industry: "Legal", employeeCount: 35, priorityTier: "P1", outreachDraft: "Smith & Associates' focus on estate planning for high-net-worth families is a clear niche. Noticed you're looking for an IT Manager. Before you commit to a full-time hire, would it be worth exploring whether a managed IT provider could handle that workload at a predictable monthly cost?" },
+          { companyName: "Smith & Associates Law", firstName: "John", lastName: "Smith", title: "Managing Partner", jobRole: "Help Desk Technician", confidence: "High", website: "https://smithlawfirm.com", postingDate: formatDate(2), mostRecentPostingDate: formatDate(1), industry: "Legal", employeeCount: 35, priorityTier: "P1", outreachDraft: "Smith & Associates' focus on estate planning for high-net-worth families is a clear niche. Noticed you're looking for an IT Manager. Before you commit to a full-time hire, would it be worth exploring whether a managed IT provider could handle that workload at a predictable monthly cost?" },
+          { companyName: "Greenfield Dental Group", firstName: "Sarah", lastName: "Chen", title: "Office Manager", jobRole: "Systems Administrator", confidence: "Medium", website: "https://greenfieldental.com", postingDate: formatDate(0), mostRecentPostingDate: formatDate(0), industry: "Healthcare", employeeCount: 18, priorityTier: "P2", outreachDraft: "Noticed you're looking for a Systems Administrator. Before you commit to a full-time hire, would it be worth exploring whether a managed IT provider could handle that workload at a predictable monthly cost?" },
+          { companyName: "Pacific Construction Co", firstName: "Mike", lastName: "Rodriguez", title: "CEO", jobRole: "Network Administrator", confidence: "High", website: "https://pacificconstruction.com", postingDate: formatDate(3), mostRecentPostingDate: formatDate(3), industry: "Construction", employeeCount: 65, priorityTier: "P3" },
+          { companyName: "Summit Financial Advisors", firstName: "David", lastName: "Park", title: "Founder", jobRole: "IT Support Specialist", confidence: "High", website: "https://summitfa.com", postingDate: formatDate(5), mostRecentPostingDate: formatDate(5), industry: "Financial Services", employeeCount: 12, priorityTier: "P1", outreachDraft: "Summit's fee-only model sets them apart in the advisory space. Noticed you're looking for an IT Support Specialist. Before you commit to a full-time hire, would it be worth exploring whether a managed IT provider could handle that workload at a predictable monthly cost?" },
         ]
       };
     }
@@ -87,6 +87,8 @@ function ItMspDemo() {
             confidence: lead.confidence
           },
           insight: lead.insight || '',
+          priorityTier: lead.priorityTier || '',
+          outreachDraft: lead.outreachDraft || '',
           roles: []
         };
       }
@@ -103,21 +105,22 @@ function ItMspDemo() {
       }
     });
 
-    const result = Object.values(grouped).sort((a, b) => {
-      const aDate = a.mostRecentPostingDate ? parseLocalDate(a.mostRecentPostingDate) : new Date(0);
-      const bDate = b.mostRecentPostingDate ? parseLocalDate(b.mostRecentPostingDate) : new Date(0);
-      return bDate - aDate;
-    });
+    const priorityOrder = { 'P1': 1, 'P2': 2, 'P3': 3, 'P4': 4 };
+    const result = Object.values(grouped)
+      .filter(c => c.priorityTier !== 'P5')
+      .sort((a, b) => {
+        const aPriority = priorityOrder[a.priorityTier] || 5;
+        const bPriority = priorityOrder[b.priorityTier] || 5;
+        if (aPriority !== bPriority) return aPriority - bPriority;
+        const aHasDM = a.decisionMaker && a.decisionMaker.firstName ? 1 : 0;
+        const bHasDM = b.decisionMaker && b.decisionMaker.firstName ? 1 : 0;
+        if (aHasDM !== bHasDM) return bHasDM - aHasDM;
+        const aDate = a.mostRecentPostingDate ? parseLocalDate(a.mostRecentPostingDate) : new Date(0);
+        const bDate = b.mostRecentPostingDate ? parseLocalDate(b.mostRecentPostingDate) : new Date(0);
+        return bDate - aDate;
+      });
 
-    const now = new Date();
-    const filtered = result.filter(company => {
-      if (!company.mostRecentPostingDate) return false;
-      const postDate = parseLocalDate(company.mostRecentPostingDate);
-      const diffDays = Math.floor((now - postDate) / (1000 * 60 * 60 * 24));
-      return diffDays <= 7;
-    });
-
-    return filtered;
+    return result;
   };
 
   const getFilteredCompanies = () => {
@@ -337,7 +340,14 @@ function ItMspDemo() {
                         {/* Company Header */}
                         <div className="lead-gen-company-header">
                           <div className="lead-gen-company-info">
-                            <h3 className="lead-gen-company-name">{company.companyName}</h3>
+                            <h3 className="lead-gen-company-name">
+                              {company.companyName}
+                              {company.priorityTier && (
+                                <span className={`lead-gen-priority-badge lead-gen-priority-${company.priorityTier.toLowerCase()}`}>
+                                  {company.priorityTier}
+                                </span>
+                              )}
+                            </h3>
                             {company.website && (
                               <a href={company.website} target="_blank" rel="noopener noreferrer" className="lead-gen-company-website">
                                 {company.website.replace('https://', '')}
@@ -432,6 +442,22 @@ function ItMspDemo() {
                             <h4 className="lead-gen-section-title">How An IT MSP Can Help</h4>
                             <div className="lead-gen-insight-card">
                               <p className="lead-gen-insight-text">{company.insight}</p>
+                            </div>
+                          </div>
+                        )}
+
+                        {/* Outreach Draft */}
+                        {company.outreachDraft && (
+                          <div className="lead-gen-outreach-section">
+                            <h4 className="lead-gen-section-title">Personalized Introduction Copy</h4>
+                            <div className="lead-gen-outreach-card">
+                              <p className="lead-gen-outreach-text">{company.outreachDraft}</p>
+                              <button
+                                className="lead-gen-copy-btn"
+                                onClick={() => navigator.clipboard.writeText(company.outreachDraft)}
+                              >
+                                Copy
+                              </button>
                             </div>
                           </div>
                         )}

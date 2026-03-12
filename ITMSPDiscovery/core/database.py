@@ -101,16 +101,46 @@ class Database:
     def _run_migrations(self):
         """Add columns that don't exist yet."""
         cursor = self.conn.cursor()
+
+        # Companies table migrations
         cursor.execute("PRAGMA table_info(companies)")
         cols = {row[1] for row in cursor.fetchall()}
         for col_name, col_type in [
             ("insight", "TEXT"),
             ("dm_lookup_attempted_at", "TEXT"),
+            ("priority_tier", "TEXT"),
+            ("website_summary", "TEXT"),
+            ("compliment", "TEXT"),
+            ("outreach_draft", "TEXT"),
+            ("role_classification", "TEXT"),
         ]:
             if col_name not in cols:
                 cursor.execute(
                     f"ALTER TABLE companies ADD COLUMN {col_name} {col_type}"
                 )
+
+        # Decision makers table migrations
+        cursor.execute("PRAGMA table_info(decision_makers)")
+        dm_cols = {row[1] for row in cursor.fetchall()}
+        for col_name, col_type in [
+            ("linkedin_url", "TEXT"),
+        ]:
+            if col_name not in dm_cols:
+                cursor.execute(
+                    f"ALTER TABLE decision_makers ADD COLUMN {col_name} {col_type}"
+                )
+
+        # Jobs table migrations
+        cursor.execute("PRAGMA table_info(jobs)")
+        job_cols = {row[1] for row in cursor.fetchall()}
+        for col_name, col_type in [
+            ("verification_status", "TEXT DEFAULT 'unverified'"),
+        ]:
+            if col_name.split()[0] not in job_cols:
+                cursor.execute(
+                    f"ALTER TABLE jobs ADD COLUMN {col_name} {col_type}"
+                )
+
         self.conn.commit()
 
     def close(self):
@@ -229,6 +259,7 @@ class Database:
         title: Optional[str] = None,
         source_url: Optional[str] = None,
         confidence: Optional[str] = None,
+        linkedin_url: Optional[str] = None,
     ) -> int:
         """Insert or update decision maker for a company."""
         now = datetime.now().isoformat()
@@ -237,16 +268,17 @@ class Database:
             """
             INSERT INTO decision_makers (
                 company_id, person_name, title, source_url, confidence,
-                looked_up_at, updated_at
-            ) VALUES (?, ?, ?, ?, ?, ?, ?)
+                linkedin_url, looked_up_at, updated_at
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
             ON CONFLICT(company_id) DO UPDATE SET
                 person_name = excluded.person_name,
                 title = excluded.title,
                 source_url = excluded.source_url,
                 confidence = excluded.confidence,
+                linkedin_url = excluded.linkedin_url,
                 updated_at = excluded.updated_at
             """,
-            (company_id, person_name, title, source_url, confidence, now, now),
+            (company_id, person_name, title, source_url, confidence, linkedin_url, now, now),
         )
         self.conn.commit()
         return cursor.lastrowid
@@ -459,9 +491,13 @@ class Database:
                 dm.title as dm_title,
                 dm.source_url,
                 dm.confidence,
+                dm.linkedin_url,
                 (SELECT MAX(j.posting_date) FROM jobs j
                  WHERE j.company_id = c.id AND j.is_active = 1) as most_recent_posting,
-                c.insight
+                c.insight,
+                c.priority_tier,
+                c.outreach_draft,
+                c.role_classification
             FROM companies c
             LEFT JOIN decision_makers dm ON dm.company_id = c.id
             WHERE (c.employee_count IS NULL OR c.employee_count <= ?)
@@ -481,12 +517,158 @@ class Database:
         cursor = self.conn.cursor()
         cursor.execute(
             """
-            SELECT title, job_url, location, posting_date, source
+            SELECT id, title, job_url, location, posting_date, source,
+                   verification_status
             FROM jobs
             WHERE company_id = ? AND is_active = 1
               AND posting_date >= date('now', '-7 days')
             ORDER BY posting_date DESC
             """,
             (company_id,),
+        )
+        return [dict(row) for row in cursor.fetchall()]
+
+    # Priority tier operations
+
+    def update_company_priority_tier(self, company_id: int, priority_tier: str):
+        """Update company's priority tier classification."""
+        now = datetime.now().isoformat()
+        self.conn.execute(
+            "UPDATE companies SET priority_tier = ?, updated_at = ? WHERE id = ?",
+            (priority_tier, now, company_id),
+        )
+        self.conn.commit()
+
+    def get_companies_needing_priority_classification(
+        self, max_employee_count: int = 100
+    ) -> List[Dict]:
+        """Get upload-eligible companies that don't yet have a priority tier."""
+        cursor = self.conn.cursor()
+        cursor.execute(
+            """
+            SELECT c.id, c.name, c.domain, c.industry, c.employee_count,
+                   CASE WHEN dm.id IS NOT NULL THEN 1 ELSE 0 END as has_decision_maker
+            FROM companies c
+            LEFT JOIN decision_makers dm ON dm.company_id = c.id
+            WHERE (c.employee_count IS NULL OR c.employee_count <= ?)
+              AND EXISTS (
+                SELECT 1 FROM jobs j
+                WHERE j.company_id = c.id AND j.is_active = 1
+                  AND j.posting_date >= date('now', '-7 days')
+              )
+              AND (c.priority_tier IS NULL OR c.priority_tier = '')
+            """,
+            (max_employee_count,),
+        )
+        return [dict(row) for row in cursor.fetchall()]
+
+    # Outreach operations
+
+    def update_company_outreach(
+        self,
+        company_id: int,
+        summary: str,
+        compliment: str,
+        outreach_draft: str,
+        role_classification: str,
+    ):
+        """Update company's outreach draft and related fields."""
+        now = datetime.now().isoformat()
+        self.conn.execute(
+            """UPDATE companies SET website_summary = ?, compliment = ?,
+               outreach_draft = ?, role_classification = ?, updated_at = ?
+               WHERE id = ?""",
+            (summary, compliment, outreach_draft, role_classification, now, company_id),
+        )
+        self.conn.commit()
+
+    def get_companies_needing_outreach(
+        self, max_employee_count: int = 100
+    ) -> List[Dict]:
+        """Get upload-eligible companies that don't yet have outreach drafts."""
+        cursor = self.conn.cursor()
+        cursor.execute(
+            """
+            SELECT c.id, c.name, c.domain
+            FROM companies c
+            WHERE (c.employee_count IS NULL OR c.employee_count <= ?)
+              AND EXISTS (
+                SELECT 1 FROM jobs j
+                WHERE j.company_id = c.id AND j.is_active = 1
+                  AND j.posting_date >= date('now', '-7 days')
+              )
+              AND (c.outreach_draft IS NULL OR c.outreach_draft = '')
+            """,
+            (max_employee_count,),
+        )
+        return [dict(row) for row in cursor.fetchall()]
+
+    # LinkedIn URL operations
+
+    def get_companies_needing_linkedin_url(
+        self, max_employee_count: int = 100
+    ) -> List[Dict]:
+        """Get companies with decision makers but missing LinkedIn URLs."""
+        cursor = self.conn.cursor()
+        cursor.execute(
+            """
+            SELECT c.id, c.name, c.domain
+            FROM companies c
+            INNER JOIN decision_makers dm ON dm.company_id = c.id
+            WHERE (c.employee_count IS NULL OR c.employee_count <= ?)
+              AND EXISTS (
+                SELECT 1 FROM jobs j
+                WHERE j.company_id = c.id AND j.is_active = 1
+                  AND j.posting_date >= date('now', '-7 days')
+              )
+              AND (dm.linkedin_url IS NULL OR dm.linkedin_url = '')
+              AND dm.person_name IS NOT NULL
+            """,
+            (max_employee_count,),
+        )
+        return [dict(row) for row in cursor.fetchall()]
+
+    def get_decision_makers_with_linkedin_urls(self) -> List[Dict]:
+        """Get decision makers that have LinkedIn URLs (for validation)."""
+        cursor = self.conn.cursor()
+        cursor.execute(
+            """
+            SELECT dm.id, dm.company_id, dm.linkedin_url
+            FROM decision_makers dm
+            WHERE dm.linkedin_url IS NOT NULL AND dm.linkedin_url != ''
+            """
+        )
+        return [dict(row) for row in cursor.fetchall()]
+
+    def clear_linkedin_url(self, dm_id: int):
+        """Clear an invalid LinkedIn URL."""
+        self.conn.execute(
+            "UPDATE decision_makers SET linkedin_url = NULL, updated_at = ? WHERE id = ?",
+            (datetime.now().isoformat(), dm_id),
+        )
+        self.conn.commit()
+
+    # Job verification operations
+
+    def update_job_verification(self, job_id: int, status: str):
+        """Update a job's verification status."""
+        self.conn.execute(
+            "UPDATE jobs SET verification_status = ? WHERE id = ?",
+            (status, job_id),
+        )
+        self.conn.commit()
+
+    def get_jobs_for_verification(self) -> List[Dict]:
+        """Get active jobs that haven't been verified yet."""
+        cursor = self.conn.cursor()
+        cursor.execute(
+            """
+            SELECT id, job_url
+            FROM jobs
+            WHERE is_active = 1
+              AND job_url IS NOT NULL AND job_url != ''
+              AND (verification_status IS NULL OR verification_status = 'unverified')
+              AND posting_date >= date('now', '-7 days')
+            """
         )
         return [dict(row) for row in cursor.fetchall()]
