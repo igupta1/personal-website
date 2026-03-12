@@ -279,9 +279,25 @@ class ITDecisionMakerFinder:
         if not url or not isinstance(url, str):
             return None
         url = url.strip()
-        if _LINKEDIN_URL_PATTERN.match(url):
-            return url
-        return None
+        if not _LINKEDIN_URL_PATTERN.match(url):
+            return None
+        # Reject hallucinated URLs with repeating hex suffixes
+        # e.g. scott-collins-a7b7b7b7, kathy-warden-a7101010
+        slug = url.rstrip("/").rsplit("/", 1)[-1]
+        # Check for 8+ hex char suffix with repeating 2-char pattern
+        suffix_match = re.search(r"-([0-9a-f]{8,})$", slug)
+        if suffix_match:
+            hex_suffix = suffix_match.group(1)
+            # Repeating 2-char blocks: a7a7a7a7, 10101010, b7b7b7b7
+            if len(hex_suffix) >= 8:
+                pair = hex_suffix[:2]
+                if hex_suffix == pair * (len(hex_suffix) // 2):
+                    return None
+                # Repeating 4-char blocks: a7b0a7b0
+                quad = hex_suffix[:4]
+                if len(hex_suffix) >= 8 and hex_suffix == quad * (len(hex_suffix) // 4):
+                    return None
+        return url
 
     @staticmethod
     def _validate_website_url(url: Optional[str]) -> Optional[str]:
