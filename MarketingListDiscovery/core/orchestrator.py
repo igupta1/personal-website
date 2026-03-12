@@ -348,8 +348,8 @@ class ListDiscoveryOrchestrator:
 
     async def _validate_linkedin_urls(self):
         """Validate LinkedIn URLs by checking if they resolve to real profiles."""
-        company_ids = self._new_company_ids if self._new_company_ids else None
-        dms = self.db.get_decision_makers_with_linkedin_urls(company_ids)
+        # Always validate ALL LinkedIn URLs, not just new ones
+        dms = self.db.get_decision_makers_with_linkedin_urls(None)
         if not dms:
             print("\n--- No LinkedIn URLs to validate ---")
             return
