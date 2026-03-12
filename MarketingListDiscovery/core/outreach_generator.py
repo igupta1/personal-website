@@ -63,6 +63,16 @@ OUTREACH_NON_AGENCY_WITHOUT_COMPLIMENT = (
     "plate while you focus on hiring for the in-person side."
 )
 
+OUTREACH_AGENCY_COMPANY_WITH_COMPLIMENT = (
+    "{compliment} Noticed you're hiring for {a_role}. If you ever need overflow "
+    "support or white-label help on client work, would it be worth a quick conversation?"
+)
+
+OUTREACH_AGENCY_COMPANY_WITHOUT_COMPLIMENT = (
+    "Noticed you're hiring for {a_role}. If you ever need overflow support or "
+    "white-label help on client work, would it be worth a quick conversation?"
+)
+
 # Keywords for role classification (checked case-insensitively against role title)
 _NOT_AGENCY_KEYWORDS = [
     "brand ambassador", "promotions representative", "field marketing",
@@ -109,12 +119,42 @@ def _strip_em_dashes(text: str) -> str:
     return text.replace("\u2014", " - ").replace("\u2013", " - ")
 
 
+_ROLE_KEYWORDS = [
+    "coordinator", "manager", "specialist", "director", "analyst",
+    "associate", "ambassador", "writer", "strategist", "planner",
+    "lead", "head", "vp", "chief", "officer", "editor", "designer",
+    "developer", "engineer", "assistant", "intern", "executive",
+    "representative", "consultant", "supervisor", "administrator",
+]
+
+
 def _clean_role_title(role_title: str) -> str:
-    """Strip location/parenthetical info from role titles."""
-    # Remove parenthetical content: "Digital Audience Operations Support(New York, NY)" -> "Digital Audience Operations Support"
+    """Strip location, parentheticals, and junk from role titles.
+
+    Examples:
+        "Digital Audience Operations Support(New York, NY)" -> "Digital Audience Operations Support"
+        "Gretchen - Energy - Sports Drink - Brand Ambassador - Promoter - Weekly Pay" -> "Brand Ambassador"
+        "Social Media Coordinator- Beauty" -> "Social Media Coordinator"
+    """
+    # Step 1: Remove parenthetical content
     cleaned = re.sub(r'\s*\(.*?\)\s*', '', role_title).strip()
-    # Remove trailing comma-separated locations: "Marketing Manager, Remote" is fine but
-    # "Marketing Coordinator - New York, NY" strip after dash+location
+
+    # Step 2: Handle dash-separated junk titles (3+ segments)
+    segments = [s.strip() for s in cleaned.split(" - ") if s.strip()]
+    if len(segments) >= 3:
+        # Find segment containing a role keyword
+        for seg in segments:
+            seg_lower = seg.lower()
+            if any(kw in seg_lower for kw in _ROLE_KEYWORDS):
+                cleaned = seg
+                break
+        else:
+            # No keyword match — use longest segment as best guess
+            cleaned = max(segments, key=len)
+
+    # Step 3: Strip trailing "- Category" suffix (dash with short trailing text)
+    cleaned = re.sub(r'\s*-\s*\w+(\s+\w+)?$', '', cleaned).strip()
+
     return cleaned if cleaned else role_title
 
 
@@ -124,6 +164,24 @@ def _a_or_an(role_title: str) -> str:
     if first_char in ('a', 'e', 'i', 'o', 'u'):
         return f"an {role_title}"
     return f"a {role_title}"
+
+
+_AGENCY_COMPANY_KEYWORDS = [
+    "marketing agency", "advertising agency", "pr agency", "pr firm",
+    "media agency", "creative agency", "digital agency", "communications agency",
+    "communications firm", "marketing firm", "ad agency", "branding agency",
+    "full-service agency", "marketing services firm", "advertising firm",
+    "digital marketing agency", "social media agency", "content agency",
+    "performance marketing agency", "media buying agency",
+]
+
+
+def _is_marketing_agency(summary: str) -> bool:
+    """Detect if company is a marketing/advertising/PR agency from its summary."""
+    if not summary or summary == "none":
+        return False
+    lower = summary.lower()
+    return any(kw in lower for kw in _AGENCY_COMPANY_KEYWORDS)
 
 
 class OutreachGenerator:
@@ -182,7 +240,12 @@ class OutreachGenerator:
                 else:
                     compliment = "none"
 
-                draft = self._assemble_draft(compliment, role_title, role_class)
+                is_agency_co = _is_marketing_agency(summary)
+                if is_agency_co:
+                    role_class = "agency_company"
+                    print(f"  [{i+1}/{len(companies)}] {name}: detected as agency, using agency template")
+
+                draft = self._assemble_draft(compliment, role_title, role_class, is_agency_co)
 
                 results[name] = {
                     "summary": summary or "none",
@@ -353,21 +416,32 @@ class OutreachGenerator:
         return "none"
 
     @staticmethod
-    def _assemble_draft(compliment: str, role_title: str, role_classification: str = "agency_replaceable") -> str:
+    def _assemble_draft(
+        compliment: str,
+        role_title: str,
+        role_classification: str = "agency_replaceable",
+        is_agency_company: bool = False,
+    ) -> str:
         """Assemble the final outreach draft from compliment, role title, and role classification."""
         has_compliment = compliment and compliment != "none"
-        is_agency = role_classification == "agency_replaceable"
 
         clean_role = _clean_role_title(role_title)
         a_role = _a_or_an(clean_role)
 
-        if is_agency and has_compliment:
-            draft = OUTREACH_AGENCY_WITH_COMPLIMENT.format(compliment=compliment, a_role=a_role)
-        elif is_agency:
-            draft = OUTREACH_AGENCY_WITHOUT_COMPLIMENT.format(a_role=a_role)
-        elif has_compliment:
-            draft = OUTREACH_NON_AGENCY_WITH_COMPLIMENT.format(compliment=compliment, a_role=a_role)
+        if is_agency_company:
+            if has_compliment:
+                draft = OUTREACH_AGENCY_COMPANY_WITH_COMPLIMENT.format(compliment=compliment, a_role=a_role)
+            else:
+                draft = OUTREACH_AGENCY_COMPANY_WITHOUT_COMPLIMENT.format(a_role=a_role)
+        elif role_classification == "agency_replaceable":
+            if has_compliment:
+                draft = OUTREACH_AGENCY_WITH_COMPLIMENT.format(compliment=compliment, a_role=a_role)
+            else:
+                draft = OUTREACH_AGENCY_WITHOUT_COMPLIMENT.format(a_role=a_role)
         else:
-            draft = OUTREACH_NON_AGENCY_WITHOUT_COMPLIMENT.format(a_role=a_role)
+            if has_compliment:
+                draft = OUTREACH_NON_AGENCY_WITH_COMPLIMENT.format(compliment=compliment, a_role=a_role)
+            else:
+                draft = OUTREACH_NON_AGENCY_WITHOUT_COMPLIMENT.format(a_role=a_role)
 
         return _strip_em_dashes(draft)
