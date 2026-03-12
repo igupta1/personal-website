@@ -42,6 +42,8 @@ def cmd_run(args):
         print("DRY RUN MODE - No database writes will be made")
 
     config = Config.from_env()
+    if args.skip_screening:
+        config.enable_relevancy_screening = False
     if args.skip_decision_makers:
         config.enable_decision_maker_lookup = False
     if args.skip_insights:
@@ -313,6 +315,11 @@ def main():
         type=int,
         default=None,
         help="Override max searches per run (default: 100)",
+    )
+    run_parser.add_argument(
+        "--skip-screening",
+        action="store_true",
+        help="Skip early relevancy screening",
     )
     run_parser.add_argument(
         "--skip-decision-makers",

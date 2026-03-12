@@ -60,38 +60,42 @@ class SerpAPIJobClient:
 
     def search_all(
         self,
-        query: str,
+        queries: List[str],
         metro_areas: List[str],
     ) -> List[SerpJobListing]:
         """
-        Search the query across the given metro areas, deduplicate results.
+        Search multiple query clusters across the given metro areas, deduplicate results.
 
-        With daily rotation: 1 query x 3 metros = 3 searches per run.
+        With 2 query clusters x 4 metros = 8 searches per run.
         """
         seen: Set[str] = set()
         all_listings: List[SerpJobListing] = []
 
-        for metro in metro_areas:
-            if self.searches_used >= self.max_searches:
-                logger.warning(
-                    f"Search budget exhausted ({self.max_searches}). Stopping."
+        for query_idx, query in enumerate(queries, 1):
+            for metro in metro_areas:
+                if self.searches_used >= self.max_searches:
+                    logger.warning(
+                        f"Search budget exhausted ({self.max_searches}). Stopping."
+                    )
+                    return all_listings
+
+                listings = self._search_one(query, metro)
+                self.searches_used += 1
+
+                new_in_batch = 0
+                for listing in listings:
+                    dedup_key = self._dedup_key(listing.company_name, listing.title)
+                    if dedup_key not in seen:
+                        seen.add(dedup_key)
+                        listing.search_metro = metro
+                        all_listings.append(listing)
+                        new_in_batch += 1
+
+                logger.info(
+                    f"[{self.searches_used}] Q{query_idx} {metro}: "
+                    f"{len(listings)} results, {new_in_batch} new, "
+                    f"{len(all_listings)} unique total"
                 )
-                return all_listings
-
-            listings = self._search_one(query, metro)
-            self.searches_used += 1
-
-            for listing in listings:
-                dedup_key = self._dedup_key(listing.company_name, listing.title)
-                if dedup_key not in seen:
-                    seen.add(dedup_key)
-                    listing.search_metro = metro
-                    all_listings.append(listing)
-
-            logger.info(
-                f"[{self.searches_used}] {metro}: {len(listings)} results, "
-                f"{len(all_listings)} unique total"
-            )
 
         return all_listings
 

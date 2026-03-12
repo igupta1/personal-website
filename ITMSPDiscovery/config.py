@@ -21,9 +21,14 @@ class Config:
 
     # SerpAPI settings
     serpapi_api_key: Optional[str] = None
-    max_searches_per_run: int = 3
-    metros_per_run: int = 3
+    max_searches_per_run: int = 8
+    metros_per_run: int = 4
     metro_state_path: Path = field(default=None)
+
+    # Relevancy screening settings
+    enable_relevancy_screening: bool = True
+    relevancy_screening_threshold: int = 40
+    max_enrichment_companies: int = 30
 
     # Gemini Decision Maker settings
     gemini_api_key: Optional[str] = None
@@ -62,12 +67,11 @@ class Config:
         "San Francisco, CA", "Seattle, WA", "Denver, CO", "Washington, DC",
     ])
 
-    # Single combined query (all 10 IT titles in one search to save credits)
-    search_query: str = (
-        '("IT Manager" OR "Help Desk" OR "Systems Administrator" OR "Network Admin" '
-        'OR "IT Support" OR "IT Technician" OR "IT Coordinator" OR "Desktop Support" '
-        'OR "IT Specialist" OR "Network Engineer")'
-    )
+    # Split into two query clusters for better coverage with 8 daily SERP calls
+    search_queries: List[str] = field(default_factory=lambda: [
+        '("IT Manager" OR "Help Desk" OR "IT Support" OR "IT Technician" OR "Desktop Support")',
+        '("Systems Administrator" OR "Network Administrator" OR "IT Coordinator" OR "IT Specialist" OR "Network Engineer")',
+    ])
 
     def __post_init__(self):
         """Set default paths based on base_dir."""
@@ -81,8 +85,13 @@ class Config:
         """Create config from environment variables."""
         return cls(
             serpapi_api_key=os.getenv("SERPAPI_API_KEY"),
-            max_searches_per_run=int(os.getenv("MAX_SEARCHES_PER_RUN", "3")),
-            metros_per_run=int(os.getenv("METROS_PER_RUN", "3")),
+            max_searches_per_run=int(os.getenv("MAX_SEARCHES_PER_RUN", "8")),
+            metros_per_run=int(os.getenv("METROS_PER_RUN", "4")),
+            enable_relevancy_screening=os.getenv(
+                "ENABLE_RELEVANCY_SCREENING", "true"
+            ).lower() == "true",
+            relevancy_screening_threshold=int(os.getenv("RELEVANCY_SCREENING_THRESHOLD", "40")),
+            max_enrichment_companies=int(os.getenv("MAX_ENRICHMENT_COMPANIES", "30")),
             gemini_api_key=os.getenv("GEMINI_API_KEY"),
             gemini_model=os.getenv("GEMINI_MODEL", "gemini-2.5-flash"),
             gemini_batch_size=int(os.getenv("GEMINI_BATCH_SIZE", "5")),

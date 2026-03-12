@@ -15,6 +15,7 @@ from .insight_generator import InsightGenerator
 from .priority_classifier import PriorityClassifier
 from .outreach_generator import OutreachGenerator
 from .job_verifier import JobVerifier
+from .relevancy_screener import RelevancyScreener
 
 logger = logging.getLogger(__name__)
 
@@ -75,7 +76,7 @@ class ITMSPOrchestrator:
         print(f"  Today's metros: {', '.join(todays_metros)}")
 
         all_listings = client.search_all(
-            query=self.config.search_query,
+            queries=self.config.search_queries,
             metro_areas=todays_metros,
         )
         raw_count = client.searches_used * 10  # Approximate
@@ -143,28 +144,31 @@ class ITMSPOrchestrator:
         if self.dry_run:
             print("  (DRY RUN - no database writes)")
 
-        # Step 3: Decision makers
+        # Step 3: Early relevancy screening
+        await self._screen_relevancy()
+
+        # Step 4: Decision makers
         dm_found = await self._find_decision_makers_if_needed()
 
-        # Step 4: LinkedIn URL backfill
+        # Step 5: LinkedIn URL backfill
         await self._backfill_linkedin_urls()
 
-        # Step 5: LinkedIn URL validation
+        # Step 6: LinkedIn URL validation
         await self._validate_linkedin_urls()
 
-        # Step 6: Insights
+        # Step 7: Insights
         await self._generate_insights_if_needed()
 
-        # Step 7: Priority classification
+        # Step 8: Priority classification
         await self._classify_priority_tiers()
 
-        # Step 8: Outreach drafts
+        # Step 9: Outreach drafts
         await self._generate_outreach_if_needed()
 
-        # Step 9: Job verification
+        # Step 10: Job verification
         await self._verify_jobs_if_needed()
 
-        # Step 10: Record run and print summary
+        # Step 11: Record run and print summary
         if not self.dry_run:
             self.db.record_run_snapshot(
                 run_id=self.run_id,
@@ -194,6 +198,80 @@ class ITMSPOrchestrator:
             "companies": len(companies_touched),
             "decision_makers_found": dm_found,
         }
+
+    async def _screen_relevancy(self):
+        """Screen companies for relevancy before expensive enrichment."""
+        if not self.config.enable_relevancy_screening or not self.config.gemini_api_key:
+            if self.config.enable_relevancy_screening and not self.config.gemini_api_key:
+                print("\n--- Skipping relevancy screening (GEMINI_API_KEY not set) ---")
+            else:
+                print("\n--- Skipping relevancy screening (disabled) ---")
+            return
+
+        companies = self.db.get_companies_needing_relevancy_screening()
+
+        if not companies:
+            print("\n--- All companies already screened for relevancy ---")
+            return
+
+        print(f"\n" + "=" * 70)
+        print(f"Step 3: Screening {len(companies)} companies for relevancy...")
+        print("=" * 70)
+
+        # Build input with job data for richer context
+        screener_input = []
+        for comp in companies:
+            jobs = self.db.get_jobs_for_company(comp["id"])
+            roles = [j["title"] for j in jobs]
+            # Use first job's location and snippet as representative
+            location = jobs[0]["location"] if jobs else ""
+            snippets = [j.get("description_snippet", "") for j in jobs if j.get("description_snippet")]
+            snippet = snippets[0] if snippets else ""
+
+            screener_input.append({
+                "company_name": comp["name"],
+                "roles": roles,
+                "location": location,
+                "description_snippet": snippet,
+            })
+
+        try:
+            screener = RelevancyScreener(
+                api_key=self.config.gemini_api_key,
+                model=self.config.gemini_model,
+                batch_size=15,
+            )
+            results = await screener.screen_companies(screener_input)
+
+            # Sort by score descending for display
+            scored = []
+            for comp in companies:
+                result = results.get(comp["name"], {"score": 50, "reason": "No score returned"})
+                scored.append((comp, result["score"], result["reason"]))
+            scored.sort(key=lambda x: x[1], reverse=True)
+
+            kept = 0
+            screened_out = 0
+            threshold = self.config.relevancy_screening_threshold
+
+            for comp, score, reason in scored:
+                is_screened_out = score < threshold
+                if not self.dry_run:
+                    self.db.update_company_relevancy(
+                        comp["id"], score, reason, is_screened_out
+                    )
+                if is_screened_out:
+                    screened_out += 1
+                    print(f"  [-] {comp['name']}: {score}/100 - {reason}")
+                else:
+                    kept += 1
+                    print(f"  [+] {comp['name']}: {score}/100 - {reason}")
+
+            print(f"\n  Kept {kept} companies, screened out {screened_out}")
+
+        except Exception as e:
+            logger.error(f"Relevancy screening failed: {e}")
+            print(f"  Relevancy screening failed: {e}")
 
     async def _find_decision_makers_if_needed(self) -> int:
         """Find decision makers for all upload-eligible companies missing one."""

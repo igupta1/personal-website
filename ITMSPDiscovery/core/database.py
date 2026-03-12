@@ -113,6 +113,9 @@ class Database:
             ("compliment", "TEXT"),
             ("outreach_draft", "TEXT"),
             ("role_classification", "TEXT"),
+            ("relevancy_score", "INTEGER"),
+            ("relevancy_reason", "TEXT"),
+            ("screened_out", "INTEGER DEFAULT 0"),
         ]:
             if col_name not in cols:
                 cursor.execute(
@@ -316,6 +319,7 @@ class Database:
             FROM companies c
             LEFT JOIN decision_makers dm ON dm.company_id = c.id
             WHERE (c.employee_count IS NULL OR c.employee_count <= ?)
+              AND (c.screened_out IS NULL OR c.screened_out = 0)
               AND EXISTS (
                 SELECT 1 FROM jobs j
                 WHERE j.company_id = c.id AND j.is_active = 1
@@ -353,6 +357,7 @@ class Database:
             SELECT c.id, c.name, c.domain
             FROM companies c
             WHERE (c.employee_count IS NULL OR c.employee_count <= ?)
+              AND (c.screened_out IS NULL OR c.screened_out = 0)
               AND EXISTS (
                 SELECT 1 FROM jobs j
                 WHERE j.company_id = c.id AND j.is_active = 1
@@ -501,6 +506,7 @@ class Database:
             FROM companies c
             LEFT JOIN decision_makers dm ON dm.company_id = c.id
             WHERE (c.employee_count IS NULL OR c.employee_count <= ?)
+              AND (c.screened_out IS NULL OR c.screened_out = 0)
               AND EXISTS (
                 SELECT 1 FROM jobs j
                 WHERE j.company_id = c.id AND j.is_active = 1
@@ -551,6 +557,7 @@ class Database:
             FROM companies c
             LEFT JOIN decision_makers dm ON dm.company_id = c.id
             WHERE (c.employee_count IS NULL OR c.employee_count <= ?)
+              AND (c.screened_out IS NULL OR c.screened_out = 0)
               AND EXISTS (
                 SELECT 1 FROM jobs j
                 WHERE j.company_id = c.id AND j.is_active = 1
@@ -592,6 +599,7 @@ class Database:
             SELECT c.id, c.name, c.domain
             FROM companies c
             WHERE (c.employee_count IS NULL OR c.employee_count <= ?)
+              AND (c.screened_out IS NULL OR c.screened_out = 0)
               AND EXISTS (
                 SELECT 1 FROM jobs j
                 WHERE j.company_id = c.id AND j.is_active = 1
@@ -616,6 +624,7 @@ class Database:
             FROM companies c
             INNER JOIN decision_makers dm ON dm.company_id = c.id
             WHERE (c.employee_count IS NULL OR c.employee_count <= ?)
+              AND (c.screened_out IS NULL OR c.screened_out = 0)
               AND EXISTS (
                 SELECT 1 FROM jobs j
                 WHERE j.company_id = c.id AND j.is_active = 1
@@ -655,6 +664,37 @@ class Database:
         self.conn.execute(
             "UPDATE jobs SET verification_status = ? WHERE id = ?",
             (status, job_id),
+        )
+        self.conn.commit()
+
+    # Relevancy screening operations
+
+    def get_companies_needing_relevancy_screening(self) -> List[Dict]:
+        """Get companies that haven't been screened yet, with active jobs."""
+        cursor = self.conn.cursor()
+        cursor.execute(
+            """
+            SELECT c.id, c.name, c.domain
+            FROM companies c
+            WHERE c.relevancy_score IS NULL
+              AND EXISTS (
+                SELECT 1 FROM jobs j
+                WHERE j.company_id = c.id AND j.is_active = 1
+                  AND j.posting_date >= date('now', '-7 days')
+              )
+            """
+        )
+        return [dict(row) for row in cursor.fetchall()]
+
+    def update_company_relevancy(
+        self, company_id: int, score: int, reason: str, screened_out: bool
+    ):
+        """Update company's relevancy screening results."""
+        now = datetime.now().isoformat()
+        self.conn.execute(
+            """UPDATE companies SET relevancy_score = ?, relevancy_reason = ?,
+               screened_out = ?, updated_at = ? WHERE id = ?""",
+            (score, reason, 1 if screened_out else 0, now, company_id),
         )
         self.conn.commit()
 
