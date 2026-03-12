@@ -15,6 +15,32 @@ const SIZE_RANGES = [
   { label: "101-250", min: 101, max: 250 },
 ];
 
+const SPECIALTY_KEYWORDS = {
+  "Social Media": ["social media", "community manager", "social content", "social strategist"],
+  "Paid Ads": ["paid media", "paid search", "ppc", "ad operations", "advertising", "media planner", "media planning", "media buyer", "media buying"],
+  "Content": ["content strategist", "content coordinator", "copywriter", "copy editor", "content marketing", "web content", "content writer", "content manager", "content specialist"],
+  "SEO": ["seo", "search engine", "organic search", "organic growth"],
+  "PR": ["public relations", "pr ", "communications", "comms ", "press", "media relations"],
+  "Email Marketing": ["email marketing", "email", "crm", "lifecycle", "retention marketing", "marketing automation"],
+  "Web/Ecommerce": ["ecommerce", "e-commerce", "web developer", "web designer", "webmaster", "digital merchandising", "shopify", "web content"],
+  "Brand/Creative": ["brand ", "branding", "creative director", "creative manager", "graphic design", "art director", "visual design", "creative strategist"],
+  "Growth/Demand Gen": ["growth marketing", "demand gen", "demand generation", "growth manager", "head of growth", "acquisition", "performance marketing", "gtm"],
+  "General Marketing": ["marketing coordinator", "marketing specialist", "marketing manager", "marketing associate", "marketing assistant", "marketing director", "marketing analyst", "digital marketing"],
+};
+
+const getCompanySpecialties = (roles) => {
+  const specialties = new Set();
+  for (const role of roles) {
+    const lower = role.title.toLowerCase();
+    for (const [specialty, keywords] of Object.entries(SPECIALTY_KEYWORDS)) {
+      if (keywords.some(kw => lower.includes(kw))) {
+        specialties.add(specialty);
+      }
+    }
+  }
+  return specialties;
+};
+
 function LeadGenDemo() {
   const [companies, setCompanies] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -23,6 +49,7 @@ function LeadGenDemo() {
   const [selectedIndustries, setSelectedIndustries] = useState([]);
   const [selectedSizeRanges, setSelectedSizeRanges] = useState([]);
   const [filtersExpanded, setFiltersExpanded] = useState(false);
+  const [selectedSpecialty, setSelectedSpecialty] = useState(null);
 
   const fetchLeads = async () => {
     const location = "marketing-discovery";
@@ -125,6 +152,10 @@ function LeadGenDemo() {
   const getFilteredCompanies = () => {
     let filtered = companies;
 
+    if (selectedSpecialty) {
+      filtered = filtered.filter(c => getCompanySpecialties(c.roles).has(selectedSpecialty));
+    }
+
     if (selectedIndustries.length > 0) {
       filtered = filtered.filter(c => selectedIndustries.includes(c.industry));
     }
@@ -192,7 +223,12 @@ function LeadGenDemo() {
   };
 
   const filteredCompanies = getFilteredCompanies();
-  const activeFilterCount = selectedIndustries.length + selectedSizeRanges.length;
+  const activeFilterCount = selectedIndustries.length + selectedSizeRanges.length + (selectedSpecialty ? 1 : 0);
+
+  // Only show specialties that have at least one matching company
+  const availableSpecialties = Object.keys(SPECIALTY_KEYWORDS).filter(specialty =>
+    companies.some(c => getCompanySpecialties(c.roles).has(specialty))
+  );
 
   // Derive available filter options from actual data
   const availableIndustries = [...new Set(companies.map(c => c.industry).filter(Boolean))].sort();
@@ -228,6 +264,27 @@ function LeadGenDemo() {
               </div>
             ) : (
               <div className="demo-results-stage">
+                {/* Specialty Filter Pills */}
+                {availableSpecialties.length > 0 && (
+                  <div className="lead-gen-specialty-filters">
+                    <button
+                      className={`lead-gen-specialty-pill ${!selectedSpecialty ? 'active' : ''}`}
+                      onClick={() => setSelectedSpecialty(null)}
+                    >
+                      All
+                    </button>
+                    {availableSpecialties.map(specialty => (
+                      <button
+                        key={specialty}
+                        className={`lead-gen-specialty-pill ${selectedSpecialty === specialty ? 'active' : ''}`}
+                        onClick={() => setSelectedSpecialty(selectedSpecialty === specialty ? null : specialty)}
+                      >
+                        {specialty}
+                      </button>
+                    ))}
+                  </div>
+                )}
+
                 {/* Filter Panel - only show if data has filterable fields */}
                 {hasAnyFilters && (
                 <div className="lead-gen-filter-panel">
@@ -300,6 +357,7 @@ function LeadGenDemo() {
                           onClick={() => {
                             setSelectedIndustries([]);
                             setSelectedSizeRanges([]);
+                            setSelectedSpecialty(null);
                           }}
                         >
                           Clear all filters
@@ -322,11 +380,6 @@ function LeadGenDemo() {
                           <div className="lead-gen-company-info">
                             <h3 className="lead-gen-company-name">
                               {company.companyName}
-                              {company.priorityTier && (
-                                <span className={`lead-gen-priority-badge lead-gen-priority-${company.priorityTier.toLowerCase()}`}>
-                                  {company.priorityTier}
-                                </span>
-                              )}
                             </h3>
                             {company.website && (
                               <a href={company.website} target="_blank" rel="noopener noreferrer" className="lead-gen-company-website">
@@ -404,7 +457,7 @@ function LeadGenDemo() {
                                 <div className="lead-gen-dm-links">
                                   {company.decisionMaker.linkedinUrl && (
                                     <a href={company.decisionMaker.linkedinUrl} target="_blank" rel="noopener noreferrer">
-                                      LinkedIn
+                                      {company.decisionMaker.linkedinUrl.replace('https://', '').replace('http://', '').replace(/\/$/, '')}
                                     </a>
                                   )}
                                 </div>

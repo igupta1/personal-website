@@ -14,6 +14,28 @@ const SIZE_RANGES = [
   { label: "51-100", min: 51, max: 100 },
 ];
 
+const ROLE_CATEGORY_KEYWORDS = {
+  "Help Desk / IT Support": ["help desk", "it support", "support specialist", "support technician", "desktop support", "technical support"],
+  "Systems Administration": ["systems administrator", "system administrator", "sysadmin", "systems engineer"],
+  "IT Management": ["it manager", "it director", "it coordinator", "it generalist", "vp of it", "head of it"],
+  "Network / Infrastructure": ["network administrator", "network engineer", "infrastructure", "network technician"],
+  "Cybersecurity": ["cybersecurity", "security analyst", "information security", "security engineer", "security specialist"],
+  "Cloud / DevOps": ["cloud", "devops", "site reliability", "cloud engineer", "cloud administrator"],
+};
+
+const getCompanyRoleCategories = (roles) => {
+  const categories = new Set();
+  for (const role of roles) {
+    const lower = role.title.toLowerCase();
+    for (const [category, keywords] of Object.entries(ROLE_CATEGORY_KEYWORDS)) {
+      if (keywords.some(kw => lower.includes(kw))) {
+        categories.add(category);
+      }
+    }
+  }
+  return categories;
+};
+
 function ItMspDemo() {
   const [companies, setCompanies] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -22,6 +44,7 @@ function ItMspDemo() {
   const [selectedIndustries, setSelectedIndustries] = useState([]);
   const [selectedSizeRanges, setSelectedSizeRanges] = useState([]);
   const [filtersExpanded, setFiltersExpanded] = useState(false);
+  const [selectedRoleCategory, setSelectedRoleCategory] = useState(null);
   const [lastUpdated, setLastUpdated] = useState(null);
 
   const fetchLeads = async () => {
@@ -126,6 +149,10 @@ function ItMspDemo() {
   const getFilteredCompanies = () => {
     let filtered = companies;
 
+    if (selectedRoleCategory) {
+      filtered = filtered.filter(c => getCompanyRoleCategories(c.roles).has(selectedRoleCategory));
+    }
+
     if (selectedIndustries.length > 0) {
       filtered = filtered.filter(c => selectedIndustries.includes(c.industry));
     }
@@ -208,13 +235,16 @@ function ItMspDemo() {
   };
 
   const filteredCompanies = getFilteredCompanies();
-  const activeFilterCount = selectedIndustries.length + selectedSizeRanges.length;
+  const activeFilterCount = selectedIndustries.length + selectedSizeRanges.length + (selectedRoleCategory ? 1 : 0);
 
   const availableIndustries = [...new Set(companies.map(c => c.industry).filter(Boolean))].sort();
   const availableSizeRanges = SIZE_RANGES.filter(range =>
     companies.some(c => c.employeeCount && c.employeeCount >= range.min && c.employeeCount <= range.max)
   );
-  const hasAnyFilters = availableIndustries.length > 0 || availableSizeRanges.length > 0;
+  const availableRoleCategories = Object.keys(ROLE_CATEGORY_KEYWORDS).filter(category =>
+    companies.some(c => getCompanyRoleCategories(c.roles).has(category))
+  );
+  const hasAnyFilters = availableIndustries.length > 0 || availableSizeRanges.length > 0 || availableRoleCategories.length > 0;
 
   return (
     <div className="about-page-combined">
@@ -248,6 +278,28 @@ function ItMspDemo() {
               </div>
             ) : (
               <div className="demo-results-stage">
+                {/* Filter Panel */}
+                {/* Role Category Pills */}
+                {availableRoleCategories.length > 0 && (
+                <div className="lead-gen-specialty-filters">
+                  <button
+                    className={`lead-gen-specialty-pill ${!selectedRoleCategory ? 'active' : ''}`}
+                    onClick={() => setSelectedRoleCategory(null)}
+                  >
+                    All Roles
+                  </button>
+                  {availableRoleCategories.map(category => (
+                    <button
+                      key={category}
+                      className={`lead-gen-specialty-pill ${selectedRoleCategory === category ? 'active' : ''}`}
+                      onClick={() => setSelectedRoleCategory(selectedRoleCategory === category ? null : category)}
+                    >
+                      {category}
+                    </button>
+                  ))}
+                </div>
+                )}
+
                 {/* Filter Panel */}
                 {hasAnyFilters && (
                 <div className="lead-gen-filter-panel">
@@ -320,6 +372,7 @@ function ItMspDemo() {
                           onClick={() => {
                             setSelectedIndustries([]);
                             setSelectedSizeRanges([]);
+                            setSelectedRoleCategory(null);
                           }}
                         >
                           Clear all filters
@@ -342,11 +395,6 @@ function ItMspDemo() {
                           <div className="lead-gen-company-info">
                             <h3 className="lead-gen-company-name">
                               {company.companyName}
-                              {company.priorityTier && (
-                                <span className={`lead-gen-priority-badge lead-gen-priority-${company.priorityTier.toLowerCase()}`}>
-                                  {company.priorityTier}
-                                </span>
-                              )}
                             </h3>
                             {company.website && (
                               <a href={company.website} target="_blank" rel="noopener noreferrer" className="lead-gen-company-website">
@@ -427,7 +475,7 @@ function ItMspDemo() {
                                 <div className="lead-gen-dm-links">
                                   {company.decisionMaker.linkedinUrl && (
                                     <a href={company.decisionMaker.linkedinUrl} target="_blank" rel="noopener noreferrer">
-                                      LinkedIn
+                                      {company.decisionMaker.linkedinUrl.replace(/^https?:\/\/(www\.)?/, '')}
                                     </a>
                                   )}
                                 </div>
@@ -448,16 +496,10 @@ function ItMspDemo() {
 
                         {/* Outreach Draft */}
                         {company.outreachDraft && (
-                          <div className="lead-gen-outreach-section">
+                          <div className="lead-gen-insight-section">
                             <h4 className="lead-gen-section-title">Personalized Introduction Copy</h4>
-                            <div className="lead-gen-outreach-card">
-                              <p className="lead-gen-outreach-text">{company.outreachDraft}</p>
-                              <button
-                                className="lead-gen-copy-btn"
-                                onClick={() => navigator.clipboard.writeText(company.outreachDraft)}
-                              >
-                                Copy
-                              </button>
+                            <div className="lead-gen-insight-card">
+                              <p className="lead-gen-insight-text">{company.outreachDraft}</p>
                             </div>
                           </div>
                         )}

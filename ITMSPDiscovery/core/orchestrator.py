@@ -67,18 +67,18 @@ class ITMSPOrchestrator:
             max_searches=self.max_searches,
         )
 
-        # Pick today's metros from the rotation
-        todays_metros = SerpAPIJobClient.get_next_metros(
+        # Build today's cluster schedule (3 clusters with rotating metro counts)
+        schedule = SerpAPIJobClient.get_cluster_schedule(
             all_metros=self.config.metro_areas,
-            count=self.config.metros_per_run,
+            queries=self.config.search_queries,
+            rotation_patterns=self.config.cluster_rotation_patterns,
             state_path=self.config.metro_state_path,
         )
-        print(f"  Today's metros: {', '.join(todays_metros)}")
+        for query, metros in schedule:
+            label = query[:50].strip("()")
+            print(f"  {label}  →  {', '.join(metros)}")
 
-        all_listings = client.search_all(
-            queries=self.config.search_queries,
-            metro_areas=todays_metros,
-        )
+        all_listings = client.search_all(query_metro_pairs=schedule)
         raw_count = client.searches_used * 10  # Approximate
         print(
             f"  Found {len(all_listings)} unique listings "
@@ -337,11 +337,12 @@ class ITMSPOrchestrator:
                     )
 
                 # Update enrichment data regardless
-                if dm and not self.dry_run and (dm.employee_count or dm.industry):
+                if dm and not self.dry_run and (dm.employee_count or dm.industry or dm.website):
                     self.db.update_company_enrichment(
                         company_id,
                         employee_count=dm.employee_count,
                         industry=dm.industry,
+                        website=dm.website,
                     )
 
                 # Mark attempt regardless of success/failure

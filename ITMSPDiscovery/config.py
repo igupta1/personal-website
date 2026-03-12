@@ -22,7 +22,6 @@ class Config:
     # SerpAPI settings
     serpapi_api_key: Optional[str] = None
     max_searches_per_run: int = 8
-    metros_per_run: int = 4
     metro_state_path: Path = field(default=None)
 
     # Relevancy screening settings
@@ -58,19 +57,32 @@ class Config:
     # Company size filter
     max_employee_count: int = 100
 
-    # Metro areas for search
+    # Metro areas for search (SMB-optimized)
     metro_areas: List[str] = field(default_factory=lambda: [
-        "New York, NY", "Los Angeles, CA", "Chicago, IL", "Houston, TX",
-        "Phoenix, AZ", "Philadelphia, PA", "San Antonio, TX", "San Diego, CA",
-        "Dallas, TX", "San Jose, CA", "Austin, TX", "Jacksonville, FL",
-        "Fort Worth, TX", "Columbus, OH", "Charlotte, NC", "Indianapolis, IN",
-        "San Francisco, CA", "Seattle, WA", "Denver, CO", "Washington, DC",
+        # Tier 1 — large metros with strong SMB density
+        "Dallas, TX", "Houston, TX", "Atlanta, GA", "Phoenix, AZ",
+        "Denver, CO", "Austin, TX", "Nashville, TN", "Charlotte, NC",
+        "Columbus, OH", "Indianapolis, IN",
+        # Tier 2 — mid-size metros with high SMB concentration
+        "Tampa, FL", "Minneapolis, MN", "Portland, OR", "Salt Lake City, UT",
+        "Raleigh, NC", "San Antonio, TX", "Jacksonville, FL", "Kansas City, MO",
+        # Tier 3 — large metros for raw volume
+        "Chicago, IL", "Seattle, WA",
     ])
 
-    # Split into two query clusters for better coverage with 8 daily SERP calls
+    # 3 query clusters: entry-level, mid-level, first-IT-hire signal
     search_queries: List[str] = field(default_factory=lambda: [
-        '("IT Manager" OR "Help Desk" OR "IT Support" OR "IT Technician" OR "Desktop Support")',
-        '("Systems Administrator" OR "Network Administrator" OR "IT Coordinator" OR "IT Specialist" OR "Network Engineer")',
+        '("IT Support Specialist" OR "Help Desk Technician" OR "IT Help Desk")',
+        '("Systems Administrator" OR "Network Administrator" OR "IT Administrator")',
+        '("IT Manager" OR "IT Coordinator" OR "IT Generalist" OR "IT Director")',
+    ])
+
+    # Rotation patterns: metro counts per cluster [A, B, C]
+    # The "short" cluster (2 metros) rotates each day
+    cluster_rotation_patterns: List[List[int]] = field(default_factory=lambda: [
+        [3, 3, 2],  # Day 1: A=3, B=3, C=2
+        [2, 3, 3],  # Day 2: A=2, B=3, C=3
+        [3, 2, 3],  # Day 3: A=3, B=2, C=3
     ])
 
     def __post_init__(self):
@@ -86,7 +98,6 @@ class Config:
         return cls(
             serpapi_api_key=os.getenv("SERPAPI_API_KEY"),
             max_searches_per_run=int(os.getenv("MAX_SEARCHES_PER_RUN", "8")),
-            metros_per_run=int(os.getenv("METROS_PER_RUN", "4")),
             enable_relevancy_screening=os.getenv(
                 "ENABLE_RELEVANCY_SCREENING", "true"
             ).lower() == "true",

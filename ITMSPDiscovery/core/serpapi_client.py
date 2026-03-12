@@ -5,7 +5,7 @@ import logging
 import re
 from datetime import date, timedelta
 from pathlib import Path
-from typing import List, Set, Optional
+from typing import List, Set, Optional, Tuple
 
 from serpapi import GoogleSearch
 
@@ -28,51 +28,79 @@ class SerpAPIJobClient:
         self.searches_used = 0
 
     @staticmethod
-    def get_next_metros(
-        all_metros: List[str], count: int, state_path: Path
-    ) -> List[str]:
+    def get_cluster_schedule(
+        all_metros: List[str],
+        queries: List[str],
+        rotation_patterns: List[List[int]],
+        state_path: Path,
+    ) -> List[Tuple[str, List[str]]]:
         """
-        Pick the next `count` metros from the rotation and advance the index.
+        Build a per-cluster metro schedule and advance rotation state.
 
-        State is stored in a JSON file: {"next_index": N}
-        Wraps around when reaching the end of the list.
+        Each cluster has its own independent metro rotation index so every
+        cluster cycles through all metros over ~7 days. The "short" cluster
+        (2 metros instead of 3) rotates each day via cluster_rotation.
+
+        State file schema:
+            {"cluster_metro_indices": [0, 0, 0], "cluster_rotation": 0}
+
+        Returns:
+            List of (query, [metros]) tuples — one per cluster.
         """
-        # Read current state
-        next_index = 0
+        num_clusters = len(queries)
+        total_metros = len(all_metros)
+
+        # Read state (handle old format gracefully)
+        indices = [0] * num_clusters
+        cluster_rotation = 0
         if state_path.exists():
             try:
                 state = json.loads(state_path.read_text())
-                next_index = state.get("next_index", 0)
+                if "cluster_metro_indices" in state:
+                    saved = state["cluster_metro_indices"]
+                    # Ensure list is right length
+                    indices = (saved + [0] * num_clusters)[:num_clusters]
+                    cluster_rotation = state.get("cluster_rotation", 0)
+                # Old format {"next_index": N} — start fresh
             except (json.JSONDecodeError, OSError):
-                next_index = 0
+                pass
 
-        # Pick metros with wraparound
-        selected = []
-        total = len(all_metros)
-        for i in range(count):
-            selected.append(all_metros[(next_index + i) % total])
+        # Get today's pattern
+        pattern = rotation_patterns[cluster_rotation % len(rotation_patterns)]
 
-        # Advance and save state
-        new_index = (next_index + count) % total
-        state_path.write_text(json.dumps({"next_index": new_index}))
+        # Build schedule: each cluster picks its metros independently
+        schedule: List[Tuple[str, List[str]]] = []
+        for i, query in enumerate(queries):
+            count = pattern[i] if i < len(pattern) else 2
+            metros = []
+            for j in range(count):
+                metros.append(all_metros[(indices[i] + j) % total_metros])
+            schedule.append((query, metros))
+            # Advance this cluster's index
+            indices[i] = (indices[i] + count) % total_metros
 
-        return selected
+        # Save state
+        state_path.write_text(json.dumps({
+            "cluster_metro_indices": indices,
+            "cluster_rotation": cluster_rotation + 1,
+        }))
+
+        return schedule
 
     def search_all(
         self,
-        queries: List[str],
-        metro_areas: List[str],
+        query_metro_pairs: List[Tuple[str, List[str]]],
     ) -> List[SerpJobListing]:
         """
-        Search multiple query clusters across the given metro areas, deduplicate results.
+        Search each query cluster against its assigned metros, deduplicate results.
 
-        With 2 query clusters x 4 metros = 8 searches per run.
+        3 clusters with rotating metro counts = 8 searches per run.
         """
         seen: Set[str] = set()
         all_listings: List[SerpJobListing] = []
 
-        for query_idx, query in enumerate(queries, 1):
-            for metro in metro_areas:
+        for query_idx, (query, metros) in enumerate(query_metro_pairs, 1):
+            for metro in metros:
                 if self.searches_used >= self.max_searches:
                     logger.warning(
                         f"Search budget exhausted ({self.max_searches}). Stopping."

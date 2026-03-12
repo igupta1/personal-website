@@ -61,11 +61,14 @@ class ITDecisionMakerFinder:
         'Retail / E-commerce, Education, Nonprofits, Food & Beverage, Other.\n\n'
         'Also return the person\'s LinkedIn profile URL as "linkedin_url" if found '
         'during your search. If no LinkedIn profile is found, set it to null.\n\n'
+        'Also return the company\'s primary website URL as "website" (e.g. '
+        '"https://smithlawfirm.com"). Use the company\'s official domain, not '
+        'a LinkedIn or Facebook page. If no website is found, set it to null.\n\n'
         'Prefer accuracy over completeness.\n\n'
         'IMPORTANT: Return your results as a JSON array. Each element must be '
         'an object with these exact keys: "company_name", "person_name", '
         '"title", "source_url", "confidence", "employee_count", "industry", '
-        '"linkedin_url". '
+        '"linkedin_url", "website". '
         'If not identifiable, set person_name to "Not confidently identifiable" '
         'and add a "reason" key.\n\n'
         'Companies:\n{company_list}'
@@ -200,6 +203,9 @@ class ITDecisionMakerFinder:
                     linkedin_url = self._validate_linkedin_url(
                         entry.get("linkedin_url")
                     )
+                    website = self._validate_website_url(
+                        entry.get("website")
+                    )
                     results_by_company[matched] = DecisionMakerResult(
                         company_name=matched,
                         person_name=person or None,
@@ -209,6 +215,7 @@ class ITDecisionMakerFinder:
                         employee_count=emp_count,
                         industry=industry,
                         linkedin_url=linkedin_url,
+                        website=website,
                         raw_text=str(entry),
                     )
         else:
@@ -275,6 +282,21 @@ class ITDecisionMakerFinder:
         if _LINKEDIN_URL_PATTERN.match(url):
             return url
         return None
+
+    @staticmethod
+    def _validate_website_url(url: Optional[str]) -> Optional[str]:
+        """Validate a company website URL. Rejects social media pages."""
+        if not url or not isinstance(url, str):
+            return None
+        url = url.strip()
+        if not url.startswith(("http://", "https://")):
+            return None
+        # Reject social media profiles as company websites
+        social_domains = ["linkedin.com", "facebook.com", "twitter.com", "instagram.com"]
+        for domain in social_domains:
+            if domain in url.lower():
+                return None
+        return url
 
     def _regex_parse(
         self,
