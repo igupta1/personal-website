@@ -37,7 +37,9 @@ class ListDiscoveryOrchestrator:
     """
 
     # Maximum companies to process through expensive enrichment stages
-    MAX_ENRICHMENT_COMPANIES = 30
+    MAX_ENRICHMENT_COMPANIES = 100
+    # Minimum relevancy score to proceed (filters out competitors, enterprises)
+    MIN_RELEVANCY_SCORE = 40
 
     def __init__(
         self,
@@ -188,15 +190,20 @@ class ListDiscoveryOrchestrator:
                 marker = "*" if rank <= self.MAX_ENRICHMENT_COMPANIES else " "
                 print(f"  {marker} #{rank} [{score}] {company['name']} - {reason}")
 
-            # Keep top N
+            # Filter by minimum score, then cap at top N
+            qualified = [(c, j, s, r) for c, j, s, r in scored if s >= self.MIN_RELEVANCY_SCORE]
+            disqualified = len(scored) - len(qualified)
+            if disqualified > 0:
+                print(f"\n  Disqualified {disqualified} companies below score {self.MIN_RELEVANCY_SCORE}")
+
             limit = self.MAX_ENRICHMENT_COMPANIES
             if self.max_companies > 0:
                 limit = min(limit, self.max_companies)
 
-            kept = scored[:limit]
-            dropped = len(scored) - len(kept)
+            kept = qualified[:limit]
+            dropped = len(qualified) - len(kept)
             if dropped > 0:
-                print(f"\n  Keeping top {len(kept)}, dropping {dropped} lower-relevancy companies")
+                print(f"  Capped to top {len(kept)} (dropped {dropped} above cutoff)")
 
             return [(company, jobs) for company, jobs, score, reason in kept]
 

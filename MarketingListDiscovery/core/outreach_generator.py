@@ -40,25 +40,25 @@ COMPLIMENT_PROMPT = (
 )
 
 OUTREACH_AGENCY_WITH_COMPLIMENT = (
-    "{compliment} Noticed you're looking for a {role}. Before you commit to a "
+    "{compliment} Noticed you're looking for {a_role}. Before you commit to a "
     "full-time hire, would it be worth exploring whether an agency could deliver "
     "the same results at a fraction of the cost?"
 )
 
 OUTREACH_AGENCY_WITHOUT_COMPLIMENT = (
-    "Noticed you're looking for a {role}. Before you commit to a full-time hire, "
+    "Noticed you're looking for {a_role}. Before you commit to a full-time hire, "
     "would it be worth exploring whether an agency could deliver the same results "
     "at a fraction of the cost?"
 )
 
 OUTREACH_NON_AGENCY_WITH_COMPLIMENT = (
-    "{compliment} Noticed you're looking for a {role}. If your team is also "
+    "{compliment} Noticed you're looking for {a_role}. If your team is also "
     "stretched thin on digital marketing or content, that's something an agency "
     "could take off your plate while you focus on hiring for the in-person side."
 )
 
 OUTREACH_NON_AGENCY_WITHOUT_COMPLIMENT = (
-    "Noticed you're looking for a {role}. If your team is also stretched thin on "
+    "Noticed you're looking for {a_role}. If your team is also stretched thin on "
     "digital marketing or content, that's something an agency could take off your "
     "plate while you focus on hiring for the in-person side."
 )
@@ -107,6 +107,23 @@ BROWSER_USER_AGENT = (
 def _strip_em_dashes(text: str) -> str:
     """Replace em dashes and en dashes with ' - '."""
     return text.replace("\u2014", " - ").replace("\u2013", " - ")
+
+
+def _clean_role_title(role_title: str) -> str:
+    """Strip location/parenthetical info from role titles."""
+    # Remove parenthetical content: "Digital Audience Operations Support(New York, NY)" -> "Digital Audience Operations Support"
+    cleaned = re.sub(r'\s*\(.*?\)\s*', '', role_title).strip()
+    # Remove trailing comma-separated locations: "Marketing Manager, Remote" is fine but
+    # "Marketing Coordinator - New York, NY" strip after dash+location
+    return cleaned if cleaned else role_title
+
+
+def _a_or_an(role_title: str) -> str:
+    """Return 'a' or 'an' based on whether the role title starts with a vowel sound."""
+    first_char = role_title.lstrip().lower()[:1]
+    if first_char in ('a', 'e', 'i', 'o', 'u'):
+        return f"an {role_title}"
+    return f"a {role_title}"
 
 
 class OutreachGenerator:
@@ -341,13 +358,16 @@ class OutreachGenerator:
         has_compliment = compliment and compliment != "none"
         is_agency = role_classification == "agency_replaceable"
 
+        clean_role = _clean_role_title(role_title)
+        a_role = _a_or_an(clean_role)
+
         if is_agency and has_compliment:
-            draft = OUTREACH_AGENCY_WITH_COMPLIMENT.format(compliment=compliment, role=role_title)
+            draft = OUTREACH_AGENCY_WITH_COMPLIMENT.format(compliment=compliment, a_role=a_role)
         elif is_agency:
-            draft = OUTREACH_AGENCY_WITHOUT_COMPLIMENT.format(role=role_title)
+            draft = OUTREACH_AGENCY_WITHOUT_COMPLIMENT.format(a_role=a_role)
         elif has_compliment:
-            draft = OUTREACH_NON_AGENCY_WITH_COMPLIMENT.format(compliment=compliment, role=role_title)
+            draft = OUTREACH_NON_AGENCY_WITH_COMPLIMENT.format(compliment=compliment, a_role=a_role)
         else:
-            draft = OUTREACH_NON_AGENCY_WITHOUT_COMPLIMENT.format(role=role_title)
+            draft = OUTREACH_NON_AGENCY_WITHOUT_COMPLIMENT.format(a_role=a_role)
 
         return _strip_em_dashes(draft)

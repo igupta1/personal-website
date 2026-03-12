@@ -425,16 +425,10 @@ function LeadGenDemo() {
 
                         {/* Outreach Draft */}
                         {company.outreachDraft && (
-                          <div className="lead-gen-outreach-section">
+                          <div className="lead-gen-insight-section">
                             <h4 className="lead-gen-section-title">Personalized Introduction Copy</h4>
-                            <div className="lead-gen-outreach-card">
-                              <p className="lead-gen-outreach-text">{company.outreachDraft}</p>
-                              <button
-                                className="lead-gen-copy-btn"
-                                onClick={() => navigator.clipboard.writeText(company.outreachDraft)}
-                              >
-                                Copy
-                              </button>
+                            <div className="lead-gen-insight-card">
+                              <p className="lead-gen-insight-text">{company.outreachDraft}</p>
                             </div>
                           </div>
                         )}

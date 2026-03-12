@@ -11,7 +11,7 @@ permissions:
 jobs:
   discover-leads:
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    timeout-minutes: 60
     env:
       TZ: America/New_York
 
