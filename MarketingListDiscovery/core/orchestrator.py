@@ -363,6 +363,18 @@ class ListDiscoveryOrchestrator:
             "Chrome/120.0.0.0 Safari/537.36"
         )
 
+        # Phrases in the page body that indicate a non-existent profile
+        _INVALID_MARKERS = [
+            "page not found",
+            "profile is not available",
+            "this page doesn",
+            "this linkedin page isn",
+            "the profile you're looking for",
+            "couldn't find this page",
+            "this profile is no longer available",
+            "404",
+        ]
+
         try:
             async with httpx.AsyncClient(
                 timeout=httpx.Timeout(10.0),
@@ -372,23 +384,35 @@ class ListDiscoveryOrchestrator:
                 for dm in dms:
                     url = dm["linkedin_url"]
                     try:
-                        resp = await client.get(url)
-                        body = resp.text[:5000].lower()
+                        resp = await client.head(url)
+
+                        is_invalid = False
 
                         if resp.status_code == 404:
+                            is_invalid = True
+                        elif resp.status_code == 999:
+                            # LinkedIn blocks automated requests with 999;
+                            # can't verify, so skip (don't clear)
+                            logger.debug(f"LinkedIn returned 999 for {url}, skipping")
+                            await asyncio.sleep(2)
+                            continue
+                        elif resp.status_code in (200, 301, 302, 303):
+                            # HEAD passed; do a GET to check for soft 404 in body
+                            get_resp = await client.get(url)
+                            body = get_resp.text[:8000].lower()
+
+                            if any(marker in body for marker in _INVALID_MARKERS):
+                                is_invalid = True
+                            # LinkedIn redirects invalid profiles to the login/404 page
+                            final_url = str(get_resp.url).lower()
+                            if "/404" in final_url or "linkedin.com/in/" not in final_url:
+                                is_invalid = True
+
+                        if is_invalid:
                             if not self.dry_run:
                                 self.db.clear_linkedin_url(dm["id"])
                             cleared += 1
-                            logger.info(f"Cleared invalid LinkedIn URL (404): {url}")
-                        elif resp.status_code == 200 and (
-                            "page not found" in body
-                            or "profile is not available" in body
-                            or "this page doesn" in body
-                        ):
-                            if not self.dry_run:
-                                self.db.clear_linkedin_url(dm["id"])
-                            cleared += 1
-                            logger.info(f"Cleared invalid LinkedIn URL (not found): {url}")
+                            logger.info(f"Cleared invalid LinkedIn URL: {url}")
                     except Exception as e:
                         logger.debug(f"LinkedIn validation error for {url}: {e}")
 
