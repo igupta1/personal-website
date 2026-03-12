@@ -15,6 +15,7 @@ from .decision_maker import DecisionMakerFinder
 from .insight_generator import InsightGenerator
 from .priority_classifier import PriorityClassifier
 from .outreach_generator import OutreachGenerator
+from .relevancy_screener import RelevancyScreener
 from ..scrapers.github_scraper import GitHubReadmeScraper
 
 logger = logging.getLogger(__name__)
@@ -34,6 +35,9 @@ class ListDiscoveryOrchestrator:
     7. Mark companies as seen
     8. Generate summary report
     """
+
+    # Maximum companies to process through expensive enrichment stages
+    MAX_ENRICHMENT_COMPANIES = 30
 
     def __init__(
         self,
@@ -92,6 +96,9 @@ class ListDiscoveryOrchestrator:
 
             print(f"Found {len(companies_with_jobs)} new companies to process")
 
+            # Early relevancy screening: score all companies, keep top N
+            companies_with_jobs = await self._screen_relevancy(companies_with_jobs)
+
             results = []
 
             for i, (company, jobs) in enumerate(companies_with_jobs, 1):
@@ -141,6 +148,66 @@ class ListDiscoveryOrchestrator:
         summary = self._generate_summary(results, elapsed)
         self._print_summary(summary)
         return summary
+
+    async def _screen_relevancy(
+        self, companies_with_jobs: List[tuple]
+    ) -> List[tuple]:
+        """Score all companies by relevancy and return only top N."""
+        if not self.config.gemini_api_key:
+            logger.warning("No GEMINI_API_KEY set, skipping relevancy screening")
+            return companies_with_jobs
+
+        print(f"\n--- Screening {len(companies_with_jobs)} companies for relevancy ---")
+
+        screener_input = []
+        for company, jobs in companies_with_jobs:
+            screener_input.append({
+                "company_name": company["name"],
+                "domain": company["domain"],
+                "roles": [j.job_title for j in jobs],
+            })
+
+        try:
+            screener = RelevancyScreener(
+                api_key=self.config.gemini_api_key,
+                model=self.config.gemini_model,
+                batch_size=10,
+            )
+            scores = await screener.screen_companies(screener_input)
+
+            # Attach scores and sort descending
+            scored = []
+            for company, jobs in companies_with_jobs:
+                result = scores.get(company["name"], {"score": 50, "reason": "Not scored"})
+                scored.append((company, jobs, result["score"], result["reason"]))
+
+            scored.sort(key=lambda x: x[2], reverse=True)
+
+            # Print ranking
+            for rank, (company, jobs, score, reason) in enumerate(scored, 1):
+                marker = "*" if rank <= self.MAX_ENRICHMENT_COMPANIES else " "
+                print(f"  {marker} #{rank} [{score}] {company['name']} - {reason}")
+
+            # Keep top N
+            limit = self.MAX_ENRICHMENT_COMPANIES
+            if self.max_companies > 0:
+                limit = min(limit, self.max_companies)
+
+            kept = scored[:limit]
+            dropped = len(scored) - len(kept)
+            if dropped > 0:
+                print(f"\n  Keeping top {len(kept)}, dropping {dropped} lower-relevancy companies")
+
+            return [(company, jobs) for company, jobs, score, reason in kept]
+
+        except Exception as e:
+            logger.error(f"Relevancy screening failed: {e}")
+            self._record_error("relevancy_screening", f"Screening failed: {e}")
+            print(f"  Screening failed ({e}), proceeding with all companies")
+            # Fall back to max_companies limit if set
+            if self.max_companies > 0:
+                return companies_with_jobs[:self.max_companies]
+            return companies_with_jobs
 
     async def _find_decision_makers_if_needed(self):
         """Find decision makers for all upload-eligible companies missing one."""
@@ -538,10 +605,6 @@ class ListDiscoveryOrchestrator:
         if skipped > 0:
             print(f"Skipped {skipped} companies with no new jobs")
 
-        if self.max_companies > 0 and len(result) > self.max_companies:
-            print(f"Limiting to {self.max_companies} companies (from {len(result)})")
-            result = result[:self.max_companies]
-
         return result
 
     def _store_company_and_jobs(
@@ -579,9 +642,8 @@ class ListDiscoveryOrchestrator:
                 "posting_date": listing.date_posted.isoformat(),
             })
 
-        # Update urgency score and reset DM lookup for re-enrichment
+        # Reset DM lookup for re-enrichment
         if not self.dry_run:
-            self.db.update_company_urgency(company_id, stored_count)
             self.db.conn.execute(
                 "UPDATE companies SET dm_lookup_attempted_at = NULL WHERE id = ?",
                 (company_id,),

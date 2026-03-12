@@ -247,18 +247,6 @@ class Database:
             self.conn.commit()
             return cursor.lastrowid, True  # New company = always process
 
-    def update_company_urgency(self, company_id: int, urgency_score: int):
-        """Update company's urgency score (count of marketing jobs)."""
-        now = datetime.now().isoformat()
-        self.conn.execute(
-            """
-            UPDATE companies SET urgency_score = ?, updated_at = ?
-            WHERE id = ?
-            """,
-            (urgency_score, now, company_id),
-        )
-        self.conn.commit()
-
     # Decision maker operations
 
     def upsert_decision_maker(
@@ -301,21 +289,6 @@ class Database:
         )
         row = cursor.fetchone()
         return dict(row) if row else None
-
-    def get_top_companies_by_urgency(self, limit: int = 10) -> List[Dict]:
-        """Get top companies by marketing job urgency score."""
-        cursor = self.conn.cursor()
-        cursor.execute(
-            """
-            SELECT c.id, c.name, c.domain, c.urgency_score, c.ats_provider
-            FROM companies c
-            WHERE c.urgency_score > 0
-            ORDER BY c.urgency_score DESC
-            LIMIT ?
-            """,
-            (limit,),
-        )
-        return [dict(row) for row in cursor.fetchall()]
 
     def get_companies_sorted_by_recency(self, limit: int = None) -> List[Dict]:
         """

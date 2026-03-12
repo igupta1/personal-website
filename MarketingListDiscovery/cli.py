@@ -216,7 +216,7 @@ def cmd_upload(args):
                 WHERE j.company_id = c.id AND j.is_active = 1
                   AND j.posting_date >= date('now', '-7 days')
               )
-            ORDER BY most_recent_posting DESC, c.urgency_score DESC
+            ORDER BY most_recent_posting DESC
             """
         )
         companies = cursor.fetchall()
