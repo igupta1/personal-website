@@ -2,7 +2,7 @@ name: Daily List Discovery
 
 on:
   schedule:
-    - cron: '0 4 * * *'  # 11 PM EST = 4 AM UTC
+    - cron: '0 21 * * *'  # 4 PM EST = 9 PM UTC
   workflow_dispatch:  # Allow manual trigger
 
 permissions:
