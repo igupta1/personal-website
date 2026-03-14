@@ -455,11 +455,6 @@ function LeadGenDemo() {
                                 </div>
                                 <div className="lead-gen-dm-title">{company.decisionMaker.title}</div>
                                 <div className="lead-gen-dm-links">
-                                  {company.decisionMaker.linkedinUrl && (
-                                    <a href={company.decisionMaker.linkedinUrl} target="_blank" rel="noopener noreferrer">
-                                      {company.decisionMaker.linkedinUrl.replace('https://', '').replace('http://', '').replace(/\/$/, '')}
-                                    </a>
-                                  )}
                                 </div>
                               </div>
                             </div>
