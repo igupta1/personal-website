@@ -14,7 +14,7 @@ from .models import GitHubListing
 from .decision_maker import DecisionMakerFinder
 from .insight_generator import InsightGenerator
 from .priority_classifier import PriorityClassifier
-from .outreach_generator import OutreachGenerator, _classify_role, _clean_role_title, _a_or_an, _pick_closing, _AGENCY_CLOSINGS, _NON_AGENCY_CLOSINGS, _strip_em_dashes
+from .outreach_generator import OutreachGenerator
 from .relevancy_screener import RelevancyScreener
 from ..scrapers.github_scraper import GitHubReadmeScraper
 
@@ -135,22 +135,9 @@ class ListDiscoveryOrchestrator:
 
         await self._find_decision_makers_if_needed()
 
-        # Filter out companies with >250 employees (they'll be excluded by upload filter anyway)
-        if self._new_company_ids:
-            cursor = self.db.conn.cursor()
-            cursor.execute(
-                f"SELECT id FROM companies WHERE id IN ({','.join('?' * len(self._new_company_ids))}) "
-                "AND employee_count IS NOT NULL AND employee_count > 250",
-                self._new_company_ids,
-            )
-            large_ids = {row[0] for row in cursor.fetchall()}
-            if large_ids:
-                self._new_company_ids = [
-                    cid for cid in self._new_company_ids if cid not in large_ids
-                ]
-                print(f"\n--- Filtered out {len(large_ids)} companies with >250 employees ---")
+        await self._generate_insights_if_needed()
 
-        await self._generate_insights_and_priorities()
+        await self._classify_priority_tiers()
 
         await self._generate_outreach_if_needed()
 
@@ -301,41 +288,76 @@ class ListDiscoveryOrchestrator:
             self._record_error("decision_makers", f"Decision maker lookup failed: {e}", critical=True)
             print(f"  Decision maker lookup failed: {e}")
 
-    async def _generate_insights_and_priorities(self):
-        """Generate insights and priority tiers in a single combined Claude call."""
-        if not self.config.anthropic_api_key:
-            return
-        if not self.config.enable_insight_generation and not self.config.enable_priority_classification:
+    async def _generate_insights_if_needed(self):
+        """Generate AI insights for newly added companies that don't have one yet."""
+        if not self.config.enable_insight_generation or not self.config.anthropic_api_key:
             return
 
-        # Get companies needing either insight or priority
+        # Only generate insights for companies processed in this run
+        # Falls back to all companies with missing insights if no new ones
         companies_needing_insights = self.db.get_companies_with_missing_insights(
             self._new_company_ids if self._new_company_ids else None
         )
-        companies_needing_priority = self.db.get_companies_needing_priority_classification(
+
+        if not companies_needing_insights:
+            print("\n--- All top companies already have insights ---")
+            return
+
+        print(
+            f"\n--- Generating insights for "
+            f"{len(companies_needing_insights)} companies ---"
+        )
+        try:
+            insight_input = []
+            for comp in companies_needing_insights:
+                jobs = self.db.get_jobs_for_company_by_id(comp["id"])
+                role_titles = [j["title"] for j in jobs]
+                insight_input.append({
+                    "company_name": comp["name"],
+                    "domain": comp["domain"],
+                    "roles": role_titles,
+                })
+
+            generator = InsightGenerator(
+                api_key=self.config.anthropic_api_key,
+                model=self.config.anthropic_model,
+                batch_size=10,
+            )
+            insights = await generator.generate_insights(insight_input)
+
+            if not self.dry_run:
+                for comp in companies_needing_insights:
+                    insight_text = insights.get(comp["name"])
+                    if insight_text:
+                        self.db.update_company_insight(comp["id"], insight_text)
+
+            print(f"  Generated {len(insights)} insights")
+        except Exception as e:
+            logger.error(f"Insight generation failed: {e}")
+            self._record_error("insights", f"Insight generation failed: {e}")
+            print(f"  Insight generation failed: {e}")
+
+    async def _classify_priority_tiers(self):
+        """Classify priority tiers for companies that don't have one yet."""
+        if not self.config.enable_priority_classification or not self.config.anthropic_api_key:
+            return
+
+        companies = self.db.get_companies_needing_priority_classification(
             self._new_company_ids if self._new_company_ids else None
         )
 
-        # Merge into unique set by company ID
-        seen_ids = set()
-        companies = []
-        for comp in list(companies_needing_insights) + list(companies_needing_priority):
-            if comp["id"] not in seen_ids:
-                seen_ids.add(comp["id"])
-                companies.append(comp)
-
         if not companies:
-            print("\n--- All companies already have insights and priority tiers ---")
+            print("\n--- All companies already have priority tiers ---")
             return
 
-        print(f"\n--- Generating insights + priorities for {len(companies)} companies ---")
+        print(f"\n--- Classifying priority tiers for {len(companies)} companies ---")
 
         try:
-            combined_input = []
+            classifier_input = []
             for comp in companies:
                 jobs = self.db.get_jobs_for_company_by_id(comp["id"])
                 role_titles = [j["title"] for j in jobs]
-                combined_input.append({
+                classifier_input.append({
                     "company_name": comp["name"],
                     "domain": comp["domain"],
                     "industry": comp.get("industry") or "",
@@ -344,30 +366,26 @@ class ListDiscoveryOrchestrator:
                     "has_decision_maker": bool(comp.get("has_decision_maker")),
                 })
 
-            from .insight_and_priority import InsightAndPriorityGenerator
-            generator = InsightAndPriorityGenerator(
+            classifier = PriorityClassifier(
                 api_key=self.config.anthropic_api_key,
                 model=self.config.anthropic_model,
                 batch_size=10,
             )
-            results = await generator.generate(combined_input)
+            results = await classifier.classify_priorities(classifier_input)
 
             if not self.dry_run:
                 for comp in companies:
                     result = results.get(comp["name"])
                     if result:
-                        if result.get("insight"):
-                            self.db.update_company_insight(comp["id"], result["insight"])
-                        if result.get("priority_tier"):
-                            self.db.update_company_priority_tier(
-                                comp["id"], result["priority_tier"]
-                            )
+                        self.db.update_company_priority_tier(
+                            comp["id"], result["priority_tier"]
+                        )
 
-            print(f"  Generated {len(results)} insights + priority tiers")
+            print(f"  Classified {len(results)} companies")
         except Exception as e:
-            logger.error(f"Insight+priority generation failed: {e}")
-            self._record_error("insights_priority", f"Insight+priority generation failed: {e}")
-            print(f"  Insight+priority generation failed: {e}")
+            logger.error(f"Priority classification failed: {e}")
+            self._record_error("priority_classification", f"Priority classification failed: {e}")
+            print(f"  Priority classification failed: {e}")
 
     async def _generate_outreach_if_needed(self):
         """Generate personalized outreach drafts for companies missing them."""
@@ -420,42 +438,6 @@ class ListDiscoveryOrchestrator:
             logger.error(f"Outreach generation failed: {e}")
             self._record_error("outreach", f"Outreach generation failed: {e}")
             print(f"  Outreach generation failed: {e}")
-
-        # Assign generic outreach drafts to P5 companies (no scraping/LLM needed)
-        self._assign_p5_fallback_outreach()
-
-    def _assign_p5_fallback_outreach(self):
-        """Assign generic outreach drafts to P5 companies without using LLM."""
-        cursor = self.db.conn.cursor()
-        cursor.execute("""
-            SELECT c.id, c.name, c.domain FROM companies c
-            WHERE c.priority_tier = 'P5'
-            AND (c.outreach_draft IS NULL OR c.outreach_draft = '')
-            AND EXISTS (SELECT 1 FROM jobs j WHERE j.company_id = c.id AND j.is_active = 1)
-        """)
-        p5_companies = cursor.fetchall()
-        if not p5_companies:
-            return
-
-        count = 0
-        for row in p5_companies:
-            company_id, name, domain = row
-            jobs = self.db.get_jobs_for_company_by_id(company_id)
-            role_title = jobs[0]["title"] if jobs else "marketing role"
-            role_class = _classify_role(role_title)
-            clean_role = _clean_role_title(role_title)
-            a_role = _a_or_an(clean_role)
-            closing = _pick_closing(
-                _AGENCY_CLOSINGS if role_class == "agency_replaceable" else _NON_AGENCY_CLOSINGS,
-                name,
-            )
-            draft = _strip_em_dashes(f"Noticed you're looking for {a_role}. {closing}")
-            if not self.dry_run:
-                self.db.update_company_outreach(company_id, "", "", draft, role_class)
-            count += 1
-
-        if count:
-            print(f"  Assigned {count} generic outreach drafts to P5 companies")
 
     async def _load_companies_from_github(
         self, client: httpx.AsyncClient

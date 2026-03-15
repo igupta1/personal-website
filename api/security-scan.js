@@ -395,6 +395,8 @@ async function generateGeminiSummary(domain, checks) {
 
 Do NOT use letter grades or scores. Do NOT be condescending. Write as if you are a trusted advisor having a conversation with the business owner. Be direct and specific — reference the actual findings from their scan.
 
+Keep each recommendation description to 2-3 sentences maximum. Be concise.
+
 Respond in valid JSON format with this structure:
 {
   "executiveSummary": "...",
@@ -417,11 +419,11 @@ ${JSON.stringify(checks, null, 2)}`;
           contents: [{ parts: [{ text: prompt }] }],
           generationConfig: {
             temperature: 0.7,
-            maxOutputTokens: 1500,
+            maxOutputTokens: 4000,
             responseMimeType: 'application/json',
           },
         }),
-        signal: AbortSignal.timeout(15000),
+        signal: AbortSignal.timeout(30000),
       }
     );
 
