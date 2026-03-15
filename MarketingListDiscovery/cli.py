@@ -469,7 +469,7 @@ def cmd_enrich(args):
 
                 try:
                     response = await client.aio.models.generate_content(
-                        model=config.gemini_model or "gemini-2.5-flash",
+                        model=config.gemini_model or "gemini-2.5-pro",
                         contents=prompt,
                         config=gen_config,
                     )

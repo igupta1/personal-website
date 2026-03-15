@@ -1,4 +1,4 @@
-"""Personalized outreach draft generation using website scraping + Gemini."""
+"""Personalized outreach draft generation using website scraping + Anthropic Claude."""
 
 import asyncio
 import json
@@ -9,25 +9,20 @@ from urllib.parse import urljoin, urlparse
 
 import httpx
 from bs4 import BeautifulSoup
-from google import genai
-from google.genai import types
+from anthropic import AsyncAnthropic
 
 logger = logging.getLogger(__name__)
 
-SUMMARIZE_PROMPT = (
+SUMMARIZE_AND_COMPLIMENT_PROMPT = (
     "You're provided markdown scrapes of a company's homepage and up to 3 subpages. "
-    "Write a two-paragraph summary of what this company does, who they serve, and "
-    "anything notable about their positioning, values, or recent activity. "
-    'Return as JSON: {"summary": "your summary here"}. '
-    "Rules: Be comprehensive but concise. Focus on specifics that make this company unique. "
-    'If content is empty or unusable, return {"summary": "none"}'
-)
-
-COMPLIMENT_PROMPT = (
-    "You're a sales copywriter. Given a company summary, generate a single compliment "
-    "sentence about this company that could open a cold email. "
-    'Return as JSON: {"compliment": "your compliment here"}. '
-    "Rules: One sentence only. Reference something specific and non-obvious from the summary. "
+    "Do two things:\n\n"
+    "1. Write a two-paragraph summary of what this company does, who they serve, and "
+    "anything notable about their positioning, values, or recent activity.\n\n"
+    "2. Based on that summary, generate a single compliment sentence about this company "
+    "that could open a cold email.\n\n"
+    'Return as JSON: {"summary": "your summary here", "compliment": "your compliment here"}.\n\n'
+    "Summary rules: Be comprehensive but concise. Focus on specifics that make this company unique.\n\n"
+    "Compliment rules: One sentence only. Reference something specific and non-obvious from the summary. "
     "Do NOT say generic things like 'Love your website' or 'Great company'. "
     "Write in a matter-of-fact, peer-to-peer tone. Do NOT use gushing language like "
     "'It's genuinely impressive,' 'It's really cool,' 'It's fantastic how,' or "
@@ -35,8 +30,8 @@ COMPLIMENT_PROMPT = (
     "For example, instead of 'It's genuinely impressive how EXL achieves a 90% success rate' "
     "write 'EXL's 90% success rate on enterprise AI initiatives is a strong proof point.' "
     "Shorten company names where natural. "
-    "Do NOT use em dashes (\u2014) anywhere. "
-    'If the summary is \'none\', return {"compliment": "none"}'
+    "Do NOT use em dashes (\u2014) anywhere.\n\n"
+    'If content is empty or unusable, return {"summary": "none", "compliment": "none"}'
 )
 
 OUTREACH_AGENCY_WITH_COMPLIMENT = (
@@ -113,6 +108,21 @@ BROWSER_USER_AGENT = (
     "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
 )
 
+# Full browser headers to reduce 403 rejections
+BROWSER_HEADERS = {
+    "User-Agent": BROWSER_USER_AGENT,
+    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+    "Accept-Language": "en-US,en;q=0.9",
+    "Accept-Encoding": "gzip, deflate, br",
+    "Connection": "keep-alive",
+    "Upgrade-Insecure-Requests": "1",
+    "Sec-Fetch-Dest": "document",
+    "Sec-Fetch-Mode": "navigate",
+    "Sec-Fetch-Site": "none",
+    "Sec-Fetch-User": "?1",
+    "Cache-Control": "max-age=0",
+}
+
 
 def _strip_em_dashes(text: str) -> str:
     """Replace em dashes and en dashes with ' - '."""
@@ -135,6 +145,7 @@ def _clean_role_title(role_title: str) -> str:
         "Digital Audience Operations Support(New York, NY)" -> "Digital Audience Operations Support"
         "Gretchen - Energy - Sports Drink - Brand Ambassador - Promoter - Weekly Pay" -> "Brand Ambassador"
         "Social Media Coordinator- Beauty" -> "Social Media Coordinator"
+        "Associate, Growth & Go-To-Market Strategy" -> "Associate, Growth & Go-To-Market Strategy"
     """
     # Step 1: Remove parenthetical content
     cleaned = re.sub(r'\s*\(.*?\)\s*', '', role_title).strip()
@@ -152,14 +163,26 @@ def _clean_role_title(role_title: str) -> str:
             # No keyword match — use longest segment as best guess
             cleaned = max(segments, key=len)
 
-    # Step 3: Strip trailing "- Category" suffix (dash with short trailing text)
-    cleaned = re.sub(r'\s*-\s*\w+(\s+\w+)?$', '', cleaned).strip()
+    # Step 3: Strip trailing "- Category" suffix, but protect hyphenated
+    # compounds like "Go-To-Market" where the dash is part of the word
+    if not re.search(r'\w-\w', cleaned):
+        cleaned = re.sub(r'\s*-\s*\w+(\s+\w+)?$', '', cleaned).strip()
 
     return cleaned if cleaned else role_title
 
 
 def _a_or_an(role_title: str) -> str:
     """Return 'a' or 'an' based on whether the role title starts with a vowel sound."""
+    word = role_title.lstrip().split()[0] if role_title.strip() else ""
+
+    # Handle acronyms (all-uppercase words like UGC, SEO, HR, FBI)
+    # Letters whose names start with vowel sounds: A E F H I L M N O R S X
+    if word.isupper() and len(word) >= 2:
+        vowel_sound_letters = set("AEFHILMNORSX")
+        if word[0] in vowel_sound_letters:
+            return f"an {role_title}"
+        return f"a {role_title}"
+
     first_char = role_title.lstrip().lower()[:1]
     if first_char in ('a', 'e', 'i', 'o', 'u'):
         return f"an {role_title}"
@@ -185,18 +208,15 @@ def _is_marketing_agency(summary: str) -> bool:
 
 
 class OutreachGenerator:
-    """Generate personalized outreach drafts by scraping company websites and using Gemini."""
+    """Generate personalized outreach drafts by scraping company websites and using Anthropic Claude."""
 
     def __init__(
         self,
         api_key: Optional[str] = None,
-        model: str = "gemini-2.5-flash",
+        model: str = "claude-sonnet-4-6",
     ):
         self.model = model
-        client_kwargs = {}
-        if api_key:
-            client_kwargs["api_key"] = api_key
-        self.client = genai.Client(**client_kwargs)
+        self.client = AsyncAnthropic(api_key=api_key, max_retries=3)
 
     async def generate_outreach(
         self, companies: List[Dict[str, Any]]
@@ -229,15 +249,10 @@ class OutreachGenerator:
                 raw_text = await self._scrape_company(domain)
 
                 if raw_text and len(raw_text.strip()) > 100:
-                    print(f"  [{i+1}/{len(companies)}] {name}: summarizing...")
-                    summary = await self._summarize(raw_text)
+                    print(f"  [{i+1}/{len(companies)}] {name}: summarizing + generating compliment...")
+                    summary, compliment = await self._summarize_and_compliment(raw_text)
                 else:
                     summary = "none"
-
-                if summary and summary != "none":
-                    print(f"  [{i+1}/{len(companies)}] {name}: generating compliment...")
-                    compliment = await self._generate_compliment(summary)
-                else:
                     compliment = "none"
 
                 is_agency_co = _is_marketing_agency(summary)
@@ -273,10 +288,9 @@ class OutreachGenerator:
     async def _scrape_company(self, domain: str) -> str:
         """Scrape company homepage + up to 3 subpages, return concatenated text."""
         all_text = []
-        headers = {"User-Agent": BROWSER_USER_AGENT}
 
         async with httpx.AsyncClient(
-            headers=headers, timeout=10.0, follow_redirects=True
+            headers=BROWSER_HEADERS, timeout=10.0, follow_redirects=True
         ) as client:
             # Fetch homepage
             homepage_url = f"https://{domain}"
@@ -355,42 +369,32 @@ class OutreachGenerator:
 
         return links
 
-    async def _summarize(self, raw_text: str) -> str:
-        """Summarize company website content via Gemini."""
-        prompt = f"{SUMMARIZE_PROMPT}\n\n---\n\n{raw_text}"
-        config = types.GenerateContentConfig(temperature=0.3)
+    async def _summarize_and_compliment(self, raw_text: str) -> tuple:
+        """Summarize company website and generate compliment in a single LLM call.
+
+        Returns:
+            Tuple of (summary, compliment) strings.
+        """
+        prompt = f"{SUMMARIZE_AND_COMPLIMENT_PROMPT}\n\n---\n\n{raw_text}"
 
         try:
-            response = await self.client.aio.models.generate_content(
+            response = await self.client.messages.create(
                 model=self.model,
-                contents=prompt,
-                config=config,
+                max_tokens=2048,
+                temperature=0.3,
+                messages=[{"role": "user", "content": prompt}],
             )
-            if not response.text:
-                return "none"
-            return self._parse_json_field(response.text, "summary")
-        except Exception as e:
-            logger.error(f"Summarize call failed: {e}")
-            return "none"
+            raw_response = response.content[0].text
+            if not raw_response:
+                return "none", "none"
 
-    async def _generate_compliment(self, summary: str) -> str:
-        """Generate a compliment sentence from the company summary via Gemini."""
-        prompt = f"{COMPLIMENT_PROMPT}\n\nCompany summary:\n{summary}"
-        config = types.GenerateContentConfig(temperature=0.3)
-
-        try:
-            response = await self.client.aio.models.generate_content(
-                model=self.model,
-                contents=prompt,
-                config=config,
-            )
-            if not response.text:
-                return "none"
-            compliment = self._parse_json_field(response.text, "compliment")
-            return _strip_em_dashes(compliment) if compliment else "none"
+            summary = self._parse_json_field(raw_response, "summary")
+            compliment = self._parse_json_field(raw_response, "compliment")
+            compliment = _strip_em_dashes(compliment) if compliment and compliment != "none" else "none"
+            return summary, compliment
         except Exception as e:
-            logger.error(f"Compliment call failed: {e}")
-            return "none"
+            logger.error(f"Summarize+compliment call failed: {e}")
+            return "none", "none"
 
     @staticmethod
     def _parse_json_field(raw_text: str, field: str) -> str:

@@ -155,8 +155,8 @@ class ListDiscoveryOrchestrator:
         self, companies_with_jobs: List[tuple]
     ) -> List[tuple]:
         """Score all companies by relevancy and return only top N."""
-        if not self.config.gemini_api_key:
-            logger.warning("No GEMINI_API_KEY set, skipping relevancy screening")
+        if not self.config.anthropic_api_key:
+            logger.warning("No ANTHROPIC_API_KEY set, skipping relevancy screening")
             return companies_with_jobs
 
         print(f"\n--- Screening {len(companies_with_jobs)} companies for relevancy ---")
@@ -171,8 +171,8 @@ class ListDiscoveryOrchestrator:
 
         try:
             screener = RelevancyScreener(
-                api_key=self.config.gemini_api_key,
-                model=self.config.gemini_model,
+                api_key=self.config.anthropic_api_key,
+                model=self.config.anthropic_model,
                 batch_size=10,
             )
             scores = await screener.screen_companies(screener_input)
@@ -425,7 +425,7 @@ class ListDiscoveryOrchestrator:
 
     async def _generate_insights_if_needed(self):
         """Generate AI insights for newly added companies that don't have one yet."""
-        if not self.config.enable_insight_generation or not self.config.gemini_api_key:
+        if not self.config.enable_insight_generation or not self.config.anthropic_api_key:
             return
 
         # Only generate insights for companies processed in this run
@@ -454,8 +454,8 @@ class ListDiscoveryOrchestrator:
                 })
 
             generator = InsightGenerator(
-                api_key=self.config.gemini_api_key,
-                model=self.config.gemini_model,
+                api_key=self.config.anthropic_api_key,
+                model=self.config.anthropic_model,
                 batch_size=10,
             )
             insights = await generator.generate_insights(insight_input)
@@ -474,7 +474,7 @@ class ListDiscoveryOrchestrator:
 
     async def _classify_priority_tiers(self):
         """Classify priority tiers for companies that don't have one yet."""
-        if not self.config.enable_priority_classification or not self.config.gemini_api_key:
+        if not self.config.enable_priority_classification or not self.config.anthropic_api_key:
             return
 
         companies = self.db.get_companies_needing_priority_classification(
@@ -502,8 +502,8 @@ class ListDiscoveryOrchestrator:
                 })
 
             classifier = PriorityClassifier(
-                api_key=self.config.gemini_api_key,
-                model=self.config.gemini_model,
+                api_key=self.config.anthropic_api_key,
+                model=self.config.anthropic_model,
                 batch_size=10,
             )
             results = await classifier.classify_priorities(classifier_input)
@@ -524,7 +524,7 @@ class ListDiscoveryOrchestrator:
 
     async def _generate_outreach_if_needed(self):
         """Generate personalized outreach drafts for companies missing them."""
-        if not self.config.enable_outreach_generation or not self.config.gemini_api_key:
+        if not self.config.enable_outreach_generation or not self.config.anthropic_api_key:
             return
 
         companies = self.db.get_companies_needing_outreach(
@@ -550,8 +550,8 @@ class ListDiscoveryOrchestrator:
                 })
 
             generator = OutreachGenerator(
-                api_key=self.config.gemini_api_key,
-                model=self.config.gemini_model,
+                api_key=self.config.anthropic_api_key,
+                model=self.config.anthropic_model,
             )
             results = await generator.generate_outreach(outreach_input)
 

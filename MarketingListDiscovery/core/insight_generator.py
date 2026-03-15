@@ -1,12 +1,11 @@
-"""AI-generated outreach insights using Google Gemini."""
+"""AI-generated outreach insights using Anthropic Claude."""
 
 import json
 import logging
 import re
 from typing import Dict, List, Optional, Any
 
-from google import genai
-from google.genai import types
+from anthropic import AsyncAnthropic
 
 logger = logging.getLogger(__name__)
 
@@ -20,9 +19,19 @@ class InsightGenerator:
     PROMPT_TEMPLATE = (
         'You are a marketing agency strategist. For each company below, '
         'write exactly ONE sentence (max 20 words) explaining why a marketing '
-        'agency should reach out. Be specific to the role and company, not generic.\n\n'
+        'agency should reach out. Be specific to the role, company type, and hiring signal.\n\n'
         'Do NOT mention the company name. Do NOT start with "This company" or '
         '"They are". Start with a verb or observation.\n\n'
+        'GOOD examples:\n'
+        '- "Hiring a CRM Specialist without a dedicated marketing team signals agency opportunity for retention strategy."\n'
+        '- "Expanding into DTC e-commerce while hiring entry-level suggests they need senior strategic guidance externally."\n'
+        '- "Opening a Marketing Coordinator role at a 50-person SaaS startup indicates building the function from scratch."\n\n'
+        'BAD examples (too generic — avoid these patterns):\n'
+        '- "Hiring a marketing role suggests a need for marketing support."\n'
+        '- "Could benefit from agency expertise for their marketing needs."\n'
+        '- "Investing in marketing suggests a need for strategic support."\n\n'
+        'Focus on: what the specific hiring signal reveals about their marketing maturity, '
+        'budget gaps, or capability holes that an agency could fill.\n\n'
         'IMPORTANT: Return your results as a JSON array. Each element must be '
         'an object with these exact keys: "company_name", "insight".\n\n'
         'Companies:\n{company_list}'
@@ -31,15 +40,12 @@ class InsightGenerator:
     def __init__(
         self,
         api_key: Optional[str] = None,
-        model: str = "gemini-2.5-flash",
+        model: str = "claude-sonnet-4-6",
         batch_size: int = 10,
     ):
         self.model = model
         self.batch_size = batch_size
-        client_kwargs = {}
-        if api_key:
-            client_kwargs["api_key"] = api_key
-        self.client = genai.Client(**client_kwargs)
+        self.client = AsyncAnthropic(api_key=api_key, max_retries=3)
 
     async def generate_insights(
         self, companies: List[Dict[str, Any]]
@@ -84,7 +90,7 @@ class InsightGenerator:
     async def _process_batch(
         self, batch: List[Dict[str, Any]]
     ) -> Dict[str, str]:
-        """Process a single batch via Gemini."""
+        """Process a single batch via Anthropic Claude."""
         lines = []
         for c in batch:
             roles_str = ", ".join(c.get("roles", []))
@@ -96,20 +102,19 @@ class InsightGenerator:
         company_list = "\n".join(lines)
         prompt = self.PROMPT_TEMPLATE.format(company_list=company_list)
 
-        config = types.GenerateContentConfig(temperature=0.3)
-
-        response = await self.client.aio.models.generate_content(
+        response = await self.client.messages.create(
             model=self.model,
-            contents=prompt,
-            config=config,
+            max_tokens=4096,
+            temperature=0.3,
+            messages=[{"role": "user", "content": prompt}],
         )
 
-        return self._parse_response(response.text, batch)
+        return self._parse_response(response.content[0].text, batch)
 
     def _parse_response(
         self, raw_text: str, batch: List[Dict[str, Any]]
     ) -> Dict[str, str]:
-        """Parse Gemini response into company_name -> insight mapping."""
+        """Parse LLM response into company_name -> insight mapping."""
         batch_names = {c["company_name"] for c in batch}
         results: Dict[str, str] = {}
 
