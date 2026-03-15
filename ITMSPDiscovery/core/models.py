@@ -32,7 +32,6 @@ class DecisionMakerResult:
     confidence: Optional[str] = None  # "High", "Medium", or None
     employee_count: Optional[int] = None
     industry: Optional[str] = None
-    linkedin_url: Optional[str] = None
     website: Optional[str] = None
     not_found_reason: Optional[str] = None
     raw_text: Optional[str] = None

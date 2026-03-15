@@ -5,15 +5,15 @@ import logging
 from datetime import datetime
 from typing import List, Dict, Any
 
-import httpx
-
 from ..config import Config
 from .database import Database
 from .serpapi_client import SerpAPIJobClient
 from .decision_maker import ITDecisionMakerFinder
-from .insight_generator import InsightGenerator
-from .priority_classifier import PriorityClassifier
-from .outreach_generator import OutreachGenerator
+from .insight_and_priority import InsightAndPriorityGenerator
+from .outreach_generator import (
+    OutreachGenerator, _classify_role, _clean_role_title, _a_or_an,
+    _pick_closing, _MSP_CLOSINGS, _NON_MSP_CLOSINGS, _strip_em_dashes,
+)
 from .job_verifier import JobVerifier
 from .relevancy_screener import RelevancyScreener
 
@@ -26,12 +26,12 @@ class ITMSPOrchestrator:
     1. SerpAPI Google Jobs search across metros
     2. Deduplicate listings (within run + across previous runs)
     3. Store companies and jobs in SQLite
-    4. Gemini lookup for decision makers + employee count + industry
-    5. Backfill LinkedIn URLs for DMs missing them
-    6. Validate LinkedIn URLs
-    7. Generate AI insights
-    8. Classify priority tiers (P1-P5)
-    9. Generate personalized outreach drafts
+    4. Early relevancy screening (Claude)
+    5. Gemini lookup for decision makers + employee count + industry
+    6. Early employee_count filter (>100 screened out)
+    7. Generate insights + classify priority tiers (Claude, combined)
+    8. Generate personalized outreach drafts (Claude, batched)
+    9. Assign P5 fallback outreach (no LLM)
     10. Verify job URLs
     11. Record run snapshot
     """
@@ -150,25 +150,22 @@ class ITMSPOrchestrator:
         # Step 4: Decision makers
         dm_found = await self._find_decision_makers_if_needed()
 
-        # Step 5: LinkedIn URL backfill
-        await self._backfill_linkedin_urls()
+        # Step 5: Early employee_count filter
+        self._filter_large_companies()
 
-        # Step 6: LinkedIn URL validation
-        await self._validate_linkedin_urls()
+        # Step 6: Insights + Priority (combined)
+        await self._generate_insights_and_priorities()
 
-        # Step 7: Insights
-        await self._generate_insights_if_needed()
-
-        # Step 8: Priority classification
-        await self._classify_priority_tiers()
-
-        # Step 9: Outreach drafts
+        # Step 7: Outreach drafts
         await self._generate_outreach_if_needed()
 
-        # Step 10: Job verification
+        # Step 8: P5 fallback outreach
+        self._assign_p5_fallback_outreach()
+
+        # Step 9: Job verification
         await self._verify_jobs_if_needed()
 
-        # Step 11: Record run and print summary
+        # Step 10: Record run and print summary
         if not self.dry_run:
             self.db.record_run_snapshot(
                 run_id=self.run_id,
@@ -201,9 +198,9 @@ class ITMSPOrchestrator:
 
     async def _screen_relevancy(self):
         """Screen companies for relevancy before expensive enrichment."""
-        if not self.config.enable_relevancy_screening or not self.config.gemini_api_key:
-            if self.config.enable_relevancy_screening and not self.config.gemini_api_key:
-                print("\n--- Skipping relevancy screening (GEMINI_API_KEY not set) ---")
+        if not self.config.enable_relevancy_screening or not self.config.anthropic_api_key:
+            if self.config.enable_relevancy_screening and not self.config.anthropic_api_key:
+                print("\n--- Skipping relevancy screening (ANTHROPIC_API_KEY not set) ---")
             else:
                 print("\n--- Skipping relevancy screening (disabled) ---")
             return
@@ -223,7 +220,6 @@ class ITMSPOrchestrator:
         for comp in companies:
             jobs = self.db.get_jobs_for_company(comp["id"])
             roles = [j["title"] for j in jobs]
-            # Use first job's location and snippet as representative
             location = jobs[0]["location"] if jobs else ""
             snippets = [j.get("description_snippet", "") for j in jobs if j.get("description_snippet")]
             snippet = snippets[0] if snippets else ""
@@ -237,8 +233,8 @@ class ITMSPOrchestrator:
 
         try:
             screener = RelevancyScreener(
-                api_key=self.config.gemini_api_key,
-                model=self.config.gemini_model,
+                api_key=self.config.anthropic_api_key,
+                model=self.config.anthropic_model,
                 batch_size=15,
             )
             results = await screener.screen_companies(screener_input)
@@ -329,7 +325,6 @@ class ITMSPOrchestrator:
                             title=dm.title,
                             source_url=dm.source_url,
                             confidence=dm.confidence,
-                            linkedin_url=dm.linkedin_url,
                         )
                     print(
                         f"  {dm.company_name}: {dm.person_name} "
@@ -357,211 +352,105 @@ class ITMSPOrchestrator:
 
         return dm_found
 
-    async def _backfill_linkedin_urls(self):
-        """Re-run DM lookup for existing decision makers missing LinkedIn URLs."""
-        if not self.config.enable_decision_maker_lookup or not self.config.gemini_api_key:
+    def _filter_large_companies(self):
+        """Screen out companies with employee_count > max threshold after DM lookup."""
+        if self.dry_run:
+            return
+        cursor = self.db.conn.cursor()
+        cursor.execute(
+            "UPDATE companies SET screened_out = 1 "
+            "WHERE employee_count IS NOT NULL AND employee_count > ? "
+            "AND (screened_out IS NULL OR screened_out = 0)",
+            (self.config.max_employee_count,),
+        )
+        filtered = cursor.rowcount
+        self.db.conn.commit()
+        if filtered:
+            print(f"\n--- Filtered out {filtered} companies with >{self.config.max_employee_count} employees ---")
+
+    async def _generate_insights_and_priorities(self):
+        """Generate insights and classify priority tiers in a single Claude call."""
+        if not self.config.enable_insight_generation and not self.config.enable_priority_classification:
+            return
+        if not self.config.anthropic_api_key:
+            print("\n--- Skipping insights+priority (ANTHROPIC_API_KEY not set) ---")
             return
 
-        companies = self.db.get_companies_needing_linkedin_url(
-            max_employee_count=self.config.max_employee_count
-        )
-        if not companies:
-            print("\n--- All decision makers already have LinkedIn URLs ---")
+        # Collect companies needing either insight or priority
+        companies_needing_insight = set()
+        companies_needing_priority = set()
+
+        if self.config.enable_insight_generation:
+            for c in self.db.get_companies_needing_insights(
+                max_employee_count=self.config.max_employee_count
+            ):
+                companies_needing_insight.add(c["id"])
+
+        if self.config.enable_priority_classification:
+            for c in self.db.get_companies_needing_priority_classification(
+                max_employee_count=self.config.max_employee_count
+            ):
+                companies_needing_priority.add(c["id"])
+
+        all_ids = companies_needing_insight | companies_needing_priority
+        if not all_ids:
+            print("\n--- All companies already have insights and priority tiers ---")
             return
 
-        print(
-            f"\n--- Backfilling LinkedIn URLs for "
-            f"{len(companies)} decision makers ---"
-        )
-
-        lookup_list = [
-            {"company": c["name"], "domain": c.get("domain") or "", "company_id": c["id"]}
-            for c in companies
-        ]
+        print(f"\n--- Generating insights + priorities for {len(all_ids)} companies ---")
 
         try:
-            finder = ITDecisionMakerFinder(
-                api_key=self.config.gemini_api_key,
-                model=self.config.gemini_model,
-                batch_size=self.config.gemini_batch_size,
-            )
-            dm_results = await finder.find_decision_makers(lookup_list)
+            # Build input list
+            generator_input = []
+            for company_id in all_ids:
+                cursor = self.db.conn.cursor()
+                cursor.execute(
+                    "SELECT c.id, c.name, c.domain, c.industry, c.employee_count, "
+                    "CASE WHEN dm.id IS NOT NULL THEN 1 ELSE 0 END as has_decision_maker "
+                    "FROM companies c LEFT JOIN decision_makers dm ON dm.company_id = c.id "
+                    "WHERE c.id = ?",
+                    (company_id,),
+                )
+                row = cursor.fetchone()
+                if not row:
+                    continue
 
-            filled_count = 0
-            dm_by_company = {dm.company_name: dm for dm in dm_results}
-
-            for company_info in lookup_list:
-                company_id = company_info["company_id"]
-                company_name = company_info["company"]
-                dm = dm_by_company.get(company_name)
-
-                if dm and dm.person_name and dm.linkedin_url and not self.dry_run:
-                    filled_count += 1
-                    self.db.upsert_decision_maker(
-                        company_id=company_id,
-                        person_name=dm.person_name,
-                        title=dm.title,
-                        source_url=dm.source_url,
-                        confidence=dm.confidence,
-                        linkedin_url=dm.linkedin_url,
-                    )
-
-            print(f"  Filled {filled_count}/{len(companies)} LinkedIn URLs")
-
-        except Exception as e:
-            logger.error(f"LinkedIn URL backfill failed: {e}")
-            print(f"  LinkedIn URL backfill failed: {e}")
-
-    async def _validate_linkedin_urls(self):
-        """Validate LinkedIn URLs by checking if they resolve to real profiles."""
-        dms = self.db.get_decision_makers_with_linkedin_urls()
-        if not dms:
-            print("\n--- No LinkedIn URLs to validate ---")
-            return
-
-        print(f"\n--- Validating {len(dms)} LinkedIn URLs ---")
-
-        cleared = 0
-        browser_ua = (
-            "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
-            "AppleWebKit/537.36 (KHTML, like Gecko) "
-            "Chrome/120.0.0.0 Safari/537.36"
-        )
-
-        try:
-            async with httpx.AsyncClient(
-                timeout=httpx.Timeout(10.0),
-                headers={"User-Agent": browser_ua},
-                follow_redirects=True,
-            ) as client:
-                for dm in dms:
-                    url = dm["linkedin_url"]
-                    try:
-                        resp = await client.get(url)
-                        body = resp.text[:5000].lower()
-
-                        if resp.status_code == 404:
-                            if not self.dry_run:
-                                self.db.clear_linkedin_url(dm["id"])
-                            cleared += 1
-                            logger.info(f"Cleared invalid LinkedIn URL (404): {url}")
-                        elif resp.status_code == 200 and (
-                            "page not found" in body
-                            or "profile is not available" in body
-                            or "this page doesn" in body
-                        ):
-                            if not self.dry_run:
-                                self.db.clear_linkedin_url(dm["id"])
-                            cleared += 1
-                            logger.info(f"Cleared invalid LinkedIn URL (not found): {url}")
-                    except Exception as e:
-                        logger.debug(f"LinkedIn validation error for {url}: {e}")
-
-                    await asyncio.sleep(2)
-
-            print(f"  Cleared {cleared}/{len(dms)} invalid LinkedIn URLs")
-        except Exception as e:
-            logger.error(f"LinkedIn URL validation failed: {e}")
-            print(f"  LinkedIn URL validation failed: {e}")
-
-    async def _generate_insights_if_needed(self):
-        """Generate AI insights for companies that don't have one yet."""
-        if not self.config.enable_insight_generation or not self.config.gemini_api_key:
-            return
-
-        companies_needing = self.db.get_companies_needing_insights(
-            max_employee_count=self.config.max_employee_count
-        )
-
-        if not companies_needing:
-            print("\n--- All companies already have insights ---")
-            return
-
-        print(
-            f"\n--- Generating insights for "
-            f"{len(companies_needing)} companies ---"
-        )
-        try:
-            insight_input = []
-            for comp in companies_needing:
-                jobs = self.db.get_jobs_for_company(comp["id"])
+                jobs = self.db.get_jobs_for_company(row["id"])
                 role_titles = [j["title"] for j in jobs]
-                insight_input.append({
-                    "company_name": comp["name"],
-                    "domain": comp.get("domain") or "",
+                generator_input.append({
+                    "company_name": row["name"],
+                    "domain": row["domain"] or "",
+                    "industry": row["industry"] or "",
+                    "employee_count": row["employee_count"],
                     "roles": role_titles,
+                    "has_decision_maker": bool(row["has_decision_maker"]),
+                    "_id": row["id"],
                 })
 
-            generator = InsightGenerator(
-                api_key=self.config.gemini_api_key,
-                model=self.config.gemini_model,
+            generator = InsightAndPriorityGenerator(
+                api_key=self.config.anthropic_api_key,
+                model=self.config.anthropic_model,
                 batch_size=10,
             )
-            insights = await generator.generate_insights(insight_input)
+            results = await generator.generate(generator_input)
 
             if not self.dry_run:
-                for comp in companies_needing:
-                    insight_text = insights.get(comp["name"])
-                    if insight_text:
-                        self.db.update_company_insight(comp["id"], insight_text)
-
-            print(f"  Generated {len(insights)} insights")
-        except Exception as e:
-            logger.error(f"Insight generation failed: {e}")
-            print(f"  Insight generation failed: {e}")
-
-    async def _classify_priority_tiers(self):
-        """Classify priority tiers for companies that don't have one yet."""
-        if not self.config.enable_priority_classification or not self.config.gemini_api_key:
-            return
-
-        companies = self.db.get_companies_needing_priority_classification(
-            max_employee_count=self.config.max_employee_count
-        )
-
-        if not companies:
-            print("\n--- All companies already have priority tiers ---")
-            return
-
-        print(f"\n--- Classifying priority tiers for {len(companies)} companies ---")
-
-        try:
-            classifier_input = []
-            for comp in companies:
-                jobs = self.db.get_jobs_for_company(comp["id"])
-                role_titles = [j["title"] for j in jobs]
-                classifier_input.append({
-                    "company_name": comp["name"],
-                    "domain": comp.get("domain") or "",
-                    "industry": comp.get("industry") or "",
-                    "employee_count": comp.get("employee_count"),
-                    "roles": role_titles,
-                    "has_decision_maker": bool(comp.get("has_decision_maker")),
-                })
-
-            classifier = PriorityClassifier(
-                api_key=self.config.gemini_api_key,
-                model=self.config.gemini_model,
-                batch_size=10,
-            )
-            results = await classifier.classify_priorities(classifier_input)
-
-            if not self.dry_run:
-                for comp in companies:
-                    result = results.get(comp["name"])
+                for item in generator_input:
+                    result = results.get(item["company_name"])
                     if result:
-                        self.db.update_company_priority_tier(
-                            comp["id"], result["priority_tier"]
-                        )
+                        if item["_id"] in companies_needing_insight and result.get("insight"):
+                            self.db.update_company_insight(item["_id"], result["insight"])
+                        if item["_id"] in companies_needing_priority and result.get("priority_tier"):
+                            self.db.update_company_priority_tier(item["_id"], result["priority_tier"])
 
-            print(f"  Classified {len(results)} companies")
+            print(f"  Generated insights + priorities for {len(results)} companies")
         except Exception as e:
-            logger.error(f"Priority classification failed: {e}")
-            print(f"  Priority classification failed: {e}")
+            logger.error(f"Insight+priority generation failed: {e}")
+            print(f"  Insight+priority generation failed: {e}")
 
     async def _generate_outreach_if_needed(self):
         """Generate personalized outreach drafts for companies missing them."""
-        if not self.config.enable_outreach_generation or not self.config.gemini_api_key:
+        if not self.config.enable_outreach_generation or not self.config.anthropic_api_key:
             return
 
         companies = self.db.get_companies_needing_outreach(
@@ -587,8 +476,8 @@ class ITMSPOrchestrator:
                 })
 
             generator = OutreachGenerator(
-                api_key=self.config.gemini_api_key,
-                model=self.config.gemini_model,
+                api_key=self.config.anthropic_api_key,
+                model=self.config.anthropic_model,
             )
             results = await generator.generate_outreach(outreach_input)
 
@@ -609,6 +498,39 @@ class ITMSPOrchestrator:
         except Exception as e:
             logger.error(f"Outreach generation failed: {e}")
             print(f"  Outreach generation failed: {e}")
+
+    def _assign_p5_fallback_outreach(self):
+        """Assign generic outreach drafts to P5 companies without using LLM."""
+        cursor = self.db.conn.cursor()
+        cursor.execute("""
+            SELECT c.id, c.name, c.domain FROM companies c
+            WHERE c.priority_tier = 'P5'
+            AND (c.outreach_draft IS NULL OR c.outreach_draft = '')
+            AND EXISTS (SELECT 1 FROM jobs j WHERE j.company_id = c.id AND j.is_active = 1)
+        """)
+        p5_companies = cursor.fetchall()
+        if not p5_companies:
+            return
+
+        count = 0
+        for row in p5_companies:
+            company_id, name = row["id"], row["name"]
+            jobs = self.db.get_jobs_for_company(company_id)
+            role_title = jobs[0]["title"] if jobs else "IT role"
+            role_class = _classify_role(role_title)
+            clean_role = _clean_role_title(role_title)
+            a_role = _a_or_an(clean_role)
+            closing = _pick_closing(
+                _MSP_CLOSINGS if role_class == "msp_replaceable" else _NON_MSP_CLOSINGS,
+                name,
+            )
+            draft = _strip_em_dashes(f"Noticed you're looking for {a_role}. {closing}")
+            if not self.dry_run:
+                self.db.update_company_outreach(company_id, "", "", draft, role_class)
+            count += 1
+
+        if count:
+            print(f"  Assigned {count} generic outreach drafts to P5 companies")
 
     async def _verify_jobs_if_needed(self):
         """Verify job URLs are still live using HEAD requests."""

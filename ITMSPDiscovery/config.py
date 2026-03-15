@@ -29,11 +29,15 @@ class Config:
     relevancy_screening_threshold: int = 40
     max_enrichment_companies: int = 30
 
-    # Gemini Decision Maker settings
+    # Gemini Decision Maker settings (DM lookup only - needs Search grounding)
     gemini_api_key: Optional[str] = None
     gemini_model: str = "gemini-2.5-flash"
     gemini_batch_size: int = 5
     enable_decision_maker_lookup: bool = True
+
+    # Anthropic Claude settings (relevancy, insights+priority, outreach)
+    anthropic_api_key: Optional[str] = None
+    anthropic_model: str = "claude-sonnet-4-6"
 
     # Insight generation settings
     enable_insight_generation: bool = True
@@ -106,6 +110,8 @@ class Config:
             gemini_api_key=os.getenv("GEMINI_API_KEY"),
             gemini_model=os.getenv("GEMINI_MODEL", "gemini-2.5-flash"),
             gemini_batch_size=int(os.getenv("GEMINI_BATCH_SIZE", "5")),
+            anthropic_api_key=os.getenv("ANTHROPIC_API_KEY"),
+            anthropic_model=os.getenv("ANTHROPIC_MODEL", "claude-sonnet-4-6"),
             enable_decision_maker_lookup=os.getenv(
                 "ENABLE_DECISION_MAKER_LOOKUP", "true"
             ).lower() == "true",

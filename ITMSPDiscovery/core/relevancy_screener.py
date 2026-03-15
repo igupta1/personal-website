@@ -1,4 +1,4 @@
-"""Early relevancy screening using Google Gemini.
+"""Early relevancy screening using Anthropic Claude.
 
 Runs on all scraped companies BEFORE expensive enrichment stages
 (DM lookup, outreach, etc.) to filter to the most promising MSP prospects.
@@ -9,8 +9,7 @@ import logging
 import re
 from typing import Dict, List, Optional, Any
 
-from google import genai
-from google.genai import types
+from anthropic import AsyncAnthropic
 
 logger = logging.getLogger(__name__)
 
@@ -63,15 +62,12 @@ class RelevancyScreener:
     def __init__(
         self,
         api_key: Optional[str] = None,
-        model: str = "gemini-2.5-flash",
+        model: str = "claude-sonnet-4-6",
         batch_size: int = 15,
     ):
         self.model = model
         self.batch_size = batch_size
-        client_kwargs = {}
-        if api_key:
-            client_kwargs["api_key"] = api_key
-        self.client = genai.Client(**client_kwargs)
+        self.client = AsyncAnthropic(api_key=api_key, max_retries=3)
 
     async def screen_companies(
         self, companies: List[Dict[str, Any]]
@@ -123,7 +119,7 @@ class RelevancyScreener:
     async def _process_batch(
         self, batch: List[Dict[str, Any]]
     ) -> Dict[str, Dict[str, Any]]:
-        """Process a single batch via Gemini (no Google Search grounding)."""
+        """Process a single batch via Anthropic Claude."""
         lines = []
         for c in batch:
             roles_str = ", ".join(c.get("roles", [])) or "unknown roles"
@@ -134,27 +130,26 @@ class RelevancyScreener:
                 line += f", location: {location}"
             if snippet:
                 # Truncate snippet for prompt efficiency
-                line += f", snippet: \"{snippet[:200]}\""
+                line += f', snippet: "{snippet[:200]}"'
             line += ")"
             lines.append(line)
 
         company_list = "\n".join(lines)
         prompt = self.PROMPT_TEMPLATE.format(company_list=company_list)
 
-        config = types.GenerateContentConfig(temperature=0.3)
-
-        response = await self.client.aio.models.generate_content(
+        response = await self.client.messages.create(
             model=self.model,
-            contents=prompt,
-            config=config,
+            max_tokens=1500,
+            temperature=0.3,
+            messages=[{"role": "user", "content": prompt}],
         )
 
-        return self._parse_response(response.text, batch)
+        return self._parse_response(response.content[0].text, batch)
 
     def _parse_response(
         self, raw_text: str, batch: List[Dict[str, Any]]
     ) -> Dict[str, Dict[str, Any]]:
-        """Parse Gemini response into company_name -> {score, reason} mapping."""
+        """Parse Claude response into company_name -> {score, reason} mapping."""
         batch_names = {c["company_name"] for c in batch}
         results: Dict[str, Dict[str, Any]] = {}
 

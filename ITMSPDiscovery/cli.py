@@ -26,8 +26,11 @@ def setup_logging(verbose: bool = False):
         format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
         handlers=[logging.StreamHandler()],
     )
-    logging.getLogger("httpx").setLevel(logging.WARNING)
-    logging.getLogger("httpcore").setLevel(logging.WARNING)
+    for noisy_logger in [
+        "httpx", "httpcore", "anthropic", "google_genai",
+        "asyncio", "urllib3", "google.auth",
+    ]:
+        logging.getLogger(noisy_logger).setLevel(logging.WARNING)
 
 
 def cmd_run(args):
@@ -184,7 +187,7 @@ def cmd_upload(args):
                         "jobLink": job["job_url"] or "",
                         "postingDate": job["posting_date"] or "",
                         "mostRecentPostingDate": most_recent_date,
-                        "linkedinUrl": row["linkedin_url"] or "",
+                        "linkedinUrl": "",
                         "sourceUrl": row["source_url"] or "",
                         "confidence": row["confidence"] or "",
                         "isNewCompany": False,
@@ -215,7 +218,7 @@ def cmd_upload(args):
                     "jobLink": "",
                     "postingDate": "",
                     "mostRecentPostingDate": "",
-                    "linkedinUrl": row["linkedin_url"] or "",
+                    "linkedinUrl": "",
                     "sourceUrl": row["source_url"] or "",
                     "confidence": row["confidence"] or "",
                     "isNewCompany": False,

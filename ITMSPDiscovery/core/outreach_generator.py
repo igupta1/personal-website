@@ -1,6 +1,7 @@
-"""Personalized outreach draft generation using website scraping + Gemini for IT MSP pipeline."""
+"""Personalized outreach draft generation using website scraping + Anthropic Claude for IT MSP pipeline."""
 
 import asyncio
+import hashlib
 import json
 import logging
 import re
@@ -9,60 +10,81 @@ from urllib.parse import urljoin, urlparse
 
 import httpx
 from bs4 import BeautifulSoup
-from google import genai
-from google.genai import types
+from anthropic import AsyncAnthropic
 
 logger = logging.getLogger(__name__)
 
-SUMMARIZE_PROMPT = (
+# Common misspellings in IT job titles from postings
+_ROLE_TYPO_MAP = {
+    "adminstrator": "Administrator", "administator": "Administrator",
+    "technican": "Technician", "technicain": "Technician",
+    "cordinator": "Coordinator", "coodinator": "Coordinator",
+    "coordinater": "Coordinator",
+    "specalist": "Specialist", "specilaist": "Specialist",
+    "managr": "Manager", "mananger": "Manager", "managment": "Management",
+    "enginer": "Engineer", "direcor": "Director", "directr": "Director",
+    "analst": "Analyst", "anaylst": "Analyst",
+    "supervisr": "Supervisor", "assitant": "Assistant", "assisstant": "Assistant",
+    "adminstration": "Administration",
+}
+
+SUMMARIZE_AND_COMPLIMENT_PROMPT = (
     "You're provided markdown scrapes of a company's homepage and up to 3 subpages. "
-    "Write a two-paragraph summary of what this company does, who they serve, and "
-    "anything notable about their positioning, values, or recent activity. "
-    'Return as JSON: {"summary": "your summary here"}. '
-    "Rules: Be comprehensive but concise. Focus on specifics that make this company unique. "
-    'If content is empty or unusable, return {"summary": "none"}'
-)
-
-COMPLIMENT_PROMPT = (
-    "You're a sales copywriter. Given a company summary, generate a single compliment "
-    "sentence about this company that could open a cold email. "
-    'Return as JSON: {"compliment": "your compliment here"}. '
-    "Rules: One sentence only. Reference something specific and non-obvious from the summary. "
-    "Do NOT say generic things like 'Love your website' or 'Great company'. "
-    "Write in a matter-of-fact, peer-to-peer tone. Do NOT use gushing language like "
+    "Do two things:\n\n"
+    "1. Write a two-paragraph summary of what this company does, who they serve, and "
+    "anything notable about their positioning, values, or recent activity.\n\n"
+    "2. Based on that summary, generate a single compliment sentence about this company "
+    "that could open a cold email.\n\n"
+    'Return as JSON: {"summary": "your summary here", "compliment": "your compliment here"}.\n\n'
+    "Summary rules: Be comprehensive but concise. Focus on specifics that make this company unique.\n\n"
+    "Compliment rules:\n"
+    "- MUST be under 20 words. Trim to the core insight. No filler.\n"
+    "- Reference something specific and non-obvious from the summary.\n"
+    "- Start with a varied, conversational opener. Rotate naturally among styles like:\n"
+    '  "Was looking at your site and noticed..."\n'
+    '  "Came across your [specific thing] and..."\n'
+    '  "Saw that [company] recently..."\n'
+    '  "Interesting approach with..."\n'
+    '  "Cool that [company]..."\n'
+    "  Do NOT always use the same opener. Each compliment should feel fresh.\n"
+    "- Do NOT say generic things like 'Love your website' or 'Great company'.\n"
+    "- Write in a matter-of-fact, peer-to-peer tone. Do NOT use gushing language like "
     "'It's genuinely impressive,' 'It's really cool,' 'It's fantastic how,' or "
-    "'I was really impressed.' State the observation directly without filler praise. "
-    "For example, instead of 'It's genuinely impressive how EXL achieves a 90% success rate' "
-    "write 'EXL's 90% success rate on enterprise AI initiatives is a strong proof point.' "
-    "Shorten company names where natural. "
-    "Do NOT use em dashes (\u2014) anywhere. "
-    'If the summary is \'none\', return {"compliment": "none"}'
+    "'I was really impressed.' State the observation directly without filler praise.\n"
+    "- Shorten company names where natural.\n"
+    "- Do NOT use em dashes (\u2014) anywhere.\n\n"
+    'If content is empty or unusable, return {"summary": "none", "compliment": "none"}'
 )
 
-OUTREACH_MSP_WITH_COMPLIMENT = (
-    "{compliment} Noticed you're looking for a {role}. Before you commit to a "
-    "full-time hire, would it be worth exploring whether a managed IT provider "
-    "could handle that workload at a predictable monthly cost?"
-)
+_MSP_CLOSINGS = [
+    "Before you commit to a full-time hire, would it be worth exploring whether "
+    "a managed IT provider could handle that workload at a predictable monthly cost?",
+    "Might be worth chatting with a managed IT provider before locking in a full-time salary "
+    "and benefits package for this.",
+    "Depending on scope, a managed IT provider might be able to cover this at a fraction of "
+    "what a full-time hire would cost.",
+    "Have you considered whether a managed IT provider could handle this without the overhead "
+    "of a full-time hire?",
+    "Worth asking whether this is a full-time role or something a managed IT provider could "
+    "own for less.",
+]
 
-OUTREACH_MSP_WITHOUT_COMPLIMENT = (
-    "Noticed you're looking for a {role}. Before you commit to a full-time hire, "
-    "would it be worth exploring whether a managed IT provider could handle that "
-    "workload at a predictable monthly cost?"
-)
+_NON_MSP_CLOSINGS = [
+    "If your team is also stretched thin on day-to-day IT support, help desk, or security, "
+    "that's something a managed provider could take off your plate while you focus on "
+    "the strategic hire.",
+    "If the day-to-day IT support side is also a gap, a managed provider could handle that "
+    "while you build out the leadership team.",
+    "While you're building out IT leadership, a managed provider could quietly handle the "
+    "support workload without adding more headcount.",
+]
 
-OUTREACH_NON_MSP_WITH_COMPLIMENT = (
-    "{compliment} Noticed you're looking for a {role}. If your team is also "
-    "stretched thin on day-to-day IT support, help desk, or security, that's "
-    "something a managed provider could take off your plate while you focus on "
-    "the strategic hire."
-)
 
-OUTREACH_NON_MSP_WITHOUT_COMPLIMENT = (
-    "Noticed you're looking for a {role}. If your team is also stretched thin on "
-    "day-to-day IT support, help desk, or security, that's something a managed "
-    "provider could take off your plate while you focus on the strategic hire."
-)
+def _pick_closing(variations: list, company_name: str) -> str:
+    """Deterministically pick a closing variation based on company name hash."""
+    idx = int(hashlib.md5(company_name.encode()).hexdigest(), 16) % len(variations)
+    return variations[idx]
+
 
 # Keywords for role classification (checked case-insensitively against role title)
 _NOT_MSP_KEYWORDS = [
@@ -78,6 +100,18 @@ _MSP_KEYWORDS = [
     "it associate", "it analyst", "tech support", "technical support",
 ]
 
+
+def _classify_role(role_title: str) -> str:
+    """Classify a role as msp_replaceable or not_msp_replaceable."""
+    # Fix typos before classifying
+    fixed = _fix_role_typos(role_title)
+    lower = fixed.lower()
+    for kw in _NOT_MSP_KEYWORDS:
+        if kw in lower:
+            return "not_msp_replaceable"
+    return "msp_replaceable"
+
+
 # Paths to skip when extracting internal links
 SKIP_PATHS = {
     "#", "javascript:", ".pdf", ".zip", ".png", ".jpg", ".jpeg", ".gif", ".svg",
@@ -90,14 +124,20 @@ BROWSER_USER_AGENT = (
     "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
 )
 
-
-def _classify_role(role_title: str) -> str:
-    """Classify a role as msp_replaceable or not_msp_replaceable."""
-    lower = role_title.lower()
-    for kw in _NOT_MSP_KEYWORDS:
-        if kw in lower:
-            return "not_msp_replaceable"
-    return "msp_replaceable"
+# Full browser headers to reduce 403 rejections
+BROWSER_HEADERS = {
+    "User-Agent": BROWSER_USER_AGENT,
+    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+    "Accept-Language": "en-US,en;q=0.9",
+    "Accept-Encoding": "gzip, deflate",
+    "Connection": "keep-alive",
+    "Upgrade-Insecure-Requests": "1",
+    "Sec-Fetch-Dest": "document",
+    "Sec-Fetch-Mode": "navigate",
+    "Sec-Fetch-Site": "none",
+    "Sec-Fetch-User": "?1",
+    "Cache-Control": "max-age=0",
+}
 
 
 def _strip_em_dashes(text: str) -> str:
@@ -105,25 +145,104 @@ def _strip_em_dashes(text: str) -> str:
     return text.replace("\u2014", " - ").replace("\u2013", " - ")
 
 
+_ROLE_KEYWORDS = [
+    "coordinator", "manager", "specialist", "director", "analyst",
+    "associate", "administrator", "technician", "engineer", "supervisor",
+    "lead", "head", "vp", "chief", "officer", "assistant", "intern",
+    "architect", "support", "consultant", "operator",
+]
+
+
+def _fix_role_typos(title: str) -> str:
+    """Fix common misspellings in role titles from job postings."""
+    words = title.split()
+    fixed = []
+    for word in words:
+        # Check lowercase version against typo map
+        lookup = word.lower().rstrip("s,.:;")
+        if lookup in _ROLE_TYPO_MAP:
+            # Preserve trailing chars (e.g. plural 's')
+            suffix = word[len(lookup):]
+            fixed.append(_ROLE_TYPO_MAP[lookup] + suffix)
+        else:
+            fixed.append(word)
+    return " ".join(fixed)
+
+
+def _clean_role_title(role_title: str) -> str:
+    """Strip location, parentheticals, junk, and fix typos in role titles.
+
+    Examples:
+        "Systems Administrator(New York, NY)" -> "Systems Administrator"
+        "Acme - IT - Help Desk Technician - Full Time" -> "Help Desk Technician"
+        "Network Engineer- Enterprise" -> "Network Engineer"
+        "IT Adminstrator" -> "IT Administrator"
+    """
+    # Step 1: Remove parenthetical content
+    cleaned = re.sub(r'\s*\(.*?\)\s*', '', role_title).strip()
+
+    # Step 2: Handle dash-separated junk titles (3+ segments)
+    segments = [s.strip() for s in cleaned.split(" - ") if s.strip()]
+    if len(segments) >= 3:
+        # Find segment containing a role keyword
+        for seg in segments:
+            seg_lower = seg.lower()
+            if any(kw in seg_lower for kw in _ROLE_KEYWORDS):
+                cleaned = seg
+                break
+        else:
+            # No keyword match — use longest segment as best guess
+            cleaned = max(segments, key=len)
+
+    # Step 3: Strip trailing "- Category" suffix, but protect hyphenated
+    # compounds where the dash is part of the word
+    if not re.search(r'\w-\w', cleaned):
+        cleaned = re.sub(r'\s*-\s*\w+(\s+\w+)?$', '', cleaned).strip()
+
+    # Step 4: Fix common typos
+    cleaned = _fix_role_typos(cleaned)
+
+    return cleaned if cleaned else role_title
+
+
+def _a_or_an(role_title: str) -> str:
+    """Return 'a' or 'an' based on whether the role title starts with a vowel sound."""
+    word = role_title.lstrip().split()[0] if role_title.strip() else ""
+
+    # Handle acronyms (all-uppercase words like IT, MSP, HR)
+    # Letters whose names start with vowel sounds: A E F H I L M N O R S X
+    if word.isupper() and len(word) >= 2:
+        vowel_sound_letters = set("AEFHILMNORSX")
+        if word[0] in vowel_sound_letters:
+            return f"an {role_title}"
+        return f"a {role_title}"
+
+    first_char = role_title.lstrip().lower()[:1]
+    if first_char in ('a', 'e', 'i', 'o', 'u'):
+        return f"an {role_title}"
+    return f"a {role_title}"
+
+
 class OutreachGenerator:
-    """Generate personalized outreach drafts by scraping company websites and using Gemini."""
+    """Generate personalized outreach drafts by scraping company websites and using Anthropic Claude."""
 
     def __init__(
         self,
         api_key: Optional[str] = None,
-        model: str = "gemini-2.5-flash",
+        model: str = "claude-sonnet-4-6",
     ):
         self.model = model
-        client_kwargs = {}
-        if api_key:
-            client_kwargs["api_key"] = api_key
-        self.client = genai.Client(**client_kwargs)
+        self.client = AsyncAnthropic(api_key=api_key, max_retries=3)
 
     async def generate_outreach(
         self, companies: List[Dict[str, Any]]
     ) -> Dict[str, Dict[str, str]]:
         """
         Generate outreach drafts for a list of companies.
+
+        Phase 1: Scrape all company websites in parallel (semaphore-limited).
+        Phase 2: Batch summarize+compliment via Claude (3 companies per call).
+        Phase 3: Assemble final drafts deterministically.
 
         Args:
             companies: List of dicts with keys:
@@ -132,67 +251,187 @@ class OutreachGenerator:
                 - roles (list of str): job titles being hired
 
         Returns:
-            Dict mapping company_name -> {summary, compliment, outreach_draft, role_classification}
+            Dict mapping company_name -> {summary, compliment, outreach_draft}
         """
         results: Dict[str, Dict[str, str]] = {}
 
         logger.info(f"Generating outreach for {len(companies)} companies")
 
-        for i, company in enumerate(companies):
+        # Phase 1: Parallel scraping
+        print(f"  Scraping {len(companies)} company websites...")
+        scraped = await self._scrape_all_companies(companies)
+
+        # Phase 2: Batched summarization
+        companies_with_text = [
+            c for c in companies
+            if scraped.get(c["company_name"]) and len(scraped[c["company_name"]].strip()) > 100
+        ]
+        companies_without_text = [
+            c for c in companies if c not in companies_with_text
+        ]
+
+        summaries: Dict[str, tuple] = {}  # name -> (summary, compliment)
+
+        if companies_with_text:
+            print(f"  Summarizing {len(companies_with_text)} companies in batches...")
+            summaries = await self._batch_summarize(companies_with_text, scraped)
+
+        # Phase 3: Assemble drafts
+        for company in companies:
             name = company["company_name"]
-            domain = company.get("domain", "")
             roles = company.get("roles", [])
             role_title = roles[0] if roles else "IT role"
             role_class = _classify_role(role_title)
 
+            summary, compliment = summaries.get(name, ("none", "none"))
+
+            draft = self._assemble_draft(compliment, role_title, role_class, name)
+
+            results[name] = {
+                "summary": summary or "none",
+                "compliment": compliment or "none",
+                "outreach_draft": draft,
+                "role_classification": role_class,
+            }
+
+        print(f"  Generated {len(results)} outreach drafts")
+        return results
+
+    async def _scrape_all_companies(
+        self, companies: List[Dict[str, Any]]
+    ) -> Dict[str, str]:
+        """Scrape all company websites in parallel with a concurrency limit."""
+        semaphore = asyncio.Semaphore(5)
+        scraped: Dict[str, str] = {}
+
+        async def _scrape_one(company: Dict[str, Any]):
+            name = company["company_name"]
+            domain = company.get("domain", "")
+            async with semaphore:
+                try:
+                    text = await self._scrape_company(domain)
+                    scraped[name] = text
+                except Exception as e:
+                    logger.error(f"Scrape failed for {name}: {e}")
+                    scraped[name] = ""
+
+        await asyncio.gather(*[_scrape_one(c) for c in companies])
+        return scraped
+
+    async def _batch_summarize(
+        self,
+        companies: List[Dict[str, Any]],
+        scraped: Dict[str, str],
+    ) -> Dict[str, tuple]:
+        """Summarize + generate compliments in batches of 3 companies per Claude call."""
+        batch_size = 3
+        results: Dict[str, tuple] = {}
+
+        batches = [
+            companies[i : i + batch_size]
+            for i in range(0, len(companies), batch_size)
+        ]
+
+        for batch_idx, batch in enumerate(batches, 1):
             try:
-                print(f"  [{i+1}/{len(companies)}] {name}: scraping {domain}...")
-                raw_text = await self._scrape_company(domain)
+                # Build multi-company prompt
+                sections = []
+                for c in batch:
+                    name = c["company_name"]
+                    text = scraped.get(name, "")
+                    sections.append(f"=== COMPANY: {name} ===\n{text}")
 
-                if raw_text and len(raw_text.strip()) > 100:
-                    print(f"  [{i+1}/{len(companies)}] {name}: summarizing...")
-                    summary = await self._summarize(raw_text)
-                else:
-                    summary = "none"
+                combined_text = "\n\n".join(sections)
+                prompt = (
+                    f"{SUMMARIZE_AND_COMPLIMENT_PROMPT}\n\n"
+                    f"There are {len(batch)} companies below, separated by '=== COMPANY: name ===' markers. "
+                    f"Return a JSON ARRAY with one object per company. Each object must have: "
+                    f'"company_name", "summary", "compliment".\n\n---\n\n{combined_text}'
+                )
 
-                if summary and summary != "none":
-                    print(f"  [{i+1}/{len(companies)}] {name}: generating compliment...")
-                    compliment = await self._generate_compliment(summary)
-                else:
-                    compliment = "none"
+                response = await self.client.messages.create(
+                    model=self.model,
+                    max_tokens=2048,
+                    temperature=0.3,
+                    messages=[{"role": "user", "content": prompt}],
+                )
+                raw_response = response.content[0].text
 
-                draft = self._assemble_draft(compliment, role_title, role_class)
+                # Parse array response
+                parsed = self._try_parse_json_array(raw_response)
+                if parsed:
+                    batch_names = {c["company_name"] for c in batch}
+                    for entry in parsed:
+                        name = entry.get("company_name", "")
+                        matched = self._match_company_name(name, batch_names)
+                        if matched:
+                            summary = entry.get("summary", "none")
+                            compliment = entry.get("compliment", "none")
+                            compliment = _strip_em_dashes(compliment) if compliment and compliment != "none" else "none"
+                            results[matched] = (summary, compliment)
 
-                results[name] = {
-                    "summary": summary or "none",
-                    "compliment": compliment or "none",
-                    "outreach_draft": draft,
-                    "role_classification": role_class,
-                }
-                print(f"  [{i+1}/{len(companies)}] {name}: done")
+                # Fill in any missing companies from the batch
+                for c in batch:
+                    if c["company_name"] not in results:
+                        results[c["company_name"]] = ("none", "none")
 
             except Exception as e:
-                logger.error(f"Outreach generation failed for {name}: {e}")
-                draft = self._assemble_draft("none", role_title, role_class)
-                results[name] = {
-                    "summary": "none",
-                    "compliment": "none",
-                    "outreach_draft": draft,
-                    "role_classification": role_class,
-                }
-
-            if i < len(companies) - 1:
-                await asyncio.sleep(1.0)
+                logger.error(f"Batch summarize failed for batch {batch_idx}: {e}")
+                for c in batch:
+                    if c["company_name"] not in results:
+                        results[c["company_name"]] = ("none", "none")
 
         return results
+
+    @staticmethod
+    def _try_parse_json_array(raw_text: str) -> Optional[List[Dict]]:
+        """Try to parse a JSON array from response text."""
+        cleaned = raw_text.strip()
+        if cleaned.startswith("```"):
+            lines = cleaned.split("\n")
+            cleaned = "\n".join(lines[1:-1]).strip()
+        try:
+            parsed = json.loads(cleaned)
+            if isinstance(parsed, list):
+                return parsed
+        except json.JSONDecodeError:
+            pass
+        match = re.search(r"\[[\s\S]*\]", raw_text)
+        if match:
+            try:
+                parsed = json.loads(match.group())
+                if isinstance(parsed, list):
+                    return parsed
+            except json.JSONDecodeError:
+                pass
+        # Fallback: try parsing as single object and wrap in array
+        try:
+            parsed = json.loads(cleaned)
+            if isinstance(parsed, dict):
+                return [parsed]
+        except json.JSONDecodeError:
+            pass
+        return None
+
+    @staticmethod
+    def _match_company_name(name: str, candidates: set) -> Optional[str]:
+        """Match company name from response to batch list."""
+        if not name:
+            return None
+        name_lower = name.lower().strip()
+        for candidate in candidates:
+            if candidate.lower() == name_lower:
+                return candidate
+            if name_lower in candidate.lower() or candidate.lower() in name_lower:
+                return candidate
+        return None
 
     async def _scrape_company(self, domain: str) -> str:
         """Scrape company homepage + up to 3 subpages, return concatenated text."""
         all_text = []
-        headers = {"User-Agent": BROWSER_USER_AGENT}
 
         async with httpx.AsyncClient(
-            headers=headers, timeout=10.0, follow_redirects=True
+            headers=BROWSER_HEADERS, timeout=10.0, follow_redirects=True
         ) as client:
             # Fetch homepage
             homepage_url = f"https://{domain}"
@@ -248,15 +487,19 @@ class OutreachGenerator:
         for a_tag in soup.find_all("a", href=True):
             href = a_tag["href"].strip()
 
+            # Skip non-content paths
             if any(href.lower().startswith(skip) or skip in href.lower() for skip in SKIP_PATHS):
                 continue
 
+            # Resolve relative URLs
             full_url = urljoin(base_url, href)
             parsed = urlparse(full_url)
 
+            # Only keep same-domain links
             if domain not in parsed.netloc:
                 continue
 
+            # Normalize: strip fragment and query
             normalized = f"{parsed.scheme}://{parsed.netloc}{parsed.path}"
             if normalized.rstrip("/") == base_url.rstrip("/"):
                 continue
@@ -267,78 +510,29 @@ class OutreachGenerator:
 
         return links
 
-    async def _summarize(self, raw_text: str) -> str:
-        """Summarize company website content via Gemini."""
-        prompt = f"{SUMMARIZE_PROMPT}\n\n---\n\n{raw_text}"
-        config = types.GenerateContentConfig(temperature=0.3)
-
-        try:
-            response = await self.client.aio.models.generate_content(
-                model=self.model,
-                contents=prompt,
-                config=config,
-            )
-            if not response.text:
-                return "none"
-            return self._parse_json_field(response.text, "summary")
-        except Exception as e:
-            logger.error(f"Summarize call failed: {e}")
-            return "none"
-
-    async def _generate_compliment(self, summary: str) -> str:
-        """Generate a compliment sentence from the company summary via Gemini."""
-        prompt = f"{COMPLIMENT_PROMPT}\n\nCompany summary:\n{summary}"
-        config = types.GenerateContentConfig(temperature=0.3)
-
-        try:
-            response = await self.client.aio.models.generate_content(
-                model=self.model,
-                contents=prompt,
-                config=config,
-            )
-            if not response.text:
-                return "none"
-            compliment = self._parse_json_field(response.text, "compliment")
-            return _strip_em_dashes(compliment) if compliment else "none"
-        except Exception as e:
-            logger.error(f"Compliment call failed: {e}")
-            return "none"
-
     @staticmethod
-    def _parse_json_field(raw_text: str, field: str) -> str:
-        """Parse a JSON response for a specific field, with fallbacks."""
-        cleaned = raw_text.strip()
-        if cleaned.startswith("```"):
-            lines = cleaned.split("\n")
-            cleaned = "\n".join(lines[1:-1]).strip()
-
-        try:
-            parsed = json.loads(cleaned)
-            if isinstance(parsed, dict) and field in parsed:
-                return parsed[field]
-        except json.JSONDecodeError:
-            pass
-
-        pattern = rf'"{field}"\s*:\s*"((?:[^"\\]|\\.)*)\"'
-        match = re.search(pattern, raw_text)
-        if match:
-            return match.group(1).replace('\\"', '"')
-
-        return "none"
-
-    @staticmethod
-    def _assemble_draft(compliment: str, role_title: str, role_classification: str = "msp_replaceable") -> str:
+    def _assemble_draft(
+        compliment: str,
+        role_title: str,
+        role_classification: str = "msp_replaceable",
+        company_name: str = "",
+    ) -> str:
         """Assemble the final outreach draft from compliment, role title, and role classification."""
         has_compliment = compliment and compliment != "none"
-        is_msp = role_classification == "msp_replaceable"
 
-        if is_msp and has_compliment:
-            draft = OUTREACH_MSP_WITH_COMPLIMENT.format(compliment=compliment, role=role_title)
-        elif is_msp:
-            draft = OUTREACH_MSP_WITHOUT_COMPLIMENT.format(role=role_title)
-        elif has_compliment:
-            draft = OUTREACH_NON_MSP_WITH_COMPLIMENT.format(compliment=compliment, role=role_title)
+        clean_role = _clean_role_title(role_title)
+        a_role = _a_or_an(clean_role)
+
+        if role_classification == "msp_replaceable":
+            closing = _pick_closing(_MSP_CLOSINGS, company_name)
         else:
-            draft = OUTREACH_NON_MSP_WITHOUT_COMPLIMENT.format(role=role_title)
+            closing = _pick_closing(_NON_MSP_CLOSINGS, company_name)
+
+        opener = f"Noticed you're looking for {a_role}. "
+
+        if has_compliment:
+            draft = f"{compliment} {opener}{closing}"
+        else:
+            draft = f"{opener}{closing}"
 
         return _strip_em_dashes(draft)

@@ -12,9 +12,6 @@ from .models import DecisionMakerResult
 
 logger = logging.getLogger(__name__)
 
-_LINKEDIN_URL_PATTERN = re.compile(r"https?://(www\.)?linkedin\.com/in/.+")
-
-
 VALID_INDUSTRIES = {
     "Healthcare", "Legal", "Financial Services", "Manufacturing",
     "Professional Services", "Construction", "Real Estate",
@@ -59,8 +56,6 @@ class ITDecisionMakerFinder:
         'one from this list: Healthcare, Legal, Financial Services, Manufacturing, '
         'Professional Services, Construction, Real Estate, '
         'Retail / E-commerce, Education, Nonprofits, Food & Beverage, Other.\n\n'
-        'Also return the person\'s LinkedIn profile URL as "linkedin_url" if found '
-        'during your search. If no LinkedIn profile is found, set it to null.\n\n'
         'Also return the company\'s primary website URL as "website" (e.g. '
         '"https://smithlawfirm.com"). Use the company\'s official domain, not '
         'a LinkedIn or Facebook page. If no website is found, set it to null.\n\n'
@@ -68,7 +63,7 @@ class ITDecisionMakerFinder:
         'IMPORTANT: Return your results as a JSON array. Each element must be '
         'an object with these exact keys: "company_name", "person_name", '
         '"title", "source_url", "confidence", "employee_count", "industry", '
-        '"linkedin_url", "website". '
+        '"website". '
         'If not identifiable, set person_name to "Not confidently identifiable" '
         'and add a "reason" key.\n\n'
         'Companies:\n{company_list}'
@@ -200,9 +195,6 @@ class ITDecisionMakerFinder:
                     industry = entry.get("industry")
                     if industry and industry not in VALID_INDUSTRIES:
                         industry = "Other"
-                    linkedin_url = self._validate_linkedin_url(
-                        entry.get("linkedin_url")
-                    )
                     website = self._validate_website_url(
                         entry.get("website")
                     )
@@ -214,7 +206,6 @@ class ITDecisionMakerFinder:
                         confidence=entry.get("confidence"),
                         employee_count=emp_count,
                         industry=industry,
-                        linkedin_url=linkedin_url,
                         website=website,
                         raw_text=str(entry),
                     )
@@ -272,32 +263,6 @@ class ITDecisionMakerFinder:
             if name_lower in candidate.lower() or candidate.lower() in name_lower:
                 return candidate
         return None
-
-    @staticmethod
-    def _validate_linkedin_url(url: Optional[str]) -> Optional[str]:
-        """Validate a LinkedIn profile URL. Returns URL if valid, None otherwise."""
-        if not url or not isinstance(url, str):
-            return None
-        url = url.strip()
-        if not _LINKEDIN_URL_PATTERN.match(url):
-            return None
-        # Reject hallucinated URLs with repeating hex suffixes
-        # e.g. scott-collins-a7b7b7b7, kathy-warden-a7101010
-        slug = url.rstrip("/").rsplit("/", 1)[-1]
-        # Check for 8+ hex char suffix with repeating 2-char pattern
-        suffix_match = re.search(r"-([0-9a-f]{8,})$", slug)
-        if suffix_match:
-            hex_suffix = suffix_match.group(1)
-            # Repeating 2-char blocks: a7a7a7a7, 10101010, b7b7b7b7
-            if len(hex_suffix) >= 8:
-                pair = hex_suffix[:2]
-                if hex_suffix == pair * (len(hex_suffix) // 2):
-                    return None
-                # Repeating 4-char blocks: a7b0a7b0
-                quad = hex_suffix[:4]
-                if len(hex_suffix) >= 8 and hex_suffix == quad * (len(hex_suffix) // 4):
-                    return None
-        return url
 
     @staticmethod
     def _validate_website_url(url: Optional[str]) -> Optional[str]:

@@ -606,6 +606,7 @@ class Database:
                   AND j.posting_date >= date('now', '-7 days')
               )
               AND (c.outreach_draft IS NULL OR c.outreach_draft = '')
+              AND (c.priority_tier IS NULL OR c.priority_tier != 'P5')
             """,
             (max_employee_count,),
         )

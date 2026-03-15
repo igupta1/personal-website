@@ -105,7 +105,6 @@ function ItMspDemo() {
             lastName: lead.lastName,
             title: lead.title,
             email: lead.email,
-            linkedinUrl: lead.linkedinUrl,
             sourceUrl: lead.sourceUrl,
             confidence: lead.confidence
           },
@@ -400,6 +399,11 @@ function ItMspDemo() {
                               <a href={company.website} target="_blank" rel="noopener noreferrer" className="lead-gen-company-website">
                                 {company.website.replace('https://', '')}
                               </a>
+                            )}
+                            {company.employeeCount > 0 && (
+                              <span className="lead-gen-employee-count">
+                                About {Math.round(company.employeeCount / 10) * 10} Employees
+                              </span>
                             )}
                             {daysAgo !== null && (
                               <span className="lead-gen-posted-badge">

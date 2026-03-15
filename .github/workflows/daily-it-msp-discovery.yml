@@ -33,6 +33,7 @@ jobs:
         env:
           SERPAPI_API_KEY: ${{ secrets.SERPAPI_API_KEY }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           LEADS_UPLOAD_API_KEY: ${{ secrets.LEADS_UPLOAD_API_KEY }}
           VERCEL_API_URL: https://www.ishaangpta.com
         run: python -m ITMSPDiscovery run --verbose
@@ -51,3 +52,9 @@ jobs:
           git diff --cached --quiet || git commit -m "Update IT MSP discovery DB [skip ci]"
           git pull --rebase origin master
           git push
+
+      - name: Pipeline summary
+        if: always()
+        run: |
+          echo "## IT MSP Discovery Summary" >> $GITHUB_STEP_SUMMARY
+          echo "Run completed at $(date)" >> $GITHUB_STEP_SUMMARY
