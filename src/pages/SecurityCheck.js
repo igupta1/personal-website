@@ -426,37 +426,9 @@ function SslTlsDetails({ check }) {
 // ─── Intro Opener ───
 
 function IntroOpener({ text }) {
-  const [copied, setCopied] = useState(false);
-
-  const handleCopy = async () => {
-    try {
-      await navigator.clipboard.writeText(text);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    } catch {
-      // Fallback
-      const textarea = document.createElement("textarea");
-      textarea.value = text;
-      document.body.appendChild(textarea);
-      textarea.select();
-      document.execCommand("copy");
-      document.body.removeChild(textarea);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    }
-  };
-
   return (
     <div className="sec-check-card">
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "0.75rem" }}>
-        <h3 style={{ margin: 0 }}>Personalized Intro Opener</h3>
-        <button
-          onClick={handleCopy}
-          className="sec-check-copy-btn"
-        >
-          {copied ? "Copied!" : "Copy to Clipboard"}
-        </button>
-      </div>
+      <h3>Personalized Intro Opener</h3>
       <div className="sec-check-opener-text">{text}</div>
     </div>
   );
