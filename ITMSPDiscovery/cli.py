@@ -16,6 +16,7 @@ from datetime import datetime
 from .config import Config
 from .core.database import Database
 from .core.orchestrator import ITMSPOrchestrator
+from .core.outreach_generator import _clean_role_title
 
 
 def setup_logging(verbose: bool = False):
@@ -183,7 +184,7 @@ def cmd_upload(args):
                         "category": category,
                         "industry": row["industry"] or "",
                         "employeeCount": emp_count,
-                        "jobRole": job["title"] or "",
+                        "jobRole": _clean_role_title(job["title"]) if job["title"] else "",
                         "jobLink": job["job_url"] or "",
                         "postingDate": job["posting_date"] or "",
                         "mostRecentPostingDate": most_recent_date,

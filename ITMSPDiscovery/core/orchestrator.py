@@ -453,6 +453,20 @@ class ITMSPOrchestrator:
         if not self.config.enable_outreach_generation or not self.config.anthropic_api_key:
             return
 
+        # Clear stale outreach where scraping failed (no compliment)
+        if not self.dry_run:
+            cursor = self.db.conn.cursor()
+            cursor.execute("""
+                UPDATE companies SET outreach_draft = NULL, compliment = NULL,
+                       website_summary = NULL, role_classification = NULL
+                WHERE outreach_draft IS NOT NULL AND outreach_draft != ''
+                  AND (compliment IS NULL OR compliment = '' OR compliment = 'none')
+            """)
+            cleared = cursor.rowcount
+            self.db.conn.commit()
+            if cleared:
+                print(f"\n--- Cleared {cleared} stale outreach drafts (missing compliments) ---")
+
         companies = self.db.get_companies_needing_outreach(
             max_employee_count=self.config.max_employee_count
         )

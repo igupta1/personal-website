@@ -205,7 +205,11 @@ def _clean_role_title(role_title: str) -> str:
     if not re.search(r'\w-\w', cleaned):
         cleaned = re.sub(r'\s*-\s*.*$', '', cleaned).strip()
 
-    # Step 4: Fix common typos
+    # Step 4: Strip trailing seniority levels (Staff I, Level II, I, II, III, etc.)
+    cleaned = re.sub(r'\s+(?:Staff|Level)\s+[IVX]+$', '', cleaned, flags=re.IGNORECASE).strip()
+    cleaned = re.sub(r'\s+[IVX]+$', '', cleaned).strip()
+
+    # Step 5: Fix common typos
     cleaned = _fix_role_typos(cleaned)
 
     return cleaned if cleaned else role_title
