@@ -292,6 +292,10 @@ class OutreachGenerator:
         """
         Generate outreach drafts for a list of companies.
 
+        Phase 1: Scrape all company websites in parallel (semaphore-limited).
+        Phase 2: Batch summarize+compliment via Claude (3 companies per call).
+        Phase 3: Assemble final drafts deterministically.
+
         Args:
             companies: List of dicts with keys:
                 - company_name (str)
@@ -305,53 +309,178 @@ class OutreachGenerator:
 
         logger.info(f"Generating outreach for {len(companies)} companies")
 
-        for i, company in enumerate(companies):
+        # Phase 1: Parallel scraping
+        print(f"  Scraping {len(companies)} company websites...")
+        scraped = await self._scrape_all_companies(companies)
+
+        # Phase 2: Batched summarization
+        companies_with_text = [
+            c for c in companies
+            if scraped.get(c["company_name"]) and len(scraped[c["company_name"]].strip()) > 100
+        ]
+        companies_without_text = [
+            c for c in companies if c not in companies_with_text
+        ]
+
+        summaries: Dict[str, tuple] = {}  # name -> (summary, compliment)
+
+        if companies_with_text:
+            print(f"  Summarizing {len(companies_with_text)} companies in batches...")
+            summaries = await self._batch_summarize(companies_with_text, scraped)
+
+        # Phase 3: Assemble drafts
+        for company in companies:
             name = company["company_name"]
-            domain = company.get("domain", "")
             roles = company.get("roles", [])
             role_title = roles[0] if roles else "marketing role"
             role_class = _classify_role(role_title)
 
+            summary, compliment = summaries.get(name, ("none", "none"))
+
+            is_agency_co = _is_marketing_agency(summary)
+            if is_agency_co:
+                role_class = "agency_company"
+
+            draft = self._assemble_draft(compliment, role_title, role_class, is_agency_co, name)
+
+            results[name] = {
+                "summary": summary or "none",
+                "compliment": compliment or "none",
+                "outreach_draft": draft,
+                "role_classification": role_class,
+            }
+
+        print(f"  Generated {len(results)} outreach drafts")
+        return results
+
+    async def _scrape_all_companies(
+        self, companies: List[Dict[str, Any]]
+    ) -> Dict[str, str]:
+        """Scrape all company websites in parallel with a concurrency limit."""
+        semaphore = asyncio.Semaphore(5)
+        scraped: Dict[str, str] = {}
+
+        async def _scrape_one(company: Dict[str, Any]):
+            name = company["company_name"]
+            domain = company.get("domain", "")
+            async with semaphore:
+                try:
+                    text = await self._scrape_company(domain)
+                    scraped[name] = text
+                except Exception as e:
+                    logger.error(f"Scrape failed for {name}: {e}")
+                    scraped[name] = ""
+
+        await asyncio.gather(*[_scrape_one(c) for c in companies])
+        return scraped
+
+    async def _batch_summarize(
+        self,
+        companies: List[Dict[str, Any]],
+        scraped: Dict[str, str],
+    ) -> Dict[str, tuple]:
+        """Summarize + generate compliments in batches of 3 companies per Claude call."""
+        batch_size = 3
+        results: Dict[str, tuple] = {}
+
+        batches = [
+            companies[i : i + batch_size]
+            for i in range(0, len(companies), batch_size)
+        ]
+
+        for batch_idx, batch in enumerate(batches, 1):
             try:
-                print(f"  [{i+1}/{len(companies)}] {name}: scraping {domain}...")
-                raw_text = await self._scrape_company(domain)
+                # Build multi-company prompt
+                sections = []
+                for c in batch:
+                    name = c["company_name"]
+                    text = scraped.get(name, "")
+                    sections.append(f"=== COMPANY: {name} ===\n{text}")
 
-                if raw_text and len(raw_text.strip()) > 100:
-                    print(f"  [{i+1}/{len(companies)}] {name}: summarizing + generating compliment...")
-                    summary, compliment = await self._summarize_and_compliment(raw_text)
-                else:
-                    summary = "none"
-                    compliment = "none"
+                combined_text = "\n\n".join(sections)
+                prompt = (
+                    f"{SUMMARIZE_AND_COMPLIMENT_PROMPT}\n\n"
+                    f"There are {len(batch)} companies below, separated by '=== COMPANY: name ===' markers. "
+                    f"Return a JSON ARRAY with one object per company. Each object must have: "
+                    f'"company_name", "summary", "compliment".\n\n---\n\n{combined_text}'
+                )
 
-                is_agency_co = _is_marketing_agency(summary)
-                if is_agency_co:
-                    role_class = "agency_company"
-                    print(f"  [{i+1}/{len(companies)}] {name}: detected as agency, using agency template")
+                response = await self.client.messages.create(
+                    model=self.model,
+                    max_tokens=2048,
+                    temperature=0.3,
+                    messages=[{"role": "user", "content": prompt}],
+                )
+                raw_response = response.content[0].text
 
-                draft = self._assemble_draft(compliment, role_title, role_class, is_agency_co, name)
+                # Parse array response
+                parsed = self._try_parse_json_array(raw_response)
+                if parsed:
+                    batch_names = {c["company_name"] for c in batch}
+                    for entry in parsed:
+                        name = entry.get("company_name", "")
+                        matched = self._match_company_name(name, batch_names)
+                        if matched:
+                            summary = entry.get("summary", "none")
+                            compliment = entry.get("compliment", "none")
+                            compliment = _strip_em_dashes(compliment) if compliment and compliment != "none" else "none"
+                            results[matched] = (summary, compliment)
 
-                results[name] = {
-                    "summary": summary or "none",
-                    "compliment": compliment or "none",
-                    "outreach_draft": draft,
-                    "role_classification": role_class,
-                }
-                print(f"  [{i+1}/{len(companies)}] {name}: done")
+                # Fill in any missing companies from the batch
+                for c in batch:
+                    if c["company_name"] not in results:
+                        results[c["company_name"]] = ("none", "none")
 
             except Exception as e:
-                logger.error(f"Outreach generation failed for {name}: {e}")
-                draft = self._assemble_draft("none", role_title, role_class, company_name=name)
-                results[name] = {
-                    "summary": "none",
-                    "compliment": "none",
-                    "outreach_draft": draft,
-                    "role_classification": role_class,
-                }
-
-            if i < len(companies) - 1:
-                await asyncio.sleep(1.0)
+                logger.error(f"Batch summarize failed for batch {batch_idx}: {e}")
+                for c in batch:
+                    if c["company_name"] not in results:
+                        results[c["company_name"]] = ("none", "none")
 
         return results
+
+    @staticmethod
+    def _try_parse_json_array(raw_text: str) -> Optional[List[Dict]]:
+        """Try to parse a JSON array from response text."""
+        cleaned = raw_text.strip()
+        if cleaned.startswith("```"):
+            lines = cleaned.split("\n")
+            cleaned = "\n".join(lines[1:-1]).strip()
+        try:
+            parsed = json.loads(cleaned)
+            if isinstance(parsed, list):
+                return parsed
+        except json.JSONDecodeError:
+            pass
+        match = re.search(r"\[[\s\S]*\]", raw_text)
+        if match:
+            try:
+                parsed = json.loads(match.group())
+                if isinstance(parsed, list):
+                    return parsed
+            except json.JSONDecodeError:
+                pass
+        # Fallback: try parsing as single object and wrap in array
+        try:
+            parsed = json.loads(cleaned)
+            if isinstance(parsed, dict):
+                return [parsed]
+        except json.JSONDecodeError:
+            pass
+        return None
+
+    @staticmethod
+    def _match_company_name(name: str, candidates: set) -> Optional[str]:
+        """Match company name from response to batch list."""
+        if not name:
+            return None
+        name_lower = name.lower().strip()
+        for candidate in candidates:
+            if candidate.lower() == name_lower:
+                return candidate
+            if name_lower in candidate.lower() or candidate.lower() in name_lower:
+                return candidate
+        return None
 
     async def _scrape_company(self, domain: str) -> str:
         """Scrape company homepage + up to 3 subpages, return concatenated text."""

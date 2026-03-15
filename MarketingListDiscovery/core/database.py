@@ -421,7 +421,7 @@ class Database:
         self.conn.commit()
 
     def get_companies_needing_outreach(self, company_ids: List[int] = None) -> List[Dict]:
-        """Get companies that need outreach draft generation."""
+        """Get companies that need outreach draft generation (excludes P5)."""
         cursor = self.conn.cursor()
         if company_ids:
             placeholders = ",".join("?" * len(company_ids))
@@ -431,6 +431,7 @@ class Database:
                 FROM companies c
                 WHERE c.id IN ({placeholders})
                 AND (c.outreach_draft IS NULL OR c.outreach_draft = '')
+                AND (c.priority_tier IS NULL OR c.priority_tier != 'P5')
                 """,
                 company_ids,
             )
@@ -439,6 +440,7 @@ class Database:
                 SELECT c.id, c.name, c.domain
                 FROM companies c
                 WHERE (c.outreach_draft IS NULL OR c.outreach_draft = '')
+                AND (c.priority_tier IS NULL OR c.priority_tier != 'P5')
                 AND EXISTS (SELECT 1 FROM jobs j WHERE j.company_id = c.id AND j.is_active = 1)
             """)
         return [dict(row) for row in cursor.fetchall()]

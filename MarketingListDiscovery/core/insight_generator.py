@@ -104,7 +104,7 @@ class InsightGenerator:
 
         response = await self.client.messages.create(
             model=self.model,
-            max_tokens=4096,
+            max_tokens=1500,
             temperature=0.3,
             messages=[{"role": "user", "content": prompt}],
         )
