@@ -1,6 +1,7 @@
 """Personalized outreach draft generation using website scraping + Anthropic Claude."""
 
 import asyncio
+import hashlib
 import json
 import logging
 import re
@@ -13,6 +14,41 @@ from anthropic import AsyncAnthropic
 
 logger = logging.getLogger(__name__)
 
+# Common misspellings in job titles from postings
+_ROLE_TYPO_MAP = {
+    "ambassdor": "Ambassador",
+    "ambassodor": "Ambassador",
+    "ambasador": "Ambassador",
+    "cordinator": "Coordinator",
+    "coodinator": "Coordinator",
+    "coordinater": "Coordinator",
+    "managment": "Management",
+    "managr": "Manager",
+    "mananger": "Manager",
+    "specalist": "Specialist",
+    "specilaist": "Specialist",
+    "markting": "Marketing",
+    "marketng": "Marketing",
+    "stratagist": "Strategist",
+    "strategst": "Strategist",
+    "assisstant": "Assistant",
+    "assitant": "Assistant",
+    "advertisng": "Advertising",
+    "comunications": "Communications",
+    "communictions": "Communications",
+    "developr": "Developer",
+    "analst": "Analyst",
+    "anaylst": "Analyst",
+    "enginer": "Engineer",
+    "direcor": "Director",
+    "directr": "Director",
+    "excutive": "Executive",
+    "representive": "Representative",
+    "representaive": "Representative",
+    "supervisr": "Supervisor",
+    "adminstrator": "Administrator",
+}
+
 SUMMARIZE_AND_COMPLIMENT_PROMPT = (
     "You're provided markdown scrapes of a company's homepage and up to 3 subpages. "
     "Do two things:\n\n"
@@ -22,55 +58,65 @@ SUMMARIZE_AND_COMPLIMENT_PROMPT = (
     "that could open a cold email.\n\n"
     'Return as JSON: {"summary": "your summary here", "compliment": "your compliment here"}.\n\n'
     "Summary rules: Be comprehensive but concise. Focus on specifics that make this company unique.\n\n"
-    "Compliment rules: One sentence only. Reference something specific and non-obvious from the summary. "
-    "Do NOT say generic things like 'Love your website' or 'Great company'. "
-    "Write in a matter-of-fact, peer-to-peer tone. Do NOT use gushing language like "
+    "Compliment rules:\n"
+    "- MUST be under 20 words. Trim to the core insight. No filler.\n"
+    "- Reference something specific and non-obvious from the summary.\n"
+    "- Start with a varied, conversational opener. Rotate naturally among styles like:\n"
+    '  "Was looking at your site and noticed..."\n'
+    '  "Came across your [specific thing] and..."\n'
+    '  "Saw that [company] recently..."\n'
+    '  "Interesting approach with..."\n'
+    '  "Cool that [company]..."\n'
+    "  Do NOT always use the same opener. Each compliment should feel fresh.\n"
+    "- Do NOT say generic things like 'Love your website' or 'Great company'.\n"
+    "- Write in a matter-of-fact, peer-to-peer tone. Do NOT use gushing language like "
     "'It's genuinely impressive,' 'It's really cool,' 'It's fantastic how,' or "
-    "'I was really impressed.' State the observation directly without filler praise. "
-    "For example, instead of 'It's genuinely impressive how EXL achieves a 90% success rate' "
-    "write 'EXL's 90% success rate on enterprise AI initiatives is a strong proof point.' "
-    "Shorten company names where natural. "
-    "Do NOT use em dashes (\u2014) anywhere.\n\n"
+    "'I was really impressed.' State the observation directly without filler praise.\n"
+    "- Shorten company names where natural.\n"
+    "- Do NOT use em dashes (\u2014) anywhere.\n\n"
     'If content is empty or unusable, return {"summary": "none", "compliment": "none"}'
 )
 
-OUTREACH_AGENCY_WITH_COMPLIMENT = (
-    "{compliment} Noticed you're looking for {a_role}. Before you commit to a "
-    "full-time hire, would it be worth exploring whether an agency could deliver "
-    "the same results at a fraction of the cost?"
-)
+_AGENCY_CLOSINGS = [
+    "Before you commit to a full-time hire, would it be worth exploring whether "
+    "an agency could deliver the same results at a fraction of the cost?",
+    "Might be worth chatting with an agency before locking in a full-time salary "
+    "and benefits package for this.",
+    "Depending on scope, an agency might be able to cover this at a fraction of "
+    "what a full-time hire would cost.",
+    "Have you considered whether an agency could handle this without the overhead "
+    "of a full-time hire?",
+    "Worth asking whether this is a full-time role or something an agency could "
+    "own for less.",
+]
 
-OUTREACH_AGENCY_WITHOUT_COMPLIMENT = (
-    "Noticed you're looking for {a_role}. Before you commit to a full-time hire, "
-    "would it be worth exploring whether an agency could deliver the same results "
-    "at a fraction of the cost?"
-)
+_NON_AGENCY_CLOSINGS = [
+    "If your team is also stretched thin on digital marketing or content, that's "
+    "something an agency could take off your plate while you focus on hiring for "
+    "the in-person side.",
+    "If the digital side of marketing is also a gap, an agency could handle that "
+    "while you build out the in-person team.",
+    "While you're building out field staff, an agency could quietly run the digital "
+    "side without adding more headcount.",
+]
 
-OUTREACH_NON_AGENCY_WITH_COMPLIMENT = (
-    "{compliment} Noticed you're looking for {a_role}. If your team is also "
-    "stretched thin on digital marketing or content, that's something an agency "
-    "could take off your plate while you focus on hiring for the in-person side."
-)
+_AGENCY_COMPANY_CLOSINGS = [
+    "If you ever need overflow support or white-label help on client work, would "
+    "it be worth a quick conversation?",
+    "If client work ever exceeds capacity, an outside team could pick up the "
+    "overflow without you missing a beat.",
+]
 
-OUTREACH_NON_AGENCY_WITHOUT_COMPLIMENT = (
-    "Noticed you're looking for {a_role}. If your team is also stretched thin on "
-    "digital marketing or content, that's something an agency could take off your "
-    "plate while you focus on hiring for the in-person side."
-)
 
-OUTREACH_AGENCY_COMPANY_WITH_COMPLIMENT = (
-    "{compliment} Noticed you're hiring for {a_role}. If you ever need overflow "
-    "support or white-label help on client work, would it be worth a quick conversation?"
-)
-
-OUTREACH_AGENCY_COMPANY_WITHOUT_COMPLIMENT = (
-    "Noticed you're hiring for {a_role}. If you ever need overflow support or "
-    "white-label help on client work, would it be worth a quick conversation?"
-)
+def _pick_closing(variations: list, company_name: str) -> str:
+    """Deterministically pick a closing variation based on company name hash."""
+    idx = int(hashlib.md5(company_name.encode()).hexdigest(), 16) % len(variations)
+    return variations[idx]
 
 # Keywords for role classification (checked case-insensitively against role title)
 _NOT_AGENCY_KEYWORDS = [
-    "brand ambassador", "promotions representative", "field marketing",
+    "ambassador",  # catches Brand Ambassador, Field Brand Ambassador, Retail Brand Ambassador, etc.
+    "promotions representative", "field marketing",
     "event coordinator", "canvasser", "door hanger", "retail",
     "on-call", "shift", "community outreach", "merchandising", "sales",
 ]
@@ -90,7 +136,9 @@ _AGENCY_KEYWORDS = [
 
 def _classify_role(role_title: str) -> str:
     """Classify a role as agency_replaceable or not_agency_replaceable."""
-    lower = role_title.lower()
+    # Fix typos before classifying so "Brand Ambassdor" matches "ambassador"
+    fixed = _fix_role_typos(role_title)
+    lower = fixed.lower()
     for kw in _NOT_AGENCY_KEYWORDS:
         if kw in lower:
             return "not_agency_replaceable"
@@ -138,14 +186,31 @@ _ROLE_KEYWORDS = [
 ]
 
 
+def _fix_role_typos(title: str) -> str:
+    """Fix common misspellings in role titles from job postings."""
+    words = title.split()
+    fixed = []
+    for word in words:
+        # Check lowercase version against typo map
+        lookup = word.lower().rstrip("s,.:;")
+        if lookup in _ROLE_TYPO_MAP:
+            # Preserve trailing chars (e.g. plural 's')
+            suffix = word[len(lookup):]
+            fixed.append(_ROLE_TYPO_MAP[lookup] + suffix)
+        else:
+            fixed.append(word)
+    return " ".join(fixed)
+
+
 def _clean_role_title(role_title: str) -> str:
-    """Strip location, parentheticals, and junk from role titles.
+    """Strip location, parentheticals, junk, and fix typos in role titles.
 
     Examples:
         "Digital Audience Operations Support(New York, NY)" -> "Digital Audience Operations Support"
         "Gretchen - Energy - Sports Drink - Brand Ambassador - Promoter - Weekly Pay" -> "Brand Ambassador"
         "Social Media Coordinator- Beauty" -> "Social Media Coordinator"
         "Associate, Growth & Go-To-Market Strategy" -> "Associate, Growth & Go-To-Market Strategy"
+        "Brand Ambassdor" -> "Brand Ambassador"
     """
     # Step 1: Remove parenthetical content
     cleaned = re.sub(r'\s*\(.*?\)\s*', '', role_title).strip()
@@ -167,6 +232,9 @@ def _clean_role_title(role_title: str) -> str:
     # compounds like "Go-To-Market" where the dash is part of the word
     if not re.search(r'\w-\w', cleaned):
         cleaned = re.sub(r'\s*-\s*\w+(\s+\w+)?$', '', cleaned).strip()
+
+    # Step 4: Fix common typos
+    cleaned = _fix_role_typos(cleaned)
 
     return cleaned if cleaned else role_title
 
@@ -260,7 +328,7 @@ class OutreachGenerator:
                     role_class = "agency_company"
                     print(f"  [{i+1}/{len(companies)}] {name}: detected as agency, using agency template")
 
-                draft = self._assemble_draft(compliment, role_title, role_class, is_agency_co)
+                draft = self._assemble_draft(compliment, role_title, role_class, is_agency_co, name)
 
                 results[name] = {
                     "summary": summary or "none",
@@ -272,7 +340,7 @@ class OutreachGenerator:
 
             except Exception as e:
                 logger.error(f"Outreach generation failed for {name}: {e}")
-                draft = self._assemble_draft("none", role_title, role_class)
+                draft = self._assemble_draft("none", role_title, role_class, company_name=name)
                 results[name] = {
                     "summary": "none",
                     "compliment": "none",
@@ -425,6 +493,7 @@ class OutreachGenerator:
         role_title: str,
         role_classification: str = "agency_replaceable",
         is_agency_company: bool = False,
+        company_name: str = "",
     ) -> str:
         """Assemble the final outreach draft from compliment, role title, and role classification."""
         has_compliment = compliment and compliment != "none"
@@ -433,19 +502,18 @@ class OutreachGenerator:
         a_role = _a_or_an(clean_role)
 
         if is_agency_company:
-            if has_compliment:
-                draft = OUTREACH_AGENCY_COMPANY_WITH_COMPLIMENT.format(compliment=compliment, a_role=a_role)
-            else:
-                draft = OUTREACH_AGENCY_COMPANY_WITHOUT_COMPLIMENT.format(a_role=a_role)
+            closing = _pick_closing(_AGENCY_COMPANY_CLOSINGS, company_name)
+            opener = f"Noticed you're hiring for {a_role}. "
         elif role_classification == "agency_replaceable":
-            if has_compliment:
-                draft = OUTREACH_AGENCY_WITH_COMPLIMENT.format(compliment=compliment, a_role=a_role)
-            else:
-                draft = OUTREACH_AGENCY_WITHOUT_COMPLIMENT.format(a_role=a_role)
+            closing = _pick_closing(_AGENCY_CLOSINGS, company_name)
+            opener = f"Noticed you're looking for {a_role}. "
         else:
-            if has_compliment:
-                draft = OUTREACH_NON_AGENCY_WITH_COMPLIMENT.format(compliment=compliment, a_role=a_role)
-            else:
-                draft = OUTREACH_NON_AGENCY_WITHOUT_COMPLIMENT.format(a_role=a_role)
+            closing = _pick_closing(_NON_AGENCY_CLOSINGS, company_name)
+            opener = f"Noticed you're looking for {a_role}. "
+
+        if has_compliment:
+            draft = f"{compliment} {opener}{closing}"
+        else:
+            draft = f"{opener}{closing}"
 
         return _strip_em_dashes(draft)
