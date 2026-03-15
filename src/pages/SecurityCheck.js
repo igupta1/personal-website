@@ -125,12 +125,13 @@ function SecurityCheck() {
       }
       // DNS
       case check.nameservers !== undefined: {
-        const hasIssues = !check.dnssecEnabled || check.mxRecords?.length === 0;
+        const hasIssues = check.mxRecords?.length === 0;
         return hasIssues ? { label: "Issues Found", className: "issues" } : { label: "Looks Good", className: "good" };
       }
       // Headers
       case check.headersFound !== undefined: {
-        return check.headersFound < check.headersTotal ? { label: `${check.headersFound}/${check.headersTotal} Present`, className: "issues" } : { label: "All Present", className: "good" };
+        const serious = check.headersFound <= Math.floor(check.headersTotal / 2);
+        return serious ? { label: `${check.headersFound}/${check.headersTotal} Present`, className: "issues" } : { label: "Looks Good", className: "good" };
       }
       default:
         return { label: "Checked", className: "good" };
