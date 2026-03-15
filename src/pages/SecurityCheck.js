@@ -111,7 +111,8 @@ function SecurityCheck() {
     switch (true) {
       // Email auth
       case check.spf !== undefined: {
-        const hasIssues = !check.spf?.found || !check.dkim?.found || !check.dmarc?.found || check.dmarc?.policy === "none";
+        const dkimOk = check.dkim?.found || check.dkimAssessment === "likely_configured";
+        const hasIssues = !check.spf?.found || !dkimOk || !check.dmarc?.found || check.dmarc?.policy === "none";
         return hasIssues ? { label: "Issues Found", className: "issues" } : { label: "Looks Good", className: "good" };
       }
       // SSL
@@ -346,7 +347,9 @@ function EmailAuthDetails({ check }) {
       <div className="sec-check-detail-value">
         {check.dkim?.found
           ? `Found on selectors: ${check.dkim.selectors.join(", ")}`
-          : "Not found on common selectors (checked: default, google, selector1, selector2, k1, mail, dkim, smtp, s1, s2)"}
+          : check.dkimAssessment === "likely_configured"
+            ? "Not found on common selectors, but DMARC enforcement suggests DKIM is configured with a custom selector"
+            : "Not found on common selectors (checked: default, google, selector1, selector2, k1, mail, dkim, smtp, s1, s2)"}
       </div>
 
       <div className="sec-check-detail-label">DMARC Record</div>
@@ -451,7 +454,7 @@ function DnsHealthDetails({ check }) {
       <div className="sec-check-detail-row">
         <span className="label">DNSSEC</span>
         <span className="value" style={{ color: check.dnssecEnabled ? "#4ade80" : "#fbbf24" }}>
-          {check.dnssecEnabled ? "Enabled" : "Not Enabled"}
+          {check.dnssecEnabled ? "Enabled" : "Not Enabled (common for most domains)"}
         </span>
       </div>
 

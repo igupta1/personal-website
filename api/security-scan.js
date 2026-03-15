@@ -86,16 +86,39 @@ async function checkEmailAuth(domain) {
       }
     } catch (e) { /* no DMARC */ }
 
+    // DKIM assessment using DMARC context
+    const dmarcEnforced = results.dmarc.found && (results.dmarc.policy === 'quarantine' || results.dmarc.policy === 'reject');
+    if (results.dkim.found) {
+      results.dkimAssessment = 'verified';
+    } else if (dmarcEnforced) {
+      results.dkimAssessment = 'likely_configured';
+    } else {
+      results.dkimAssessment = 'not_found';
+    }
+
     // Plain-English summary
     const issues = [];
     if (!results.spf.found) issues.push('SPF record is missing');
-    if (!results.dkim.found) issues.push('No DKIM records found on common selectors');
+    if (results.dkimAssessment === 'not_found') {
+      issues.push('No DKIM records found on common selectors and DMARC is either missing or not enforced. DKIM is likely not configured, leaving the domain vulnerable to email spoofing');
+    }
     if (!results.dmarc.found) issues.push('DMARC record is missing');
     else if (results.dmarc.policy === 'none') issues.push('DMARC policy is set to "none" (monitoring only, not enforcing)');
 
-    results.plainSummary = issues.length === 0
-      ? 'Email authentication is properly configured with SPF, DKIM, and DMARC records.'
-      : `Email authentication issues found: ${issues.join('. ')}. This means your domain may be vulnerable to email spoofing and phishing attacks.`;
+    // Build summary
+    const summaryParts = [];
+    if (issues.length === 0 && results.dkimAssessment === 'verified') {
+      summaryParts.push('Email authentication is properly configured with SPF, DKIM, and DMARC records.');
+    } else if (issues.length === 0 && results.dkimAssessment === 'likely_configured') {
+      summaryParts.push('SPF and DMARC are properly configured. No DKIM records found on common selectors checked. DMARC is enforced (' + results.dmarc.policy + '), which strongly suggests DKIM is configured with a custom selector.');
+    } else {
+      summaryParts.push(`Email authentication issues found: ${issues.join('. ')}.`);
+      if (results.dkimAssessment === 'likely_configured') {
+        summaryParts.push('Note: No DKIM records found on common selectors checked. DMARC is enforced (' + results.dmarc.policy + '), which strongly suggests DKIM is configured with a custom selector.');
+      }
+    }
+
+    results.plainSummary = summaryParts.join(' ');
 
     return { status: 'success', ...results };
   } catch (error) {
@@ -277,6 +300,12 @@ async function checkDnsHealth(domain) {
         results.mailProvider = 'Zoho Mail';
       } else if (exchanges.includes('secureserver') || exchanges.includes('godaddy')) {
         results.mailProvider = 'GoDaddy';
+      } else if (exchanges.includes('pphosted')) {
+        results.mailProvider = 'Proofpoint';
+      } else if (exchanges.includes('emailsrvr')) {
+        results.mailProvider = 'Rackspace';
+      } else if (exchanges.includes('messagelabs')) {
+        results.mailProvider = 'Broadcom/Symantec';
       } else if (results.mxRecords.length > 0) {
         results.mailProvider = results.mxRecords[0].exchange;
       }
@@ -297,7 +326,7 @@ async function checkDnsHealth(domain) {
     // Plain-English summary
     const issues = [];
     if (results.mxRecords.length === 0) issues.push('No MX records found — email may not be configured');
-    if (!results.dnssecEnabled) issues.push('DNSSEC is not enabled — the domain is vulnerable to DNS spoofing attacks');
+    if (!results.dnssecEnabled) issues.push('DNSSEC is not enabled (common for most domains, best-practice recommendation)');
     if (results.nameservers.length < 2) issues.push('Fewer than 2 nameservers found — limited DNS redundancy');
 
     results.plainSummary = issues.length === 0
@@ -363,7 +392,7 @@ async function checkSecurityHeaders(domain) {
       ? `Could not connect to the website over HTTPS to check security headers: ${fetchError}`
       : presentCount === totalCount
         ? `All ${totalCount} recommended security headers are present. ${httpsRedirect ? 'HTTP properly redirects to HTTPS.' : 'However, HTTP does not redirect to HTTPS.'}`
-        : `The website is missing ${totalCount - presentCount} out of ${totalCount} recommended security headers. These are configurations that protect visitors from common attacks like clickjacking and data injection.${!httpsRedirect ? ' Additionally, HTTP does not redirect to HTTPS.' : ''}`;
+        : `The website is missing ${totalCount - presentCount} out of ${totalCount} recommended security headers.${!httpsRedirect ? ' HTTP does not redirect to HTTPS.' : ''} Note: These checks reflect the homepage response only. Sites using CDNs, WAFs, or custom infrastructure may implement equivalent protections at layers not visible to this scan.`;
 
     return {
       status: fetchError ? 'partial' : 'success',
@@ -396,6 +425,24 @@ async function generateGeminiSummary(domain, checks) {
 3. **Personalized Intro Opener**: Write a short cold email or LinkedIn message (3-5 sentences) that the MSP can send to the prospect. It should reference one or two specific findings from the scan without being alarmist or salesy. The tone should be helpful and peer-to-peer, like one business owner looking out for another. Do not mention the scan tool by name. Do not use em dashes. Use the actual domain name "${domain}" and actual findings. The only placeholder should be the recipient's first name: [Name]. Example tone: 'Hey [Name], I was doing some research in your industry and noticed your domain [specific finding]. Wanted to flag it because [business risk]. Happy to walk you through what we typically recommend if that is helpful.'
 
 Write for a technical audience. Skip definitions of SPF/DKIM/DMARC and other basics. Be concise. No filler.
+
+CRITICAL ACCURACY RULES:
+
+- Consider the overall context of all findings together before assessing severity. A domain with valid SPF, enforced DMARC (quarantine/reject), valid SSL, HTTPS redirect, and HSTS has strong baseline security even if some optional headers or DKIM selectors were not detected.
+
+- If the DKIM check notes that common selectors were not found but DMARC is enforced, do NOT treat this as a confirmed vulnerability. Acknowledge it is inconclusive.
+
+- Do not frame missing optional security headers as critical if the site has HSTS and HTTPS redirect working. They are best-practice recommendations, not urgent gaps.
+
+- DNSSEC being disabled is common and should be mentioned as a recommendation, not a critical finding or primary sales opportunity.
+
+- Err on the side of understatement. A false alarm destroys credibility with an MSP. It is better to say "this domain appears to be reasonably well-configured with a few areas for improvement" than to overstate risk.
+
+- Only position a finding as a Sales Opportunity if it represents a genuine, exploitable gap that the MSP can credibly pitch a fix for. Do not manufacture urgency where none exists.
+
+- If the overall scan shows strong security posture with only minor gaps, say so directly. Not every report needs to be alarming. A report that honestly says "this domain is in good shape" builds more trust than one that invents problems.
+
+- For the Personalized Intro Opener: if no significant gaps were found, do not generate a message pitching non-issues. Instead, set introOpener to: "No significant issues were found to reference in outreach. This prospect does not have an obvious security pain point."
 
 Respond in valid JSON format with this structure:
 {
@@ -507,6 +554,20 @@ module.exports = async function handler(req, res) {
       dnsHealth: dnsHealth.status === 'fulfilled' ? dnsHealth.value : { status: 'error', errorMessage: 'Check crashed unexpectedly' },
       securityHeaders: securityHeaders.status === 'fulfilled' ? securityHeaders.value : { status: 'error', errorMessage: 'Check crashed unexpectedly' },
     };
+
+    // Compute headersContext from cross-check data (headers + SSL)
+    if (checks.securityHeaders.status !== 'error') {
+      const contextFlags = [];
+      if (checks.securityHeaders.headers?.['strict-transport-security']?.present) contextFlags.push('HSTS present');
+      if (checks.securityHeaders.httpsRedirect) contextFlags.push('HTTPS redirect works');
+      if (checks.sslTls.valid && checks.sslTls.tlsVersion && !['TLSv1', 'TLSv1.1'].includes(checks.sslTls.tlsVersion)) contextFlags.push('Valid modern TLS');
+      checks.securityHeaders.headersContext = {
+        baselineFlags: contextFlags,
+        note: contextFlags.length >= 2
+          ? 'Site has baseline transport security. Missing headers are best-practice recommendations, not critical gaps. Still mention them as recommendations.'
+          : 'Site lacks baseline transport security — missing headers are more concerning.',
+      };
+    }
 
     // Generate Gemini summary
     const summary = await generateGeminiSummary(domain, checks);
