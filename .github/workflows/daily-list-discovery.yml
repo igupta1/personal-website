@@ -36,7 +36,7 @@ jobs:
           LEADS_UPLOAD_API_KEY: ${{ secrets.LEADS_UPLOAD_API_KEY }}
           VERCEL_API_URL: https://www.ishaangpta.com
           GITHUB_REPO: jobright-ai/2026-Marketing-New-Grad
-        run: python -m MarketingListDiscovery run --verbose --date 2026-03-14
+        run: python -m MarketingListDiscovery run --verbose
 
       - name: Upload leads to website
         env:
