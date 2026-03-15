@@ -30,9 +30,12 @@ def setup_logging(verbose: bool = False):
         format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
         handlers=[logging.StreamHandler()],
     )
-    # Reduce noise from httpx
-    logging.getLogger("httpx").setLevel(logging.WARNING)
-    logging.getLogger("httpcore").setLevel(logging.WARNING)
+    # Reduce noise from third-party HTTP/API client loggers
+    for noisy_logger in [
+        "httpx", "httpcore", "anthropic", "google_genai",
+        "asyncio", "urllib3", "google.auth",
+    ]:
+        logging.getLogger(noisy_logger).setLevel(logging.WARNING)
 
 
 def cmd_run(args):
@@ -284,7 +287,7 @@ def cmd_upload(args):
                         "jobLink": job[1] if job else "",
                         "postingDate": job[2] if job else "",
                         "mostRecentPostingDate": most_recent_date,
-                        "linkedinUrl": row[6] or "",
+                        "linkedinUrl": "",
                         "sourceUrl": row[7] or "",
                         "confidence": row[8] or "",
                         "isNewCompany": is_new_company,

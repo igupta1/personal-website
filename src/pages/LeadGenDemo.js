@@ -111,7 +111,6 @@ function LeadGenDemo() {
             firstName: lead.firstName,
             lastName: lead.lastName,
             title: lead.title,
-            linkedinUrl: lead.linkedinUrl,
             sourceUrl: lead.sourceUrl,
             confidence: lead.confidence
           },

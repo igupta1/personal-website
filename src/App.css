@@ -1780,6 +1780,7 @@ body {
 }
 
 .lead-gen-employee-count {
+  display: block;
   font-size: 0.7rem;
   color: #94a3b8;
 }

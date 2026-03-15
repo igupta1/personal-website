@@ -135,10 +135,6 @@ class ListDiscoveryOrchestrator:
 
         await self._find_decision_makers_if_needed()
 
-        await self._backfill_linkedin_urls()
-
-        await self._validate_linkedin_urls()
-
         await self._generate_insights_if_needed()
 
         await self._classify_priority_tiers()
@@ -265,7 +261,6 @@ class ListDiscoveryOrchestrator:
                             title=dm.title,
                             source_url=dm.source_url,
                             confidence=dm.confidence,
-                            linkedin_url=dm.linkedin_url,
                         )
                         # Update employee_count and industry if available
                         updates = {}
@@ -292,136 +287,6 @@ class ListDiscoveryOrchestrator:
             logger.error(f"Decision maker lookup failed: {e}")
             self._record_error("decision_makers", f"Decision maker lookup failed: {e}", critical=True)
             print(f"  Decision maker lookup failed: {e}")
-
-    async def _backfill_linkedin_urls(self):
-        """Re-run DM lookup for existing decision makers missing LinkedIn URLs."""
-        if not self.config.enable_decision_maker_lookup or not self.config.gemini_api_key:
-            return
-
-        companies = self.db.get_companies_needing_linkedin_url()
-        if not companies:
-            print("\n--- All decision makers already have LinkedIn URLs ---")
-            return
-
-        print(
-            f"\n--- Backfilling LinkedIn URLs for "
-            f"{len(companies)} decision makers ---"
-        )
-
-        lookup_list = [
-            {"company": c["name"], "domain": c.get("domain", ""), "company_id": c["id"]}
-            for c in companies
-        ]
-
-        try:
-            finder = DecisionMakerFinder(
-                api_key=self.config.gemini_api_key,
-                model=self.config.gemini_model,
-                batch_size=self.config.gemini_batch_size,
-            )
-            dm_results = await finder.find_decision_makers(lookup_list)
-
-            filled_count = 0
-            dm_by_company = {dm.company_name: dm for dm in dm_results}
-
-            for company_info in lookup_list:
-                company_id = company_info["company_id"]
-                company_name = company_info["company"]
-                dm = dm_by_company.get(company_name)
-
-                if dm and dm.person_name and dm.linkedin_url and not self.dry_run:
-                    filled_count += 1
-                    self.db.upsert_decision_maker(
-                        company_id=company_id,
-                        person_name=dm.person_name,
-                        title=dm.title,
-                        source_url=dm.source_url,
-                        confidence=dm.confidence,
-                        linkedin_url=dm.linkedin_url,
-                    )
-
-            print(f"  Filled {filled_count}/{len(companies)} LinkedIn URLs")
-
-        except Exception as e:
-            logger.error(f"LinkedIn URL backfill failed: {e}")
-            print(f"  LinkedIn URL backfill failed: {e}")
-
-    async def _validate_linkedin_urls(self):
-        """Validate LinkedIn URLs by checking if they resolve to real profiles."""
-        # Always validate ALL LinkedIn URLs, not just new ones
-        dms = self.db.get_decision_makers_with_linkedin_urls(None)
-        if not dms:
-            print("\n--- No LinkedIn URLs to validate ---")
-            return
-
-        print(f"\n--- Validating {len(dms)} LinkedIn URLs ---")
-
-        cleared = 0
-        browser_ua = (
-            "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
-            "AppleWebKit/537.36 (KHTML, like Gecko) "
-            "Chrome/120.0.0.0 Safari/537.36"
-        )
-
-        # Phrases in the page body that indicate a non-existent profile
-        _INVALID_MARKERS = [
-            "page not found",
-            "profile is not available",
-            "this page doesn",
-            "this linkedin page isn",
-            "the profile you're looking for",
-            "couldn't find this page",
-            "this profile is no longer available",
-            "404",
-        ]
-
-        try:
-            async with httpx.AsyncClient(
-                timeout=httpx.Timeout(10.0),
-                headers={"User-Agent": browser_ua},
-                follow_redirects=True,
-            ) as client:
-                for dm in dms:
-                    url = dm["linkedin_url"]
-                    try:
-                        resp = await client.head(url)
-
-                        is_invalid = False
-
-                        if resp.status_code == 404:
-                            is_invalid = True
-                        elif resp.status_code == 999:
-                            # LinkedIn blocks automated requests with 999;
-                            # can't verify, so skip (don't clear)
-                            logger.debug(f"LinkedIn returned 999 for {url}, skipping")
-                            await asyncio.sleep(2)
-                            continue
-                        elif resp.status_code in (200, 301, 302, 303):
-                            # HEAD passed; do a GET to check for soft 404 in body
-                            get_resp = await client.get(url)
-                            body = get_resp.text[:8000].lower()
-
-                            if any(marker in body for marker in _INVALID_MARKERS):
-                                is_invalid = True
-                            # LinkedIn redirects invalid profiles to the login/404 page
-                            final_url = str(get_resp.url).lower()
-                            if "/404" in final_url or "linkedin.com/in/" not in final_url:
-                                is_invalid = True
-
-                        if is_invalid:
-                            if not self.dry_run:
-                                self.db.clear_linkedin_url(dm["id"])
-                            cleared += 1
-                            logger.info(f"Cleared invalid LinkedIn URL: {url}")
-                    except Exception as e:
-                        logger.debug(f"LinkedIn validation error for {url}: {e}")
-
-                    await asyncio.sleep(2)
-
-            print(f"  Cleared {cleared}/{len(dms)} invalid LinkedIn URLs")
-        except Exception as e:
-            logger.error(f"LinkedIn URL validation failed: {e}")
-            self._record_error("linkedin_validation", f"LinkedIn URL validation failed: {e}")
 
     async def _generate_insights_if_needed(self):
         """Generate AI insights for newly added companies that don't have one yet."""
@@ -792,7 +657,5 @@ class ListDiscoveryOrchestrator:
                     f"  Decision Maker: {dm['person_name']} "
                     f"- {dm.get('title', 'N/A')}"
                 )
-                if dm.get("linkedin_url"):
-                    print(f"    LinkedIn: {dm['linkedin_url']}")
 
         print("\n" + "=" * 70)
