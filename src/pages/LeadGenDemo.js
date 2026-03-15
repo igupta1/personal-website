@@ -386,6 +386,11 @@ function LeadGenDemo() {
                                 {company.website.replace('https://', '')}
                               </a>
                             )}
+                            {company.employeeCount > 0 && (
+                              <span className="lead-gen-employee-count">
+                                About {Math.round(company.employeeCount / 10) * 10} Employees
+                              </span>
+                            )}
                             {daysAgo !== null && (
                               <span className="lead-gen-posted-badge">
                                 {daysAgo === 0 ? 'Role Posted Today' : `Role Posted ${daysAgo} ${daysAgo === 1 ? 'Day' : 'Days'} Ago`}
