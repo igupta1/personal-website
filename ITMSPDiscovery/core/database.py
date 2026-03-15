@@ -507,6 +507,7 @@ class Database:
             LEFT JOIN decision_makers dm ON dm.company_id = c.id
             WHERE (c.employee_count IS NULL OR c.employee_count <= ?)
               AND (c.screened_out IS NULL OR c.screened_out = 0)
+              AND c.website IS NOT NULL AND c.website != ''
               AND EXISTS (
                 SELECT 1 FROM jobs j
                 WHERE j.company_id = c.id AND j.is_active = 1

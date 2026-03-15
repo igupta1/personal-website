@@ -176,14 +176,20 @@ def _clean_role_title(role_title: str) -> str:
         "Systems Administrator(New York, NY)" -> "Systems Administrator"
         "Acme - IT - Help Desk Technician - Full Time" -> "Help Desk Technician"
         "Network Engineer- Enterprise" -> "Network Engineer"
+        "IT Manager - Norton Shores Area" -> "IT Manager"
+        "IT Support Specialist - Part time, .5 FTE" -> "IT Support Specialist"
+        "Information TechnologyManager" -> "Information Technology Manager"
         "IT Adminstrator" -> "IT Administrator"
     """
     # Step 1: Remove parenthetical content
     cleaned = re.sub(r'\s*\(.*?\)\s*', '', role_title).strip()
 
-    # Step 2: Handle dash-separated junk titles (3+ segments)
+    # Step 1b: Fix missing spaces before uppercase (e.g. "TechnologyManager")
+    cleaned = re.sub(r'([a-z])([A-Z])', r'\1 \2', cleaned)
+
+    # Step 2: Split on " - " and find the role keyword segment
     segments = [s.strip() for s in cleaned.split(" - ") if s.strip()]
-    if len(segments) >= 3:
+    if len(segments) >= 2:
         # Find segment containing a role keyword
         for seg in segments:
             seg_lower = seg.lower()
@@ -191,13 +197,13 @@ def _clean_role_title(role_title: str) -> str:
                 cleaned = seg
                 break
         else:
-            # No keyword match — use longest segment as best guess
-            cleaned = max(segments, key=len)
+            # No keyword match — use first segment as best guess
+            cleaned = segments[0]
 
     # Step 3: Strip trailing "- Category" suffix, but protect hyphenated
     # compounds where the dash is part of the word
     if not re.search(r'\w-\w', cleaned):
-        cleaned = re.sub(r'\s*-\s*\w+(\s+\w+)?$', '', cleaned).strip()
+        cleaned = re.sub(r'\s*-\s*.*$', '', cleaned).strip()
 
     # Step 4: Fix common typos
     cleaned = _fix_role_typos(cleaned)
