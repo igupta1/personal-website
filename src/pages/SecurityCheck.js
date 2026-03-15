@@ -216,11 +216,11 @@ function SecurityCheck() {
                   </span>
                 </div>
 
-                {/* Executive Summary */}
-                {report.summary?.executiveSummary ? (
+                {/* Scan Summary */}
+                {report.summary?.scanSummary ? (
                   <div className="sec-check-card">
-                    <h3>Executive Summary</h3>
-                    <p>{report.summary.executiveSummary}</p>
+                    <h3>Scan Summary</h3>
+                    <p>{report.summary.scanSummary}</p>
                   </div>
                 ) : report.summary?.error && (
                   <div className="sec-check-error">
@@ -229,19 +229,24 @@ function SecurityCheck() {
                   </div>
                 )}
 
-                {/* Top 3 Recommendations */}
-                {report.summary?.recommendations?.length > 0 && (
+                {/* Sales Opportunities */}
+                {report.summary?.salesOpportunities?.length > 0 && (
                   <div className="sec-check-card">
-                    <h3>Top Recommendations</h3>
+                    <h3>Sales Opportunities</h3>
                     <ul className="sec-check-recs-list">
-                      {report.summary.recommendations.map((rec, i) => (
+                      {report.summary.salesOpportunities.map((opp, i) => (
                         <li key={i} className="sec-check-rec-item">
-                          <h4>{i + 1}. {rec.title}</h4>
-                          <p>{rec.description}</p>
+                          <h4>{i + 1}. {opp.title}</h4>
+                          <p>{opp.description}</p>
                         </li>
                       ))}
                     </ul>
                   </div>
+                )}
+
+                {/* Personalized Intro Opener */}
+                {report.summary?.introOpener && (
+                  <IntroOpener text={report.summary.introOpener} />
                 )}
 
                 {/* Detailed Findings */}
@@ -265,17 +270,6 @@ function SecurityCheck() {
                   getStatus={getSectionStatus}
                 >
                   <SslTlsDetails check={report.checks.sslTls} />
-                </CollapsibleSection>
-
-                <CollapsibleSection
-                  title="Breach Exposure"
-                  sectionKey="breachExposure"
-                  check={report.checks.breachExposure}
-                  expanded={expandedSections.breachExposure}
-                  onToggle={toggleSection}
-                  getStatus={getSectionStatus}
-                >
-                  <BreachDetails check={report.checks.breachExposure} />
                 </CollapsibleSection>
 
                 <CollapsibleSection
@@ -429,38 +423,42 @@ function SslTlsDetails({ check }) {
   );
 }
 
-// ─── Breach Details ───
+// ─── Intro Opener ───
 
-function BreachDetails({ check }) {
-  if (check.status === "error") return <p>{check.errorMessage}</p>;
-  if (check.status === "stubbed") return <p>{check.plainSummary}</p>;
+function IntroOpener({ text }) {
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(text);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch {
+      // Fallback
+      const textarea = document.createElement("textarea");
+      textarea.value = text;
+      document.body.appendChild(textarea);
+      textarea.select();
+      document.execCommand("copy");
+      document.body.removeChild(textarea);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    }
+  };
 
   return (
-    <>
-      <div className="sec-check-detail-row">
-        <span className="label">Breaches Found</span>
-        <span className="value">{check.breachCount}</span>
+    <div className="sec-check-card">
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "0.75rem" }}>
+        <h3 style={{ margin: 0 }}>Personalized Intro Opener</h3>
+        <button
+          onClick={handleCopy}
+          className="sec-check-copy-btn"
+        >
+          {copied ? "Copied!" : "Copy to Clipboard"}
+        </button>
       </div>
-
-      {check.breaches?.length > 0 && check.breaches.map((b, i) => (
-        <div key={i} style={{ marginBottom: "0.5rem", paddingLeft: "0.5rem", borderLeft: "2px solid rgba(255,255,255,0.1)" }}>
-          <div className="sec-check-detail-row">
-            <span className="label">Breach</span>
-            <span className="value">{b.name} ({b.date})</span>
-          </div>
-          <div className="sec-check-detail-row">
-            <span className="label">Data Exposed</span>
-            <span className="value">{b.dataClasses?.join(", ") || "Unknown"}</span>
-          </div>
-          <div className="sec-check-detail-row">
-            <span className="label">Records</span>
-            <span className="value">{b.pwnCount?.toLocaleString() || "Unknown"}</span>
-          </div>
-        </div>
-      ))}
-
-      {check.plainSummary && <p className="sec-check-plain-summary">{check.plainSummary}</p>}
-    </>
+      <div className="sec-check-opener-text">{text}</div>
+    </div>
   );
 }
 

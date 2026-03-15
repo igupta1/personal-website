@@ -383,28 +383,27 @@ async function checkSecurityHeaders(domain) {
 async function generateGeminiSummary(domain, checks) {
   const apiKey = process.env.GEMINI_API_KEY || process.env.GOOGLE_GEMINI_API_KEY;
   if (!apiKey) {
-    return { executiveSummary: null, recommendations: null, error: 'Gemini API key not configured' };
+    return { scanSummary: null, salesOpportunities: null, introOpener: null, error: 'Gemini API key not configured' };
   }
 
   try {
-    const prompt = `You are an IT security advisor writing a report for a non-technical small business owner. Based on the following security scan results for ${domain}, write:
+    const prompt = `You are a sales strategist helping an IT Managed Service Provider identify opportunities to pitch their services. Based on the following security scan results for ${domain}, write:
 
-1. **Executive Summary** (3-4 sentences): What is the overall security posture of this domain? What should the business owner be most concerned about?
+1. **Scan Summary** (3-4 sentences): Summarize the security posture of this domain in technical shorthand an MSP would understand. Be direct. What's exposed, what's misconfigured, and what's the overall risk level? No hand-holding.
 
-2. **Top 3 Recommendations**: The three most impactful things they should do immediately, written in plain English. Each recommendation should explain what the problem is, why it matters to their business (lost clients, ransomware risk, compliance, etc.), and what fixing it looks like in simple terms.
+2. **Sales Opportunities**: For each significant finding, frame it as a sales angle. What can the MSP pitch to this prospect? What's the business risk they can reference in a conversation? What's the fix the MSP can offer as a service? Only include findings that are actually actionable and worth bringing up in a sales conversation. Skip anything that's fine.
 
-Do NOT use letter grades or scores. Do NOT be condescending. Write as if you are a trusted advisor having a conversation with the business owner. Be direct and specific — reference the actual findings from their scan.
+3. **Personalized Intro Opener**: Write a short cold email or LinkedIn message (3-5 sentences) that the MSP can send to the prospect. It should reference one or two specific findings from the scan without being alarmist or salesy. The tone should be helpful and peer-to-peer, like one business owner looking out for another. Do not mention the scan tool by name. Do not use em dashes. Use the actual domain name "${domain}" and actual findings. The only placeholder should be the recipient's first name: [Name]. Example tone: 'Hey [Name], I was doing some research in your industry and noticed your domain [specific finding]. Wanted to flag it because [business risk]. Happy to walk you through what we typically recommend if that is helpful.'
 
-Keep each recommendation description to 2-3 sentences maximum. Be concise.
+Write for a technical audience. Skip definitions of SPF/DKIM/DMARC and other basics. Be concise. No filler.
 
 Respond in valid JSON format with this structure:
 {
-  "executiveSummary": "...",
-  "recommendations": [
-    { "title": "...", "description": "..." },
-    { "title": "...", "description": "..." },
+  "scanSummary": "...",
+  "salesOpportunities": [
     { "title": "...", "description": "..." }
-  ]
+  ],
+  "introOpener": "..."
 }
 
 Scan results:
@@ -430,22 +429,23 @@ ${JSON.stringify(checks, null, 2)}`;
     if (!response.ok) {
       const errText = await response.text();
       console.error('Gemini API error:', response.status, errText);
-      return { executiveSummary: null, recommendations: null, error: `Gemini API error: ${response.status} - ${errText.slice(0, 200)}` };
+      return { scanSummary: null, salesOpportunities: null, introOpener: null, error: `Gemini API error: ${response.status} - ${errText.slice(0, 200)}` };
     }
 
     const data = await response.json();
     const text = data.candidates?.[0]?.content?.parts?.[0]?.text;
     if (!text) {
-      return { executiveSummary: null, recommendations: null, error: 'Empty Gemini response' };
+      return { scanSummary: null, salesOpportunities: null, introOpener: null, error: 'Empty Gemini response' };
     }
 
     const parsed = JSON.parse(text);
     return {
-      executiveSummary: parsed.executiveSummary || null,
-      recommendations: parsed.recommendations || null,
+      scanSummary: parsed.scanSummary || null,
+      salesOpportunities: parsed.salesOpportunities || null,
+      introOpener: parsed.introOpener || null,
     };
   } catch (error) {
-    return { executiveSummary: null, recommendations: null, error: `Summary generation failed: ${error.message}` };
+    return { scanSummary: null, salesOpportunities: null, introOpener: null, error: `Summary generation failed: ${error.message}` };
   }
 }
 
