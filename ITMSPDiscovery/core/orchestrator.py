@@ -470,7 +470,7 @@ class ITMSPOrchestrator:
                 role_titles = [j["title"] for j in jobs]
                 outreach_input.append({
                     "company_name": comp["name"],
-                    "domain": comp.get("domain") or "",
+                    "domain": comp.get("website") or comp.get("domain") or "",
                     "roles": role_titles,
                     "company_id": comp["id"],
                 })

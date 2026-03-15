@@ -597,7 +597,7 @@ class Database:
         cursor = self.conn.cursor()
         cursor.execute(
             """
-            SELECT c.id, c.name, c.domain
+            SELECT c.id, c.name, c.domain, c.website
             FROM companies c
             WHERE (c.employee_count IS NULL OR c.employee_count <= ?)
               AND (c.screened_out IS NULL OR c.screened_out = 0)

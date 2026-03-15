@@ -434,6 +434,11 @@ class OutreachGenerator:
 
     async def _scrape_company(self, domain: str) -> str:
         """Scrape company homepage + up to 3 subpages, return concatenated text."""
+        # Strip protocol if already present (website URLs include https://)
+        domain = domain.replace("https://", "").replace("http://", "").rstrip("/")
+        if not domain:
+            return ""
+
         all_text = []
 
         async with httpx.AsyncClient(
