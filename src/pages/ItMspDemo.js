@@ -253,7 +253,7 @@ function ItMspDemo() {
             <div className="demo-top-row">
               <div className="demo-section-header">
                 <Link to="/gtm" className="back-link-inline">Back to GTM Systems</Link>
-                <h2>Find Small Businesses Hiring IT Roles</h2>
+                <h2>Find Businesses Hiring IT Roles</h2>
                 {lastUpdated && getLastUpdatedLabel(lastUpdated) && (
                   <p style={{ fontSize: '0.75rem', color: 'var(--text-muted, #888)', margin: '2px 0 0' }}>
                     {getLastUpdatedLabel(lastUpdated)}
