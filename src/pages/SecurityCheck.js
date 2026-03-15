@@ -217,10 +217,15 @@ function SecurityCheck() {
                 </div>
 
                 {/* Executive Summary */}
-                {report.summary?.executiveSummary && (
+                {report.summary?.executiveSummary ? (
                   <div className="sec-check-card">
                     <h3>Executive Summary</h3>
                     <p>{report.summary.executiveSummary}</p>
+                  </div>
+                ) : report.summary?.error && (
+                  <div className="sec-check-error">
+                    <span>⚠</span>
+                    <span>AI Summary unavailable: {report.summary.error}</span>
                   </div>
                 )}
 

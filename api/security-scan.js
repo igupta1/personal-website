@@ -381,7 +381,7 @@ async function checkSecurityHeaders(domain) {
 // ─── Gemini Summary ───
 
 async function generateGeminiSummary(domain, checks) {
-  const apiKey = process.env.GEMINI_API_KEY;
+  const apiKey = process.env.GEMINI_API_KEY || process.env.GOOGLE_GEMINI_API_KEY;
   if (!apiKey) {
     return { executiveSummary: null, recommendations: null, error: 'Gemini API key not configured' };
   }
@@ -427,7 +427,8 @@ ${JSON.stringify(checks, null, 2)}`;
 
     if (!response.ok) {
       const errText = await response.text();
-      return { executiveSummary: null, recommendations: null, error: `Gemini API error: ${response.status}` };
+      console.error('Gemini API error:', response.status, errText);
+      return { executiveSummary: null, recommendations: null, error: `Gemini API error: ${response.status} - ${errText.slice(0, 200)}` };
     }
 
     const data = await response.json();
