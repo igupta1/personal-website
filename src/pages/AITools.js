@@ -14,7 +14,6 @@ import linkmailLogo from '../assets/linkmail-logo.png';
 // Icons
 import { HiOutlineUserGroup } from "react-icons/hi";
 import { HiOutlineSparkles } from "react-icons/hi";
-import { HiOutlineShieldCheck } from "react-icons/hi";
 import { HiOutlineChartBar } from "react-icons/hi";
 
 function AITools() {
@@ -69,14 +68,6 @@ function AITools() {
     },
     {
       id: 4,
-      title: "IT Security Scorecard",
-      description: "Scan Any Domain for Security Vulnerabilities Instantly",
-      icon: <HiOutlineShieldCheck size={34} color="#f5f5f5" />,
-      isReactIcon: true,
-      link: "/gtm/it-security-check",
-    },
-    {
-      id: 5,
       title: "Marketing Readiness Scorecard",
       description: "Scan Any Business Website for Marketing Gaps and Opportunities",
       icon: <HiOutlineChartBar size={34} color="#f5f5f5" />,
