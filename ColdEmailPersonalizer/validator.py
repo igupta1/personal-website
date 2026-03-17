@@ -135,17 +135,17 @@ def validate(subject: str, opener: str, first_name: str) -> Tuple[bool, List[str
     if "!" in subject:
         issues.append("exclamation_in_subject")
 
-    # ALL CAPS words (4+ consecutive uppercase)
-    if re.search(r"\b[A-Z]{4,}\b", subject + " " + opener):
+    # ALL CAPS words (6+ consecutive uppercase, allows short acronyms like HIPAA, IGTD, UGC)
+    if re.search(r"\b[A-Z]{6,}\b", subject + " " + opener):
         issues.append("all_caps_word")
 
     # Subject not lowercase
     if subject != subject.lower():
         issues.append("subject_not_lowercase")
 
-    # Subject punctuation (only ? allowed)
-    subject_no_question = subject.replace("?", "")
-    if re.search(r"[!@#$%^&*()+=\[\]{};:\"\\|<>/~`]", subject_no_question):
+    # Subject punctuation - allow ?, $, +, %, commas (in numbers like 5,000), apostrophes
+    subject_cleaned = re.sub(r"[?$+%,']", "", subject)
+    if re.search(r"[!@#^&*()=\[\]{};:\"\\|<>/~`]", subject_cleaned):
         issues.append("subject_bad_punctuation")
 
     # Unfilled merge tags

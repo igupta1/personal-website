@@ -24,15 +24,15 @@ Worth a quick call?
 
 Ishaan"
 
-Here are examples of good subject + opener pairs. Notice how some are one sentence, and the ones with two sentences connect them naturally instead of ending with a judgment:
+Here are examples of good subject + opener pairs:
 
 Example 1:
 Prospect: Sarah at GrowthSpark (website mentions ecommerce focus, Shopify Plus partnerships, DTC brands)
-{{"subject": "the ecommerce focus on your site", "opener": "Hey Sarah, noticed GrowthSpark is going deep on Shopify Plus and DTC brands."}}
+{{"subject": "the ecommerce focus on your site", "opener": "Hey Sarah, noticed GrowthSpark is going deep on Shopify Plus and DTC brands. Clearly know your niche."}}
 
 Example 2:
 Prospect: James at Bright Pixel Media (website has case study about scaling a SaaS client's paid media from $50k to $200k/mo)
-{{"subject": "that saas paid media case study", "opener": "Hey James, saw you scaled a SaaS client's paid media from 50k to 200k a month."}}
+{{"subject": "that saas paid media case study", "opener": "Hey James, you scaled a SaaS client's paid media from 50k to 200k a month. Not easy to pull off."}}
 
 Example 3:
 Prospect: Lauren at Cedar Creative (website mentions they recently launched a new content marketing service, blog post about B2B content strategy)
@@ -56,13 +56,15 @@ Now generate for this prospect:
 - Website content summary: {extracted_content}
 
 Rules:
-1. subject: Under 7 words, lowercase, no punctuation except question marks. Reference something HIGHLY SPECIFIC from their site: a named client, a specific case study, a concrete service with details, a named blog post, a specific vertical, a recent hire by name. Generic observations like "your growth focus" or "your marketing services" are not acceptable.
-2. opener: 1-2 sentences, under 25 words. Start with "Hey {first_name}," then go directly into the observation. The observation itself proves you did research, so do NOT use filler phrases like "was doing some digging on", "was looking through", "was checking out", "came across", or "took a look at". Just state what you noticed.
-3. The subject and opener MUST reference the same specific observation.
-4. Vary your sentence structure. After "Hey {first_name}," you can start with: the company name doing something, a verb like "noticed/saw/read", a reference to the specific thing ("the [thing] on your site"), or the observation itself. Do NOT repeat the same pattern.
-5. The opener must naturally lead into the email body that follows it (which starts with "Here's the irony I keep seeing...").
-6. The opener can be one sentence or two. One sentence is often better. If you write a second sentence, it must connect to the first, not evaluate it. NEVER end with a two-word judgment like "Good question.", "Smart move.", "Timely topic.", "Solid results.", "Good niche.", "Cool initiative.", or any "[Adjective] [noun]." pattern. Instead, either stop after one sentence, or add a brief connected thought like "been thinking about that too" or "we work with a lot of similar brands". The second sentence should feel like a thought trailing off, not a grade.
+1. subject: Under 7 words, lowercase. Reference something HIGHLY SPECIFIC from their site: a named client, a specific case study, a concrete service with details, a named blog post, a specific vertical, a recent hire by name. Generic observations like "your growth focus" or "your marketing services" are not acceptable.
+2. The opener's job is to make the reader want to keep reading into the email body that follows. The email body starts with: "Here's the irony I keep seeing with agencies your size: you're great at filling pipelines for clients but your own pipeline runs on referrals and word-of-mouth." For this to land, the opener needs to establish that the agency is doing good, specific work. The reader should think "yeah, we are good at what we do" right before they read the irony line. This creates a one-two punch: respect followed by a challenge.
+3. opener: 1-2 sentences, under 25 words. Start with "Hey {first_name}," then go directly into the observation. Do NOT use filler phrases like "was doing some digging on", "was looking through", "was checking out", "came across", or "took a look at". Just state what you noticed.
+4. The opener can be one or two sentences. If two, the second should acknowledge their competence in a casual, specific way that connects to the observation, not a generic judgment. Examples of good second sentences: "Clearly know your niche.", "Not easy to pull off.", "That takes serious execution.", "Most agencies wouldn't touch that vertical." Examples of bad second sentences: "Smart move.", "Good niche.", "Interesting approach." The difference is that good ones acknowledge difficulty or competence, while bad ones just grade. It is also fine to write just one sentence if the observation itself already implies competence.
+5. The subject and opener MUST reference the same specific observation.
+6. Vary how you start the observation after "Hey {first_name},". Options include: "noticed...", "read your...", "[Company name] just...", "the [thing] on your site...", "your [specific thing]...", or start with the observation itself. Do NOT default to "saw" for every opener.
 7. NEVER use the pattern "That's a [adjective] [noun]". This is the single biggest tell that the email was written by AI.
+8. The opener must reference something specific enough that it could only apply to this one company. If the opener could describe dozens of agencies (e.g. "helps clients with automated lead generation systems" or "offers social media management"), it is too generic. Reference a named client, a specific case study result, a named blog post, a named team member, a specific event, or a unique service detail.
+9. Do NOT reference referrals, word-of-mouth, or growing beyond referrals in the opener. The email body already covers this topic.
 
 CRITICAL formatting rules:
 - Subject must be pure lowercase ASCII. No em dashes, en dashes, curly quotes, or unicode.
