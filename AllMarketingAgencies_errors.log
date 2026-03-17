@@ -1,0 +1,15 @@
+17:17:02 [INFO] SCRAPE_FAIL domain=repulseagency.com error=Client error '404 Not Found' for url 'http://repulseagency.com'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+17:17:02 [INFO] SCRAPE_FAIL domain=blastoff.agency error=insufficient_content: only 8 words (min 200)
+17:17:02 [INFO] SCRAPE_FAIL domain=rogerthat.agency error=Client error '403 Forbidden' for url 'http://rogerthat.agency'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/403
+17:17:02 [INFO] SCRAPE_FAIL domain=getunstoppable.in error=insufficient_content: only 0 words (min 200)
+17:17:02 [INFO] SCRAPE_FAIL domain=creativeagency.ceo error=insufficient_content: only 13 words (min 200)
+17:17:02 [INFO] SCRAPE_FAIL domain=margottagency.com error=Client error '403 Forbidden' for url 'http://margottagency.com'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/403
+17:17:02 [INFO] LLM_FAIL row=4 company=NGNG Agency error=insufficient_content
+17:17:20 [INFO] VALIDATION_FAIL row=1 company=Hashtag SocialBuzz subject="your $99 a month social media" opener="Hey Katherine, your $99 a month social media management really stands out." issues=['REJECT: subject_bad_punctuation']
+17:17:20 [INFO] VALIDATION_FAIL row=2 company=AcquisitionX subject="the 197+ sales calls case study" opener="Hey Suprava, read your case study on booking 197+ sales calls using a multi channel funnel." issues=['REJECT: subject_bad_punctuation']
+17:17:20 [INFO] VALIDATION_FAIL row=10 company=LUCY HEALTHCARE AGENCY subject="the aller plus loin philosophy" opener="Hey Dora, noticed LUCY HEALTHCARE AGENCY's 'aller plus loin' philosophy." issues=['REJECT: all_caps_word']
+17:17:20 [INFO] VALIDATION_FAIL row=15 company=LIT Agency subject="your guaranteed ugc conversion" opener="Hey Hope, saw LIT Agency offers guaranteed conversion for user-generated content." issues=['REJECT: banned_word: guaranteed']
+17:17:20 [INFO] VALIDATION_FAIL row=23 company=Lenu Agency - Creative Marketing & PR Agency subject="your b2b & ecommerce sales growth" opener="Hey Jina, saw you have immense skills in growing B2B and e-commerce sales even to 5,000%+." issues=['REJECT: subject_bad_punctuation']

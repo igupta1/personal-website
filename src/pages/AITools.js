@@ -12,9 +12,7 @@ import ciscologo from '../assets/ciscologo.png';
 import linkmailLogo from '../assets/linkmail-logo.png';
 
 // Icons
-import { HiOutlineUserGroup } from "react-icons/hi";
-import { HiOutlineSparkles } from "react-icons/hi";
-import { HiOutlineChartBar } from "react-icons/hi";
+import { HiOutlineUserGroup, HiOutlineSparkles, HiOutlineShieldCheck } from "react-icons/hi";
 
 function AITools() {
   const navigate = useNavigate();
@@ -68,14 +66,14 @@ function AITools() {
     },
     {
       id: 4,
-      title: "Marketing Readiness Scorecard",
-      description: "Scan Any Business Website for Marketing Gaps and Opportunities",
-      icon: <HiOutlineChartBar size={34} color="#f5f5f5" />,
+      title: "IT Security Scorecard",
+      description: "Scan Any Domain for Security Vulnerabilities Instantly",
+      icon: <HiOutlineShieldCheck size={34} color="#f5f5f5" />,
       isReactIcon: true,
-      link: "/gtm/marketing-check",
+      link: "/gtm/it-security-check",
     },
     {
-      id: 6,
+      id: 5,
       title: "More Coming Soon...",
       description: "Stay tuned for more AI-powered tools",
       icon: <HiOutlineSparkles size={34} color="#f5f5f5" />,
@@ -166,4 +164,3 @@ function AITools() {
 }
 
 export default AITools;
-

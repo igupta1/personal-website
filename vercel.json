@@ -6,7 +6,7 @@
     "api/generate-leads.js": {
       "maxDuration": 10
     },
-    "api/marketing-scan.js": {
+    "api/security-scan.js": {
       "maxDuration": 60
     }
   }
