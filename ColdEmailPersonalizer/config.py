@@ -20,7 +20,7 @@ class Config:
 
     # Gemini
     gemini_api_key: Optional[str] = None
-    gemini_model: str = "gemini-2.5-flash"
+    gemini_model: str = "gemini-2.5-pro"
 
     # Concurrency
     scrape_concurrency: int = 20
@@ -34,7 +34,7 @@ class Config:
     max_subpages: int = 5
 
     # Validation & retries
-    max_retries: int = 1
+    max_retries: int = 2
 
     # Limit (0 = all rows)
     limit: int = 0

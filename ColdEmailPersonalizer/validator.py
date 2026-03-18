@@ -30,7 +30,48 @@ BANNED_PHRASES = [
     "was browsing",
     "was exploring",
     "that's a ",
+    # Overused AI-generated compliment patterns
+    "that takes serious",
+    "not many agencies",
+    "not many ",
+    "clearly know",
+    "clearly understand",
+    "not easy to pull off",
+    "stood out",
 ]
+
+# Generic/lazy observations that should trigger a hard reject + retry
+GENERIC_PATTERNS = [
+    "years of experience",
+    "decade of expertise",
+    "decade of",
+    "years in ",
+    "market focus",
+    "is hiring",
+    "job opening",
+    "your site mentions",
+    # Description-not-achievement patterns
+    "specializes in",
+    "focuses on",
+    "is dedicated to",
+    "offers a range",
+    "provides comprehensive",
+]
+
+# Bio/LinkedIn reference patterns - signals scraping personal profile, not company website
+BIO_REFERENCE_PATTERNS = [
+    "leadership experience at",
+    "your experience at",
+    "your background in",
+    "your background includes",
+    "your career",
+    "your time at",
+    "your role at",
+    "former role",
+]
+
+# Marketing words that make subjects look like ads (reject if 2+ appear)
+SUBJECT_MARKETING_WORDS = {"roi", "guarantee", "guaranteed", "growth", "revenue", "profit", "boost"}
 
 # Characters that cause encoding issues across email clients
 _CURLY_QUOTES = {"\u201c", "\u201d", "\u2018", "\u2019"}
@@ -77,7 +118,7 @@ def sanitize(subject: str, opener: str) -> Tuple[str, str]:
     return subject, opener
 
 
-def validate(subject: str, opener: str, first_name: str) -> Tuple[bool, List[str]]:
+def validate(subject: str, opener: str, first_name: str, last_name: str = "") -> Tuple[bool, List[str]]:
     """Validate a subject + opener pair for deliverability.
 
     Returns (is_valid, list_of_issues).
@@ -131,6 +172,43 @@ def validate(subject: str, opener: str, first_name: str) -> Tuple[bool, List[str
         if phrase in opener_lower:
             issues.append(f"banned_phrase: {phrase}")
 
+    # Generic/lazy observations (checked against opener only)
+    for pattern in GENERIC_PATTERNS:
+        if pattern in opener_lower:
+            issues.append(f"generic_observation: {pattern}")
+
+    # Bio/LinkedIn reference patterns (checked against opener only)
+    for pattern in BIO_REFERENCE_PATTERNS:
+        if pattern in opener_lower:
+            issues.append(f"bio_reference: {pattern}")
+
+    # Prospect name in subject line (signals mail merge)
+    subject_lower = subject.lower()
+    if first_name and len(first_name) >= 4:
+        if re.search(r'\b' + re.escape(first_name.lower()) + r'\b', subject_lower):
+            issues.append(f"prospect_name_in_subject: {first_name}")
+    if last_name and len(last_name) >= 4:
+        if re.search(r'\b' + re.escape(last_name.lower()) + r'\b', subject_lower):
+            issues.append(f"prospect_name_in_subject: {last_name}")
+
+    # Subject ending in "post" (filler word)
+    if re.search(r'\bpost$', subject_lower.strip()):
+        issues.append("filler_post_in_subject")
+
+    # Salesy subject (2+ marketing words = looks like an ad)
+    subject_words_set = set(subject_lower.split())
+    marketing_matches = subject_words_set & SUBJECT_MARKETING_WORDS
+    if len(marketing_matches) >= 2:
+        issues.append(f"subject_too_salesy: {marketing_matches}")
+
+    # Multi-sentence opener rejection: opener must be exactly one sentence
+    # Count sentences by looking for ". " followed by an uppercase letter,
+    # but skip common abbreviations
+    opener_no_greeting = re.sub(r"^Hey\s+\w+,\s*", "", opener)
+    sentence_breaks = re.findall(r"\.\s+[A-Z]", opener_no_greeting)
+    if len(sentence_breaks) > 0:
+        issues.append("multi_sentence_opener")
+
     # Exclamation marks in subject
     if "!" in subject:
         issues.append("exclamation_in_subject")
@@ -168,10 +246,12 @@ def validate(subject: str, opener: str, first_name: str) -> Tuple[bool, List[str
     if len(subject) > 50:
         warnings.append(f"subject_char_length: {len(subject)} chars (>50)")
 
-    subject_lower = subject.lower()
     for trigger in SPAM_TRIGGER_WORDS:
         if trigger in subject_lower:
             warnings.append(f"spam_trigger: {trigger}")
+
+    if subject_lower.startswith("your "):
+        warnings.append("subject_starts_with_your")
 
     # Hard reject = any issue in issues list
     is_valid = len(issues) == 0

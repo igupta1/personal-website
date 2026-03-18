@@ -41,9 +41,9 @@ BROWSER_HEADERS = {
 
 # Priority scores for subpage paths (higher = more valuable for personalization)
 LINK_PRIORITY = {
-    "/about": 10, "/about-us": 10, "/who-we-are": 10,
+    "/work": 10, "/portfolio": 10, "/case-studies": 10, "/case-study": 10, "/projects": 10, "/results": 10,
     "/services": 9, "/what-we-do": 9, "/solutions": 9, "/capabilities": 9,
-    "/work": 8, "/portfolio": 8, "/case-studies": 8, "/case-study": 8, "/projects": 8, "/results": 8,
+    "/about": 8, "/about-us": 8, "/who-we-are": 8,
     "/blog": 7, "/insights": 7, "/resources": 7, "/news": 7, "/articles": 7,
     "/clients": 6, "/industries": 6, "/sectors": 6, "/verticals": 6,
     "/team": 5, "/people": 5, "/leadership": 5,
@@ -260,11 +260,21 @@ async def scrape_all_websites(
     return results
 
 
-def build_content_summary(scrape_result: Dict) -> str:
-    """Build a content summary string from a scrape result for the LLM prompt."""
+def build_content_summary(scrape_result: Dict, max_words: int = 1500) -> str:
+    """Build a content summary string from a scrape result for the LLM prompt.
+
+    Truncates to max_words to prevent verbose sites from inflating input tokens.
+    """
     parts = []
     if scrape_result.get("homepage_text"):
         parts.append(scrape_result["homepage_text"])
     for subpage_text in scrape_result.get("subpage_texts", []):
         parts.append(subpage_text)
-    return "\n\n---\n\n".join(parts) if parts else ""
+    summary = "\n\n---\n\n".join(parts) if parts else ""
+
+    # Truncate to max_words (trim from the end)
+    words = summary.split()
+    if len(words) > max_words:
+        summary = " ".join(words[:max_words])
+
+    return summary

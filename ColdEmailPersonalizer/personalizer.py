@@ -24,31 +24,67 @@ Worth a quick call?
 
 Ishaan"
 
-Here are examples of good subject + opener pairs:
+OBSERVATION HIERARCHY (pick the highest tier you can find in the website content):
 
-Example 1:
-Prospect: Sarah at GrowthSpark (website mentions ecommerce focus, Shopify Plus partnerships, DTC brands)
-{{"subject": "the ecommerce focus on your site", "opener": "Hey Sarah, noticed GrowthSpark is going deep on Shopify Plus and DTC brands. Clearly know your niche."}}
+Tier 1 (strongest): Named third-party client or partner + a specific metric or result.
+  "Verdant drove $2M in pipeline for CrowdStrike in one quarter."
 
-Example 2:
-Prospect: James at Bright Pixel Media (website has case study about scaling a SaaS client's paid media from $50k to $200k/mo)
-{{"subject": "that saas paid media case study", "opener": "Hey James, you scaled a SaaS client's paid media from 50k to 200k a month. Not easy to pull off."}}
+Tier 2: Named third-party client or partner, without a metric.
+  "noticed GrowthSpark is doing the Shopify Plus builds for Allbirds and Bombas."
 
-Example 3:
-Prospect: Lauren at Cedar Creative (website mentions they recently launched a new content marketing service, blog post about B2B content strategy)
-{{"subject": "the new content marketing service", "opener": "Hey Lauren, noticed Cedar Creative just added content marketing to the mix."}}
+Tier 3: Specific project, case study result (even unnamed client), or a named team hire.
+  "you scaled a SaaS client's paid media from 50k to 200k a month."
 
-Example 4:
-Prospect: Dave at Ridgeline Digital (website mentions healthcare and fintech as verticals, HIPAA-compliant marketing)
-{{"subject": "the hipaa marketing angle", "opener": "Hey Dave, not many agencies touch HIPAA-compliant marketing so Ridgeline stood out."}}
+Tier 4: Specific content piece (blog post, guide) or a truly unique service detail.
+  "read your post on why agencies should stop discounting."
 
-Example 5:
+Tier 5 (weakest, avoid if possible): General service description or vertical focus.
+
+Always aim for Tier 1 or 2. Only use Tier 4-5 if the website genuinely lacks case studies, named clients, and concrete results.
+
+GOOD examples:
+
+Example 1 (Tier 1, ultra-short subject):
+Prospect: Anika at Verdant Agency (website has case study: drove $2M in pipeline for CrowdStrike)
+{{"subject": "crowdstrike", "opener": "Hey Anika, Verdant drove $2M in pipeline for CrowdStrike in one quarter."}}
+
+Example 2 (Tier 2):
+Prospect: Sarah at GrowthSpark (website mentions Shopify Plus partnership, built stores for Allbirds and Bombas)
+{{"subject": "the allbirds + bombas builds", "opener": "Hey Sarah, noticed GrowthSpark is doing the Shopify Plus builds for Allbirds and Bombas."}}
+
+Example 3 (Tier 3):
+Prospect: James at Bright Pixel Media (website has case study: scaled a SaaS client's paid media from $50k to $200k/mo)
+{{"subject": "that saas paid media case study", "opener": "Hey James, you scaled a SaaS client's paid media from 50k to 200k a month."}}
+
+Example 4 (Tier 3, named hire):
+Prospect: Marcus at Trellis Digital (website shows they hired Alex Chen as Head of Strategy, previously at Deloitte Digital)
+{{"subject": "alex chen joining trellis", "opener": "Hey Marcus, noticed Trellis just brought on Alex Chen from Deloitte Digital as Head of Strategy."}}
+
+Example 5 (Tier 4, ultra-short subject):
 Prospect: Priya at Launchpad Studios (website has a blog post about why agencies should stop discounting)
-{{"subject": "your stop discounting blog post", "opener": "Hey Priya, read your post on why agencies should stop discounting. Been thinking about that a lot lately."}}
+{{"subject": "stop discounting", "opener": "Hey Priya, read your post on why agencies should stop discounting."}}
 
-Example 6:
-Prospect: Marcus at Trellis Digital (website shows they just hired a new Head of Strategy)
-{{"subject": "the new head of strategy", "opener": "Hey Marcus, noticed Trellis just brought on a new Head of Strategy."}}
+Example 6 (Tier 1):
+Prospect: Carlos at Peak Digital (website mentions Google Premier Partner status, managing $5M+ in annual ad spend across 40+ accounts)
+{{"subject": "peak digital's google premier status", "opener": "Hey Carlos, Peak Digital is managing over $5M in annual ad spend as a Google Premier Partner."}}
+
+Example 7 (Tier 2, ultra-short subject):
+Prospect: Susan at Halo Creative (website has Nike 'Made to Play' campaign case study)
+{{"subject": "the nike work", "opener": "Hey Susan, your Nike 'Made to Play' case study is strong."}}
+
+BAD examples (DO NOT generate anything like these):
+
+BAD: {{"subject": "partner program strategies", "opener": "Hey Jennifer, Fresh Marketing specializes in channel and partner program strategies."}}
+WHY: Subject reads like a database category, not a human observation. Opener restates what the company does. The prospect already knows their own services.
+
+BAD: {{"subject": "smart marketing systems 5x roi guarantee", "opener": "Hey Mike, your team builds customized strategies that drive measurable growth, not vanity metrics."}}
+WHY: Subject is a complete thought with no curiosity gap, no reason to open. Opener echoes their own marketing copy back at them. Like reading someone's business card aloud.
+
+BAD: {{"subject": "solangelee's personal branding genius", "opener": "Hey Solangelee, noticed your leadership experience at L'Oreal and Estee Lauder."}}
+WHY: Prospect's name in subject signals mail merge. Opener references LinkedIn/bio, not website work. Company websites feel public; LinkedIn profiles feel personal and invasive.
+
+BAD: {{"subject": "your ai and humans content post", "opener": "Hey Tom, Find Rentals features 15 vacation rental managers in the Great Smoky Mountains."}}
+WHY: "post" is dead weight at the end of the subject. Opener describes how their platform works, not something they achieved. Features are not accomplishments.
 
 Now generate for this prospect:
 - Name: {first_name}
@@ -56,15 +92,26 @@ Now generate for this prospect:
 - Website content summary: {extracted_content}
 
 Rules:
-1. subject: Under 7 words, lowercase. Reference something HIGHLY SPECIFIC from their site: a named client, a specific case study, a concrete service with details, a named blog post, a specific vertical, a recent hire by name. Generic observations like "your growth focus" or "your marketing services" are not acceptable.
-2. The opener's job is to make the reader want to keep reading into the email body that follows. The email body starts with: "Here's the irony I keep seeing with agencies your size: you're great at filling pipelines for clients but your own pipeline runs on referrals and word-of-mouth." For this to land, the opener needs to establish that the agency is doing good, specific work. The reader should think "yeah, we are good at what we do" right before they read the irony line. This creates a one-two punch: respect followed by a challenge.
-3. opener: 1-2 sentences, under 25 words. Start with "Hey {first_name}," then go directly into the observation. Do NOT use filler phrases like "was doing some digging on", "was looking through", "was checking out", "came across", or "took a look at". Just state what you noticed.
-4. The opener can be one or two sentences. If two, the second should acknowledge their competence in a casual, specific way that connects to the observation, not a generic judgment. Examples of good second sentences: "Clearly know your niche.", "Not easy to pull off.", "That takes serious execution.", "Most agencies wouldn't touch that vertical." Examples of bad second sentences: "Smart move.", "Good niche.", "Interesting approach." The difference is that good ones acknowledge difficulty or competence, while bad ones just grade. It is also fine to write just one sentence if the observation itself already implies competence.
-5. The subject and opener MUST reference the same specific observation.
-6. Vary how you start the observation after "Hey {first_name},". Options include: "noticed...", "read your...", "[Company name] just...", "the [thing] on your site...", "your [specific thing]...", or start with the observation itself. Do NOT default to "saw" for every opener.
-7. NEVER use the pattern "That's a [adjective] [noun]". This is the single biggest tell that the email was written by AI.
-8. The opener must reference something specific enough that it could only apply to this one company. If the opener could describe dozens of agencies (e.g. "helps clients with automated lead generation systems" or "offers social media management"), it is too generic. Reference a named client, a specific case study result, a named blog post, a named team member, a specific event, or a unique service detail.
-9. Do NOT reference referrals, word-of-mouth, or growing beyond referrals in the opener. The email body already covers this topic.
+1. subject: Under 7 words, lowercase, an INCOMPLETE thought that creates a curiosity gap. The subject is a compressed version of the opener. The prospect must open to understand. GOOD: "crowdstrike" (what about it?). BAD: "smart marketing systems 5x roi guarantee" (complete, no reason to open). Ultra-short (1-3 words) is great. Do not end with "post". Do not default to starting with "the" or "your". Vary structure.
+2. The observation must pass the DINNER PARTY TEST: would the prospect brag about this to a stranger? Cite ACHIEVEMENTS, not descriptions. What they DID, not what they ARE. "You scaled WSJ subscriptions to 100,000" = YES. "You specialize in channel partner strategies" = NO. If the opener could describe dozens of agencies, it is too generic. The reader should think "yeah, we are good at what we do" right before reading the email body's challenge.
+3. opener: Exactly ONE sentence, under 25 words. Start with "Hey {{first_name}}," then the observation. No second sentence. No filler phrases like "was doing some digging on", "was looking through", "was checking out", "came across", or "took a look at".
+4. Vary opener starts: "noticed...", "read your...", "[Company name] just...", "your [specific thing]...", or the observation itself. Do NOT default to "saw".
+5. Named third parties (clients, partners, publications) are the strongest observations. When you name a client, you prove research. Specific numbers prove depth. NEVER echo their marketing copy or tagline. NEVER reference their personal bio, LinkedIn, or career history, only company website content.
+6. NEVER put the prospect's name in the subject line. Do NOT reference referrals or word-of-mouth (the email body covers this). Do NOT reference generic traits like years of experience, decades of expertise, city focus, or job postings.
+7. NEVER use the pattern "That's a [adjective] [noun]". This is an AI writing tell.
+
+NEVER use these phrases (they are overused and detectable as AI-generated):
+- "That takes serious execution" or any "That takes serious..." variant
+- "Not many agencies..." or any "Not many..." sentence starter
+- "Clearly know..." or "Clearly understand..." or "Clearly" at the start of any clause
+- "Not easy to pull off"
+- "stood out"
+- "specializes in"
+- "is known for"
+- "focuses on"
+- "is dedicated to"
+- "offers a range"
+- "provides comprehensive"
 
 CRITICAL formatting rules:
 - Subject must be pure lowercase ASCII. No em dashes, en dashes, curly quotes, or unicode.
@@ -140,6 +187,7 @@ class Personalizer:
         first_name: str,
         company_name: str,
         content_summary: str,
+        avoid_subject: str = "",
     ) -> Dict[str, Optional[str]]:
         """Generate a personalized subject + opener for one prospect.
 
@@ -154,9 +202,16 @@ class Personalizer:
             extracted_content=content_summary,
         )
 
+        if avoid_subject:
+            prompt += (
+                f'\n\nIMPORTANT: A colleague already used the subject "{avoid_subject}" '
+                f"for someone else at this company. You MUST pick a completely different "
+                f"observation from the website. Do not reference the same topic."
+            )
+
         try:
             config = types.GenerateContentConfig(
-                temperature=0.4,
+                temperature=0.5,
             )
             response = await self.client.aio.models.generate_content(
                 model=self.model,
@@ -214,8 +269,10 @@ class Personalizer:
             scrape_result = scrape_cache.get(domain, {})
             content_summary = build_content_summary(scrape_result)
 
+            avoid_subject = prospect.get("avoid_subject", "")
+
             async with semaphore:
-                result = await self.personalize_one(first_name, company_name, content_summary)
+                result = await self.personalize_one(first_name, company_name, content_summary, avoid_subject=avoid_subject)
                 results[row_idx] = result
 
                 completed += 1

@@ -1,0 +1,37 @@
+10:55:51 [INFO] SCRAPE_FAIL domain=blastoff.agency error=insufficient_content: only 8 words (min 200)
+10:55:51 [INFO] SCRAPE_FAIL domain=repulseagency.com error=Client error '404 Not Found' for url 'http://repulseagency.com'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+10:55:51 [INFO] SCRAPE_FAIL domain=rogerthat.agency error=insufficient_content: only 0 words (min 200)
+10:55:51 [INFO] SCRAPE_FAIL domain=getunstoppable.in error=insufficient_content: only 0 words (min 200)
+10:55:51 [INFO] SCRAPE_FAIL domain=margottagency.com error=insufficient_content: only 0 words (min 200)
+10:55:51 [INFO] SCRAPE_FAIL domain=creativeagency.ceo error=insufficient_content: only 13 words (min 200)
+10:55:51 [INFO] SCRAPE_FAIL domain=ngngagency.com error=insufficient_content: only 2 words (min 200)
+10:55:51 [INFO] SCRAPE_FAIL domain=thedigitalcounsel.net error=insufficient_content: only 0 words (min 200)
+10:55:51 [INFO] SCRAPE_FAIL domain=easymarketingconcepts.com error=insufficient_content: only 79 words (min 200)
+10:55:51 [INFO] SCRAPE_FAIL domain=evolving-digital.com error=insufficient_content: only 0 words (min 200)
+10:55:51 [INFO] SCRAPE_FAIL domain=liftconversions.com error=insufficient_content: only 0 words (min 200)
+10:55:51 [INFO] SCRAPE_FAIL domain=garysinghdotcom.com error=Client error '404 Not Found' for url 'http://garysinghdotcom.com'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+10:55:51 [INFO] SCRAPE_FAIL domain=lfmarketingandpr.com error=insufficient_content: only 74 words (min 200)
+10:55:51 [INFO] SCRAPE_FAIL domain=livewirecollaborative.com error=Client error '403 Forbidden' for url 'http://livewirecollaborative.com'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/403
+10:55:51 [INFO] SCRAPE_FAIL domain=frontiermark.com error=insufficient_content: only 0 words (min 200)
+10:55:51 [INFO] SCRAPE_FAIL domain=colecoprojects.com error=insufficient_content: only 18 words (min 200)
+10:55:51 [INFO] SCRAPE_FAIL domain=boostmkt.co error=insufficient_content: only 0 words (min 200)
+10:55:51 [INFO] SCRAPE_FAIL domain=itsglyff.com error=Client error '404 Not Found' for url 'https://itsglyff.com/'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+10:55:51 [INFO] SCRAPE_FAIL domain=blackiron.agency error=insufficient_content: only 14 words (min 200)
+10:55:51 [INFO] SCRAPE_FAIL domain=piscesholding.com error=Client error '404 Not Found' for url 'http://piscesholding.com'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+10:55:51 [INFO] SCRAPE_FAIL domain=agence-small-business.om error=[Errno 8] nodename nor servname provided, or not known
+10:56:34 [INFO] LLM_FAIL row=56 company=BEARtech Marketing error=insufficient_content
+10:57:54 [INFO] VALIDATION_FAIL row=20 company=Fama Agency subject="your #1 amazon book" opener="Hey Michelle, your book 'Style Your Business' hit #1 on Amazon for entrepreneurship." issues=['REJECT: subject_bad_punctuation']
+10:57:54 [INFO] VALIDATION_FAIL row=32 company=Ultia Marketing subject="$10k/mo google ad grant" opener="Hey Debbie, noticed Ultia helps nonprofits use the $10,000/month Google Ad Grant." issues=['REJECT: subject_bad_punctuation']
+10:57:54 [INFO] VALIDATION_FAIL row=39 company=THRILL Communications LLC subject="the switzerland work" opener="Hey Ryan, noticed THRILL developed a story campaign for the government of Switzerland." issues=['REJECT: all_caps_word']
+10:57:54 [INFO] VALIDATION_FAIL row=62 company=C.C. Brooks Marketing subject="over capacity" opener="Hey Christopher, C.C. Brooks is over capacity and no longer taking on new clients." issues=['REJECT: multi_sentence_opener']
+10:57:54 [INFO] VALIDATION_FAIL row=69 company=Smart Marketing Systems subject="5x roi guarantee" opener="Hey Orson, the 5X ROI in 90 days guarantee is a strong offer for financial professionals." issues=["REJECT: subject_too_salesy: {'guarantee', 'roi'}"]
+10:57:54 [INFO] VALIDATION_FAIL row=88 company=GoBeRewarded Marketing Agency subject="carlsbad strawberry + cat & craft" opener="Hey Aaron, noticed GoBeRewarded is working with local brands like Carlsbad Strawberry Company and Cat & Craft." issues=['REJECT: subject_bad_punctuation']
+10:58:49 [INFO] MANUAL_REVIEW row=88 company=GoBeRewarded Marketing Agency reason=failed_all_2_retries
+10:58:49 [INFO] MANUAL_REVIEW row=20 company=Fama Agency reason=failed_all_2_retries
+10:58:49 [INFO] MANUAL_REVIEW row=62 company=C.C. Brooks Marketing reason=failed_all_2_retries
+10:58:49 [INFO] MANUAL_REVIEW row=39 company=THRILL Communications LLC reason=failed_all_2_retries
