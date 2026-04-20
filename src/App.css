@@ -153,6 +153,10 @@ body {
   line-height: 1.6;
 }
 
+.booking-button-container {
+  margin-top: 1.5rem;
+}
+
 /* Work Experience Section */
 .work-experience-section h2 {
   font-size: 2rem;
