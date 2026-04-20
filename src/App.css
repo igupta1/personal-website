@@ -584,6 +584,11 @@ body {
 .demo-intro-banner-cta {
   margin-top: 0.25rem;
   align-self: flex-start;
+  width: auto;
+}
+
+.demo-intro-banner-cta button {
+  width: auto;
 }
 
 .demo-top-row {
