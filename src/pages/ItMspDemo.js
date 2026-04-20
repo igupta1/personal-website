@@ -310,7 +310,7 @@ function ItMspDemo() {
             <div className="demo-intro-banner">
               <h3 className="demo-intro-banner-title">What this demonstrates</h3>
               <p className="demo-intro-banner-text">
-                This is a live example of signal-based lead generation. It surfaces SMBs currently hiring for internal tech support roles, identifies the decision maker, and drafts a personalized outreach line for each result. For my clients, I build custom versions tuned to their specific buying signals — companies adopting Snowflake, announcing cloud migrations, hiring their first compliance lead, or any other signal that indicates buying intent for their business. Book a call to discuss what signal-based outbound could look like for yours.
+                This is a live example that surfaces SMBs currently hiring for internal tech support roles, identifies the decision maker, and drafts a personalized outreach line for each result. For my clients, I build custom versions tuned to their specific buying signals. Book a call to discuss what signal-based outbound could look like for yours.
               </p>
               <div ref={bookingButtonRef} className="demo-intro-banner-cta"></div>
             </div>

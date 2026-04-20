@@ -87,7 +87,7 @@ function AITools() {
     {
       id: 1,
       title: "Live Example: SMBs Hiring Tech Support",
-      description: "Surfaces SMBs hiring for internal tech support, identifies the decision maker, and drafts personalized outreach. One example of what I build for clients — tuned to their specific buying signals.",
+      description: "Surfaces SMBs hiring for internal tech support, identifies the decision maker, and drafts personalized outreach.",
       icon: <HiOutlineUserGroup size={34} color="#f5f5f5" />,
       isReactIcon: true,
       link: "/gtm/it-msp",
