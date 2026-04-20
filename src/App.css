@@ -553,6 +553,34 @@ body {
   gap: 0.75rem;
 }
 
+.demo-intro-banner {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.demo-intro-banner-title {
+  color: white;
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.demo-intro-banner-text {
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 0.9rem;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.demo-intro-banner-cta {
+  margin-top: 0.25rem;
+}
+
 .demo-top-row {
   display: flex;
   justify-content: space-between;

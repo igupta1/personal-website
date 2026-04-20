@@ -1,6 +1,10 @@
 //ItMspDemo.js
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
+
+const SCHEDULING_STYLESHEET_HREF = "https://calendar.google.com/calendar/scheduling-button-script.css";
+const SCHEDULING_SCRIPT_SRC = "https://calendar.google.com/calendar/scheduling-button-script.js";
+const SCHEDULING_URL = "https://calendar.google.com/calendar/appointments/schedules/AcZssZ0DBh4IrfhTXa3MeWJiWrKSR0h3nDlddqmRQ75mhjzv_3iJrPcH1irAOFYFcx4Z7Z2pKYkHNTTm?gv=true";
 
 const parseLocalDate = (dateStr) => {
   const [year, month, day] = dateStr.split('-').map(Number);
@@ -46,6 +50,47 @@ function ItMspDemo() {
   const [filtersExpanded, setFiltersExpanded] = useState(false);
   const [selectedRoleCategory, setSelectedRoleCategory] = useState(null);
   const [lastUpdated, setLastUpdated] = useState(null);
+  const bookingButtonRef = useRef(null);
+
+  useEffect(() => {
+    document.title = "Live Demo: SMBs Hiring Tech Support — Ishaan Gupta";
+  }, []);
+
+  useEffect(() => {
+    if (!document.querySelector(`link[href="${SCHEDULING_STYLESHEET_HREF}"]`)) {
+      const link = document.createElement("link");
+      link.rel = "stylesheet";
+      link.href = SCHEDULING_STYLESHEET_HREF;
+      document.head.appendChild(link);
+    }
+
+    const mountButton = () => {
+      if (!bookingButtonRef.current) return;
+      if (bookingButtonRef.current.childElementCount > 0) return;
+      if (!window.calendar || !window.calendar.schedulingButton) return;
+      window.calendar.schedulingButton.load({
+        url: SCHEDULING_URL,
+        color: "#039BE5",
+        label: "Book a call",
+        target: bookingButtonRef.current,
+      });
+    };
+
+    const existingScript = document.querySelector(`script[src="${SCHEDULING_SCRIPT_SRC}"]`);
+    if (existingScript) {
+      if (window.calendar && window.calendar.schedulingButton) {
+        mountButton();
+      } else {
+        existingScript.addEventListener("load", mountButton, { once: true });
+      }
+    } else {
+      const script = document.createElement("script");
+      script.src = SCHEDULING_SCRIPT_SRC;
+      script.async = true;
+      script.addEventListener("load", mountButton, { once: true });
+      document.body.appendChild(script);
+    }
+  }, []);
 
   const fetchLeads = async () => {
     const location = "it-msp-discovery";
@@ -252,14 +297,22 @@ function ItMspDemo() {
           <section className="demo-section">
             <div className="demo-top-row">
               <div className="demo-section-header">
-                <Link to="/gtm" className="back-link-inline">Back to GTM Systems</Link>
-                <h2>Find Businesses Hiring IT Roles</h2>
+                <Link to="/gtm" className="back-link-inline">Back to Example Automations</Link>
+                <h2>Live Demo: SMBs Hiring Tech Support</h2>
                 {lastUpdated && getLastUpdatedLabel(lastUpdated) && (
                   <p style={{ fontSize: '0.75rem', color: 'var(--text-muted, #888)', margin: '2px 0 0' }}>
                     {getLastUpdatedLabel(lastUpdated)}
                   </p>
                 )}
               </div>
+            </div>
+
+            <div className="demo-intro-banner">
+              <h3 className="demo-intro-banner-title">What this demonstrates</h3>
+              <p className="demo-intro-banner-text">
+                This is a live example of signal-based lead generation. It surfaces SMBs currently hiring for internal tech support roles, identifies the decision maker, and drafts a personalized outreach line for each result. For my clients, I build custom versions tuned to their specific buying signals — companies adopting Snowflake, announcing cloud migrations, hiring their first compliance lead, or any other signal that indicates buying intent for their business. Book a call to discuss what signal-based outbound could look like for yours.
+              </p>
+              <div ref={bookingButtonRef} className="demo-intro-banner-cta"></div>
             </div>
 
             {error && (
@@ -418,7 +471,7 @@ function ItMspDemo() {
                         {company.roles.length > 0 && (
                           <div className="lead-gen-roles-section">
                             <h4 className="lead-gen-section-title">
-                              IT Roles Being Hired
+                              Roles Being Hired
                             </h4>
                             <div className="lead-gen-roles-list">
                               {company.roles.slice(0, 3).map((role, roleIndex) => (
@@ -483,10 +536,10 @@ function ItMspDemo() {
                           </div>
                         )}
 
-                        {/* IT MSP Insight */}
+                        {/* Signal Insight */}
                         {company.insight && (
                           <div className="lead-gen-insight-section">
-                            <h4 className="lead-gen-section-title">How An IT MSP Can Help</h4>
+                            <h4 className="lead-gen-section-title">Why This Is a Signal</h4>
                             <div className="lead-gen-insight-card">
                               <p className="lead-gen-insight-text">{company.insight}</p>
                             </div>

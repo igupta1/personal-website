@@ -23,6 +23,10 @@ function AITools() {
   const bookingButtonRef = useRef(null);
 
   useEffect(() => {
+    document.title = "Example Automations — Ishaan Gupta";
+  }, []);
+
+  useEffect(() => {
     if (!document.querySelector(`link[href="${SCHEDULING_STYLESHEET_HREF}"]`)) {
       const link = document.createElement("link");
       link.rel = "stylesheet";
@@ -82,8 +86,8 @@ function AITools() {
   const aiTools = [
     {
       id: 1,
-      title: "IT Managed Service Provider Lead Generation",
-      description: "Find IT MSPs and Their Contact Information Instantly",
+      title: "Live Example: SMBs Hiring Tech Support",
+      description: "Surfaces SMBs hiring for internal tech support, identifies the decision maker, and drafts personalized outreach. One example of what I build for clients — tuned to their specific buying signals.",
       icon: <HiOutlineUserGroup size={34} color="#f5f5f5" />,
       isReactIcon: true,
       link: "/gtm/it-msp",
@@ -151,12 +155,12 @@ function AITools() {
         {/* Right Column - AI Tools */}
         <div className="about-right-column">
           <section id="ai-tools" className="projects-section">
-            <h2>GTM Systems for Businesses</h2>
+            <h2>Example Automations</h2>
             <div className="projects-list">
               {aiTools.map((tool) => (
                 <div
                   key={tool.id}
-                  className={`project-card ${tool.link ? 'clickable' : 'non-clickable'} ${tool.id === 3 ? 'linkedin-tool' : ''}`}
+                  className={`project-card ${tool.link ? 'clickable' : 'non-clickable'} ${tool.id === 2 ? 'linkedin-tool' : ''}`}
                   onClick={() => handleToolClick(tool.link, tool.external)}
                   style={{ cursor: tool.link ? 'pointer' : 'default' }}
                 >
