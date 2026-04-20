@@ -5,9 +5,8 @@
     },
     "api/generate-leads.js": {
       "maxDuration": 10
-    },
-    "api/security-scan.js": {
-      "maxDuration": 60
     }
   }
 }
+
+

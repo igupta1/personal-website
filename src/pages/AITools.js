@@ -12,7 +12,7 @@ import ciscologo from '../assets/ciscologo.png';
 import linkmailLogo from '../assets/linkmail-logo.png';
 
 // Icons
-import { HiOutlineUserGroup, HiOutlineSparkles, HiOutlineShieldCheck } from "react-icons/hi";
+import { HiOutlineUserGroup, HiOutlineSparkles } from "react-icons/hi";
 
 function AITools() {
   const navigate = useNavigate();
@@ -41,14 +41,6 @@ function AITools() {
   const aiTools = [
     {
       id: 1,
-      title: "Marketing Agency Lead Generation",
-      description: "Find Marketing Agencies and Their Contact Information Instantly",
-      icon: <HiOutlineUserGroup size={34} color="#f5f5f5" />,
-      isReactIcon: true,
-      link: "/gtm/marketing-agency",
-    },
-    {
-      id: 2,
       title: "IT Managed Service Provider Lead Generation",
       description: "Find IT MSPs and Their Contact Information Instantly",
       icon: <HiOutlineUserGroup size={34} color="#f5f5f5" />,
@@ -56,7 +48,7 @@ function AITools() {
       link: "/gtm/it-msp",
     },
     {
-      id: 3,
+      id: 2,
       title: "LinkedIn Cold Message Personalization Tool",
       description: "Automatically Find Emails and Send a Personalized Message Instantly.",
       icon: linkmailLogo,
@@ -65,15 +57,7 @@ function AITools() {
       external: true,
     },
     {
-      id: 4,
-      title: "IT Security Scorecard",
-      description: "Scan Any Domain for Security Vulnerabilities Instantly",
-      icon: <HiOutlineShieldCheck size={34} color="#f5f5f5" />,
-      isReactIcon: true,
-      link: "/gtm/it-security-check",
-    },
-    {
-      id: 5,
+      id: 3,
       title: "More Coming Soon...",
       description: "Stay tuned for more AI-powered tools",
       icon: <HiOutlineSparkles size={34} color="#f5f5f5" />,
