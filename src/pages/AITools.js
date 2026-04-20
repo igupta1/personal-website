@@ -1,5 +1,5 @@
 //AITools.js
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import pfpImage from '../assets/headshot.jpg';
 
@@ -12,10 +12,51 @@ import ciscologo from '../assets/ciscologo.png';
 import linkmailLogo from '../assets/linkmail-logo.png';
 
 // Icons
-import { HiOutlineUserGroup, HiOutlineSparkles } from "react-icons/hi";
+import { HiOutlineUserGroup } from "react-icons/hi";
+
+const SCHEDULING_STYLESHEET_HREF = "https://calendar.google.com/calendar/scheduling-button-script.css";
+const SCHEDULING_SCRIPT_SRC = "https://calendar.google.com/calendar/scheduling-button-script.js";
+const SCHEDULING_URL = "https://calendar.google.com/calendar/appointments/schedules/AcZssZ0DBh4IrfhTXa3MeWJiWrKSR0h3nDlddqmRQ75mhjzv_3iJrPcH1irAOFYFcx4Z7Z2pKYkHNTTm?gv=true";
 
 function AITools() {
   const navigate = useNavigate();
+  const bookingButtonRef = useRef(null);
+
+  useEffect(() => {
+    if (!document.querySelector(`link[href="${SCHEDULING_STYLESHEET_HREF}"]`)) {
+      const link = document.createElement("link");
+      link.rel = "stylesheet";
+      link.href = SCHEDULING_STYLESHEET_HREF;
+      document.head.appendChild(link);
+    }
+
+    const mountButton = () => {
+      if (!bookingButtonRef.current) return;
+      if (bookingButtonRef.current.childElementCount > 0) return;
+      if (!window.calendar || !window.calendar.schedulingButton) return;
+      window.calendar.schedulingButton.load({
+        url: SCHEDULING_URL,
+        color: "#039BE5",
+        label: "Book a call",
+        target: bookingButtonRef.current,
+      });
+    };
+
+    const existingScript = document.querySelector(`script[src="${SCHEDULING_SCRIPT_SRC}"]`);
+    if (existingScript) {
+      if (window.calendar && window.calendar.schedulingButton) {
+        mountButton();
+      } else {
+        existingScript.addEventListener("load", mountButton, { once: true });
+      }
+    } else {
+      const script = document.createElement("script");
+      script.src = SCHEDULING_SCRIPT_SRC;
+      script.async = true;
+      script.addEventListener("load", mountButton, { once: true });
+      document.body.appendChild(script);
+    }
+  }, []);
 
   const experiences = [
     {
@@ -56,13 +97,6 @@ function AITools() {
       link: "https://www.linkmail.dev/",
       external: true,
     },
-    {
-      id: 3,
-      title: "More Coming Soon...",
-      description: "Stay tuned for more AI-powered tools",
-      icon: <HiOutlineSparkles size={34} color="#f5f5f5" />,
-      isReactIcon: true,
-    },
   ];
 
   const handleToolClick = (link, external) => {
@@ -86,9 +120,10 @@ function AITools() {
               <img src={pfpImage} alt="Ishaan Gupta" className="profile-image" />
               <div className="profile-info">
                 <h1>Ishaan Gupta</h1>
-                <p>Software Engineer - Problem Solver - Builder
+                <p>I build outbound systems for technical consultancies.
                 <br /> <br />
-                I focus on turning complex problems into clear, practical solutions — from large-scale systems at Gmail and Amazon.com to tools for everyday users.</p>
+                Software engineer and builder. Previously at Google, Amazon, and Cisco. I work with founder-led technical consultancies — cloud, data, and security — to turn buying signals into qualified meetings.</p>
+                <div ref={bookingButtonRef} className="booking-button-container"></div>
               </div>
             </div>
           </section>
