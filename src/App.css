@@ -583,12 +583,12 @@ body {
 
 .demo-intro-banner-cta {
   margin-top: 0.25rem;
-  align-self: flex-start;
-  width: auto;
 }
 
-.demo-intro-banner-cta button {
+.demo-intro-banner > .qxCTlb {
+  align-self: flex-start;
   width: auto;
+  margin-top: 0.25rem;
 }
 
 .demo-top-row {
