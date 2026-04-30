@@ -3,7 +3,10 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
+import pytest
+
 from msp_pipeline.db import (
+    _name_key,
     append_signal,
     get_lead,
     init_db,
@@ -35,6 +38,15 @@ def _candidate(
             captured_at=datetime.now(timezone.utc).replace(tzinfo=None),
             payload=payload or {},
         ),
+    )
+
+
+def _signal() -> Signal:
+    return Signal(
+        type=SignalType.JOB_IT_SUPPORT,
+        source=SourceName.JOBS,
+        captured_at=datetime.now(timezone.utc).replace(tzinfo=None),
+        payload={},
     )
 
 
@@ -113,3 +125,73 @@ def test_update_lead_persists_and_bumps_updated_at(tmp_path: Path) -> None:
     assert result.country == "US"
     assert result.updated_at is not None
     assert result.updated_at > a.updated_at
+
+
+def test_get_lead_requires_exactly_one_arg(tmp_path: Path) -> None:
+    conn = init_db(tmp_path / "leads.db")
+    with pytest.raises(ValueError):
+        get_lead(conn)
+    with pytest.raises(ValueError):
+        get_lead(conn, lead_id=1, name_key="acme")
+
+
+def test_iter_leads_min_score_filter(tmp_path: Path) -> None:
+    conn = init_db(tmp_path / "leads.db")
+    a = upsert_lead(conn, _candidate("Alpha Co"))
+    b = upsert_lead(conn, _candidate("Beta Co"))
+    c = upsert_lead(conn, _candidate("Gamma Co"))
+    assert a.id is not None and b.id is not None and c.id is not None
+    update_lead(conn, a.id, it_msp_score=50.0)
+    update_lead(conn, b.id, it_msp_score=80.0)
+    update_lead(conn, c.id, it_msp_score=30.0)
+
+    results = list(iter_leads(conn, niche=NicheName.IT_MSP, min_score=50.0))
+    assert [r.it_msp_score for r in results] == [80.0, 50.0]
+
+
+def test_iter_leads_limit(tmp_path: Path) -> None:
+    conn = init_db(tmp_path / "leads.db")
+    upsert_lead(conn, _candidate("Alpha Co"))
+    upsert_lead(conn, _candidate("Beta Co"))
+    upsert_lead(conn, _candidate("Gamma Co"))
+    results = list(iter_leads(conn, limit=2))
+    assert len(results) == 2
+
+
+def test_iter_leads_min_score_without_niche_raises(tmp_path: Path) -> None:
+    conn = init_db(tmp_path / "leads.db")
+    with pytest.raises(ValueError):
+        list(iter_leads(conn, min_score=50.0))
+
+
+def test_update_lead_rejects_unknown_field(tmp_path: Path) -> None:
+    conn = init_db(tmp_path / "leads.db")
+    a = upsert_lead(conn, _candidate("Foo Co"))
+    assert a.id is not None
+    with pytest.raises(ValueError):
+        update_lead(conn, a.id, secret_field="x")
+
+
+def test_update_lead_raises_on_missing_id(tmp_path: Path) -> None:
+    conn = init_db(tmp_path / "leads.db")
+    with pytest.raises(ValueError):
+        update_lead(conn, 99999, industry="saas")
+
+
+def test_append_signal_raises_on_missing_id(tmp_path: Path) -> None:
+    conn = init_db(tmp_path / "leads.db")
+    with pytest.raises(ValueError):
+        append_signal(conn, 99999, _signal())
+
+
+def test_name_key_unicode_and_legal_suffixes() -> None:
+    assert _name_key("Café Inc") == "cafe"
+    assert _name_key("Acme Corporation") == "acme"
+    assert _name_key("Acme & Co, LLC") == "acme"
+    assert _name_key("naïve Ltd") == "naive"
+    with pytest.raises(ValueError):
+        _name_key("Inc.")
+    with pytest.raises(ValueError):
+        _name_key("LLC")
+    with pytest.raises(ValueError):
+        _name_key("")
