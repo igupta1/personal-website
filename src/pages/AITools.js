@@ -1,6 +1,5 @@
 //AITools.js
 import React, { useEffect, useRef } from "react";
-import { useNavigate } from "react-router-dom";
 import pfpImage from '../assets/headshot.jpg';
 
 // Company logos
@@ -11,15 +10,11 @@ import ciscologo from '../assets/ciscologo.png';
 // Tool logos
 import linkmailLogo from '../assets/linkmail-logo.png';
 
-// Icons
-import { HiOutlineUserGroup } from "react-icons/hi";
-
 const SCHEDULING_STYLESHEET_HREF = "https://calendar.google.com/calendar/scheduling-button-script.css";
 const SCHEDULING_SCRIPT_SRC = "https://calendar.google.com/calendar/scheduling-button-script.js";
 const SCHEDULING_URL = "https://calendar.google.com/calendar/appointments/schedules/AcZssZ0DBh4IrfhTXa3MeWJiWrKSR0h3nDlddqmRQ75mhjzv_3iJrPcH1irAOFYFcx4Z7Z2pKYkHNTTm?gv=true";
 
 function AITools() {
-  const navigate = useNavigate();
   const bookingButtonRef = useRef(null);
 
   useEffect(() => {
@@ -86,14 +81,6 @@ function AITools() {
   const aiTools = [
     {
       id: 1,
-      title: "Live Example: SMBs Hiring Tech Support",
-      description: "Surfaces SMBs hiring for internal tech support, identifies the decision maker, and drafts personalized outreach.",
-      icon: <HiOutlineUserGroup size={34} color="#f5f5f5" />,
-      isReactIcon: true,
-      link: "/gtm/it-msp",
-    },
-    {
-      id: 2,
       title: "LinkedIn Cold Message Personalization Tool",
       description: "Automatically Find Emails and Send a Personalized Message Instantly.",
       icon: linkmailLogo,
@@ -107,8 +94,6 @@ function AITools() {
     if (link) {
       if (external) {
         window.open(link, '_blank', 'noopener,noreferrer');
-      } else {
-        navigate(link);
       }
     }
   };
@@ -160,7 +145,7 @@ function AITools() {
               {aiTools.map((tool) => (
                 <div
                   key={tool.id}
-                  className={`project-card ${tool.link ? 'clickable' : 'non-clickable'} ${tool.id === 2 ? 'linkedin-tool' : ''}`}
+                  className={`project-card ${tool.link ? 'clickable' : 'non-clickable'} ${tool.id === 1 ? 'linkedin-tool' : ''}`}
                   onClick={() => handleToolClick(tool.link, tool.external)}
                   style={{ cursor: tool.link ? 'pointer' : 'default' }}
                 >

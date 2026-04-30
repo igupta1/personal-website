@@ -28,9 +28,3 @@ yarn-error.log*
 .vercel
 .env*.local
 
-# Python
-__pycache__/
-*.pyc
-*.db
-!list_discovery.db
-!ITMSPDiscovery/it_msp_discovery.db

@@ -5,7 +5,6 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import About from "./pages/About";
 import AITools from "./pages/AITools";
-import ItMspDemo from "./pages/ItMspDemo";
 import "./App.css";  // Use the existing App.css
 
 function App() {
@@ -17,7 +16,6 @@ function App() {
           <Routes>
             <Route path="/" element={<About />} />
             <Route path="/gtm" element={<AITools />} />
-            <Route path="/gtm/it-msp" element={<ItMspDemo />} />
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </main>
