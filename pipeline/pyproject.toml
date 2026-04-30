@@ -40,3 +40,7 @@ target-version = "py311"
 python_version = "3.11"
 warn_unused_ignores = true
 warn_redundant_casts = true
+
+[[tool.mypy.overrides]]
+module = ["jobspy", "feedparser", "requests", "requests.*"]
+ignore_missing_imports = true
