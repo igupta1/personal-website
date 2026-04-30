@@ -258,6 +258,13 @@ def append_signal(conn: sqlite3.Connection, lead_id: int, signal: Signal) -> Non
         _append_signal_row(conn, lead_id, signal)
 
 
+def delete_lead(conn: sqlite3.Connection, lead_id: int) -> None:
+    with conn:
+        cur = conn.execute("DELETE FROM leads WHERE id = ?", (lead_id,))
+        if cur.rowcount == 0:
+            raise ValueError(f"No lead with id={lead_id}")
+
+
 def update_lead(conn: sqlite3.Connection, lead_id: int, **fields: Any) -> None:
     if not fields:
         return

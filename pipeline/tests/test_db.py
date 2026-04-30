@@ -8,6 +8,7 @@ import pytest
 from msp_pipeline.db import (
     _name_key,
     append_signal,
+    delete_lead,
     get_lead,
     init_db,
     iter_leads,
@@ -182,6 +183,16 @@ def test_append_signal_raises_on_missing_id(tmp_path: Path) -> None:
     conn = init_db(tmp_path / "leads.db")
     with pytest.raises(ValueError):
         append_signal(conn, 99999, _signal())
+
+
+def test_delete_lead_removes_row_and_raises_on_missing(tmp_path: Path) -> None:
+    conn = init_db(tmp_path / "leads.db")
+    a = upsert_lead(conn, _candidate("Zeta Co"))
+    assert a.id is not None
+    delete_lead(conn, a.id)
+    assert get_lead(conn, lead_id=a.id) is None
+    with pytest.raises(ValueError):
+        delete_lead(conn, a.id)
 
 
 def test_name_key_unicode_and_legal_suffixes() -> None:

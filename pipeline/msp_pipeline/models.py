@@ -19,8 +19,8 @@ class SignalType(str, Enum):
     EXEC_HIRED = "exec_hired"
     FUNDING_RAISED = "funding_raised"
     BREACH_DISCLOSED = "breach_disclosed"
-    HEADCOUNT_THRESHOLD_CROSSED = "headcount_threshold_crossed"
-    HEADCOUNT_GROWTH_RAPID = "headcount_growth_rapid"
+    LOCATION_CAPTURED = "location_captured"
+    ENRICHMENT_RUN = "enrichment_run"
 
 
 class SourceName(str, Enum):
