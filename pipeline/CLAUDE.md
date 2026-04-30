@@ -44,7 +44,7 @@ Computed: `headcount_threshold_crossed`, `headcount_growth_rapid`
 - Python 3.11+, type hints required everywhere.
 - Pydantic models for structured data.
 - All LLM calls go through `msp_pipeline/llm.py` wrappers (never call the
-  Anthropic or Gemini SDKs directly elsewhere).
+  OpenAI or Gemini SDKs directly elsewhere).
 - Tests use captured fixtures, never live HTTP.
 - One source module per file in `msp_pipeline/sources/`.
 
