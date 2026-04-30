@@ -331,7 +331,7 @@ def test_enrich_persists_headcount_rounding(
     monkeypatch.setattr(
         enrichment.llm,
         "call_gemini",
-        MagicMock(return_value=_lookup_response(headcount="1247")),
+        MagicMock(return_value=_lookup_response(headcount="247")),
     )
     monkeypatch.setattr(
         enrichment.llm,
@@ -342,7 +342,79 @@ def test_enrich_persists_headcount_rounding(
     enrich(conn, lead)
     after = db.get_lead(conn, lead_id=lead.id)
     assert after is not None
-    assert after.headcount == 1250
+    assert after.headcount == 250
+
+
+def test_enrich_deletes_oversized_lead(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    conn = db.init_db(tmp_path / "leads.db")
+    lead = _insert_lead(conn, "Big Co")
+    assert lead.id is not None
+
+    openai_mock = MagicMock()
+    monkeypatch.setattr(
+        enrichment.llm,
+        "call_gemini",
+        MagicMock(return_value=_lookup_response(headcount="300", country="US")),
+    )
+    monkeypatch.setattr(enrichment.llm, "call_openai", openai_mock)
+
+    assert enrich(conn, lead) is False
+    assert db.get_lead(conn, lead_id=lead.id) is None
+    openai_mock.assert_not_called()
+
+
+def test_enrich_keeps_lead_at_exactly_250(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    conn = db.init_db(tmp_path / "leads.db")
+    lead = _insert_lead(conn, "Edge Co")
+    assert lead.id is not None
+
+    monkeypatch.setattr(
+        enrichment.llm,
+        "call_gemini",
+        MagicMock(return_value=_lookup_response(headcount="250")),
+    )
+    monkeypatch.setattr(
+        enrichment.llm,
+        "call_openai",
+        MagicMock(return_value=_IndustryOut(industry=Industry.OTHER)),
+    )
+
+    assert enrich(conn, lead) is True
+    after = db.get_lead(conn, lead_id=lead.id)
+    assert after is not None
+    assert after.headcount == 250
+
+
+def test_enrich_keeps_lead_with_unknown_headcount(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    conn = db.init_db(tmp_path / "leads.db")
+    lead = _insert_lead(conn, "Mystery Co")
+    assert lead.id is not None
+
+    monkeypatch.setattr(
+        enrichment.llm,
+        "call_gemini",
+        MagicMock(
+            return_value=_lookup_response(
+                headcount="unknown", city="unknown", state="unknown", country="US"
+            )
+        ),
+    )
+    monkeypatch.setattr(
+        enrichment.llm,
+        "call_openai",
+        MagicMock(return_value=_IndustryOut(industry=Industry.OTHER)),
+    )
+
+    assert enrich(conn, lead) is True
+    after = db.get_lead(conn, lead_id=lead.id)
+    assert after is not None
+    assert after.headcount is None
 
 
 def test_enrich_force_re_enriches(
@@ -361,7 +433,7 @@ def test_enrich_force_re_enriches(
     refreshed = db.get_lead(conn, lead_id=lead.id)
     assert refreshed is not None
 
-    gemini_mock = MagicMock(return_value=_lookup_response(headcount="500"))
+    gemini_mock = MagicMock(return_value=_lookup_response(headcount="100"))
     openai_mock = MagicMock(return_value=_IndustryOut(industry=Industry.HEALTHCARE))
     monkeypatch.setattr(enrichment.llm, "call_gemini", gemini_mock)
     monkeypatch.setattr(enrichment.llm, "call_openai", openai_mock)
@@ -373,4 +445,4 @@ def test_enrich_force_re_enriches(
     after = db.get_lead(conn, lead_id=lead.id)
     assert after is not None
     assert after.industry == "healthcare"
-    assert after.headcount == 500
+    assert after.headcount == 100

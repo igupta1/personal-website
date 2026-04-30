@@ -216,9 +216,12 @@ def enrich(conn: sqlite3.Connection, lead: Lead, *, force: bool = False) -> bool
 
     lookup = lookup_company(lead)
 
-    if lookup.country != "US":
-        log.info("enrich: deleting non-US lead %d (%s) — country=%r",
-                 lead.id, lead.name, lookup.country)
+    oversized = lookup.headcount is not None and lookup.headcount > 250
+    if lookup.country != "US" or oversized:
+        log.info(
+            "enrich: deleting lead %d (%s) — country=%r headcount=%r",
+            lead.id, lead.name, lookup.country, lookup.headcount,
+        )
         db.delete_lead(conn, lead.id)
         return False
 
