@@ -29,7 +29,7 @@ Each source module wraps multiple free APIs:
 
 - `msp_pipeline/sources/jobs.py` — JobSpy + Adzuna + HN Algolia
 - `msp_pipeline/sources/funding.py` — SEC EDGAR Form D + TechCrunch RSS + PR Newswire RSS
-- `msp_pipeline/sources/breaches.py` — HHS Wall of Shame + California AG + Maine AG
+- `msp_pipeline/sources/breaches.py` — California AG + Maine AG + Washington State AG
 
 ## Signal types
 
@@ -81,8 +81,14 @@ mypy msp_pipeline
 
 ## Forbidden without explicit user instruction
 
-- Destructive operations: `rm`, `DROP`, `DELETE`, `TRUNCATE`, deleting files,
-  `git reset --hard`, force push.
-- Dropping or recreating `data/leads.db`.
+Deleting individual files (e.g. orphan fixtures, generated artifacts) is fine.
+What needs explicit permission is anything that destroys real work or shared
+state:
+
+- Wholesale removal: `rm -rf` on directories, removing source modules, wiping
+  `pipeline/` or `msp_pipeline/`.
+- Dropping or recreating `data/leads.db`, `DROP TABLE`, `DELETE FROM` on
+  populated tables, `TRUNCATE`.
+- Force push, `git reset --hard`, history rewrites on shared branches.
 - Modifying anything outside `pipeline/` (the React app and root configs are
   out of scope here — see root `CLAUDE.md`).

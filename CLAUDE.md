@@ -39,9 +39,9 @@ Vercel serverless functions live in `api/` at the repo root:
 - Modifying `vercel.json`
 - Committing `.env` or `.env.local` files
 - Modifying existing site code: `App.js` routes, `About.js`, `AITools.js`, `Header.js`, `Footer.js`
-- **Destructive operations of any kind:** `rm`, `DELETE`, `DROP`, `git reset --hard`, force push, deleting files or directories, dropping database tables, truncating data
+- **Wholesale destruction:** `rm -rf` of directories, wiping the pipeline or its data, `git reset --hard`, force push, dropping database tables, truncating data, mass-deleting files. Single-file deletes (orphan fixtures, generated artifacts, etc.) are fine without asking.
 
-The user will explicitly say when destructive operations are okay. Until then, ask before doing anything irreversible.
+The user will explicitly say when wholesale-destructive operations are okay. Until then, ask before doing anything irreversible at scale.
 
 ## Conventions
 

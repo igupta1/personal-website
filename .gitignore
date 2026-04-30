@@ -36,4 +36,5 @@ pipeline/.ruff_cache/
 pipeline/**/__pycache__/
 pipeline/**/*.pyc
 pipeline/**/*.egg-info/
+pipeline/data/smoke/
 

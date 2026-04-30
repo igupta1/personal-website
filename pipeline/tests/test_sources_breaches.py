@@ -25,63 +25,63 @@ def _make_candidate(name: str) -> LeadCandidate:
     )
 
 
-def test_breaches_hhs_parses_fixture() -> None:
-    csv_text = (_FIXTURES / "hhs.csv").read_text()
+def _mock_response(content: bytes) -> MagicMock:
     response = MagicMock()
     response.raise_for_status.return_value = None
-    response.text = csv_text
-
-    since = datetime(2020, 1, 1)
-    with patch.object(breaches_module.requests, "get", return_value=response):
-        candidates = breaches_module._fetch_from_hhs(since)
-
-    names = {c.name for c in candidates}
-    assert names == {"Tango Hospital", "Uniform Medical Group"}
-    assert all(c.initial_signal.type == SignalType.BREACH_DISCLOSED for c in candidates)
+    response.content = content
+    return response
 
 
 def test_breaches_ca_ag_parses_fixture() -> None:
-    html = (_FIXTURES / "ca_ag.html").read_text()
-    response = MagicMock()
-    response.raise_for_status.return_value = None
-    response.text = html
-
-    since = datetime(2020, 1, 1)
-    with patch.object(breaches_module.requests, "get", return_value=response):
-        candidates = breaches_module._fetch_from_ca_ag(since)
+    html = (_FIXTURES / "ca_ag.html").read_bytes()
+    with patch.object(
+        breaches_module.requests, "get", return_value=_mock_response(html)
+    ):
+        candidates = breaches_module._fetch_from_ca_ag(datetime(2020, 1, 1))
 
     names = {c.name for c in candidates}
     assert names == {"Victor Financial", "Whiskey Tech Inc"}
+    assert all(c.initial_signal.type == SignalType.BREACH_DISCLOSED for c in candidates)
 
 
 def test_breaches_me_ag_parses_fixture() -> None:
-    html = (_FIXTURES / "me_ag.html").read_text()
-    response = MagicMock()
-    response.raise_for_status.return_value = None
-    response.text = html
-
-    since = datetime(2020, 1, 1)
-    with patch.object(breaches_module.requests, "get", return_value=response):
-        candidates = breaches_module._fetch_from_me_ag(since)
+    html = (_FIXTURES / "me_ag.html").read_bytes()
+    with patch.object(
+        breaches_module.requests, "get", return_value=_mock_response(html)
+    ):
+        candidates = breaches_module._fetch_from_me_ag(datetime(2020, 1, 1))
 
     names = {c.name for c in candidates}
     assert names == {"X-ray Insurance", "Yankee Banking"}
 
 
-def test_breaches_fetch_aggregates_and_continues_on_failure() -> None:
-    a, b, c = _make_candidate("HHS Co"), _make_candidate("CA Co"), _make_candidate("ME Co")
+def test_breaches_wa_ag_parses_fixture() -> None:
+    html = (_FIXTURES / "wa_ag.html").read_bytes()
+    with patch.object(
+        breaches_module.requests, "get", return_value=_mock_response(html)
+    ):
+        candidates = breaches_module._fetch_from_wa_ag(datetime(2020, 1, 1))
 
-    with patch.object(breaches_module, "_fetch_from_hhs", return_value=[a]), \
-         patch.object(breaches_module, "_fetch_from_ca_ag", return_value=[b]), \
-         patch.object(breaches_module, "_fetch_from_me_ag", return_value=[c]):
+    names = {c.name for c in candidates}
+    assert names == {"Zulu Logistics", "Alpha Health Network"}
+
+
+def test_breaches_fetch_aggregates_and_continues_on_failure() -> None:
+    a = _make_candidate("CA Co")
+    b = _make_candidate("ME Co")
+    c = _make_candidate("WA Co")
+
+    with patch.object(breaches_module, "_fetch_from_ca_ag", return_value=[a]), \
+         patch.object(breaches_module, "_fetch_from_me_ag", return_value=[b]), \
+         patch.object(breaches_module, "_fetch_from_wa_ag", return_value=[c]):
         names = {x.name for x in breaches_module.fetch(since=datetime(2020, 1, 1))}
-    assert names == {"HHS Co", "CA Co", "ME Co"}
+    assert names == {"CA Co", "ME Co", "WA Co"}
 
     def boom(_since: datetime) -> list[LeadCandidate]:
         raise RuntimeError("boom")
 
-    with patch.object(breaches_module, "_fetch_from_hhs", side_effect=boom), \
-         patch.object(breaches_module, "_fetch_from_ca_ag", return_value=[b]), \
-         patch.object(breaches_module, "_fetch_from_me_ag", return_value=[c]):
+    with patch.object(breaches_module, "_fetch_from_ca_ag", side_effect=boom), \
+         patch.object(breaches_module, "_fetch_from_me_ag", return_value=[b]), \
+         patch.object(breaches_module, "_fetch_from_wa_ag", return_value=[c]):
         names = {x.name for x in breaches_module.fetch(since=datetime(2020, 1, 1))}
-    assert names == {"CA Co", "ME Co"}
+    assert names == {"ME Co", "WA Co"}
