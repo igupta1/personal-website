@@ -4,6 +4,11 @@ on:
   schedule:
     - cron: "0 6 * * *"   # 06:00 UTC daily (~11pm PT, 2am ET)
   workflow_dispatch:
+    inputs:
+      limit:
+        description: "Per-source candidate cap (empty = no cap; e.g. 3 for a quick smoke)"
+        required: false
+        default: ""
 
 permissions:
   contents: write
@@ -45,7 +50,13 @@ jobs:
           ADZUNA_APP_KEY:       ${{ secrets.ADZUNA_APP_KEY }}
           LEADS_UPLOAD_URL:     https://www.ishaangpta.com/api/upload-leads
           LEADS_UPLOAD_API_KEY: ${{ secrets.LEADS_UPLOAD_API_KEY }}
-        run: python -m msp_pipeline.daily_run --upload
+          LIMIT:                ${{ inputs.limit }}
+        run: |
+          args=("--upload")
+          if [[ -n "$LIMIT" ]]; then
+            args+=("--limit" "$LIMIT")
+          fi
+          python -m msp_pipeline.daily_run "${args[@]}"
 
       - name: Commit updated DB + JSON
         if: success()
