@@ -330,3 +330,118 @@ def test_lead_to_json_pulls_city_state_from_signal() -> None:
     out2 = daily_run._lead_to_json(lead_no_loc, NicheName.IT_MSP, now=base)
     assert out2["city"] is None
     assert out2["state"] is None
+
+
+# --- --upload --------------------------------------------------------------
+
+
+def _setup_minimal_pipeline_mocks(monkeypatch: pytest.MonkeyPatch) -> None:
+    """Patch sources / enrichment / outreach so main() runs to the upload
+    step without making any real network calls."""
+    monkeypatch.setattr(
+        daily_run.jobs,
+        "fetch",
+        MagicMock(return_value=[_candidate("Acme Co")]),
+    )
+    monkeypatch.setattr(
+        daily_run.funding, "fetch", MagicMock(return_value=[])
+    )
+    monkeypatch.setattr(
+        daily_run.breaches, "fetch", MagicMock(return_value=[])
+    )
+    monkeypatch.setattr(
+        "msp_pipeline.enrichment.lookup_company",
+        MagicMock(
+            return_value=enrichment._Lookup(
+                headcount=80, city=None, state=None, country="US"
+            )
+        ),
+    )
+    monkeypatch.setattr(
+        "msp_pipeline.enrichment.classify_industry",
+        MagicMock(return_value=enrichment.Industry.OTHER),
+    )
+    monkeypatch.setattr(
+        "msp_pipeline.outreach.generate",
+        MagicMock(return_value=Copy(insight="x" * 30, outreach="y" * 200)),
+    )
+
+
+def test_upload_called_when_flag_set(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    _setup_minimal_pipeline_mocks(monkeypatch)
+
+    monkeypatch.setenv("LEADS_UPLOAD_URL", "https://example.com/api/upload-leads")
+    monkeypatch.setenv("LEADS_UPLOAD_API_KEY", "secret-token")
+
+    fake_response = MagicMock()
+    fake_response.raise_for_status = MagicMock()
+    fake_response.json = MagicMock(return_value={"ok": True, "url": "..."})
+    post_mock = MagicMock(return_value=fake_response)
+    monkeypatch.setattr(daily_run.requests, "post", post_mock)
+
+    rc = daily_run.main(
+        [
+            "--upload",
+            "--db-path",
+            str(tmp_path / "leads.db"),
+            "--output-path",
+            str(tmp_path / "leads.json"),
+        ]
+    )
+    assert rc == 0
+    post_mock.assert_called_once()
+    call = post_mock.call_args
+    assert call.args[0] == "https://example.com/api/upload-leads"
+    assert call.kwargs["headers"] == {"Authorization": "Bearer secret-token"}
+    assert "niches" in call.kwargs["json"]
+    assert set(call.kwargs["json"]["niches"].keys()) == {"it_msp", "mssp", "cloud"}
+
+
+def test_upload_skipped_without_flag(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    _setup_minimal_pipeline_mocks(monkeypatch)
+
+    post_mock = MagicMock()
+    monkeypatch.setattr(daily_run.requests, "post", post_mock)
+
+    rc = daily_run.main(
+        [
+            "--db-path",
+            str(tmp_path / "leads.db"),
+            "--output-path",
+            str(tmp_path / "leads.json"),
+        ]
+    )
+    assert rc == 0
+    post_mock.assert_not_called()
+
+
+def test_upload_failure_returns_nonzero_exit(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    _setup_minimal_pipeline_mocks(monkeypatch)
+
+    monkeypatch.setenv("LEADS_UPLOAD_URL", "https://example.com/api/upload-leads")
+    monkeypatch.setenv("LEADS_UPLOAD_API_KEY", "secret-token")
+
+    import requests as real_requests
+
+    monkeypatch.setattr(
+        daily_run.requests,
+        "post",
+        MagicMock(side_effect=real_requests.RequestException("boom")),
+    )
+
+    rc = daily_run.main(
+        [
+            "--upload",
+            "--db-path",
+            str(tmp_path / "leads.db"),
+            "--output-path",
+            str(tmp_path / "leads.json"),
+        ]
+    )
+    assert rc == 1

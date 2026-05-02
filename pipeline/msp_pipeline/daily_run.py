@@ -10,11 +10,14 @@ from __future__ import annotations
 import argparse
 import json
 import logging
+import os
 import sqlite3
 import sys
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Any
+
+import requests
 
 from msp_pipeline import db, enrichment, outreach, scoring
 from msp_pipeline.models import Lead, LeadCandidate, NicheName, Signal, SignalType
@@ -107,6 +110,13 @@ def main(argv: list[str] | None = None) -> int:
     args.output_path.parent.mkdir(parents=True, exist_ok=True)
     args.output_path.write_text(json.dumps(output, indent=2, default=str))
     log.info("wrote %s", args.output_path)
+
+    if args.upload:
+        try:
+            _upload_blob(args.output_path)
+        except Exception:
+            log.exception("upload failed")
+            return 1
     return 0
 
 
@@ -264,6 +274,27 @@ def _signal_to_json(s: Signal, now: datetime) -> dict[str, Any]:
     }
 
 
+# --- Upload ----------------------------------------------------------------
+
+
+def _upload_blob(json_path: Path) -> None:
+    url = os.environ.get("LEADS_UPLOAD_URL")
+    api_key = os.environ.get("LEADS_UPLOAD_API_KEY")
+    if not url or not api_key:
+        raise RuntimeError(
+            "--upload requires LEADS_UPLOAD_URL and LEADS_UPLOAD_API_KEY env vars"
+        )
+    payload = json.loads(json_path.read_text())
+    resp = requests.post(
+        url,
+        json=payload,
+        headers={"Authorization": f"Bearer {api_key}"},
+        timeout=30,
+    )
+    resp.raise_for_status()
+    log.info("uploaded blob: %s", resp.json())
+
+
 # --- CLI -------------------------------------------------------------------
 
 
@@ -284,6 +315,11 @@ def _parse_args(argv: list[str] | None) -> argparse.Namespace:
         "--dry-run",
         action="store_true",
         help="Run sources only; skip DB writes, LLM calls, JSON write",
+    )
+    parser.add_argument(
+        "--upload",
+        action="store_true",
+        help="POST the local JSON to LEADS_UPLOAD_URL after writing it",
     )
     parser.add_argument("--verbose", action="store_true")
     return parser.parse_args(argv)
