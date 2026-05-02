@@ -38,6 +38,30 @@ function Header() {
               GTM Systems for Businesses
             </NavLink>
           </li>
+          <li>
+            <NavLink
+              to="/it-msps"
+              className={({ isActive }) => (isActive ? "active" : "")}
+            >
+              IT MSPs
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/mssps"
+              className={({ isActive }) => (isActive ? "active" : "")}
+            >
+              MSSPs
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/cloud"
+              className={({ isActive }) => (isActive ? "active" : "")}
+            >
+              Cloud
+            </NavLink>
+          </li>
         </ul>
       </nav>
     </header>

@@ -5,6 +5,9 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import About from "./pages/About";
 import AITools from "./pages/AITools";
+import ITMsps from "./pages/ITMsps";
+import Mssps from "./pages/Mssps";
+import Cloud from "./pages/Cloud";
 import "./App.css";  // Use the existing App.css
 
 function App() {
@@ -16,6 +19,9 @@ function App() {
           <Routes>
             <Route path="/" element={<About />} />
             <Route path="/gtm" element={<AITools />} />
+            <Route path="/it-msps" element={<ITMsps />} />
+            <Route path="/mssps" element={<Mssps />} />
+            <Route path="/cloud" element={<Cloud />} />
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </main>
