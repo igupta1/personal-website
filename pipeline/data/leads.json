@@ -1,0 +1,368 @@
+{
+  "generated_at": "2026-05-04T22:22:36.170192",
+  "niches": {
+    "it_msp": [
+      {
+        "name": "Qaimera Technologies, Inc.  (CIK 0002133230)",
+        "domain": null,
+        "industry": null,
+        "headcount": null,
+        "country": null,
+        "city": null,
+        "state": null,
+        "score": 24.999473415515645,
+        "insight": null,
+        "outreach": null,
+        "signals": [
+          {
+            "type": "funding_raised",
+            "captured_at": "2026-05-04T22:21:11.774850",
+            "days_ago": 0,
+            "payload": {
+              "form": "D",
+              "filing_date": "2026-05-04",
+              "accession": "0002133230-26-000001"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Climb Bio, Inc.  (CLYM)  (CIK 0001768446)",
+        "domain": null,
+        "industry": "healthcare",
+        "headcount": 30,
+        "country": "US",
+        "city": "Wellesley Hills",
+        "state": "MA",
+        "score": 24.999473409365162,
+        "insight": null,
+        "outreach": null,
+        "signals": [
+          {
+            "type": "funding_raised",
+            "captured_at": "2026-05-04T22:21:11.774850",
+            "days_ago": 0,
+            "payload": {
+              "form": "D",
+              "filing_date": "2026-05-04",
+              "accession": "0001768446-26-000001"
+            }
+          }
+        ]
+      },
+      {
+        "name": "S R International Inc",
+        "domain": null,
+        "industry": "other",
+        "headcount": 40,
+        "country": "US",
+        "city": "Naperville",
+        "state": "IL",
+        "score": 24.999331016204724,
+        "insight": null,
+        "outreach": null,
+        "signals": [
+          {
+            "type": "job_posted_it_support",
+            "captured_at": "2026-05-04T22:20:50.473425",
+            "days_ago": 0,
+            "payload": {
+              "title": "Help Desk Representative",
+              "url": "https://www.indeed.com/viewjob?jk=73926b606cfe2833",
+              "date_posted": "2026-05-04",
+              "site": "indeed"
+            }
+          }
+        ]
+      },
+      {
+        "name": "TransGlobal Insurance Agency, Inc.",
+        "domain": null,
+        "industry": "fintech",
+        "headcount": null,
+        "country": "US",
+        "city": "Monrovia",
+        "state": "CA",
+        "score": 17.99963166358077,
+        "insight": null,
+        "outreach": null,
+        "signals": [
+          {
+            "type": "breach_disclosed",
+            "captured_at": "2026-05-04T22:21:14.021591",
+            "days_ago": 0,
+            "payload": {
+              "agency": "ca_ag",
+              "reported_date": "04/29/2026"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Frontwave Credit Union",
+        "domain": null,
+        "industry": "fintech",
+        "headcount": 160,
+        "country": "US",
+        "city": "Oceanside",
+        "state": "CA",
+        "score": 17.999615272600547,
+        "insight": null,
+        "outreach": null,
+        "signals": [
+          {
+            "type": "breach_disclosed",
+            "captured_at": "2026-05-04T22:21:14.021591",
+            "days_ago": 0,
+            "payload": {
+              "agency": "ca_ag",
+              "reported_date": "04/28/2026"
+            }
+          }
+        ]
+      }
+    ],
+    "mssp": [
+      {
+        "name": "TransGlobal Insurance Agency, Inc.",
+        "domain": null,
+        "industry": "fintech",
+        "headcount": null,
+        "country": "US",
+        "city": "Monrovia",
+        "state": "CA",
+        "score": 44.99907915895193,
+        "insight": "With a breach disclosed just yesterday, TransGlobal may be looking to strengthen its security posture and regain customer trust rapidly.",
+        "outreach": "I saw the recent breach disclosure at TransGlobal and understand how stressful this situation can be. Now more than ever, having a robust SOC monitoring solution is crucial to protect your sensitive data and maintain compliance. We specialize in supporting companies like yours by providing proactive security management and compliance support. If you'd like, we can set up a brief call to discuss how we might assist you moving forward.",
+        "signals": [
+          {
+            "type": "breach_disclosed",
+            "captured_at": "2026-05-04T22:21:14.021591",
+            "days_ago": 0,
+            "payload": {
+              "agency": "ca_ag",
+              "reported_date": "04/29/2026"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Frontwave Credit Union",
+        "domain": null,
+        "industry": "fintech",
+        "headcount": 160,
+        "country": "US",
+        "city": "Oceanside",
+        "state": "CA",
+        "score": 44.99903818150137,
+        "insight": "With a recent breach disclosed, Frontwave could benefit from enhanced SOC monitoring and vulnerability management to strengthen its cybersecurity posture.",
+        "outreach": "I saw the breach disclosure from Frontwave and understand how challenging that can be for your team. It\u2019s crucial now more than ever to ensure robust protection against future threats. We specialize in managed security services that provide around-the-clock SOC monitoring and vulnerability management tailored for fintech organizations like yours. If it makes sense, I\u2019d love to schedule a brief call to explore how we can support your cybersecurity initiatives.",
+        "signals": [
+          {
+            "type": "breach_disclosed",
+            "captured_at": "2026-05-04T22:21:14.021591",
+            "days_ago": 0,
+            "payload": {
+              "agency": "ca_ag",
+              "reported_date": "04/28/2026"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Qaimera Technologies, Inc.  (CIK 0002133230)",
+        "domain": null,
+        "industry": null,
+        "headcount": null,
+        "country": null,
+        "city": null,
+        "state": null,
+        "score": 21.99953660565377,
+        "insight": null,
+        "outreach": null,
+        "signals": [
+          {
+            "type": "funding_raised",
+            "captured_at": "2026-05-04T22:21:11.774850",
+            "days_ago": 0,
+            "payload": {
+              "form": "D",
+              "filing_date": "2026-05-04",
+              "accession": "0002133230-26-000001"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Climb Bio, Inc.  (CLYM)  (CIK 0001768446)",
+        "domain": null,
+        "industry": "healthcare",
+        "headcount": 30,
+        "country": "US",
+        "city": "Wellesley Hills",
+        "state": "MA",
+        "score": 21.999536600241345,
+        "insight": null,
+        "outreach": null,
+        "signals": [
+          {
+            "type": "funding_raised",
+            "captured_at": "2026-05-04T22:21:11.774850",
+            "days_ago": 0,
+            "payload": {
+              "form": "D",
+              "filing_date": "2026-05-04",
+              "accession": "0001768446-26-000001"
+            }
+          }
+        ]
+      },
+      {
+        "name": "S R International Inc",
+        "domain": null,
+        "industry": "other",
+        "headcount": 40,
+        "country": "US",
+        "city": "Naperville",
+        "state": "IL",
+        "score": 9.99973240648189,
+        "insight": null,
+        "outreach": null,
+        "signals": [
+          {
+            "type": "job_posted_it_support",
+            "captured_at": "2026-05-04T22:20:50.473425",
+            "days_ago": 0,
+            "payload": {
+              "title": "Help Desk Representative",
+              "url": "https://www.indeed.com/viewjob?jk=73926b606cfe2833",
+              "date_posted": "2026-05-04",
+              "site": "indeed"
+            }
+          }
+        ]
+      }
+    ],
+    "cloud": [
+      {
+        "name": "Qaimera Technologies, Inc.  (CIK 0002133230)",
+        "domain": null,
+        "industry": null,
+        "headcount": null,
+        "country": null,
+        "city": null,
+        "state": null,
+        "score": 27.999410225377524,
+        "insight": null,
+        "outreach": null,
+        "signals": [
+          {
+            "type": "funding_raised",
+            "captured_at": "2026-05-04T22:21:11.774850",
+            "days_ago": 0,
+            "payload": {
+              "form": "D",
+              "filing_date": "2026-05-04",
+              "accession": "0002133230-26-000001"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Climb Bio, Inc.  (CLYM)  (CIK 0001768446)",
+        "domain": null,
+        "industry": "healthcare",
+        "headcount": 30,
+        "country": "US",
+        "city": "Wellesley Hills",
+        "state": "MA",
+        "score": 27.999410218488983,
+        "insight": null,
+        "outreach": null,
+        "signals": [
+          {
+            "type": "funding_raised",
+            "captured_at": "2026-05-04T22:21:11.774850",
+            "days_ago": 0,
+            "payload": {
+              "form": "D",
+              "filing_date": "2026-05-04",
+              "accession": "0001768446-26-000001"
+            }
+          }
+        ]
+      },
+      {
+        "name": "S R International Inc",
+        "domain": null,
+        "industry": "other",
+        "headcount": 40,
+        "country": "US",
+        "city": "Naperville",
+        "state": "IL",
+        "score": 9.99973240648189,
+        "insight": null,
+        "outreach": null,
+        "signals": [
+          {
+            "type": "job_posted_it_support",
+            "captured_at": "2026-05-04T22:20:50.473425",
+            "days_ago": 0,
+            "payload": {
+              "title": "Help Desk Representative",
+              "url": "https://www.indeed.com/viewjob?jk=73926b606cfe2833",
+              "date_posted": "2026-05-04",
+              "site": "indeed"
+            }
+          }
+        ]
+      },
+      {
+        "name": "TransGlobal Insurance Agency, Inc.",
+        "domain": null,
+        "industry": "fintech",
+        "headcount": null,
+        "country": "US",
+        "city": "Monrovia",
+        "state": "CA",
+        "score": 7.999836294924787,
+        "insight": null,
+        "outreach": null,
+        "signals": [
+          {
+            "type": "breach_disclosed",
+            "captured_at": "2026-05-04T22:21:14.021591",
+            "days_ago": 0,
+            "payload": {
+              "agency": "ca_ag",
+              "reported_date": "04/29/2026"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Frontwave Credit Union",
+        "domain": null,
+        "industry": "fintech",
+        "headcount": 160,
+        "country": "US",
+        "city": "Oceanside",
+        "state": "CA",
+        "score": 7.999829010044688,
+        "insight": null,
+        "outreach": null,
+        "signals": [
+          {
+            "type": "breach_disclosed",
+            "captured_at": "2026-05-04T22:21:14.021591",
+            "days_ago": 0,
+            "payload": {
+              "agency": "ca_ag",
+              "reported_date": "04/28/2026"
+            }
+          }
+        ]
+      }
+    ]
+  }
+}
