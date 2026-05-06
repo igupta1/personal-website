@@ -146,12 +146,34 @@ def _get_lead_by_name_key(conn: sqlite3.Connection, name_key: str) -> Lead | Non
 # the M4 enrichment-skip logic still sees per-run timestamps.
 _NEVER_DEDUP: frozenset[SignalType] = frozenset({SignalType.ENRICHMENT_RUN})
 
+# Job-style signals carry URLs that often have per-fetch tracking suffixes
+# (Adzuna `?se=...`, Indeed `?jk=...`). Dedup on (type, title, url-path) so
+# the same posting fetched multiple times collapses to one signal.
+_JOB_LIKE: frozenset[SignalType] = frozenset({
+    SignalType.JOB_IT_SUPPORT,
+    SignalType.JOB_IT_LEADERSHIP,
+    SignalType.JOB_SECURITY,
+    SignalType.JOB_CLOUD_DEVOPS,
+    SignalType.EXEC_HIRED,
+})
+
 
 def _signal_dedup_key(sig_dict: dict[str, Any]) -> str:
-    """Stable hash of (type, payload). Excludes captured_at and source so two
-    fetches of the same underlying event collapse to one signal."""
+    """Stable key per signal. Excludes captured_at and source so two fetches
+    of the same event collapse. Job-type signals normalize the URL (strip
+    query + fragment) so tracking suffixes don't fragment dedup."""
+    sig_type_str = sig_dict["type"]
     payload = sig_dict.get("payload") or {}
-    return f"{sig_dict['type']}|{json.dumps(payload, sort_keys=True, default=str)}"
+    try:
+        sig_type = SignalType(sig_type_str)
+    except ValueError:
+        sig_type = None
+    if sig_type in _JOB_LIKE:
+        raw_url = payload.get("url") or ""
+        url_path = raw_url.split("?", 1)[0].split("#", 1)[0]
+        title = (payload.get("title") or "").strip()
+        return f"{sig_type_str}|{title}|{url_path}"
+    return f"{sig_type_str}|{json.dumps(payload, sort_keys=True, default=str)}"
 
 
 def _append_signal_row(conn: sqlite3.Connection, lead_id: int, signal: Signal) -> None:

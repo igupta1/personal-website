@@ -241,6 +241,123 @@ def test_append_signal_keeps_distinct_payloads(tmp_path: Path) -> None:
     }
 
 
+def test_append_signal_dedups_jobs_with_tracking_suffix(tmp_path: Path) -> None:
+    """Adzuna pattern: same posting, different `?se=...` tracking suffix."""
+    conn = init_db(tmp_path / "leads.db")
+    a = upsert_lead(conn, _candidate("Sky Co"))
+    assert a.id is not None
+
+    now = datetime.now(timezone.utc).replace(tzinfo=None)
+    base_url = "https://www.adzuna.com/land/ad/5708002240"
+    for tracking in ("3AWQYyVJ8R", "uDCLv1lI8R", "mOQoOg1I8R"):
+        append_signal(
+            conn,
+            a.id,
+            Signal(
+                type=SignalType.JOB_IT_SUPPORT,
+                source=SourceName.JOBS,
+                captured_at=now,
+                payload={"url": f"{base_url}?se={tracking}", "title": "IT Support"},
+            ),
+        )
+    result = get_lead(conn, lead_id=a.id)
+    assert result is not None
+    matching = [
+        s for s in result.signals
+        if s.type == SignalType.JOB_IT_SUPPORT and s.payload.get("title") == "IT Support"
+    ]
+    assert len(matching) == 1
+
+
+def test_append_signal_dedups_indeed_jk_for_same_title(tmp_path: Path) -> None:
+    """Indeed pattern: same role re-posted with different `jk=...` IDs."""
+    conn = init_db(tmp_path / "leads.db")
+    a = upsert_lead(conn, _candidate("Indeed Co"))
+    assert a.id is not None
+    now = datetime.now(timezone.utc).replace(tzinfo=None)
+    for jk in ("b0f5c71fab", "c762c41cb1", "c0321a204f", "1db845f2ad"):
+        append_signal(
+            conn,
+            a.id,
+            Signal(
+                type=SignalType.JOB_CLOUD_DEVOPS,
+                source=SourceName.JOBS,
+                captured_at=now,
+                payload={
+                    "url": f"https://www.indeed.com/viewjob?jk={jk}",
+                    "title": "PingOne Cloud Engineer",
+                },
+            ),
+        )
+    result = get_lead(conn, lead_id=a.id)
+    assert result is not None
+    matching = [
+        s for s in result.signals
+        if s.type == SignalType.JOB_CLOUD_DEVOPS
+        and s.payload.get("title") == "PingOne Cloud Engineer"
+    ]
+    assert len(matching) == 1
+
+
+def test_append_signal_keeps_jobs_with_distinct_titles(tmp_path: Path) -> None:
+    """Same URL path, different titles — both kept (e.g. 'IT Support' vs
+    'IT Support - Backfill' are real distinct postings)."""
+    conn = init_db(tmp_path / "leads.db")
+    a = upsert_lead(conn, _candidate("Two Roles Co"))
+    assert a.id is not None
+    now = datetime.now(timezone.utc).replace(tzinfo=None)
+    for title in ("IT Support", "IT Support - Backfill"):
+        append_signal(
+            conn,
+            a.id,
+            Signal(
+                type=SignalType.JOB_IT_SUPPORT,
+                source=SourceName.JOBS,
+                captured_at=now,
+                payload={
+                    "url": "https://www.adzuna.com/land/ad/5708002240?se=tracking",
+                    "title": title,
+                },
+            ),
+        )
+    result = get_lead(conn, lead_id=a.id)
+    assert result is not None
+    titles = {
+        s.payload.get("title")
+        for s in result.signals
+        if s.type == SignalType.JOB_IT_SUPPORT and s.payload.get("title")
+    }
+    assert titles == {"IT Support", "IT Support - Backfill"}
+
+
+def test_append_signal_keeps_funding_with_distinct_accessions(tmp_path: Path) -> None:
+    """SEC funding signals: still dedup on full payload, not URL — so
+    different accessions stay distinct."""
+    conn = init_db(tmp_path / "leads.db")
+    a = upsert_lead(conn, _candidate("Fund Co"))
+    assert a.id is not None
+    now = datetime.now(timezone.utc).replace(tzinfo=None)
+    for accession in ("0002132836-26-000002", "0002132836-26-000005", "0002132834-26-000003"):
+        append_signal(
+            conn,
+            a.id,
+            Signal(
+                type=SignalType.FUNDING_RAISED,
+                source=SourceName.FUNDING,
+                captured_at=now,
+                payload={"accession": accession, "filing_date": "2026-05-05", "form": "D"},
+            ),
+        )
+    result = get_lead(conn, lead_id=a.id)
+    assert result is not None
+    accessions = {
+        s.payload.get("accession")
+        for s in result.signals
+        if s.type == SignalType.FUNDING_RAISED
+    }
+    assert len(accessions) == 3
+
+
 def test_append_signal_never_dedups_enrichment_run(tmp_path: Path) -> None:
     conn = init_db(tmp_path / "leads.db")
     a = upsert_lead(conn, _candidate("Marker Co"))
