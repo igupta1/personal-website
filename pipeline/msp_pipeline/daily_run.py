@@ -82,6 +82,38 @@ def main(argv: list[str] | None = None) -> int:
         log.info("dry-run fetched %d candidates total", len(candidates))
         return 0
 
+    if args.rescore_only:
+        log.info("rescore-only: skipping fetch / upsert / enrichment")
+        args.db_path.parent.mkdir(parents=True, exist_ok=True)
+        conn = db.init_db(args.db_path)
+
+        modified = db.dedup_signals_pass(conn)
+        log.info("deduped signals on %d leads", modified)
+
+        all_ids = [lead.id for lead in db.iter_leads(conn) if lead.id is not None]
+        log.info("re-scoring %d leads", len(all_ids))
+
+        rescored, copy_calls = _rescore_and_regen_copy(
+            conn, all_ids, model=args.copy_model
+        )
+        log.info(
+            "re-scored %d leads, regenerated copy %d times",
+            len(rescored), copy_calls,
+        )
+
+        output = _build_output(conn)
+        args.output_path.parent.mkdir(parents=True, exist_ok=True)
+        args.output_path.write_text(json.dumps(output, indent=2, default=str))
+        log.info("wrote %s", args.output_path)
+
+        if args.upload:
+            try:
+                _upload_blob(args.output_path)
+            except Exception:
+                log.exception("upload failed")
+                return 1
+        return 0
+
     candidates = _fetch_all(
         since=_utcnow() - timedelta(days=LOOKBACK_DAYS),
         per_source_limit=args.limit,
@@ -187,6 +219,8 @@ def _rescore_and_regen_copy(
         updates: dict[str, Any] = {}
         for niche, new in new_scores.items():
             score_col = _NICHE_SCORE_COL[niche]
+            insight_col = _NICHE_INSIGHT_COL[niche]
+            outreach_col = _NICHE_OUTREACH_COL[niche]
             old = getattr(lead, score_col)
             updates[score_col] = new
             should_regen = new >= COPY_THRESHOLD and (
@@ -195,8 +229,8 @@ def _rescore_and_regen_copy(
             if should_regen:
                 try:
                     copy = outreach.generate(lead, niche, new, model=model)
-                    updates[_NICHE_INSIGHT_COL[niche]] = copy.insight
-                    updates[_NICHE_OUTREACH_COL[niche]] = copy.outreach
+                    updates[insight_col] = copy.insight
+                    updates[outreach_col] = copy.outreach
                     copy_calls += 1
                 except Exception:
                     log.exception(
@@ -204,6 +238,13 @@ def _rescore_and_regen_copy(
                         lead.name,
                         niche.value,
                     )
+            elif new < COPY_THRESHOLD and (
+                getattr(lead, insight_col) is not None
+                or getattr(lead, outreach_col) is not None
+            ):
+                # Lead dropped below threshold; existing copy is stale.
+                updates[insight_col] = None
+                updates[outreach_col] = None
         try:
             db.update_lead(conn, lead_id, **updates)
             rescored.append(lead_id)
@@ -320,6 +361,13 @@ def _parse_args(argv: list[str] | None) -> argparse.Namespace:
         "--upload",
         action="store_true",
         help="POST the local JSON to LEADS_UPLOAD_URL after writing it",
+    )
+    parser.add_argument(
+        "--rescore-only",
+        action="store_true",
+        help="Skip fetch / upsert / enrichment. Dedup existing signals, "
+        "rescore every lead, regenerate / clear outreach copy as needed, "
+        "write JSON, upload (if --upload).",
     )
     parser.add_argument("--verbose", action="store_true")
     return parser.parse_args(argv)

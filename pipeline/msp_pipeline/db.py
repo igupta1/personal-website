@@ -14,6 +14,7 @@ from msp_pipeline.models import (
     LeadCandidate,
     NicheName,
     Signal,
+    SignalType,
 )
 
 _DDL = """
@@ -140,17 +141,67 @@ def _get_lead_by_name_key(conn: sqlite3.Connection, name_key: str) -> Lead | Non
     return _row_to_lead(row) if row is not None else None
 
 
+# Signals of these types are timestamp markers (one per event) — never dedup
+# them, even if their payloads happen to be identical. Skipping these ensures
+# the M4 enrichment-skip logic still sees per-run timestamps.
+_NEVER_DEDUP: frozenset[SignalType] = frozenset({SignalType.ENRICHMENT_RUN})
+
+
+def _signal_dedup_key(sig_dict: dict[str, Any]) -> str:
+    """Stable hash of (type, payload). Excludes captured_at and source so two
+    fetches of the same underlying event collapse to one signal."""
+    payload = sig_dict.get("payload") or {}
+    return f"{sig_dict['type']}|{json.dumps(payload, sort_keys=True, default=str)}"
+
+
 def _append_signal_row(conn: sqlite3.Connection, lead_id: int, signal: Signal) -> None:
     cur = conn.execute("SELECT signals FROM leads WHERE id = ?", (lead_id,))
     row = cur.fetchone()
     if row is None:
         raise ValueError(f"No lead with id={lead_id}")
     existing = json.loads(row["signals"])
-    existing.append(signal.model_dump(mode="json"))
+    new_dict = signal.model_dump(mode="json")
+    if signal.type not in _NEVER_DEDUP:
+        new_key = _signal_dedup_key(new_dict)
+        for s in existing:
+            if SignalType(s["type"]) in _NEVER_DEDUP:
+                continue
+            if _signal_dedup_key(s) == new_key:
+                return  # already on file; skip the append + DB write
+    existing.append(new_dict)
     conn.execute(
         "UPDATE leads SET signals = ?, updated_at = ? WHERE id = ?",
         (json.dumps(existing), _utcnow(), lead_id),
     )
+
+
+def dedup_signals_pass(conn: sqlite3.Connection) -> int:
+    """One-shot dedup over every lead's signals JSON. Returns count of leads
+    whose array was modified. Markers (ENRICHMENT_RUN) preserved as-is."""
+    modified = 0
+    cur = conn.execute("SELECT id, signals FROM leads")
+    rows = cur.fetchall()
+    with conn:
+        for row in rows:
+            existing = json.loads(row["signals"])
+            seen: set[str] = set()
+            deduped: list[dict[str, Any]] = []
+            for sig in existing:
+                if SignalType(sig["type"]) in _NEVER_DEDUP:
+                    deduped.append(sig)
+                    continue
+                key = _signal_dedup_key(sig)
+                if key in seen:
+                    continue
+                seen.add(key)
+                deduped.append(sig)
+            if len(deduped) != len(existing):
+                conn.execute(
+                    "UPDATE leads SET signals = ?, updated_at = ? WHERE id = ?",
+                    (json.dumps(deduped), _utcnow(), row["id"]),
+                )
+                modified += 1
+    return modified
 
 
 def init_db(path: Path) -> sqlite3.Connection:

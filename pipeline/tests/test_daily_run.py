@@ -419,6 +419,126 @@ def test_upload_skipped_without_flag(
     post_mock.assert_not_called()
 
 
+def test_rescore_only_skips_fetch_and_enrich(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    db_path = tmp_path / "leads.db"
+    out_path = tmp_path / "leads.json"
+
+    conn = db.init_db(db_path)
+    lead = db.upsert_lead(conn, _candidate("Rescore Co"))
+    assert lead.id is not None
+    db.update_lead(conn, lead.id, industry="other", headcount=80, country="US")
+    conn.close()
+
+    fetch_mock = MagicMock()
+    enrich_mock = MagicMock()
+    generate_mock = MagicMock()
+    monkeypatch.setattr(daily_run.jobs, "fetch", fetch_mock)
+    monkeypatch.setattr(daily_run.funding, "fetch", fetch_mock)
+    monkeypatch.setattr(daily_run.breaches, "fetch", fetch_mock)
+    monkeypatch.setattr("msp_pipeline.enrichment.enrich", enrich_mock)
+    monkeypatch.setattr("msp_pipeline.outreach.generate", generate_mock)
+
+    rc = daily_run.main(
+        [
+            "--rescore-only",
+            "--db-path",
+            str(db_path),
+            "--output-path",
+            str(out_path),
+        ]
+    )
+    assert rc == 0
+    fetch_mock.assert_not_called()
+    enrich_mock.assert_not_called()
+    assert out_path.exists()
+
+
+def test_rescore_only_dedups_existing_signals(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    db_path = tmp_path / "leads.db"
+    out_path = tmp_path / "leads.json"
+
+    conn = db.init_db(db_path)
+    lead = db.upsert_lead(
+        conn, _candidate("Spammed Co", SignalType.JOB_IT_SUPPORT)
+    )
+    assert lead.id is not None
+    db.update_lead(conn, lead.id, industry="other", headcount=80, country="US")
+    now = _now()
+    raw_signals = [
+        {
+            "type": SignalType.JOB_IT_SUPPORT.value,
+            "source": SourceName.JOBS.value,
+            "captured_at": now.isoformat(),
+            "payload": {"url": "https://example.com/dup"},
+        }
+    ] * 6
+    conn.execute(
+        "UPDATE leads SET signals = ? WHERE id = ?",
+        (json.dumps(raw_signals), lead.id),
+    )
+    conn.commit()
+    conn.close()
+
+    monkeypatch.setattr(
+        "msp_pipeline.outreach.generate",
+        MagicMock(return_value=Copy(insight="x" * 30, outreach="y" * 200)),
+    )
+
+    rc = daily_run.main(
+        [
+            "--rescore-only",
+            "--db-path",
+            str(db_path),
+            "--output-path",
+            str(out_path),
+        ]
+    )
+    assert rc == 0
+
+    conn2 = db.init_db(db_path)
+    after = db.get_lead(conn2, lead_id=lead.id)
+    assert after is not None
+    job_sigs = [s for s in after.signals if s.type == SignalType.JOB_IT_SUPPORT]
+    assert len(job_sigs) == 1
+
+
+def test_rescore_clears_stale_copy_when_score_drops_below_threshold(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    conn = db.init_db(tmp_path / "leads.db")
+    lead = db.upsert_lead(conn, _candidate("Falling Co"))
+    assert lead.id is not None
+    # Pre-seed: score above threshold + outreach copy already populated.
+    db.update_lead(
+        conn,
+        lead.id,
+        it_msp_score=80.0,
+        it_msp_insight="stale insight",
+        it_msp_outreach="stale outreach",
+    )
+    # The lead has only one weak signal (JOB_IT_SUPPORT, IT MSP weight 25
+    # → fresh score = 25, well below the 40 threshold).
+    refreshed = db.get_lead(conn, lead_id=lead.id)
+    assert refreshed is not None
+
+    generate_mock = MagicMock()
+    monkeypatch.setattr("msp_pipeline.outreach.generate", generate_mock)
+
+    daily_run._rescore_and_regen_copy(
+        conn, [lead.id], model="gpt-4o-mini"
+    )
+
+    after = db.get_lead(conn, lead_id=lead.id)
+    assert after is not None
+    assert after.it_msp_insight is None
+    assert after.it_msp_outreach is None
+    generate_mock.assert_not_called()
+
+
 def test_upload_failure_returns_nonzero_exit(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:

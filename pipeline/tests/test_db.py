@@ -1,5 +1,5 @@
 import time
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Any
 
@@ -8,6 +8,7 @@ import pytest
 from msp_pipeline.db import (
     _name_key,
     append_signal,
+    dedup_signals_pass,
     delete_lead,
     get_lead,
     init_db,
@@ -60,12 +61,13 @@ def test_init_db_idempotent(tmp_path: Path) -> None:
 def test_upsert_inserts_new_then_merges_fuzzy(tmp_path: Path) -> None:
     conn = init_db(tmp_path / "leads.db")
 
-    a = upsert_lead(conn, _candidate("Acme Inc"))
+    a = upsert_lead(conn, _candidate("Acme Inc", payload={"url": "u1"}))
     assert a.id is not None
     assert a.name_key == "acme"
     assert len(a.signals) == 1
 
-    b = upsert_lead(conn, _candidate("Acme Inc."))
+    # Distinct payload so the new signal doesn't dedup against the first.
+    b = upsert_lead(conn, _candidate("Acme Inc.", payload={"url": "u2"}))
     assert b.id == a.id
     assert len(b.signals) == 2
 
@@ -183,6 +185,113 @@ def test_append_signal_raises_on_missing_id(tmp_path: Path) -> None:
     conn = init_db(tmp_path / "leads.db")
     with pytest.raises(ValueError):
         append_signal(conn, 99999, _signal())
+
+
+def test_append_signal_dedups_identical_payload(tmp_path: Path) -> None:
+    conn = init_db(tmp_path / "leads.db")
+    a = upsert_lead(conn, _candidate("Dup Co"))
+    assert a.id is not None
+
+    sig_payload = {"url": "https://example.com/job/1", "title": "IT Support"}
+    sig = Signal(
+        type=SignalType.JOB_IT_SUPPORT,
+        source=SourceName.JOBS,
+        captured_at=datetime.now(timezone.utc).replace(tzinfo=None),
+        payload=sig_payload,
+    )
+    append_signal(conn, a.id, sig)
+    append_signal(conn, a.id, sig)
+    append_signal(conn, a.id, sig)
+
+    result = get_lead(conn, lead_id=a.id)
+    assert result is not None
+    matching = [s for s in result.signals if s.payload == sig_payload]
+    # Three identical appends collapse to a single stored signal.
+    assert len(matching) == 1
+
+
+def test_append_signal_keeps_distinct_payloads(tmp_path: Path) -> None:
+    conn = init_db(tmp_path / "leads.db")
+    a = upsert_lead(conn, _candidate("Distinct Co"))
+    assert a.id is not None
+
+    now = datetime.now(timezone.utc).replace(tzinfo=None)
+    for i in range(3):
+        append_signal(
+            conn,
+            a.id,
+            Signal(
+                type=SignalType.JOB_IT_SUPPORT,
+                source=SourceName.JOBS,
+                captured_at=now,
+                payload={"url": f"https://example.com/job/{i}"},
+            ),
+        )
+    result = get_lead(conn, lead_id=a.id)
+    assert result is not None
+    urls = {
+        s.payload.get("url")
+        for s in result.signals
+        if s.type == SignalType.JOB_IT_SUPPORT and s.payload.get("url")
+    }
+    assert urls == {
+        "https://example.com/job/0",
+        "https://example.com/job/1",
+        "https://example.com/job/2",
+    }
+
+
+def test_append_signal_never_dedups_enrichment_run(tmp_path: Path) -> None:
+    conn = init_db(tmp_path / "leads.db")
+    a = upsert_lead(conn, _candidate("Marker Co"))
+    assert a.id is not None
+
+    base = datetime(2026, 5, 1, 12, 0, 0)
+    for i in range(3):
+        append_signal(
+            conn,
+            a.id,
+            Signal(
+                type=SignalType.ENRICHMENT_RUN,
+                source=SourceName.COMPUTED,
+                captured_at=base + timedelta(seconds=i),
+                payload={},
+            ),
+        )
+    result = get_lead(conn, lead_id=a.id)
+    assert result is not None
+    markers = [s for s in result.signals if s.type == SignalType.ENRICHMENT_RUN]
+    assert len(markers) == 3  # all three preserved despite identical payload
+
+
+def test_dedup_signals_pass_collapses_existing_dups(tmp_path: Path) -> None:
+    conn = init_db(tmp_path / "leads.db")
+    a = upsert_lead(conn, _candidate("Backfill Co"))
+    assert a.id is not None
+
+    # Simulate the bug: write duplicate signals directly to bypass dedup.
+    now = datetime.now(timezone.utc).replace(tzinfo=None)
+    dup_sig = {
+        "type": SignalType.JOB_IT_SUPPORT.value,
+        "source": SourceName.JOBS.value,
+        "captured_at": now.isoformat(),
+        "payload": {"url": "https://example.com/job/1"},
+    }
+    import json as _json
+    raw_signals = [dup_sig, dup_sig, dup_sig, dup_sig]
+    conn.execute(
+        "UPDATE leads SET signals = ? WHERE id = ?",
+        (_json.dumps(raw_signals), a.id),
+    )
+    conn.commit()
+
+    modified = dedup_signals_pass(conn)
+    assert modified == 1
+
+    result = get_lead(conn, lead_id=a.id)
+    assert result is not None
+    job_sigs = [s for s in result.signals if s.type == SignalType.JOB_IT_SUPPORT]
+    assert len(job_sigs) == 1
 
 
 def test_delete_lead_removes_row_and_raises_on_missing(tmp_path: Path) -> None:
