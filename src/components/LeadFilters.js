@@ -31,7 +31,7 @@ export default function LeadFilters({
   leads,
   industry, setIndustry,
   sizeBand, setSizeBand,
-  sortBy, setSortBy,
+  state, setState,
 }) {
   const availableIndustries = useMemo(() => {
     const counts = {};
@@ -41,14 +41,22 @@ export default function LeadFilters({
     return Object.entries(counts).sort((a, b) => b[1] - a[1]);
   }, [leads]);
 
+  const availableStates = useMemo(() => {
+    const counts = {};
+    for (const l of leads) {
+      if (l.state) counts[l.state] = (counts[l.state] || 0) + 1;
+    }
+    return Object.entries(counts).sort((a, b) => a[0].localeCompare(b[0]));
+  }, [leads]);
+
   const clearAll = () => {
     setIndustry("any");
     setSizeBand("any");
-    setSortBy("default");
+    setState("any");
   };
 
   const hasActiveFilters =
-    industry !== "any" || sizeBand !== "any" || sortBy !== "default";
+    industry !== "any" || sizeBand !== "any" || state !== "any";
 
   const selectClass =
     "w-full px-3 py-2.5 border border-slate-700 rounded-lg text-sm " +
@@ -107,16 +115,20 @@ export default function LeadFilters({
 
         <div>
           <label className="block text-[10px] font-semibold text-gray-400 uppercase tracking-widest mb-1.5">
-            Sort by
+            Location
           </label>
           <select
-            value={sortBy}
-            onChange={(e) => setSortBy(e.target.value)}
+            value={state}
+            onChange={(e) => setState(e.target.value)}
             className={selectClass}
             style={chevronStyle}
           >
-            <option value="default">Best match</option>
-            <option value="name">Name (A–Z)</option>
+            <option value="any">All locations</option>
+            {availableStates.map(([st, count]) => (
+              <option key={st} value={st}>
+                {st} ({count})
+              </option>
+            ))}
           </select>
         </div>
       </div>

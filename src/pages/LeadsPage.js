@@ -26,7 +26,7 @@ export default function LeadsPage({ niche, title, subtitle }) {
 
   const [industry, setIndustry] = useState("any");
   const [sizeBand, setSizeBand] = useState("any");
-  const [sortBy, setSortBy] = useState("default");
+  const [state, setState] = useState("any");
 
   useEffect(() => {
     document.title = `${title} — Ishaan Gupta`;
@@ -69,11 +69,11 @@ export default function LeadsPage({ niche, title, subtitle }) {
         );
       }
     }
-    if (sortBy === "name") {
-      out = [...out].sort((a, b) => a.name.localeCompare(b.name));
+    if (state !== "any") {
+      out = out.filter((l) => l.state === state);
     }
     return out;
-  }, [leads, industry, sizeBand, sortBy]);
+  }, [leads, industry, sizeBand, state]);
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8">
@@ -117,8 +117,8 @@ export default function LeadsPage({ niche, title, subtitle }) {
             setIndustry={setIndustry}
             sizeBand={sizeBand}
             setSizeBand={setSizeBand}
-            sortBy={sortBy}
-            setSortBy={setSortBy}
+            state={state}
+            setState={setState}
           />
 
           <div className="flex items-center justify-between mb-4">

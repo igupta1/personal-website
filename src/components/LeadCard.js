@@ -146,7 +146,7 @@ export default function LeadCard({ lead }) {
           )}
           {lead.headcount != null && (
             <span className="px-2 py-0.5 rounded-full bg-slate-700/70 text-gray-300 ring-1 ring-slate-600/70">
-              ~{lead.headcount} emp
+              ~{lead.headcount} employees
             </span>
           )}
           {location && (
