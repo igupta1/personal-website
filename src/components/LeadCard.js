@@ -17,22 +17,40 @@ const INDUSTRY_LABELS = {
   other: "Other",
 };
 
+const SIGNAL_KIND_META = {
+  job_posted_it_support:    { label: "IT Support job",    pill: "bg-blue-50 text-blue-700 ring-blue-200" },
+  job_posted_it_leadership: { label: "IT Leadership job", pill: "bg-indigo-50 text-indigo-700 ring-indigo-200" },
+  job_posted_security:      { label: "Security job",      pill: "bg-red-50 text-red-700 ring-red-200" },
+  job_posted_cloud_devops:  { label: "Cloud / DevOps job",pill: "bg-cyan-50 text-cyan-700 ring-cyan-200" },
+  exec_hired:               { label: "Exec hire",         pill: "bg-purple-50 text-purple-700 ring-purple-200" },
+  funding_raised:           { label: "Funding raised",    pill: "bg-emerald-50 text-emerald-700 ring-emerald-200" },
+  breach_disclosed:         { label: "Breach disclosed",  pill: "bg-amber-50 text-amber-800 ring-amber-200" },
+};
+
+const AGENCY_LABELS = {
+  ca_ag: "California AG",
+  me_ag: "Maine AG",
+  wa_ag: "Washington AG",
+};
+
 function prettyIndustry(value) {
   if (!value) return null;
   return INDUSTRY_LABELS[value] || value;
 }
 
 function scoreColor(score) {
-  if (score == null) return "bg-gray-200 text-gray-600";
-  if (score >= 70) return "bg-green-100 text-green-800";
-  if (score >= 40) return "bg-amber-100 text-amber-800";
-  return "bg-gray-100 text-gray-600";
+  if (score == null) return "bg-gray-100 text-gray-500 ring-gray-200";
+  if (score >= 70) return "bg-green-100 text-green-800 ring-green-300";
+  if (score >= 40) return "bg-amber-100 text-amber-800 ring-amber-300";
+  return "bg-gray-100 text-gray-600 ring-gray-300";
 }
 
 function ScoreBadge({ score }) {
   const display = score == null ? "—" : score.toFixed(0);
   return (
-    <div className={`shrink-0 px-3 py-1 rounded-full font-semibold text-sm ${scoreColor(score)}`}>
+    <div
+      className={`shrink-0 px-3 py-1.5 rounded-full font-semibold text-base tabular-nums ring-1 ${scoreColor(score)}`}
+    >
       {display}
     </div>
   );
@@ -54,34 +72,105 @@ function CopyButton({ text }) {
       onClick={onClick}
       className="px-3 py-1 text-xs font-medium rounded border border-gray-300 hover:bg-gray-100 transition-colors"
     >
-      {copied ? "Copied!" : "Copy outreach"}
+      {copied ? "Copied!" : "Copy"}
     </button>
   );
 }
 
-export default function LeadCard({ lead }) {
-  const [expanded, setExpanded] = useState(true);
-  const industryLabel = prettyIndustry(lead.industry);
-  const location = [lead.city, lead.state].filter(Boolean).join(", ");
+function SignalRow({ signal }) {
+  const meta = SIGNAL_KIND_META[signal.type];
+  if (!meta) return null;
+
+  const days = signal.days_ago === 0 ? "today" : `${signal.days_ago}d ago`;
+  const payload = signal.payload || {};
+
+  let primary = null;
+  let extra = null;
+  let link = null;
+
+  if (signal.type.startsWith("job_posted_") || signal.type === "exec_hired") {
+    primary = payload.title || "(untitled posting)";
+    if (payload.site) extra = payload.site;
+    if (payload.url) link = { href: payload.url, label: "View posting" };
+  } else if (signal.type === "funding_raised") {
+    primary = payload.feed_title || payload.title || "(no headline)";
+    if (payload.link) link = { href: payload.link, label: "Read article" };
+  } else if (signal.type === "breach_disclosed") {
+    const agencyLabel = AGENCY_LABELS[payload.agency] || payload.agency || "state AG";
+    primary = `Disclosed to ${agencyLabel}`;
+    if (payload.reported_date) extra = `reported ${payload.reported_date}`;
+  }
 
   return (
-    <div className="bg-white border border-gray-200 rounded-lg p-5 shadow-sm hover:shadow-md transition-shadow">
+    <li className="flex flex-wrap items-center gap-x-3 gap-y-1 py-2 border-t border-gray-100 first:border-t-0">
+      <span
+        className={`shrink-0 px-2 py-0.5 text-xs font-medium rounded-full ring-1 ${meta.pill}`}
+      >
+        {meta.label}
+      </span>
+      <span className="text-sm text-gray-900 flex-1 min-w-0 truncate" title={primary}>
+        {primary}
+      </span>
+      <span className="shrink-0 text-xs text-gray-500 tabular-nums">{days}</span>
+      {extra && <span className="shrink-0 text-xs text-gray-400">· {extra}</span>}
+      {link && (
+        <a
+          href={link.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="shrink-0 text-xs font-medium text-blue-600 hover:text-blue-800 hover:underline"
+        >
+          {link.label} ↗
+        </a>
+      )}
+    </li>
+  );
+}
+
+export default function LeadCard({ lead }) {
+  const [outreachOpen, setOutreachOpen] = useState(false);
+
+  const industryLabel = prettyIndustry(lead.industry);
+  const location = [lead.city, lead.state].filter(Boolean).join(", ");
+  const renderableSignals = (lead.signals || []).filter((s) => SIGNAL_KIND_META[s.type]);
+
+  return (
+    <div className="bg-white border border-gray-200 rounded-xl p-5 shadow-sm hover:shadow transition-shadow">
+      {/* Header: name + chips on the left, score on the right */}
       <div className="flex items-start justify-between gap-4">
         <div className="min-w-0 flex-1">
-          <h3 className="text-lg font-semibold text-gray-900 truncate">{lead.name}</h3>
-          <div className="mt-2 flex flex-wrap gap-2">
+          <div className="flex items-baseline gap-2 flex-wrap">
+            <h3 className="text-lg font-semibold text-gray-900 leading-snug truncate">
+              {lead.name}
+            </h3>
+            {lead.domain && (
+              <a
+                href={
+                  lead.domain.startsWith("http")
+                    ? lead.domain
+                    : `https://${lead.domain}`
+                }
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-xs font-medium text-blue-600 hover:text-blue-800 hover:underline whitespace-nowrap"
+              >
+                {lead.domain} ↗
+              </a>
+            )}
+          </div>
+          <div className="mt-1.5 flex flex-wrap gap-1.5 text-xs">
             {industryLabel && (
-              <span className="px-2 py-0.5 text-xs rounded-full bg-blue-50 text-blue-700">
+              <span className="px-2 py-0.5 rounded-full bg-blue-50 text-blue-700 ring-1 ring-blue-200">
                 {industryLabel}
               </span>
             )}
             {lead.headcount != null && (
-              <span className="px-2 py-0.5 text-xs rounded-full bg-gray-100 text-gray-700">
+              <span className="px-2 py-0.5 rounded-full bg-gray-100 text-gray-700 ring-1 ring-gray-200">
                 ~{lead.headcount} emp
               </span>
             )}
             {location && (
-              <span className="px-2 py-0.5 text-xs rounded-full bg-gray-100 text-gray-700">
+              <span className="px-2 py-0.5 rounded-full bg-gray-100 text-gray-700 ring-1 ring-gray-200">
                 {location}
               </span>
             )}
@@ -90,52 +179,41 @@ export default function LeadCard({ lead }) {
         <ScoreBadge score={lead.score} />
       </div>
 
+      {/* Insight */}
       {lead.insight && (
-        <p className="mt-3 text-sm text-gray-700 leading-relaxed">{lead.insight}</p>
+        <p className="mt-3 text-sm text-gray-800 leading-relaxed">{lead.insight}</p>
       )}
 
-      <button
-        onClick={() => setExpanded(e => !e)}
-        className="mt-3 text-sm text-blue-600 hover:text-blue-800 font-medium"
-      >
-        {expanded ? "Hide outreach ↑" : "Show outreach ↓"}
-      </button>
+      {/* Signals — always visible, scannable */}
+      {renderableSignals.length > 0 && (
+        <div className="mt-4">
+          <h4 className="text-[11px] font-semibold tracking-wide text-gray-500 uppercase mb-1">
+            Signals ({renderableSignals.length})
+          </h4>
+          <ul>
+            {renderableSignals.map((s, i) => (
+              <SignalRow key={i} signal={s} />
+            ))}
+          </ul>
+        </div>
+      )}
 
-      {expanded && (
-        <div className="mt-4 space-y-4">
-          <div>
-            <div className="flex items-center justify-between mb-2">
-              <h4 className="text-xs font-semibold text-gray-500 uppercase tracking-wide">
-                Outreach draft
-              </h4>
-              {lead.outreach && <CopyButton text={lead.outreach} />}
-            </div>
-            <div className="bg-gray-50 border border-gray-200 rounded p-3 text-sm text-gray-800 whitespace-pre-wrap">
-              {lead.outreach || "(no outreach copy)"}
-            </div>
+      {/* Outreach — collapsed by default */}
+      {lead.outreach && (
+        <div className="mt-4 pt-3 border-t border-gray-100">
+          <div className="flex items-center justify-between">
+            <button
+              onClick={() => setOutreachOpen((v) => !v)}
+              className="text-sm font-medium text-blue-600 hover:text-blue-800"
+            >
+              {outreachOpen ? "Hide outreach draft ↑" : "Show outreach draft ↓"}
+            </button>
+            {outreachOpen && <CopyButton text={lead.outreach} />}
           </div>
-
-          {lead.signals && lead.signals.length > 0 && (
-            <details className="text-sm" open>
-              <summary className="cursor-pointer text-gray-600 hover:text-gray-900 font-medium">
-                Signals ({lead.signals.length})
-              </summary>
-              <ul className="mt-2 space-y-2">
-                {lead.signals.map((s, i) => (
-                  <li key={i} className="bg-gray-50 border border-gray-200 rounded p-2">
-                    <div>
-                      <strong className="text-gray-800">{s.type}</strong>
-                      <span className="text-gray-500"> · {s.days_ago}d ago</span>
-                    </div>
-                    {s.payload && Object.keys(s.payload).length > 0 && (
-                      <pre className="mt-1 text-xs text-gray-600 overflow-x-auto">
-                        {JSON.stringify(s.payload, null, 2)}
-                      </pre>
-                    )}
-                  </li>
-                ))}
-              </ul>
-            </details>
+          {outreachOpen && (
+            <div className="mt-2 bg-gray-50 border border-gray-200 rounded-md p-3 text-sm text-gray-800 whitespace-pre-wrap leading-relaxed">
+              {lead.outreach}
+            </div>
           )}
         </div>
       )}
