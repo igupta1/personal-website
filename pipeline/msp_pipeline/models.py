@@ -45,6 +45,8 @@ class Lead(BaseModel):
     industry: str | None = None
     headcount: int | None = None
     country: str | None = None
+    dm_name: str | None = None
+    dm_title: str | None = None
     signals: list[Signal] = Field(default_factory=list)
     it_msp_score: float | None = None
     mssp_score: float | None = None

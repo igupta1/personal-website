@@ -221,6 +221,39 @@ def test_generate_calls_openai_with_full_prompt(
     assert captured["kwargs"]["model"] == "gpt-4o-mini"
 
 
+def test_generate_passes_dm_into_prompt_when_known(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    captured: dict[str, str] = {}
+
+    def fake_call_openai(prompt: str, **kwargs):
+        captured["prompt"] = prompt
+        return Copy(insight="x" * 30, outreach="y" * 200)
+
+    monkeypatch.setattr(outreach.llm, "call_openai", fake_call_openai)
+    lead = _lead(signals=[_signal(type=SignalType.JOB_SECURITY, captured_at=_now())])
+    lead.dm_name = "Sarah Johnson"
+    lead.dm_title = "Director of IT"
+
+    generate(lead, NicheName.MSSP, 60.0)
+    assert "Sarah Johnson" in captured["prompt"]
+    assert "Director of IT" in captured["prompt"]
+
+
+def test_generate_dm_unknown_falls_back(monkeypatch: pytest.MonkeyPatch) -> None:
+    captured: dict[str, str] = {}
+
+    def fake_call_openai(prompt: str, **kwargs):
+        captured["prompt"] = prompt
+        return Copy(insight="x" * 30, outreach="y" * 200)
+
+    monkeypatch.setattr(outreach.llm, "call_openai", fake_call_openai)
+    lead = _lead(signals=[_signal(type=SignalType.JOB_SECURITY, captured_at=_now())])
+
+    generate(lead, NicheName.MSSP, 60.0)
+    assert "open without a personal greeting" in captured["prompt"]
+
+
 def test_generate_returns_copy_pydantic(monkeypatch: pytest.MonkeyPatch) -> None:
     expected = Copy(insight="x" * 30, outreach="y" * 200)
     monkeypatch.setattr(outreach.llm, "call_openai", MagicMock(return_value=expected))

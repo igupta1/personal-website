@@ -172,6 +172,19 @@ export default function LeadCard({ lead }) {
         </div>
       </div>
 
+      {/* Likely decision maker */}
+      {lead.dm_name && (
+        <div className="mt-3 flex items-center gap-2 text-[12px]">
+          <span className="text-[10px] font-semibold tracking-widest text-gray-500 uppercase">
+            Contact
+          </span>
+          <span className="text-gray-200 font-medium">{lead.dm_name}</span>
+          {lead.dm_title && (
+            <span className="text-gray-400">· {lead.dm_title}</span>
+          )}
+        </div>
+      )}
+
       {/* Insight */}
       {lead.insight && (
         <p className="mt-3 text-[13px] text-gray-300 leading-relaxed italic">

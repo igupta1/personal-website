@@ -50,6 +50,7 @@ Lead profile:
 - Industry: {industry}
 - Approximate headcount: {headcount}
 - Location: {location}
+- Likely decision maker: {dm_block}
 - Heat score for this niche: {score:.0f}/100
 
 Recent signals (most recent first):
@@ -64,13 +65,17 @@ Write two pieces of copy:
    "your". This text is shown to a salesperson scanning a list of
    leads, NOT to the lead being pitched.
 2. **outreach** - a 3-5 sentence outbound email body (no subject line, no
-   greeting, no signature) that:
+   signature) that:
+   - opens with a greeting using the decision maker's FIRST name when
+     a decision maker is known above ("Hi Sarah,"). When no decision
+     maker is known, open without a name and reference the company
+     short form "{short_name}" naturally in the body instead.
    - opens by naming a *specific* detail from one recent signal - the
      actual job title, the funding amount/round, the breach context,
      etc. (do NOT just say "I saw you posted a job" - say "I saw the
      Senior Security Engineer posting"),
-   - addresses the company by the short form "{short_name}" (not the
-     full legal name) - e.g. "Hope Q3 is going well at {short_name}",
+   - refers to the company by the short form "{short_name}" (not the
+     full legal name) when needed - e.g. "Hope Q3 is going well at {short_name}",
    - frames how your service addresses what that signal implies,
    - ends with a soft, low-pressure CTA (e.g. a 15-min intro call).
 
@@ -103,6 +108,14 @@ Special handling for breach signals:
 _PLACEHOLDER_RE = re.compile(r"\[[A-Z][A-Za-z][A-Za-z\s]{1,40}\]")
 
 
+def _describe_dm(lead: Lead) -> str:
+    if lead.dm_name and lead.dm_title:
+        return f"{lead.dm_name}, {lead.dm_title}"
+    if lead.dm_name:
+        return lead.dm_name
+    return "unknown — open without a personal greeting"
+
+
 def generate(
     lead: Lead,
     niche: NicheName,
@@ -117,6 +130,7 @@ def generate(
         industry=lead.industry or "unknown",
         headcount=_describe_headcount(lead.headcount),
         location=_describe_location(lead),
+        dm_block=_describe_dm(lead),
         score=score,
         signals=_describe_signals(lead),
     )

@@ -101,6 +101,12 @@ DOMAIN: <primary website domain like "acme.com" without https or path, or "unkno
 IS_IT_VENDOR: <"yes" if this company is itself an IT services / IT staffing / \
 IT consulting / managed-service-provider / cloud-consultancy / cybersecurity \
 firm (i.e. they SELL IT services), otherwise "no">
+DM_NAME: <full name of the most likely IT / security / technology decision \
+maker (CIO, CTO, CISO, VP/Director of IT, Head of IT). For very small \
+companies that don't have a tech exec, use the CEO / Founder / COO who \
+would handle vendor decisions. Otherwise "unknown".>
+DM_TITLE: <their job title (e.g. "Director of IT", "COO", "Founder & CEO") \
+or "unknown">
 """
 
 _FIELD_RE = {
@@ -112,6 +118,8 @@ _FIELD_RE = {
     "is_it_vendor": re.compile(
         r"^IS_IT_VENDOR:\s*(.+?)\s*$", re.MULTILINE | re.IGNORECASE
     ),
+    "dm_name": re.compile(r"^DM_NAME:\s*(.+?)\s*$", re.MULTILINE | re.IGNORECASE),
+    "dm_title": re.compile(r"^DM_TITLE:\s*(.+?)\s*$", re.MULTILINE | re.IGNORECASE),
 }
 
 _HEADCOUNT_NUM_RE = re.compile(r"\b(\d{1,3}(?:,\d{3})*|\d+)\b")
@@ -125,6 +133,8 @@ class _Lookup(BaseModel):
     country: str | None = None
     domain: str | None = None
     is_it_vendor: bool = False
+    dm_name: str | None = None
+    dm_title: str | None = None
 
 
 def _parse_field(raw: str, field: str) -> str | None:
@@ -169,6 +179,8 @@ def lookup_company(lead: Lead) -> _Lookup:
     country_raw = _parse_field(raw, "country")
     domain_raw = _parse_field(raw, "domain")
     vendor_raw = _parse_field(raw, "is_it_vendor")
+    dm_name_raw = _parse_field(raw, "dm_name")
+    dm_title_raw = _parse_field(raw, "dm_title")
     return _Lookup(
         headcount=_parse_headcount(headcount_raw),
         city=city,
@@ -176,6 +188,8 @@ def lookup_company(lead: Lead) -> _Lookup:
         country=country_raw.upper() if country_raw else None,
         domain=_parse_domain(domain_raw),
         is_it_vendor=_parse_yesno(vendor_raw),
+        dm_name=dm_name_raw,
+        dm_title=dm_title_raw,
     )
 
 
@@ -276,6 +290,8 @@ def enrich(conn: sqlite3.Connection, lead: Lead, *, force: bool = False) -> bool
         headcount=lookup.headcount,
         country="US",
         domain=lookup.domain,
+        dm_name=lookup.dm_name,
+        dm_title=lookup.dm_title,
     )
 
     db.append_signal(

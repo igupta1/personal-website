@@ -314,6 +314,8 @@ def _lead_to_json(
         "country": lead.country,
         "city": city,
         "state": state,
+        "dm_name": lead.dm_name,
+        "dm_title": lead.dm_title,
         "score": getattr(lead, _NICHE_SCORE_COL[niche]),
         "insight": getattr(lead, _NICHE_INSIGHT_COL[niche]),
         "outreach": getattr(lead, _NICHE_OUTREACH_COL[niche]),

@@ -26,6 +26,8 @@ CREATE TABLE IF NOT EXISTS leads (
     industry        TEXT,
     headcount       INTEGER,
     country         TEXT,
+    dm_name         TEXT,
+    dm_title        TEXT,
     signals         TEXT NOT NULL DEFAULT '[]',
     it_msp_score    REAL,
     mssp_score      REAL,
@@ -40,6 +42,14 @@ CREATE TABLE IF NOT EXISTS leads (
     updated_at      TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 )
 """
+
+# Columns added after the original schema. init_db runs ALTER TABLE for any
+# of these that don't exist yet, so an older committed DB picks up the new
+# fields on first open.
+_MIGRATIONS: tuple[tuple[str, str], ...] = (
+    ("dm_name", "TEXT"),
+    ("dm_title", "TEXT"),
+)
 
 _INDEXES = (
     "CREATE INDEX IF NOT EXISTS idx_leads_it_msp_score ON leads(it_msp_score DESC)",
@@ -58,6 +68,8 @@ _UPDATABLE_FIELDS = frozenset({
     "industry",
     "headcount",
     "country",
+    "dm_name",
+    "dm_title",
     "it_msp_score",
     "mssp_score",
     "cloud_score",
@@ -254,6 +266,13 @@ def init_db(path: Path) -> sqlite3.Connection:
         conn.execute(_DDL)
         for stmt in _INDEXES:
             conn.execute(stmt)
+        # Idempotent column migrations: add any column from _MIGRATIONS that
+        # isn't already on the table. Lets older committed DBs open cleanly.
+        cur = conn.execute("PRAGMA table_info(leads)")
+        existing_cols = {row[1] for row in cur.fetchall()}
+        for col_name, col_type in _MIGRATIONS:
+            if col_name not in existing_cols:
+                conn.execute(f"ALTER TABLE leads ADD COLUMN {col_name} {col_type}")
     return conn
 
 

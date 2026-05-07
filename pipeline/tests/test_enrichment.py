@@ -58,6 +58,8 @@ def _lookup_response(
     country: str = "US",
     domain: str = "acme.com",
     is_it_vendor: str = "no",
+    dm_name: str = "Sarah Johnson",
+    dm_title: str = "Director of IT",
 ) -> str:
     return (
         f"HEADCOUNT: {headcount}\n"
@@ -66,6 +68,8 @@ def _lookup_response(
         f"COUNTRY: {country}\n"
         f"DOMAIN: {domain}\n"
         f"IS_IT_VENDOR: {is_it_vendor}\n"
+        f"DM_NAME: {dm_name}\n"
+        f"DM_TITLE: {dm_title}\n"
     )
 
 
@@ -114,6 +118,8 @@ def test_lookup_company_parses_full_response(monkeypatch: pytest.MonkeyPatch) ->
         country="US",
         domain="acme.com",
         is_it_vendor=False,
+        dm_name="Sarah Johnson",
+        dm_title="Director of IT",
     )
 
 
@@ -129,6 +135,8 @@ def test_lookup_company_handles_unknowns(monkeypatch: pytest.MonkeyPatch) -> Non
                 country="unknown",
                 domain="unknown",
                 is_it_vendor="unknown",
+                dm_name="unknown",
+                dm_title="unknown",
             )
         ),
     )
@@ -141,6 +149,8 @@ def test_lookup_company_handles_unknowns(monkeypatch: pytest.MonkeyPatch) -> Non
         country=None,
         domain=None,
         is_it_vendor=False,
+        dm_name=None,
+        dm_title=None,
     )
 
 
@@ -444,6 +454,38 @@ def test_enrich_writes_domain(
     after = db.get_lead(conn, lead_id=lead.id)
     assert after is not None
     assert after.domain == "domain-co.com"
+
+
+def test_enrich_writes_dm_fields(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    conn = db.init_db(tmp_path / "leads.db")
+    lead = _insert_lead(conn, "DM Co")
+    assert lead.id is not None
+
+    monkeypatch.setattr(
+        enrichment.llm,
+        "call_gemini",
+        MagicMock(
+            return_value=_lookup_response(
+                headcount="80",
+                country="US",
+                dm_name="Jane Smith",
+                dm_title="VP of IT",
+            )
+        ),
+    )
+    monkeypatch.setattr(
+        enrichment.llm,
+        "call_openai",
+        MagicMock(return_value=_IndustryOut(industry=Industry.OTHER)),
+    )
+
+    assert enrich(conn, lead) is True
+    after = db.get_lead(conn, lead_id=lead.id)
+    assert after is not None
+    assert after.dm_name == "Jane Smith"
+    assert after.dm_title == "VP of IT"
 
 
 def test_enrich_keeps_lead_at_exactly_250(
