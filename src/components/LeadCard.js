@@ -116,7 +116,7 @@ export default function LeadCard({ lead }) {
   const renderableSignals = (lead.signals || []).filter((s) => SIGNAL_KIND_META[s.type]);
 
   return (
-    <div className="bg-white border border-gray-200 rounded-xl p-5 shadow-sm hover:shadow transition-shadow">
+    <div className="bg-white border border-gray-200 rounded-2xl p-5 shadow-sm hover:shadow-lg hover:-translate-y-0.5 transition-all duration-150">
       {/* Header: name + domain link, then chips */}
       <div className="min-w-0">
         <div className="flex items-baseline gap-2 flex-wrap">
@@ -138,7 +138,7 @@ export default function LeadCard({ lead }) {
             </a>
           )}
         </div>
-        <div className="mt-1.5 flex flex-wrap gap-1.5 text-xs">
+        <div className="mt-2 flex flex-wrap gap-1.5 text-xs">
           {industryLabel && (
             <span className="px-2 py-0.5 rounded-full bg-blue-50 text-blue-700 ring-1 ring-blue-200">
               {industryLabel}
@@ -159,7 +159,7 @@ export default function LeadCard({ lead }) {
 
       {/* Insight */}
       {lead.insight && (
-        <p className="mt-3 text-sm text-gray-800 leading-relaxed">{lead.insight}</p>
+        <p className="mt-4 text-sm text-gray-800 leading-relaxed">{lead.insight}</p>
       )}
 
       {/* Signals — always visible, scannable */}

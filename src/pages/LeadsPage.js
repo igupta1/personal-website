@@ -76,25 +76,37 @@ export default function LeadsPage({ niche, title, subtitle }) {
   }, [leads, industry, sizeBand, sortBy]);
 
   return (
-    <div className="max-w-6xl mx-auto px-4 py-8">
-      <header className="mb-6">
-        <h1 className="text-3xl font-bold text-gray-900">{title}</h1>
-        {subtitle && <p className="mt-2 text-gray-600">{subtitle}</p>}
+    <div className="max-w-6xl mx-auto px-4 sm:px-6 py-10">
+      <header className="mb-8">
+        <div className="flex items-center gap-3">
+          <span className="inline-flex h-2.5 w-2.5 rounded-full bg-emerald-400 ring-2 ring-emerald-400/30" />
+          <span className="text-xs font-semibold tracking-widest uppercase text-emerald-300">
+            Live lead feed
+          </span>
+        </div>
+        <h1 className="mt-3 text-4xl sm:text-5xl font-bold text-white tracking-tight">
+          {title}
+        </h1>
+        {subtitle && (
+          <p className="mt-3 text-base sm:text-lg text-gray-300 max-w-3xl leading-relaxed">
+            {subtitle}
+          </p>
+        )}
         {generatedAt && (
-          <p className="mt-2 text-xs text-gray-500">
-            Updated {formatRelative(generatedAt)}
+          <p className="mt-3 text-xs text-gray-400">
+            Updated {formatRelative(generatedAt)} · refreshed automatically every night
           </p>
         )}
       </header>
 
       {error && (
-        <div className="bg-red-50 border border-red-200 text-red-800 rounded p-4">
+        <div className="bg-red-50 border border-red-200 text-red-800 rounded-xl p-4 shadow-sm">
           Failed to load leads: {error}
         </div>
       )}
 
       {leads === null && !error && (
-        <div className="text-gray-500 py-8 text-center">Loading…</div>
+        <div className="text-gray-300 py-12 text-center">Loading…</div>
       )}
 
       {leads !== null && (
@@ -109,19 +121,23 @@ export default function LeadsPage({ niche, title, subtitle }) {
             setSortBy={setSortBy}
           />
 
-          <div className="text-sm text-gray-500 mb-3">
-            Showing {visibleLeads.length} of {leads.length} leads
+          <div className="flex items-center justify-between mb-4">
+            <span className="inline-flex items-center gap-2 text-sm text-gray-300">
+              <span className="font-semibold text-white">{visibleLeads.length}</span>
+              <span className="text-gray-400">of {leads.length} leads</span>
+            </span>
           </div>
 
-          <div className="grid gap-4 grid-cols-1 lg:grid-cols-2">
+          <div className="grid gap-5 grid-cols-1 lg:grid-cols-2">
             {visibleLeads.map((lead, i) => (
               <LeadCard key={`${lead.name}-${i}`} lead={lead} />
             ))}
           </div>
 
           {visibleLeads.length === 0 && (
-            <div className="text-center text-gray-500 py-12">
-              No leads match the current filters.
+            <div className="text-center text-gray-300 py-16">
+              <div className="text-base font-medium">No leads match the current filters.</div>
+              <div className="text-sm text-gray-400 mt-1">Try widening the size or industry selector.</div>
             </div>
           )}
         </>

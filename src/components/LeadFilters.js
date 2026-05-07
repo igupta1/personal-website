@@ -50,17 +50,32 @@ export default function LeadFilters({
   const hasActiveFilters =
     industry !== "any" || sizeBand !== "any" || sortBy !== "default";
 
+  const selectClass =
+    "w-full px-3 py-2.5 border border-gray-200 rounded-lg text-sm bg-white " +
+    "shadow-sm transition-shadow hover:shadow focus:outline-none " +
+    "focus:ring-2 focus:ring-blue-500 focus:border-blue-500 " +
+    "appearance-none bg-no-repeat bg-right pr-10";
+
+  // Inline SVG chevron for the dropdown arrow.
+  const chevronStyle = {
+    backgroundImage:
+      "url(\"data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e\")",
+    backgroundPosition: "right 0.7rem center",
+    backgroundSize: "1.25rem",
+  };
+
   return (
-    <div className="bg-white border border-gray-200 rounded-xl shadow-sm mb-6 overflow-hidden">
-      <div className="px-5 py-4 grid grid-cols-1 md:grid-cols-3 gap-4 items-end">
+    <div className="bg-white border border-gray-200 rounded-2xl shadow-md mb-6 overflow-hidden">
+      <div className="px-6 py-5 grid grid-cols-1 md:grid-cols-3 gap-5 items-end">
         <div>
-          <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1.5">
+          <label className="block text-[11px] font-semibold text-gray-500 uppercase tracking-widest mb-2">
             Industry
           </label>
           <select
             value={industry}
             onChange={(e) => setIndustry(e.target.value)}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            className={selectClass}
+            style={chevronStyle}
           >
             <option value="any">All industries</option>
             {availableIndustries.map(([ind, count]) => (
@@ -72,13 +87,14 @@ export default function LeadFilters({
         </div>
 
         <div>
-          <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1.5">
+          <label className="block text-[11px] font-semibold text-gray-500 uppercase tracking-widest mb-2">
             Company size
           </label>
           <select
             value={sizeBand}
             onChange={(e) => setSizeBand(e.target.value)}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            className={selectClass}
+            style={chevronStyle}
           >
             {SIZE_BANDS.map((b) => (
               <option key={b.value} value={b.value}>
@@ -89,13 +105,14 @@ export default function LeadFilters({
         </div>
 
         <div>
-          <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1.5">
+          <label className="block text-[11px] font-semibold text-gray-500 uppercase tracking-widest mb-2">
             Sort by
           </label>
           <select
             value={sortBy}
             onChange={(e) => setSortBy(e.target.value)}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            className={selectClass}
+            style={chevronStyle}
           >
             <option value="default">Best match</option>
             <option value="name">Name (A–Z)</option>
@@ -104,12 +121,12 @@ export default function LeadFilters({
       </div>
 
       {hasActiveFilters && (
-        <div className="px-5 py-2 bg-gray-50 border-t border-gray-200 flex justify-end">
+        <div className="px-6 py-2.5 bg-gray-50 border-t border-gray-100 flex justify-end">
           <button
             onClick={clearAll}
-            className="text-xs font-medium text-gray-600 hover:text-gray-900 underline"
+            className="text-xs font-medium text-gray-600 hover:text-gray-900 transition-colors"
           >
-            Reset filters
+            Reset filters →
           </button>
         </div>
       )}
