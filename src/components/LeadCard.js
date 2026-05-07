@@ -38,6 +38,30 @@ function prettyIndustry(value) {
   return INDUSTRY_LABELS[value] || value;
 }
 
+const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+// Accepts "YYYY-MM-DD", "MM/DD/YYYY", "M/D/YY", or anything Date can parse.
+// Returns "May 5" when the year matches today, "May 5, 2025" otherwise.
+function formatDate(raw) {
+  if (!raw) return null;
+  let d;
+  if (/^\d{4}-\d{2}-\d{2}/.test(raw)) {
+    const [y, m, day] = raw.split("-").map(Number);
+    d = new Date(y, m - 1, day);
+  } else if (/^\d{1,2}\/\d{1,2}\/\d{2,4}/.test(raw)) {
+    let [m, day, y] = raw.split("/").map(Number);
+    if (y < 100) y += 2000;
+    d = new Date(y, m - 1, day);
+  } else {
+    d = new Date(raw);
+  }
+  if (isNaN(d.getTime())) return raw;
+  const month = MONTHS[d.getMonth()];
+  const day = d.getDate();
+  const sameYear = d.getFullYear() === new Date().getFullYear();
+  return sameYear ? `${month} ${day}` : `${month} ${day}, ${d.getFullYear()}`;
+}
+
 // Freshness dot color: green if today, amber if last few days, gray otherwise.
 function freshnessClass(daysAgo) {
   if (daysAgo == null) return "bg-gray-500";
@@ -87,8 +111,8 @@ function SignalRow({ signal }) {
     if (payload.link) link = { href: payload.link, label: "Read" };
   } else if (signal.type === "breach_disclosed") {
     const agencyLabel = AGENCY_LABELS[payload.agency] || payload.agency || "state AG";
-    primary = `Disclosed to ${agencyLabel}`;
-    if (payload.reported_date) extra = `reported ${payload.reported_date}`;
+    primary = agencyLabel;
+    if (payload.reported_date) extra = `reported ${formatDate(payload.reported_date)}`;
   }
 
   return (
@@ -172,15 +196,54 @@ export default function LeadCard({ lead }) {
         </div>
       </div>
 
-      {/* Likely decision maker */}
+      {/* Likely decision maker — featured panel: this is the highest-value
+          piece of information for someone using the lead magnet, so it gets
+          a distinct treatment instead of a single-line label. */}
       {lead.dm_name && (
-        <div className="mt-3 flex items-center gap-2 text-[12px]">
-          <span className="text-[10px] font-semibold tracking-widest text-gray-500 uppercase">
-            Contact
-          </span>
-          <span className="text-gray-200 font-medium">{lead.dm_name}</span>
+        <div className="mt-3 rounded-lg border border-emerald-500/20 bg-emerald-500/5 px-3 py-2.5">
+          <div className="text-[10px] font-semibold tracking-widest text-emerald-400 uppercase mb-1">
+            Decision maker
+          </div>
+          <div className="text-sm text-white font-semibold leading-tight">
+            {lead.dm_name}
+          </div>
           {lead.dm_title && (
-            <span className="text-gray-400">· {lead.dm_title}</span>
+            <div className="text-[12px] text-gray-300 mt-0.5">
+              {lead.dm_title}
+            </div>
+          )}
+          {(lead.dm_email || lead.dm_linkedin_url) && (
+            <div className="mt-2 flex items-center gap-1.5 flex-wrap">
+              {lead.dm_email && (
+                <a
+                  href={`mailto:${lead.dm_email}`}
+                  title={lead.dm_email}
+                  className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-blue-500/15 text-blue-300 ring-1 ring-blue-400/30 hover:bg-blue-500/25 hover:text-blue-200 transition-colors text-[11px] font-medium max-w-full"
+                >
+                  <svg viewBox="0 0 16 16" fill="currentColor" className="h-3 w-3 shrink-0" aria-hidden="true">
+                    <path d="M2 3h12a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm0 1.5v.4l6 3.6 6-3.6v-.4H2zm12 1.66-5.62 3.37a1 1 0 0 1-1.04 0L2 6.16V12h12V6.16z" />
+                  </svg>
+                  <span className="truncate">{lead.dm_email}</span>
+                </a>
+              )}
+              {lead.dm_linkedin_url && (
+                <a
+                  href={
+                    lead.dm_linkedin_url.startsWith("http")
+                      ? lead.dm_linkedin_url
+                      : `https://${lead.dm_linkedin_url}`
+                  }
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-blue-500/15 text-blue-300 ring-1 ring-blue-400/30 hover:bg-blue-500/25 hover:text-blue-200 transition-colors text-[11px] font-medium whitespace-nowrap shrink-0"
+                >
+                  <svg viewBox="0 0 24 24" fill="currentColor" className="h-3 w-3 shrink-0" aria-hidden="true">
+                    <path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.13 1.45-2.13 2.94v5.67H9.36V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.59 0 4.26 2.36 4.26 5.43v6.31zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.55V9h3.57v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z" />
+                  </svg>
+                  LinkedIn
+                </a>
+              )}
+            </div>
           )}
         </div>
       )}

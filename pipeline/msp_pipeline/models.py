@@ -21,6 +21,7 @@ class SignalType(str, Enum):
     BREACH_DISCLOSED = "breach_disclosed"
     LOCATION_CAPTURED = "location_captured"
     ENRICHMENT_RUN = "enrichment_run"
+    APOLLO_ENRICHED = "apollo_enriched"
 
 
 class SourceName(str, Enum):
@@ -28,6 +29,7 @@ class SourceName(str, Enum):
     FUNDING = "funding"
     BREACHES = "breaches"
     COMPUTED = "computed"
+    APOLLO = "apollo"
 
 
 class Signal(BaseModel):
@@ -47,6 +49,8 @@ class Lead(BaseModel):
     country: str | None = None
     dm_name: str | None = None
     dm_title: str | None = None
+    dm_email: str | None = None
+    dm_linkedin_url: str | None = None
     signals: list[Signal] = Field(default_factory=list)
     it_msp_score: float | None = None
     mssp_score: float | None = None

@@ -8,7 +8,7 @@ from unittest.mock import MagicMock
 
 import pytest
 
-from msp_pipeline import daily_run, db, enrichment
+from msp_pipeline import apollo, daily_run, db, enrichment
 from msp_pipeline.models import (
     Lead,
     LeadCandidate,
@@ -573,6 +573,281 @@ def test_rescore_clears_stale_copy_when_score_drops_below_threshold(
     assert after.it_msp_insight is None
     assert after.it_msp_outreach is None
     generate_mock.assert_not_called()
+
+
+# --- Apollo integration ----------------------------------------------------
+
+
+def _seed_lead(
+    conn: Any,
+    name: str,
+    *,
+    it_msp_score: float | None = None,
+    mssp_score: float | None = None,
+    cloud_score: float | None = None,
+    industry: str = "other",
+    headcount: int = 80,
+) -> int:
+    lead = db.upsert_lead(conn, _candidate(name))
+    assert lead.id is not None
+    db.update_lead(
+        conn,
+        lead.id,
+        industry=industry,
+        headcount=headcount,
+        country="US",
+        it_msp_score=it_msp_score,
+        mssp_score=mssp_score,
+        cloud_score=cloud_score,
+    )
+    return lead.id
+
+
+def test_apollo_top_n_skips_when_unconfigured(
+    tmp_path: Path,
+) -> None:
+    """When APOLLO_API_KEY is unset (the default thanks to conftest), the
+    apollo stage no-ops and returns an empty set."""
+    conn = db.init_db(tmp_path / "leads.db")
+    _seed_lead(conn, "Top Co", it_msp_score=90.0)
+    result = daily_run._apollo_enrich_top_n(conn, n=30)
+    assert result == set()
+
+
+def test_apollo_top_n_only_runs_on_top_n_union(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """With n=2, each niche contributes its top-2 by score. Companies
+    outside every niche's top-2 should never be Apollo-queried, even if
+    they exist in the DB."""
+    monkeypatch.setenv("APOLLO_API_KEY", "test-key")
+    conn = db.init_db(tmp_path / "leads.db")
+    # Two clear winners (different per niche), one loser.
+    _seed_lead(conn, "Alpha", it_msp_score=90.0, mssp_score=10.0, cloud_score=10.0)
+    _seed_lead(conn, "Beta", it_msp_score=80.0, mssp_score=10.0, cloud_score=10.0)
+    c = _seed_lead(conn, "Gamma", it_msp_score=10.0, mssp_score=10.0, cloud_score=10.0)
+    # Boost Gamma in MSSP only, so it sneaks into the union.
+    db.update_lead(conn, c, mssp_score=85.0)
+    # Loser — never in any top-2.
+    _seed_lead(conn, "Delta", it_msp_score=5.0, mssp_score=5.0, cloud_score=5.0)
+
+    seen: list[str] = []
+
+    def fake_find_dm(name: str, domain: str | None) -> apollo.Result:
+        seen.append(name)
+        return apollo.Result(
+            org_found=True,
+            dm_found=True,
+            dm_name=f"DM at {name}",
+            dm_title="CTO",
+            dm_email=f"dm@{name.lower()}.com",
+        )
+
+    monkeypatch.setattr(daily_run.apollo, "find_decision_maker", fake_find_dm)
+
+    enriched = daily_run._apollo_enrich_top_n(conn, n=2)
+    assert "Delta" not in seen
+    assert {"Alpha", "Beta", "Gamma"} <= set(seen)
+    # Each company called exactly once even when in multiple niches' top-2.
+    assert len(seen) == len(set(seen))
+    assert {db.get_lead(conn, lead_id=lid).name for lid in enriched} == {
+        "Alpha", "Beta", "Gamma",
+    }
+
+
+def test_apollo_skips_already_marked_leads(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    monkeypatch.setenv("APOLLO_API_KEY", "test-key")
+    conn = db.init_db(tmp_path / "leads.db")
+    lid = _seed_lead(conn, "Already Apollo'd", it_msp_score=90.0)
+    db.append_signal(
+        conn, lid,
+        Signal(
+            type=SignalType.APOLLO_ENRICHED,
+            source=SourceName.APOLLO,
+            captured_at=_now(),
+            payload={"dm_found": True},
+        ),
+    )
+
+    find_mock = MagicMock()
+    monkeypatch.setattr(daily_run.apollo, "find_decision_maker", find_mock)
+
+    result = daily_run._apollo_enrich_top_n(conn, n=30)
+    find_mock.assert_not_called()
+    assert result == set()
+
+
+def test_apollo_writes_dm_fields_and_marker(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    monkeypatch.setenv("APOLLO_API_KEY", "test-key")
+    conn = db.init_db(tmp_path / "leads.db")
+    lid = _seed_lead(conn, "Skio", it_msp_score=90.0)
+
+    monkeypatch.setattr(
+        daily_run.apollo,
+        "find_decision_maker",
+        MagicMock(
+            return_value=apollo.Result(
+                org_found=True,
+                dm_found=True,
+                dm_name="Andrew Chen",
+                dm_title="Chief Technology Officer",
+                dm_email="andrew@skio.com",
+                dm_linkedin_url="http://www.linkedin.com/in/andrewmnchen",
+                apollo_person_id="p_andrew",
+                headcount=30,
+            )
+        ),
+    )
+
+    enriched = daily_run._apollo_enrich_top_n(conn, n=30)
+    assert enriched == {lid}
+
+    after = db.get_lead(conn, lead_id=lid)
+    assert after is not None
+    assert after.dm_name == "Andrew Chen"
+    assert after.dm_email == "andrew@skio.com"
+    assert after.dm_linkedin_url == "http://www.linkedin.com/in/andrewmnchen"
+    assert after.headcount == 30
+    markers = [s for s in after.signals if s.type == SignalType.APOLLO_ENRICHED]
+    assert len(markers) == 1
+    assert markers[0].payload["dm_found"] is True
+    assert markers[0].payload["apollo_person_id"] == "p_andrew"
+
+
+def test_apollo_no_marker_when_org_not_found(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """Org not in Apollo → don't mark, so we retry next night."""
+    monkeypatch.setenv("APOLLO_API_KEY", "test-key")
+    conn = db.init_db(tmp_path / "leads.db")
+    lid = _seed_lead(conn, "Mystery Co", it_msp_score=90.0)
+
+    monkeypatch.setattr(
+        daily_run.apollo,
+        "find_decision_maker",
+        MagicMock(return_value=apollo.Result(org_found=False)),
+    )
+
+    enriched = daily_run._apollo_enrich_top_n(conn, n=30)
+    assert enriched == set()
+    after = db.get_lead(conn, lead_id=lid)
+    assert after is not None
+    assert not any(s.type == SignalType.APOLLO_ENRICHED for s in after.signals)
+
+
+def test_apollo_marks_when_org_found_but_no_dm(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """Org in Apollo but no DM-titled person → mark, so we don't retry forever."""
+    monkeypatch.setenv("APOLLO_API_KEY", "test-key")
+    conn = db.init_db(tmp_path / "leads.db")
+    lid = _seed_lead(conn, "TinyShop", it_msp_score=80.0)
+
+    monkeypatch.setattr(
+        daily_run.apollo,
+        "find_decision_maker",
+        MagicMock(
+            return_value=apollo.Result(org_found=True, dm_found=False, headcount=8)
+        ),
+    )
+
+    enriched = daily_run._apollo_enrich_top_n(conn, n=30)
+    assert enriched == set()  # No DM data → no force-regen needed
+    after = db.get_lead(conn, lead_id=lid)
+    assert after is not None
+    markers = [s for s in after.signals if s.type == SignalType.APOLLO_ENRICHED]
+    assert len(markers) == 1
+    assert markers[0].payload["dm_found"] is False
+
+
+def test_apollo_deletes_when_headcount_over_smb_cap(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    monkeypatch.setenv("APOLLO_API_KEY", "test-key")
+    conn = db.init_db(tmp_path / "leads.db")
+    lid = _seed_lead(conn, "Big Sneaker", it_msp_score=70.0, headcount=80)
+
+    monkeypatch.setattr(
+        daily_run.apollo,
+        "find_decision_maker",
+        MagicMock(
+            return_value=apollo.Result(
+                org_found=True, dm_found=True,
+                dm_name="Some VP", headcount=750,
+            )
+        ),
+    )
+
+    daily_run._apollo_enrich_top_n(conn, n=30)
+    assert db.get_lead(conn, lead_id=lid) is None
+
+
+def test_regen_copy_force_regens_apollo_enriched_lead(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """A lead whose score barely moved would normally skip outreach regen.
+    But if Apollo just supplied a DM name, the new copy should be regenerated
+    so it can address them by first name."""
+    conn = db.init_db(tmp_path / "leads.db")
+    lid = _seed_lead(conn, "Stable Hot Co", it_msp_score=70.0)
+    db.update_lead(
+        conn, lid,
+        it_msp_insight="old insight", it_msp_outreach="old outreach",
+    )
+
+    generate_mock = MagicMock(
+        return_value=Copy(insight="x" * 30, outreach="y" * 200)
+    )
+    monkeypatch.setattr("msp_pipeline.outreach.generate", generate_mock)
+
+    # Score change is below the COPY_DELTA_THRESHOLD (10) — no regen normally.
+    score_changes = {
+        lid: {
+            NicheName.IT_MSP: (70.0, 71.0),
+            NicheName.MSSP: (5.0, 5.0),  # Below threshold, no regen
+            NicheName.CLOUD: (5.0, 5.0),
+        }
+    }
+
+    copy_calls = daily_run._regen_copy(
+        conn, score_changes,
+        force_regen_ids={lid},  # Apollo just enriched this lead
+        model="gpt-4o-mini",
+    )
+    # IT_MSP regenerated (above threshold + force); MSSP/CLOUD below threshold
+    # so no regen even with force.
+    assert copy_calls == 1
+    after = db.get_lead(conn, lead_id=lid)
+    assert after is not None
+    assert after.it_msp_outreach == "y" * 200
+
+
+def test_apollo_skipped_lead_not_in_force_set(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """If Apollo finds the org but no DM name, the lead is marked but
+    NOT added to the force-regen set (no point regenerating outreach with
+    no DM data to inject)."""
+    monkeypatch.setenv("APOLLO_API_KEY", "test-key")
+    conn = db.init_db(tmp_path / "leads.db")
+    lid = _seed_lead(conn, "Hot Co", it_msp_score=80.0)
+
+    monkeypatch.setattr(
+        daily_run.apollo,
+        "find_decision_maker",
+        MagicMock(
+            return_value=apollo.Result(
+                org_found=True, dm_found=False, headcount=50,
+            )
+        ),
+    )
+
+    enriched = daily_run._apollo_enrich_top_n(conn, n=30)
+    assert lid not in enriched
 
 
 def test_upload_failure_returns_nonzero_exit(

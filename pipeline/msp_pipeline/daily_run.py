@@ -19,8 +19,15 @@ from typing import Any
 
 import requests
 
-from msp_pipeline import db, enrichment, outreach, scoring
-from msp_pipeline.models import Lead, LeadCandidate, NicheName, Signal, SignalType
+from msp_pipeline import apollo, db, enrichment, outreach, scoring
+from msp_pipeline.models import (
+    Lead,
+    LeadCandidate,
+    NicheName,
+    Signal,
+    SignalType,
+    SourceName,
+)
 from msp_pipeline.sources import breaches, funding, jobs
 
 log = logging.getLogger("daily_run")
@@ -31,6 +38,7 @@ LOOKBACK_DAYS = 14
 COPY_THRESHOLD = 20.0
 COPY_DELTA_THRESHOLD = 10.0
 SIGNAL_LIMIT_IN_JSON = 6
+APOLLO_TOP_N_DEFAULT = 30
 
 
 _SCORING_SIGNAL_TYPES: frozenset[SignalType] = frozenset(
@@ -101,12 +109,16 @@ def main(argv: list[str] | None = None) -> int:
         all_ids = [lead.id for lead in db.iter_leads(conn) if lead.id is not None]
         log.info("re-scoring %d leads", len(all_ids))
 
-        rescored, copy_calls = _rescore_and_regen_copy(
-            conn, all_ids, model=args.copy_model
+        score_changes = _rescore_all(conn, all_ids)
+        apollo_ids = _apollo_enrich_top_n(conn, n=args.apollo_top_n)
+        copy_calls = _regen_copy(
+            conn, score_changes,
+            force_regen_ids=apollo_ids,
+            model=args.copy_model,
         )
         log.info(
-            "re-scored %d leads, regenerated copy %d times",
-            len(rescored), copy_calls,
+            "re-scored %d leads, apollo-enriched %d, regenerated copy %d times",
+            len(score_changes), len(apollo_ids), copy_calls,
         )
 
         output = _build_output(conn)
@@ -137,13 +149,16 @@ def main(argv: list[str] | None = None) -> int:
     enriched_ids = _enrich_all(conn, upserted_ids, force=args.reenrich)
     log.info("kept %d enriched leads", len(enriched_ids))
 
-    rescored, copy_calls = _rescore_and_regen_copy(
-        conn, enriched_ids, model=args.copy_model
+    score_changes = _rescore_all(conn, enriched_ids)
+    apollo_ids = _apollo_enrich_top_n(conn, n=args.apollo_top_n)
+    copy_calls = _regen_copy(
+        conn, score_changes,
+        force_regen_ids=apollo_ids,
+        model=args.copy_model,
     )
     log.info(
-        "re-scored %d leads, generated copy %d times",
-        len(rescored),
-        copy_calls,
+        "re-scored %d leads, apollo-enriched %d, generated copy %d times",
+        len(score_changes), len(apollo_ids), copy_calls,
     )
 
     output = _build_output(conn)
@@ -214,23 +229,145 @@ def _enrich_all(
     return kept
 
 
-def _rescore_and_regen_copy(
-    conn: sqlite3.Connection, lead_ids: list[int], *, model: str
-) -> tuple[list[int], int]:
-    rescored: list[int] = []
-    copy_calls = 0
+def _rescore_all(
+    conn: sqlite3.Connection, lead_ids: list[int]
+) -> dict[int, dict[NicheName, tuple[float | None, float]]]:
+    """Compute fresh scores for each lead and persist them. Returns
+    per-lead per-niche (old, new) pairs so the regen stage can apply
+    threshold-crossing logic without re-reading the pre-update state."""
+    changes: dict[int, dict[NicheName, tuple[float | None, float]]] = {}
     for lead_id in lead_ids:
         lead = db.get_lead(conn, lead_id=lead_id)
         if lead is None:
             continue
         new_scores = scoring.score(lead)
+        per_niche: dict[NicheName, tuple[float | None, float]] = {}
         updates: dict[str, Any] = {}
         for niche, new in new_scores.items():
-            score_col = _NICHE_SCORE_COL[niche]
+            col = _NICHE_SCORE_COL[niche]
+            old = getattr(lead, col)
+            per_niche[niche] = (old, new)
+            updates[col] = new
+        try:
+            db.update_lead(conn, lead_id, **updates)
+            changes[lead_id] = per_niche
+        except Exception:
+            log.exception("rescore: update_lead failed for id=%s", lead_id)
+    return changes
+
+
+def _apollo_enrich_top_n(conn: sqlite3.Connection, *, n: int) -> set[int]:
+    """For each niche, take the top-N by score and union into one set of
+    company IDs. Skip leads that already carry an APOLLO_ENRICHED marker
+    (we never re-call). Returns the set of IDs that received fresh DM
+    data — the regen stage uses this to force outreach regeneration so
+    new copy can address the DM by first name.
+
+    Silently no-ops when ``APOLLO_API_KEY`` is unset, so the pipeline
+    still runs end-to-end without an Apollo plan."""
+    if not apollo.is_configured():
+        log.info("apollo: APOLLO_API_KEY not set, skipping DM enrichment")
+        return set()
+
+    target_ids: set[int] = set()
+    for niche in NicheName:
+        for top_lead in db.iter_leads(conn, niche=niche, limit=n):
+            if top_lead.id is None:
+                continue
+            if getattr(top_lead, _NICHE_SCORE_COL[niche]) is None:
+                continue  # NULL-scored leads sort last; once we hit them, stop.
+            target_ids.add(top_lead.id)
+
+    enriched: set[int] = set()
+    for lead_id in target_ids:
+        lead = db.get_lead(conn, lead_id=lead_id)
+        if lead is None:
+            continue
+        if any(s.type == SignalType.APOLLO_ENRICHED for s in lead.signals):
+            continue
+        try:
+            result = apollo.find_decision_maker(lead.name, lead.domain)
+        except Exception:
+            log.exception("apollo: lookup raised for %r", lead.name)
+            continue
+
+        if not result.org_found:
+            # Org not in Apollo — don't write the marker; cheap to retry next
+            # night since the org-search calls don't burn credits.
+            continue
+
+        # Apollo's headcount is more reliable than Gemini's when both exist.
+        # If it puts the company over the SMB cap, drop the lead entirely.
+        if result.headcount is not None and result.headcount > 250:
+            log.info(
+                "apollo: deleting lead %d (%s) — apollo headcount=%d exceeds SMB cap",
+                lead_id, lead.name, result.headcount,
+            )
+            try:
+                db.delete_lead(conn, lead_id)
+            except Exception:
+                log.exception("apollo: delete_lead failed for id=%s", lead_id)
+            continue
+
+        updates: dict[str, Any] = {}
+        if result.dm_name:
+            updates["dm_name"] = result.dm_name
+        if result.dm_title:
+            updates["dm_title"] = result.dm_title
+        if result.dm_email:
+            updates["dm_email"] = result.dm_email
+        if result.dm_linkedin_url:
+            updates["dm_linkedin_url"] = result.dm_linkedin_url
+        if result.headcount is not None:
+            updates["headcount"] = result.headcount
+        if updates:
+            try:
+                db.update_lead(conn, lead_id, **updates)
+                if result.dm_found:
+                    enriched.add(lead_id)
+            except Exception:
+                log.exception("apollo: update_lead failed for id=%s", lead_id)
+
+        try:
+            db.append_signal(
+                conn, lead_id,
+                Signal(
+                    type=SignalType.APOLLO_ENRICHED,
+                    source=SourceName.APOLLO,
+                    captured_at=_utcnow(),
+                    payload={
+                        "dm_found": result.dm_found,
+                        "apollo_person_id": result.apollo_person_id,
+                    },
+                ),
+            )
+        except Exception:
+            log.exception("apollo: append marker failed for id=%s", lead_id)
+
+    return enriched
+
+
+def _regen_copy(
+    conn: sqlite3.Connection,
+    score_changes: dict[int, dict[NicheName, tuple[float | None, float]]],
+    *,
+    force_regen_ids: set[int],
+    model: str,
+) -> int:
+    """Apply threshold/delta gating to decide which (lead, niche) pairs need
+    fresh outreach copy. ``force_regen_ids`` are leads that just received
+    Apollo DM data — for those we regen any niche above threshold, so the
+    new copy can use a first-name greeting."""
+    copy_calls = 0
+    for lead_id, per_niche in score_changes.items():
+        lead = db.get_lead(conn, lead_id=lead_id)
+        if lead is None:
+            continue
+        force = lead_id in force_regen_ids
+        updates: dict[str, Any] = {}
+        for niche, (old, new) in per_niche.items():
             insight_col = _NICHE_INSIGHT_COL[niche]
             outreach_col = _NICHE_OUTREACH_COL[niche]
-            old = getattr(lead, score_col)
-            updates[score_col] = new
             copy_missing = (
                 getattr(lead, insight_col) is None
                 or getattr(lead, outreach_col) is None
@@ -240,6 +377,7 @@ def _rescore_and_regen_copy(
                 or old is None
                 or old < COPY_THRESHOLD  # first crossing-from-below
                 or abs(new - old) > COPY_DELTA_THRESHOLD
+                or force  # got new Apollo DM data this run
             )
             if should_regen:
                 try:
@@ -260,12 +398,22 @@ def _rescore_and_regen_copy(
                 # Lead dropped below threshold; existing copy is stale.
                 updates[insight_col] = None
                 updates[outreach_col] = None
-        try:
-            db.update_lead(conn, lead_id, **updates)
-            rescored.append(lead_id)
-        except Exception:
-            log.exception("update_lead failed for id=%s", lead_id)
-    return rescored, copy_calls
+        if updates:
+            try:
+                db.update_lead(conn, lead_id, **updates)
+            except Exception:
+                log.exception("regen: update_lead failed for id=%s", lead_id)
+    return copy_calls
+
+
+def _rescore_and_regen_copy(
+    conn: sqlite3.Connection, lead_ids: list[int], *, model: str
+) -> tuple[list[int], int]:
+    """Convenience wrapper that runs rescore + regen with no Apollo step.
+    Kept for callers (and tests) that don't need Apollo in the loop."""
+    changes = _rescore_all(conn, lead_ids)
+    copy_calls = _regen_copy(conn, changes, force_regen_ids=set(), model=model)
+    return list(changes.keys()), copy_calls
 
 
 # --- JSON output -----------------------------------------------------------
@@ -316,6 +464,8 @@ def _lead_to_json(
         "state": state,
         "dm_name": lead.dm_name,
         "dm_title": lead.dm_title,
+        "dm_email": lead.dm_email,
+        "dm_linkedin_url": lead.dm_linkedin_url,
         "score": getattr(lead, _NICHE_SCORE_COL[niche]),
         "insight": getattr(lead, _NICHE_INSIGHT_COL[niche]),
         "outreach": getattr(lead, _NICHE_OUTREACH_COL[niche]),
@@ -385,6 +535,14 @@ def _parse_args(argv: list[str] | None) -> argparse.Namespace:
         help="Skip fetch / upsert / enrichment. Dedup existing signals, "
         "rescore every lead, regenerate / clear outreach copy as needed, "
         "write JSON, upload (if --upload).",
+    )
+    parser.add_argument(
+        "--apollo-top-n",
+        type=int,
+        default=APOLLO_TOP_N_DEFAULT,
+        help="Apollo DM enrichment runs only on the union of top-N leads "
+        "per niche by score. New entrants to the top-N each night are the "
+        "only credit-burning calls. Default: %(default)d.",
     )
     parser.add_argument("--verbose", action="store_true")
     return parser.parse_args(argv)
