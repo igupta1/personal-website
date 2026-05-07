@@ -17,13 +17,18 @@ SCORE_MAX = 100.0
 
 SIGNAL_WEIGHTS: dict[NicheName, dict[SignalType, float]] = {
     NicheName.IT_MSP: {
-        SignalType.BREACH_DISCLOSED: 40,
-        SignalType.JOB_IT_LEADERSHIP: 35,
-        SignalType.JOB_IT_SUPPORT: 25,
-        SignalType.FUNDING_RAISED: 25,
-        SignalType.EXEC_HIRED: 18,
-        SignalType.JOB_SECURITY: 12,
-        SignalType.JOB_CLOUD_DEVOPS: 12,
+        # Rebalanced so every "primary" buying signal scores in the same
+        # 33-39 single-fresh-signal range. Previously breach disclosures
+        # at weight 40 swept the top 30 simply because state AGs report
+        # them in volume; other signal types couldn't compete. The page
+        # is a lead magnet — variety beats homogeneity.
+        SignalType.JOB_IT_LEADERSHIP: 40,  # strongest MSP-buying signal
+        SignalType.BREACH_DISCLOSED: 35,   # urgent IT pain (MSSP also high)
+        SignalType.JOB_IT_SUPPORT: 35,     # growing IT team — MSP supplements
+        SignalType.FUNDING_RAISED: 35,     # new cash, IT scale-up
+        SignalType.EXEC_HIRED: 35,         # CISO/CIO/CTO triggers vendor eval
+        SignalType.JOB_SECURITY: 15,       # primarily MSSP territory
+        SignalType.JOB_CLOUD_DEVOPS: 15,   # primarily Cloud territory
     },
     NicheName.MSSP: {
         SignalType.BREACH_DISCLOSED: 45,

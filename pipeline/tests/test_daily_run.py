@@ -220,9 +220,27 @@ def test_copy_regen_threshold_gates_calls(
 ) -> None:
     conn = db.init_db(tmp_path / "leads.db")
 
-    # EXEC_HIRED gives all niche weights ≤ 18, all under the 20 threshold.
+    # All primary signals now score ≥35 fresh; use a stale (100-day-old)
+    # signal so recency decay drops the score below the 20 threshold.
+    stale_when = _now() - timedelta(days=100)
     cold = db.upsert_lead(conn, _candidate("Cold Co", SignalType.EXEC_HIRED))
     assert cold.id is not None
+    # Replace the candidate's fresh signal with a stale one.
+    conn.execute(
+        "UPDATE leads SET signals = ? WHERE id = ?",
+        (
+            json.dumps([
+                {
+                    "type": SignalType.EXEC_HIRED.value,
+                    "source": SourceName.JOBS.value,
+                    "captured_at": stale_when.isoformat(),
+                    "payload": {},
+                }
+            ]),
+            cold.id,
+        ),
+    )
+    conn.commit()
     db.update_lead(conn, cold.id, industry="other", headcount=80, country="US")
 
     hot = db.upsert_lead(
@@ -513,9 +531,25 @@ def test_rescore_clears_stale_copy_when_score_drops_below_threshold(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
     conn = db.init_db(tmp_path / "leads.db")
-    # EXEC_HIRED gives all niche weights ≤ 18, below the 20 threshold.
+    # Use a stale signal so IT MSP recency-decayed score drops below 20.
+    stale_when = _now() - timedelta(days=100)
     lead = db.upsert_lead(conn, _candidate("Falling Co", SignalType.EXEC_HIRED))
     assert lead.id is not None
+    conn.execute(
+        "UPDATE leads SET signals = ? WHERE id = ?",
+        (
+            json.dumps([
+                {
+                    "type": SignalType.EXEC_HIRED.value,
+                    "source": SourceName.JOBS.value,
+                    "captured_at": stale_when.isoformat(),
+                    "payload": {},
+                }
+            ]),
+            lead.id,
+        ),
+    )
+    conn.commit()
     # Pre-seed: score above threshold + outreach copy already populated.
     db.update_lead(
         conn,
