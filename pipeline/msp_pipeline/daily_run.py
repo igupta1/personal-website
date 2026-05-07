@@ -231,9 +231,14 @@ def _rescore_and_regen_copy(
             outreach_col = _NICHE_OUTREACH_COL[niche]
             old = getattr(lead, score_col)
             updates[score_col] = new
+            copy_missing = (
+                getattr(lead, insight_col) is None
+                or getattr(lead, outreach_col) is None
+            )
             should_regen = new >= COPY_THRESHOLD and (
-                old is None
-                or old < COPY_THRESHOLD  # first crossing-from-below: always regen
+                copy_missing  # above threshold but never had copy generated
+                or old is None
+                or old < COPY_THRESHOLD  # first crossing-from-below
                 or abs(new - old) > COPY_DELTA_THRESHOLD
             )
             if should_regen:
