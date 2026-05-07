@@ -232,7 +232,9 @@ def _rescore_and_regen_copy(
             old = getattr(lead, score_col)
             updates[score_col] = new
             should_regen = new >= COPY_THRESHOLD and (
-                old is None or abs(new - old) > COPY_DELTA_THRESHOLD
+                old is None
+                or old < COPY_THRESHOLD  # first crossing-from-below: always regen
+                or abs(new - old) > COPY_DELTA_THRESHOLD
             )
             if should_regen:
                 try:

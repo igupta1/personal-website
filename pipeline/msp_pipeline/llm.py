@@ -34,7 +34,7 @@ log = logging.getLogger(__name__)
 T = TypeVar("T", bound=BaseModel)
 
 _DEFAULT_OPENAI_MODEL = "gpt-4o-mini"
-_DEFAULT_GEMINI_MODEL = "gemini-2.5-flash"
+_DEFAULT_GEMINI_MODEL = "gemini-2.5-flash-lite"
 _DEFAULT_MAX_TOKENS = 1024
 _MAX_RETRIES = 4
 _BACKOFF_BASE_S = 1.5
