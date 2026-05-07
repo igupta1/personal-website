@@ -43,10 +43,8 @@ def test_funding_techcrunch_parses_fixture() -> None:
         candidates = funding_module._fetch_from_techcrunch(since)
 
     titles = {c.name for c in candidates}
-    assert titles == {
-        "Lima Robotics raises $25M Series B",
-        "Mike's AI secures $10M from a16z",
-    }
+    # Headline-as-name extraction: "Lima Robotics raises $25M Series B" -> "Lima Robotics"
+    assert titles == {"Lima Robotics", "Mike's AI"}
     assert all(c.initial_signal.type == SignalType.FUNDING_RAISED for c in candidates)
 
 
@@ -59,10 +57,7 @@ def test_funding_prnewswire_parses_fixture() -> None:
         candidates = funding_module._fetch_from_prnewswire(since)
 
     titles = {c.name for c in candidates}
-    assert titles == {
-        "November Bank closes $50M Series C",
-        "Oscar Insurance announces $30M raise",
-    }
+    assert titles == {"November Bank", "Oscar Insurance"}
 
 
 def test_funding_fetch_aggregates_and_continues_on_failure() -> None:
@@ -113,3 +108,41 @@ def test_clean_company_name_strips_cik_suffix() -> None:
     ) == "Bar LLC"
     # Names without the suffix are unchanged.
     assert funding_module._clean_company_name("Bare Co") == "Bare Co"
+
+
+def test_is_funding_title_blocks_vc_fund_raises() -> None:
+    assert not funding_module._is_funding_title(
+        "Katie Haun raises $1B for new venture funds"
+    )
+    assert not funding_module._is_funding_title(
+        "SpaceX backer 137 Ventures raises $700M for two growth-stage funds"
+    )
+
+
+def test_is_funding_title_blocks_acquisitions_lawsuits_valuations() -> None:
+    assert not funding_module._is_funding_title(
+        "Y Combinator alum Skio sells for $105M cash"
+    )
+    assert not funding_module._is_funding_title(
+        "Founder of Shark Tank-backed startup Scholly sues his acquirer Sallie Mae"
+    )
+    assert not funding_module._is_funding_title(
+        "Parallel Web Systems hits $2B valuation five months after its last big raise"
+    )
+    assert not funding_module._is_funding_title(
+        "NHI Announces $106.9 Million SHOP Investment"
+    )
+
+
+def test_company_from_headline_extracts_company() -> None:
+    assert funding_module._company_from_headline(
+        "Altara secures $7M to bridge the data gap"
+    ) == "Altara"
+    assert funding_module._company_from_headline(
+        "Firestorm Labs raises $82M to take drone factories into the field"
+    ) == "Firestorm Labs"
+    assert funding_module._company_from_headline(
+        "Lima Robotics raises $25M Series B"
+    ) == "Lima Robotics"
+    # Fallback when no verb matches: return cleaned full title.
+    assert funding_module._company_from_headline("Mystery Co") == "Mystery Co"

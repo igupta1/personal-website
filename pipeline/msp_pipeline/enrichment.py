@@ -97,6 +97,10 @@ HEADCOUNT: <integer employee count or "unknown">
 CITY: <city name or "unknown">
 STATE: <2-letter US state code (CA, NY, ...) or "unknown">
 COUNTRY: <2-letter ISO country code (US, GB, CA, ...) or "unknown">
+DOMAIN: <primary website domain like "acme.com" without https or path, or "unknown">
+IS_IT_VENDOR: <"yes" if this company is itself an IT services / IT staffing / \
+IT consulting / managed-service-provider / cloud-consultancy / cybersecurity \
+firm (i.e. they SELL IT services), otherwise "no">
 """
 
 _FIELD_RE = {
@@ -104,9 +108,14 @@ _FIELD_RE = {
     "city": re.compile(r"^CITY:\s*(.+?)\s*$", re.MULTILINE | re.IGNORECASE),
     "state": re.compile(r"^STATE:\s*(.+?)\s*$", re.MULTILINE | re.IGNORECASE),
     "country": re.compile(r"^COUNTRY:\s*(.+?)\s*$", re.MULTILINE | re.IGNORECASE),
+    "domain": re.compile(r"^DOMAIN:\s*(.+?)\s*$", re.MULTILINE | re.IGNORECASE),
+    "is_it_vendor": re.compile(
+        r"^IS_IT_VENDOR:\s*(.+?)\s*$", re.MULTILINE | re.IGNORECASE
+    ),
 }
 
 _HEADCOUNT_NUM_RE = re.compile(r"\b(\d{1,3}(?:,\d{3})*|\d+)\b")
+_DOMAIN_CLEAN_RE = re.compile(r"^https?://|^www\.|/.*$", re.IGNORECASE)
 
 
 class _Lookup(BaseModel):
@@ -114,6 +123,8 @@ class _Lookup(BaseModel):
     city: str | None = None
     state: str | None = None
     country: str | None = None
+    domain: str | None = None
+    is_it_vendor: bool = False
 
 
 def _parse_field(raw: str, field: str) -> str | None:
@@ -135,17 +146,36 @@ def _parse_headcount(raw_value: str | None) -> int | None:
     return _round_to_10(int(m.group(1).replace(",", "")))
 
 
+def _parse_domain(raw_value: str | None) -> str | None:
+    if raw_value is None:
+        return None
+    cleaned = _DOMAIN_CLEAN_RE.sub("", raw_value).strip().lower()
+    if not cleaned or "." not in cleaned or " " in cleaned:
+        return None
+    return cleaned
+
+
+def _parse_yesno(raw_value: str | None) -> bool:
+    if raw_value is None:
+        return False
+    return raw_value.strip().lower().startswith("y")
+
+
 def lookup_company(lead: Lead) -> _Lookup:
     raw = llm.call_gemini(_LOOKUP_PROMPT.format(name=lead.name))
     headcount_raw = _parse_field(raw, "headcount")
     city = _parse_field(raw, "city")
     state_raw = _parse_field(raw, "state")
     country_raw = _parse_field(raw, "country")
+    domain_raw = _parse_field(raw, "domain")
+    vendor_raw = _parse_field(raw, "is_it_vendor")
     return _Lookup(
         headcount=_parse_headcount(headcount_raw),
         city=city,
         state=state_raw.upper() if state_raw else None,
         country=country_raw.upper() if country_raw else None,
+        domain=_parse_domain(domain_raw),
+        is_it_vendor=_parse_yesno(vendor_raw),
     )
 
 
@@ -217,10 +247,10 @@ def enrich(conn: sqlite3.Connection, lead: Lead, *, force: bool = False) -> bool
     lookup = lookup_company(lead)
 
     oversized = lookup.headcount is not None and lookup.headcount > 250
-    if lookup.country != "US" or oversized:
+    if lookup.country != "US" or oversized or lookup.is_it_vendor:
         log.info(
-            "enrich: deleting lead %d (%s) — country=%r headcount=%r",
-            lead.id, lead.name, lookup.country, lookup.headcount,
+            "enrich: deleting lead %d (%s) — country=%r headcount=%r vendor=%s",
+            lead.id, lead.name, lookup.country, lookup.headcount, lookup.is_it_vendor,
         )
         db.delete_lead(conn, lead.id)
         return False
@@ -245,6 +275,7 @@ def enrich(conn: sqlite3.Connection, lead: Lead, *, force: bool = False) -> bool
         industry=industry.value,
         headcount=lookup.headcount,
         country="US",
+        domain=lookup.domain,
     )
 
     db.append_signal(

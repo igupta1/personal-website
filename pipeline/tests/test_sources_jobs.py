@@ -29,6 +29,18 @@ def _make_candidate(name: str) -> LeadCandidate:
     )
 
 
+def test_is_recruiter_name_matches_staffing_patterns() -> None:
+    assert jobs_module._is_recruiter_name("Liberty Personnel Services, Inc.")
+    assert jobs_module._is_recruiter_name("Diati Staffing")
+    assert jobs_module._is_recruiter_name("Eleven Recruiting")
+    assert jobs_module._is_recruiter_name("Ringside Talent")
+    assert jobs_module._is_recruiter_name("Motion Recruitment")
+    # Real companies that aren't staffing firms.
+    assert not jobs_module._is_recruiter_name("Acme Corp")
+    assert not jobs_module._is_recruiter_name("Software Solutions LLC")
+    assert not jobs_module._is_recruiter_name("Berger & Williams, LLP")
+
+
 def test_classify_job_title() -> None:
     cases: list[tuple[str, SignalType | None]] = [
         ("Help Desk Technician", SignalType.JOB_IT_SUPPORT),

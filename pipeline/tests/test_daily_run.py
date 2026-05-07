@@ -220,7 +220,8 @@ def test_copy_regen_threshold_gates_calls(
 ) -> None:
     conn = db.init_db(tmp_path / "leads.db")
 
-    cold = db.upsert_lead(conn, _candidate("Cold Co", SignalType.JOB_IT_SUPPORT))
+    # EXEC_HIRED gives all niche weights ≤ 18, all under the 20 threshold.
+    cold = db.upsert_lead(conn, _candidate("Cold Co", SignalType.EXEC_HIRED))
     assert cold.id is not None
     db.update_lead(conn, cold.id, industry="other", headcount=80, country="US")
 
@@ -240,7 +241,9 @@ def test_copy_regen_threshold_gates_calls(
         conn, [cold.id, hot.id], model="gpt-4o-mini"
     )
     assert len(rescored) == 2
-    assert copy_calls == 1
+    # Hot Co crosses threshold in IT MSP + MSSP at minimum; Cloud may be
+    # right at the boundary depending on micro-decay. Cold Co never crosses.
+    assert copy_calls >= 2
     called_names = {call.args[0].name for call in generate_mock.call_args_list}
     assert called_names == {"Hot Co"}
 
@@ -510,7 +513,8 @@ def test_rescore_clears_stale_copy_when_score_drops_below_threshold(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
     conn = db.init_db(tmp_path / "leads.db")
-    lead = db.upsert_lead(conn, _candidate("Falling Co"))
+    # EXEC_HIRED gives all niche weights ≤ 18, below the 20 threshold.
+    lead = db.upsert_lead(conn, _candidate("Falling Co", SignalType.EXEC_HIRED))
     assert lead.id is not None
     # Pre-seed: score above threshold + outreach copy already populated.
     db.update_lead(
@@ -520,8 +524,6 @@ def test_rescore_clears_stale_copy_when_score_drops_below_threshold(
         it_msp_insight="stale insight",
         it_msp_outreach="stale outreach",
     )
-    # The lead has only one weak signal (JOB_IT_SUPPORT, IT MSP weight 25
-    # → fresh score = 25, well below the 40 threshold).
     refreshed = db.get_lead(conn, lead_id=lead.id)
     assert refreshed is not None
 

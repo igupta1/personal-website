@@ -34,7 +34,24 @@ _FUNDING_TITLE_PATTERN = re.compile(
 _NON_FUNDING_PATTERN = re.compile(
     r"\b(class\s+action|lawsuit|investigation|encourag(?:es|ing)|"
     r"shareholder|inquire|complaint|fraud|securities\s+fraud|"
-    r"recall(?:ed|s)?|reminder)\b",
+    r"recall(?:ed|s)?|reminder|"
+    # Acquisitions / sales — "X sells for $Ym", "sold to", "acquired by"
+    r"sells?\s+for|sold\s+(?:for|to)|acquir(?:es|ed|ition|er)|"
+    # Lawsuits & valuation milestones
+    r"sues?|suing|hits?\s+\$[\d.]+\s*(?:b|m|billion|million)?\s+valuation|"
+    # VC / fund-of-funds raises (the entity raising IS itself a fund)
+    r"venture\s+(?:capital|fund|funds)|growth-stage\s+funds?|"
+    r"for\s+(?:new\s+|two\s+|three\s+)?(?:growth-stage\s+|venture\s+)?funds?\b|"
+    # REIT investment announcements ("NHI Announces $X SHOP Investment")
+    r"announces.*\binvestment\b|REIT\b)",
+    re.IGNORECASE,
+)
+
+# Headline-as-name from RSS — extract the company part (everything before
+# the funding-action verb). "Altara secures $7M to..." -> "Altara".
+_HEADLINE_VERB_RE = re.compile(
+    r"\s+(?:raises?|raised|secur(?:es|ed)|clos(?:es|ed)|announces?|"
+    r"hits?|sells?|sold|backed)\s+",
     re.IGNORECASE,
 )
 
@@ -63,6 +80,16 @@ def _parse_rss_date(value: Any) -> datetime | None:
 
 def _clean_company_name(name: str) -> str:
     return _CIK_SUFFIX.sub("", name).strip()
+
+
+def _company_from_headline(title: str) -> str:
+    """Extract the company name from a funding-announcement headline by
+    splitting on the action verb. 'Altara secures $7M to ...' -> 'Altara'."""
+    m = _HEADLINE_VERB_RE.search(title)
+    if m is None:
+        return _clean_company_name(title)
+    candidate = title[: m.start()].strip().rstrip(",").strip()
+    return _clean_company_name(candidate) or _clean_company_name(title)
 
 
 def _is_funding_title(title: str) -> bool:
@@ -95,7 +122,7 @@ def _fetch_from_rss(feed_url: str, since: datetime) -> list[LeadCandidate]:
         # merge duplicates.
         candidates.append(
             LeadCandidate(
-                name=_clean_company_name(title),
+                name=_company_from_headline(title),
                 domain=None,
                 initial_signal=Signal(
                     type=SignalType.FUNDING_RAISED,

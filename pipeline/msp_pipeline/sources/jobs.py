@@ -55,6 +55,22 @@ _HN_ALGOLIA_API = "https://hn.algolia.com/api/v1/search_by_date"
 
 _HN_COMPANY_PATTERN = re.compile(r"\s+at\s+(.+?)(?:\s*[-–|(]|\s*$)", re.IGNORECASE)
 
+# Companies whose names match this pattern are almost always staffing /
+# recruiting firms reposting roles on behalf of unnamed clients. The lead
+# would be the recruiter, not the actual hiring company — useless for MSP
+# outreach. The is_it_vendor enrichment check catches the rest of the
+# vendors that don't have an obvious naming convention.
+_RECRUITER_NAME_PATTERN = re.compile(
+    r"\b(staffing|recruit(?:ing|er|ers|ment)|"
+    r"personnel\s+services?|talent\s+(?:group|agency|partners|solutions)|"
+    r"\btalent$)",
+    re.IGNORECASE,
+)
+
+
+def _is_recruiter_name(name: str) -> bool:
+    return bool(_RECRUITER_NAME_PATTERN.search(name))
+
 
 def _utcnow() -> datetime:
     return datetime.now(timezone.utc).replace(tzinfo=None)
@@ -116,6 +132,8 @@ def _fetch_from_jobspy(since: datetime) -> list[LeadCandidate]:
             sig_type = _classify_job_title(title)
             if sig_type is None:
                 continue
+            if _is_recruiter_name(company):
+                continue
             candidates.append(
                 LeadCandidate(
                     name=company,
@@ -172,6 +190,8 @@ def _fetch_from_adzuna(since: datetime) -> list[LeadCandidate]:
             sig_type = _classify_job_title(title)
             if sig_type is None:
                 continue
+            if _is_recruiter_name(company):
+                continue
             candidates.append(
                 LeadCandidate(
                     name=company,
@@ -222,6 +242,8 @@ def _fetch_from_hn(since: datetime) -> list[LeadCandidate]:
                 continue
             sig_type = _classify_job_title(title)
             if sig_type is None:
+                continue
+            if _is_recruiter_name(company):
                 continue
             candidates.append(
                 LeadCandidate(

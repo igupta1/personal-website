@@ -28,7 +28,7 @@ log = logging.getLogger("daily_run")
 DEFAULT_DB_PATH = Path("data/leads.db")
 DEFAULT_OUTPUT_PATH = Path("data/leads.json")
 LOOKBACK_DAYS = 14
-COPY_THRESHOLD = 40.0
+COPY_THRESHOLD = 20.0
 COPY_DELTA_THRESHOLD = 10.0
 SIGNAL_LIMIT_IN_JSON = 6
 
@@ -83,9 +83,17 @@ def main(argv: list[str] | None = None) -> int:
         return 0
 
     if args.rescore_only:
-        log.info("rescore-only: skipping fetch / upsert / enrichment")
+        log.info("rescore-only: skipping fetch / upsert")
         args.db_path.parent.mkdir(parents=True, exist_ok=True)
         conn = db.init_db(args.db_path)
+
+        if args.reenrich:
+            existing_ids = [
+                lead.id for lead in db.iter_leads(conn) if lead.id is not None
+            ]
+            log.info("re-enriching %d existing leads (force=True)", len(existing_ids))
+            kept_ids = _enrich_all(conn, existing_ids, force=True)
+            log.info("kept %d leads after re-enrichment", len(kept_ids))
 
         modified = db.dedup_signals_pass(conn)
         log.info("deduped signals on %d leads", modified)

@@ -58,7 +58,7 @@ def test_single_fresh_signal_scores_full_weight() -> None:
     lead = _lead(_signal(type=SignalType.BREACH_DISCLOSED, captured_at=_now()))
     result = score(lead, now=_now())
     assert result[NicheName.MSSP] == 45.0
-    assert result[NicheName.IT_MSP] == 18.0
+    assert result[NicheName.IT_MSP] == 40.0
     assert result[NicheName.CLOUD] == 8.0
 
 

@@ -17,11 +17,11 @@ SCORE_MAX = 100.0
 
 SIGNAL_WEIGHTS: dict[NicheName, dict[SignalType, float]] = {
     NicheName.IT_MSP: {
+        SignalType.BREACH_DISCLOSED: 40,
         SignalType.JOB_IT_LEADERSHIP: 35,
         SignalType.JOB_IT_SUPPORT: 25,
         SignalType.FUNDING_RAISED: 25,
         SignalType.EXEC_HIRED: 18,
-        SignalType.BREACH_DISCLOSED: 18,
         SignalType.JOB_SECURITY: 12,
         SignalType.JOB_CLOUD_DEVOPS: 12,
     },

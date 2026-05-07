@@ -51,13 +51,21 @@ def _candidate(name: str) -> LeadCandidate:
 
 
 def _lookup_response(
-    *, headcount: str = "120", city: str = "Boston", state: str = "MA", country: str = "US"
+    *,
+    headcount: str = "120",
+    city: str = "Boston",
+    state: str = "MA",
+    country: str = "US",
+    domain: str = "acme.com",
+    is_it_vendor: str = "no",
 ) -> str:
     return (
         f"HEADCOUNT: {headcount}\n"
         f"CITY: {city}\n"
         f"STATE: {state}\n"
         f"COUNTRY: {country}\n"
+        f"DOMAIN: {domain}\n"
+        f"IS_IT_VENDOR: {is_it_vendor}\n"
     )
 
 
@@ -99,7 +107,14 @@ def test_lookup_company_parses_full_response(monkeypatch: pytest.MonkeyPatch) ->
     )
     lead = Lead(name="Acme Inc", name_key="acme", signals=[_signal()])
     result = lookup_company(lead)
-    assert result == _Lookup(headcount=1250, city="Boston", state="MA", country="US")
+    assert result == _Lookup(
+        headcount=1250,
+        city="Boston",
+        state="MA",
+        country="US",
+        domain="acme.com",
+        is_it_vendor=False,
+    )
 
 
 def test_lookup_company_handles_unknowns(monkeypatch: pytest.MonkeyPatch) -> None:
@@ -108,13 +123,25 @@ def test_lookup_company_handles_unknowns(monkeypatch: pytest.MonkeyPatch) -> Non
         "call_gemini",
         MagicMock(
             return_value=_lookup_response(
-                headcount="unknown", city="unknown", state="unknown", country="unknown"
+                headcount="unknown",
+                city="unknown",
+                state="unknown",
+                country="unknown",
+                domain="unknown",
+                is_it_vendor="unknown",
             )
         ),
     )
     lead = Lead(name="Mystery Co", name_key="mystery", signals=[_signal()])
     result = lookup_company(lead)
-    assert result == _Lookup(headcount=None, city=None, state=None, country=None)
+    assert result == _Lookup(
+        headcount=None,
+        city=None,
+        state=None,
+        country=None,
+        domain=None,
+        is_it_vendor=False,
+    )
 
 
 # --- classify_industry -----------------------------------------------------
@@ -363,6 +390,60 @@ def test_enrich_deletes_oversized_lead(
     assert enrich(conn, lead) is False
     assert db.get_lead(conn, lead_id=lead.id) is None
     openai_mock.assert_not_called()
+
+
+def test_enrich_deletes_it_vendor_lead(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """IT services / staffing / consulting firms are competitors, not
+    targets. The is_it_vendor flag from the Gemini lookup deletes them."""
+    conn = db.init_db(tmp_path / "leads.db")
+    lead = _insert_lead(conn, "Sky Systems Inc")
+    assert lead.id is not None
+
+    openai_mock = MagicMock()
+    monkeypatch.setattr(
+        enrichment.llm,
+        "call_gemini",
+        MagicMock(
+            return_value=_lookup_response(
+                headcount="150", country="US", is_it_vendor="yes"
+            )
+        ),
+    )
+    monkeypatch.setattr(enrichment.llm, "call_openai", openai_mock)
+
+    assert enrich(conn, lead) is False
+    assert db.get_lead(conn, lead_id=lead.id) is None
+    openai_mock.assert_not_called()
+
+
+def test_enrich_writes_domain(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    conn = db.init_db(tmp_path / "leads.db")
+    lead = _insert_lead(conn, "Domain Co")
+    assert lead.id is not None
+
+    monkeypatch.setattr(
+        enrichment.llm,
+        "call_gemini",
+        MagicMock(
+            return_value=_lookup_response(
+                headcount="80", country="US", domain="domain-co.com"
+            )
+        ),
+    )
+    monkeypatch.setattr(
+        enrichment.llm,
+        "call_openai",
+        MagicMock(return_value=_IndustryOut(industry=Industry.OTHER)),
+    )
+
+    assert enrich(conn, lead) is True
+    after = db.get_lead(conn, lead_id=lead.id)
+    assert after is not None
+    assert after.domain == "domain-co.com"
 
 
 def test_enrich_keeps_lead_at_exactly_250(
