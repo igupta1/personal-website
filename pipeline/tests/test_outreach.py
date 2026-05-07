@@ -228,6 +228,33 @@ def test_generate_returns_copy_pydantic(monkeypatch: pytest.MonkeyPatch) -> None
     assert generate(lead, NicheName.IT_MSP, 50.0) is expected
 
 
+def test_generate_rejects_outreach_with_template_placeholder(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """The LLM occasionally hallucinates [Your Company Name] / [Customer]
+    / [Date] patterns. We reject rather than ship them."""
+    from msp_pipeline import llm
+    bad_copy = Copy(
+        insight="x" * 30,
+        outreach=(
+            "I saw the recent funding round. At [Your Company Name], we help "
+            "fintech firms streamline IT operations." + ("y" * 60)
+        ),
+    )
+    monkeypatch.setattr(outreach.llm, "call_openai", MagicMock(return_value=bad_copy))
+    lead = _lead(signals=[_signal(type=SignalType.JOB_SECURITY, captured_at=_now())])
+    with pytest.raises(llm.LLMError, match="placeholder"):
+        generate(lead, NicheName.MSSP, 60.0)
+
+
+def test_generate_accepts_clean_outreach(monkeypatch: pytest.MonkeyPatch) -> None:
+    good_copy = Copy(insight="x" * 30, outreach="y" * 200)
+    monkeypatch.setattr(outreach.llm, "call_openai", MagicMock(return_value=good_copy))
+    lead = _lead(signals=[_signal(type=SignalType.JOB_SECURITY, captured_at=_now())])
+    result = generate(lead, NicheName.MSSP, 60.0)
+    assert result is good_copy
+
+
 def test_generate_per_niche_framing_differs(monkeypatch: pytest.MonkeyPatch) -> None:
     prompts: list[str] = []
 

@@ -1,10 +1,10 @@
 import logging
+import re
 from datetime import datetime, timezone
 from email.utils import parsedate_to_datetime
 from typing import Any
 
 import feedparser
-import requests
 
 from msp_pipeline.models import (
     LeadCandidate,
@@ -15,14 +15,34 @@ from msp_pipeline.models import (
 
 _log = logging.getLogger(__name__)
 
-_SEC_EDGAR_API = "https://efts.sec.gov/LATEST/search-index"
 _TECHCRUNCH_FEED = "https://techcrunch.com/category/startups/feed/"
 _PRNEWSWIRE_FEED = (
     "https://www.prnewswire.com/rss/financial-services-latest-news/"
     "financial-services-latest-news-list.rss"
 )
 
-_HEADERS = {"User-Agent": "MSP Lead Magnet Pipeline (contact@example.com)"}
+# Title-pattern filter for RSS sources. The PR Newswire financial-services
+# feed mixes funding announcements with class-action notices, regulatory
+# filings, M&A, etc. — only let through titles that look like actual
+# funding events.
+_FUNDING_TITLE_PATTERN = re.compile(
+    r"\b(raise[sd]?|secur(?:es|ed)|clos(?:es|ed)|"
+    r"funding|series\s+[a-h]\b|seed(?:\s+round)?\b|"
+    r"investment|round|backed|capital\s+from)\b",
+    re.IGNORECASE,
+)
+_NON_FUNDING_PATTERN = re.compile(
+    r"\b(class\s+action|lawsuit|investigation|encourag(?:es|ing)|"
+    r"shareholder|inquire|complaint|fraud|securities\s+fraud|"
+    r"recall(?:ed|s)?|reminder)\b",
+    re.IGNORECASE,
+)
+
+# Strip "(CIK 0001234567)" suffixes that some upstream feeds attach to
+# company names. Defensive — the SEC EDGAR fetcher that historically emitted
+# these has been removed, but the helper costs nothing and protects against
+# any future feed leaking similar markers.
+_CIK_SUFFIX = re.compile(r"\s*\(CIK\s+\d+\)\s*$", re.IGNORECASE)
 
 
 def _utcnow() -> datetime:
@@ -41,53 +61,17 @@ def _parse_rss_date(value: Any) -> datetime | None:
     return dt
 
 
-def _fetch_from_sec_edgar(since: datetime) -> list[LeadCandidate]:
-    captured_at = _utcnow()
-    candidates: list[LeadCandidate] = []
-    try:
-        response = requests.get(
-            _SEC_EDGAR_API,
-            params={
-                "q": "",
-                "dateRange": "custom",
-                "startdt": since.date().isoformat(),
-                "enddt": captured_at.date().isoformat(),
-                "forms": "D",
-            },
-            headers=_HEADERS,
-            timeout=15,
-        )
-        response.raise_for_status()
-        data = response.json()
-    except Exception:
-        _log.exception("sec edgar fetch failed")
-        return []
+def _clean_company_name(name: str) -> str:
+    return _CIK_SUFFIX.sub("", name).strip()
 
-    for hit in data.get("hits", {}).get("hits", []):
-        source = hit.get("_source", {})
-        names = source.get("display_names") or []
-        if not names:
-            continue
-        company = str(names[0]).strip()
-        if not company:
-            continue
-        candidates.append(
-            LeadCandidate(
-                name=company,
-                domain=None,
-                initial_signal=Signal(
-                    type=SignalType.FUNDING_RAISED,
-                    source=SourceName.FUNDING,
-                    captured_at=captured_at,
-                    payload={
-                        "form": "D",
-                        "filing_date": str(source.get("file_date") or ""),
-                        "accession": str(source.get("adsh") or ""),
-                    },
-                ),
-            )
-        )
-    return candidates
+
+def _is_funding_title(title: str) -> bool:
+    """True if a feed-entry title looks like a funding announcement."""
+    if not title:
+        return False
+    if _NON_FUNDING_PATTERN.search(title):
+        return False
+    return bool(_FUNDING_TITLE_PATTERN.search(title))
 
 
 def _fetch_from_rss(feed_url: str, since: datetime) -> list[LeadCandidate]:
@@ -100,7 +84,7 @@ def _fetch_from_rss(feed_url: str, since: datetime) -> list[LeadCandidate]:
         return []
     for entry in feed.entries:
         title = str(entry.get("title") or "").strip()
-        if not title:
+        if not _is_funding_title(title):
             continue
         published = entry.get("published")
         published_dt = _parse_rss_date(published)
@@ -111,7 +95,7 @@ def _fetch_from_rss(feed_url: str, since: datetime) -> list[LeadCandidate]:
         # merge duplicates.
         candidates.append(
             LeadCandidate(
-                name=title,
+                name=_clean_company_name(title),
                 domain=None,
                 initial_signal=Signal(
                     type=SignalType.FUNDING_RAISED,
@@ -140,7 +124,6 @@ def _fetch_from_prnewswire(since: datetime) -> list[LeadCandidate]:
 def fetch(*, since: datetime, limit: int | None = None) -> list[LeadCandidate]:
     candidates: list[LeadCandidate] = []
     fetchers = (
-        ("sec_edgar", _fetch_from_sec_edgar),
         ("techcrunch", _fetch_from_techcrunch),
         ("prnewswire", _fetch_from_prnewswire),
     )

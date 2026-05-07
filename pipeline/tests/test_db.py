@@ -61,13 +61,13 @@ def test_init_db_idempotent(tmp_path: Path) -> None:
 def test_upsert_inserts_new_then_merges_fuzzy(tmp_path: Path) -> None:
     conn = init_db(tmp_path / "leads.db")
 
-    a = upsert_lead(conn, _candidate("Acme Inc", payload={"url": "u1"}))
+    a = upsert_lead(conn, _candidate("Acme Inc", payload={"title": "IT Support"}))
     assert a.id is not None
     assert a.name_key == "acme"
     assert len(a.signals) == 1
 
-    # Distinct payload so the new signal doesn't dedup against the first.
-    b = upsert_lead(conn, _candidate("Acme Inc.", payload={"url": "u2"}))
+    # Distinct payload (different title) so it doesn't dedup against the first.
+    b = upsert_lead(conn, _candidate("Acme Inc.", payload={"title": "Senior SRE"}))
     assert b.id == a.id
     assert len(b.signals) == 2
 
@@ -216,7 +216,8 @@ def test_append_signal_keeps_distinct_payloads(tmp_path: Path) -> None:
     assert a.id is not None
 
     now = datetime.now(timezone.utc).replace(tzinfo=None)
-    for i in range(3):
+    titles = ["Engineer I", "Engineer II", "Engineer III"]
+    for title in titles:
         append_signal(
             conn,
             a.id,
@@ -224,21 +225,17 @@ def test_append_signal_keeps_distinct_payloads(tmp_path: Path) -> None:
                 type=SignalType.JOB_IT_SUPPORT,
                 source=SourceName.JOBS,
                 captured_at=now,
-                payload={"url": f"https://example.com/job/{i}"},
+                payload={"title": title},
             ),
         )
     result = get_lead(conn, lead_id=a.id)
     assert result is not None
-    urls = {
-        s.payload.get("url")
+    seen_titles = {
+        s.payload.get("title")
         for s in result.signals
-        if s.type == SignalType.JOB_IT_SUPPORT and s.payload.get("url")
+        if s.type == SignalType.JOB_IT_SUPPORT and s.payload.get("title")
     }
-    assert urls == {
-        "https://example.com/job/0",
-        "https://example.com/job/1",
-        "https://example.com/job/2",
-    }
+    assert seen_titles == set(titles)
 
 
 def test_append_signal_dedups_jobs_with_tracking_suffix(tmp_path: Path) -> None:
@@ -267,6 +264,68 @@ def test_append_signal_dedups_jobs_with_tracking_suffix(tmp_path: Path) -> None:
         if s.type == SignalType.JOB_IT_SUPPORT and s.payload.get("title") == "IT Support"
     ]
     assert len(matching) == 1
+
+
+def test_append_signal_dedups_linkedin_same_title_distinct_paths(tmp_path: Path) -> None:
+    """LinkedIn job IDs are unique per repost; same title at same company
+    is one hiring pain. Job dedup ignores URL entirely."""
+    conn = init_db(tmp_path / "leads.db")
+    a = upsert_lead(conn, _candidate("LinkedIn Co"))
+    assert a.id is not None
+    now = datetime.now(timezone.utc).replace(tzinfo=None)
+    for jid in ("4403772813", "4403775828", "4403786667"):
+        append_signal(
+            conn,
+            a.id,
+            Signal(
+                type=SignalType.JOB_CLOUD_DEVOPS,
+                source=SourceName.JOBS,
+                captured_at=now,
+                payload={
+                    "url": f"https://www.linkedin.com/jobs/view/{jid}",
+                    "title": "Cloud/DevOps Engineer",
+                },
+            ),
+        )
+    result = get_lead(conn, lead_id=a.id)
+    assert result is not None
+    matching = [
+        s for s in result.signals
+        if s.type == SignalType.JOB_CLOUD_DEVOPS
+        and s.payload.get("title") == "Cloud/DevOps Engineer"
+    ]
+    assert len(matching) == 1
+
+
+def test_append_signal_dedups_breach_across_state_agencies(tmp_path: Path) -> None:
+    """Same breach incident reported to multiple state AGs with different
+    date formats should collapse to one signal."""
+    conn = init_db(tmp_path / "leads.db")
+    a = upsert_lead(
+        conn,
+        _candidate(
+            "Resort Co",
+            signal_type=SignalType.BREACH_DISCLOSED,
+            source=SourceName.BREACHES,
+            payload={"agency": "ca_ag", "reported_date": "04/28/2026"},
+        ),
+    )
+    assert a.id is not None
+    now = datetime.now(timezone.utc).replace(tzinfo=None)
+    append_signal(
+        conn,
+        a.id,
+        Signal(
+            type=SignalType.BREACH_DISCLOSED,
+            source=SourceName.BREACHES,
+            captured_at=now,
+            payload={"agency": "me_ag", "reported_date": "2026-04-28"},
+        ),
+    )
+    result = get_lead(conn, lead_id=a.id)
+    assert result is not None
+    breach_sigs = [s for s in result.signals if s.type == SignalType.BREACH_DISCLOSED]
+    assert len(breach_sigs) == 1
 
 
 def test_append_signal_dedups_indeed_jk_for_same_title(tmp_path: Path) -> None:

@@ -1,7 +1,6 @@
-import json
 from datetime import datetime, timezone
 from pathlib import Path
-from unittest.mock import MagicMock, patch
+from unittest.mock import patch
 
 import feedparser
 
@@ -28,19 +27,11 @@ def _make_candidate(name: str) -> LeadCandidate:
     )
 
 
-def test_funding_sec_edgar_parses_fixture() -> None:
-    fixture = json.loads((_FIXTURES / "sec_edgar.json").read_text())
-    response = MagicMock()
-    response.raise_for_status.return_value = None
-    response.json.return_value = fixture
-
-    since = datetime(2020, 1, 1)
-    with patch.object(funding_module.requests, "get", return_value=response):
-        candidates = funding_module._fetch_from_sec_edgar(since)
-
-    names = {c.name for c in candidates}
-    assert names == {"Juliet Cybersecurity LLC", "Kilo Cloud Inc"}
-    assert all(c.initial_signal.type == SignalType.FUNDING_RAISED for c in candidates)
+def test_funding_sec_edgar_fetcher_is_removed() -> None:
+    """SEC EDGAR Form D was almost exclusively private fund formations, not
+    operating businesses. Fetcher dropped; no replacement."""
+    assert not hasattr(funding_module, "_fetch_from_sec_edgar")
+    assert not hasattr(funding_module, "_SEC_EDGAR_API")
 
 
 def test_funding_techcrunch_parses_fixture() -> None:
@@ -75,19 +66,50 @@ def test_funding_prnewswire_parses_fixture() -> None:
 
 
 def test_funding_fetch_aggregates_and_continues_on_failure() -> None:
-    a, b, c = _make_candidate("SEC Co"), _make_candidate("TC Co"), _make_candidate("PR Co")
+    b, c = _make_candidate("TC Co"), _make_candidate("PR Co")
 
-    with patch.object(funding_module, "_fetch_from_sec_edgar", return_value=[a]), \
-         patch.object(funding_module, "_fetch_from_techcrunch", return_value=[b]), \
+    with patch.object(funding_module, "_fetch_from_techcrunch", return_value=[b]), \
          patch.object(funding_module, "_fetch_from_prnewswire", return_value=[c]):
         names = {x.name for x in funding_module.fetch(since=datetime(2020, 1, 1))}
-    assert names == {"SEC Co", "TC Co", "PR Co"}
+    assert names == {"TC Co", "PR Co"}
 
     def boom(_since: datetime) -> list[LeadCandidate]:
         raise RuntimeError("boom")
 
-    with patch.object(funding_module, "_fetch_from_sec_edgar", side_effect=boom), \
-         patch.object(funding_module, "_fetch_from_techcrunch", return_value=[b]), \
+    with patch.object(funding_module, "_fetch_from_techcrunch", side_effect=boom), \
          patch.object(funding_module, "_fetch_from_prnewswire", return_value=[c]):
         names = {x.name for x in funding_module.fetch(since=datetime(2020, 1, 1))}
-    assert names == {"TC Co", "PR Co"}
+    assert names == {"PR Co"}
+
+
+def test_is_funding_title_filters_non_funding_pr_newswire_noise() -> None:
+    # Funding announcements pass.
+    assert funding_module._is_funding_title("Acme Corp raises $25M Series B")
+    assert funding_module._is_funding_title("Beta Inc secures $10M seed funding")
+    assert funding_module._is_funding_title("Gamma closes $5M round")
+
+    # PR Newswire class-action / regulatory noise is filtered.
+    assert not funding_module._is_funding_title(
+        "Rosen Law Firm Encourages Zillow Group, Inc. Investors to Inquire "
+        "About Securities Class Action Investigation - Z, ZG"
+    )
+    assert not funding_module._is_funding_title(
+        "ACME Pharma Recall Notice - Dietary Supplement"
+    )
+    assert not funding_module._is_funding_title(
+        "Reminder: Shareholder Investigation in XYZ Corp"
+    )
+    # Empty / blank.
+    assert not funding_module._is_funding_title("")
+    assert not funding_module._is_funding_title("   ")
+
+
+def test_clean_company_name_strips_cik_suffix() -> None:
+    assert funding_module._clean_company_name(
+        "Foo Corp  (CIK 0001234567)"
+    ) == "Foo Corp"
+    assert funding_module._clean_company_name(
+        "Bar LLC (CIK 12345)"
+    ) == "Bar LLC"
+    # Names without the suffix are unchanged.
+    assert funding_module._clean_company_name("Bare Co") == "Bare Co"

@@ -8,6 +8,7 @@ orchestrator (M7) handles persistence and re-generation gating.
 
 from __future__ import annotations
 
+import re
 from datetime import datetime, timezone
 
 from pydantic import BaseModel, Field
@@ -78,6 +79,9 @@ Tone & style - write like a human salesperson, not like an AI:
   are fine ("you're", "we've").
 - Do NOT fabricate facts not in the profile or signals - if a detail
   isn't there, don't invent it.
+- NEVER use template placeholders like "[Your Company Name]",
+  "[Customer]", "[Date]", or any "[Word]" form. Write concrete text only.
+  If you don't know something, omit the sentence entirely.
 
 Special handling for breach signals:
 - If a recent signal is a breach disclosure, treat it with EMPATHY,
@@ -87,6 +91,12 @@ Special handling for breach signals:
   disclosure can be" or "no pitch - just wanted to introduce ourselves
   in case it's useful down the line" land better than urgency.
 """
+
+
+# Detects unfilled template-style placeholders in generated copy. The model
+# occasionally hallucinates "[Your Company Name]" / "[Customer]" / "[Date]"
+# patterns from its training data. We reject those rather than ship them.
+_PLACEHOLDER_RE = re.compile(r"\[[A-Z][A-Za-z][A-Za-z\s]{1,40}\]")
 
 
 def generate(
@@ -106,7 +116,15 @@ def generate(
         score=score,
         signals=_describe_signals(lead),
     )
-    return llm.call_openai(prompt, response_model=Copy, model=model)
+    out = llm.call_openai(prompt, response_model=Copy, model=model)
+    for field, text in (("insight", out.insight), ("outreach", out.outreach)):
+        match = _PLACEHOLDER_RE.search(text)
+        if match:
+            raise llm.LLMError(
+                f"outreach.generate: copy.{field} contains template "
+                f"placeholder {match.group(0)!r}"
+            )
+    return out
 
 
 # --- Private helpers -------------------------------------------------------

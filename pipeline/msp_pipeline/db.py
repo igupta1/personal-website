@@ -158,10 +158,30 @@ _JOB_LIKE: frozenset[SignalType] = frozenset({
 })
 
 
+def _normalize_date(s: str) -> str:
+    """Best-effort canonicalize a date string to YYYY-MM-DD. Returns the
+    original string if no known format matches."""
+    s = s.strip()
+    for fmt in ("%Y-%m-%d", "%m/%d/%Y", "%m/%d/%y", "%Y/%m/%d", "%d %b %Y"):
+        try:
+            return datetime.strptime(s, fmt).date().isoformat()
+        except ValueError:
+            continue
+    return s
+
+
 def _signal_dedup_key(sig_dict: dict[str, Any]) -> str:
     """Stable key per signal. Excludes captured_at and source so two fetches
-    of the same event collapse. Job-type signals normalize the URL (strip
-    query + fragment) so tracking suffixes don't fragment dedup."""
+    of the same event collapse. Per-type rules:
+
+    - Job-type signals: dedup on (type, title) only. Same posting may carry
+      slightly different URLs across reposts (LinkedIn IDs, Indeed `jk=`,
+      Adzuna `?se=`); same role at the same company is one hiring pain.
+    - BREACH_DISCLOSED: dedup on (type, normalized reported_date). State AGs
+      report the same incident in different formats — collapse them.
+    - Everything else: dedup on (type, full payload) — funding accessions,
+      RSS links, etc. are genuinely distinct identifiers.
+    """
     sig_type_str = sig_dict["type"]
     payload = sig_dict.get("payload") or {}
     try:
@@ -169,10 +189,11 @@ def _signal_dedup_key(sig_dict: dict[str, Any]) -> str:
     except ValueError:
         sig_type = None
     if sig_type in _JOB_LIKE:
-        raw_url = payload.get("url") or ""
-        url_path = raw_url.split("?", 1)[0].split("#", 1)[0]
-        title = (payload.get("title") or "").strip()
-        return f"{sig_type_str}|{title}|{url_path}"
+        title = (payload.get("title") or "").strip().lower()
+        return f"{sig_type_str}|{title}"
+    if sig_type == SignalType.BREACH_DISCLOSED:
+        date_raw = str(payload.get("reported_date") or "")
+        return f"{sig_type_str}|{_normalize_date(date_raw)}"
     return f"{sig_type_str}|{json.dumps(payload, sort_keys=True, default=str)}"
 
 
