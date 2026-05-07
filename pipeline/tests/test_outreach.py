@@ -221,6 +221,23 @@ def test_generate_calls_openai_with_full_prompt(
     assert captured["kwargs"]["model"] == "gpt-4o-mini"
 
 
+def test_generate_includes_value_prop_in_prompt(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    captured: dict[str, str] = {}
+
+    def fake_call_openai(prompt: str, **kwargs: Any) -> Copy:
+        captured["prompt"] = prompt
+        return Copy(insight="x" * 30, outreach="y" * 200)
+
+    monkeypatch.setattr(outreach.llm, "call_openai", fake_call_openai)
+    lead = _lead(signals=[_signal(type=SignalType.JOB_SECURITY, captured_at=_now())])
+    lead.value_prop = "Family-owned auto dealership in Pennsylvania."
+
+    generate(lead, NicheName.MSSP, 60.0)
+    assert "Family-owned auto dealership in Pennsylvania." in captured["prompt"]
+
+
 def test_generate_passes_dm_into_prompt_when_known(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:

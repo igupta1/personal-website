@@ -107,6 +107,11 @@ companies that don't have a tech exec, use the CEO / Founder / COO who \
 would handle vendor decisions. Otherwise "unknown".>
 DM_TITLE: <their job title (e.g. "Director of IT", "COO", "Founder & CEO") \
 or "unknown">
+VALUE_PROP: <ONE sentence (max 25 words), present tense, plain language, \
+describing what the company does or sells. Examples: "Sells subscription \
+billing software to Shopify stores." / "Family-owned auto dealership in \
+Pennsylvania." / "Pediatric clinic with 3 locations in Spokane." Avoid \
+marketing fluff and superlatives. Use "unknown" only as a last resort.>
 """
 
 _FIELD_RE = {
@@ -120,6 +125,7 @@ _FIELD_RE = {
     ),
     "dm_name": re.compile(r"^DM_NAME:\s*(.+?)\s*$", re.MULTILINE | re.IGNORECASE),
     "dm_title": re.compile(r"^DM_TITLE:\s*(.+?)\s*$", re.MULTILINE | re.IGNORECASE),
+    "value_prop": re.compile(r"^VALUE_PROP:\s*(.+?)\s*$", re.MULTILINE | re.IGNORECASE),
 }
 
 _HEADCOUNT_NUM_RE = re.compile(r"\b(\d{1,3}(?:,\d{3})*|\d+)\b")
@@ -135,6 +141,7 @@ class _Lookup(BaseModel):
     is_it_vendor: bool = False
     dm_name: str | None = None
     dm_title: str | None = None
+    value_prop: str | None = None
 
 
 def _parse_field(raw: str, field: str) -> str | None:
@@ -181,6 +188,7 @@ def lookup_company(lead: Lead) -> _Lookup:
     vendor_raw = _parse_field(raw, "is_it_vendor")
     dm_name_raw = _parse_field(raw, "dm_name")
     dm_title_raw = _parse_field(raw, "dm_title")
+    value_prop_raw = _parse_field(raw, "value_prop")
     return _Lookup(
         headcount=_parse_headcount(headcount_raw),
         city=city,
@@ -190,6 +198,7 @@ def lookup_company(lead: Lead) -> _Lookup:
         is_it_vendor=_parse_yesno(vendor_raw),
         dm_name=dm_name_raw,
         dm_title=dm_title_raw,
+        value_prop=value_prop_raw,
     )
 
 
@@ -260,11 +269,21 @@ def enrich(conn: sqlite3.Connection, lead: Lead, *, force: bool = False) -> bool
 
     lookup = lookup_company(lead)
 
-    oversized = lookup.headcount is not None and lookup.headcount > 250
+    # If Apollo has already enriched this lead, its headcount + DM data are
+    # more reliable than Gemini's. Trust the existing values for the SMB-cap
+    # check and don't overwrite them below.
+    has_apollo = any(s.type == SignalType.APOLLO_ENRICHED for s in lead.signals)
+    effective_headcount = (
+        lead.headcount if has_apollo and lead.headcount is not None
+        else lookup.headcount
+    )
+
+    oversized = effective_headcount is not None and effective_headcount > 250
     if lookup.country != "US" or oversized or lookup.is_it_vendor:
         log.info(
             "enrich: deleting lead %d (%s) — country=%r headcount=%r vendor=%s",
-            lead.id, lead.name, lookup.country, lookup.headcount, lookup.is_it_vendor,
+            lead.id, lead.name, lookup.country, effective_headcount,
+            lookup.is_it_vendor,
         )
         db.delete_lead(conn, lead.id)
         return False
@@ -283,16 +302,25 @@ def enrich(conn: sqlite3.Connection, lead: Lead, *, force: bool = False) -> bool
 
     industry = classify_industry(lead)
 
-    db.update_lead(
-        conn,
-        lead.id,
-        industry=industry.value,
-        headcount=lookup.headcount,
-        country="US",
-        domain=lookup.domain,
-        dm_name=lookup.dm_name,
-        dm_title=lookup.dm_title,
-    )
+    updates: dict[str, object] = {
+        "industry": industry.value,
+        "country": "US",
+        "value_prop": lookup.value_prop,
+    }
+    # Apollo wins for these fields when its marker is present. Otherwise
+    # take whatever Gemini found (None overwrites are fine here — original
+    # behavior).
+    if not has_apollo:
+        updates.update(
+            headcount=lookup.headcount,
+            domain=lookup.domain,
+            dm_name=lookup.dm_name,
+            dm_title=lookup.dm_title,
+        )
+    elif lookup.domain and not lead.domain:
+        # Apollo didn't fill in a domain (org-search miss); accept Gemini's.
+        updates["domain"] = lookup.domain
+    db.update_lead(conn, lead.id, **updates)
 
     db.append_signal(
         conn,

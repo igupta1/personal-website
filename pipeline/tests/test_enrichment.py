@@ -60,6 +60,7 @@ def _lookup_response(
     is_it_vendor: str = "no",
     dm_name: str = "Sarah Johnson",
     dm_title: str = "Director of IT",
+    value_prop: str = "Sells industrial widgets to manufacturing plants.",
 ) -> str:
     return (
         f"HEADCOUNT: {headcount}\n"
@@ -70,6 +71,7 @@ def _lookup_response(
         f"IS_IT_VENDOR: {is_it_vendor}\n"
         f"DM_NAME: {dm_name}\n"
         f"DM_TITLE: {dm_title}\n"
+        f"VALUE_PROP: {value_prop}\n"
     )
 
 
@@ -120,6 +122,7 @@ def test_lookup_company_parses_full_response(monkeypatch: pytest.MonkeyPatch) ->
         is_it_vendor=False,
         dm_name="Sarah Johnson",
         dm_title="Director of IT",
+        value_prop="Sells industrial widgets to manufacturing plants.",
     )
 
 
@@ -137,6 +140,7 @@ def test_lookup_company_handles_unknowns(monkeypatch: pytest.MonkeyPatch) -> Non
                 is_it_vendor="unknown",
                 dm_name="unknown",
                 dm_title="unknown",
+                value_prop="unknown",
             )
         ),
     )
@@ -151,6 +155,7 @@ def test_lookup_company_handles_unknowns(monkeypatch: pytest.MonkeyPatch) -> Non
         is_it_vendor=False,
         dm_name=None,
         dm_title=None,
+        value_prop=None,
     )
 
 
@@ -486,6 +491,141 @@ def test_enrich_writes_dm_fields(
     assert after is not None
     assert after.dm_name == "Jane Smith"
     assert after.dm_title == "VP of IT"
+
+
+def test_enrich_writes_value_prop(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    conn = db.init_db(tmp_path / "leads.db")
+    lead = _insert_lead(conn, "VP Co")
+    assert lead.id is not None
+
+    monkeypatch.setattr(
+        enrichment.llm,
+        "call_gemini",
+        MagicMock(
+            return_value=_lookup_response(
+                value_prop="Pediatric clinic with 3 locations in Spokane.",
+            )
+        ),
+    )
+    monkeypatch.setattr(
+        enrichment.llm,
+        "call_openai",
+        MagicMock(return_value=_IndustryOut(industry=Industry.HEALTHCARE)),
+    )
+
+    assert enrich(conn, lead) is True
+    after = db.get_lead(conn, lead_id=lead.id)
+    assert after is not None
+    assert after.value_prop == "Pediatric clinic with 3 locations in Spokane."
+
+
+def test_enrich_preserves_apollo_dm_fields_when_marker_present(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """Once Apollo has enriched a lead, Gemini re-enrichment must NOT
+    overwrite the DM data — Apollo's records are higher quality."""
+    from msp_pipeline.models import SourceName
+
+    conn = db.init_db(tmp_path / "leads.db")
+    lead = _insert_lead(conn, "Apollo'd Co")
+    assert lead.id is not None
+    db.update_lead(
+        conn,
+        lead.id,
+        dm_name="Real Apollo Person",
+        dm_title="CTO",
+        dm_email="real@apollod-co.com",
+        headcount=80,
+        domain="apollod-co.com",
+    )
+    db.append_signal(
+        conn,
+        lead.id,
+        Signal(
+            type=SignalType.APOLLO_ENRICHED,
+            source=SourceName.APOLLO,
+            captured_at=_now(),
+            payload={"dm_found": True},
+        ),
+    )
+
+    refreshed = db.get_lead(conn, lead_id=lead.id)
+    assert refreshed is not None
+
+    monkeypatch.setattr(
+        enrichment.llm,
+        "call_gemini",
+        MagicMock(
+            return_value=_lookup_response(
+                headcount="500",  # different from Apollo's 80
+                dm_name="Wrong Gemini Guess",
+                dm_title="Office Manager",
+                domain="different.com",
+                value_prop="Software firm specializing in real estate analytics.",
+            )
+        ),
+    )
+    monkeypatch.setattr(
+        enrichment.llm,
+        "call_openai",
+        MagicMock(return_value=_IndustryOut(industry=Industry.SOFTWARE_SAAS)),
+    )
+
+    assert enrich(conn, refreshed, force=True) is True
+    after = db.get_lead(conn, lead_id=lead.id)
+    assert after is not None
+    # Apollo-sourced fields untouched
+    assert after.dm_name == "Real Apollo Person"
+    assert after.dm_title == "CTO"
+    assert after.dm_email == "real@apollod-co.com"
+    assert after.headcount == 80
+    assert after.domain == "apollod-co.com"
+    # Gemini-only fields updated
+    assert after.industry == "software_saas"
+    assert after.value_prop == "Software firm specializing in real estate analytics."
+
+
+def test_enrich_uses_apollo_headcount_for_smb_cap_check(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """Gemini may guess wrong on headcount; if Apollo has set a smaller
+    real value, don't delete the lead based on Gemini's guess."""
+    from msp_pipeline.models import SourceName
+
+    conn = db.init_db(tmp_path / "leads.db")
+    lead = _insert_lead(conn, "Right Sized Co")
+    assert lead.id is not None
+    db.update_lead(conn, lead.id, headcount=80)
+    db.append_signal(
+        conn,
+        lead.id,
+        Signal(
+            type=SignalType.APOLLO_ENRICHED,
+            source=SourceName.APOLLO,
+            captured_at=_now(),
+            payload={"dm_found": True},
+        ),
+    )
+    refreshed = db.get_lead(conn, lead_id=lead.id)
+    assert refreshed is not None
+
+    monkeypatch.setattr(
+        enrichment.llm,
+        "call_gemini",
+        MagicMock(return_value=_lookup_response(headcount="500")),  # wrong
+    )
+    monkeypatch.setattr(
+        enrichment.llm,
+        "call_openai",
+        MagicMock(return_value=_IndustryOut(industry=Industry.OTHER)),
+    )
+
+    assert enrich(conn, refreshed, force=True) is True
+    after = db.get_lead(conn, lead_id=lead.id)
+    assert after is not None
+    assert after.headcount == 80  # Apollo's value preserved
 
 
 def test_enrich_keeps_lead_at_exactly_250(

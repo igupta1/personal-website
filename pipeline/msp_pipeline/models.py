@@ -51,6 +51,7 @@ class Lead(BaseModel):
     dm_title: str | None = None
     dm_email: str | None = None
     dm_linkedin_url: str | None = None
+    value_prop: str | None = None
     signals: list[Signal] = Field(default_factory=list)
     it_msp_score: float | None = None
     mssp_score: float | None = None

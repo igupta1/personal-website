@@ -19,7 +19,9 @@ from msp_pipeline.models import Lead, NicheName, Signal, SignalType
 
 class Copy(BaseModel):
     insight: str = Field(min_length=10, max_length=160)
-    outreach: str = Field(min_length=80, max_length=1500)
+    # Tight cap so the email is genuinely send-as-is. ~3 short sentences
+    # land in 350-550 chars; 600 caps the long tail without forcing one-liners.
+    outreach: str = Field(min_length=80, max_length=600)
 
 
 _NICHE_FRAMING: dict[NicheName, str] = {
@@ -45,10 +47,10 @@ _PROMPT_TEMPLATE = """\
 {framing}
 
 Lead profile:
-- Company name: {name}
-- Short form to use in the email body: "{short_name}"
+- Company: {name} (short form: "{short_name}")
+- What they do: {value_prop}
 - Industry: {industry}
-- Approximate headcount: {headcount}
+- Headcount: {headcount}
 - Location: {location}
 - Likely decision maker: {dm_block}
 - Heat score for this niche: {score:.0f}/100
@@ -56,49 +58,55 @@ Lead profile:
 Recent signals (most recent first):
 {signals}
 
-Write two pieces of copy:
-1. **insight** - ONE concise sentence (<= 140 chars), in THIRD PERSON,
-   summarizing the buying-moment that makes this lead a fit. Reference
-   the specific signal (e.g. "just posted Director of IT", "disclosed
-   a breach to the Maine AG", "raised $7M Series A"). Use the company
-   name or pronouns like "they" / "the company" — NEVER "you" or
-   "your". This text is shown to a salesperson scanning a list of
-   leads, NOT to the lead being pitched.
-2. **outreach** - a 3-5 sentence outbound email body (no subject line, no
-   signature) that:
-   - opens with a greeting using the decision maker's FIRST name when
-     a decision maker is known above ("Hi Sarah,"). When no decision
-     maker is known, open without a name and reference the company
-     short form "{short_name}" naturally in the body instead.
-   - opens by naming a *specific* detail from one recent signal - the
-     actual job title, the funding amount/round, the breach context,
-     etc. (do NOT just say "I saw you posted a job" - say "I saw the
-     Senior Security Engineer posting"),
-   - refers to the company by the short form "{short_name}" (not the
-     full legal name) when needed - e.g. "Hope Q3 is going well at {short_name}",
-   - frames how your service addresses what that signal implies,
-   - ends with a soft, low-pressure CTA (e.g. a 15-min intro call).
+Write two pieces of copy.
 
-Tone & style - write like a human salesperson, not like an AI:
-- AVOID these AI-tell openers: "I hope this email finds you well",
-  "I came across", "I noticed", "I wanted to reach out", "Just wanted
-  to touch base", "I trust you're doing well".
-- Prefer specific, conversational openers grounded in the signal.
-- Professional B2B tone. No emojis. No exclamation marks. Contractions
-  are fine ("you're", "we've").
-- Do NOT fabricate facts not in the profile or signals - if a detail
-  isn't there, don't invent it.
-- NEVER use template placeholders like "[Your Company Name]",
-  "[Customer]", "[Date]", or any "[Word]" form. Write concrete text only.
-  If you don't know something, omit the sentence entirely.
+**insight** — ONE sentence (<= 140 chars), THIRD PERSON, naming the
+specific buying moment (job title, breach context, funding round, etc.).
+Use the company name or "they" / "the company" — never "you" / "your".
+This is shown to a salesperson, not the prospect.
 
-Special handling for breach signals:
-- If a recent signal is a breach disclosure, treat it with EMPATHY,
-  never urgency or alarm. The reader has already lived through the
-  breach; the goal is to build trust as a future partner, not to
-  exploit a vulnerable moment. Phrases like "we know how stressful a
-  disclosure can be" or "no pitch - just wanted to introduce ourselves
-  in case it's useful down the line" land better than urgency.
+**outreach** — an email the salesperson can copy, paste, and send AS-IS.
+
+Structure — TWO parts, separated by a blank line:
+
+(a) GREETING LINE — REQUIRED when a decision maker is named above.
+    Format: "Hi <first_name>," using the actual first name from the
+    "Likely decision maker" line (e.g. for "Philip Hu, Owner" write
+    "Hi Philip,"). Take only the first word of the name. If the
+    decision maker is unknown, OMIT this line entirely AND do NOT
+    substitute a generic greeting — no "Hi there,", no "Hello,",
+    no "Hi,". Start directly with sentence 1 of the body.
+
+(b) BODY — 2-3 sentences, ~60-90 words total. Hard rules:
+    - Sentence 1 names the SPECIFIC signal detail (the actual title,
+      the dollar amount, the agency that received the breach
+      disclosure) and ties it to what the company does using the
+      "What they do" field. Example: "Saw the Director of IT posting
+      at {short_name} — running a 200-person insurance brokerage,
+      that role can make or break ticket SLAs."
+    - Sentence 2: one concrete way your service eases that pressure,
+      grounded in their actual business model from "What they do".
+    - Sentence 3 (optional): soft CTA like "Worth a 15-minute intro?"
+      or "Happy to share what we did for a similar firm if useful."
+    - NO sign-off, NO "Best," NO signature — the salesperson adds
+      their own. End on the CTA sentence.
+
+Banned openers (AI tells): "I hope this email finds you well", "I came
+across", "I noticed", "I wanted to reach out", "Just wanted to touch
+base", "I trust you're doing well", "Hope Q3 is going well at...". Use
+specific, signal-grounded language instead.
+
+Banned forever:
+- Template placeholders like "[Your Company Name]", "[Customer]",
+  "[Date]", "[Your MSSP]" — any "[Word]" form. Write concrete text.
+- Exclamation marks.
+- Emojis.
+- Fabricating facts not in the profile or signals.
+
+Breach signals get EMPATHY, not urgency. The recipient is already
+stressed. Lead with "Saw the disclosure — no pitch, just wanted to
+introduce ourselves in case it's useful down the road" rather than
+hammering on the vulnerability.
 """
 
 
@@ -127,6 +135,7 @@ def generate(
         framing=_NICHE_FRAMING[niche],
         name=lead.name,
         short_name=_short_name(lead.name),
+        value_prop=lead.value_prop or "unknown",
         industry=lead.industry or "unknown",
         headcount=_describe_headcount(lead.headcount),
         location=_describe_location(lead),

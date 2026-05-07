@@ -30,6 +30,7 @@ CREATE TABLE IF NOT EXISTS leads (
     dm_title        TEXT,
     dm_email        TEXT,
     dm_linkedin_url TEXT,
+    value_prop      TEXT,
     signals         TEXT NOT NULL DEFAULT '[]',
     it_msp_score    REAL,
     mssp_score      REAL,
@@ -53,6 +54,7 @@ _MIGRATIONS: tuple[tuple[str, str], ...] = (
     ("dm_title", "TEXT"),
     ("dm_email", "TEXT"),
     ("dm_linkedin_url", "TEXT"),
+    ("value_prop", "TEXT"),
 )
 
 _INDEXES = (
@@ -76,6 +78,7 @@ _UPDATABLE_FIELDS = frozenset({
     "dm_title",
     "dm_email",
     "dm_linkedin_url",
+    "value_prop",
     "it_msp_score",
     "mssp_score",
     "cloud_score",
