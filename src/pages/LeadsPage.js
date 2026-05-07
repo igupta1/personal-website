@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from "react";
 import LeadCard from "../components/LeadCard";
-import LeadFilters from "../components/LeadFilters";
+import LeadFilters, { SIZE_BANDS } from "../components/LeadFilters";
 
 function formatRelative(iso) {
   if (!iso) return null;
@@ -15,15 +15,18 @@ function formatRelative(iso) {
   return `${days}d ago`;
 }
 
+function bandFor(value) {
+  return SIZE_BANDS.find((b) => b.value === value) || SIZE_BANDS[0];
+}
+
 export default function LeadsPage({ niche, title, subtitle }) {
   const [leads, setLeads] = useState(null);
   const [error, setError] = useState(null);
   const [generatedAt, setGeneratedAt] = useState(null);
 
-  const [industries, setIndustries] = useState(new Set());
-  const [headcountMax, setHeadcountMax] = useState(250);
-  const [search, setSearch] = useState("");
-  const [sortBy, setSortBy] = useState("score");
+  const [industry, setIndustry] = useState("any");
+  const [sizeBand, setSizeBand] = useState("any");
+  const [sortBy, setSortBy] = useState("default");
 
   useEffect(() => {
     document.title = `${title} — Ishaan Gupta`;
@@ -53,21 +56,24 @@ export default function LeadsPage({ niche, title, subtitle }) {
   const visibleLeads = useMemo(() => {
     if (!leads) return [];
     let out = leads;
-    if (industries.size > 0) {
-      out = out.filter((l) => l.industry && industries.has(l.industry));
+    if (industry !== "any") {
+      out = out.filter((l) => l.industry === industry);
     }
-    if (headcountMax < 250) {
-      out = out.filter((l) => l.headcount == null || l.headcount <= headcountMax);
-    }
-    if (search.trim()) {
-      const q = search.trim().toLowerCase();
-      out = out.filter((l) => l.name.toLowerCase().includes(q));
+    if (sizeBand !== "any") {
+      const band = bandFor(sizeBand);
+      if (sizeBand === "unknown") {
+        out = out.filter((l) => l.headcount == null);
+      } else if (band.min != null && band.max != null) {
+        out = out.filter(
+          (l) => l.headcount != null && l.headcount >= band.min && l.headcount <= band.max
+        );
+      }
     }
     if (sortBy === "name") {
       out = [...out].sort((a, b) => a.name.localeCompare(b.name));
     }
     return out;
-  }, [leads, industries, headcountMax, search, sortBy]);
+  }, [leads, industry, sizeBand, sortBy]);
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-8">
@@ -95,12 +101,10 @@ export default function LeadsPage({ niche, title, subtitle }) {
         <>
           <LeadFilters
             leads={leads}
-            industries={industries}
-            setIndustries={setIndustries}
-            headcountMax={headcountMax}
-            setHeadcountMax={setHeadcountMax}
-            search={search}
-            setSearch={setSearch}
+            industry={industry}
+            setIndustry={setIndustry}
+            sizeBand={sizeBand}
+            setSizeBand={setSizeBand}
             sortBy={sortBy}
             setSortBy={setSortBy}
           />

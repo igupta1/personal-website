@@ -1,10 +1,36 @@
 import React, { useMemo } from "react";
 
+const INDUSTRY_LABELS = {
+  software_saas: "Software / SaaS",
+  fintech: "Fintech",
+  healthcare: "Healthcare",
+  ecommerce_retail: "E-commerce / Retail",
+  manufacturing: "Manufacturing",
+  logistics_transport: "Logistics / Transport",
+  real_estate: "Real Estate",
+  legal_professional: "Legal / Professional",
+  education: "Education",
+  media_entertainment: "Media / Entertainment",
+  hospitality_food: "Hospitality / Food",
+  government_nonprofit: "Government / Nonprofit",
+  construction: "Construction",
+  other: "Other",
+};
+
+// Each band: [label, predicate(headcount)]. Predicate accepts a number or null.
+export const SIZE_BANDS = [
+  { value: "any", label: "Any size" },
+  { value: "1-10", label: "1–10 employees", min: 1, max: 10 },
+  { value: "11-50", label: "11–50 employees", min: 11, max: 50 },
+  { value: "51-200", label: "51–200 employees", min: 51, max: 200 },
+  { value: "201-250", label: "201–250 employees", min: 201, max: 250 },
+  { value: "unknown", label: "Size unknown" },
+];
+
 export default function LeadFilters({
   leads,
-  industries, setIndustries,
-  headcountMax, setHeadcountMax,
-  search, setSearch,
+  industry, setIndustry,
+  sizeBand, setSizeBand,
   sortBy, setSortBy,
 }) {
   const availableIndustries = useMemo(() => {
@@ -15,103 +41,76 @@ export default function LeadFilters({
     return Object.entries(counts).sort((a, b) => b[1] - a[1]);
   }, [leads]);
 
-  const toggleIndustry = (ind) => {
-    const next = new Set(industries);
-    if (next.has(ind)) next.delete(ind);
-    else next.add(ind);
-    setIndustries(next);
-  };
-
   const clearAll = () => {
-    setIndustries(new Set());
-    setHeadcountMax(250);
-    setSearch("");
-    setSortBy("score");
+    setIndustry("any");
+    setSizeBand("any");
+    setSortBy("default");
   };
 
-  const hasActiveFilters = industries.size > 0 || headcountMax < 250 || search || sortBy !== "score";
+  const hasActiveFilters =
+    industry !== "any" || sizeBand !== "any" || sortBy !== "default";
 
   return (
-    <div className="bg-white border border-gray-200 rounded-lg p-4 mb-6 space-y-4">
-      <div className="flex flex-wrap items-center gap-4">
-        <div className="flex-1 min-w-[200px]">
-          <label className="block text-xs font-semibold text-gray-500 uppercase mb-1">
-            Search by name
+    <div className="bg-white border border-gray-200 rounded-xl shadow-sm mb-6 overflow-hidden">
+      <div className="px-5 py-4 grid grid-cols-1 md:grid-cols-3 gap-4 items-end">
+        <div>
+          <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1.5">
+            Industry
           </label>
-          <input
-            type="text"
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            placeholder="Acme..."
-            className="w-full px-3 py-1.5 border border-gray-300 rounded text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
+          <select
+            value={industry}
+            onChange={(e) => setIndustry(e.target.value)}
+            className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+          >
+            <option value="any">All industries</option>
+            {availableIndustries.map(([ind, count]) => (
+              <option key={ind} value={ind}>
+                {INDUSTRY_LABELS[ind] || ind} ({count})
+              </option>
+            ))}
+          </select>
         </div>
 
         <div>
-          <label className="block text-xs font-semibold text-gray-500 uppercase mb-1">
-            Max headcount
+          <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1.5">
+            Company size
           </label>
-          <div className="flex items-center gap-2">
-            <input
-              type="range"
-              min="10"
-              max="250"
-              step="10"
-              value={headcountMax}
-              onChange={(e) => setHeadcountMax(parseInt(e.target.value, 10))}
-              className="w-32"
-            />
-            <span className="text-sm text-gray-700 w-10 tabular-nums">{headcountMax}</span>
-          </div>
+          <select
+            value={sizeBand}
+            onChange={(e) => setSizeBand(e.target.value)}
+            className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+          >
+            {SIZE_BANDS.map((b) => (
+              <option key={b.value} value={b.value}>
+                {b.label}
+              </option>
+            ))}
+          </select>
         </div>
 
         <div>
-          <label className="block text-xs font-semibold text-gray-500 uppercase mb-1">
+          <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1.5">
             Sort by
           </label>
           <select
             value={sortBy}
             onChange={(e) => setSortBy(e.target.value)}
-            className="px-3 py-1.5 border border-gray-300 rounded text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
           >
-            <option value="score">Score (highest first)</option>
+            <option value="default">Best match</option>
             <option value="name">Name (A–Z)</option>
           </select>
         </div>
-
-        {hasActiveFilters && (
-          <button
-            onClick={clearAll}
-            className="self-end px-3 py-1.5 text-xs text-gray-600 hover:text-gray-900 underline"
-          >
-            Clear filters
-          </button>
-        )}
       </div>
 
-      {availableIndustries.length > 0 && (
-        <div>
-          <label className="block text-xs font-semibold text-gray-500 uppercase mb-2">
-            Filter by industry
-          </label>
-          <div className="flex flex-wrap gap-2">
-            {availableIndustries.map(([ind, count]) => {
-              const active = industries.has(ind);
-              return (
-                <button
-                  key={ind}
-                  onClick={() => toggleIndustry(ind)}
-                  className={`px-2.5 py-1 text-xs rounded-full border transition-colors ${
-                    active
-                      ? "bg-blue-600 text-white border-blue-600"
-                      : "bg-white text-gray-700 border-gray-300 hover:bg-gray-50"
-                  }`}
-                >
-                  {ind} ({count})
-                </button>
-              );
-            })}
-          </div>
+      {hasActiveFilters && (
+        <div className="px-5 py-2 bg-gray-50 border-t border-gray-200 flex justify-end">
+          <button
+            onClick={clearAll}
+            className="text-xs font-medium text-gray-600 hover:text-gray-900 underline"
+          >
+            Reset filters
+          </button>
         </div>
       )}
     </div>

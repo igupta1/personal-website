@@ -18,7 +18,7 @@ from msp_pipeline.models import Lead, NicheName, Signal, SignalType
 
 
 class Copy(BaseModel):
-    insight: str = Field(min_length=10, max_length=240)
+    insight: str = Field(min_length=10, max_length=160)
     outreach: str = Field(min_length=80, max_length=1500)
 
 
@@ -56,9 +56,13 @@ Recent signals (most recent first):
 {signals}
 
 Write two pieces of copy:
-1. **insight** - ONE sentence (<= 220 chars) explaining the most compelling
-   reason this lead is a fit. Lead with the strongest recent signal,
-   referencing concrete details from it (job title, funding round, etc.).
+1. **insight** - ONE concise sentence (<= 140 chars), in THIRD PERSON,
+   summarizing the buying-moment that makes this lead a fit. Reference
+   the specific signal (e.g. "just posted Director of IT", "disclosed
+   a breach to the Maine AG", "raised $7M Series A"). Use the company
+   name or pronouns like "they" / "the company" — NEVER "you" or
+   "your". This text is shown to a salesperson scanning a list of
+   leads, NOT to the lead being pitched.
 2. **outreach** - a 3-5 sentence outbound email body (no subject line, no
    greeting, no signature) that:
    - opens by naming a *specific* detail from one recent signal - the

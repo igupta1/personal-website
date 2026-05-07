@@ -38,24 +38,6 @@ function prettyIndustry(value) {
   return INDUSTRY_LABELS[value] || value;
 }
 
-function scoreColor(score) {
-  if (score == null) return "bg-gray-100 text-gray-500 ring-gray-200";
-  if (score >= 70) return "bg-green-100 text-green-800 ring-green-300";
-  if (score >= 40) return "bg-amber-100 text-amber-800 ring-amber-300";
-  return "bg-gray-100 text-gray-600 ring-gray-300";
-}
-
-function ScoreBadge({ score }) {
-  const display = score == null ? "—" : score.toFixed(0);
-  return (
-    <div
-      className={`shrink-0 px-3 py-1.5 rounded-full font-semibold text-base tabular-nums ring-1 ${scoreColor(score)}`}
-    >
-      {display}
-    </div>
-  );
-}
-
 function CopyButton({ text }) {
   const [copied, setCopied] = useState(false);
   const onClick = async () => {
@@ -90,7 +72,6 @@ function SignalRow({ signal }) {
 
   if (signal.type.startsWith("job_posted_") || signal.type === "exec_hired") {
     primary = payload.title || "(untitled posting)";
-    if (payload.site) extra = payload.site;
     if (payload.url) link = { href: payload.url, label: "View posting" };
   } else if (signal.type === "funding_raised") {
     primary = payload.feed_title || payload.title || "(no headline)";
@@ -136,47 +117,44 @@ export default function LeadCard({ lead }) {
 
   return (
     <div className="bg-white border border-gray-200 rounded-xl p-5 shadow-sm hover:shadow transition-shadow">
-      {/* Header: name + chips on the left, score on the right */}
-      <div className="flex items-start justify-between gap-4">
-        <div className="min-w-0 flex-1">
-          <div className="flex items-baseline gap-2 flex-wrap">
-            <h3 className="text-lg font-semibold text-gray-900 leading-snug truncate">
-              {lead.name}
-            </h3>
-            {lead.domain && (
-              <a
-                href={
-                  lead.domain.startsWith("http")
-                    ? lead.domain
-                    : `https://${lead.domain}`
-                }
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-xs font-medium text-blue-600 hover:text-blue-800 hover:underline whitespace-nowrap"
-              >
-                {lead.domain} ↗
-              </a>
-            )}
-          </div>
-          <div className="mt-1.5 flex flex-wrap gap-1.5 text-xs">
-            {industryLabel && (
-              <span className="px-2 py-0.5 rounded-full bg-blue-50 text-blue-700 ring-1 ring-blue-200">
-                {industryLabel}
-              </span>
-            )}
-            {lead.headcount != null && (
-              <span className="px-2 py-0.5 rounded-full bg-gray-100 text-gray-700 ring-1 ring-gray-200">
-                ~{lead.headcount} emp
-              </span>
-            )}
-            {location && (
-              <span className="px-2 py-0.5 rounded-full bg-gray-100 text-gray-700 ring-1 ring-gray-200">
-                {location}
-              </span>
-            )}
-          </div>
+      {/* Header: name + domain link, then chips */}
+      <div className="min-w-0">
+        <div className="flex items-baseline gap-2 flex-wrap">
+          <h3 className="text-lg font-semibold text-gray-900 leading-snug">
+            {lead.name}
+          </h3>
+          {lead.domain && (
+            <a
+              href={
+                lead.domain.startsWith("http")
+                  ? lead.domain
+                  : `https://${lead.domain}`
+              }
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-xs font-medium text-blue-600 hover:text-blue-800 hover:underline whitespace-nowrap"
+            >
+              {lead.domain} ↗
+            </a>
+          )}
         </div>
-        <ScoreBadge score={lead.score} />
+        <div className="mt-1.5 flex flex-wrap gap-1.5 text-xs">
+          {industryLabel && (
+            <span className="px-2 py-0.5 rounded-full bg-blue-50 text-blue-700 ring-1 ring-blue-200">
+              {industryLabel}
+            </span>
+          )}
+          {lead.headcount != null && (
+            <span className="px-2 py-0.5 rounded-full bg-gray-100 text-gray-700 ring-1 ring-gray-200">
+              ~{lead.headcount} emp
+            </span>
+          )}
+          {location && (
+            <span className="px-2 py-0.5 rounded-full bg-gray-100 text-gray-700 ring-1 ring-gray-200">
+              {location}
+            </span>
+          )}
+        </div>
       </div>
 
       {/* Insight */}
