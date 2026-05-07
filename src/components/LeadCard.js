@@ -60,7 +60,7 @@ function CopyButton({ text }) {
 }
 
 export default function LeadCard({ lead }) {
-  const [expanded, setExpanded] = useState(false);
+  const [expanded, setExpanded] = useState(true);
   const industryLabel = prettyIndustry(lead.industry);
   const location = [lead.city, lead.state].filter(Boolean).join(", ");
 
@@ -116,7 +116,7 @@ export default function LeadCard({ lead }) {
           </div>
 
           {lead.signals && lead.signals.length > 0 && (
-            <details className="text-sm">
+            <details className="text-sm" open>
               <summary className="cursor-pointer text-gray-600 hover:text-gray-900 font-medium">
                 Signals ({lead.signals.length})
               </summary>
