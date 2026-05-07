@@ -51,24 +51,25 @@ export default function LeadFilters({
     industry !== "any" || sizeBand !== "any" || sortBy !== "default";
 
   const selectClass =
-    "w-full px-3 py-2.5 border border-gray-200 rounded-lg text-sm bg-white " +
-    "shadow-sm transition-shadow hover:shadow focus:outline-none " +
-    "focus:ring-2 focus:ring-blue-500 focus:border-blue-500 " +
+    "w-full px-3 py-2.5 border border-slate-700 rounded-lg text-sm " +
+    "bg-slate-900/60 text-gray-100 transition-colors " +
+    "hover:bg-slate-900 hover:border-slate-600 " +
+    "focus:outline-none focus:ring-2 focus:ring-blue-500/60 focus:border-blue-500 " +
     "appearance-none bg-no-repeat bg-right pr-10";
 
-  // Inline SVG chevron for the dropdown arrow.
+  // Inline SVG chevron tinted for dark backgrounds.
   const chevronStyle = {
     backgroundImage:
-      "url(\"data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e\")",
+      "url(\"data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%239ca3af' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e\")",
     backgroundPosition: "right 0.7rem center",
     backgroundSize: "1.25rem",
   };
 
   return (
-    <div className="bg-white border border-gray-200 rounded-2xl shadow-md mb-6 overflow-hidden">
-      <div className="px-6 py-5 grid grid-cols-1 md:grid-cols-3 gap-5 items-end">
+    <div className="bg-slate-800/70 backdrop-blur border border-slate-700/70 rounded-2xl shadow-lg shadow-black/10 mb-6 overflow-hidden">
+      <div className="px-5 py-4 grid grid-cols-1 md:grid-cols-3 gap-4 items-end">
         <div>
-          <label className="block text-[11px] font-semibold text-gray-500 uppercase tracking-widest mb-2">
+          <label className="block text-[10px] font-semibold text-gray-400 uppercase tracking-widest mb-1.5">
             Industry
           </label>
           <select
@@ -87,7 +88,7 @@ export default function LeadFilters({
         </div>
 
         <div>
-          <label className="block text-[11px] font-semibold text-gray-500 uppercase tracking-widest mb-2">
+          <label className="block text-[10px] font-semibold text-gray-400 uppercase tracking-widest mb-1.5">
             Company size
           </label>
           <select
@@ -105,7 +106,7 @@ export default function LeadFilters({
         </div>
 
         <div>
-          <label className="block text-[11px] font-semibold text-gray-500 uppercase tracking-widest mb-2">
+          <label className="block text-[10px] font-semibold text-gray-400 uppercase tracking-widest mb-1.5">
             Sort by
           </label>
           <select
@@ -121,10 +122,10 @@ export default function LeadFilters({
       </div>
 
       {hasActiveFilters && (
-        <div className="px-6 py-2.5 bg-gray-50 border-t border-gray-100 flex justify-end">
+        <div className="px-5 py-2 bg-slate-900/40 border-t border-slate-700/60 flex justify-end">
           <button
             onClick={clearAll}
-            className="text-xs font-medium text-gray-600 hover:text-gray-900 transition-colors"
+            className="text-xs font-medium text-gray-400 hover:text-white transition-colors"
           >
             Reset filters →
           </button>

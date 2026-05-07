@@ -18,13 +18,13 @@ const INDUSTRY_LABELS = {
 };
 
 const SIGNAL_KIND_META = {
-  job_posted_it_support:    { label: "IT Support job",    pill: "bg-blue-50 text-blue-700 ring-blue-200" },
-  job_posted_it_leadership: { label: "IT Leadership job", pill: "bg-indigo-50 text-indigo-700 ring-indigo-200" },
-  job_posted_security:      { label: "Security job",      pill: "bg-red-50 text-red-700 ring-red-200" },
-  job_posted_cloud_devops:  { label: "Cloud / DevOps job",pill: "bg-cyan-50 text-cyan-700 ring-cyan-200" },
-  exec_hired:               { label: "Exec hire",         pill: "bg-purple-50 text-purple-700 ring-purple-200" },
-  funding_raised:           { label: "Funding raised",    pill: "bg-emerald-50 text-emerald-700 ring-emerald-200" },
-  breach_disclosed:         { label: "Breach disclosed",  pill: "bg-amber-50 text-amber-800 ring-amber-200" },
+  job_posted_it_support:    { label: "IT Support",    pill: "bg-blue-500/15 text-blue-300 ring-blue-400/30" },
+  job_posted_it_leadership: { label: "IT Leadership", pill: "bg-indigo-500/15 text-indigo-300 ring-indigo-400/30" },
+  job_posted_security:      { label: "Security",      pill: "bg-rose-500/15 text-rose-300 ring-rose-400/30" },
+  job_posted_cloud_devops:  { label: "Cloud / DevOps",pill: "bg-cyan-500/15 text-cyan-300 ring-cyan-400/30" },
+  exec_hired:               { label: "Exec hire",     pill: "bg-purple-500/15 text-purple-300 ring-purple-400/30" },
+  funding_raised:           { label: "Funding",       pill: "bg-emerald-500/15 text-emerald-300 ring-emerald-400/30" },
+  breach_disclosed:         { label: "Breach",        pill: "bg-amber-500/15 text-amber-300 ring-amber-400/30" },
 };
 
 const AGENCY_LABELS = {
@@ -52,7 +52,7 @@ function CopyButton({ text }) {
   return (
     <button
       onClick={onClick}
-      className="px-3 py-1 text-xs font-medium rounded border border-gray-300 hover:bg-gray-100 transition-colors"
+      className="px-3 py-1 text-xs font-medium rounded-md bg-slate-700/60 text-gray-200 border border-slate-600 hover:bg-slate-600 transition-colors"
     >
       {copied ? "Copied!" : "Copy"}
     </button>
@@ -83,23 +83,23 @@ function SignalRow({ signal }) {
   }
 
   return (
-    <li className="flex flex-wrap items-center gap-x-3 gap-y-1 py-2 border-t border-gray-100 first:border-t-0">
+    <li className="flex flex-wrap items-center gap-x-3 gap-y-1 py-2 border-t border-slate-700/60 first:border-t-0">
       <span
-        className={`shrink-0 px-2 py-0.5 text-xs font-medium rounded-full ring-1 ${meta.pill}`}
+        className={`shrink-0 px-2 py-0.5 text-[11px] font-medium rounded-full ring-1 ${meta.pill}`}
       >
         {meta.label}
       </span>
-      <span className="text-sm text-gray-900 flex-1 min-w-0 truncate" title={primary}>
+      <span className="text-sm text-gray-200 flex-1 min-w-0 truncate" title={primary}>
         {primary}
       </span>
       <span className="shrink-0 text-xs text-gray-500 tabular-nums">{days}</span>
-      {extra && <span className="shrink-0 text-xs text-gray-400">· {extra}</span>}
+      {extra && <span className="shrink-0 text-xs text-gray-500">· {extra}</span>}
       {link && (
         <a
           href={link.href}
           target="_blank"
           rel="noopener noreferrer"
-          className="shrink-0 text-xs font-medium text-blue-600 hover:text-blue-800 hover:underline"
+          className="shrink-0 text-xs font-medium text-blue-400 hover:text-blue-300 hover:underline"
         >
           {link.label} ↗
         </a>
@@ -116,11 +116,11 @@ export default function LeadCard({ lead }) {
   const renderableSignals = (lead.signals || []).filter((s) => SIGNAL_KIND_META[s.type]);
 
   return (
-    <div className="bg-white border border-gray-200 rounded-2xl p-5 shadow-sm hover:shadow-lg hover:-translate-y-0.5 transition-all duration-150">
+    <div className="bg-slate-800/70 backdrop-blur border border-slate-700/70 rounded-2xl p-5 shadow-lg shadow-black/10 hover:bg-slate-800 hover:border-slate-600 hover:-translate-y-0.5 transition-all duration-150">
       {/* Header: name + domain link, then chips */}
       <div className="min-w-0">
         <div className="flex items-baseline gap-2 flex-wrap">
-          <h3 className="text-lg font-semibold text-gray-900 leading-snug">
+          <h3 className="text-base font-semibold text-white leading-snug">
             {lead.name}
           </h3>
           {lead.domain && (
@@ -132,25 +132,25 @@ export default function LeadCard({ lead }) {
               }
               target="_blank"
               rel="noopener noreferrer"
-              className="text-xs font-medium text-blue-600 hover:text-blue-800 hover:underline whitespace-nowrap"
+              className="text-xs font-medium text-blue-400 hover:text-blue-300 hover:underline whitespace-nowrap"
             >
               {lead.domain} ↗
             </a>
           )}
         </div>
-        <div className="mt-2 flex flex-wrap gap-1.5 text-xs">
+        <div className="mt-2 flex flex-wrap gap-1.5 text-[11px]">
           {industryLabel && (
-            <span className="px-2 py-0.5 rounded-full bg-blue-50 text-blue-700 ring-1 ring-blue-200">
+            <span className="px-2 py-0.5 rounded-full bg-blue-500/15 text-blue-300 ring-1 ring-blue-400/30">
               {industryLabel}
             </span>
           )}
           {lead.headcount != null && (
-            <span className="px-2 py-0.5 rounded-full bg-gray-100 text-gray-700 ring-1 ring-gray-200">
+            <span className="px-2 py-0.5 rounded-full bg-slate-700/70 text-gray-300 ring-1 ring-slate-600/70">
               ~{lead.headcount} emp
             </span>
           )}
           {location && (
-            <span className="px-2 py-0.5 rounded-full bg-gray-100 text-gray-700 ring-1 ring-gray-200">
+            <span className="px-2 py-0.5 rounded-full bg-slate-700/70 text-gray-300 ring-1 ring-slate-600/70">
               {location}
             </span>
           )}
@@ -159,13 +159,13 @@ export default function LeadCard({ lead }) {
 
       {/* Insight */}
       {lead.insight && (
-        <p className="mt-4 text-sm text-gray-800 leading-relaxed">{lead.insight}</p>
+        <p className="mt-4 text-sm text-gray-300 leading-relaxed">{lead.insight}</p>
       )}
 
       {/* Signals — always visible, scannable */}
       {renderableSignals.length > 0 && (
         <div className="mt-4">
-          <h4 className="text-[11px] font-semibold tracking-wide text-gray-500 uppercase mb-1">
+          <h4 className="text-[10px] font-semibold tracking-widest text-gray-500 uppercase mb-1">
             Signals ({renderableSignals.length})
           </h4>
           <ul>
@@ -178,18 +178,18 @@ export default function LeadCard({ lead }) {
 
       {/* Outreach — collapsed by default */}
       {lead.outreach && (
-        <div className="mt-4 pt-3 border-t border-gray-100">
+        <div className="mt-4 pt-3 border-t border-slate-700/60">
           <div className="flex items-center justify-between">
             <button
               onClick={() => setOutreachOpen((v) => !v)}
-              className="text-sm font-medium text-blue-600 hover:text-blue-800"
+              className="text-xs font-medium text-blue-400 hover:text-blue-300 transition-colors"
             >
               {outreachOpen ? "Hide outreach draft ↑" : "Show outreach draft ↓"}
             </button>
             {outreachOpen && <CopyButton text={lead.outreach} />}
           </div>
           {outreachOpen && (
-            <div className="mt-2 bg-gray-50 border border-gray-200 rounded-md p-3 text-sm text-gray-800 whitespace-pre-wrap leading-relaxed">
+            <div className="mt-3 bg-slate-900/60 border border-slate-700/70 rounded-lg p-3 text-sm text-gray-200 whitespace-pre-wrap leading-relaxed">
               {lead.outreach}
             </div>
           )}
