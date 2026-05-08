@@ -85,9 +85,6 @@ _UPDATABLE_FIELDS = frozenset({
     "it_msp_insight",
     "mssp_insight",
     "cloud_insight",
-    "it_msp_outreach",
-    "mssp_outreach",
-    "cloud_outreach",
 })
 
 _LEGAL_SUFFIXES = (

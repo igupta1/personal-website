@@ -167,21 +167,58 @@ _IT_PHRASES: tuple[str, ...] = (
 # "dire**cto**r" and "cio" hits "asso**cio**ate". Pre-compiled for speed.
 _IT_ABBREV_RE = re.compile(r"\b(cto|cio|ciso|it)\b", re.IGNORECASE)
 
+# Title substrings that disqualify a candidate as an IT/security/cloud
+# decision maker. Apollo's people-search sometimes returns the wrong person
+# at orgs with multiple senior people (e.g. an HR director when we asked for
+# "Director" titles). Hitting one of these forces a heavy negative score so
+# the candidate falls below alternatives.
+_DISQUALIFYING_TITLE_KEYWORDS: tuple[str, ...] = (
+    "recruitment", "recruiting", "talent acquisition",
+    "marketing", "communications",
+    "sales", "business development",
+    "medical officer", "clinical",
+    "civil engineering",  # common at construction/AE firms
+    "diversity", "equity and inclusion",
+    "human resources",
+    "facilities",
+)
+
 
 def _score_person(person: dict[str, Any]) -> int:
-    """Higher = better DM candidate. Combines seniority bucket + IT focus."""
+    """Higher = better DM candidate. Combines seniority bucket + IT focus.
+    Disqualifying titles get a large negative score so they never beat a
+    legitimate IT/security candidate at the same org."""
     title = (person.get("title") or "").lower()
     seniority = (person.get("seniority") or "").lower()
     score = _SENIORITY_WEIGHT.get(seniority, 0)
     if any(k in title for k in _IT_PHRASES) or _IT_ABBREV_RE.search(title):
         score += 100
+    if any(k in title for k in _DISQUALIFYING_TITLE_KEYWORDS):
+        score -= 1000
     return score
 
 
 def _pick_best(people: list[dict[str, Any]]) -> dict[str, Any] | None:
     if not people:
         return None
-    return max(people, key=_score_person)
+    best = max(people, key=_score_person)
+    # If even the best candidate hits a disqualifying keyword, return None
+    # rather than ship a clearly-wrong DM.
+    if _score_person(best) < 0:
+        return None
+    return best
+
+
+def _sanitize_title(title: str | None) -> str | None:
+    """Apollo's match endpoint occasionally returns a candidate's full
+    LinkedIn headline as their title (pipe-delimited self-summary). Reject
+    anything that's > 80 chars or contains a `|` and let the caller fall
+    back to the api_search title."""
+    if not title:
+        return None
+    if len(title) > 80 or "|" in title:
+        return None
+    return title.strip()
 
 
 def find_decision_maker(name: str, domain: str | None) -> Result:
@@ -225,7 +262,10 @@ def find_decision_maker(name: str, domain: str | None) -> Result:
         )
 
     full_name = matched.get("name")
-    title = matched.get("title") or chosen.get("title")
+    # Prefer the api_search title (canonical role) when match returned a
+    # LinkedIn-headline-style string. Falls back to api_search title in
+    # both error paths.
+    title = _sanitize_title(matched.get("title")) or _sanitize_title(chosen.get("title"))
     email = matched.get("email")
     linkedin_url = matched.get("linkedin_url")
 

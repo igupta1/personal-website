@@ -13,7 +13,6 @@ from msp_pipeline.outreach import (
     _describe_headcount,
     _describe_location,
     _describe_signals,
-    _short_name,
     generate,
 )
 
@@ -64,23 +63,6 @@ def _lead(
 )
 def test_describe_headcount(headcount: int | None, expected: str) -> None:
     assert _describe_headcount(headcount) == expected
-
-
-@pytest.mark.parametrize(
-    "name,expected",
-    [
-        ("Angel's Marketing and Advertising Agency", "Angel"),
-        ("The Acme Company", "Acme"),
-        ("Stripe", "Stripe"),
-        ("Pioneer Legal LLP", "Pioneer"),
-        ("", ""),
-        ("Angel’s Studio", "Angel"),
-        ("a tiny shop", "tiny"),
-        ("An Honest Co", "Honest"),
-    ],
-)
-def test_short_name(name: str, expected: str) -> None:
-    assert _short_name(name) == expected
 
 
 def test_describe_location_uses_latest_signal() -> None:
@@ -178,7 +160,7 @@ def test_describe_signals_limits_and_orders() -> None:
         assert expected in line
 
 
-# --- generate() ------------------------------------------------------------
+# --- generate() — single-sentence insight ----------------------------------
 
 
 def test_generate_calls_openai_with_full_prompt(
@@ -189,7 +171,7 @@ def test_generate_calls_openai_with_full_prompt(
     def fake_call_openai(prompt: str, **kwargs: Any) -> Copy:
         captured["prompt"] = prompt
         captured["kwargs"] = kwargs
-        return Copy(insight="x" * 30, outreach="y" * 200)
+        return Copy(insight="x" * 30)
 
     monkeypatch.setattr(outreach.llm, "call_openai", fake_call_openai)
 
@@ -208,14 +190,12 @@ def test_generate_calls_openai_with_full_prompt(
 
     prompt = captured["prompt"]
     assert "Angel's Marketing and Advertising Agency" in prompt
-    assert '"Angel"' in prompt
     assert "legal_professional" in prompt
     assert "~80 employees" in prompt
     assert "managed security service provider" in prompt
     assert "72/100" in prompt
-    assert "I hope this email finds you well" in prompt
-    assert "EMPATHY" in prompt
     assert "job_posted_security" in prompt
+    assert "THIRD PERSON" in prompt
 
     assert captured["kwargs"]["response_model"] is Copy
     assert captured["kwargs"]["model"] == "gpt-4o-mini"
@@ -228,7 +208,7 @@ def test_generate_includes_value_prop_in_prompt(
 
     def fake_call_openai(prompt: str, **kwargs: Any) -> Copy:
         captured["prompt"] = prompt
-        return Copy(insight="x" * 30, outreach="y" * 200)
+        return Copy(insight="x" * 30)
 
     monkeypatch.setattr(outreach.llm, "call_openai", fake_call_openai)
     lead = _lead(signals=[_signal(type=SignalType.JOB_SECURITY, captured_at=_now())])
@@ -238,71 +218,11 @@ def test_generate_includes_value_prop_in_prompt(
     assert "Family-owned auto dealership in Pennsylvania." in captured["prompt"]
 
 
-def test_generate_passes_dm_into_prompt_when_known(
-    monkeypatch: pytest.MonkeyPatch,
-) -> None:
-    captured: dict[str, str] = {}
-
-    def fake_call_openai(prompt: str, **kwargs):
-        captured["prompt"] = prompt
-        return Copy(insight="x" * 30, outreach="y" * 200)
-
-    monkeypatch.setattr(outreach.llm, "call_openai", fake_call_openai)
-    lead = _lead(signals=[_signal(type=SignalType.JOB_SECURITY, captured_at=_now())])
-    lead.dm_name = "Sarah Johnson"
-    lead.dm_title = "Director of IT"
-
-    generate(lead, NicheName.MSSP, 60.0)
-    assert "Sarah Johnson" in captured["prompt"]
-    assert "Director of IT" in captured["prompt"]
-
-
-def test_generate_dm_unknown_falls_back(monkeypatch: pytest.MonkeyPatch) -> None:
-    captured: dict[str, str] = {}
-
-    def fake_call_openai(prompt: str, **kwargs):
-        captured["prompt"] = prompt
-        return Copy(insight="x" * 30, outreach="y" * 200)
-
-    monkeypatch.setattr(outreach.llm, "call_openai", fake_call_openai)
-    lead = _lead(signals=[_signal(type=SignalType.JOB_SECURITY, captured_at=_now())])
-
-    generate(lead, NicheName.MSSP, 60.0)
-    assert "open without a personal greeting" in captured["prompt"]
-
-
 def test_generate_returns_copy_pydantic(monkeypatch: pytest.MonkeyPatch) -> None:
-    expected = Copy(insight="x" * 30, outreach="y" * 200)
+    expected = Copy(insight="x" * 30)
     monkeypatch.setattr(outreach.llm, "call_openai", MagicMock(return_value=expected))
     lead = _lead(signals=[_signal(type=SignalType.JOB_SECURITY, captured_at=_now())])
     assert generate(lead, NicheName.IT_MSP, 50.0) is expected
-
-
-def test_generate_rejects_outreach_with_template_placeholder(
-    monkeypatch: pytest.MonkeyPatch,
-) -> None:
-    """The LLM occasionally hallucinates [Your Company Name] / [Customer]
-    / [Date] patterns. We reject rather than ship them."""
-    from msp_pipeline import llm
-    bad_copy = Copy(
-        insight="x" * 30,
-        outreach=(
-            "I saw the recent funding round. At [Your Company Name], we help "
-            "fintech firms streamline IT operations." + ("y" * 60)
-        ),
-    )
-    monkeypatch.setattr(outreach.llm, "call_openai", MagicMock(return_value=bad_copy))
-    lead = _lead(signals=[_signal(type=SignalType.JOB_SECURITY, captured_at=_now())])
-    with pytest.raises(llm.LLMError, match="placeholder"):
-        generate(lead, NicheName.MSSP, 60.0)
-
-
-def test_generate_accepts_clean_outreach(monkeypatch: pytest.MonkeyPatch) -> None:
-    good_copy = Copy(insight="x" * 30, outreach="y" * 200)
-    monkeypatch.setattr(outreach.llm, "call_openai", MagicMock(return_value=good_copy))
-    lead = _lead(signals=[_signal(type=SignalType.JOB_SECURITY, captured_at=_now())])
-    result = generate(lead, NicheName.MSSP, 60.0)
-    assert result is good_copy
 
 
 def test_generate_per_niche_framing_differs(monkeypatch: pytest.MonkeyPatch) -> None:
@@ -310,7 +230,7 @@ def test_generate_per_niche_framing_differs(monkeypatch: pytest.MonkeyPatch) -> 
 
     def capture(prompt: str, **kwargs: Any) -> Copy:
         prompts.append(prompt)
-        return Copy(insight="x" * 30, outreach="y" * 200)
+        return Copy(insight="x" * 30)
 
     monkeypatch.setattr(outreach.llm, "call_openai", capture)
     lead = _lead(signals=[_signal(type=SignalType.JOB_SECURITY, captured_at=_now())])

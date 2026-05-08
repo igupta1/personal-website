@@ -59,9 +59,6 @@ class Lead(BaseModel):
     it_msp_insight: str | None = None
     mssp_insight: str | None = None
     cloud_insight: str | None = None
-    it_msp_outreach: str | None = None
-    mssp_outreach: str | None = None
-    cloud_outreach: str | None = None
     created_at: datetime | None = None
     updated_at: datetime | None = None
 

@@ -5,7 +5,9 @@ from email.utils import parsedate_to_datetime
 from typing import Any
 
 import feedparser
+from pydantic import BaseModel
 
+from msp_pipeline import llm
 from msp_pipeline.models import (
     LeadCandidate,
     Signal,
@@ -84,12 +86,79 @@ def _clean_company_name(name: str) -> str:
 
 def _company_from_headline(title: str) -> str:
     """Extract the company name from a funding-announcement headline by
-    splitting on the action verb. 'Altara secures $7M to ...' -> 'Altara'."""
+    splitting on the action verb. 'Altara secures $7M to ...' -> 'Altara'.
+
+    Used as a fallback when the LLM extractor below is unavailable or fails."""
     m = _HEADLINE_VERB_RE.search(title)
     if m is None:
         return _clean_company_name(title)
     candidate = title[: m.start()].strip().rstrip(",").strip()
     return _clean_company_name(candidate) or _clean_company_name(title)
+
+
+# --- LLM-driven extraction ---------------------------------------------------
+#
+# Funding headlines are messy: "Khosla-backed robotics startup Genesis AI has
+# gone full stack, demo shows" should yield "Genesis AI", but a plain split-on-
+# verb gives "Khosla" (because "backed" is an action verb). One small OpenAI
+# call per headline gets us reliable extraction AND a flag for routine IR
+# noise (earnings calls, conference call schedules) we should skip entirely.
+
+
+class _HeadlineExtraction(BaseModel):
+    company_name: str | None = None
+    is_real_buying_signal: bool = True
+    is_vc_or_fund: bool = False
+
+
+_EXTRACT_PROMPT = """\
+This is a headline from a startup funding / investment RSS feed. Extract
+the actual company that just raised money or had a real funding event,
+and flag noise we should skip.
+
+Headline: "{headline}"
+
+Rules for company_name:
+- Return ONLY the operating company that is the subject of the funding.
+  Not a VC firm. Not a person's name. Not a journalist's framing.
+- "Khosla-backed robotics startup Genesis AI has gone full stack" -> "Genesis AI"
+- "Y Combinator alum Skio sells for $105M cash" -> "Skio"
+- "SpaceX backer 137 Ventures raises $700M for two growth-stage funds"
+  -> set company_name to null AND is_vc_or_fund=true (137 Ventures is
+  the fund itself, not a portfolio company)
+- "Katie Haun raises $1B for new venture funds" -> null, is_vc_or_fund=true
+- "Altara secures $7M to bridge the data gap" -> "Altara"
+- If you can't confidently identify a real operating company, set
+  company_name to null.
+
+Rules for is_real_buying_signal:
+- TRUE: Series A/B/C/D/etc., seed rounds, growth funding, real
+  acquisitions where the acquired company will keep operating.
+- FALSE: routine investor relations (earnings calls, conference call
+  schedules, dividend announcements), class actions, lawsuits,
+  regulatory inquiries, "encouraged to inquire" shareholder notices,
+  share price milestones / valuation hits.
+- Example FALSE: "Stellus Capital Schedules First Quarter Conference Call"
+- Example FALSE: "X Inc Hits $5B Valuation"
+
+Rules for is_vc_or_fund:
+- TRUE if the entity raising money IS a VC firm, growth fund, or
+  investment fund raising LP money. They don't buy IT services.
+- FALSE for normal operating companies.
+"""
+
+
+def _extract_company_via_llm(headline: str) -> _HeadlineExtraction | None:
+    """One small OpenAI call per headline. Returns None on any failure so
+    the caller can fall back to the regex extractor."""
+    try:
+        return llm.call_openai(
+            _EXTRACT_PROMPT.format(headline=headline),
+            response_model=_HeadlineExtraction,
+        )
+    except Exception:
+        _log.warning("funding: LLM headline extraction failed for %r", headline)
+        return None
 
 
 def _is_funding_title(title: str) -> bool:
@@ -117,12 +186,27 @@ def _fetch_from_rss(feed_url: str, since: datetime) -> list[LeadCandidate]:
         published_dt = _parse_rss_date(published)
         if published_dt and published_dt < since:
             continue
-        # Per M2 plan: feed-entry title used verbatim as company name in v1.
-        # M4 enrichment (with llm.py) will extract the actual company and
-        # merge duplicates.
+
+        # LLM extraction first; regex fallback if the call errors. The
+        # extraction also tells us when to skip (routine IR, VC fund raises).
+        extraction = _extract_company_via_llm(title)
+        if extraction is not None:
+            if not extraction.is_real_buying_signal:
+                _log.info("funding: skipping non-buying-signal headline: %r", title)
+                continue
+            if extraction.is_vc_or_fund:
+                _log.info("funding: skipping VC/fund headline: %r", title)
+                continue
+            company = (extraction.company_name or "").strip()
+            if not company:
+                _log.info("funding: LLM couldn't identify a company in: %r", title)
+                continue
+        else:
+            company = _company_from_headline(title)
+
         candidates.append(
             LeadCandidate(
-                name=_company_from_headline(title),
+                name=company,
                 domain=None,
                 initial_signal=Signal(
                     type=SignalType.FUNDING_RAISED,

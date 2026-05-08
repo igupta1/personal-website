@@ -35,8 +35,8 @@ log = logging.getLogger("daily_run")
 DEFAULT_DB_PATH = Path("data/leads.db")
 DEFAULT_OUTPUT_PATH = Path("data/leads.json")
 LOOKBACK_DAYS = 14
-COPY_THRESHOLD = 20.0
-COPY_DELTA_THRESHOLD = 10.0
+INSIGHT_THRESHOLD = 20.0
+INSIGHT_DELTA_THRESHOLD = 10.0
 SIGNAL_LIMIT_IN_JSON = 6
 APOLLO_TOP_N_DEFAULT = 30
 
@@ -62,11 +62,6 @@ _NICHE_INSIGHT_COL: dict[NicheName, str] = {
     NicheName.IT_MSP: "it_msp_insight",
     NicheName.MSSP: "mssp_insight",
     NicheName.CLOUD: "cloud_insight",
-}
-_NICHE_OUTREACH_COL: dict[NicheName, str] = {
-    NicheName.IT_MSP: "it_msp_outreach",
-    NicheName.MSSP: "mssp_outreach",
-    NicheName.CLOUD: "cloud_outreach",
 }
 
 
@@ -105,6 +100,9 @@ def main(argv: list[str] | None = None) -> int:
 
         modified = db.dedup_signals_pass(conn)
         log.info("deduped signals on %d leads", modified)
+
+        purged = enrichment.purge_disqualified(conn)
+        log.info("purged %d disqualified leads", purged)
 
         all_ids = [lead.id for lead in db.iter_leads(conn) if lead.id is not None]
         log.info("re-scoring %d leads", len(all_ids))
@@ -148,6 +146,10 @@ def main(argv: list[str] | None = None) -> int:
 
     enriched_ids = _enrich_all(conn, upserted_ids, force=args.reenrich)
     log.info("kept %d enriched leads", len(enriched_ids))
+
+    purged = enrichment.purge_disqualified(conn)
+    log.info("purged %d disqualified leads", purged)
+    enriched_ids = [lid for lid in enriched_ids if db.get_lead(conn, lead_id=lid)]
 
     score_changes = _rescore_all(conn, enriched_ids)
     apollo_ids = _apollo_enrich_top_n(conn, n=args.apollo_top_n)
@@ -355,35 +357,29 @@ def _regen_copy(
     model: str,
 ) -> int:
     """Apply threshold/delta gating to decide which (lead, niche) pairs need
-    fresh outreach copy. ``force_regen_ids`` are leads that just received
-    Apollo DM data — for those we regen any niche above threshold, so the
-    new copy can use a first-name greeting."""
+    fresh insight copy. ``force_regen_ids`` is unused by the insight prompt
+    (no DM-aware greeting) but kept for parity with the apollo step's return
+    type."""
+    del force_regen_ids  # not used now that outreach emails are gone
     copy_calls = 0
     for lead_id, per_niche in score_changes.items():
         lead = db.get_lead(conn, lead_id=lead_id)
         if lead is None:
             continue
-        force = lead_id in force_regen_ids
         updates: dict[str, Any] = {}
         for niche, (old, new) in per_niche.items():
             insight_col = _NICHE_INSIGHT_COL[niche]
-            outreach_col = _NICHE_OUTREACH_COL[niche]
-            copy_missing = (
-                getattr(lead, insight_col) is None
-                or getattr(lead, outreach_col) is None
-            )
-            should_regen = new >= COPY_THRESHOLD and (
-                copy_missing  # above threshold but never had copy generated
+            insight_missing = getattr(lead, insight_col) is None
+            should_regen = new >= INSIGHT_THRESHOLD and (
+                insight_missing
                 or old is None
-                or old < COPY_THRESHOLD  # first crossing-from-below
-                or abs(new - old) > COPY_DELTA_THRESHOLD
-                or force  # got new Apollo DM data this run
+                or old < INSIGHT_THRESHOLD  # first crossing-from-below
+                or abs(new - old) > INSIGHT_DELTA_THRESHOLD
             )
             if should_regen:
                 try:
                     copy = outreach.generate(lead, niche, new, model=model)
                     updates[insight_col] = copy.insight
-                    updates[outreach_col] = copy.outreach
                     copy_calls += 1
                 except Exception:
                     log.exception(
@@ -391,13 +387,9 @@ def _regen_copy(
                         lead.name,
                         niche.value,
                     )
-            elif new < COPY_THRESHOLD and (
-                getattr(lead, insight_col) is not None
-                or getattr(lead, outreach_col) is not None
-            ):
-                # Lead dropped below threshold; existing copy is stale.
+            elif new < INSIGHT_THRESHOLD and getattr(lead, insight_col) is not None:
+                # Lead dropped below threshold; existing insight is stale.
                 updates[insight_col] = None
-                updates[outreach_col] = None
         if updates:
             try:
                 db.update_lead(conn, lead_id, **updates)
@@ -468,7 +460,6 @@ def _lead_to_json(
         "dm_linkedin_url": lead.dm_linkedin_url,
         "score": getattr(lead, _NICHE_SCORE_COL[niche]),
         "insight": getattr(lead, _NICHE_INSIGHT_COL[niche]),
-        "outreach": getattr(lead, _NICHE_OUTREACH_COL[niche]),
         "signals": [_signal_to_json(s, now) for s in relevant],
     }
 

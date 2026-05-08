@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 const INDUSTRY_LABELS = {
   software_saas: "Software / SaaS",
@@ -71,27 +71,6 @@ function freshnessClass(daysAgo) {
   return "bg-gray-600";
 }
 
-function CopyButton({ text, label = "Copy" }) {
-  const [copied, setCopied] = useState(false);
-  const onClick = async () => {
-    try {
-      await navigator.clipboard.writeText(text);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 1500);
-    } catch {
-      setCopied(false);
-    }
-  };
-  return (
-    <button
-      onClick={onClick}
-      className="px-2.5 py-1 text-[11px] font-medium rounded-md bg-slate-700/60 text-gray-200 border border-slate-600 hover:bg-slate-600 transition-colors"
-    >
-      {copied ? "Copied!" : label}
-    </button>
-  );
-}
-
 function SignalRow({ signal }) {
   const meta = SIGNAL_KIND_META[signal.type];
   if (!meta) return null;
@@ -146,10 +125,6 @@ function SignalRow({ signal }) {
 }
 
 export default function LeadCard({ lead }) {
-  // Outreach visible by default — it's the wow content. Toggle is a way to
-  // collapse if the user wants a denser view.
-  const [outreachOpen, setOutreachOpen] = useState(true);
-
   const industryLabel = prettyIndustry(lead.industry);
   const location = [lead.city, lead.state].filter(Boolean).join(", ");
   const renderableSignals = (lead.signals || []).filter((s) => SIGNAL_KIND_META[s.type]);
@@ -207,7 +182,7 @@ export default function LeadCard({ lead }) {
           <div className="text-sm text-white font-semibold leading-tight">
             {lead.dm_name}
           </div>
-          {lead.dm_title && (
+          {lead.dm_title && lead.dm_title.length <= 80 && !lead.dm_title.includes("|") && (
             <div className="text-[12px] text-gray-300 mt-0.5">
               {lead.dm_title}
             </div>
@@ -269,40 +244,6 @@ export default function LeadCard({ lead }) {
         </div>
       )}
 
-      {/* Outreach — visible by default, framed as a draft email */}
-      {lead.outreach && (
-        <div className="mt-4 pt-3 border-t border-slate-700/60">
-          <div className="flex items-center justify-between mb-2">
-            <div className="flex items-center gap-2">
-              <span className="text-[10px] font-semibold tracking-widest text-gray-500 uppercase">
-                Draft outreach email
-              </span>
-            </div>
-            <div className="flex items-center gap-2">
-              <CopyButton text={lead.outreach} />
-              <button
-                onClick={() => setOutreachOpen((v) => !v)}
-                className="text-[11px] font-medium text-gray-400 hover:text-gray-200 transition-colors"
-                title={outreachOpen ? "Collapse" : "Expand"}
-              >
-                {outreachOpen ? "−" : "+"}
-              </button>
-            </div>
-          </div>
-          {outreachOpen ? (
-            <div className="bg-slate-900/60 border-l-2 border-blue-500/50 rounded-r-md px-3 py-2.5 text-[13px] text-gray-200 whitespace-pre-wrap leading-relaxed">
-              {lead.outreach}
-            </div>
-          ) : (
-            <button
-              onClick={() => setOutreachOpen(true)}
-              className="w-full text-left text-[12px] text-gray-400 italic hover:text-gray-200 truncate"
-            >
-              {lead.outreach.slice(0, 90)}…
-            </button>
-          )}
-        </div>
-      )}
     </div>
   );
 }

@@ -22,6 +22,144 @@ from msp_pipeline.models import Lead, Signal, SignalType, SourceName
 log = logging.getLogger(__name__)
 
 
+# --- Pure-code disqualification filter ------------------------------------
+#
+# These checks run BEFORE any LLM call (in purge_disqualified) and as a
+# secondary gate inside enrich(). The goal is to drop leads that obviously
+# don't fit "SMB IT-services buyer" — government, mega-corps, VC funds, the
+# user's own competitors — without burning Gemini/OpenAI tokens on them.
+
+# Domain TLDs that mark non-SMB targets. Government, military, public
+# universities don't transact with small MSPs in any reasonable timeframe.
+_BLOCKED_TLDS: tuple[str, ...] = (".gov", ".mil", ".edu")
+
+# Token-aware name patterns for entities that can't be SMB buyers. Each
+# regex must match a whole-word portion of the company name (case
+# insensitive). Crafted to NOT match legitimate SMBs that happen to have
+# substring overlap (e.g. "Capital City Auto" should not match "Capital").
+_BLOCKED_NAME_RES: tuple[re.Pattern[str], ...] = (
+    re.compile(r"\b(?:State|City|County|Town) of\b", re.IGNORECASE),
+    re.compile(r"\bDepartment of\b", re.IGNORECASE),
+    re.compile(r"\bU\.?S\.? (?:House|Senate|Department|Government|Army|Navy|Air Force)\b", re.IGNORECASE),
+    re.compile(r"\b(?:University|College)\b", re.IGNORECASE),
+    re.compile(r"\bVentures?\b", re.IGNORECASE),  # VC fund names
+    # Investment-fund LP-style names — Stellus Capital Investment Corp, etc.
+    # Match "Capital" / "Holdings" / "Investments" only when followed by a
+    # fund-style suffix nearby, to avoid false-matching small businesses.
+    re.compile(
+        r"\b(?:Capital|Holdings?|Investments?) "
+        r"(?:Partners|LLC|Inc|LP|L\.P\.|Corp(?:oration)?|Group|Fund|Management|Investments?)\b",
+        re.IGNORECASE,
+    ),
+)
+
+# Mega-corps that should never appear in an SMB lead set. Match by domain
+# (more reliable than name).
+_BLOCKED_DOMAINS: frozenset[str] = frozenset({
+    "google.com", "alphabet.com",
+    "apple.com",
+    "meta.com", "facebook.com",
+    "microsoft.com",
+    "amazon.com", "aws.amazon.com",
+    "netflix.com",
+    "tesla.com",
+    "openai.com",
+    "anthropic.com",
+    "nvidia.com",
+    "oracle.com",
+    "salesforce.com",
+    "ibm.com",
+    "intel.com",
+    "cisco.com",
+})
+
+# Substrings inside the company NAME (not domain) that strongly suggest
+# the entity sells IT services itself (i.e. is a competitor, not a buyer).
+# Match on whole-name basis: "X IT Solutions", "X Technology Services", etc.
+_IT_VENDOR_NAME_RES: tuple[re.Pattern[str], ...] = (
+    re.compile(r"\bIT (?:Solutions|Services|Consulting|Support)\b", re.IGNORECASE),
+    re.compile(r"\b(?:Managed|Cloud) (?:Services|Solutions|Consulting)\b", re.IGNORECASE),
+    re.compile(r"\bCybersecurity\b", re.IGNORECASE),
+    re.compile(r"\bSoftware (?:Solutions|Services)\b", re.IGNORECASE),
+    re.compile(r"\bTech(?:nology)? (?:Solutions|Services|Consulting)\b", re.IGNORECASE),
+    re.compile(r"\bComplete IT\b", re.IGNORECASE),
+)
+
+# Names that look like raw RSS article headlines instead of actual company
+# names — symptom of a funding-source extraction miss before the LLM
+# extractor was added. Catches "Khosla-backed robotics startup Genesis AI
+# has gone full stack, demo shows", "NHI Announces $106.9 Million SHOP
+# Investment", "Stellus Capital Schedules First Quarter ... Conference Call".
+_HEADLINE_NAME_PATTERNS: tuple[re.Pattern[str], ...] = (
+    re.compile(r"\$[\d.]+\s*(?:M|B|million|billion)", re.IGNORECASE),
+    re.compile(r"\bConference Call\b|\bquarter(?:ly)?\s+results\b|\bSchedules\b", re.IGNORECASE),
+    re.compile(r"\bdemo shows\b|\bgone full stack\b|\bfounder says\b", re.IGNORECASE),
+    re.compile(r"\b(?:raises|raised|secured|secures|backed|sells|sold|announces|hits)\b\s+\$", re.IGNORECASE),
+)
+
+
+def _looks_like_article_headline(name: str) -> bool:
+    if len(name) > 80:
+        return True
+    return any(p.search(name) for p in _HEADLINE_NAME_PATTERNS)
+
+
+def _domain_blocked(domain: str | None) -> bool:
+    if not domain:
+        return False
+    d = domain.lower().strip().rstrip("/")
+    if d in _BLOCKED_DOMAINS:
+        return True
+    return any(d.endswith(tld) for tld in _BLOCKED_TLDS)
+
+
+def _name_blocked(name: str) -> bool:
+    return any(p.search(name) for p in _BLOCKED_NAME_RES)
+
+
+def _is_it_vendor_name(name: str) -> bool:
+    return any(p.search(name) for p in _IT_VENDOR_NAME_RES)
+
+
+def _disqualification_reason(lead: Lead) -> str | None:
+    if _domain_blocked(lead.domain):
+        return f"blocked_domain={lead.domain}"
+    if _name_blocked(lead.name):
+        return "blocked_name_pattern"
+    if _is_it_vendor_name(lead.name):
+        return "it_vendor_name"
+    if _looks_like_article_headline(lead.name):
+        return "article_headline_as_name"
+    if lead.headcount is not None and lead.headcount > 250:
+        return f"oversized={lead.headcount}"
+    if lead.headcount == 0:
+        return "zero_headcount"
+    return None
+
+
+def purge_disqualified(conn: sqlite3.Connection) -> int:
+    """Pure-code pass: drop leads that clearly don't fit the SMB target.
+    Runs before scoring so disqualified leads can't crowd the top-30. No
+    LLM calls. Safe to run every night."""
+    deleted = 0
+    leads = list(db.iter_leads(conn))
+    for lead in leads:
+        if lead.id is None:
+            continue
+        reason = _disqualification_reason(lead)
+        if reason is not None:
+            log.info(
+                "purge: deleting %d (%s) — %s",
+                lead.id, lead.name, reason,
+            )
+            try:
+                db.delete_lead(conn, lead.id)
+                deleted += 1
+            except Exception:
+                log.exception("purge: delete_lead failed for id=%s", lead.id)
+    return deleted
+
+
 # --- Industry vocabulary ---------------------------------------------------
 
 
@@ -266,6 +404,18 @@ def enrich(conn: sqlite3.Connection, lead: Lead, *, force: bool = False) -> bool
         log.debug("enrich: skip lead %d (%s) — no new signals since last run",
                   lead.id, lead.name)
         return True
+
+    # First gate: pure-code disqualification. Cheap, runs on whatever
+    # data we already have. Catches government / mega-corps / VC funds /
+    # competitor names without needing a Gemini call.
+    reason = _disqualification_reason(lead)
+    if reason is not None:
+        log.info(
+            "enrich: deleting lead %d (%s) — %s",
+            lead.id, lead.name, reason,
+        )
+        db.delete_lead(conn, lead.id)
+        return False
 
     lookup = lookup_company(lead)
 

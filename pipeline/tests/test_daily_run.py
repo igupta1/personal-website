@@ -127,7 +127,7 @@ def test_main_end_to_end_smoke(
     )
     monkeypatch.setattr(
         "msp_pipeline.outreach.generate",
-        MagicMock(return_value=Copy(insight="x" * 30, outreach="y" * 200)),
+        MagicMock(return_value=Copy(insight="x" * 30)),
     )
 
     rc = daily_run.main(
@@ -152,7 +152,6 @@ def test_main_end_to_end_smoke(
                 "state",
                 "score",
                 "insight",
-                "outreach",
                 "signals",
             }
             assert lead["country"] == "US"
@@ -203,7 +202,7 @@ def test_per_source_failure_isolated(
     )
     monkeypatch.setattr(
         "msp_pipeline.outreach.generate",
-        MagicMock(return_value=Copy(insight="x" * 30, outreach="y" * 200)),
+        MagicMock(return_value=Copy(insight="x" * 30)),
     )
 
     rc = daily_run.main(
@@ -251,7 +250,7 @@ def test_copy_regen_threshold_gates_calls(
     db.update_lead(conn, hot.id, industry="healthcare", headcount=80, country="US")
 
     generate_mock = MagicMock(
-        return_value=Copy(insight="x" * 30, outreach="y" * 200)
+        return_value=Copy(insight="x" * 30)
     )
     monkeypatch.setattr("msp_pipeline.outreach.generate", generate_mock)
 
@@ -384,7 +383,7 @@ def _setup_minimal_pipeline_mocks(monkeypatch: pytest.MonkeyPatch) -> None:
     )
     monkeypatch.setattr(
         "msp_pipeline.outreach.generate",
-        MagicMock(return_value=Copy(insight="x" * 30, outreach="y" * 200)),
+        MagicMock(return_value=Copy(insight="x" * 30)),
     )
 
 
@@ -506,7 +505,7 @@ def test_rescore_only_dedups_existing_signals(
 
     monkeypatch.setattr(
         "msp_pipeline.outreach.generate",
-        MagicMock(return_value=Copy(insight="x" * 30, outreach="y" * 200)),
+        MagicMock(return_value=Copy(insight="x" * 30)),
     )
 
     rc = daily_run.main(
@@ -550,13 +549,12 @@ def test_rescore_clears_stale_copy_when_score_drops_below_threshold(
         ),
     )
     conn.commit()
-    # Pre-seed: score above threshold + outreach copy already populated.
+    # Pre-seed: score above threshold + insight already populated.
     db.update_lead(
         conn,
         lead.id,
         it_msp_score=80.0,
         it_msp_insight="stale insight",
-        it_msp_outreach="stale outreach",
     )
     refreshed = db.get_lead(conn, lead_id=lead.id)
     assert refreshed is not None
@@ -571,7 +569,6 @@ def test_rescore_clears_stale_copy_when_score_drops_below_threshold(
     after = db.get_lead(conn, lead_id=lead.id)
     assert after is not None
     assert after.it_msp_insight is None
-    assert after.it_msp_outreach is None
     generate_mock.assert_not_called()
 
 
@@ -784,70 +781,6 @@ def test_apollo_deletes_when_headcount_over_smb_cap(
 
     daily_run._apollo_enrich_top_n(conn, n=30)
     assert db.get_lead(conn, lead_id=lid) is None
-
-
-def test_regen_copy_force_regens_apollo_enriched_lead(
-    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
-) -> None:
-    """A lead whose score barely moved would normally skip outreach regen.
-    But if Apollo just supplied a DM name, the new copy should be regenerated
-    so it can address them by first name."""
-    conn = db.init_db(tmp_path / "leads.db")
-    lid = _seed_lead(conn, "Stable Hot Co", it_msp_score=70.0)
-    db.update_lead(
-        conn, lid,
-        it_msp_insight="old insight", it_msp_outreach="old outreach",
-    )
-
-    generate_mock = MagicMock(
-        return_value=Copy(insight="x" * 30, outreach="y" * 200)
-    )
-    monkeypatch.setattr("msp_pipeline.outreach.generate", generate_mock)
-
-    # Score change is below the COPY_DELTA_THRESHOLD (10) — no regen normally.
-    score_changes = {
-        lid: {
-            NicheName.IT_MSP: (70.0, 71.0),
-            NicheName.MSSP: (5.0, 5.0),  # Below threshold, no regen
-            NicheName.CLOUD: (5.0, 5.0),
-        }
-    }
-
-    copy_calls = daily_run._regen_copy(
-        conn, score_changes,
-        force_regen_ids={lid},  # Apollo just enriched this lead
-        model="gpt-4o-mini",
-    )
-    # IT_MSP regenerated (above threshold + force); MSSP/CLOUD below threshold
-    # so no regen even with force.
-    assert copy_calls == 1
-    after = db.get_lead(conn, lead_id=lid)
-    assert after is not None
-    assert after.it_msp_outreach == "y" * 200
-
-
-def test_apollo_skipped_lead_not_in_force_set(
-    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
-) -> None:
-    """If Apollo finds the org but no DM name, the lead is marked but
-    NOT added to the force-regen set (no point regenerating outreach with
-    no DM data to inject)."""
-    monkeypatch.setenv("APOLLO_API_KEY", "test-key")
-    conn = db.init_db(tmp_path / "leads.db")
-    lid = _seed_lead(conn, "Hot Co", it_msp_score=80.0)
-
-    monkeypatch.setattr(
-        daily_run.apollo,
-        "find_decision_maker",
-        MagicMock(
-            return_value=apollo.Result(
-                org_found=True, dm_found=False, headcount=50,
-            )
-        ),
-    )
-
-    enriched = daily_run._apollo_enrich_top_n(conn, n=30)
-    assert lid not in enriched
 
 
 def test_upload_failure_returns_nonzero_exit(
