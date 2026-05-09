@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-08T16:45:44.972262",
+  "generated_at": "2026-05-09T08:03:38.533365",
   "niches": {
     "it_msp": [
       {
@@ -42,6 +42,41 @@
             "payload": {
               "agency": "ca_ag",
               "reported_date": "04/29/2026"
+            }
+          }
+        ]
+      },
+      {
+        "name": "U.S. 1031 Exchange Services. Inc.",
+        "domain": "us1031.com",
+        "industry": "real_estate",
+        "headcount": null,
+        "country": "US",
+        "city": "Sarasota",
+        "state": "FL",
+        "dm_name": "Ryan Stulman",
+        "dm_title": "President",
+        "dm_email": "rstulman@us1031.com",
+        "dm_linkedin_url": "http://www.linkedin.com/in/ryan-stulman-mba",
+        "score": 66.63118295736575,
+        "insight": "U.S. 1031 Exchange Services disclosed a data breach recently, indicating an urgent need for enhanced IT security and support.",
+        "signals": [
+          {
+            "type": "breach_disclosed",
+            "captured_at": "2026-05-09T07:57:13.098372",
+            "days_ago": 0,
+            "payload": {
+              "agency": "me_ag",
+              "reported_date": "2026-05-08"
+            }
+          },
+          {
+            "type": "breach_disclosed",
+            "captured_at": "2026-05-04T23:01:56.641858",
+            "days_ago": 4,
+            "payload": {
+              "agency": "me_ag",
+              "reported_date": "2026-04-23"
             }
           }
         ]
@@ -97,24 +132,52 @@
         ]
       },
       {
+        "name": "The Moorings Park Institute Incorporated",
+        "domain": "mooringspark.org",
+        "industry": "healthcare",
+        "headcount": null,
+        "country": "US",
+        "city": "Naples",
+        "state": "FL",
+        "dm_name": "Daniel J Lavender",
+        "dm_title": "President and Chief Executive Officer",
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": 39.996014215352275,
+        "insight": "The Moorings Park Institute Incorporated recently posted a job for a Director of IT Architecture, indicating a potential need for IT support.",
+        "signals": [
+          {
+            "type": "job_posted_it_leadership",
+            "captured_at": "2026-05-09T07:56:49.271362",
+            "days_ago": 0,
+            "payload": {
+              "title": "Director of IT Architecture",
+              "url": "https://www.adzuna.com/land/ad/5721259224?se=JGHTpXxL8RGnMap5hKkm1g&utm_medium=api&utm_source=3aa14b35&v=96B9C8A3546C269632B3966CC0D1E58CD6FFD3C7",
+              "date_posted": "2026-05-07T01:06:09Z",
+              "site": "adzuna"
+            }
+          }
+        ]
+      },
+      {
         "name": "Aligned Dental",
         "domain": "aligneddentalpartners.com",
         "industry": "healthcare",
         "headcount": 38,
         "country": "US",
-        "city": "Chagrin Falls",
-        "state": "OH",
+        "city": "Sarasota",
+        "state": "FL",
         "dm_name": "Chris McClure",
         "dm_title": "Co-Founder",
         "dm_email": "chris@aligneddentalpartners.com",
         "dm_linkedin_url": "http://www.linkedin.com/in/chris-mcclure",
-        "score": 39.65281802444994,
+        "score": 39.07312178367181,
         "insight": "Aligned Dental recently posted for an IT Director, indicating a crucial time for scaling IT support as they expand their consulting services.",
         "signals": [
           {
             "type": "job_posted_it_leadership",
             "captured_at": "2026-05-08T07:41:51.457583",
-            "days_ago": 0,
+            "days_ago": 1,
             "payload": {
               "title": "IT Director- Healthcare",
               "url": "https://www.linkedin.com/jobs/view/4411682564",
@@ -142,7 +205,7 @@
           {
             "type": "job_posted_it_leadership",
             "captured_at": "2026-05-04T23:01:46.127486",
-            "days_ago": 3,
+            "days_ago": 4,
             "payload": {
               "title": "Interim Director of IT",
               "url": "https://www.adzuna.com/land/ad/5718222787?se=fnxJPA1I8RGldLZhYZiz6Q&utm_medium=api&utm_source=3aa14b35&v=CE66AC6A2276C4E0A5173DB442EEB967E174D723",
@@ -153,105 +216,345 @@
         ]
       },
       {
-        "name": "54 Below Inc.",
-        "domain": "54below.org",
-        "industry": "media_entertainment",
-        "headcount": 74,
+        "name": "New  Congol  LLC  dba  New  Congoleum",
+        "domain": "congoleum.com",
+        "industry": "manufacturing",
+        "headcount": null,
         "country": "US",
-        "city": "New York",
-        "state": "NY",
-        "dm_name": "Richard Frankel",
-        "dm_title": "Managing Director",
+        "city": "Trenton",
+        "state": "NJ",
+        "dm_name": null,
+        "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 34.69645195167672,
-        "insight": "They disclosed a breach yesterday, highlighting the increasing risk of data security in their cabaret theater operations.",
+        "score": 34.99673534602446,
+        "insight": "New Congol disclosed a security breach, indicating an urgent need for enhanced IT support and system administration.",
         "signals": [
           {
             "type": "breach_disclosed",
-            "captured_at": "2026-05-08T07:42:16.913744",
+            "captured_at": "2026-05-09T07:57:13.098372",
             "days_ago": 0,
             "payload": {
               "agency": "me_ag",
-              "reported_date": "2026-05-07"
+              "reported_date": "2026-05-08"
             }
           }
         ]
       },
       {
-        "name": "Johnson, Webbert, & Beard LLP",
-        "domain": "johnsonwebbert.com",
-        "industry": "legal_professional",
-        "headcount": 19,
-        "country": "US",
-        "city": "Topsham",
-        "state": "ME",
-        "dm_name": "David G. Webbert",
-        "dm_title": "Managing Partner",
-        "dm_email": null,
-        "dm_linkedin_url": null,
-        "score": 34.69645194888391,
-        "insight": "They disclosed a breach shortly before reaching out for assistance, which is critical for their law practice's reputation.",
-        "signals": [
-          {
-            "type": "breach_disclosed",
-            "captured_at": "2026-05-08T07:42:16.913744",
-            "days_ago": 0,
-            "payload": {
-              "agency": "me_ag",
-              "reported_date": "2026-05-07"
-            }
-          }
-        ]
-      },
-      {
-        "name": "Credit Technologies, Inc",
-        "domain": "credittechnologies.com",
+        "name": "Financial Foundations, Inc.",
+        "domain": "financial-foundationsinc.com",
         "industry": "fintech",
-        "headcount": 48,
+        "headcount": 10,
         "country": "US",
-        "city": "Wixom",
-        "state": "MI",
-        "dm_name": "Thomas Conwell",
-        "dm_title": "President / CEO",
-        "dm_email": "tconwell@credittechnologies.com",
-        "dm_linkedin_url": "http://www.linkedin.com/in/thomasconwell",
-        "score": 34.69645193844565,
-        "insight": "Credit Technologies recently disclosed a data breach, highlighting potential vulnerability in their fintech services.",
+        "city": "SOUTHBOROUGH",
+        "state": "MA",
+        "dm_name": "Eric Meushaw",
+        "dm_title": "President",
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": 34.99673533843451,
+        "insight": "Financial Foundations, Inc. disclosed a breach, indicating an urgent need for enhanced IT support and security.",
         "signals": [
           {
             "type": "breach_disclosed",
-            "captured_at": "2026-05-08T07:42:16.913744",
+            "captured_at": "2026-05-09T07:57:13.098372",
             "days_ago": 0,
             "payload": {
               "agency": "me_ag",
-              "reported_date": "2026-04-27"
+              "reported_date": "2026-05-08"
             }
           }
         ]
       },
       {
-        "name": "Alliance Roofing Company, Inc.",
-        "domain": "allianceroofinginc.com",
-        "industry": "construction",
-        "headcount": 3,
+        "name": "Lautrec, Ltd.",
+        "domain": "lautrecltd.com",
+        "industry": "other",
+        "headcount": null,
         "country": "US",
-        "city": "Santa Clara",
-        "state": "CA",
-        "dm_name": "Randy Tobin",
-        "dm_title": "CEO",
+        "city": "Farmington Hills",
+        "state": "MI",
+        "dm_name": null,
+        "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 34.69642130544545,
-        "insight": "Randy Tobin, CEO of Alliance, may be assessing IT security post-breach disclosure as they manage roofing services.",
+        "score": 34.9967353220099,
+        "insight": "Lautrec, Ltd. recently disclosed a data breach, indicating an urgent need for enhanced IT security and support.",
         "signals": [
           {
             "type": "breach_disclosed",
-            "captured_at": "2026-05-08T07:42:13.610247",
+            "captured_at": "2026-05-09T07:57:13.098372",
+            "days_ago": 0,
+            "payload": {
+              "agency": "me_ag",
+              "reported_date": "2026-05-08"
+            }
+          }
+        ]
+      },
+      {
+        "name": "2nd Swing",
+        "domain": "2ndswing.com",
+        "industry": "ecommerce_retail",
+        "headcount": null,
+        "country": "US",
+        "city": "Eden Prairie",
+        "state": "MN",
+        "dm_name": "Simon Kallal",
+        "dm_title": "Chief Executive Officer",
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": 34.996735296956516,
+        "insight": "2nd Swing disclosed a breach, indicating an urgent need for enhanced IT support and security services.",
+        "signals": [
+          {
+            "type": "breach_disclosed",
+            "captured_at": "2026-05-09T07:57:13.098372",
+            "days_ago": 0,
+            "payload": {
+              "agency": "me_ag",
+              "reported_date": "2026-05-07"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Gateways Community Services",
+        "domain": "gatewayscs.org",
+        "industry": "healthcare",
+        "headcount": null,
+        "country": "US",
+        "city": "Nashua",
+        "state": "NH",
+        "dm_name": "Sandy Pelletier",
+        "dm_title": "President & Chief Executive Officer",
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": 34.99673528071908,
+        "insight": "Gateways Community Services recently disclosed a data breach, indicating an urgent need for enhanced IT support and security services.",
+        "signals": [
+          {
+            "type": "breach_disclosed",
+            "captured_at": "2026-05-09T07:57:13.098372",
+            "days_ago": 0,
+            "payload": {
+              "agency": "me_ag",
+              "reported_date": "2026-05-05"
+            }
+          }
+        ]
+      },
+      {
+        "name": "MemberSource Credit Union",
+        "domain": "membersourcecu.org",
+        "industry": "fintech",
+        "headcount": 50,
+        "country": "US",
+        "city": "Houston",
+        "state": "TX",
+        "dm_name": "Kenny Harrington",
+        "dm_title": "President/CEO",
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": 34.996704564808425,
+        "insight": "MemberSource Credit Union recently disclosed a data breach, highlighting an urgent need for enhanced IT support services.",
+        "signals": [
+          {
+            "type": "breach_disclosed",
+            "captured_at": "2026-05-09T07:57:09.802162",
+            "days_ago": 0,
+            "payload": {
+              "agency": "ca_ag",
+              "reported_date": "05/08/2026"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Sanger Skilled Care, LLC dba Cornerstone Care Center",
+        "domain": null,
+        "industry": "healthcare",
+        "headcount": null,
+        "country": "US",
+        "city": "Sanger",
+        "state": "CA",
+        "dm_name": null,
+        "dm_title": null,
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": 34.99670455635748,
+        "insight": "Sanger Skilled Care, LLC recently disclosed a breach, indicating an urgent need for enhanced cybersecurity measures.",
+        "signals": [
+          {
+            "type": "breach_disclosed",
+            "captured_at": "2026-05-09T07:57:09.802162",
             "days_ago": 0,
             "payload": {
               "agency": "ca_ag",
               "reported_date": "05/07/2026"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Berger & Williams, LLP",
+        "domain": "bwrllp.com",
+        "industry": "legal_professional",
+        "headcount": null,
+        "country": "US",
+        "city": "San Diego",
+        "state": "CA",
+        "dm_name": null,
+        "dm_title": null,
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": 34.996704540419536,
+        "insight": "Berger & Williams, LLP recently disclosed a breach, highlighting their immediate need for enhanced IT support and security.",
+        "signals": [
+          {
+            "type": "breach_disclosed",
+            "captured_at": "2026-05-09T07:57:09.802162",
+            "days_ago": 0,
+            "payload": {
+              "agency": "ca_ag",
+              "reported_date": "05/05/2026"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Frontwave Credit Union",
+        "domain": "frontwavecu.com",
+        "industry": "fintech",
+        "headcount": 120,
+        "country": "US",
+        "city": "Oceanside",
+        "state": "CA",
+        "dm_name": "Bill Birnie",
+        "dm_title": "President/CEO",
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": 34.9967045247062,
+        "insight": "The company recently disclosed a breach, highlighting their critical need for enhanced IT support and security solutions.",
+        "signals": [
+          {
+            "type": "breach_disclosed",
+            "captured_at": "2026-05-09T07:57:09.802162",
+            "days_ago": 0,
+            "payload": {
+              "agency": "ca_ag",
+              "reported_date": "04/28/2026"
+            }
+          }
+        ]
+      },
+      {
+        "name": "L.A. Care Health Plan",
+        "domain": "lacare.org",
+        "industry": "healthcare",
+        "headcount": null,
+        "country": "US",
+        "city": "Los Angeles",
+        "state": "CA",
+        "dm_name": "T. M.",
+        "dm_title": "Chief Information And Technology Officer",
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": 34.99670450676549,
+        "insight": "L.A. Care Health Plan disclosed a data breach, indicating an urgent need for enhanced IT support and security solutions.",
+        "signals": [
+          {
+            "type": "breach_disclosed",
+            "captured_at": "2026-05-09T07:57:09.802162",
+            "days_ago": 0,
+            "payload": {
+              "agency": "ca_ag",
+              "reported_date": "04/27/2026"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Maman",
+        "domain": "mamannyc.com",
+        "industry": "hospitality_food",
+        "headcount": null,
+        "country": "US",
+        "city": "New York",
+        "state": "NY",
+        "dm_name": "Benjamin Sormonte",
+        "dm_title": "CEO",
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": 34.99667404255699,
+        "insight": "Maman recently raised funding, indicating potential for increased IT support and infrastructure needs.",
+        "signals": [
+          {
+            "type": "funding_raised",
+            "captured_at": "2026-05-09T07:57:06.539973",
+            "days_ago": 0,
+            "payload": {
+              "feed_title": "TriSpan Closes Continuation Vehicle for Maman",
+              "feed_url": "https://www.prnewswire.com/rss/financial-services-latest-news/financial-services-latest-news-list.rss",
+              "link": "https://www.prnewswire.com/news-releases/trispan-closes-continuation-vehicle-for-maman-302767086.html",
+              "published": "Fri, 8 May 2026 15:36:00 +0000"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Tsubaki Kabelschlepp America, Inc",
+        "domain": "tsubaki.com",
+        "industry": "manufacturing",
+        "headcount": null,
+        "country": "US",
+        "city": null,
+        "state": null,
+        "dm_name": null,
+        "dm_title": null,
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": 34.99651247100149,
+        "insight": "Tsubaki Kabelschlepp America, Inc recently posted a job for a Help Desk Technician Intern, indicating a need for IT support.",
+        "signals": [
+          {
+            "type": "job_posted_it_support",
+            "captured_at": "2026-05-09T07:56:49.271362",
+            "days_ago": 0,
+            "payload": {
+              "title": "Help Desk Technician Intern",
+              "url": "https://www.adzuna.com/land/ad/5722725889?se=EFtkonxL8RGnMap5hKkm1g&utm_medium=api&utm_source=3aa14b35&v=AEFDC5ADA7D94C8A7131D66EEAB006394A75198E",
+              "date_posted": "2026-05-08T03:42:04Z",
+              "site": "adzuna"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Sol de Janeiro",
+        "domain": "soldejaneiro.com",
+        "industry": "ecommerce_retail",
+        "headcount": null,
+        "country": "US",
+        "city": "New York",
+        "state": "NY",
+        "dm_name": null,
+        "dm_title": null,
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": 34.996401812635035,
+        "insight": "Sol de Janeiro recently posted a job for a part-time IT Support Specialist, indicating a need for IT assistance.",
+        "signals": [
+          {
+            "type": "job_posted_it_support",
+            "captured_at": "2026-05-09T07:56:37.439236",
+            "days_ago": 0,
+            "payload": {
+              "title": "IT Support Specialist (Part-Time)",
+              "url": "https://www.linkedin.com/jobs/view/4388509300",
+              "date_posted": "2026-05-03",
+              "site": "linkedin"
             }
           }
         ]
@@ -274,7 +577,7 @@
           {
             "type": "exec_hired",
             "captured_at": "2026-05-08T07:41:51.457583",
-            "days_ago": 0,
+            "days_ago": 1,
             "payload": {
               "title": "Chief Information Security Officer",
               "url": "https://www.indeed.com/viewjob?jk=e30831756f792724",
@@ -285,53 +588,105 @@
         ]
       },
       {
-        "name": "Mt. Spokane Pediatrics",
-        "domain": "mtspokanepediatrics.com",
-        "industry": "healthcare",
-        "headcount": 24,
+        "name": "54 Below Inc.",
+        "domain": "54below.org",
+        "industry": "media_entertainment",
+        "headcount": 74,
         "country": "US",
-        "city": "Spokane",
-        "state": "WA",
-        "dm_name": null,
-        "dm_title": null,
+        "city": "New York",
+        "state": "NY",
+        "dm_name": "Richard Frankel",
+        "dm_title": "Managing Director",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 33.93223797315117,
-        "insight": "They recently disclosed a breach, highlighting the importance of robust IT support as a healthcare provider.",
+        "score": 34.18921414839483,
+        "insight": "They disclosed a breach yesterday, highlighting the increasing risk of data security in their cabaret theater operations.",
         "signals": [
           {
             "type": "breach_disclosed",
-            "captured_at": "2026-05-07T08:34:11.918561",
+            "captured_at": "2026-05-08T07:42:16.913744",
             "days_ago": 1,
             "payload": {
-              "agency": "wa_ag",
-              "reported_date": "04/30/2026"
+              "agency": "me_ag",
+              "reported_date": "2026-05-07"
             }
           }
         ]
       },
       {
-        "name": "First Harvest Federal Credit Union",
-        "domain": "firstharvestcu.com",
-        "industry": "fintech",
-        "headcount": 200,
+        "name": "Johnson, Webbert, & Beard LLP",
+        "domain": "johnsonwebbert.com",
+        "industry": "legal_professional",
+        "headcount": 19,
         "country": "US",
-        "city": "Deptford",
-        "state": "NJ",
-        "dm_name": "Ned Leslie",
-        "dm_title": "Vice President Information Technology Operations",
-        "dm_email": "nleslie@firstharvestcu.com",
-        "dm_linkedin_url": "http://www.linkedin.com/in/ned-leslie-31576b4",
-        "score": 33.93222601270728,
-        "insight": "They experienced a breach disclosure, highlighting the importance of robust IT support in the fintech sector.",
+        "city": "Topsham",
+        "state": "ME",
+        "dm_name": "David G. Webbert",
+        "dm_title": "Managing Partner",
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": 34.18921414046802,
+        "insight": "They disclosed a breach shortly before reaching out for assistance, which is critical for their law practice's reputation.",
         "signals": [
           {
             "type": "breach_disclosed",
-            "captured_at": "2026-05-07T08:34:10.599934",
+            "captured_at": "2026-05-08T07:42:16.913744",
             "days_ago": 1,
             "payload": {
               "agency": "me_ag",
-              "reported_date": "2026-05-06"
+              "reported_date": "2026-05-07"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Credit Technologies, Inc",
+        "domain": "credittechnologies.com",
+        "industry": "fintech",
+        "headcount": 48,
+        "country": "US",
+        "city": "Wixom",
+        "state": "MI",
+        "dm_name": "Thomas Conwell",
+        "dm_title": "President / CEO",
+        "dm_email": "tconwell@credittechnologies.com",
+        "dm_linkedin_url": "http://www.linkedin.com/in/thomasconwell",
+        "score": 34.189213996541945,
+        "insight": "Credit Technologies recently disclosed a data breach, highlighting potential vulnerability in their fintech services.",
+        "signals": [
+          {
+            "type": "breach_disclosed",
+            "captured_at": "2026-05-08T07:42:16.913744",
+            "days_ago": 1,
+            "payload": {
+              "agency": "me_ag",
+              "reported_date": "2026-04-27"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Alliance Roofing Company, Inc.",
+        "domain": "allianceroofinginc.com",
+        "industry": "construction",
+        "headcount": 3,
+        "country": "US",
+        "city": "Santa Clara",
+        "state": "CA",
+        "dm_name": "Randy Tobin",
+        "dm_title": "CEO",
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": 34.18918402704435,
+        "insight": "Randy Tobin, CEO of Alliance, may be assessing IT security post-breach disclosure as they manage roofing services.",
+        "signals": [
+          {
+            "type": "breach_disclosed",
+            "captured_at": "2026-05-08T07:42:13.610247",
+            "days_ago": 1,
+            "payload": {
+              "agency": "ca_ag",
+              "reported_date": "05/07/2026"
             }
           }
         ]
@@ -419,157 +774,53 @@
         ]
       },
       {
-        "name": "D'Ambrosio Dodge Inc.",
-        "domain": "jeffdambrosio.com",
-        "industry": "other",
-        "headcount": null,
+        "name": "Mt. Spokane Pediatrics",
+        "domain": "mtspokanepediatrics.com",
+        "industry": "healthcare",
+        "headcount": 24,
         "country": "US",
-        "city": "Downingtown",
-        "state": "PA",
+        "city": "Spokane",
+        "state": "WA",
         "dm_name": null,
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 33.1536375730336,
-        "insight": "D'Ambrosio recently disclosed a breach, highlighting potential vulnerabilities in their IT infrastructure.",
+        "score": 33.43617226459559,
+        "insight": "They recently disclosed a breach, highlighting the importance of robust IT support as a healthcare provider.",
         "signals": [
           {
             "type": "breach_disclosed",
-            "captured_at": "2026-05-06T08:27:27.350212",
-            "days_ago": 2,
+            "captured_at": "2026-05-07T08:34:11.918561",
+            "days_ago": 1,
             "payload": {
-              "agency": "me_ag",
-              "reported_date": "2026-05-05"
+              "agency": "wa_ag",
+              "reported_date": "04/30/2026"
             }
           }
         ]
       },
       {
-        "name": "Diamond Chemical Co, LLC",
-        "domain": null,
-        "industry": "manufacturing",
-        "headcount": 110,
+        "name": "First Harvest Federal Credit Union",
+        "domain": "firstharvestcu.com",
+        "industry": "fintech",
+        "headcount": 200,
         "country": "US",
-        "city": "East Rutherford",
+        "city": "Deptford",
         "state": "NJ",
-        "dm_name": null,
-        "dm_title": null,
-        "dm_email": null,
-        "dm_linkedin_url": null,
-        "score": 33.153637570249714,
-        "insight": "Diamond disclosed a breach just yesterday, signaling rising security pressures for the 110-employee manufacturing firm.",
+        "dm_name": "Ned Leslie",
+        "dm_title": "Vice President Information Technology Operations",
+        "dm_email": "nleslie@firstharvestcu.com",
+        "dm_linkedin_url": "http://www.linkedin.com/in/ned-leslie-31576b4",
+        "score": 33.436160606626075,
+        "insight": "They experienced a breach disclosure, highlighting the importance of robust IT support in the fintech sector.",
         "signals": [
           {
             "type": "breach_disclosed",
-            "captured_at": "2026-05-06T08:27:27.350212",
-            "days_ago": 2,
+            "captured_at": "2026-05-07T08:34:10.599934",
+            "days_ago": 1,
             "payload": {
               "agency": "me_ag",
-              "reported_date": "2026-05-05"
-            }
-          }
-        ]
-      },
-      {
-        "name": "Suncoast One Title & Closings, Inc.",
-        "domain": null,
-        "industry": "real_estate",
-        "headcount": 20,
-        "country": "US",
-        "city": "North Port",
-        "state": "FL",
-        "dm_name": null,
-        "dm_title": null,
-        "dm_email": null,
-        "dm_linkedin_url": null,
-        "score": 33.15363756788253,
-        "insight": "The breach disclosed recently by Suncoast One Title & Closings highlights the vulnerability of real estate firms with around 20 employees.",
-        "signals": [
-          {
-            "type": "breach_disclosed",
-            "captured_at": "2026-05-06T08:27:27.350212",
-            "days_ago": 2,
-            "payload": {
-              "agency": "me_ag",
-              "reported_date": "2026-05-05"
-            }
-          }
-        ]
-      },
-      {
-        "name": "Empire Express",
-        "domain": "empireexpress.com",
-        "industry": "logistics_transport",
-        "headcount": 60,
-        "country": "US",
-        "city": "Memphis",
-        "state": "TN",
-        "dm_name": "John Phillips",
-        "dm_title": "President & COO",
-        "dm_email": "john@empireexpress.com",
-        "dm_linkedin_url": "http://www.linkedin.com/in/john-phillips-86646a24",
-        "score": 33.153637565444406,
-        "insight": "Empire disclosed a breach recently, highlighting potential vulnerabilities for their logistics operations.",
-        "signals": [
-          {
-            "type": "breach_disclosed",
-            "captured_at": "2026-05-06T08:27:27.350212",
-            "days_ago": 2,
-            "payload": {
-              "agency": "me_ag",
-              "reported_date": "2026-05-05"
-            }
-          }
-        ]
-      },
-      {
-        "name": "Radial Entertainment",
-        "domain": "radialentertainment.com",
-        "industry": "media_entertainment",
-        "headcount": null,
-        "country": "US",
-        "city": "New York",
-        "state": "NY",
-        "dm_name": "Jeff Shultz",
-        "dm_title": "Chief Executive Officer",
-        "dm_email": "jshultz@radialentertainment.com",
-        "dm_linkedin_url": "http://www.linkedin.com/in/shultz",
-        "score": 33.153637562997424,
-        "insight": "Saw the recent breach disclosure at Radial, highlighting the need for robust IT support in the media industry.",
-        "signals": [
-          {
-            "type": "breach_disclosed",
-            "captured_at": "2026-05-06T08:27:27.350212",
-            "days_ago": 2,
-            "payload": {
-              "agency": "me_ag",
-              "reported_date": "2026-05-05"
-            }
-          }
-        ]
-      },
-      {
-        "name": "JC Resorts LLC",
-        "domain": null,
-        "industry": "hospitality_food",
-        "headcount": null,
-        "country": "US",
-        "city": "La Jolla",
-        "state": "CA",
-        "dm_name": null,
-        "dm_title": null,
-        "dm_email": null,
-        "dm_linkedin_url": null,
-        "score": 33.15361435292257,
-        "insight": "JC Resorts disclosed a breach, highlighting potential IT weaknesses in their hospitality operations.",
-        "signals": [
-          {
-            "type": "breach_disclosed",
-            "captured_at": "2026-05-06T08:27:24.730892",
-            "days_ago": 2,
-            "payload": {
-              "agency": "ca_ag",
-              "reported_date": "04/28/2026"
+              "reported_date": "2026-05-06"
             }
           }
         ]
@@ -631,34 +882,6 @@
         ]
       },
       {
-        "name": "zTrip",
-        "domain": "ztrip.com",
-        "industry": "logistics_transport",
-        "headcount": null,
-        "country": "US",
-        "city": "Kansas City",
-        "state": "MO",
-        "dm_name": "Luke Misgen",
-        "dm_title": "Vice President of Technology",
-        "dm_email": "lmisgen@ztrip.com",
-        "dm_linkedin_url": "http://www.linkedin.com/in/lukemisgen",
-        "score": 33.15341477996765,
-        "insight": "zTrip just posted an IT Support position, indicating they are expanding their tech team to bolster their logistics operations.",
-        "signals": [
-          {
-            "type": "job_posted_it_support",
-            "captured_at": "2026-05-06T08:27:02.213469",
-            "days_ago": 2,
-            "payload": {
-              "title": "IT Support",
-              "url": "https://www.linkedin.com/jobs/view/4408538417",
-              "date_posted": "2026-04-29",
-              "site": "linkedin"
-            }
-          }
-        ]
-      },
-      {
         "name": "MACKENZIE",
         "domain": null,
         "industry": "other",
@@ -687,6 +910,190 @@
         ]
       },
       {
+        "name": "D'Ambrosio Dodge Inc.",
+        "domain": "jeffdambrosio.com",
+        "industry": "other",
+        "headcount": null,
+        "country": "US",
+        "city": "Downingtown",
+        "state": "PA",
+        "dm_name": null,
+        "dm_title": null,
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": 32.66895454275548,
+        "insight": "D'Ambrosio recently disclosed a breach, highlighting potential vulnerabilities in their IT infrastructure.",
+        "signals": [
+          {
+            "type": "breach_disclosed",
+            "captured_at": "2026-05-06T08:27:27.350212",
+            "days_ago": 2,
+            "payload": {
+              "agency": "me_ag",
+              "reported_date": "2026-05-05"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Diamond Chemical Co, LLC",
+        "domain": null,
+        "industry": "manufacturing",
+        "headcount": 110,
+        "country": "US",
+        "city": "East Rutherford",
+        "state": "NJ",
+        "dm_name": null,
+        "dm_title": null,
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": 32.66895453484916,
+        "insight": "Diamond disclosed a breach just yesterday, signaling rising security pressures for the 110-employee manufacturing firm.",
+        "signals": [
+          {
+            "type": "breach_disclosed",
+            "captured_at": "2026-05-06T08:27:27.350212",
+            "days_ago": 2,
+            "payload": {
+              "agency": "me_ag",
+              "reported_date": "2026-05-05"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Suncoast One Title & Closings, Inc.",
+        "domain": null,
+        "industry": "real_estate",
+        "headcount": 20,
+        "country": "US",
+        "city": "North Port",
+        "state": "FL",
+        "dm_name": null,
+        "dm_title": null,
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": 32.66895452767669,
+        "insight": "The breach disclosed recently by Suncoast One Title & Closings highlights the vulnerability of real estate firms with around 20 employees.",
+        "signals": [
+          {
+            "type": "breach_disclosed",
+            "captured_at": "2026-05-06T08:27:27.350212",
+            "days_ago": 2,
+            "payload": {
+              "agency": "me_ag",
+              "reported_date": "2026-05-05"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Empire Express",
+        "domain": "empireexpress.com",
+        "industry": "logistics_transport",
+        "headcount": 60,
+        "country": "US",
+        "city": "Memphis",
+        "state": "TN",
+        "dm_name": "John Phillips",
+        "dm_title": "President & COO",
+        "dm_email": "john@empireexpress.com",
+        "dm_linkedin_url": "http://www.linkedin.com/in/john-phillips-86646a24",
+        "score": 32.66895452007614,
+        "insight": "Empire disclosed a breach recently, highlighting potential vulnerabilities for their logistics operations.",
+        "signals": [
+          {
+            "type": "breach_disclosed",
+            "captured_at": "2026-05-06T08:27:27.350212",
+            "days_ago": 2,
+            "payload": {
+              "agency": "me_ag",
+              "reported_date": "2026-05-05"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Radial Entertainment",
+        "domain": "radialentertainment.com",
+        "industry": "media_entertainment",
+        "headcount": null,
+        "country": "US",
+        "city": "New York",
+        "state": "NY",
+        "dm_name": "Jeff Shultz",
+        "dm_title": "Chief Executive Officer",
+        "dm_email": "jshultz@radialentertainment.com",
+        "dm_linkedin_url": "http://www.linkedin.com/in/shultz",
+        "score": 32.668954499685704,
+        "insight": "Saw the recent breach disclosure at Radial, highlighting the need for robust IT support in the media industry.",
+        "signals": [
+          {
+            "type": "breach_disclosed",
+            "captured_at": "2026-05-06T08:27:27.350212",
+            "days_ago": 2,
+            "payload": {
+              "agency": "me_ag",
+              "reported_date": "2026-05-05"
+            }
+          }
+        ]
+      },
+      {
+        "name": "JC Resorts LLC",
+        "domain": null,
+        "industry": "hospitality_food",
+        "headcount": null,
+        "country": "US",
+        "city": "La Jolla",
+        "state": "CA",
+        "dm_name": null,
+        "dm_title": null,
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": 32.668931744192136,
+        "insight": "JC Resorts disclosed a breach, highlighting potential IT weaknesses in their hospitality operations.",
+        "signals": [
+          {
+            "type": "breach_disclosed",
+            "captured_at": "2026-05-06T08:27:24.730892",
+            "days_ago": 2,
+            "payload": {
+              "agency": "ca_ag",
+              "reported_date": "04/28/2026"
+            }
+          }
+        ]
+      },
+      {
+        "name": "zTrip",
+        "domain": "ztrip.com",
+        "industry": "logistics_transport",
+        "headcount": null,
+        "country": "US",
+        "city": "Kansas City",
+        "state": "MO",
+        "dm_name": "Luke Misgen",
+        "dm_title": "Vice President of Technology",
+        "dm_email": "lmisgen@ztrip.com",
+        "dm_linkedin_url": "http://www.linkedin.com/in/lukemisgen",
+        "score": 32.66873515682162,
+        "insight": "zTrip just posted an IT Support position, indicating they are expanding their tech team to bolster their logistics operations.",
+        "signals": [
+          {
+            "type": "job_posted_it_support",
+            "captured_at": "2026-05-06T08:27:02.213469",
+            "days_ago": 2,
+            "payload": {
+              "title": "IT Support",
+              "url": "https://www.linkedin.com/jobs/view/4408538417",
+              "date_posted": "2026-04-29",
+              "site": "linkedin"
+            }
+          }
+        ]
+      },
+      {
         "name": "PAM Health",
         "domain": "pamhealth.com",
         "industry": "healthcare",
@@ -698,7 +1105,7 @@
         "dm_title": "Chief Information Officer",
         "dm_email": "manderson@pamhealth.com",
         "dm_linkedin_url": "http://www.linkedin.com/in/mike-anderson-18418a4",
-        "score": 33.15341477224552,
+        "score": 32.668735148391185,
         "insight": "PAM Health recently hired a Chief Information Security Officer, indicating a strategic focus on strengthening their IT security.",
         "signals": [
           {
@@ -710,32 +1117,6 @@
               "url": "https://www.indeed.com/viewjob?jk=d03c3973622cd37c",
               "date_posted": "2026-05-05",
               "site": "indeed"
-            }
-          }
-        ]
-      },
-      {
-        "name": "Art Jetter & Company",
-        "domain": "jetter.com",
-        "industry": "other",
-        "headcount": 30,
-        "country": "US",
-        "city": "Omaha",
-        "state": "NE",
-        "dm_name": "Jetter",
-        "dm_title": "VP & Chief Operating Officer",
-        "dm_email": "ace@jetter.com",
-        "dm_linkedin_url": "http://www.linkedin.com/in/acjetter",
-        "score": 32.38719541015128,
-        "insight": "They disclosed a breach recently, indicating potential vulnerabilities for Art Jetter & Company, which employs about 30 people.",
-        "signals": [
-          {
-            "type": "breach_disclosed",
-            "captured_at": "2026-05-05T08:09:43.860213",
-            "days_ago": 3,
-            "payload": {
-              "agency": "me_ag",
-              "reported_date": "2026-05-04"
             }
           }
         ]
@@ -879,6 +1260,242 @@
         ]
       },
       {
+        "name": "Rodenburg Law Firm",
+        "domain": null,
+        "industry": "legal_professional",
+        "headcount": null,
+        "country": "US",
+        "city": "Fargo",
+        "state": "ND",
+        "dm_name": null,
+        "dm_title": null,
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": 32.10378258724909,
+        "insight": "Rodenburg disclosed a breach recently, emphasizing the critical role managed IT support plays in the legal sector.",
+        "signals": [
+          {
+            "type": "breach_disclosed",
+            "captured_at": "2026-05-04T23:01:56.641858",
+            "days_ago": 4,
+            "payload": {
+              "agency": "me_ag",
+              "reported_date": "2026-04-24"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Columbia Medical Practice",
+        "domain": null,
+        "industry": "healthcare",
+        "headcount": 50,
+        "country": "US",
+        "city": "Columbia",
+        "state": "MD",
+        "dm_name": "Gary Werschmidt",
+        "dm_title": "President & CEO",
+        "dm_email": null,
+        "dm_linkedin_url": "http://www.linkedin.com/in/gary-werschmidt-578540177",
+        "score": 32.10378258454478,
+        "insight": "Columbia disclosed a breach recently, highlighting the need for robust IT support in their healthcare operations.",
+        "signals": [
+          {
+            "type": "breach_disclosed",
+            "captured_at": "2026-05-04T23:01:56.641858",
+            "days_ago": 4,
+            "payload": {
+              "agency": "me_ag",
+              "reported_date": "2026-04-24"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Auto Auction of New England Inc.",
+        "domain": null,
+        "industry": "other",
+        "headcount": null,
+        "country": "US",
+        "city": "Londonderry",
+        "state": "NH",
+        "dm_name": null,
+        "dm_title": null,
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": 32.10378257595107,
+        "insight": "They recently disclosed a breach, highlighting potential vulnerabilities in their IT security management processes.",
+        "signals": [
+          {
+            "type": "breach_disclosed",
+            "captured_at": "2026-05-04T23:01:56.641858",
+            "days_ago": 4,
+            "payload": {
+              "agency": "me_ag",
+              "reported_date": "2026-04-22"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Law Offices of Alan M. Cohen & Associates LLC (\"AMC\")",
+        "domain": null,
+        "industry": "legal_professional",
+        "headcount": null,
+        "country": "US",
+        "city": "Framingham",
+        "state": "MA",
+        "dm_name": null,
+        "dm_title": null,
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": 32.10378257268014,
+        "insight": "They recently disclosed a security breach, highlighting the potential vulnerabilities in their IT systems.",
+        "signals": [
+          {
+            "type": "breach_disclosed",
+            "captured_at": "2026-05-04T23:01:56.641858",
+            "days_ago": 4,
+            "payload": {
+              "agency": "me_ag",
+              "reported_date": "2026-04-22"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Laurel Eye Clinic",
+        "domain": null,
+        "industry": "healthcare",
+        "headcount": null,
+        "country": "US",
+        "city": "Brookville",
+        "state": "PA",
+        "dm_name": "Brian Gaster",
+        "dm_title": "Owner",
+        "dm_email": null,
+        "dm_linkedin_url": "http://www.linkedin.com/in/brian-gaster-669411a2",
+        "score": 32.10378256997582,
+        "insight": "Laurel Eye Clinic recently disclosed a breach; managing such events is critical for their healthcare operations.",
+        "signals": [
+          {
+            "type": "breach_disclosed",
+            "captured_at": "2026-05-04T23:01:56.641858",
+            "days_ago": 4,
+            "payload": {
+              "agency": "me_ag",
+              "reported_date": "2026-04-22"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Murray's Cheese LLC",
+        "domain": null,
+        "industry": "ecommerce_retail",
+        "headcount": null,
+        "country": "US",
+        "city": "New York",
+        "state": "NY",
+        "dm_name": null,
+        "dm_title": null,
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": 32.1037825667564,
+        "insight": "Murray's Cheese recently disclosed a breach, highlighting the critical need for reliable IT support in their ecommerce retail operations.",
+        "signals": [
+          {
+            "type": "breach_disclosed",
+            "captured_at": "2026-05-04T23:01:56.641858",
+            "days_ago": 4,
+            "payload": {
+              "agency": "me_ag",
+              "reported_date": "2026-04-21"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Marin Cancer Care",
+        "domain": "marinhealth.org",
+        "industry": "healthcare",
+        "headcount": null,
+        "country": "US",
+        "city": "Greenbrae",
+        "state": "CA",
+        "dm_name": "Joel Criste",
+        "dm_title": "Chief Executive Officer",
+        "dm_email": "jcriste@marincancercare.com",
+        "dm_linkedin_url": "http://www.linkedin.com/in/joel-criste-14095a6",
+        "score": 32.103763461525894,
+        "insight": "Marin recently disclosed a data breach, underscoring the importance of robust IT security for their healthcare services.",
+        "signals": [
+          {
+            "type": "breach_disclosed",
+            "captured_at": "2026-05-04T23:01:54.411532",
+            "days_ago": 4,
+            "payload": {
+              "agency": "ca_ag",
+              "reported_date": "04/23/2026"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Winonics",
+        "domain": "winonics.com",
+        "industry": "software_saas",
+        "headcount": 50,
+        "country": "US",
+        "city": "Brea",
+        "state": "CA",
+        "dm_name": "Dennis Brown",
+        "dm_title": "Chief Executive Officer",
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": 32.10358613499753,
+        "insight": "Winonics posted an entry-level IT support role, highlighting their need for enhanced tech assistance for their manufacturing processes.",
+        "signals": [
+          {
+            "type": "job_posted_it_support",
+            "captured_at": "2026-05-04T23:01:33.755742",
+            "days_ago": 4,
+            "payload": {
+              "title": "IT Support Specialist (Entry-Level)",
+              "url": "https://www.linkedin.com/jobs/view/4405162384",
+              "date_posted": "2026-04-27",
+              "site": "linkedin"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Art Jetter & Company",
+        "domain": "jetter.com",
+        "industry": "other",
+        "headcount": 30,
+        "country": "US",
+        "city": "Omaha",
+        "state": "NE",
+        "dm_name": "Jetter",
+        "dm_title": "VP & Chief Operating Officer",
+        "dm_email": "ace@jetter.com",
+        "dm_linkedin_url": "http://www.linkedin.com/in/acjetter",
+        "score": 31.913717107870113,
+        "insight": "They disclosed a breach recently, indicating potential vulnerabilities for Art Jetter & Company, which employs about 30 people.",
+        "signals": [
+          {
+            "type": "breach_disclosed",
+            "captured_at": "2026-05-05T08:09:43.860213",
+            "days_ago": 3,
+            "payload": {
+              "agency": "me_ag",
+              "reported_date": "2026-05-04"
+            }
+          }
+        ]
+      },
+      {
         "name": "Ocean Casino Resort",
         "domain": null,
         "industry": "hospitality_food",
@@ -890,7 +1507,7 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 32.386993112520685,
+        "score": 31.913518007280793,
         "insight": "Ocean Casino Resort recently posted for an IT Support Technician role, indicating a growing need for robust IT management.",
         "signals": [
           {
@@ -918,13 +1535,13 @@
         "dm_title": "Chief Executive Officer",
         "dm_email": "allan.penksa@flygainesville.com",
         "dm_linkedin_url": "http://www.linkedin.com/in/allan-penksa-0b589510",
-        "score": 32.103782606153544,
+        "score": 31.634447518378423,
         "insight": "Allan Penksa recently faced a breach disclosure at Gainesville-Alachua, emphasizing the need for robust IT support.",
         "signals": [
           {
             "type": "breach_disclosed",
             "captured_at": "2026-05-04T23:01:56.641858",
-            "days_ago": 3,
+            "days_ago": 4,
             "payload": {
               "agency": "me_ag",
               "reported_date": "2026-05-01"
@@ -944,13 +1561,13 @@
         "dm_title": "IT Manager",
         "dm_email": "bwoolwine@qualichem.com",
         "dm_linkedin_url": "http://www.linkedin.com/in/brandon-woolwine-55371641",
-        "score": 32.10378260349216,
+        "score": 31.634447509673475,
         "insight": "QualiChem disclosed a breach recently, signaling potential vulnerabilities in their IT support structures.",
         "signals": [
           {
             "type": "breach_disclosed",
             "captured_at": "2026-05-04T23:01:56.641858",
-            "days_ago": 3,
+            "days_ago": 4,
             "payload": {
               "agency": "me_ag",
               "reported_date": "2026-04-29"
@@ -970,13 +1587,13 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 32.10378260067623,
+        "score": 31.634447502000604,
         "insight": "Saw the breach disclosed at Johnson \u2014 for a legal firm, managing sensitive data security is critical amid rising risks.",
         "signals": [
           {
             "type": "breach_disclosed",
             "captured_at": "2026-05-04T23:01:56.641858",
-            "days_ago": 3,
+            "days_ago": 4,
             "payload": {
               "agency": "me_ag",
               "reported_date": "2026-04-29"
@@ -996,13 +1613,13 @@
         "dm_title": "Chief Executive Officer",
         "dm_email": "aduke@sandhillsmedical.org",
         "dm_linkedin_url": "http://www.linkedin.com/in/amanda-duke-0969748",
-        "score": 32.10378259766286,
+        "score": 31.634447493989345,
         "insight": "Sandhills disclosed a breach recently, highlighting the importance of robust IT support in healthcare operations.",
         "signals": [
           {
             "type": "breach_disclosed",
             "captured_at": "2026-05-04T23:01:56.641858",
-            "days_ago": 3,
+            "days_ago": 4,
             "payload": {
               "agency": "me_ag",
               "reported_date": "2026-04-28"
@@ -1022,13 +1639,13 @@
         "dm_title": "Managing Partner",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 32.10378259419446,
+        "score": 31.63444748707784,
         "insight": "Saw the breach disclosed at Castaglia, LLP \u2014 a legal firm where IT security is crucial for client trust and compliance.",
         "signals": [
           {
             "type": "breach_disclosed",
             "captured_at": "2026-05-04T23:01:56.641858",
-            "days_ago": 3,
+            "days_ago": 4,
             "payload": {
               "agency": "me_ag",
               "reported_date": "2026-04-28"
@@ -1048,224 +1665,16 @@
         "dm_title": "President",
         "dm_email": "melanie.hawkins@churchill-claims.com",
         "dm_linkedin_url": "http://www.linkedin.com/in/melanie-hawkins-0a848568",
-        "score": 32.10378259029682,
+        "score": 31.63444747897352,
         "insight": "Churchill disclosed a breach just 2 days ago, highlighting potential vulnerabilities in their cybersecurity framework.",
         "signals": [
           {
             "type": "breach_disclosed",
             "captured_at": "2026-05-04T23:01:56.641858",
-            "days_ago": 3,
+            "days_ago": 4,
             "payload": {
               "agency": "me_ag",
               "reported_date": "2026-04-27"
-            }
-          }
-        ]
-      },
-      {
-        "name": "Rodenburg Law Firm",
-        "domain": null,
-        "industry": "legal_professional",
-        "headcount": null,
-        "country": "US",
-        "city": "Fargo",
-        "state": "ND",
-        "dm_name": null,
-        "dm_title": null,
-        "dm_email": null,
-        "dm_linkedin_url": null,
-        "score": 32.10378258724909,
-        "insight": "Rodenburg disclosed a breach recently, emphasizing the critical role managed IT support plays in the legal sector.",
-        "signals": [
-          {
-            "type": "breach_disclosed",
-            "captured_at": "2026-05-04T23:01:56.641858",
-            "days_ago": 3,
-            "payload": {
-              "agency": "me_ag",
-              "reported_date": "2026-04-24"
-            }
-          }
-        ]
-      },
-      {
-        "name": "Columbia Medical Practice",
-        "domain": null,
-        "industry": "healthcare",
-        "headcount": 50,
-        "country": "US",
-        "city": "Columbia",
-        "state": "MD",
-        "dm_name": "Gary Werschmidt",
-        "dm_title": "President & CEO",
-        "dm_email": null,
-        "dm_linkedin_url": "http://www.linkedin.com/in/gary-werschmidt-578540177",
-        "score": 32.10378258454478,
-        "insight": "Columbia disclosed a breach recently, highlighting the need for robust IT support in their healthcare operations.",
-        "signals": [
-          {
-            "type": "breach_disclosed",
-            "captured_at": "2026-05-04T23:01:56.641858",
-            "days_ago": 3,
-            "payload": {
-              "agency": "me_ag",
-              "reported_date": "2026-04-24"
-            }
-          }
-        ]
-      },
-      {
-        "name": "U.S. 1031 Exchange Services. Inc.",
-        "domain": null,
-        "industry": "real_estate",
-        "headcount": null,
-        "country": "US",
-        "city": "Sarasota",
-        "state": "FL",
-        "dm_name": "Ryan Stulman",
-        "dm_title": "President",
-        "dm_email": "rstulman@us1031.com",
-        "dm_linkedin_url": "http://www.linkedin.com/in/ryan-stulman-mba",
-        "score": 32.103782580939026,
-        "insight": "They recently disclosed a breach, highlighting the growing cybersecurity challenges facing U.S. in the real estate industry.",
-        "signals": [
-          {
-            "type": "breach_disclosed",
-            "captured_at": "2026-05-04T23:01:56.641858",
-            "days_ago": 3,
-            "payload": {
-              "agency": "me_ag",
-              "reported_date": "2026-04-23"
-            }
-          }
-        ]
-      },
-      {
-        "name": "Auto Auction of New England Inc.",
-        "domain": null,
-        "industry": "other",
-        "headcount": null,
-        "country": "US",
-        "city": "Londonderry",
-        "state": "NH",
-        "dm_name": null,
-        "dm_title": null,
-        "dm_email": null,
-        "dm_linkedin_url": null,
-        "score": 32.10378257595107,
-        "insight": "They recently disclosed a breach, highlighting potential vulnerabilities in their IT security management processes.",
-        "signals": [
-          {
-            "type": "breach_disclosed",
-            "captured_at": "2026-05-04T23:01:56.641858",
-            "days_ago": 3,
-            "payload": {
-              "agency": "me_ag",
-              "reported_date": "2026-04-22"
-            }
-          }
-        ]
-      },
-      {
-        "name": "Law Offices of Alan M. Cohen & Associates LLC (\"AMC\")",
-        "domain": null,
-        "industry": "legal_professional",
-        "headcount": null,
-        "country": "US",
-        "city": "Framingham",
-        "state": "MA",
-        "dm_name": null,
-        "dm_title": null,
-        "dm_email": null,
-        "dm_linkedin_url": null,
-        "score": 32.10378257268014,
-        "insight": "They recently disclosed a security breach, highlighting the potential vulnerabilities in their IT systems.",
-        "signals": [
-          {
-            "type": "breach_disclosed",
-            "captured_at": "2026-05-04T23:01:56.641858",
-            "days_ago": 3,
-            "payload": {
-              "agency": "me_ag",
-              "reported_date": "2026-04-22"
-            }
-          }
-        ]
-      },
-      {
-        "name": "Laurel Eye Clinic",
-        "domain": null,
-        "industry": "healthcare",
-        "headcount": null,
-        "country": "US",
-        "city": "Brookville",
-        "state": "PA",
-        "dm_name": "Brian Gaster",
-        "dm_title": "Owner",
-        "dm_email": null,
-        "dm_linkedin_url": "http://www.linkedin.com/in/brian-gaster-669411a2",
-        "score": 32.10378256997582,
-        "insight": "Laurel Eye Clinic recently disclosed a breach; managing such events is critical for their healthcare operations.",
-        "signals": [
-          {
-            "type": "breach_disclosed",
-            "captured_at": "2026-05-04T23:01:56.641858",
-            "days_ago": 3,
-            "payload": {
-              "agency": "me_ag",
-              "reported_date": "2026-04-22"
-            }
-          }
-        ]
-      },
-      {
-        "name": "Murray's Cheese LLC",
-        "domain": null,
-        "industry": "ecommerce_retail",
-        "headcount": null,
-        "country": "US",
-        "city": "New York",
-        "state": "NY",
-        "dm_name": null,
-        "dm_title": null,
-        "dm_email": null,
-        "dm_linkedin_url": null,
-        "score": 32.1037825667564,
-        "insight": "Murray's Cheese recently disclosed a breach, highlighting the critical need for reliable IT support in their ecommerce retail operations.",
-        "signals": [
-          {
-            "type": "breach_disclosed",
-            "captured_at": "2026-05-04T23:01:56.641858",
-            "days_ago": 3,
-            "payload": {
-              "agency": "me_ag",
-              "reported_date": "2026-04-21"
-            }
-          }
-        ]
-      },
-      {
-        "name": "Marin Cancer Care",
-        "domain": "marinhealth.org",
-        "industry": "healthcare",
-        "headcount": null,
-        "country": "US",
-        "city": "Greenbrae",
-        "state": "CA",
-        "dm_name": "Joel Criste",
-        "dm_title": "Chief Executive Officer",
-        "dm_email": "jcriste@marincancercare.com",
-        "dm_linkedin_url": "http://www.linkedin.com/in/joel-criste-14095a6",
-        "score": 32.103763461525894,
-        "insight": "Marin recently disclosed a data breach, underscoring the importance of robust IT security for their healthcare services.",
-        "signals": [
-          {
-            "type": "breach_disclosed",
-            "captured_at": "2026-05-04T23:01:54.411532",
-            "days_ago": 3,
-            "payload": {
-              "agency": "ca_ag",
-              "reported_date": "04/23/2026"
             }
           }
         ]
@@ -1282,13 +1691,13 @@
         "dm_title": "VP and Chief Technology Officer",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 32.103586144192136,
+        "score": 31.63425419690083,
         "insight": "Weldaloy recently posted a job for an IT Support Specialist, highlighting their growing IT needs amid manufacturing demands.",
         "signals": [
           {
             "type": "job_posted_it_support",
             "captured_at": "2026-05-04T23:01:33.755742",
-            "days_ago": 3,
+            "days_ago": 4,
             "payload": {
               "title": "IT Support Specialist (Help Desk)",
               "url": "https://www.linkedin.com/jobs/view/4406422539",
@@ -1310,13 +1719,13 @@
         "dm_title": "Chief Medical Officer",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 32.10358613808815,
+        "score": 31.63425418257033,
         "insight": "Saw Open Fertility posted an IT Support Technician role, indicating potential growth in their healthcare services.",
         "signals": [
           {
             "type": "job_posted_it_support",
             "captured_at": "2026-05-04T23:01:33.755742",
-            "days_ago": 3,
+            "days_ago": 4,
             "payload": {
               "title": "IT Support Technician",
               "url": "https://www.linkedin.com/jobs/view/4408553766",
@@ -1327,28 +1736,56 @@
         ]
       },
       {
-        "name": "Winonics",
-        "domain": "winonics.com",
-        "industry": "software_saas",
-        "headcount": 50,
+        "name": "Society for Science",
+        "domain": "societyforscience.org",
+        "industry": "government_nonprofit",
+        "headcount": 130,
         "country": "US",
-        "city": "Brea",
-        "state": "CA",
-        "dm_name": "Dennis Brown",
+        "city": "Washington",
+        "state": "DC",
+        "dm_name": "Maya Ajmera",
+        "dm_title": "President & CEO",
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": 14.998505334467154,
+        "insight": null,
+        "signals": [
+          {
+            "type": "job_posted_security",
+            "captured_at": "2026-05-09T07:56:49.271362",
+            "days_ago": 0,
+            "payload": {
+              "title": "Director, IT Infrastructure and Security",
+              "url": "https://www.adzuna.com/land/ad/5715255388?se=JGHTpXxL8RGnMap5hKkm1g&utm_medium=api&utm_source=3aa14b35&v=9186F2AD5C5AAC70BAD4B53ECE76ADEAFF5081C8",
+              "date_posted": "2026-04-30T23:38:49Z",
+              "site": "adzuna"
+            }
+          }
+        ]
+      },
+      {
+        "name": "EXPRESS",
+        "domain": "express.com",
+        "industry": "other",
+        "headcount": null,
+        "country": "US",
+        "city": "Columbus",
+        "state": "OH",
+        "dm_name": "Stewart Glendinning",
         "dm_title": "Chief Executive Officer",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 32.10358613499753,
-        "insight": "Winonics posted an entry-level IT support role, highlighting their need for enhanced tech assistance for their manufacturing processes.",
+        "score": 14.99845789814639,
+        "insight": null,
         "signals": [
           {
-            "type": "job_posted_it_support",
-            "captured_at": "2026-05-04T23:01:33.755742",
-            "days_ago": 3,
+            "type": "job_posted_cloud_devops",
+            "captured_at": "2026-05-09T07:56:37.439236",
+            "days_ago": 0,
             "payload": {
-              "title": "IT Support Specialist (Entry-Level)",
-              "url": "https://www.linkedin.com/jobs/view/4405162384",
-              "date_posted": "2026-04-27",
+              "title": "DevOps Engineer",
+              "url": "https://www.linkedin.com/jobs/view/4402046792",
+              "date_posted": "2026-05-06",
               "site": "linkedin"
             }
           }
@@ -1366,13 +1803,13 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 14.869854723075804,
+        "score": 14.652467926993216,
         "insight": null,
         "signals": [
           {
             "type": "job_posted_security",
             "captured_at": "2026-05-08T07:42:03.520100",
-            "days_ago": 0,
+            "days_ago": 1,
             "payload": {
               "title": "Director of Engineering & Security",
               "url": "https://www.adzuna.com/land/ad/5722410774?se=OqIaarFK8RGeYJz9IZgogA&utm_medium=api&utm_source=3aa14b35&v=95EA270730A580B8BEFF850B4F5F538539C3121E",
@@ -1411,34 +1848,6 @@
         ]
       },
       {
-        "name": "Avail",
-        "domain": "avail.com",
-        "industry": "software_saas",
-        "headcount": 75,
-        "country": "US",
-        "city": "Chicago",
-        "state": "IL",
-        "dm_name": "James Rogers",
-        "dm_title": "Vice President",
-        "dm_email": null,
-        "dm_linkedin_url": "http://www.linkedin.com/in/james-rogers-43995b191",
-        "score": 14.542284871433706,
-        "insight": null,
-        "signals": [
-          {
-            "type": "job_posted_cloud_devops",
-            "captured_at": "2026-05-07T08:33:45.474163",
-            "days_ago": 1,
-            "payload": {
-              "title": "DevOps Engineer",
-              "url": "https://www.linkedin.com/jobs/view/4409928072",
-              "date_posted": "nan",
-              "site": "linkedin"
-            }
-          }
-        ]
-      },
-      {
         "name": "Revelation Pharma",
         "domain": "revelationpharma.com",
         "industry": "healthcare",
@@ -1460,6 +1869,34 @@
             "payload": {
               "title": "DevOps / AgentOps Engineer",
               "url": "https://www.linkedin.com/jobs/view/4409941614",
+              "date_posted": "nan",
+              "site": "linkedin"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Avail",
+        "domain": "avail.com",
+        "industry": "software_saas",
+        "headcount": 75,
+        "country": "US",
+        "city": "Santa Clara",
+        "state": "CA",
+        "dm_name": "James Rogers",
+        "dm_title": "Vice President",
+        "dm_email": null,
+        "dm_linkedin_url": "http://www.linkedin.com/in/james-rogers-43995b191",
+        "score": 14.329686912038877,
+        "insight": null,
+        "signals": [
+          {
+            "type": "job_posted_cloud_devops",
+            "captured_at": "2026-05-07T08:33:45.474163",
+            "days_ago": 1,
+            "payload": {
+              "title": "DevOps Engineer",
+              "url": "https://www.linkedin.com/jobs/view/4409928072",
               "date_posted": "nan",
               "site": "linkedin"
             }
@@ -1545,34 +1982,6 @@
               "title": "FCC - Security Engineer / SIEM Engineer",
               "url": "https://www.linkedin.com/jobs/view/4408412247",
               "date_posted": "2026-05-05",
-              "site": "linkedin"
-            }
-          }
-        ]
-      },
-      {
-        "name": "Careful Security",
-        "domain": null,
-        "industry": "other",
-        "headcount": null,
-        "country": "US",
-        "city": "Burbank",
-        "state": "CA",
-        "dm_name": "Sammy Basu",
-        "dm_title": "Founder and CEO",
-        "dm_email": "sammy@carefulsecurity.com",
-        "dm_linkedin_url": "http://www.linkedin.com/in/sammybasu",
-        "score": 14.208606327740275,
-        "insight": null,
-        "signals": [
-          {
-            "type": "job_posted_security",
-            "captured_at": "2026-05-06T08:27:02.213469",
-            "days_ago": 2,
-            "payload": {
-              "title": "Security Engineer",
-              "url": "https://www.linkedin.com/jobs/view/4409763516",
-              "date_posted": "nan",
               "site": "linkedin"
             }
           }
@@ -1719,34 +2128,6 @@
         ]
       },
       {
-        "name": "iClassPro, Inc.",
-        "domain": null,
-        "industry": "software_saas",
-        "headcount": 100,
-        "country": "US",
-        "city": "Longview",
-        "state": "TX",
-        "dm_name": null,
-        "dm_title": null,
-        "dm_email": null,
-        "dm_linkedin_url": null,
-        "score": 13.88018129587776,
-        "insight": null,
-        "signals": [
-          {
-            "type": "job_posted_cloud_devops",
-            "captured_at": "2026-05-05T08:09:31.653253",
-            "days_ago": 3,
-            "payload": {
-              "title": "DevOps Engineer Manager",
-              "url": "https://www.adzuna.com/land/ad/5716885449?se=blP8wFlI8RGSdISXQQQjPQ&utm_medium=api&utm_source=3aa14b35&v=C44F8A3EC47190FA2FF187E9B3E9C1E145EEFA70",
-              "date_posted": "2026-05-02T05:51:56Z",
-              "site": "adzuna"
-            }
-          }
-        ]
-      },
-      {
         "name": "HealthMark Group",
         "domain": null,
         "industry": "healthcare",
@@ -1857,6 +2238,34 @@
             }
           }
         ]
+      },
+      {
+        "name": "iClassPro, Inc.",
+        "domain": null,
+        "industry": "software_saas",
+        "headcount": 100,
+        "country": "US",
+        "city": "Longview",
+        "state": "TX",
+        "dm_name": null,
+        "dm_title": null,
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": 13.677262772888545,
+        "insight": null,
+        "signals": [
+          {
+            "type": "job_posted_cloud_devops",
+            "captured_at": "2026-05-05T08:09:31.653253",
+            "days_ago": 3,
+            "payload": {
+              "title": "DevOps Engineer Manager",
+              "url": "https://www.adzuna.com/land/ad/5716885449?se=blP8wFlI8RGSdISXQQQjPQ&utm_medium=api&utm_source=3aa14b35&v=C44F8A3EC47190FA2FF187E9B3E9C1E145EEFA70",
+              "date_posted": "2026-05-02T05:51:56Z",
+              "site": "adzuna"
+            }
+          }
+        ]
       }
     ],
     "mssp": [
@@ -1905,6 +2314,301 @@
         ]
       },
       {
+        "name": "U.S. 1031 Exchange Services. Inc.",
+        "domain": "us1031.com",
+        "industry": "real_estate",
+        "headcount": null,
+        "country": "US",
+        "city": "Sarasota",
+        "state": "FL",
+        "dm_name": "Ryan Stulman",
+        "dm_title": "President",
+        "dm_email": "rstulman@us1031.com",
+        "dm_linkedin_url": "http://www.linkedin.com/in/ryan-stulman-mba",
+        "score": 85.66866380232739,
+        "insight": "U.S. 1031 Exchange Services, Inc. disclosed a breach just 0 days ago, signaling an urgent need for enhanced SOC monitoring and compliance support.",
+        "signals": [
+          {
+            "type": "breach_disclosed",
+            "captured_at": "2026-05-09T07:57:13.098372",
+            "days_ago": 0,
+            "payload": {
+              "agency": "me_ag",
+              "reported_date": "2026-05-08"
+            }
+          },
+          {
+            "type": "breach_disclosed",
+            "captured_at": "2026-05-04T23:01:56.641858",
+            "days_ago": 4,
+            "payload": {
+              "agency": "me_ag",
+              "reported_date": "2026-04-23"
+            }
+          }
+        ]
+      },
+      {
+        "name": "New  Congol  LLC  dba  New  Congoleum",
+        "domain": "congoleum.com",
+        "industry": "manufacturing",
+        "headcount": null,
+        "country": "US",
+        "city": "Trenton",
+        "state": "NJ",
+        "dm_name": null,
+        "dm_title": null,
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": 44.995802587745736,
+        "insight": "New Congol LLC just disclosed a breach, indicating an urgent need for enhanced SOC monitoring and compliance support.",
+        "signals": [
+          {
+            "type": "breach_disclosed",
+            "captured_at": "2026-05-09T07:57:13.098372",
+            "days_ago": 0,
+            "payload": {
+              "agency": "me_ag",
+              "reported_date": "2026-05-08"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Financial Foundations, Inc.",
+        "domain": "financial-foundationsinc.com",
+        "industry": "fintech",
+        "headcount": 10,
+        "country": "US",
+        "city": "SOUTHBOROUGH",
+        "state": "MA",
+        "dm_name": "Eric Meushaw",
+        "dm_title": "President",
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": 44.995802577987234,
+        "insight": "Financial Foundations, Inc. recently disclosed a breach, highlighting their urgent need for enhanced SOC monitoring and compliance support.",
+        "signals": [
+          {
+            "type": "breach_disclosed",
+            "captured_at": "2026-05-09T07:57:13.098372",
+            "days_ago": 0,
+            "payload": {
+              "agency": "me_ag",
+              "reported_date": "2026-05-08"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Lautrec, Ltd.",
+        "domain": "lautrecltd.com",
+        "industry": "other",
+        "headcount": null,
+        "country": "US",
+        "city": "Farmington Hills",
+        "state": "MI",
+        "dm_name": null,
+        "dm_title": null,
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": 44.99580255686987,
+        "insight": "Lautrec, Ltd. recently disclosed a breach, highlighting their urgent need for enhanced SOC monitoring and compliance support.",
+        "signals": [
+          {
+            "type": "breach_disclosed",
+            "captured_at": "2026-05-09T07:57:13.098372",
+            "days_ago": 0,
+            "payload": {
+              "agency": "me_ag",
+              "reported_date": "2026-05-08"
+            }
+          }
+        ]
+      },
+      {
+        "name": "2nd Swing",
+        "domain": "2ndswing.com",
+        "industry": "ecommerce_retail",
+        "headcount": null,
+        "country": "US",
+        "city": "Eden Prairie",
+        "state": "MN",
+        "dm_name": "Simon Kallal",
+        "dm_title": "Chief Executive Officer",
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": 44.99580252465838,
+        "insight": "They recently disclosed a breach, indicating an urgent need for enhanced SOC monitoring and vulnerability management.",
+        "signals": [
+          {
+            "type": "breach_disclosed",
+            "captured_at": "2026-05-09T07:57:13.098372",
+            "days_ago": 0,
+            "payload": {
+              "agency": "me_ag",
+              "reported_date": "2026-05-07"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Gateways Community Services",
+        "domain": "gatewayscs.org",
+        "industry": "healthcare",
+        "headcount": null,
+        "country": "US",
+        "city": "Nashua",
+        "state": "NH",
+        "dm_name": "Sandy Pelletier",
+        "dm_title": "President & Chief Executive Officer",
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": 44.995802503781675,
+        "insight": "Gateways Community Services disclosed a breach, indicating an immediate need for enhanced SOC monitoring services.",
+        "signals": [
+          {
+            "type": "breach_disclosed",
+            "captured_at": "2026-05-09T07:57:13.098372",
+            "days_ago": 0,
+            "payload": {
+              "agency": "me_ag",
+              "reported_date": "2026-05-05"
+            }
+          }
+        ]
+      },
+      {
+        "name": "MemberSource Credit Union",
+        "domain": "membersourcecu.org",
+        "industry": "fintech",
+        "headcount": 50,
+        "country": "US",
+        "city": "Houston",
+        "state": "TX",
+        "dm_name": "Kenny Harrington",
+        "dm_title": "President/CEO",
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": 44.99576301189654,
+        "insight": "MemberSource Credit Union has recently disclosed a breach, highlighting an urgent need for enhanced SOC monitoring and vulnerability management.",
+        "signals": [
+          {
+            "type": "breach_disclosed",
+            "captured_at": "2026-05-09T07:57:09.802162",
+            "days_ago": 0,
+            "payload": {
+              "agency": "ca_ag",
+              "reported_date": "05/08/2026"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Sanger Skilled Care, LLC dba Cornerstone Care Center",
+        "domain": null,
+        "industry": "healthcare",
+        "headcount": null,
+        "country": "US",
+        "city": "Sanger",
+        "state": "CA",
+        "dm_name": null,
+        "dm_title": null,
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": 44.995763001031044,
+        "insight": "Sanger Skilled Care, LLC disclosed a breach, indicating an urgent need for enhanced SOC monitoring and compliance support.",
+        "signals": [
+          {
+            "type": "breach_disclosed",
+            "captured_at": "2026-05-09T07:57:09.802162",
+            "days_ago": 0,
+            "payload": {
+              "agency": "ca_ag",
+              "reported_date": "05/07/2026"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Berger & Williams, LLP",
+        "domain": "bwrllp.com",
+        "industry": "legal_professional",
+        "headcount": null,
+        "country": "US",
+        "city": "San Diego",
+        "state": "CA",
+        "dm_name": null,
+        "dm_title": null,
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": 44.9957629805394,
+        "insight": "Berger & Williams, LLP recently disclosed a breach, indicating an urgent need for SOC monitoring and compliance support.",
+        "signals": [
+          {
+            "type": "breach_disclosed",
+            "captured_at": "2026-05-09T07:57:09.802162",
+            "days_ago": 0,
+            "payload": {
+              "agency": "ca_ag",
+              "reported_date": "05/05/2026"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Frontwave Credit Union",
+        "domain": "frontwavecu.com",
+        "industry": "fintech",
+        "headcount": 120,
+        "country": "US",
+        "city": "Oceanside",
+        "state": "CA",
+        "dm_name": "Bill Birnie",
+        "dm_title": "President/CEO",
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": 44.99576296033655,
+        "insight": "Frontwave Credit Union disclosed a breach, indicating an immediate need for enhanced SOC monitoring and vulnerability management.",
+        "signals": [
+          {
+            "type": "breach_disclosed",
+            "captured_at": "2026-05-09T07:57:09.802162",
+            "days_ago": 0,
+            "payload": {
+              "agency": "ca_ag",
+              "reported_date": "04/28/2026"
+            }
+          }
+        ]
+      },
+      {
+        "name": "L.A. Care Health Plan",
+        "domain": "lacare.org",
+        "industry": "healthcare",
+        "headcount": null,
+        "country": "US",
+        "city": "Los Angeles",
+        "state": "CA",
+        "dm_name": "T. M.",
+        "dm_title": "Chief Information And Technology Officer",
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": 44.995762937269916,
+        "insight": "After disclosing a breach, L.A. Care Health Plan is seeking enhanced SOC monitoring and compliance support.",
+        "signals": [
+          {
+            "type": "breach_disclosed",
+            "captured_at": "2026-05-09T07:57:09.802162",
+            "days_ago": 0,
+            "payload": {
+              "agency": "ca_ag",
+              "reported_date": "04/27/2026"
+            }
+          }
+        ]
+      },
+      {
         "name": "54 Below Inc.",
         "domain": "54below.org",
         "industry": "media_entertainment",
@@ -1916,13 +2620,13 @@
         "dm_title": "Managing Director",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 44.60972393787007,
+        "score": 43.95756104793622,
         "insight": "54 disclosed a breach, highlighting the need for robust security in their media and entertainment operations.",
         "signals": [
           {
             "type": "breach_disclosed",
             "captured_at": "2026-05-08T07:42:16.913744",
-            "days_ago": 0,
+            "days_ago": 1,
             "payload": {
               "agency": "me_ag",
               "reported_date": "2026-05-07"
@@ -1942,13 +2646,13 @@
         "dm_title": "Managing Partner",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 44.609723934279316,
+        "score": 43.9575610377446,
         "insight": "After a recent breach disclosure, Johnson, a law firm focused on employment and civil rights, is prioritizing security.",
         "signals": [
           {
             "type": "breach_disclosed",
             "captured_at": "2026-05-08T07:42:16.913744",
-            "days_ago": 0,
+            "days_ago": 1,
             "payload": {
               "agency": "me_ag",
               "reported_date": "2026-05-07"
@@ -1968,13 +2672,13 @@
         "dm_title": "President / CEO",
         "dm_email": "tconwell@credittechnologies.com",
         "dm_linkedin_url": "http://www.linkedin.com/in/thomasconwell",
-        "score": 44.6097239208587,
+        "score": 43.95756085269678,
         "insight": "Credit Technologies, Inc recently disclosed a breach, highlighting vulnerability in their fintech services for mortgage lenders.",
         "signals": [
           {
             "type": "breach_disclosed",
             "captured_at": "2026-05-08T07:42:16.913744",
-            "days_ago": 0,
+            "days_ago": 1,
             "payload": {
               "agency": "me_ag",
               "reported_date": "2026-04-27"
@@ -1994,68 +2698,16 @@
         "dm_title": "CEO",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 44.60968453557272,
+        "score": 43.95752232048559,
         "insight": "Randy Tobin, CEO of Alliance, just disclosed a breach, highlighting the urgent need for robust security oversight in roofing services.",
         "signals": [
           {
             "type": "breach_disclosed",
             "captured_at": "2026-05-08T07:42:13.610247",
-            "days_ago": 0,
+            "days_ago": 1,
             "payload": {
               "agency": "ca_ag",
               "reported_date": "05/07/2026"
-            }
-          }
-        ]
-      },
-      {
-        "name": "Mt. Spokane Pediatrics",
-        "domain": "mtspokanepediatrics.com",
-        "industry": "healthcare",
-        "headcount": 24,
-        "country": "US",
-        "city": "Spokane",
-        "state": "WA",
-        "dm_name": null,
-        "dm_title": null,
-        "dm_email": null,
-        "dm_linkedin_url": null,
-        "score": 43.627163108337214,
-        "insight": "They recently disclosed a breach, highlighting the need for robust cybersecurity in their healthcare services.",
-        "signals": [
-          {
-            "type": "breach_disclosed",
-            "captured_at": "2026-05-07T08:34:11.918561",
-            "days_ago": 1,
-            "payload": {
-              "agency": "wa_ag",
-              "reported_date": "04/30/2026"
-            }
-          }
-        ]
-      },
-      {
-        "name": "First Harvest Federal Credit Union",
-        "domain": "firstharvestcu.com",
-        "industry": "fintech",
-        "headcount": 200,
-        "country": "US",
-        "city": "Deptford",
-        "state": "NJ",
-        "dm_name": "Ned Leslie",
-        "dm_title": "Vice President Information Technology Operations",
-        "dm_email": "nleslie@firstharvestcu.com",
-        "dm_linkedin_url": "http://www.linkedin.com/in/ned-leslie-31576b4",
-        "score": 43.627147730623655,
-        "insight": "They disclosed a breach, highlighting the need for robust security in their fintech operations.",
-        "signals": [
-          {
-            "type": "breach_disclosed",
-            "captured_at": "2026-05-07T08:34:10.599934",
-            "days_ago": 1,
-            "payload": {
-              "agency": "me_ag",
-              "reported_date": "2026-05-06"
             }
           }
         ]
@@ -2087,6 +2739,58 @@
         ]
       },
       {
+        "name": "Mt. Spokane Pediatrics",
+        "domain": "mtspokanepediatrics.com",
+        "industry": "healthcare",
+        "headcount": 24,
+        "country": "US",
+        "city": "Spokane",
+        "state": "WA",
+        "dm_name": null,
+        "dm_title": null,
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": 42.98936434019433,
+        "insight": "They recently disclosed a breach, highlighting the need for robust cybersecurity in their healthcare services.",
+        "signals": [
+          {
+            "type": "breach_disclosed",
+            "captured_at": "2026-05-07T08:34:11.918561",
+            "days_ago": 1,
+            "payload": {
+              "agency": "wa_ag",
+              "reported_date": "04/30/2026"
+            }
+          }
+        ]
+      },
+      {
+        "name": "First Harvest Federal Credit Union",
+        "domain": "firstharvestcu.com",
+        "industry": "fintech",
+        "headcount": 200,
+        "country": "US",
+        "city": "Deptford",
+        "state": "NJ",
+        "dm_name": "Ned Leslie",
+        "dm_title": "Vice President Information Technology Operations",
+        "dm_email": "nleslie@firstharvestcu.com",
+        "dm_linkedin_url": "http://www.linkedin.com/in/ned-leslie-31576b4",
+        "score": 42.98934935137638,
+        "insight": "They disclosed a breach, highlighting the need for robust security in their fintech operations.",
+        "signals": [
+          {
+            "type": "breach_disclosed",
+            "captured_at": "2026-05-07T08:34:10.599934",
+            "days_ago": 1,
+            "payload": {
+              "agency": "me_ag",
+              "reported_date": "2026-05-06"
+            }
+          }
+        ]
+      },
+      {
         "name": "D'Ambrosio Dodge Inc.",
         "domain": "jeffdambrosio.com",
         "industry": "other",
@@ -2098,7 +2802,7 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 42.626105451043195,
+        "score": 42.00294155497133,
         "insight": "D'Ambrosio disclosed a breach yesterday, signaling an urgent need for enhanced security measures amid potential fallout.",
         "signals": [
           {
@@ -2124,7 +2828,7 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 42.626105447463914,
+        "score": 42.00294154480606,
         "insight": "Diamond disclosed a breach yesterday, highlighting the critical need for robust security measures in manufacturing.",
         "signals": [
           {
@@ -2150,7 +2854,7 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 42.62610544442039,
+        "score": 42.00294153558432,
         "insight": "They disclosed a breach just yesterday, highlighting vulnerabilities in their security posture as a real estate company.",
         "signals": [
           {
@@ -2176,7 +2880,7 @@
         "dm_title": "President & COO",
         "dm_email": "john@empireexpress.com",
         "dm_linkedin_url": "http://www.linkedin.com/in/john-phillips-86646a24",
-        "score": 42.62610544128567,
+        "score": 42.002941525812176,
         "insight": "Empire disclosed a breach yesterday, highlighting the importance of robust security measures in logistics.",
         "signals": [
           {
@@ -2202,7 +2906,7 @@
         "dm_title": "Chief Executive Officer",
         "dm_email": "jshultz@radialentertainment.com",
         "dm_linkedin_url": "http://www.linkedin.com/in/shultz",
-        "score": 42.62610543813955,
+        "score": 42.002941499595906,
         "insight": "Jeff Shultz at Radial recently disclosed a breach, highlighting potential vulnerabilities in their media entertainment operations.",
         "signals": [
           {
@@ -2228,7 +2932,7 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 42.62607559661473,
+        "score": 42.002912242532744,
         "insight": "JC Resorts LLC disclosed a breach recently, highlighting the urgent need for stronger cybersecurity measures.",
         "signals": [
           {
@@ -2238,32 +2942,6 @@
             "payload": {
               "agency": "ca_ag",
               "reported_date": "04/28/2026"
-            }
-          }
-        ]
-      },
-      {
-        "name": "Art Jetter & Company",
-        "domain": "jetter.com",
-        "industry": "other",
-        "headcount": 30,
-        "country": "US",
-        "city": "Omaha",
-        "state": "NE",
-        "dm_name": "Jetter",
-        "dm_title": "VP & Chief Operating Officer",
-        "dm_email": "ace@jetter.com",
-        "dm_linkedin_url": "http://www.linkedin.com/in/acjetter",
-        "score": 41.64067981305164,
-        "insight": "They recently disclosed a breach just days ago, highlighting the need for robust security solutions at Art Jetter & Company.",
-        "signals": [
-          {
-            "type": "breach_disclosed",
-            "captured_at": "2026-05-05T08:09:43.860213",
-            "days_ago": 3,
-            "payload": {
-              "agency": "me_ag",
-              "reported_date": "2026-05-04"
             }
           }
         ]
@@ -2295,162 +2973,6 @@
         ]
       },
       {
-        "name": "Gainesville-Alachua County Regional Airport Authority",
-        "domain": "flygainesville.com",
-        "industry": "government_nonprofit",
-        "headcount": 20,
-        "country": "US",
-        "city": "Gainesville",
-        "state": "FL",
-        "dm_name": "Allan Penksa",
-        "dm_title": "Chief Executive Officer",
-        "dm_email": "allan.penksa@flygainesville.com",
-        "dm_linkedin_url": "http://www.linkedin.com/in/allan-penksa-0b589510",
-        "score": 41.276291922197416,
-        "insight": "Saw the breach disclosure at Gainesville-Alachua \u2014 the airport authority may seek enhanced security measures after this incident.",
-        "signals": [
-          {
-            "type": "breach_disclosed",
-            "captured_at": "2026-05-04T23:01:56.641858",
-            "days_ago": 3,
-            "payload": {
-              "agency": "me_ag",
-              "reported_date": "2026-05-01"
-            }
-          }
-        ]
-      },
-      {
-        "name": "QualiChem Inc.",
-        "domain": "qualichem.com",
-        "industry": "manufacturing",
-        "headcount": 87,
-        "country": "US",
-        "city": "Salem",
-        "state": "VA",
-        "dm_name": "Brandon Woolwine",
-        "dm_title": "IT Manager",
-        "dm_email": "bwoolwine@qualichem.com",
-        "dm_linkedin_url": "http://www.linkedin.com/in/brandon-woolwine-55371641",
-        "score": 41.27629191877563,
-        "insight": "Brandon Woolwine, IT Manager at QualiChem, recently disclosed a breach, signaling a critical need for enhanced security support.",
-        "signals": [
-          {
-            "type": "breach_disclosed",
-            "captured_at": "2026-05-04T23:01:56.641858",
-            "days_ago": 3,
-            "payload": {
-              "agency": "me_ag",
-              "reported_date": "2026-04-29"
-            }
-          }
-        ]
-      },
-      {
-        "name": "Johnson, Vollmerhausen & Gates, PLLC",
-        "domain": "jvgpa.com",
-        "industry": "legal_professional",
-        "headcount": null,
-        "country": "US",
-        "city": "Asheville",
-        "state": "NC",
-        "dm_name": null,
-        "dm_title": null,
-        "dm_email": null,
-        "dm_linkedin_url": null,
-        "score": 41.276291915155156,
-        "insight": "The company disclosed a breach recently, indicating a critical need for enhanced security measures in their legal practice.",
-        "signals": [
-          {
-            "type": "breach_disclosed",
-            "captured_at": "2026-05-04T23:01:56.641858",
-            "days_ago": 3,
-            "payload": {
-              "agency": "me_ag",
-              "reported_date": "2026-04-29"
-            }
-          }
-        ]
-      },
-      {
-        "name": "Sandhills Medical Foundation , Inc.",
-        "domain": "sandhillsmedical.org",
-        "industry": "healthcare",
-        "headcount": 49,
-        "country": "US",
-        "city": "McBee",
-        "state": "SC",
-        "dm_name": "Amanda Duke",
-        "dm_title": "Chief Executive Officer",
-        "dm_email": "aduke@sandhillsmedical.org",
-        "dm_linkedin_url": "http://www.linkedin.com/in/amanda-duke-0969748",
-        "score": 41.27629191128081,
-        "insight": "Sandhills Medical Foundation recently disclosed a breach, highlighting the need for improved security measures.",
-        "signals": [
-          {
-            "type": "breach_disclosed",
-            "captured_at": "2026-05-04T23:01:56.641858",
-            "days_ago": 3,
-            "payload": {
-              "agency": "me_ag",
-              "reported_date": "2026-04-28"
-            }
-          }
-        ]
-      },
-      {
-        "name": "Castaglia, LLP",
-        "domain": "castigliallp.com",
-        "industry": "legal_professional",
-        "headcount": null,
-        "country": "US",
-        "city": "East Northport",
-        "state": "NY",
-        "dm_name": "Robert V. Castiglia",
-        "dm_title": "Managing Partner",
-        "dm_email": null,
-        "dm_linkedin_url": null,
-        "score": 41.276291906821456,
-        "insight": "Saw the breach disclosed at Castaglia, a legal firm, highlighting the importance of robust security measures in their industry.",
-        "signals": [
-          {
-            "type": "breach_disclosed",
-            "captured_at": "2026-05-04T23:01:56.641858",
-            "days_ago": 3,
-            "payload": {
-              "agency": "me_ag",
-              "reported_date": "2026-04-28"
-            }
-          }
-        ]
-      },
-      {
-        "name": "Churchill Claims Services, Inc.",
-        "domain": "churchill-claims.com",
-        "industry": "legal_professional",
-        "headcount": 16,
-        "country": "US",
-        "city": "Clearwater",
-        "state": "FL",
-        "dm_name": "Melanie Hawkins",
-        "dm_title": "President",
-        "dm_email": "melanie.hawkins@churchill-claims.com",
-        "dm_linkedin_url": "http://www.linkedin.com/in/melanie-hawkins-0a848568",
-        "score": 41.27629190181019,
-        "insight": "Churchill recently disclosed a breach, highlighting the need for robust security measures in their operations.",
-        "signals": [
-          {
-            "type": "breach_disclosed",
-            "captured_at": "2026-05-04T23:01:56.641858",
-            "days_ago": 3,
-            "payload": {
-              "agency": "me_ag",
-              "reported_date": "2026-04-27"
-            }
-          }
-        ]
-      },
-      {
         "name": "Rodenburg Law Firm",
         "domain": null,
         "industry": "legal_professional",
@@ -2468,7 +2990,7 @@
           {
             "type": "breach_disclosed",
             "captured_at": "2026-05-04T23:01:56.641858",
-            "days_ago": 3,
+            "days_ago": 4,
             "payload": {
               "agency": "me_ag",
               "reported_date": "2026-04-24"
@@ -2494,36 +3016,10 @@
           {
             "type": "breach_disclosed",
             "captured_at": "2026-05-04T23:01:56.641858",
-            "days_ago": 3,
+            "days_ago": 4,
             "payload": {
               "agency": "me_ag",
               "reported_date": "2026-04-24"
-            }
-          }
-        ]
-      },
-      {
-        "name": "U.S. 1031 Exchange Services. Inc.",
-        "domain": null,
-        "industry": "real_estate",
-        "headcount": null,
-        "country": "US",
-        "city": "Sarasota",
-        "state": "FL",
-        "dm_name": "Ryan Stulman",
-        "dm_title": "President",
-        "dm_email": "rstulman@us1031.com",
-        "dm_linkedin_url": "http://www.linkedin.com/in/ryan-stulman-mba",
-        "score": 41.276291889778754,
-        "insight": "U.S. disclosed a security breach recently, highlighting the need for robust monitoring in their real estate services.",
-        "signals": [
-          {
-            "type": "breach_disclosed",
-            "captured_at": "2026-05-04T23:01:56.641858",
-            "days_ago": 3,
-            "payload": {
-              "agency": "me_ag",
-              "reported_date": "2026-04-23"
             }
           }
         ]
@@ -2546,7 +3042,7 @@
           {
             "type": "breach_disclosed",
             "captured_at": "2026-05-04T23:01:56.641858",
-            "days_ago": 3,
+            "days_ago": 4,
             "payload": {
               "agency": "me_ag",
               "reported_date": "2026-04-22"
@@ -2572,7 +3068,7 @@
           {
             "type": "breach_disclosed",
             "captured_at": "2026-05-04T23:01:56.641858",
-            "days_ago": 3,
+            "days_ago": 4,
             "payload": {
               "agency": "me_ag",
               "reported_date": "2026-04-22"
@@ -2598,7 +3094,7 @@
           {
             "type": "breach_disclosed",
             "captured_at": "2026-05-04T23:01:56.641858",
-            "days_ago": 3,
+            "days_ago": 4,
             "payload": {
               "agency": "me_ag",
               "reported_date": "2026-04-22"
@@ -2624,7 +3120,7 @@
           {
             "type": "breach_disclosed",
             "captured_at": "2026-05-04T23:01:56.641858",
-            "days_ago": 3,
+            "days_ago": 4,
             "payload": {
               "agency": "me_ag",
               "reported_date": "2026-04-21"
@@ -2650,10 +3146,220 @@
           {
             "type": "breach_disclosed",
             "captured_at": "2026-05-04T23:01:54.411532",
-            "days_ago": 3,
+            "days_ago": 4,
             "payload": {
               "agency": "ca_ag",
               "reported_date": "04/23/2026"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Art Jetter & Company",
+        "domain": "jetter.com",
+        "industry": "other",
+        "headcount": 30,
+        "country": "US",
+        "city": "Omaha",
+        "state": "NE",
+        "dm_name": "Jetter",
+        "dm_title": "VP & Chief Operating Officer",
+        "dm_email": "ace@jetter.com",
+        "dm_linkedin_url": "http://www.linkedin.com/in/acjetter",
+        "score": 41.031921995833,
+        "insight": "They recently disclosed a breach just days ago, highlighting the need for robust security solutions at Art Jetter & Company.",
+        "signals": [
+          {
+            "type": "breach_disclosed",
+            "captured_at": "2026-05-05T08:09:43.860213",
+            "days_ago": 3,
+            "payload": {
+              "agency": "me_ag",
+              "reported_date": "2026-05-04"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Gainesville-Alachua County Regional Airport Authority",
+        "domain": "flygainesville.com",
+        "industry": "government_nonprofit",
+        "headcount": 20,
+        "country": "US",
+        "city": "Gainesville",
+        "state": "FL",
+        "dm_name": "Allan Penksa",
+        "dm_title": "Chief Executive Officer",
+        "dm_email": "allan.penksa@flygainesville.com",
+        "dm_linkedin_url": "http://www.linkedin.com/in/allan-penksa-0b589510",
+        "score": 40.672861095057975,
+        "insight": "Saw the breach disclosure at Gainesville-Alachua \u2014 the airport authority may seek enhanced security measures after this incident.",
+        "signals": [
+          {
+            "type": "breach_disclosed",
+            "captured_at": "2026-05-04T23:01:56.641858",
+            "days_ago": 4,
+            "payload": {
+              "agency": "me_ag",
+              "reported_date": "2026-05-01"
+            }
+          }
+        ]
+      },
+      {
+        "name": "QualiChem Inc.",
+        "domain": "qualichem.com",
+        "industry": "manufacturing",
+        "headcount": 87,
+        "country": "US",
+        "city": "Salem",
+        "state": "VA",
+        "dm_name": "Brandon Woolwine",
+        "dm_title": "IT Manager",
+        "dm_email": "bwoolwine@qualichem.com",
+        "dm_linkedin_url": "http://www.linkedin.com/in/brandon-woolwine-55371641",
+        "score": 40.6728610838659,
+        "insight": "Brandon Woolwine, IT Manager at QualiChem, recently disclosed a breach, signaling a critical need for enhanced security support.",
+        "signals": [
+          {
+            "type": "breach_disclosed",
+            "captured_at": "2026-05-04T23:01:56.641858",
+            "days_ago": 4,
+            "payload": {
+              "agency": "me_ag",
+              "reported_date": "2026-04-29"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Johnson, Vollmerhausen & Gates, PLLC",
+        "domain": "jvgpa.com",
+        "industry": "legal_professional",
+        "headcount": null,
+        "country": "US",
+        "city": "Asheville",
+        "state": "NC",
+        "dm_name": null,
+        "dm_title": null,
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": 40.67286107400078,
+        "insight": "The company disclosed a breach recently, indicating a critical need for enhanced security measures in their legal practice.",
+        "signals": [
+          {
+            "type": "breach_disclosed",
+            "captured_at": "2026-05-04T23:01:56.641858",
+            "days_ago": 4,
+            "payload": {
+              "agency": "me_ag",
+              "reported_date": "2026-04-29"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Sandhills Medical Foundation , Inc.",
+        "domain": "sandhillsmedical.org",
+        "industry": "healthcare",
+        "headcount": 49,
+        "country": "US",
+        "city": "McBee",
+        "state": "SC",
+        "dm_name": "Amanda Duke",
+        "dm_title": "Chief Executive Officer",
+        "dm_email": "aduke@sandhillsmedical.org",
+        "dm_linkedin_url": "http://www.linkedin.com/in/amanda-duke-0969748",
+        "score": 40.67286106370059,
+        "insight": "Sandhills Medical Foundation recently disclosed a breach, highlighting the need for improved security measures.",
+        "signals": [
+          {
+            "type": "breach_disclosed",
+            "captured_at": "2026-05-04T23:01:56.641858",
+            "days_ago": 4,
+            "payload": {
+              "agency": "me_ag",
+              "reported_date": "2026-04-28"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Castaglia, LLP",
+        "domain": "castigliallp.com",
+        "industry": "legal_professional",
+        "headcount": null,
+        "country": "US",
+        "city": "East Northport",
+        "state": "NY",
+        "dm_name": "Robert V. Castiglia",
+        "dm_title": "Managing Partner",
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": 40.67286105481436,
+        "insight": "Saw the breach disclosed at Castaglia, a legal firm, highlighting the importance of robust security measures in their industry.",
+        "signals": [
+          {
+            "type": "breach_disclosed",
+            "captured_at": "2026-05-04T23:01:56.641858",
+            "days_ago": 4,
+            "payload": {
+              "agency": "me_ag",
+              "reported_date": "2026-04-28"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Churchill Claims Services, Inc.",
+        "domain": "churchill-claims.com",
+        "industry": "legal_professional",
+        "headcount": 16,
+        "country": "US",
+        "city": "Clearwater",
+        "state": "FL",
+        "dm_name": "Melanie Hawkins",
+        "dm_title": "President",
+        "dm_email": "melanie.hawkins@churchill-claims.com",
+        "dm_linkedin_url": "http://www.linkedin.com/in/melanie-hawkins-0a848568",
+        "score": 40.67286104439453,
+        "insight": "Churchill recently disclosed a breach, highlighting the need for robust security measures in their operations.",
+        "signals": [
+          {
+            "type": "breach_disclosed",
+            "captured_at": "2026-05-04T23:01:56.641858",
+            "days_ago": 4,
+            "payload": {
+              "agency": "me_ag",
+              "reported_date": "2026-04-27"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Society for Science",
+        "domain": "societyforscience.org",
+        "industry": "government_nonprofit",
+        "headcount": 130,
+        "country": "US",
+        "city": "Washington",
+        "state": "DC",
+        "dm_name": "Maya Ajmera",
+        "dm_title": "President & CEO",
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": 39.996014225245744,
+        "insight": "The Society for Science has posted a job for a Director, IT Infrastructure and Security, indicating a need for enhanced security solutions.",
+        "signals": [
+          {
+            "type": "job_posted_security",
+            "captured_at": "2026-05-09T07:56:49.271362",
+            "days_ago": 0,
+            "payload": {
+              "title": "Director, IT Infrastructure and Security",
+              "url": "https://www.adzuna.com/land/ad/5715255388?se=JGHTpXxL8RGnMap5hKkm1g&utm_medium=api&utm_source=3aa14b35&v=9186F2AD5C5AAC70BAD4B53ECE76ADEAFF5081C8",
+              "date_posted": "2026-04-30T23:38:49Z",
+              "site": "adzuna"
             }
           }
         ]
@@ -2670,13 +3376,13 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 39.65294592820214,
+        "score": 39.07324780531524,
         "insight": "The recent job posting for a Director of Engineering & Security at M indicates an increased focus on security for the hotel.",
         "signals": [
           {
             "type": "job_posted_security",
             "captured_at": "2026-05-08T07:42:03.520100",
-            "days_ago": 0,
+            "days_ago": 1,
             "payload": {
               "title": "Director of Engineering & Security",
               "url": "https://www.adzuna.com/land/ad/5722410774?se=OqIaarFK8RGeYJz9IZgogA&utm_medium=api&utm_source=3aa14b35&v=95EA270730A580B8BEFF850B4F5F538539C3121E",
@@ -2737,34 +3443,6 @@
               "title": "FCC - Security Engineer / SIEM Engineer",
               "url": "https://www.linkedin.com/jobs/view/4408412247",
               "date_posted": "2026-05-05",
-              "site": "linkedin"
-            }
-          }
-        ]
-      },
-      {
-        "name": "Careful Security",
-        "domain": null,
-        "industry": "other",
-        "headcount": null,
-        "country": "US",
-        "city": "Burbank",
-        "state": "CA",
-        "dm_name": "Sammy Basu",
-        "dm_title": "Founder and CEO",
-        "dm_email": "sammy@carefulsecurity.com",
-        "dm_linkedin_url": "http://www.linkedin.com/in/sammybasu",
-        "score": 37.88961687397406,
-        "insight": "Careful recently posted a job for a Security Engineer, indicating a focus on enhancing their security posture.",
-        "signals": [
-          {
-            "type": "job_posted_security",
-            "captured_at": "2026-05-06T08:27:02.213469",
-            "days_ago": 2,
-            "payload": {
-              "title": "Security Engineer",
-              "url": "https://www.linkedin.com/jobs/view/4409763516",
-              "date_posted": "nan",
               "site": "linkedin"
             }
           }
@@ -2877,24 +3555,80 @@
         ]
       },
       {
+        "name": "Maman",
+        "domain": "mamannyc.com",
+        "industry": "hospitality_food",
+        "headcount": null,
+        "country": "US",
+        "city": "New York",
+        "state": "NY",
+        "dm_name": "Benjamin Sormonte",
+        "dm_title": "CEO",
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": 21.997909398178678,
+        "insight": "Maman recently raised funding, indicating potential investment in enhanced security measures to protect their hospitality brand.",
+        "signals": [
+          {
+            "type": "funding_raised",
+            "captured_at": "2026-05-09T07:57:06.539973",
+            "days_ago": 0,
+            "payload": {
+              "feed_title": "TriSpan Closes Continuation Vehicle for Maman",
+              "feed_url": "https://www.prnewswire.com/rss/financial-services-latest-news/financial-services-latest-news-list.rss",
+              "link": "https://www.prnewswire.com/news-releases/trispan-closes-continuation-vehicle-for-maman-302767086.html",
+              "published": "Fri, 8 May 2026 15:36:00 +0000"
+            }
+          }
+        ]
+      },
+      {
+        "name": "The Moorings Park Institute Incorporated",
+        "domain": "mooringspark.org",
+        "industry": "healthcare",
+        "headcount": null,
+        "country": "US",
+        "city": "Naples",
+        "state": "FL",
+        "dm_name": "Daniel J Lavender",
+        "dm_title": "President and Chief Executive Officer",
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": 17.99820639690852,
+        "insight": null,
+        "signals": [
+          {
+            "type": "job_posted_it_leadership",
+            "captured_at": "2026-05-09T07:56:49.271362",
+            "days_ago": 0,
+            "payload": {
+              "title": "Director of IT Architecture",
+              "url": "https://www.adzuna.com/land/ad/5721259224?se=JGHTpXxL8RGnMap5hKkm1g&utm_medium=api&utm_source=3aa14b35&v=96B9C8A3546C269632B3966CC0D1E58CD6FFD3C7",
+              "date_posted": "2026-05-07T01:06:09Z",
+              "site": "adzuna"
+            }
+          }
+        ]
+      },
+      {
         "name": "Aligned Dental",
         "domain": "aligneddentalpartners.com",
         "industry": "healthcare",
         "headcount": 38,
         "country": "US",
-        "city": "Chagrin Falls",
-        "state": "OH",
+        "city": "Sarasota",
+        "state": "FL",
         "dm_name": "Chris McClure",
         "dm_title": "Co-Founder",
         "dm_email": "chris@aligneddentalpartners.com",
         "dm_linkedin_url": "http://www.linkedin.com/in/chris-mcclure",
-        "score": 17.843768111002476,
+        "score": 17.582904802652315,
         "insight": null,
         "signals": [
           {
             "type": "job_posted_it_leadership",
             "captured_at": "2026-05-08T07:41:51.457583",
-            "days_ago": 0,
+            "days_ago": 1,
             "payload": {
               "title": "IT Director- Healthcare",
               "url": "https://www.linkedin.com/jobs/view/4411682564",
@@ -2922,7 +3656,7 @@
           {
             "type": "job_posted_it_leadership",
             "captured_at": "2026-05-04T23:01:46.127486",
-            "days_ago": 3,
+            "days_ago": 4,
             "payload": {
               "title": "Interim Director of IT",
               "url": "https://www.adzuna.com/land/ad/5718222787?se=fnxJPA1I8RGldLZhYZiz6Q&utm_medium=api&utm_source=3aa14b35&v=CE66AC6A2276C4E0A5173DB442EEB967E174D723",
@@ -2950,7 +3684,7 @@
           {
             "type": "exec_hired",
             "captured_at": "2026-05-08T07:41:51.457583",
-            "days_ago": 0,
+            "days_ago": 1,
             "payload": {
               "title": "Chief Information Security Officer",
               "url": "https://www.indeed.com/viewjob?jk=e30831756f792724",
@@ -3000,7 +3734,7 @@
         "dm_title": "Chief Information Officer",
         "dm_email": "manderson@pamhealth.com",
         "dm_linkedin_url": "http://www.linkedin.com/in/mike-anderson-18418a4",
-        "score": 14.208606330962365,
+        "score": 14.00088649216765,
         "insight": null,
         "signals": [
           {
@@ -3017,28 +3751,28 @@
         ]
       },
       {
-        "name": "Avail",
-        "domain": "avail.com",
-        "industry": "software_saas",
-        "headcount": 75,
+        "name": "EXPRESS",
+        "domain": "express.com",
+        "industry": "other",
+        "headcount": null,
         "country": "US",
-        "city": "Chicago",
-        "state": "IL",
-        "dm_name": "James Rogers",
-        "dm_title": "Vice President",
+        "city": "Columbus",
+        "state": "OH",
+        "dm_name": "Stewart Glendinning",
+        "dm_title": "Chief Executive Officer",
         "dm_email": null,
-        "dm_linkedin_url": "http://www.linkedin.com/in/james-rogers-43995b191",
-        "score": 11.633827897146965,
+        "dm_linkedin_url": null,
+        "score": 11.998766318517113,
         "insight": null,
         "signals": [
           {
             "type": "job_posted_cloud_devops",
-            "captured_at": "2026-05-07T08:33:45.474163",
-            "days_ago": 1,
+            "captured_at": "2026-05-09T07:56:37.439236",
+            "days_ago": 0,
             "payload": {
               "title": "DevOps Engineer",
-              "url": "https://www.linkedin.com/jobs/view/4409928072",
-              "date_posted": "nan",
+              "url": "https://www.linkedin.com/jobs/view/4402046792",
+              "date_posted": "2026-05-06",
               "site": "linkedin"
             }
           }
@@ -3066,6 +3800,34 @@
             "payload": {
               "title": "DevOps / AgentOps Engineer",
               "url": "https://www.linkedin.com/jobs/view/4409941614",
+              "date_posted": "nan",
+              "site": "linkedin"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Avail",
+        "domain": "avail.com",
+        "industry": "software_saas",
+        "headcount": 75,
+        "country": "US",
+        "city": "Santa Clara",
+        "state": "CA",
+        "dm_name": "James Rogers",
+        "dm_title": "Vice President",
+        "dm_email": null,
+        "dm_linkedin_url": "http://www.linkedin.com/in/james-rogers-43995b191",
+        "score": 11.463749529631102,
+        "insight": null,
+        "signals": [
+          {
+            "type": "job_posted_cloud_devops",
+            "captured_at": "2026-05-07T08:33:45.474163",
+            "days_ago": 1,
+            "payload": {
+              "title": "DevOps Engineer",
+              "url": "https://www.linkedin.com/jobs/view/4409928072",
               "date_posted": "nan",
               "site": "linkedin"
             }
@@ -3241,34 +4003,6 @@
         ]
       },
       {
-        "name": "iClassPro, Inc.",
-        "domain": null,
-        "industry": "software_saas",
-        "headcount": 100,
-        "country": "US",
-        "city": "Longview",
-        "state": "TX",
-        "dm_name": null,
-        "dm_title": null,
-        "dm_email": null,
-        "dm_linkedin_url": null,
-        "score": 11.104145036702208,
-        "insight": null,
-        "signals": [
-          {
-            "type": "job_posted_cloud_devops",
-            "captured_at": "2026-05-05T08:09:31.653253",
-            "days_ago": 3,
-            "payload": {
-              "title": "DevOps Engineer Manager",
-              "url": "https://www.adzuna.com/land/ad/5716885449?se=blP8wFlI8RGSdISXQQQjPQ&utm_medium=api&utm_source=3aa14b35&v=C44F8A3EC47190FA2FF187E9B3E9C1E145EEFA70",
-              "date_posted": "2026-05-02T05:51:56Z",
-              "site": "adzuna"
-            }
-          }
-        ]
-      },
-      {
         "name": "VideoAmp",
         "domain": null,
         "industry": "software_saas",
@@ -3347,6 +4081,90 @@
               "title": "DevOps Engineer",
               "url": "https://www.linkedin.com/jobs/view/4410293359",
               "date_posted": "nan",
+              "site": "linkedin"
+            }
+          }
+        ]
+      },
+      {
+        "name": "iClassPro, Inc.",
+        "domain": null,
+        "industry": "software_saas",
+        "headcount": 100,
+        "country": "US",
+        "city": "Longview",
+        "state": "TX",
+        "dm_name": null,
+        "dm_title": null,
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": 10.941810218310835,
+        "insight": null,
+        "signals": [
+          {
+            "type": "job_posted_cloud_devops",
+            "captured_at": "2026-05-05T08:09:31.653253",
+            "days_ago": 3,
+            "payload": {
+              "title": "DevOps Engineer Manager",
+              "url": "https://www.adzuna.com/land/ad/5716885449?se=blP8wFlI8RGSdISXQQQjPQ&utm_medium=api&utm_source=3aa14b35&v=C44F8A3EC47190FA2FF187E9B3E9C1E145EEFA70",
+              "date_posted": "2026-05-02T05:51:56Z",
+              "site": "adzuna"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Tsubaki Kabelschlepp America, Inc",
+        "domain": "tsubaki.com",
+        "industry": "manufacturing",
+        "headcount": null,
+        "country": "US",
+        "city": null,
+        "state": null,
+        "dm_name": null,
+        "dm_title": null,
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": 9.999003563143283,
+        "insight": null,
+        "signals": [
+          {
+            "type": "job_posted_it_support",
+            "captured_at": "2026-05-09T07:56:49.271362",
+            "days_ago": 0,
+            "payload": {
+              "title": "Help Desk Technician Intern",
+              "url": "https://www.adzuna.com/land/ad/5722725889?se=EFtkonxL8RGnMap5hKkm1g&utm_medium=api&utm_source=3aa14b35&v=AEFDC5ADA7D94C8A7131D66EEAB006394A75198E",
+              "date_posted": "2026-05-08T03:42:04Z",
+              "site": "adzuna"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Sol de Janeiro",
+        "domain": "soldejaneiro.com",
+        "industry": "ecommerce_retail",
+        "headcount": null,
+        "country": "US",
+        "city": "New York",
+        "state": "NY",
+        "dm_name": null,
+        "dm_title": null,
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": 9.998971946467153,
+        "insight": null,
+        "signals": [
+          {
+            "type": "job_posted_it_support",
+            "captured_at": "2026-05-09T07:56:37.439236",
+            "days_ago": 0,
+            "payload": {
+              "title": "IT Support Specialist (Part-Time)",
+              "url": "https://www.linkedin.com/jobs/view/4388509300",
+              "date_posted": "2026-05-03",
               "site": "linkedin"
             }
           }
@@ -3437,34 +4255,6 @@
         ]
       },
       {
-        "name": "zTrip",
-        "domain": "ztrip.com",
-        "industry": "logistics_transport",
-        "headcount": null,
-        "country": "US",
-        "city": "Kansas City",
-        "state": "MO",
-        "dm_name": "Luke Misgen",
-        "dm_title": "Vice President of Technology",
-        "dm_email": "lmisgen@ztrip.com",
-        "dm_linkedin_url": "http://www.linkedin.com/in/lukemisgen",
-        "score": 9.4724042228479,
-        "insight": null,
-        "signals": [
-          {
-            "type": "job_posted_it_support",
-            "captured_at": "2026-05-06T08:27:02.213469",
-            "days_ago": 2,
-            "payload": {
-              "title": "IT Support",
-              "url": "https://www.linkedin.com/jobs/view/4408538417",
-              "date_posted": "2026-04-29",
-              "site": "linkedin"
-            }
-          }
-        ]
-      },
-      {
         "name": "MACKENZIE",
         "domain": null,
         "industry": "other",
@@ -3488,6 +4278,34 @@
               "url": "https://www.indeed.com/viewjob?jk=5fe1622b37fb4db0",
               "date_posted": "2026-05-06",
               "site": "indeed"
+            }
+          }
+        ]
+      },
+      {
+        "name": "zTrip",
+        "domain": "ztrip.com",
+        "industry": "logistics_transport",
+        "headcount": null,
+        "country": "US",
+        "city": "Kansas City",
+        "state": "MO",
+        "dm_name": "Luke Misgen",
+        "dm_title": "Vice President of Technology",
+        "dm_email": "lmisgen@ztrip.com",
+        "dm_linkedin_url": "http://www.linkedin.com/in/lukemisgen",
+        "score": 9.333924330520464,
+        "insight": null,
+        "signals": [
+          {
+            "type": "job_posted_it_support",
+            "captured_at": "2026-05-06T08:27:02.213469",
+            "days_ago": 2,
+            "payload": {
+              "title": "IT Support",
+              "url": "https://www.linkedin.com/jobs/view/4408538417",
+              "date_posted": "2026-04-29",
+              "site": "linkedin"
             }
           }
         ]
@@ -3605,6 +4423,34 @@
         ]
       },
       {
+        "name": "Winonics",
+        "domain": "winonics.com",
+        "industry": "software_saas",
+        "headcount": 50,
+        "country": "US",
+        "city": "Brea",
+        "state": "CA",
+        "dm_name": "Dennis Brown",
+        "dm_title": "Chief Executive Officer",
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": 9.172453181427864,
+        "insight": null,
+        "signals": [
+          {
+            "type": "job_posted_it_support",
+            "captured_at": "2026-05-04T23:01:33.755742",
+            "days_ago": 4,
+            "payload": {
+              "title": "IT Support Specialist (Entry-Level)",
+              "url": "https://www.linkedin.com/jobs/view/4405162384",
+              "date_posted": "2026-04-27",
+              "site": "linkedin"
+            }
+          }
+        ]
+      },
+      {
         "name": "Ocean Casino Resort",
         "domain": null,
         "industry": "hospitality_food",
@@ -3616,7 +4462,7 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 9.253426603577338,
+        "score": 9.118148002080225,
         "insight": null,
         "signals": [
           {
@@ -3644,13 +4490,13 @@
         "dm_title": "VP and Chief Technology Officer",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 9.172453184054897,
+        "score": 9.038358341971666,
         "insight": null,
         "signals": [
           {
             "type": "job_posted_it_support",
             "captured_at": "2026-05-04T23:01:33.755742",
-            "days_ago": 3,
+            "days_ago": 4,
             "payload": {
               "title": "IT Support Specialist (Help Desk)",
               "url": "https://www.linkedin.com/jobs/view/4406422539",
@@ -3672,45 +4518,17 @@
         "dm_title": "Chief Medical Officer",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 9.1724531823109,
+        "score": 9.038358337877238,
         "insight": null,
         "signals": [
           {
             "type": "job_posted_it_support",
             "captured_at": "2026-05-04T23:01:33.755742",
-            "days_ago": 3,
+            "days_ago": 4,
             "payload": {
               "title": "IT Support Technician",
               "url": "https://www.linkedin.com/jobs/view/4408553766",
               "date_posted": "2026-04-29",
-              "site": "linkedin"
-            }
-          }
-        ]
-      },
-      {
-        "name": "Winonics",
-        "domain": "winonics.com",
-        "industry": "software_saas",
-        "headcount": 50,
-        "country": "US",
-        "city": "Brea",
-        "state": "CA",
-        "dm_name": "Dennis Brown",
-        "dm_title": "Chief Executive Officer",
-        "dm_email": null,
-        "dm_linkedin_url": null,
-        "score": 9.172453181427864,
-        "insight": null,
-        "signals": [
-          {
-            "type": "job_posted_it_support",
-            "captured_at": "2026-05-04T23:01:33.755742",
-            "days_ago": 3,
-            "payload": {
-              "title": "IT Support Specialist (Entry-Level)",
-              "url": "https://www.linkedin.com/jobs/view/4405162384",
-              "date_posted": "2026-04-27",
               "site": "linkedin"
             }
           }
@@ -3769,28 +4587,28 @@
         ]
       },
       {
-        "name": "Avail",
-        "domain": "avail.com",
-        "industry": "software_saas",
-        "headcount": 75,
+        "name": "EXPRESS",
+        "domain": "express.com",
+        "industry": "other",
+        "headcount": null,
         "country": "US",
-        "city": "Chicago",
-        "state": "IL",
-        "dm_name": "James Rogers",
-        "dm_title": "Vice President",
+        "city": "Columbus",
+        "state": "OH",
+        "dm_name": "Stewart Glendinning",
+        "dm_title": "Chief Executive Officer",
         "dm_email": null,
-        "dm_linkedin_url": "http://www.linkedin.com/in/james-rogers-43995b191",
-        "score": 38.779426323823216,
-        "insight": "The company recently posted a DevOps Engineer position, indicating a push towards cloud infrastructure.",
+        "dm_linkedin_url": null,
+        "score": 39.99588772839037,
+        "insight": "The company EXPRESS recently posted a job for a DevOps Engineer, indicating a push towards improving their cloud infrastructure.",
         "signals": [
           {
             "type": "job_posted_cloud_devops",
-            "captured_at": "2026-05-07T08:33:45.474163",
-            "days_ago": 1,
+            "captured_at": "2026-05-09T07:56:37.439236",
+            "days_ago": 0,
             "payload": {
               "title": "DevOps Engineer",
-              "url": "https://www.linkedin.com/jobs/view/4409928072",
-              "date_posted": "nan",
+              "url": "https://www.linkedin.com/jobs/view/4402046792",
+              "date_posted": "2026-05-06",
               "site": "linkedin"
             }
           }
@@ -3818,6 +4636,34 @@
             "payload": {
               "title": "DevOps / AgentOps Engineer",
               "url": "https://www.linkedin.com/jobs/view/4409941614",
+              "date_posted": "nan",
+              "site": "linkedin"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Avail",
+        "domain": "avail.com",
+        "industry": "software_saas",
+        "headcount": 75,
+        "country": "US",
+        "city": "Santa Clara",
+        "state": "CA",
+        "dm_name": "James Rogers",
+        "dm_title": "Vice President",
+        "dm_email": null,
+        "dm_linkedin_url": "http://www.linkedin.com/in/james-rogers-43995b191",
+        "score": 38.21249843210367,
+        "insight": "The company recently posted a DevOps Engineer position, indicating a push towards cloud infrastructure.",
+        "signals": [
+          {
+            "type": "job_posted_cloud_devops",
+            "captured_at": "2026-05-07T08:33:45.474163",
+            "days_ago": 1,
+            "payload": {
+              "title": "DevOps Engineer",
+              "url": "https://www.linkedin.com/jobs/view/4409928072",
               "date_posted": "nan",
               "site": "linkedin"
             }
@@ -3993,34 +4839,6 @@
         ]
       },
       {
-        "name": "iClassPro, Inc.",
-        "domain": null,
-        "industry": "software_saas",
-        "headcount": 100,
-        "country": "US",
-        "city": "Longview",
-        "state": "TX",
-        "dm_name": null,
-        "dm_title": null,
-        "dm_email": null,
-        "dm_linkedin_url": null,
-        "score": 37.013816789007365,
-        "insight": "Recently saw a job posting for a DevOps Engineer Manager at iClassPro, indicating a focus on advancing cloud capabilities.",
-        "signals": [
-          {
-            "type": "job_posted_cloud_devops",
-            "captured_at": "2026-05-05T08:09:31.653253",
-            "days_ago": 3,
-            "payload": {
-              "title": "DevOps Engineer Manager",
-              "url": "https://www.adzuna.com/land/ad/5716885449?se=blP8wFlI8RGSdISXQQQjPQ&utm_medium=api&utm_source=3aa14b35&v=C44F8A3EC47190FA2FF187E9B3E9C1E145EEFA70",
-              "date_posted": "2026-05-02T05:51:56Z",
-              "site": "adzuna"
-            }
-          }
-        ]
-      },
-      {
         "name": "VideoAmp",
         "domain": null,
         "industry": "software_saas",
@@ -4105,6 +4923,62 @@
         ]
       },
       {
+        "name": "iClassPro, Inc.",
+        "domain": null,
+        "industry": "software_saas",
+        "headcount": 100,
+        "country": "US",
+        "city": "Longview",
+        "state": "TX",
+        "dm_name": null,
+        "dm_title": null,
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": 36.47270072770279,
+        "insight": "Recently saw a job posting for a DevOps Engineer Manager at iClassPro, indicating a focus on advancing cloud capabilities.",
+        "signals": [
+          {
+            "type": "job_posted_cloud_devops",
+            "captured_at": "2026-05-05T08:09:31.653253",
+            "days_ago": 3,
+            "payload": {
+              "title": "DevOps Engineer Manager",
+              "url": "https://www.adzuna.com/land/ad/5716885449?se=blP8wFlI8RGSdISXQQQjPQ&utm_medium=api&utm_source=3aa14b35&v=C44F8A3EC47190FA2FF187E9B3E9C1E145EEFA70",
+              "date_posted": "2026-05-02T05:51:56Z",
+              "site": "adzuna"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Maman",
+        "domain": "mamannyc.com",
+        "industry": "hospitality_food",
+        "headcount": null,
+        "country": "US",
+        "city": "New York",
+        "state": "NY",
+        "dm_name": "Benjamin Sormonte",
+        "dm_title": "CEO",
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": 27.99733923404559,
+        "insight": "Maman recently raised funding, indicating a potential need for cloud consultancy services to support their expansion.",
+        "signals": [
+          {
+            "type": "funding_raised",
+            "captured_at": "2026-05-09T07:57:06.539973",
+            "days_ago": 0,
+            "payload": {
+              "feed_title": "TriSpan Closes Continuation Vehicle for Maman",
+              "feed_url": "https://www.prnewswire.com/rss/financial-services-latest-news/financial-services-latest-news-list.rss",
+              "link": "https://www.prnewswire.com/news-releases/trispan-closes-continuation-vehicle-for-maman-302767086.html",
+              "published": "Fri, 8 May 2026 15:36:00 +0000"
+            }
+          }
+        ]
+      },
+      {
         "name": "TransGlobal Insurance Agency, Inc.",
         "domain": "transglobalus.com",
         "industry": "fintech",
@@ -4116,7 +4990,7 @@
         "dm_title": "Owner",
         "dm_email": "philip.hu@transglobalus.com",
         "dm_linkedin_url": "http://www.linkedin.com/in/philip-hu-88730413",
-        "score": 23.26780922500888,
+        "score": 22.927650190594143,
         "insight": "TransGlobal recently disclosed multiple breaches, highlighting the need for robust cloud security measures.",
         "signals": [
           {
@@ -4149,24 +5023,52 @@
         ]
       },
       {
+        "name": "The Moorings Park Institute Incorporated",
+        "domain": "mooringspark.org",
+        "industry": "healthcare",
+        "headcount": null,
+        "country": "US",
+        "city": "Naples",
+        "state": "FL",
+        "dm_name": "Daniel J Lavender",
+        "dm_title": "President and Chief Executive Officer",
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": 17.99820639690852,
+        "insight": null,
+        "signals": [
+          {
+            "type": "job_posted_it_leadership",
+            "captured_at": "2026-05-09T07:56:49.271362",
+            "days_ago": 0,
+            "payload": {
+              "title": "Director of IT Architecture",
+              "url": "https://www.adzuna.com/land/ad/5721259224?se=JGHTpXxL8RGnMap5hKkm1g&utm_medium=api&utm_source=3aa14b35&v=96B9C8A3546C269632B3966CC0D1E58CD6FFD3C7",
+              "date_posted": "2026-05-07T01:06:09Z",
+              "site": "adzuna"
+            }
+          }
+        ]
+      },
+      {
         "name": "Aligned Dental",
         "domain": "aligneddentalpartners.com",
         "industry": "healthcare",
         "headcount": 38,
         "country": "US",
-        "city": "Chagrin Falls",
-        "state": "OH",
+        "city": "Sarasota",
+        "state": "FL",
         "dm_name": "Chris McClure",
         "dm_title": "Co-Founder",
         "dm_email": "chris@aligneddentalpartners.com",
         "dm_linkedin_url": "http://www.linkedin.com/in/chris-mcclure",
-        "score": 17.843768111002476,
+        "score": 17.582904802652315,
         "insight": null,
         "signals": [
           {
             "type": "job_posted_it_leadership",
             "captured_at": "2026-05-08T07:41:51.457583",
-            "days_ago": 0,
+            "days_ago": 1,
             "payload": {
               "title": "IT Director- Healthcare",
               "url": "https://www.linkedin.com/jobs/view/4411682564",
@@ -4194,12 +5096,47 @@
           {
             "type": "job_posted_it_leadership",
             "captured_at": "2026-05-04T23:01:46.127486",
-            "days_ago": 3,
+            "days_ago": 4,
             "payload": {
               "title": "Interim Director of IT",
               "url": "https://www.adzuna.com/land/ad/5718222787?se=fnxJPA1I8RGldLZhYZiz6Q&utm_medium=api&utm_source=3aa14b35&v=CE66AC6A2276C4E0A5173DB442EEB967E174D723",
               "date_posted": "2026-05-03T17:10:48Z",
               "site": "adzuna"
+            }
+          }
+        ]
+      },
+      {
+        "name": "U.S. 1031 Exchange Services. Inc.",
+        "domain": "us1031.com",
+        "industry": "real_estate",
+        "headcount": null,
+        "country": "US",
+        "city": "Sarasota",
+        "state": "FL",
+        "dm_name": "Ryan Stulman",
+        "dm_title": "President",
+        "dm_email": "rstulman@us1031.com",
+        "dm_linkedin_url": "http://www.linkedin.com/in/ryan-stulman-mba",
+        "score": 15.229984675969312,
+        "insight": null,
+        "signals": [
+          {
+            "type": "breach_disclosed",
+            "captured_at": "2026-05-09T07:57:13.098372",
+            "days_ago": 0,
+            "payload": {
+              "agency": "me_ag",
+              "reported_date": "2026-05-08"
+            }
+          },
+          {
+            "type": "breach_disclosed",
+            "captured_at": "2026-05-04T23:01:56.641858",
+            "days_ago": 4,
+            "payload": {
+              "agency": "me_ag",
+              "reported_date": "2026-04-23"
             }
           }
         ]
@@ -4222,7 +5159,7 @@
           {
             "type": "exec_hired",
             "captured_at": "2026-05-08T07:41:51.457583",
-            "days_ago": 0,
+            "days_ago": 1,
             "payload": {
               "title": "Chief Information Security Officer",
               "url": "https://www.indeed.com/viewjob?jk=e30831756f792724",
@@ -4272,7 +5209,7 @@
         "dm_title": "Chief Information Officer",
         "dm_email": "manderson@pamhealth.com",
         "dm_linkedin_url": "http://www.linkedin.com/in/mike-anderson-18418a4",
-        "score": 14.208606330962365,
+        "score": 14.00088649216765,
         "insight": null,
         "signals": [
           {
@@ -4289,6 +5226,34 @@
         ]
       },
       {
+        "name": "Society for Science",
+        "domain": "societyforscience.org",
+        "industry": "government_nonprofit",
+        "headcount": 130,
+        "country": "US",
+        "city": "Washington",
+        "state": "DC",
+        "dm_name": "Maya Ajmera",
+        "dm_title": "President & CEO",
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": 11.998804267573725,
+        "insight": null,
+        "signals": [
+          {
+            "type": "job_posted_security",
+            "captured_at": "2026-05-09T07:56:49.271362",
+            "days_ago": 0,
+            "payload": {
+              "title": "Director, IT Infrastructure and Security",
+              "url": "https://www.adzuna.com/land/ad/5715255388?se=JGHTpXxL8RGnMap5hKkm1g&utm_medium=api&utm_source=3aa14b35&v=9186F2AD5C5AAC70BAD4B53ECE76ADEAFF5081C8",
+              "date_posted": "2026-04-30T23:38:49Z",
+              "site": "adzuna"
+            }
+          }
+        ]
+      },
+      {
         "name": "M Social Times Square Hotel",
         "domain": "msocialhotelnewyork.com",
         "industry": "hospitality_food",
@@ -4300,13 +5265,13 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 11.895883778460643,
+        "score": 11.721974341594573,
         "insight": null,
         "signals": [
           {
             "type": "job_posted_security",
             "captured_at": "2026-05-08T07:42:03.520100",
-            "days_ago": 0,
+            "days_ago": 1,
             "payload": {
               "title": "Director of Engineering & Security",
               "url": "https://www.adzuna.com/land/ad/5722410774?se=OqIaarFK8RGeYJz9IZgogA&utm_medium=api&utm_source=3aa14b35&v=95EA270730A580B8BEFF850B4F5F538539C3121E",
@@ -4373,34 +5338,6 @@
         ]
       },
       {
-        "name": "Careful Security",
-        "domain": null,
-        "industry": "other",
-        "headcount": null,
-        "country": "US",
-        "city": "Burbank",
-        "state": "CA",
-        "dm_name": "Sammy Basu",
-        "dm_title": "Founder and CEO",
-        "dm_email": "sammy@carefulsecurity.com",
-        "dm_linkedin_url": "http://www.linkedin.com/in/sammybasu",
-        "score": 11.36688506219222,
-        "insight": null,
-        "signals": [
-          {
-            "type": "job_posted_security",
-            "captured_at": "2026-05-06T08:27:02.213469",
-            "days_ago": 2,
-            "payload": {
-              "title": "Security Engineer",
-              "url": "https://www.linkedin.com/jobs/view/4409763516",
-              "date_posted": "nan",
-              "site": "linkedin"
-            }
-          }
-        ]
-      },
-      {
         "name": "Offchain Labs",
         "domain": null,
         "industry": "software_saas",
@@ -4451,6 +5388,62 @@
               "title": "Security Engineer",
               "url": "https://www.linkedin.com/jobs/view/4407611056",
               "date_posted": "2026-04-30",
+              "site": "linkedin"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Tsubaki Kabelschlepp America, Inc",
+        "domain": "tsubaki.com",
+        "industry": "manufacturing",
+        "headcount": null,
+        "country": "US",
+        "city": null,
+        "state": null,
+        "dm_name": null,
+        "dm_title": null,
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": 9.999003563143283,
+        "insight": null,
+        "signals": [
+          {
+            "type": "job_posted_it_support",
+            "captured_at": "2026-05-09T07:56:49.271362",
+            "days_ago": 0,
+            "payload": {
+              "title": "Help Desk Technician Intern",
+              "url": "https://www.adzuna.com/land/ad/5722725889?se=EFtkonxL8RGnMap5hKkm1g&utm_medium=api&utm_source=3aa14b35&v=AEFDC5ADA7D94C8A7131D66EEAB006394A75198E",
+              "date_posted": "2026-05-08T03:42:04Z",
+              "site": "adzuna"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Sol de Janeiro",
+        "domain": "soldejaneiro.com",
+        "industry": "ecommerce_retail",
+        "headcount": null,
+        "country": "US",
+        "city": "New York",
+        "state": "NY",
+        "dm_name": null,
+        "dm_title": null,
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": 9.998971946467153,
+        "insight": null,
+        "signals": [
+          {
+            "type": "job_posted_it_support",
+            "captured_at": "2026-05-09T07:56:37.439236",
+            "days_ago": 0,
+            "payload": {
+              "title": "IT Support Specialist (Part-Time)",
+              "url": "https://www.linkedin.com/jobs/view/4388509300",
+              "date_posted": "2026-05-03",
               "site": "linkedin"
             }
           }
@@ -4541,34 +5534,6 @@
         ]
       },
       {
-        "name": "zTrip",
-        "domain": "ztrip.com",
-        "industry": "logistics_transport",
-        "headcount": null,
-        "country": "US",
-        "city": "Kansas City",
-        "state": "MO",
-        "dm_name": "Luke Misgen",
-        "dm_title": "Vice President of Technology",
-        "dm_email": "lmisgen@ztrip.com",
-        "dm_linkedin_url": "http://www.linkedin.com/in/lukemisgen",
-        "score": 9.4724042228479,
-        "insight": null,
-        "signals": [
-          {
-            "type": "job_posted_it_support",
-            "captured_at": "2026-05-06T08:27:02.213469",
-            "days_ago": 2,
-            "payload": {
-              "title": "IT Support",
-              "url": "https://www.linkedin.com/jobs/view/4408538417",
-              "date_posted": "2026-04-29",
-              "site": "linkedin"
-            }
-          }
-        ]
-      },
-      {
         "name": "MACKENZIE",
         "domain": null,
         "industry": "other",
@@ -4592,6 +5557,34 @@
               "url": "https://www.indeed.com/viewjob?jk=5fe1622b37fb4db0",
               "date_posted": "2026-05-06",
               "site": "indeed"
+            }
+          }
+        ]
+      },
+      {
+        "name": "zTrip",
+        "domain": "ztrip.com",
+        "industry": "logistics_transport",
+        "headcount": null,
+        "country": "US",
+        "city": "Kansas City",
+        "state": "MO",
+        "dm_name": "Luke Misgen",
+        "dm_title": "Vice President of Technology",
+        "dm_email": "lmisgen@ztrip.com",
+        "dm_linkedin_url": "http://www.linkedin.com/in/lukemisgen",
+        "score": 9.333924330520464,
+        "insight": null,
+        "signals": [
+          {
+            "type": "job_posted_it_support",
+            "captured_at": "2026-05-06T08:27:02.213469",
+            "days_ago": 2,
+            "payload": {
+              "title": "IT Support",
+              "url": "https://www.linkedin.com/jobs/view/4408538417",
+              "date_posted": "2026-04-29",
+              "site": "linkedin"
             }
           }
         ]
@@ -4709,6 +5702,34 @@
         ]
       },
       {
+        "name": "Winonics",
+        "domain": "winonics.com",
+        "industry": "software_saas",
+        "headcount": 50,
+        "country": "US",
+        "city": "Brea",
+        "state": "CA",
+        "dm_name": "Dennis Brown",
+        "dm_title": "Chief Executive Officer",
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": 9.172453181427864,
+        "insight": null,
+        "signals": [
+          {
+            "type": "job_posted_it_support",
+            "captured_at": "2026-05-04T23:01:33.755742",
+            "days_ago": 4,
+            "payload": {
+              "title": "IT Support Specialist (Entry-Level)",
+              "url": "https://www.linkedin.com/jobs/view/4405162384",
+              "date_posted": "2026-04-27",
+              "site": "linkedin"
+            }
+          }
+        ]
+      },
+      {
         "name": "Ocean Casino Resort",
         "domain": null,
         "industry": "hospitality_food",
@@ -4720,7 +5741,7 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 9.253426603577338,
+        "score": 9.118148002080225,
         "insight": null,
         "signals": [
           {
@@ -4748,13 +5769,13 @@
         "dm_title": "VP and Chief Technology Officer",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 9.172453184054897,
+        "score": 9.038358341971666,
         "insight": null,
         "signals": [
           {
             "type": "job_posted_it_support",
             "captured_at": "2026-05-04T23:01:33.755742",
-            "days_ago": 3,
+            "days_ago": 4,
             "payload": {
               "title": "IT Support Specialist (Help Desk)",
               "url": "https://www.linkedin.com/jobs/view/4406422539",
@@ -4776,13 +5797,13 @@
         "dm_title": "Chief Medical Officer",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 9.1724531823109,
+        "score": 9.038358337877238,
         "insight": null,
         "signals": [
           {
             "type": "job_posted_it_support",
             "captured_at": "2026-05-04T23:01:33.755742",
-            "days_ago": 3,
+            "days_ago": 4,
             "payload": {
               "title": "IT Support Technician",
               "url": "https://www.linkedin.com/jobs/view/4408553766",
@@ -4793,29 +5814,261 @@
         ]
       },
       {
-        "name": "Winonics",
-        "domain": "winonics.com",
-        "industry": "software_saas",
-        "headcount": 50,
+        "name": "New  Congol  LLC  dba  New  Congoleum",
+        "domain": "congoleum.com",
+        "industry": "manufacturing",
+        "headcount": null,
         "country": "US",
-        "city": "Brea",
-        "state": "CA",
-        "dm_name": "Dennis Brown",
-        "dm_title": "Chief Executive Officer",
+        "city": "Trenton",
+        "state": "NJ",
+        "dm_name": null,
+        "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 9.172453181427864,
+        "score": 7.99925379337702,
         "insight": null,
         "signals": [
           {
-            "type": "job_posted_it_support",
-            "captured_at": "2026-05-04T23:01:33.755742",
-            "days_ago": 3,
+            "type": "breach_disclosed",
+            "captured_at": "2026-05-09T07:57:13.098372",
+            "days_ago": 0,
             "payload": {
-              "title": "IT Support Specialist (Entry-Level)",
-              "url": "https://www.linkedin.com/jobs/view/4405162384",
-              "date_posted": "2026-04-27",
-              "site": "linkedin"
+              "agency": "me_ag",
+              "reported_date": "2026-05-08"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Financial Foundations, Inc.",
+        "domain": "financial-foundationsinc.com",
+        "industry": "fintech",
+        "headcount": 10,
+        "country": "US",
+        "city": "SOUTHBOROUGH",
+        "state": "MA",
+        "dm_name": "Eric Meushaw",
+        "dm_title": "President",
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": 7.999253791642174,
+        "insight": null,
+        "signals": [
+          {
+            "type": "breach_disclosed",
+            "captured_at": "2026-05-09T07:57:13.098372",
+            "days_ago": 0,
+            "payload": {
+              "agency": "me_ag",
+              "reported_date": "2026-05-08"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Lautrec, Ltd.",
+        "domain": "lautrecltd.com",
+        "industry": "other",
+        "headcount": null,
+        "country": "US",
+        "city": "Farmington Hills",
+        "state": "MI",
+        "dm_name": null,
+        "dm_title": null,
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": 7.999253787887977,
+        "insight": null,
+        "signals": [
+          {
+            "type": "breach_disclosed",
+            "captured_at": "2026-05-09T07:57:13.098372",
+            "days_ago": 0,
+            "payload": {
+              "agency": "me_ag",
+              "reported_date": "2026-05-08"
+            }
+          }
+        ]
+      },
+      {
+        "name": "2nd Swing",
+        "domain": "2ndswing.com",
+        "industry": "ecommerce_retail",
+        "headcount": null,
+        "country": "US",
+        "city": "Eden Prairie",
+        "state": "MN",
+        "dm_name": "Simon Kallal",
+        "dm_title": "Chief Executive Officer",
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": 7.99925378216149,
+        "insight": null,
+        "signals": [
+          {
+            "type": "breach_disclosed",
+            "captured_at": "2026-05-09T07:57:13.098372",
+            "days_ago": 0,
+            "payload": {
+              "agency": "me_ag",
+              "reported_date": "2026-05-07"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Gateways Community Services",
+        "domain": "gatewayscs.org",
+        "industry": "healthcare",
+        "headcount": null,
+        "country": "US",
+        "city": "Nashua",
+        "state": "NH",
+        "dm_name": "Sandy Pelletier",
+        "dm_title": "President & Chief Executive Officer",
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": 7.9992537784500755,
+        "insight": null,
+        "signals": [
+          {
+            "type": "breach_disclosed",
+            "captured_at": "2026-05-09T07:57:13.098372",
+            "days_ago": 0,
+            "payload": {
+              "agency": "me_ag",
+              "reported_date": "2026-05-05"
+            }
+          }
+        ]
+      },
+      {
+        "name": "MemberSource Credit Union",
+        "domain": "membersourcecu.org",
+        "industry": "fintech",
+        "headcount": 50,
+        "country": "US",
+        "city": "Houston",
+        "state": "TX",
+        "dm_name": "Kenny Harrington",
+        "dm_title": "President/CEO",
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": 7.999246757670496,
+        "insight": null,
+        "signals": [
+          {
+            "type": "breach_disclosed",
+            "captured_at": "2026-05-09T07:57:09.802162",
+            "days_ago": 0,
+            "payload": {
+              "agency": "ca_ag",
+              "reported_date": "05/08/2026"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Sanger Skilled Care, LLC dba Cornerstone Care Center",
+        "domain": null,
+        "industry": "healthcare",
+        "headcount": null,
+        "country": "US",
+        "city": "Sanger",
+        "state": "CA",
+        "dm_name": null,
+        "dm_title": null,
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": 7.999246755738852,
+        "insight": null,
+        "signals": [
+          {
+            "type": "breach_disclosed",
+            "captured_at": "2026-05-09T07:57:09.802162",
+            "days_ago": 0,
+            "payload": {
+              "agency": "ca_ag",
+              "reported_date": "05/07/2026"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Berger & Williams, LLP",
+        "domain": "bwrllp.com",
+        "industry": "legal_professional",
+        "headcount": null,
+        "country": "US",
+        "city": "San Diego",
+        "state": "CA",
+        "dm_name": null,
+        "dm_title": null,
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": 7.999246752095893,
+        "insight": null,
+        "signals": [
+          {
+            "type": "breach_disclosed",
+            "captured_at": "2026-05-09T07:57:09.802162",
+            "days_ago": 0,
+            "payload": {
+              "agency": "ca_ag",
+              "reported_date": "05/05/2026"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Frontwave Credit Union",
+        "domain": "frontwavecu.com",
+        "industry": "fintech",
+        "headcount": 120,
+        "country": "US",
+        "city": "Oceanside",
+        "state": "CA",
+        "dm_name": "Bill Birnie",
+        "dm_title": "President/CEO",
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": 7.999246748504275,
+        "insight": null,
+        "signals": [
+          {
+            "type": "breach_disclosed",
+            "captured_at": "2026-05-09T07:57:09.802162",
+            "days_ago": 0,
+            "payload": {
+              "agency": "ca_ag",
+              "reported_date": "04/28/2026"
+            }
+          }
+        ]
+      },
+      {
+        "name": "L.A. Care Health Plan",
+        "domain": "lacare.org",
+        "industry": "healthcare",
+        "headcount": null,
+        "country": "US",
+        "city": "Los Angeles",
+        "state": "CA",
+        "dm_name": "T. M.",
+        "dm_title": "Chief Information And Technology Officer",
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": 7.99924674440354,
+        "insight": null,
+        "signals": [
+          {
+            "type": "breach_disclosed",
+            "captured_at": "2026-05-09T07:57:09.802162",
+            "days_ago": 0,
+            "payload": {
+              "agency": "ca_ag",
+              "reported_date": "04/27/2026"
             }
           }
         ]
@@ -4832,13 +6085,13 @@
         "dm_title": "Managing Director",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 7.9306175889546795,
+        "score": 7.814677519633105,
         "insight": null,
         "signals": [
           {
             "type": "breach_disclosed",
             "captured_at": "2026-05-08T07:42:16.913744",
-            "days_ago": 0,
+            "days_ago": 1,
             "payload": {
               "agency": "me_ag",
               "reported_date": "2026-05-07"
@@ -4858,13 +6111,13 @@
         "dm_title": "Managing Partner",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 7.930617588316323,
+        "score": 7.814677517821261,
         "insight": null,
         "signals": [
           {
             "type": "breach_disclosed",
             "captured_at": "2026-05-08T07:42:16.913744",
-            "days_ago": 0,
+            "days_ago": 1,
             "payload": {
               "agency": "me_ag",
               "reported_date": "2026-05-07"
@@ -4884,13 +6137,13 @@
         "dm_title": "President / CEO",
         "dm_email": "tconwell@credittechnologies.com",
         "dm_linkedin_url": "http://www.linkedin.com/in/thomasconwell",
-        "score": 7.930617585930435,
+        "score": 7.814677484923872,
         "insight": null,
         "signals": [
           {
             "type": "breach_disclosed",
             "captured_at": "2026-05-08T07:42:16.913744",
-            "days_ago": 0,
+            "days_ago": 1,
             "payload": {
               "agency": "me_ag",
               "reported_date": "2026-04-27"
@@ -4910,68 +6163,16 @@
         "dm_title": "CEO",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 7.930610584101816,
+        "score": 7.814670634752994,
         "insight": null,
         "signals": [
           {
             "type": "breach_disclosed",
             "captured_at": "2026-05-08T07:42:13.610247",
-            "days_ago": 0,
+            "days_ago": 1,
             "payload": {
               "agency": "ca_ag",
               "reported_date": "05/07/2026"
-            }
-          }
-        ]
-      },
-      {
-        "name": "Mt. Spokane Pediatrics",
-        "domain": "mtspokanepediatrics.com",
-        "industry": "healthcare",
-        "headcount": 24,
-        "country": "US",
-        "city": "Spokane",
-        "state": "WA",
-        "dm_name": null,
-        "dm_title": null,
-        "dm_email": null,
-        "dm_linkedin_url": null,
-        "score": 7.755940108148838,
-        "insight": null,
-        "signals": [
-          {
-            "type": "breach_disclosed",
-            "captured_at": "2026-05-07T08:34:11.918561",
-            "days_ago": 1,
-            "payload": {
-              "agency": "wa_ag",
-              "reported_date": "04/30/2026"
-            }
-          }
-        ]
-      },
-      {
-        "name": "First Harvest Federal Credit Union",
-        "domain": "firstharvestcu.com",
-        "industry": "fintech",
-        "headcount": 200,
-        "country": "US",
-        "city": "Deptford",
-        "state": "NJ",
-        "dm_name": "Ned Leslie",
-        "dm_title": "Vice President Information Technology Operations",
-        "dm_email": "nleslie@firstharvestcu.com",
-        "dm_linkedin_url": "http://www.linkedin.com/in/ned-leslie-31576b4",
-        "score": 7.755937374333094,
-        "insight": null,
-        "signals": [
-          {
-            "type": "breach_disclosed",
-            "captured_at": "2026-05-07T08:34:10.599934",
-            "days_ago": 1,
-            "payload": {
-              "agency": "me_ag",
-              "reported_date": "2026-05-06"
             }
           }
         ]
@@ -5003,6 +6204,58 @@
         ]
       },
       {
+        "name": "Mt. Spokane Pediatrics",
+        "domain": "mtspokanepediatrics.com",
+        "industry": "healthcare",
+        "headcount": 24,
+        "country": "US",
+        "city": "Spokane",
+        "state": "WA",
+        "dm_name": null,
+        "dm_title": null,
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": 7.642553660478992,
+        "insight": null,
+        "signals": [
+          {
+            "type": "breach_disclosed",
+            "captured_at": "2026-05-07T08:34:11.918561",
+            "days_ago": 1,
+            "payload": {
+              "agency": "wa_ag",
+              "reported_date": "04/30/2026"
+            }
+          }
+        ]
+      },
+      {
+        "name": "First Harvest Federal Credit Union",
+        "domain": "firstharvestcu.com",
+        "industry": "fintech",
+        "headcount": 200,
+        "country": "US",
+        "city": "Deptford",
+        "state": "NJ",
+        "dm_name": "Ned Leslie",
+        "dm_title": "Vice President Information Technology Operations",
+        "dm_email": "nleslie@firstharvestcu.com",
+        "dm_linkedin_url": "http://www.linkedin.com/in/ned-leslie-31576b4",
+        "score": 7.642550995800246,
+        "insight": null,
+        "signals": [
+          {
+            "type": "breach_disclosed",
+            "captured_at": "2026-05-07T08:34:10.599934",
+            "days_ago": 1,
+            "payload": {
+              "agency": "me_ag",
+              "reported_date": "2026-05-06"
+            }
+          }
+        ]
+      },
+      {
         "name": "D'Ambrosio Dodge Inc.",
         "domain": "jeffdambrosio.com",
         "industry": "other",
@@ -5014,7 +6267,7 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 7.5779743024076796,
+        "score": 7.467189609772681,
         "insight": null,
         "signals": [
           {
@@ -5040,7 +6293,7 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 7.577974301771363,
+        "score": 7.467189607965523,
         "insight": null,
         "signals": [
           {
@@ -5066,7 +6319,7 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 7.577974301230292,
+        "score": 7.467189606326101,
         "insight": null,
         "signals": [
           {
@@ -5092,7 +6345,7 @@
         "dm_title": "President & COO",
         "dm_email": "john@empireexpress.com",
         "dm_linkedin_url": "http://www.linkedin.com/in/john-phillips-86646a24",
-        "score": 7.577974300673008,
+        "score": 7.467189604588832,
         "insight": null,
         "signals": [
           {
@@ -5118,7 +6371,7 @@
         "dm_title": "Chief Executive Officer",
         "dm_email": "jshultz@radialentertainment.com",
         "dm_linkedin_url": "http://www.linkedin.com/in/shultz",
-        "score": 7.577974300113698,
+        "score": 7.467189599928161,
         "insight": null,
         "signals": [
           {
@@ -5144,7 +6397,7 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 7.57796899495373,
+        "score": 7.4671843986724875,
         "insight": null,
         "signals": [
           {
@@ -5154,32 +6407,6 @@
             "payload": {
               "agency": "ca_ag",
               "reported_date": "04/28/2026"
-            }
-          }
-        ]
-      },
-      {
-        "name": "Art Jetter & Company",
-        "domain": "jetter.com",
-        "industry": "other",
-        "headcount": 30,
-        "country": "US",
-        "city": "Omaha",
-        "state": "NE",
-        "dm_name": "Jetter",
-        "dm_title": "VP & Chief Operating Officer",
-        "dm_email": "ace@jetter.com",
-        "dm_linkedin_url": "http://www.linkedin.com/in/acjetter",
-        "score": 7.402787522320292,
-        "insight": null,
-        "signals": [
-          {
-            "type": "breach_disclosed",
-            "captured_at": "2026-05-05T08:09:43.860213",
-            "days_ago": 3,
-            "payload": {
-              "agency": "me_ag",
-              "reported_date": "2026-05-04"
             }
           }
         ]
@@ -5211,162 +6438,6 @@
         ]
       },
       {
-        "name": "Gainesville-Alachua County Regional Airport Authority",
-        "domain": "flygainesville.com",
-        "industry": "government_nonprofit",
-        "headcount": 20,
-        "country": "US",
-        "city": "Gainesville",
-        "state": "FL",
-        "dm_name": "Allan Penksa",
-        "dm_title": "Chief Executive Officer",
-        "dm_email": "allan.penksa@flygainesville.com",
-        "dm_linkedin_url": "http://www.linkedin.com/in/allan-penksa-0b589510",
-        "score": 7.338007452835096,
-        "insight": null,
-        "signals": [
-          {
-            "type": "breach_disclosed",
-            "captured_at": "2026-05-04T23:01:56.641858",
-            "days_ago": 3,
-            "payload": {
-              "agency": "me_ag",
-              "reported_date": "2026-05-01"
-            }
-          }
-        ]
-      },
-      {
-        "name": "QualiChem Inc.",
-        "domain": "qualichem.com",
-        "industry": "manufacturing",
-        "headcount": 87,
-        "country": "US",
-        "city": "Salem",
-        "state": "VA",
-        "dm_name": "Brandon Woolwine",
-        "dm_title": "IT Manager",
-        "dm_email": "bwoolwine@qualichem.com",
-        "dm_linkedin_url": "http://www.linkedin.com/in/brandon-woolwine-55371641",
-        "score": 7.338007452226778,
-        "insight": null,
-        "signals": [
-          {
-            "type": "breach_disclosed",
-            "captured_at": "2026-05-04T23:01:56.641858",
-            "days_ago": 3,
-            "payload": {
-              "agency": "me_ag",
-              "reported_date": "2026-04-29"
-            }
-          }
-        ]
-      },
-      {
-        "name": "Johnson, Vollmerhausen & Gates, PLLC",
-        "domain": "jvgpa.com",
-        "industry": "legal_professional",
-        "headcount": null,
-        "country": "US",
-        "city": "Asheville",
-        "state": "NC",
-        "dm_name": null,
-        "dm_title": null,
-        "dm_email": null,
-        "dm_linkedin_url": null,
-        "score": 7.338007451583139,
-        "insight": null,
-        "signals": [
-          {
-            "type": "breach_disclosed",
-            "captured_at": "2026-05-04T23:01:56.641858",
-            "days_ago": 3,
-            "payload": {
-              "agency": "me_ag",
-              "reported_date": "2026-04-29"
-            }
-          }
-        ]
-      },
-      {
-        "name": "Sandhills Medical Foundation , Inc.",
-        "domain": "sandhillsmedical.org",
-        "industry": "healthcare",
-        "headcount": 49,
-        "country": "US",
-        "city": "McBee",
-        "state": "SC",
-        "dm_name": "Amanda Duke",
-        "dm_title": "Chief Executive Officer",
-        "dm_email": "aduke@sandhillsmedical.org",
-        "dm_linkedin_url": "http://www.linkedin.com/in/amanda-duke-0969748",
-        "score": 7.3380074508943665,
-        "insight": null,
-        "signals": [
-          {
-            "type": "breach_disclosed",
-            "captured_at": "2026-05-04T23:01:56.641858",
-            "days_ago": 3,
-            "payload": {
-              "agency": "me_ag",
-              "reported_date": "2026-04-28"
-            }
-          }
-        ]
-      },
-      {
-        "name": "Castaglia, LLP",
-        "domain": "castigliallp.com",
-        "industry": "legal_professional",
-        "headcount": null,
-        "country": "US",
-        "city": "East Northport",
-        "state": "NY",
-        "dm_name": "Robert V. Castiglia",
-        "dm_title": "Managing Partner",
-        "dm_email": null,
-        "dm_linkedin_url": null,
-        "score": 7.338007450101592,
-        "insight": null,
-        "signals": [
-          {
-            "type": "breach_disclosed",
-            "captured_at": "2026-05-04T23:01:56.641858",
-            "days_ago": 3,
-            "payload": {
-              "agency": "me_ag",
-              "reported_date": "2026-04-28"
-            }
-          }
-        ]
-      },
-      {
-        "name": "Churchill Claims Services, Inc.",
-        "domain": "churchill-claims.com",
-        "industry": "legal_professional",
-        "headcount": 16,
-        "country": "US",
-        "city": "Clearwater",
-        "state": "FL",
-        "dm_name": "Melanie Hawkins",
-        "dm_title": "President",
-        "dm_email": "melanie.hawkins@churchill-claims.com",
-        "dm_linkedin_url": "http://www.linkedin.com/in/melanie-hawkins-0a848568",
-        "score": 7.338007449210701,
-        "insight": null,
-        "signals": [
-          {
-            "type": "breach_disclosed",
-            "captured_at": "2026-05-04T23:01:56.641858",
-            "days_ago": 3,
-            "payload": {
-              "agency": "me_ag",
-              "reported_date": "2026-04-27"
-            }
-          }
-        ]
-      },
-      {
         "name": "Rodenburg Law Firm",
         "domain": null,
         "industry": "legal_professional",
@@ -5384,7 +6455,7 @@
           {
             "type": "breach_disclosed",
             "captured_at": "2026-05-04T23:01:56.641858",
-            "days_ago": 3,
+            "days_ago": 4,
             "payload": {
               "agency": "me_ag",
               "reported_date": "2026-04-24"
@@ -5410,36 +6481,10 @@
           {
             "type": "breach_disclosed",
             "captured_at": "2026-05-04T23:01:56.641858",
-            "days_ago": 3,
+            "days_ago": 4,
             "payload": {
               "agency": "me_ag",
               "reported_date": "2026-04-24"
-            }
-          }
-        ]
-      },
-      {
-        "name": "U.S. 1031 Exchange Services. Inc.",
-        "domain": null,
-        "industry": "real_estate",
-        "headcount": null,
-        "country": "US",
-        "city": "Sarasota",
-        "state": "FL",
-        "dm_name": "Ryan Stulman",
-        "dm_title": "President",
-        "dm_email": "rstulman@us1031.com",
-        "dm_linkedin_url": "http://www.linkedin.com/in/ryan-stulman-mba",
-        "score": 7.338007447071778,
-        "insight": null,
-        "signals": [
-          {
-            "type": "breach_disclosed",
-            "captured_at": "2026-05-04T23:01:56.641858",
-            "days_ago": 3,
-            "payload": {
-              "agency": "me_ag",
-              "reported_date": "2026-04-23"
             }
           }
         ]
@@ -5462,7 +6507,7 @@
           {
             "type": "breach_disclosed",
             "captured_at": "2026-05-04T23:01:56.641858",
-            "days_ago": 3,
+            "days_ago": 4,
             "payload": {
               "agency": "me_ag",
               "reported_date": "2026-04-22"
@@ -5488,7 +6533,7 @@
           {
             "type": "breach_disclosed",
             "captured_at": "2026-05-04T23:01:56.641858",
-            "days_ago": 3,
+            "days_ago": 4,
             "payload": {
               "agency": "me_ag",
               "reported_date": "2026-04-22"
@@ -5514,7 +6559,7 @@
           {
             "type": "breach_disclosed",
             "captured_at": "2026-05-04T23:01:56.641858",
-            "days_ago": 3,
+            "days_ago": 4,
             "payload": {
               "agency": "me_ag",
               "reported_date": "2026-04-22"
@@ -5540,7 +6585,7 @@
           {
             "type": "breach_disclosed",
             "captured_at": "2026-05-04T23:01:56.641858",
-            "days_ago": 3,
+            "days_ago": 4,
             "payload": {
               "agency": "me_ag",
               "reported_date": "2026-04-21"
@@ -5566,10 +6611,192 @@
           {
             "type": "breach_disclosed",
             "captured_at": "2026-05-04T23:01:54.411532",
-            "days_ago": 3,
+            "days_ago": 4,
             "payload": {
               "agency": "ca_ag",
               "reported_date": "04/23/2026"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Art Jetter & Company",
+        "domain": "jetter.com",
+        "industry": "other",
+        "headcount": 30,
+        "country": "US",
+        "city": "Omaha",
+        "state": "NE",
+        "dm_name": "Jetter",
+        "dm_title": "VP & Chief Operating Officer",
+        "dm_email": "ace@jetter.com",
+        "dm_linkedin_url": "http://www.linkedin.com/in/acjetter",
+        "score": 7.294563910370312,
+        "insight": null,
+        "signals": [
+          {
+            "type": "breach_disclosed",
+            "captured_at": "2026-05-05T08:09:43.860213",
+            "days_ago": 3,
+            "payload": {
+              "agency": "me_ag",
+              "reported_date": "2026-05-04"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Gainesville-Alachua County Regional Airport Authority",
+        "domain": "flygainesville.com",
+        "industry": "government_nonprofit",
+        "headcount": 20,
+        "country": "US",
+        "city": "Gainesville",
+        "state": "FL",
+        "dm_name": "Allan Penksa",
+        "dm_title": "Chief Executive Officer",
+        "dm_email": "allan.penksa@flygainesville.com",
+        "dm_linkedin_url": "http://www.linkedin.com/in/allan-penksa-0b589510",
+        "score": 7.230730861343639,
+        "insight": null,
+        "signals": [
+          {
+            "type": "breach_disclosed",
+            "captured_at": "2026-05-04T23:01:56.641858",
+            "days_ago": 4,
+            "payload": {
+              "agency": "me_ag",
+              "reported_date": "2026-05-01"
+            }
+          }
+        ]
+      },
+      {
+        "name": "QualiChem Inc.",
+        "domain": "qualichem.com",
+        "industry": "manufacturing",
+        "headcount": 87,
+        "country": "US",
+        "city": "Salem",
+        "state": "VA",
+        "dm_name": "Brandon Woolwine",
+        "dm_title": "IT Manager",
+        "dm_email": "bwoolwine@qualichem.com",
+        "dm_linkedin_url": "http://www.linkedin.com/in/brandon-woolwine-55371641",
+        "score": 7.230730859353937,
+        "insight": null,
+        "signals": [
+          {
+            "type": "breach_disclosed",
+            "captured_at": "2026-05-04T23:01:56.641858",
+            "days_ago": 4,
+            "payload": {
+              "agency": "me_ag",
+              "reported_date": "2026-04-29"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Johnson, Vollmerhausen & Gates, PLLC",
+        "domain": "jvgpa.com",
+        "industry": "legal_professional",
+        "headcount": null,
+        "country": "US",
+        "city": "Asheville",
+        "state": "NC",
+        "dm_name": null,
+        "dm_title": null,
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": 7.230730857600138,
+        "insight": null,
+        "signals": [
+          {
+            "type": "breach_disclosed",
+            "captured_at": "2026-05-04T23:01:56.641858",
+            "days_ago": 4,
+            "payload": {
+              "agency": "me_ag",
+              "reported_date": "2026-04-29"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Sandhills Medical Foundation , Inc.",
+        "domain": "sandhillsmedical.org",
+        "industry": "healthcare",
+        "headcount": 49,
+        "country": "US",
+        "city": "McBee",
+        "state": "SC",
+        "dm_name": "Amanda Duke",
+        "dm_title": "Chief Executive Officer",
+        "dm_email": "aduke@sandhillsmedical.org",
+        "dm_linkedin_url": "http://www.linkedin.com/in/amanda-duke-0969748",
+        "score": 7.230730855768993,
+        "insight": null,
+        "signals": [
+          {
+            "type": "breach_disclosed",
+            "captured_at": "2026-05-04T23:01:56.641858",
+            "days_ago": 4,
+            "payload": {
+              "agency": "me_ag",
+              "reported_date": "2026-04-28"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Castaglia, LLP",
+        "domain": "castigliallp.com",
+        "industry": "legal_professional",
+        "headcount": null,
+        "country": "US",
+        "city": "East Northport",
+        "state": "NY",
+        "dm_name": "Robert V. Castiglia",
+        "dm_title": "Managing Partner",
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": 7.23073085418922,
+        "insight": null,
+        "signals": [
+          {
+            "type": "breach_disclosed",
+            "captured_at": "2026-05-04T23:01:56.641858",
+            "days_ago": 4,
+            "payload": {
+              "agency": "me_ag",
+              "reported_date": "2026-04-28"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Churchill Claims Services, Inc.",
+        "domain": "churchill-claims.com",
+        "industry": "legal_professional",
+        "headcount": 16,
+        "country": "US",
+        "city": "Clearwater",
+        "state": "FL",
+        "dm_name": "Melanie Hawkins",
+        "dm_title": "President",
+        "dm_email": "melanie.hawkins@churchill-claims.com",
+        "dm_linkedin_url": "http://www.linkedin.com/in/melanie-hawkins-0a848568",
+        "score": 7.230730852336805,
+        "insight": null,
+        "signals": [
+          {
+            "type": "breach_disclosed",
+            "captured_at": "2026-05-04T23:01:56.641858",
+            "days_ago": 4,
+            "payload": {
+              "agency": "me_ag",
+              "reported_date": "2026-04-27"
             }
           }
         ]
