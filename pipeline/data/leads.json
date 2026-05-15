@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-15T08:55:45.102471",
+  "generated_at": "2026-05-15T21:51:47.649956",
   "niches": {
     "it_msp": [
       {
@@ -334,6 +334,60 @@
               "url": "https://www.adzuna.com/land/ad/5718222787?se=fnxJPA1I8RGldLZhYZiz6Q&utm_medium=api&utm_source=3aa14b35&v=CE66AC6A2276C4E0A5173DB442EEB967E174D723",
               "date_posted": "2026-05-03T17:10:48Z",
               "site": "adzuna"
+            }
+          }
+        ]
+      },
+      {
+        "name": "US Tiger Securities Inc. (\u201cUS Tiger\u201d)",
+        "domain": "jfdsecurities.com",
+        "industry": "fintech",
+        "headcount": null,
+        "country": "US",
+        "city": "New York",
+        "state": "NY",
+        "dm_name": "Lei Huang",
+        "dm_title": "CEO",
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": 34.999539169366855,
+        "insight": "US Tiger recently disclosed a breach, indicating an urgent need for enhanced IT support and security services.",
+        "signals": [
+          {
+            "type": "breach_disclosed",
+            "captured_at": "2026-05-15T21:50:51.075092",
+            "days_ago": 0,
+            "payload": {
+              "agency": "ca_ag",
+              "reported_date": "05/15/2026"
+            }
+          }
+        ]
+      },
+      {
+        "name": "OLD MISSION",
+        "domain": "oldmissioncapital.com",
+        "industry": "other",
+        "headcount": 200,
+        "country": "US",
+        "city": "Chicago",
+        "state": "IL",
+        "dm_name": null,
+        "dm_title": null,
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": 34.99914311272418,
+        "insight": "OLD MISSION is hiring a Desktop Support Engineer, indicating an immediate need for IT support services.",
+        "signals": [
+          {
+            "type": "job_posted_it_support",
+            "captured_at": "2026-05-15T21:50:08.752953",
+            "days_ago": 0,
+            "payload": {
+              "title": "Desktop Support Engineer",
+              "url": "https://www.indeed.com/viewjob?jk=a19d0cfc49fe19a7",
+              "date_posted": "2026-05-15",
+              "site": "indeed"
             }
           }
         ]
@@ -1978,7 +2032,7 @@
           {
             "type": "breach_disclosed",
             "captured_at": "2026-05-11T09:39:49.168226",
-            "days_ago": 3,
+            "days_ago": 4,
             "payload": {
               "agency": "me_ag",
               "reported_date": "2026-05-04"
@@ -2004,7 +2058,7 @@
           {
             "type": "exec_hired",
             "captured_at": "2026-05-11T09:39:27.958675",
-            "days_ago": 3,
+            "days_ago": 4,
             "payload": {
               "title": "Chief Information Security Officer (CISO)",
               "url": "https://www.adzuna.com/land/ad/5721045986?se=8JCuTx1N8RGet_aYIayg-g&utm_medium=api&utm_source=3aa14b35&v=15ED1A3D43A7E24BF508613B22C9DE381262F4DB",
@@ -2032,7 +2086,7 @@
           {
             "type": "job_posted_it_support",
             "captured_at": "2026-05-11T09:39:16.945467",
-            "days_ago": 3,
+            "days_ago": 4,
             "payload": {
               "title": "IT Support Technician",
               "url": "https://www.linkedin.com/jobs/view/4387866229",
@@ -2149,34 +2203,6 @@
         ]
       },
       {
-        "name": "Kodiak AI",
-        "domain": "kodiak.ai",
-        "industry": "software_saas",
-        "headcount": null,
-        "country": "US",
-        "city": "Mountain View",
-        "state": "CA",
-        "dm_name": "Don Burnette",
-        "dm_title": "CEO",
-        "dm_email": null,
-        "dm_linkedin_url": null,
-        "score": 31.157776382868573,
-        "insight": "Kodiak AI has just raised new funding, indicating potential growth and a need for enhanced IT support.",
-        "signals": [
-          {
-            "type": "funding_raised",
-            "captured_at": "2026-05-10T08:08:06.860751",
-            "days_ago": 5,
-            "payload": {
-              "feed_title": "Kodiak AI raises $100M at a steep discount, sending its stock tumbling 37%",
-              "feed_url": "https://techcrunch.com/category/startups/feed/",
-              "link": "https://techcrunch.com/2026/05/07/kodiak-ai-raises-100m-at-a-steep-discount-sending-its-stock-tumbling-37/",
-              "published": "Thu, 07 May 2026 21:49:24 +0000"
-            }
-          }
-        ]
-      },
-      {
         "name": "Slingshot Aerospace",
         "domain": "slingshotaerospace.com",
         "industry": "software_saas",
@@ -2252,6 +2278,34 @@
             "payload": {
               "agency": "me_ag",
               "reported_date": "2026-04-27"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Kodiak AI",
+        "domain": "kodiak.ai",
+        "industry": "software_saas",
+        "headcount": null,
+        "country": "US",
+        "city": "Mountain View",
+        "state": "CA",
+        "dm_name": "Don Burnette",
+        "dm_title": "CEO",
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": 30.772132480835193,
+        "insight": "Kodiak AI has just raised new funding, indicating potential growth and a need for enhanced IT support.",
+        "signals": [
+          {
+            "type": "funding_raised",
+            "captured_at": "2026-05-10T08:08:06.860751",
+            "days_ago": 5,
+            "payload": {
+              "feed_title": "Kodiak AI raises $100M at a steep discount, sending its stock tumbling 37%",
+              "feed_url": "https://techcrunch.com/category/startups/feed/",
+              "link": "https://techcrunch.com/2026/05/07/kodiak-ai-raises-100m-at-a-steep-discount-sending-its-stock-tumbling-37/",
+              "published": "Thu, 07 May 2026 21:49:24 +0000"
             }
           }
         ]
@@ -3200,7 +3254,7 @@
           {
             "type": "job_posted_security",
             "captured_at": "2026-05-11T09:39:16.945467",
-            "days_ago": 3,
+            "days_ago": 4,
             "payload": {
               "title": "Managing Director, Information Security and Enterprise Architecture",
               "url": "https://www.indeed.com/viewjob?jk=9d756e322a590f18",
@@ -3228,7 +3282,7 @@
           {
             "type": "job_posted_security",
             "captured_at": "2026-05-11T09:39:16.945467",
-            "days_ago": 3,
+            "days_ago": 4,
             "payload": {
               "title": "Information Security Officer - Governance, Risk, and Compliance",
               "url": "https://www.indeed.com/viewjob?jk=6ad15a94f8dc355e",
@@ -3844,7 +3898,7 @@
           {
             "type": "job_posted_cloud_devops",
             "captured_at": "2026-05-11T09:39:16.945467",
-            "days_ago": 3,
+            "days_ago": 4,
             "payload": {
               "title": "DevOps Engineer",
               "url": "https://www.linkedin.com/jobs/view/4409900489",
@@ -4021,6 +4075,90 @@
             }
           }
         ]
+      },
+      {
+        "name": "Springfield Rehabilitation and Senior Living",
+        "domain": null,
+        "industry": "healthcare",
+        "headcount": null,
+        "country": "US",
+        "city": "Springfield",
+        "state": "PA",
+        "dm_name": null,
+        "dm_title": null,
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": 0.0,
+        "insight": null,
+        "signals": [
+          {
+            "type": "job_posted_ops_role",
+            "captured_at": "2026-05-15T21:50:27.019856",
+            "days_ago": 0,
+            "payload": {
+              "title": "Business Office Manager",
+              "url": "https://www.indeed.com/viewjob?jk=92eb4d371f76d194",
+              "date_posted": "2026-05-15",
+              "site": "indeed"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Tin Can",
+        "domain": "tincan.kids",
+        "industry": "software_saas",
+        "headcount": 20,
+        "country": "US",
+        "city": "Seattle",
+        "state": "WA",
+        "dm_name": "Chet Kittleson",
+        "dm_title": "CEO",
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": 0.0,
+        "insight": null,
+        "signals": [
+          {
+            "type": "job_posted_ops_role",
+            "captured_at": "2026-05-15T21:50:27.019856",
+            "days_ago": 0,
+            "payload": {
+              "title": "Office Administrator",
+              "url": "https://www.indeed.com/viewjob?jk=148add31349ede82",
+              "date_posted": "2026-05-15",
+              "site": "indeed"
+            }
+          }
+        ]
+      },
+      {
+        "name": "IATSE Local 15",
+        "domain": "ia15.org",
+        "industry": "government_nonprofit",
+        "headcount": 30,
+        "country": "US",
+        "city": "Seattle",
+        "state": "WA",
+        "dm_name": null,
+        "dm_title": null,
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": 0.0,
+        "insight": null,
+        "signals": [
+          {
+            "type": "job_posted_ops_role",
+            "captured_at": "2026-05-15T21:50:27.019856",
+            "days_ago": 0,
+            "payload": {
+              "title": "Office Manager",
+              "url": "https://www.indeed.com/viewjob?jk=ada82d22be43198e",
+              "date_posted": "2026-05-15",
+              "site": "indeed"
+            }
+          }
+        ]
       }
     ],
     "mssp": [
@@ -4177,6 +4315,32 @@
               "url": "https://www.linkedin.com/jobs/view/4414988794",
               "date_posted": "nan",
               "site": "linkedin"
+            }
+          }
+        ]
+      },
+      {
+        "name": "US Tiger Securities Inc. (\u201cUS Tiger\u201d)",
+        "domain": "jfdsecurities.com",
+        "industry": "fintech",
+        "headcount": null,
+        "country": "US",
+        "city": "New York",
+        "state": "NY",
+        "dm_name": "Lei Huang",
+        "dm_title": "CEO",
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": 44.99940750347167,
+        "insight": "US Tiger recently disclosed a breach, highlighting their urgent need for enhanced SOC monitoring and compliance support.",
+        "signals": [
+          {
+            "type": "breach_disclosed",
+            "captured_at": "2026-05-15T21:50:51.075092",
+            "days_ago": 0,
+            "payload": {
+              "agency": "ca_ag",
+              "reported_date": "05/15/2026"
             }
           }
         ]
@@ -4953,7 +5117,7 @@
           {
             "type": "breach_disclosed",
             "captured_at": "2026-05-11T09:39:49.168226",
-            "days_ago": 3,
+            "days_ago": 4,
             "payload": {
               "agency": "me_ag",
               "reported_date": "2026-05-04"
@@ -5083,7 +5247,7 @@
           {
             "type": "job_posted_security",
             "captured_at": "2026-05-11T09:39:16.945467",
-            "days_ago": 3,
+            "days_ago": 4,
             "payload": {
               "title": "Managing Director, Information Security and Enterprise Architecture",
               "url": "https://www.indeed.com/viewjob?jk=9d756e322a590f18",
@@ -5111,7 +5275,7 @@
           {
             "type": "job_posted_security",
             "captured_at": "2026-05-11T09:39:16.945467",
-            "days_ago": 3,
+            "days_ago": 4,
             "payload": {
               "title": "Information Security Officer - Governance, Risk, and Compliance",
               "url": "https://www.indeed.com/viewjob?jk=6ad15a94f8dc355e",
@@ -6096,7 +6260,7 @@
         "dm_title": "CEO",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 19.58488801208882,
+        "score": 19.342483273667835,
         "insight": null,
         "signals": [
           {
@@ -6550,7 +6714,7 @@
           {
             "type": "exec_hired",
             "captured_at": "2026-05-11T09:39:27.958675",
-            "days_ago": 3,
+            "days_ago": 4,
             "payload": {
               "title": "Chief Information Security Officer (CISO)",
               "url": "https://www.adzuna.com/land/ad/5721045986?se=8JCuTx1N8RGet_aYIayg-g&utm_medium=api&utm_source=3aa14b35&v=15ED1A3D43A7E24BF508613B22C9DE381262F4DB",
@@ -7082,7 +7246,7 @@
           {
             "type": "job_posted_cloud_devops",
             "captured_at": "2026-05-11T09:39:16.945467",
-            "days_ago": 3,
+            "days_ago": 4,
             "payload": {
               "title": "DevOps Engineer",
               "url": "https://www.linkedin.com/jobs/view/4409900489",
@@ -7200,6 +7364,34 @@
               "url": "https://www.linkedin.com/jobs/view/4409941614",
               "date_posted": "nan",
               "site": "linkedin"
+            }
+          }
+        ]
+      },
+      {
+        "name": "OLD MISSION",
+        "domain": "oldmissioncapital.com",
+        "industry": "other",
+        "headcount": 200,
+        "country": "US",
+        "city": "Chicago",
+        "state": "IL",
+        "dm_name": null,
+        "dm_title": null,
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": 9.99975517506405,
+        "insight": null,
+        "signals": [
+          {
+            "type": "job_posted_it_support",
+            "captured_at": "2026-05-15T21:50:08.752953",
+            "days_ago": 0,
+            "payload": {
+              "title": "Desktop Support Engineer",
+              "url": "https://www.indeed.com/viewjob?jk=a19d0cfc49fe19a7",
+              "date_posted": "2026-05-15",
+              "site": "indeed"
             }
           }
         ]
@@ -7838,7 +8030,7 @@
           {
             "type": "job_posted_it_support",
             "captured_at": "2026-05-11T09:39:16.945467",
-            "days_ago": 3,
+            "days_ago": 4,
             "payload": {
               "title": "IT Support Technician",
               "url": "https://www.linkedin.com/jobs/view/4387866229",
@@ -8040,6 +8232,90 @@
               "url": "https://www.linkedin.com/jobs/view/4408553766",
               "date_posted": "2026-04-29",
               "site": "linkedin"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Springfield Rehabilitation and Senior Living",
+        "domain": null,
+        "industry": "healthcare",
+        "headcount": null,
+        "country": "US",
+        "city": "Springfield",
+        "state": "PA",
+        "dm_name": null,
+        "dm_title": null,
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": 0.0,
+        "insight": null,
+        "signals": [
+          {
+            "type": "job_posted_ops_role",
+            "captured_at": "2026-05-15T21:50:27.019856",
+            "days_ago": 0,
+            "payload": {
+              "title": "Business Office Manager",
+              "url": "https://www.indeed.com/viewjob?jk=92eb4d371f76d194",
+              "date_posted": "2026-05-15",
+              "site": "indeed"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Tin Can",
+        "domain": "tincan.kids",
+        "industry": "software_saas",
+        "headcount": 20,
+        "country": "US",
+        "city": "Seattle",
+        "state": "WA",
+        "dm_name": "Chet Kittleson",
+        "dm_title": "CEO",
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": 0.0,
+        "insight": null,
+        "signals": [
+          {
+            "type": "job_posted_ops_role",
+            "captured_at": "2026-05-15T21:50:27.019856",
+            "days_ago": 0,
+            "payload": {
+              "title": "Office Administrator",
+              "url": "https://www.indeed.com/viewjob?jk=148add31349ede82",
+              "date_posted": "2026-05-15",
+              "site": "indeed"
+            }
+          }
+        ]
+      },
+      {
+        "name": "IATSE Local 15",
+        "domain": "ia15.org",
+        "industry": "government_nonprofit",
+        "headcount": 30,
+        "country": "US",
+        "city": "Seattle",
+        "state": "WA",
+        "dm_name": null,
+        "dm_title": null,
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": 0.0,
+        "insight": null,
+        "signals": [
+          {
+            "type": "job_posted_ops_role",
+            "captured_at": "2026-05-15T21:50:27.019856",
+            "days_ago": 0,
+            "payload": {
+              "title": "Office Manager",
+              "url": "https://www.indeed.com/viewjob?jk=ada82d22be43198e",
+              "date_posted": "2026-05-15",
+              "site": "indeed"
             }
           }
         ]
@@ -8612,7 +8888,7 @@
           {
             "type": "job_posted_cloud_devops",
             "captured_at": "2026-05-11T09:39:16.945467",
-            "days_ago": 3,
+            "days_ago": 4,
             "payload": {
               "title": "DevOps Engineer",
               "url": "https://www.linkedin.com/jobs/view/4409900489",
@@ -8802,7 +9078,7 @@
         "dm_title": "CEO",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 24.926221106294857,
+        "score": 24.617705984668156,
         "insight": "Kodiak AI raised funding recently, indicating potential imminent investment in cloud infrastructure to support their autonomous vehicle technology.",
         "signals": [
           {
@@ -9339,7 +9615,7 @@
           {
             "type": "exec_hired",
             "captured_at": "2026-05-11T09:39:27.958675",
-            "days_ago": 3,
+            "days_ago": 4,
             "payload": {
               "title": "Chief Information Security Officer (CISO)",
               "url": "https://www.adzuna.com/land/ad/5721045986?se=8JCuTx1N8RGet_aYIayg-g&utm_medium=api&utm_source=3aa14b35&v=15ED1A3D43A7E24BF508613B22C9DE381262F4DB",
@@ -9486,7 +9762,7 @@
           {
             "type": "job_posted_security",
             "captured_at": "2026-05-11T09:39:16.945467",
-            "days_ago": 3,
+            "days_ago": 4,
             "payload": {
               "title": "Managing Director, Information Security and Enterprise Architecture",
               "url": "https://www.indeed.com/viewjob?jk=9d756e322a590f18",
@@ -9514,7 +9790,7 @@
           {
             "type": "job_posted_security",
             "captured_at": "2026-05-11T09:39:16.945467",
-            "days_ago": 3,
+            "days_ago": 4,
             "payload": {
               "title": "Information Security Officer - Governance, Risk, and Compliance",
               "url": "https://www.indeed.com/viewjob?jk=6ad15a94f8dc355e",
@@ -9716,6 +9992,34 @@
               "url": "https://www.adzuna.com/land/ad/5722410774?se=OqIaarFK8RGeYJz9IZgogA&utm_medium=api&utm_source=3aa14b35&v=95EA270730A580B8BEFF850B4F5F538539C3121E",
               "date_posted": "2026-05-07T22:08:34Z",
               "site": "adzuna"
+            }
+          }
+        ]
+      },
+      {
+        "name": "OLD MISSION",
+        "domain": "oldmissioncapital.com",
+        "industry": "other",
+        "headcount": 200,
+        "country": "US",
+        "city": "Chicago",
+        "state": "IL",
+        "dm_name": null,
+        "dm_title": null,
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": 9.99975517506405,
+        "insight": null,
+        "signals": [
+          {
+            "type": "job_posted_it_support",
+            "captured_at": "2026-05-15T21:50:08.752953",
+            "days_ago": 0,
+            "payload": {
+              "title": "Desktop Support Engineer",
+              "url": "https://www.indeed.com/viewjob?jk=a19d0cfc49fe19a7",
+              "date_posted": "2026-05-15",
+              "site": "indeed"
             }
           }
         ]
@@ -10326,7 +10630,7 @@
           {
             "type": "job_posted_it_support",
             "captured_at": "2026-05-11T09:39:16.945467",
-            "days_ago": 3,
+            "days_ago": 4,
             "payload": {
               "title": "IT Support Technician",
               "url": "https://www.linkedin.com/jobs/view/4387866229",
@@ -10528,6 +10832,32 @@
               "url": "https://www.linkedin.com/jobs/view/4408553766",
               "date_posted": "2026-04-29",
               "site": "linkedin"
+            }
+          }
+        ]
+      },
+      {
+        "name": "US Tiger Securities Inc. (\u201cUS Tiger\u201d)",
+        "domain": "jfdsecurities.com",
+        "industry": "fintech",
+        "headcount": null,
+        "country": "US",
+        "city": "New York",
+        "state": "NY",
+        "dm_name": "Lei Huang",
+        "dm_title": "CEO",
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": 7.999894667283853,
+        "insight": null,
+        "signals": [
+          {
+            "type": "breach_disclosed",
+            "captured_at": "2026-05-15T21:50:51.075092",
+            "days_ago": 0,
+            "payload": {
+              "agency": "ca_ag",
+              "reported_date": "05/15/2026"
             }
           }
         ]
@@ -11304,7 +11634,7 @@
           {
             "type": "breach_disclosed",
             "captured_at": "2026-05-11T09:39:49.168226",
-            "days_ago": 3,
+            "days_ago": 4,
             "payload": {
               "agency": "me_ag",
               "reported_date": "2026-05-04"
@@ -12062,6 +12392,4250 @@
             "payload": {
               "agency": "me_ag",
               "reported_date": "2026-05-04"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Springfield Rehabilitation and Senior Living",
+        "domain": null,
+        "industry": "healthcare",
+        "headcount": null,
+        "country": "US",
+        "city": "Springfield",
+        "state": "PA",
+        "dm_name": null,
+        "dm_title": null,
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": 0.0,
+        "insight": null,
+        "signals": [
+          {
+            "type": "job_posted_ops_role",
+            "captured_at": "2026-05-15T21:50:27.019856",
+            "days_ago": 0,
+            "payload": {
+              "title": "Business Office Manager",
+              "url": "https://www.indeed.com/viewjob?jk=92eb4d371f76d194",
+              "date_posted": "2026-05-15",
+              "site": "indeed"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Tin Can",
+        "domain": "tincan.kids",
+        "industry": "software_saas",
+        "headcount": 20,
+        "country": "US",
+        "city": "Seattle",
+        "state": "WA",
+        "dm_name": "Chet Kittleson",
+        "dm_title": "CEO",
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": 0.0,
+        "insight": null,
+        "signals": [
+          {
+            "type": "job_posted_ops_role",
+            "captured_at": "2026-05-15T21:50:27.019856",
+            "days_ago": 0,
+            "payload": {
+              "title": "Office Administrator",
+              "url": "https://www.indeed.com/viewjob?jk=148add31349ede82",
+              "date_posted": "2026-05-15",
+              "site": "indeed"
+            }
+          }
+        ]
+      },
+      {
+        "name": "IATSE Local 15",
+        "domain": "ia15.org",
+        "industry": "government_nonprofit",
+        "headcount": 30,
+        "country": "US",
+        "city": "Seattle",
+        "state": "WA",
+        "dm_name": null,
+        "dm_title": null,
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": 0.0,
+        "insight": null,
+        "signals": [
+          {
+            "type": "job_posted_ops_role",
+            "captured_at": "2026-05-15T21:50:27.019856",
+            "days_ago": 0,
+            "payload": {
+              "title": "Office Manager",
+              "url": "https://www.indeed.com/viewjob?jk=ada82d22be43198e",
+              "date_posted": "2026-05-15",
+              "site": "indeed"
+            }
+          }
+        ]
+      }
+    ],
+    "insurance": [
+      {
+        "name": "Springfield Rehabilitation and Senior Living",
+        "domain": null,
+        "industry": "healthcare",
+        "headcount": null,
+        "country": "US",
+        "city": "Springfield",
+        "state": "PA",
+        "dm_name": null,
+        "dm_title": null,
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": 29.99941205779312,
+        "insight": "Springfield Rehabilitation and Senior Living recently posted a job for a Business Office Manager, indicating potential operational expansion.",
+        "signals": [
+          {
+            "type": "job_posted_ops_role",
+            "captured_at": "2026-05-15T21:50:27.019856",
+            "days_ago": 0,
+            "payload": {
+              "title": "Business Office Manager",
+              "url": "https://www.indeed.com/viewjob?jk=92eb4d371f76d194",
+              "date_posted": "2026-05-15",
+              "site": "indeed"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Tin Can",
+        "domain": "tincan.kids",
+        "industry": "software_saas",
+        "headcount": 20,
+        "country": "US",
+        "city": "Seattle",
+        "state": "WA",
+        "dm_name": "Chet Kittleson",
+        "dm_title": "CEO",
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": 29.9994120493616,
+        "insight": "Tin Can recently posted an Office Administrator role, indicating a potential need for general liability and workers compensation insurance.",
+        "signals": [
+          {
+            "type": "job_posted_ops_role",
+            "captured_at": "2026-05-15T21:50:27.019856",
+            "days_ago": 0,
+            "payload": {
+              "title": "Office Administrator",
+              "url": "https://www.indeed.com/viewjob?jk=148add31349ede82",
+              "date_posted": "2026-05-15",
+              "site": "indeed"
+            }
+          }
+        ]
+      },
+      {
+        "name": "IATSE Local 15",
+        "domain": "ia15.org",
+        "industry": "government_nonprofit",
+        "headcount": 30,
+        "country": "US",
+        "city": "Seattle",
+        "state": "WA",
+        "dm_name": null,
+        "dm_title": null,
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": 29.99941204029631,
+        "insight": "IATSE Local 15 recently posted an Office Manager position, indicating a potential need for new commercial insurance solutions.",
+        "signals": [
+          {
+            "type": "job_posted_ops_role",
+            "captured_at": "2026-05-15T21:50:27.019856",
+            "days_ago": 0,
+            "payload": {
+              "title": "Office Manager",
+              "url": "https://www.indeed.com/viewjob?jk=ada82d22be43198e",
+              "date_posted": "2026-05-15",
+              "site": "indeed"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Kodiak AI",
+        "domain": "kodiak.ai",
+        "industry": "software_saas",
+        "headcount": null,
+        "country": "US",
+        "city": "Mountain View",
+        "state": "CA",
+        "dm_name": "Don Burnette",
+        "dm_title": "CEO",
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": 24.617705984668156,
+        "insight": "Kodiak AI recently raised funding 5 days ago, presenting an opportunity for tailored insurance solutions.",
+        "signals": [
+          {
+            "type": "funding_raised",
+            "captured_at": "2026-05-10T08:08:06.860751",
+            "days_ago": 5,
+            "payload": {
+              "feed_title": "Kodiak AI raises $100M at a steep discount, sending its stock tumbling 37%",
+              "feed_url": "https://techcrunch.com/category/startups/feed/",
+              "link": "https://techcrunch.com/2026/05/07/kodiak-ai-raises-100m-at-a-steep-discount-sending-its-stock-tumbling-37/",
+              "published": "Thu, 07 May 2026 21:49:24 +0000"
+            }
+          }
+        ]
+      },
+      {
+        "name": "US Tiger Securities Inc. (\u201cUS Tiger\u201d)",
+        "domain": "jfdsecurities.com",
+        "industry": "fintech",
+        "headcount": null,
+        "country": "US",
+        "city": "New York",
+        "state": "NY",
+        "dm_name": "Lei Huang",
+        "dm_title": "CEO",
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": 7.999894667283853,
+        "insight": null,
+        "signals": [
+          {
+            "type": "breach_disclosed",
+            "captured_at": "2026-05-15T21:50:51.075092",
+            "days_ago": 0,
+            "payload": {
+              "agency": "ca_ag",
+              "reported_date": "05/15/2026"
+            }
+          }
+        ]
+      },
+      {
+        "name": "OLD MISSION",
+        "domain": "oldmissioncapital.com",
+        "industry": "other",
+        "headcount": 200,
+        "country": "US",
+        "city": "Chicago",
+        "state": "IL",
+        "dm_name": null,
+        "dm_title": null,
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": 0.0,
+        "insight": null,
+        "signals": [
+          {
+            "type": "job_posted_it_support",
+            "captured_at": "2026-05-15T21:50:08.752953",
+            "days_ago": 0,
+            "payload": {
+              "title": "Desktop Support Engineer",
+              "url": "https://www.indeed.com/viewjob?jk=a19d0cfc49fe19a7",
+              "date_posted": "2026-05-15",
+              "site": "indeed"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Weldaloy Specialty Forgings",
+        "domain": "weldaloy.com",
+        "industry": "manufacturing",
+        "headcount": 50,
+        "country": "US",
+        "city": "Warren",
+        "state": "MI",
+        "dm_name": "Ramachandra Canumalla",
+        "dm_title": "VP and Chief Technology Officer",
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": null,
+        "insight": null,
+        "signals": [
+          {
+            "type": "job_posted_it_support",
+            "captured_at": "2026-05-04T23:01:33.755742",
+            "days_ago": 10,
+            "payload": {
+              "title": "IT Support Specialist (Help Desk)",
+              "url": "https://www.linkedin.com/jobs/view/4406422539",
+              "date_posted": "2026-04-29",
+              "site": "linkedin"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Open Fertility",
+        "domain": "openfertility.com",
+        "industry": "healthcare",
+        "headcount": null,
+        "country": "US",
+        "city": "Roseville",
+        "state": "CA",
+        "dm_name": "Deb Minjarez",
+        "dm_title": "Chief Medical Officer",
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": null,
+        "insight": null,
+        "signals": [
+          {
+            "type": "job_posted_it_support",
+            "captured_at": "2026-05-04T23:01:33.755742",
+            "days_ago": 10,
+            "payload": {
+              "title": "IT Support Technician",
+              "url": "https://www.linkedin.com/jobs/view/4408553766",
+              "date_posted": "2026-04-29",
+              "site": "linkedin"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Winonics",
+        "domain": "winonics.com",
+        "industry": "software_saas",
+        "headcount": 50,
+        "country": "US",
+        "city": "Brea",
+        "state": "CA",
+        "dm_name": "Dennis Brown",
+        "dm_title": "Chief Executive Officer",
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": null,
+        "insight": null,
+        "signals": [
+          {
+            "type": "job_posted_it_support",
+            "captured_at": "2026-05-04T23:01:33.755742",
+            "days_ago": 10,
+            "payload": {
+              "title": "IT Support Specialist (Entry-Level)",
+              "url": "https://www.linkedin.com/jobs/view/4405162384",
+              "date_posted": "2026-04-27",
+              "site": "linkedin"
+            }
+          }
+        ]
+      },
+      {
+        "name": "East 57th Street Partners",
+        "domain": "e57partners.com",
+        "industry": "other",
+        "headcount": 150,
+        "country": "US",
+        "city": "Dallas",
+        "state": "TX",
+        "dm_name": "Hagen Barlow",
+        "dm_title": "Sr. Director of Strategic Partnerships | Private Equity | Accounting & Finance | Human Resources | IT | Executive Leadership | The Most Important Thing to Know About our Team is That we are Here to Serve.",
+        "dm_email": null,
+        "dm_linkedin_url": "http://www.linkedin.com/in/hagenbarlow",
+        "score": null,
+        "insight": null,
+        "signals": [
+          {
+            "type": "job_posted_it_leadership",
+            "captured_at": "2026-05-04T23:01:46.127486",
+            "days_ago": 10,
+            "payload": {
+              "title": "Interim Director of IT",
+              "url": "https://www.adzuna.com/land/ad/5718222787?se=fnxJPA1I8RGldLZhYZiz6Q&utm_medium=api&utm_source=3aa14b35&v=CE66AC6A2276C4E0A5173DB442EEB967E174D723",
+              "date_posted": "2026-05-03T17:10:48Z",
+              "site": "adzuna"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Marin Cancer Care",
+        "domain": "marinhealth.org",
+        "industry": "healthcare",
+        "headcount": null,
+        "country": "US",
+        "city": "Greenbrae",
+        "state": "CA",
+        "dm_name": "Joel Criste",
+        "dm_title": "Chief Executive Officer",
+        "dm_email": "jcriste@marincancercare.com",
+        "dm_linkedin_url": "http://www.linkedin.com/in/joel-criste-14095a6",
+        "score": null,
+        "insight": null,
+        "signals": [
+          {
+            "type": "breach_disclosed",
+            "captured_at": "2026-05-04T23:01:54.411532",
+            "days_ago": 10,
+            "payload": {
+              "agency": "ca_ag",
+              "reported_date": "04/23/2026"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Gainesville-Alachua County Regional Airport Authority",
+        "domain": "flygainesville.com",
+        "industry": "government_nonprofit",
+        "headcount": 20,
+        "country": "US",
+        "city": "Gainesville",
+        "state": "FL",
+        "dm_name": "Allan Penksa",
+        "dm_title": "Chief Executive Officer",
+        "dm_email": "allan.penksa@flygainesville.com",
+        "dm_linkedin_url": "http://www.linkedin.com/in/allan-penksa-0b589510",
+        "score": null,
+        "insight": null,
+        "signals": [
+          {
+            "type": "breach_disclosed",
+            "captured_at": "2026-05-04T23:01:56.641858",
+            "days_ago": 10,
+            "payload": {
+              "agency": "me_ag",
+              "reported_date": "2026-05-01"
+            }
+          }
+        ]
+      },
+      {
+        "name": "QualiChem Inc.",
+        "domain": "qualichem.com",
+        "industry": "manufacturing",
+        "headcount": 87,
+        "country": "US",
+        "city": "Salem",
+        "state": "VA",
+        "dm_name": "Brandon Woolwine",
+        "dm_title": "IT Manager",
+        "dm_email": "bwoolwine@qualichem.com",
+        "dm_linkedin_url": "http://www.linkedin.com/in/brandon-woolwine-55371641",
+        "score": null,
+        "insight": null,
+        "signals": [
+          {
+            "type": "breach_disclosed",
+            "captured_at": "2026-05-04T23:01:56.641858",
+            "days_ago": 10,
+            "payload": {
+              "agency": "me_ag",
+              "reported_date": "2026-04-29"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Johnson, Vollmerhausen & Gates, PLLC",
+        "domain": "jvgpa.com",
+        "industry": "legal_professional",
+        "headcount": null,
+        "country": "US",
+        "city": "Asheville",
+        "state": "NC",
+        "dm_name": null,
+        "dm_title": null,
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": null,
+        "insight": null,
+        "signals": [
+          {
+            "type": "breach_disclosed",
+            "captured_at": "2026-05-04T23:01:56.641858",
+            "days_ago": 10,
+            "payload": {
+              "agency": "me_ag",
+              "reported_date": "2026-04-29"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Sandhills Medical Foundation , Inc.",
+        "domain": "sandhillsmedical.org",
+        "industry": "healthcare",
+        "headcount": 49,
+        "country": "US",
+        "city": "McBee",
+        "state": "SC",
+        "dm_name": "Amanda Duke",
+        "dm_title": "Chief Executive Officer",
+        "dm_email": "aduke@sandhillsmedical.org",
+        "dm_linkedin_url": "http://www.linkedin.com/in/amanda-duke-0969748",
+        "score": null,
+        "insight": null,
+        "signals": [
+          {
+            "type": "breach_disclosed",
+            "captured_at": "2026-05-04T23:01:56.641858",
+            "days_ago": 10,
+            "payload": {
+              "agency": "me_ag",
+              "reported_date": "2026-04-28"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Castaglia, LLP",
+        "domain": "castigliallp.com",
+        "industry": "legal_professional",
+        "headcount": null,
+        "country": "US",
+        "city": "East Northport",
+        "state": "NY",
+        "dm_name": "Robert V. Castiglia",
+        "dm_title": "Managing Partner",
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": null,
+        "insight": null,
+        "signals": [
+          {
+            "type": "breach_disclosed",
+            "captured_at": "2026-05-04T23:01:56.641858",
+            "days_ago": 10,
+            "payload": {
+              "agency": "me_ag",
+              "reported_date": "2026-04-28"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Churchill Claims Services, Inc.",
+        "domain": "churchill-claims.com",
+        "industry": "legal_professional",
+        "headcount": 16,
+        "country": "US",
+        "city": "Clearwater",
+        "state": "FL",
+        "dm_name": "Melanie Hawkins",
+        "dm_title": "President",
+        "dm_email": "melanie.hawkins@churchill-claims.com",
+        "dm_linkedin_url": "http://www.linkedin.com/in/melanie-hawkins-0a848568",
+        "score": null,
+        "insight": null,
+        "signals": [
+          {
+            "type": "breach_disclosed",
+            "captured_at": "2026-05-04T23:01:56.641858",
+            "days_ago": 10,
+            "payload": {
+              "agency": "me_ag",
+              "reported_date": "2026-04-27"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Rodenburg Law Firm",
+        "domain": null,
+        "industry": "legal_professional",
+        "headcount": null,
+        "country": "US",
+        "city": "Fargo",
+        "state": "ND",
+        "dm_name": null,
+        "dm_title": null,
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": null,
+        "insight": null,
+        "signals": [
+          {
+            "type": "breach_disclosed",
+            "captured_at": "2026-05-04T23:01:56.641858",
+            "days_ago": 10,
+            "payload": {
+              "agency": "me_ag",
+              "reported_date": "2026-04-24"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Columbia Medical Practice",
+        "domain": null,
+        "industry": "healthcare",
+        "headcount": 50,
+        "country": "US",
+        "city": "Columbia",
+        "state": "MD",
+        "dm_name": "Gary Werschmidt",
+        "dm_title": "President & CEO",
+        "dm_email": null,
+        "dm_linkedin_url": "http://www.linkedin.com/in/gary-werschmidt-578540177",
+        "score": null,
+        "insight": null,
+        "signals": [
+          {
+            "type": "breach_disclosed",
+            "captured_at": "2026-05-04T23:01:56.641858",
+            "days_ago": 10,
+            "payload": {
+              "agency": "me_ag",
+              "reported_date": "2026-04-24"
+            }
+          }
+        ]
+      },
+      {
+        "name": "U.S. 1031 Exchange Services. Inc.",
+        "domain": "us1031.com",
+        "industry": "real_estate",
+        "headcount": null,
+        "country": "US",
+        "city": "Sarasota",
+        "state": "FL",
+        "dm_name": "Ryan Stulman",
+        "dm_title": "President",
+        "dm_email": "rstulman@us1031.com",
+        "dm_linkedin_url": "http://www.linkedin.com/in/ryan-stulman-mba",
+        "score": null,
+        "insight": null,
+        "signals": [
+          {
+            "type": "breach_disclosed",
+            "captured_at": "2026-05-09T07:57:13.098372",
+            "days_ago": 6,
+            "payload": {
+              "agency": "me_ag",
+              "reported_date": "2026-05-08"
+            }
+          },
+          {
+            "type": "breach_disclosed",
+            "captured_at": "2026-05-04T23:01:56.641858",
+            "days_ago": 10,
+            "payload": {
+              "agency": "me_ag",
+              "reported_date": "2026-04-23"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Auto Auction of New England Inc.",
+        "domain": null,
+        "industry": "other",
+        "headcount": null,
+        "country": "US",
+        "city": "Londonderry",
+        "state": "NH",
+        "dm_name": null,
+        "dm_title": null,
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": null,
+        "insight": null,
+        "signals": [
+          {
+            "type": "breach_disclosed",
+            "captured_at": "2026-05-04T23:01:56.641858",
+            "days_ago": 10,
+            "payload": {
+              "agency": "me_ag",
+              "reported_date": "2026-04-22"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Law Offices of Alan M. Cohen & Associates LLC (\"AMC\")",
+        "domain": null,
+        "industry": "legal_professional",
+        "headcount": null,
+        "country": "US",
+        "city": "Framingham",
+        "state": "MA",
+        "dm_name": null,
+        "dm_title": null,
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": null,
+        "insight": null,
+        "signals": [
+          {
+            "type": "breach_disclosed",
+            "captured_at": "2026-05-04T23:01:56.641858",
+            "days_ago": 10,
+            "payload": {
+              "agency": "me_ag",
+              "reported_date": "2026-04-22"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Laurel Eye Clinic",
+        "domain": null,
+        "industry": "healthcare",
+        "headcount": null,
+        "country": "US",
+        "city": "Brookville",
+        "state": "PA",
+        "dm_name": "Brian Gaster",
+        "dm_title": "Owner",
+        "dm_email": null,
+        "dm_linkedin_url": "http://www.linkedin.com/in/brian-gaster-669411a2",
+        "score": null,
+        "insight": null,
+        "signals": [
+          {
+            "type": "breach_disclosed",
+            "captured_at": "2026-05-04T23:01:56.641858",
+            "days_ago": 10,
+            "payload": {
+              "agency": "me_ag",
+              "reported_date": "2026-04-22"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Murray's Cheese LLC",
+        "domain": null,
+        "industry": "ecommerce_retail",
+        "headcount": null,
+        "country": "US",
+        "city": "New York",
+        "state": "NY",
+        "dm_name": null,
+        "dm_title": null,
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": null,
+        "insight": null,
+        "signals": [
+          {
+            "type": "breach_disclosed",
+            "captured_at": "2026-05-04T23:01:56.641858",
+            "days_ago": 10,
+            "payload": {
+              "agency": "me_ag",
+              "reported_date": "2026-04-21"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Ocean Casino Resort",
+        "domain": null,
+        "industry": "hospitality_food",
+        "headcount": null,
+        "country": "US",
+        "city": "Atlantic City",
+        "state": "NJ",
+        "dm_name": null,
+        "dm_title": null,
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": null,
+        "insight": null,
+        "signals": [
+          {
+            "type": "job_posted_it_support",
+            "captured_at": "2026-05-05T08:09:20.498690",
+            "days_ago": 10,
+            "payload": {
+              "title": "IT Support Technician- IT Admin- Full Time",
+              "url": "https://www.linkedin.com/jobs/view/4410073488",
+              "date_posted": "nan",
+              "site": "linkedin"
+            }
+          }
+        ]
+      },
+      {
+        "name": "VideoAmp",
+        "domain": null,
+        "industry": "software_saas",
+        "headcount": null,
+        "country": "US",
+        "city": "Los Angeles",
+        "state": "CA",
+        "dm_name": "Dustin Jackson",
+        "dm_title": "Chief Technology Officer",
+        "dm_email": "dustin.jackson@videoamp.com",
+        "dm_linkedin_url": "http://www.linkedin.com/in/dustin-jackson-6a00716",
+        "score": null,
+        "insight": null,
+        "signals": [
+          {
+            "type": "job_posted_cloud_devops",
+            "captured_at": "2026-05-05T08:09:20.498690",
+            "days_ago": 10,
+            "payload": {
+              "title": "Intermediate DevOps Engineer",
+              "url": "https://www.indeed.com/viewjob?jk=d20bc9cdccd3580f",
+              "date_posted": "2026-05-05",
+              "site": "indeed"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Way2B1",
+        "domain": null,
+        "industry": "software_saas",
+        "headcount": null,
+        "country": "US",
+        "city": "San Francisco",
+        "state": "CA",
+        "dm_name": "Michael Sewell",
+        "dm_title": "Chief Technology Officer & Chief Operating Officer",
+        "dm_email": "msewell@way2b1.com",
+        "dm_linkedin_url": "http://www.linkedin.com/in/michaelsewell",
+        "score": null,
+        "insight": null,
+        "signals": [
+          {
+            "type": "job_posted_cloud_devops",
+            "captured_at": "2026-05-05T08:09:20.498690",
+            "days_ago": 10,
+            "payload": {
+              "title": "Staff Devops Engineer",
+              "url": "https://www.indeed.com/viewjob?jk=8afb48daad810f58",
+              "date_posted": "2026-05-04",
+              "site": "indeed"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Knock",
+        "domain": null,
+        "industry": "software_saas",
+        "headcount": 120,
+        "country": "US",
+        "city": "Atlanta",
+        "state": "GA",
+        "dm_name": "Jamie Glenn",
+        "dm_title": "Co-Founder & COO",
+        "dm_email": "jamie@knock.com",
+        "dm_linkedin_url": "http://www.linkedin.com/in/jamieglenn",
+        "score": null,
+        "insight": null,
+        "signals": [
+          {
+            "type": "job_posted_cloud_devops",
+            "captured_at": "2026-05-05T08:09:20.498690",
+            "days_ago": 10,
+            "payload": {
+              "title": "DevOps Engineer",
+              "url": "https://www.linkedin.com/jobs/view/4410293359",
+              "date_posted": "nan",
+              "site": "linkedin"
+            }
+          }
+        ]
+      },
+      {
+        "name": "HUMAC INC.",
+        "domain": null,
+        "industry": "other",
+        "headcount": null,
+        "country": "US",
+        "city": "Phoenix",
+        "state": "AZ",
+        "dm_name": null,
+        "dm_title": null,
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": null,
+        "insight": null,
+        "signals": [
+          {
+            "type": "job_posted_it_support",
+            "captured_at": "2026-05-05T08:09:31.653253",
+            "days_ago": 10,
+            "payload": {
+              "title": "Help Desk Operator",
+              "url": "https://www.adzuna.com/land/ad/5718917188?se=dAchv1lI8RG-rcJmfw1P3Q&utm_medium=api&utm_source=3aa14b35&v=132C32EB82F0C017DD4E8E8A196A3AE6707B518B",
+              "date_posted": "2026-05-04T19:46:14Z",
+              "site": "adzuna"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Satwic Inc",
+        "domain": null,
+        "industry": "software_saas",
+        "headcount": null,
+        "country": "US",
+        "city": "Pasadena",
+        "state": "CA",
+        "dm_name": null,
+        "dm_title": null,
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": null,
+        "insight": null,
+        "signals": [
+          {
+            "type": "job_posted_it_support",
+            "captured_at": "2026-05-05T08:09:31.653253",
+            "days_ago": 10,
+            "payload": {
+              "title": "Help Desk Technician",
+              "url": "https://www.adzuna.com/land/ad/5707336525?se=dAchv1lI8RG-rcJmfw1P3Q&utm_medium=api&utm_source=3aa14b35&v=545FC526F88B03AD1D98DB4F3A8497318DB11786",
+              "date_posted": "2026-04-22T14:04:47Z",
+              "site": "adzuna"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Ovation Workplace Services Inc.",
+        "domain": null,
+        "industry": "other",
+        "headcount": null,
+        "country": "US",
+        "city": "Summit",
+        "state": "NJ",
+        "dm_name": null,
+        "dm_title": null,
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": null,
+        "insight": null,
+        "signals": [
+          {
+            "type": "job_posted_it_support",
+            "captured_at": "2026-05-05T08:09:31.653253",
+            "days_ago": 10,
+            "payload": {
+              "title": "Walk up Support - IT Support Technician",
+              "url": "https://www.adzuna.com/land/ad/5717133430?se=uDCLv1lI8RG-rcJmfw1P3Q&utm_medium=api&utm_source=3aa14b35&v=8EA252BEBD309B2C674EC426FBDBC7E319170222",
+              "date_posted": "2026-05-02T11:27:42Z",
+              "site": "adzuna"
+            }
+          }
+        ]
+      },
+      {
+        "name": "PALMDALE OIL COMPANY LLC",
+        "domain": null,
+        "industry": "other",
+        "headcount": 130,
+        "country": "US",
+        "city": "Palm Beach Gardens",
+        "state": "FL",
+        "dm_name": null,
+        "dm_title": null,
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": null,
+        "insight": null,
+        "signals": [
+          {
+            "type": "job_posted_it_support",
+            "captured_at": "2026-05-05T08:09:31.653253",
+            "days_ago": 10,
+            "payload": {
+              "title": "IT Support Specialist",
+              "url": "https://www.adzuna.com/land/ad/5714204223?se=uDCLv1lI8RG-rcJmfw1P3Q&utm_medium=api&utm_source=3aa14b35&v=88FA58D31087D3CA1848DBBF5E9E466347A2D19F",
+              "date_posted": "2026-04-29T23:13:40Z",
+              "site": "adzuna"
+            }
+          }
+        ]
+      },
+      {
+        "name": "iClassPro, Inc.",
+        "domain": null,
+        "industry": "software_saas",
+        "headcount": 100,
+        "country": "US",
+        "city": "Longview",
+        "state": "TX",
+        "dm_name": null,
+        "dm_title": null,
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": null,
+        "insight": null,
+        "signals": [
+          {
+            "type": "job_posted_cloud_devops",
+            "captured_at": "2026-05-05T08:09:31.653253",
+            "days_ago": 10,
+            "payload": {
+              "title": "DevOps Engineer Manager",
+              "url": "https://www.adzuna.com/land/ad/5716885449?se=blP8wFlI8RGSdISXQQQjPQ&utm_medium=api&utm_source=3aa14b35&v=C44F8A3EC47190FA2FF187E9B3E9C1E145EEFA70",
+              "date_posted": "2026-05-02T05:51:56Z",
+              "site": "adzuna"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Art Jetter & Company",
+        "domain": "jetter.com",
+        "industry": "other",
+        "headcount": 30,
+        "country": "US",
+        "city": "Omaha",
+        "state": "NE",
+        "dm_name": "Jetter",
+        "dm_title": "VP & Chief Operating Officer",
+        "dm_email": "ace@jetter.com",
+        "dm_linkedin_url": "http://www.linkedin.com/in/acjetter",
+        "score": null,
+        "insight": null,
+        "signals": [
+          {
+            "type": "breach_disclosed",
+            "captured_at": "2026-05-05T08:09:43.860213",
+            "days_ago": 10,
+            "payload": {
+              "agency": "me_ag",
+              "reported_date": "2026-05-04"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Transport Workers Union Local 100",
+        "domain": null,
+        "industry": "government_nonprofit",
+        "headcount": 140,
+        "country": "US",
+        "city": "Brooklyn",
+        "state": "NY",
+        "dm_name": "Robert Taylor",
+        "dm_title": "Information Technology Director",
+        "dm_email": "rtaylor@twulocal100.org",
+        "dm_linkedin_url": "http://www.linkedin.com/in/robert-l-taylor-7164a448",
+        "score": null,
+        "insight": null,
+        "signals": [
+          {
+            "type": "breach_disclosed",
+            "captured_at": "2026-05-05T08:09:43.860213",
+            "days_ago": 10,
+            "payload": {
+              "agency": "me_ag",
+              "reported_date": "2026-04-24"
+            }
+          }
+        ]
+      },
+      {
+        "name": "J-Mack Technologies, LLC",
+        "domain": null,
+        "industry": "software_saas",
+        "headcount": 50,
+        "country": "US",
+        "city": "Fort Worth",
+        "state": "TX",
+        "dm_name": "Clayton Coleman",
+        "dm_title": "Chief Operating Officer",
+        "dm_email": "clayton.coleman@j-mack.com",
+        "dm_linkedin_url": "http://www.linkedin.com/in/colemanr",
+        "score": null,
+        "insight": null,
+        "signals": [
+          {
+            "type": "job_posted_it_support",
+            "captured_at": "2026-05-06T08:27:02.213469",
+            "days_ago": 9,
+            "payload": {
+              "title": "IT Support Technician (Entry Level)",
+              "url": "https://www.linkedin.com/jobs/view/4410717566",
+              "date_posted": "nan",
+              "site": "linkedin"
+            }
+          }
+        ]
+      },
+      {
+        "name": "zTrip",
+        "domain": "ztrip.com",
+        "industry": "logistics_transport",
+        "headcount": null,
+        "country": "US",
+        "city": "Kansas City",
+        "state": "MO",
+        "dm_name": "Luke Misgen",
+        "dm_title": "Vice President of Technology",
+        "dm_email": "lmisgen@ztrip.com",
+        "dm_linkedin_url": "http://www.linkedin.com/in/lukemisgen",
+        "score": null,
+        "insight": null,
+        "signals": [
+          {
+            "type": "job_posted_it_support",
+            "captured_at": "2026-05-06T08:27:02.213469",
+            "days_ago": 9,
+            "payload": {
+              "title": "IT Support",
+              "url": "https://www.linkedin.com/jobs/view/4408538417",
+              "date_posted": "2026-04-29",
+              "site": "linkedin"
+            }
+          }
+        ]
+      },
+      {
+        "name": "MACKENZIE",
+        "domain": null,
+        "industry": "other",
+        "headcount": null,
+        "country": "US",
+        "city": "Portland",
+        "state": "OR",
+        "dm_name": "David Stone",
+        "dm_title": "Head of Civil Engineering",
+        "dm_email": "david.stone@mackenziestuart.com",
+        "dm_linkedin_url": "http://www.linkedin.com/in/david-stone-7a07689",
+        "score": null,
+        "insight": null,
+        "signals": [
+          {
+            "type": "job_posted_it_support",
+            "captured_at": "2026-05-06T08:27:02.213469",
+            "days_ago": 9,
+            "payload": {
+              "title": "IT Support Specialist",
+              "url": "https://www.indeed.com/viewjob?jk=5fe1622b37fb4db0",
+              "date_posted": "2026-05-06",
+              "site": "indeed"
+            }
+          }
+        ]
+      },
+      {
+        "name": "PAM Health",
+        "domain": "pamhealth.com",
+        "industry": "healthcare",
+        "headcount": null,
+        "country": "US",
+        "city": "Enola",
+        "state": "PA",
+        "dm_name": "Mike Anderson",
+        "dm_title": "Chief Information Officer",
+        "dm_email": "manderson@pamhealth.com",
+        "dm_linkedin_url": "http://www.linkedin.com/in/mike-anderson-18418a4",
+        "score": null,
+        "insight": null,
+        "signals": [
+          {
+            "type": "exec_hired",
+            "captured_at": "2026-05-06T08:27:02.213469",
+            "days_ago": 9,
+            "payload": {
+              "title": "Chief Information Security Officer (CISO) | PAM Health Corporate",
+              "url": "https://www.indeed.com/viewjob?jk=d03c3973622cd37c",
+              "date_posted": "2026-05-05",
+              "site": "indeed"
+            }
+          }
+        ]
+      },
+      {
+        "name": "cFocus Software Incorporated",
+        "domain": null,
+        "industry": "software_saas",
+        "headcount": null,
+        "country": "US",
+        "city": "Largo",
+        "state": "MD",
+        "dm_name": null,
+        "dm_title": null,
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": null,
+        "insight": null,
+        "signals": [
+          {
+            "type": "job_posted_security",
+            "captured_at": "2026-05-06T08:27:02.213469",
+            "days_ago": 9,
+            "payload": {
+              "title": "FCC - Security Engineer / SIEM Engineer",
+              "url": "https://www.linkedin.com/jobs/view/4408412247",
+              "date_posted": "2026-05-05",
+              "site": "linkedin"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Offchain Labs",
+        "domain": "offchainlabs.com",
+        "industry": "software_saas",
+        "headcount": 150,
+        "country": "US",
+        "city": "Princeton",
+        "state": "NJ",
+        "dm_name": "Harry Kalodner",
+        "dm_title": "CTO and Co-Founder",
+        "dm_email": "harry@offchainlabs.com",
+        "dm_linkedin_url": "http://www.linkedin.com/in/hkalodner",
+        "score": null,
+        "insight": null,
+        "signals": [
+          {
+            "type": "job_posted_security",
+            "captured_at": "2026-05-13T08:44:14.886041",
+            "days_ago": 2,
+            "payload": {
+              "title": "Security Engineer",
+              "url": "https://www.linkedin.com/jobs/view/4413486582",
+              "date_posted": "2026-05-05",
+              "site": "linkedin"
+            }
+          },
+          {
+            "type": "job_posted_security",
+            "captured_at": "2026-05-06T08:27:02.213469",
+            "days_ago": 9,
+            "payload": {
+              "title": "Senior Security Engineer (GRC)",
+              "url": "https://www.linkedin.com/jobs/view/4410768701",
+              "date_posted": "nan",
+              "site": "linkedin"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Quantiq Partners",
+        "domain": null,
+        "industry": "software_saas",
+        "headcount": null,
+        "country": "US",
+        "city": "Austin",
+        "state": "TX",
+        "dm_name": null,
+        "dm_title": null,
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": null,
+        "insight": null,
+        "signals": [
+          {
+            "type": "job_posted_cloud_devops",
+            "captured_at": "2026-05-06T08:27:02.213469",
+            "days_ago": 9,
+            "payload": {
+              "title": "DevOps Engineer",
+              "url": "https://www.indeed.com/viewjob?jk=64248c84feaf3863",
+              "date_posted": "2026-05-06",
+              "site": "indeed"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Miami Marlins",
+        "domain": null,
+        "industry": "media_entertainment",
+        "headcount": null,
+        "country": "US",
+        "city": "Miami",
+        "state": "FL",
+        "dm_name": "Christian Lowe",
+        "dm_title": "Vice President Strategy and Analytics",
+        "dm_email": "clowe@marlins.com",
+        "dm_linkedin_url": "http://www.linkedin.com/in/christian-lowe-mba-mspa-712b753",
+        "score": null,
+        "insight": null,
+        "signals": [
+          {
+            "type": "job_posted_cloud_devops",
+            "captured_at": "2026-05-06T08:27:02.213469",
+            "days_ago": 9,
+            "payload": {
+              "title": "Senior DevOps Engineer",
+              "url": "https://www.indeed.com/viewjob?jk=ff87deef607d5450",
+              "date_posted": "2026-05-05",
+              "site": "indeed"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Akina, Inc.",
+        "domain": null,
+        "industry": "software_saas",
+        "headcount": null,
+        "country": "US",
+        "city": "West Lafayette",
+        "state": "IN",
+        "dm_name": "Amy Burkett",
+        "dm_title": "President",
+        "dm_email": "aburkett@akina-inc.com",
+        "dm_linkedin_url": "http://www.linkedin.com/in/amy-burkett-pmp-29392a15a",
+        "score": null,
+        "insight": null,
+        "signals": [
+          {
+            "type": "job_posted_cloud_devops",
+            "captured_at": "2026-05-06T08:27:02.213469",
+            "days_ago": 9,
+            "payload": {
+              "title": "DevOps Engineer 3 - (Terraform, GitLab, Docker)",
+              "url": "https://www.indeed.com/viewjob?jk=2d1c0ac2c4179b16",
+              "date_posted": "2026-05-05",
+              "site": "indeed"
+            }
+          },
+          {
+            "type": "job_posted_cloud_devops",
+            "captured_at": "2026-05-06T08:27:02.213469",
+            "days_ago": 9,
+            "payload": {
+              "title": "DevOps Engineer 3 - (AWS, Docker, Kubernetes)",
+              "url": "https://www.indeed.com/viewjob?jk=4053ab228ed70b53",
+              "date_posted": "2026-05-05",
+              "site": "indeed"
+            }
+          },
+          {
+            "type": "job_posted_cloud_devops",
+            "captured_at": "2026-05-06T08:27:02.213469",
+            "days_ago": 9,
+            "payload": {
+              "title": "DevOps Engineer 3 - (Kubernetes, AWS, IaC)",
+              "url": "https://www.indeed.com/viewjob?jk=591c0f7e90c9678b",
+              "date_posted": "2026-05-05",
+              "site": "indeed"
+            }
+          }
+        ]
+      },
+      {
+        "name": "DLRdmv\u00ae",
+        "domain": null,
+        "industry": "software_saas",
+        "headcount": 120,
+        "country": "US",
+        "city": "Dallas",
+        "state": "TX",
+        "dm_name": "Bryan Dodd",
+        "dm_title": "Chief Information Officer",
+        "dm_email": "bdodd@dlrdmv.com",
+        "dm_linkedin_url": "http://www.linkedin.com/in/bdodd",
+        "score": null,
+        "insight": null,
+        "signals": [
+          {
+            "type": "job_posted_cloud_devops",
+            "captured_at": "2026-05-06T08:27:02.213469",
+            "days_ago": 9,
+            "payload": {
+              "title": "DevOps Engineer",
+              "url": "https://www.linkedin.com/jobs/view/4410519687",
+              "date_posted": "2026-05-05",
+              "site": "linkedin"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Edgesource Corporation",
+        "domain": null,
+        "industry": "software_saas",
+        "headcount": 110,
+        "country": "US",
+        "city": "Alexandria",
+        "state": "VA",
+        "dm_name": "Diego Bernal",
+        "dm_title": "Information Technology Site Manager",
+        "dm_email": "dbernal@edgesource.com",
+        "dm_linkedin_url": "http://www.linkedin.com/in/diego-bernal-pmp-46a23a73",
+        "score": null,
+        "insight": null,
+        "signals": [
+          {
+            "type": "job_posted_cloud_devops",
+            "captured_at": "2026-05-06T08:27:02.213469",
+            "days_ago": 9,
+            "payload": {
+              "title": "Junior DevOps Engineer",
+              "url": "https://www.linkedin.com/jobs/view/4407427089",
+              "date_posted": "2026-04-27",
+              "site": "linkedin"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Network Designs Inc.",
+        "domain": null,
+        "industry": "software_saas",
+        "headcount": 140,
+        "country": "US",
+        "city": "McLean",
+        "state": "VA",
+        "dm_name": "Carmen Marco",
+        "dm_title": "Senior Vice President Information Technology Services",
+        "dm_email": "cmarco@netdes.com",
+        "dm_linkedin_url": "http://www.linkedin.com/in/carmen-marco-2b58157",
+        "score": null,
+        "insight": null,
+        "signals": [
+          {
+            "type": "job_posted_cloud_devops",
+            "captured_at": "2026-05-06T08:27:14.254137",
+            "days_ago": 9,
+            "payload": {
+              "title": "AWS Systems Administrator",
+              "url": "https://www.adzuna.com/land/ad/5712371613?se=cOX4YyVJ8RGEdJdPO2uqbQ&utm_medium=api&utm_source=3aa14b35&v=2643A97A4B2BB1CC5904F5309BCF0AAEC1A946A6",
+              "date_posted": "2026-04-27T23:21:03Z",
+              "site": "adzuna"
+            }
+          }
+        ]
+      },
+      {
+        "name": "6149-DePuy Synthes Products Legal Entity",
+        "domain": null,
+        "industry": "healthcare",
+        "headcount": 10,
+        "country": "US",
+        "city": "Raynham",
+        "state": "MA",
+        "dm_name": null,
+        "dm_title": null,
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": null,
+        "insight": null,
+        "signals": [
+          {
+            "type": "exec_hired",
+            "captured_at": "2026-05-06T08:27:14.254137",
+            "days_ago": 9,
+            "payload": {
+              "title": "Sr. Director, Dep CISO GRC & Security, Orthopedics",
+              "url": "https://www.adzuna.com/details/5717546582?utm_medium=api&utm_source=3aa14b35",
+              "date_posted": "2026-05-02T22:43:35Z",
+              "site": "adzuna"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Maxima Technologies, LLC",
+        "domain": null,
+        "industry": "software_saas",
+        "headcount": 70,
+        "country": "US",
+        "city": "Cheyenne",
+        "state": "WY",
+        "dm_name": null,
+        "dm_title": null,
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": null,
+        "insight": null,
+        "signals": [
+          {
+            "type": "job_posted_cloud_devops",
+            "captured_at": "2026-05-06T08:27:14.254137",
+            "days_ago": 9,
+            "payload": {
+              "title": "Cloud Engineer",
+              "url": "https://www.adzuna.com/land/ad/5719658116?se=CjvLZSVJ8RGEYOtM3JQkZw&utm_medium=api&utm_source=3aa14b35&v=17349A9713F325473EB5D341ECC0B23455C644CE",
+              "date_posted": "2026-05-05T15:52:01Z",
+              "site": "adzuna"
+            }
+          }
+        ]
+      },
+      {
+        "name": "JC Resorts LLC",
+        "domain": null,
+        "industry": "hospitality_food",
+        "headcount": null,
+        "country": "US",
+        "city": "La Jolla",
+        "state": "CA",
+        "dm_name": null,
+        "dm_title": null,
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": null,
+        "insight": null,
+        "signals": [
+          {
+            "type": "breach_disclosed",
+            "captured_at": "2026-05-06T08:27:24.730892",
+            "days_ago": 9,
+            "payload": {
+              "agency": "ca_ag",
+              "reported_date": "04/28/2026"
+            }
+          }
+        ]
+      },
+      {
+        "name": "D'Ambrosio Dodge Inc.",
+        "domain": "jeffdambrosio.com",
+        "industry": "other",
+        "headcount": null,
+        "country": "US",
+        "city": "Downingtown",
+        "state": "PA",
+        "dm_name": null,
+        "dm_title": null,
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": null,
+        "insight": null,
+        "signals": [
+          {
+            "type": "breach_disclosed",
+            "captured_at": "2026-05-06T08:27:27.350212",
+            "days_ago": 9,
+            "payload": {
+              "agency": "me_ag",
+              "reported_date": "2026-05-05"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Diamond Chemical Co, LLC",
+        "domain": null,
+        "industry": "manufacturing",
+        "headcount": 110,
+        "country": "US",
+        "city": "East Rutherford",
+        "state": "NJ",
+        "dm_name": null,
+        "dm_title": null,
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": null,
+        "insight": null,
+        "signals": [
+          {
+            "type": "breach_disclosed",
+            "captured_at": "2026-05-06T08:27:27.350212",
+            "days_ago": 9,
+            "payload": {
+              "agency": "me_ag",
+              "reported_date": "2026-05-05"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Suncoast One Title & Closings, Inc.",
+        "domain": null,
+        "industry": "real_estate",
+        "headcount": 20,
+        "country": "US",
+        "city": "North Port",
+        "state": "FL",
+        "dm_name": null,
+        "dm_title": null,
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": null,
+        "insight": null,
+        "signals": [
+          {
+            "type": "breach_disclosed",
+            "captured_at": "2026-05-06T08:27:27.350212",
+            "days_ago": 9,
+            "payload": {
+              "agency": "me_ag",
+              "reported_date": "2026-05-05"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Empire Express",
+        "domain": "empireexpress.com",
+        "industry": "logistics_transport",
+        "headcount": 60,
+        "country": "US",
+        "city": "Memphis",
+        "state": "TN",
+        "dm_name": "John Phillips",
+        "dm_title": "President & COO",
+        "dm_email": "john@empireexpress.com",
+        "dm_linkedin_url": "http://www.linkedin.com/in/john-phillips-86646a24",
+        "score": null,
+        "insight": null,
+        "signals": [
+          {
+            "type": "breach_disclosed",
+            "captured_at": "2026-05-06T08:27:27.350212",
+            "days_ago": 9,
+            "payload": {
+              "agency": "me_ag",
+              "reported_date": "2026-05-05"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Radial Entertainment",
+        "domain": "radialentertainment.com",
+        "industry": "media_entertainment",
+        "headcount": null,
+        "country": "US",
+        "city": "New York",
+        "state": "NY",
+        "dm_name": "Jeff Shultz",
+        "dm_title": "Chief Executive Officer",
+        "dm_email": "jshultz@radialentertainment.com",
+        "dm_linkedin_url": "http://www.linkedin.com/in/shultz",
+        "score": null,
+        "insight": null,
+        "signals": [
+          {
+            "type": "breach_disclosed",
+            "captured_at": "2026-05-06T08:27:27.350212",
+            "days_ago": 9,
+            "payload": {
+              "agency": "me_ag",
+              "reported_date": "2026-05-05"
+            }
+          }
+        ]
+      },
+      {
+        "name": "VigorCare Pediatric Services",
+        "domain": "vigorcaretexas.com",
+        "industry": "healthcare",
+        "headcount": 17,
+        "country": "US",
+        "city": "Plano",
+        "state": "TX",
+        "dm_name": null,
+        "dm_title": null,
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": null,
+        "insight": null,
+        "signals": [
+          {
+            "type": "job_posted_it_support",
+            "captured_at": "2026-05-07T08:33:45.474163",
+            "days_ago": 8,
+            "payload": {
+              "title": "IT Support Engineer",
+              "url": "https://www.indeed.com/viewjob?jk=653d44adbadcc7b5",
+              "date_posted": "2026-05-06",
+              "site": "indeed"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Avail",
+        "domain": "avail.com",
+        "industry": "software_saas",
+        "headcount": 75,
+        "country": "US",
+        "city": "Santa Clara",
+        "state": "CA",
+        "dm_name": "James Rogers",
+        "dm_title": "Vice President",
+        "dm_email": null,
+        "dm_linkedin_url": "http://www.linkedin.com/in/james-rogers-43995b191",
+        "score": null,
+        "insight": null,
+        "signals": [
+          {
+            "type": "job_posted_cloud_devops",
+            "captured_at": "2026-05-07T08:33:45.474163",
+            "days_ago": 8,
+            "payload": {
+              "title": "DevOps Engineer",
+              "url": "https://www.linkedin.com/jobs/view/4409928072",
+              "date_posted": "nan",
+              "site": "linkedin"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Revelation Pharma",
+        "domain": "revelationpharma.com",
+        "industry": "healthcare",
+        "headcount": 94,
+        "country": "US",
+        "city": "Greenwood Village",
+        "state": "CO",
+        "dm_name": "Shawn Allgood",
+        "dm_title": "IT Project Manager",
+        "dm_email": "sallgood@revelationpharma.com",
+        "dm_linkedin_url": "http://www.linkedin.com/in/shawnallgood",
+        "score": null,
+        "insight": null,
+        "signals": [
+          {
+            "type": "job_posted_cloud_devops",
+            "captured_at": "2026-05-07T08:33:45.474163",
+            "days_ago": 8,
+            "payload": {
+              "title": "DevOps / AgentOps Engineer",
+              "url": "https://www.linkedin.com/jobs/view/4409941614",
+              "date_posted": "nan",
+              "site": "linkedin"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Vanguard Tax LLC",
+        "domain": "taxvanguard.com",
+        "industry": "fintech",
+        "headcount": null,
+        "country": "US",
+        "city": "Orlando",
+        "state": "FL",
+        "dm_name": "Carmen Falbo",
+        "dm_title": "Owner",
+        "dm_email": "carmen@vanguardnaples.com",
+        "dm_linkedin_url": "http://www.linkedin.com/in/carmen-falbo-4b07473b",
+        "score": null,
+        "insight": null,
+        "signals": [
+          {
+            "type": "job_posted_it_support",
+            "captured_at": "2026-05-07T08:33:58.038098",
+            "days_ago": 8,
+            "payload": {
+              "title": "IT Support Specialist",
+              "url": "https://www.adzuna.com/land/ad/5721153018?se=Dr9pfu9J8RG3JZg8AVaeSA&utm_medium=api&utm_source=3aa14b35&v=FA989265803D6F68C294EFABF247762A4D3BFC51",
+              "date_posted": "2026-05-06T23:03:10Z",
+              "site": "adzuna"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Synthbee, Inc.",
+        "domain": "synthbee.com",
+        "industry": "software_saas",
+        "headcount": 9,
+        "country": "US",
+        "city": "Weston",
+        "state": "FL",
+        "dm_name": "Anush Mohan",
+        "dm_title": "VP of Technology",
+        "dm_email": "anush.mohan@synthbee.com",
+        "dm_linkedin_url": "http://www.linkedin.com/in/anushmohan",
+        "score": null,
+        "insight": null,
+        "signals": [
+          {
+            "type": "job_posted_security",
+            "captured_at": "2026-05-07T08:33:58.038098",
+            "days_ago": 8,
+            "payload": {
+              "title": "Facility Security Officer with Security Clearance",
+              "url": "https://www.adzuna.com/land/ad/5715010436?se=xrNage9J8RG9yII_B8yfHA&utm_medium=api&utm_source=3aa14b35&v=0DA514AF1A3ABED815C6C48A0AC2CB833A5E2C05",
+              "date_posted": "2026-04-30T21:05:26Z",
+              "site": "adzuna"
+            }
+          }
+        ]
+      },
+      {
+        "name": "TransGlobal Insurance Agency, Inc.",
+        "domain": "transglobalus.com",
+        "industry": "fintech",
+        "headcount": 250,
+        "country": "US",
+        "city": "Monrovia",
+        "state": "CA",
+        "dm_name": "Philip Hu",
+        "dm_title": "Owner",
+        "dm_email": "philip.hu@transglobalus.com",
+        "dm_linkedin_url": "http://www.linkedin.com/in/philip-hu-88730413",
+        "score": null,
+        "insight": null,
+        "signals": [
+          {
+            "type": "breach_disclosed",
+            "captured_at": "2026-05-07T08:34:11.918561",
+            "days_ago": 8,
+            "payload": {
+              "agency": "wa_ag",
+              "reported_date": "05/05/2026"
+            }
+          },
+          {
+            "type": "breach_disclosed",
+            "captured_at": "2026-05-07T08:34:10.599934",
+            "days_ago": 8,
+            "payload": {
+              "agency": "me_ag",
+              "reported_date": "2026-05-04"
+            }
+          },
+          {
+            "type": "breach_disclosed",
+            "captured_at": "2026-05-07T08:34:07.883198",
+            "days_ago": 8,
+            "payload": {
+              "agency": "ca_ag",
+              "reported_date": "04/29/2026"
+            }
+          }
+        ]
+      },
+      {
+        "name": "First Harvest Federal Credit Union",
+        "domain": "firstharvestcu.com",
+        "industry": "fintech",
+        "headcount": 200,
+        "country": "US",
+        "city": "Deptford",
+        "state": "NJ",
+        "dm_name": "Ned Leslie",
+        "dm_title": "Vice President Information Technology Operations",
+        "dm_email": "nleslie@firstharvestcu.com",
+        "dm_linkedin_url": "http://www.linkedin.com/in/ned-leslie-31576b4",
+        "score": null,
+        "insight": null,
+        "signals": [
+          {
+            "type": "breach_disclosed",
+            "captured_at": "2026-05-07T08:34:10.599934",
+            "days_ago": 8,
+            "payload": {
+              "agency": "me_ag",
+              "reported_date": "2026-05-06"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Pacient",
+        "domain": "betterpatienttransfers.com",
+        "industry": "healthcare",
+        "headcount": 6,
+        "country": "US",
+        "city": "Grand Rapids",
+        "state": "MI",
+        "dm_name": "Andrew Heuerman",
+        "dm_title": "Founder & CEO",
+        "dm_email": "andrew@betterpatienttransfers.com",
+        "dm_linkedin_url": "http://www.linkedin.com/in/andrew-heuerman-171833122",
+        "score": null,
+        "insight": null,
+        "signals": [
+          {
+            "type": "breach_disclosed",
+            "captured_at": "2026-05-07T08:34:10.599934",
+            "days_ago": 8,
+            "payload": {
+              "agency": "me_ag",
+              "reported_date": "2026-04-24"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Mt. Spokane Pediatrics",
+        "domain": "mtspokanepediatrics.com",
+        "industry": "healthcare",
+        "headcount": 24,
+        "country": "US",
+        "city": "Spokane",
+        "state": "WA",
+        "dm_name": null,
+        "dm_title": null,
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": null,
+        "insight": null,
+        "signals": [
+          {
+            "type": "breach_disclosed",
+            "captured_at": "2026-05-07T08:34:11.918561",
+            "days_ago": 8,
+            "payload": {
+              "agency": "wa_ag",
+              "reported_date": "04/30/2026"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Atlas Management Services",
+        "domain": "atlasmanagement.us",
+        "industry": "other",
+        "headcount": 23,
+        "country": "US",
+        "city": "Brentwood",
+        "state": "TN",
+        "dm_name": "Warren Sawyers",
+        "dm_title": "President and CEO",
+        "dm_email": "wsawyers@atlasmanagement.us",
+        "dm_linkedin_url": "http://www.linkedin.com/in/warren-sawyers-b3706243",
+        "score": null,
+        "insight": null,
+        "signals": [
+          {
+            "type": "exec_hired",
+            "captured_at": "2026-05-08T07:41:51.457583",
+            "days_ago": 7,
+            "payload": {
+              "title": "Chief Information Security Officer",
+              "url": "https://www.indeed.com/viewjob?jk=e30831756f792724",
+              "date_posted": "2026-05-07",
+              "site": "indeed"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Aligned Dental",
+        "domain": "aligneddentalpartners.com",
+        "industry": "healthcare",
+        "headcount": 38,
+        "country": "US",
+        "city": "Sarasota",
+        "state": "FL",
+        "dm_name": "Chris McClure",
+        "dm_title": "Co-Founder",
+        "dm_email": "chris@aligneddentalpartners.com",
+        "dm_linkedin_url": "http://www.linkedin.com/in/chris-mcclure",
+        "score": null,
+        "insight": null,
+        "signals": [
+          {
+            "type": "job_posted_it_leadership",
+            "captured_at": "2026-05-08T07:41:51.457583",
+            "days_ago": 7,
+            "payload": {
+              "title": "IT Director- Healthcare",
+              "url": "https://www.linkedin.com/jobs/view/4411682564",
+              "date_posted": "nan",
+              "site": "linkedin"
+            }
+          }
+        ]
+      },
+      {
+        "name": "M Social Times Square Hotel",
+        "domain": "msocialhotelnewyork.com",
+        "industry": "hospitality_food",
+        "headcount": 14,
+        "country": "US",
+        "city": "New York",
+        "state": "NY",
+        "dm_name": null,
+        "dm_title": null,
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": null,
+        "insight": null,
+        "signals": [
+          {
+            "type": "job_posted_security",
+            "captured_at": "2026-05-08T07:42:03.520100",
+            "days_ago": 7,
+            "payload": {
+              "title": "Director of Engineering & Security",
+              "url": "https://www.adzuna.com/land/ad/5722410774?se=OqIaarFK8RGeYJz9IZgogA&utm_medium=api&utm_source=3aa14b35&v=95EA270730A580B8BEFF850B4F5F538539C3121E",
+              "date_posted": "2026-05-07T22:08:34Z",
+              "site": "adzuna"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Alliance Roofing Company, Inc.",
+        "domain": "allianceroofinginc.com",
+        "industry": "construction",
+        "headcount": 3,
+        "country": "US",
+        "city": "Santa Clara",
+        "state": "CA",
+        "dm_name": "Randy Tobin",
+        "dm_title": "CEO",
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": null,
+        "insight": null,
+        "signals": [
+          {
+            "type": "breach_disclosed",
+            "captured_at": "2026-05-08T07:42:13.610247",
+            "days_ago": 7,
+            "payload": {
+              "agency": "ca_ag",
+              "reported_date": "05/07/2026"
+            }
+          }
+        ]
+      },
+      {
+        "name": "54 Below Inc.",
+        "domain": "54below.org",
+        "industry": "media_entertainment",
+        "headcount": 74,
+        "country": "US",
+        "city": "New York",
+        "state": "NY",
+        "dm_name": "Richard Frankel",
+        "dm_title": "Managing Director",
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": null,
+        "insight": null,
+        "signals": [
+          {
+            "type": "breach_disclosed",
+            "captured_at": "2026-05-08T07:42:16.913744",
+            "days_ago": 7,
+            "payload": {
+              "agency": "me_ag",
+              "reported_date": "2026-05-07"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Johnson, Webbert, & Beard LLP",
+        "domain": "johnsonwebbert.com",
+        "industry": "legal_professional",
+        "headcount": 19,
+        "country": "US",
+        "city": "Topsham",
+        "state": "ME",
+        "dm_name": "David G. Webbert",
+        "dm_title": "Managing Partner",
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": null,
+        "insight": null,
+        "signals": [
+          {
+            "type": "breach_disclosed",
+            "captured_at": "2026-05-08T07:42:16.913744",
+            "days_ago": 7,
+            "payload": {
+              "agency": "me_ag",
+              "reported_date": "2026-05-07"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Credit Technologies, Inc",
+        "domain": "credittechnologies.com",
+        "industry": "fintech",
+        "headcount": 48,
+        "country": "US",
+        "city": "Wixom",
+        "state": "MI",
+        "dm_name": "Thomas Conwell",
+        "dm_title": "President / CEO",
+        "dm_email": "tconwell@credittechnologies.com",
+        "dm_linkedin_url": "http://www.linkedin.com/in/thomasconwell",
+        "score": null,
+        "insight": null,
+        "signals": [
+          {
+            "type": "breach_disclosed",
+            "captured_at": "2026-05-08T07:42:16.913744",
+            "days_ago": 7,
+            "payload": {
+              "agency": "me_ag",
+              "reported_date": "2026-04-27"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Sol de Janeiro",
+        "domain": "soldejaneiro.com",
+        "industry": "ecommerce_retail",
+        "headcount": null,
+        "country": "US",
+        "city": "New York",
+        "state": "NY",
+        "dm_name": null,
+        "dm_title": null,
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": null,
+        "insight": null,
+        "signals": [
+          {
+            "type": "job_posted_it_support",
+            "captured_at": "2026-05-09T07:56:37.439236",
+            "days_ago": 6,
+            "payload": {
+              "title": "IT Support Specialist (Part-Time)",
+              "url": "https://www.linkedin.com/jobs/view/4388509300",
+              "date_posted": "2026-05-03",
+              "site": "linkedin"
+            }
+          }
+        ]
+      },
+      {
+        "name": "EXPRESS",
+        "domain": "express.com",
+        "industry": "other",
+        "headcount": null,
+        "country": "US",
+        "city": "Columbus",
+        "state": "OH",
+        "dm_name": "Stewart Glendinning",
+        "dm_title": "Chief Executive Officer",
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": null,
+        "insight": null,
+        "signals": [
+          {
+            "type": "job_posted_cloud_devops",
+            "captured_at": "2026-05-09T07:56:37.439236",
+            "days_ago": 6,
+            "payload": {
+              "title": "DevOps Engineer",
+              "url": "https://www.linkedin.com/jobs/view/4402046792",
+              "date_posted": "2026-05-06",
+              "site": "linkedin"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Tsubaki Kabelschlepp America, Inc",
+        "domain": "tsubaki.com",
+        "industry": "manufacturing",
+        "headcount": null,
+        "country": "US",
+        "city": null,
+        "state": null,
+        "dm_name": null,
+        "dm_title": null,
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": null,
+        "insight": null,
+        "signals": [
+          {
+            "type": "job_posted_it_support",
+            "captured_at": "2026-05-09T07:56:49.271362",
+            "days_ago": 6,
+            "payload": {
+              "title": "Help Desk Technician Intern",
+              "url": "https://www.adzuna.com/land/ad/5722725889?se=EFtkonxL8RGnMap5hKkm1g&utm_medium=api&utm_source=3aa14b35&v=AEFDC5ADA7D94C8A7131D66EEAB006394A75198E",
+              "date_posted": "2026-05-08T03:42:04Z",
+              "site": "adzuna"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Society for Science",
+        "domain": "societyforscience.org",
+        "industry": "government_nonprofit",
+        "headcount": 130,
+        "country": "US",
+        "city": "Washington",
+        "state": "DC",
+        "dm_name": "Maya Ajmera",
+        "dm_title": "President & CEO",
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": null,
+        "insight": null,
+        "signals": [
+          {
+            "type": "job_posted_security",
+            "captured_at": "2026-05-09T07:56:49.271362",
+            "days_ago": 6,
+            "payload": {
+              "title": "Director, IT Infrastructure and Security",
+              "url": "https://www.adzuna.com/land/ad/5715255388?se=JGHTpXxL8RGnMap5hKkm1g&utm_medium=api&utm_source=3aa14b35&v=9186F2AD5C5AAC70BAD4B53ECE76ADEAFF5081C8",
+              "date_posted": "2026-04-30T23:38:49Z",
+              "site": "adzuna"
+            }
+          }
+        ]
+      },
+      {
+        "name": "The Moorings Park Institute Incorporated",
+        "domain": "mooringspark.org",
+        "industry": "healthcare",
+        "headcount": null,
+        "country": "US",
+        "city": "Naples",
+        "state": "FL",
+        "dm_name": "Daniel J Lavender",
+        "dm_title": "President and Chief Executive Officer",
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": null,
+        "insight": null,
+        "signals": [
+          {
+            "type": "job_posted_it_leadership",
+            "captured_at": "2026-05-09T07:56:49.271362",
+            "days_ago": 6,
+            "payload": {
+              "title": "Director of IT Architecture",
+              "url": "https://www.adzuna.com/land/ad/5721259224?se=JGHTpXxL8RGnMap5hKkm1g&utm_medium=api&utm_source=3aa14b35&v=96B9C8A3546C269632B3966CC0D1E58CD6FFD3C7",
+              "date_posted": "2026-05-07T01:06:09Z",
+              "site": "adzuna"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Maman",
+        "domain": "mamannyc.com",
+        "industry": "hospitality_food",
+        "headcount": null,
+        "country": "US",
+        "city": "New York",
+        "state": "NY",
+        "dm_name": "Benjamin Sormonte",
+        "dm_title": "CEO",
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": null,
+        "insight": null,
+        "signals": [
+          {
+            "type": "funding_raised",
+            "captured_at": "2026-05-09T07:57:06.539973",
+            "days_ago": 6,
+            "payload": {
+              "feed_title": "TriSpan Closes Continuation Vehicle for Maman",
+              "feed_url": "https://www.prnewswire.com/rss/financial-services-latest-news/financial-services-latest-news-list.rss",
+              "link": "https://www.prnewswire.com/news-releases/trispan-closes-continuation-vehicle-for-maman-302767086.html",
+              "published": "Fri, 8 May 2026 15:36:00 +0000"
+            }
+          }
+        ]
+      },
+      {
+        "name": "MemberSource Credit Union",
+        "domain": "membersourcecu.org",
+        "industry": "fintech",
+        "headcount": 50,
+        "country": "US",
+        "city": "Houston",
+        "state": "TX",
+        "dm_name": "Kenny Harrington",
+        "dm_title": "President/CEO",
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": null,
+        "insight": null,
+        "signals": [
+          {
+            "type": "breach_disclosed",
+            "captured_at": "2026-05-09T07:57:09.802162",
+            "days_ago": 6,
+            "payload": {
+              "agency": "ca_ag",
+              "reported_date": "05/08/2026"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Sanger Skilled Care, LLC dba Cornerstone Care Center",
+        "domain": null,
+        "industry": "healthcare",
+        "headcount": null,
+        "country": "US",
+        "city": "Sanger",
+        "state": "CA",
+        "dm_name": null,
+        "dm_title": null,
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": null,
+        "insight": null,
+        "signals": [
+          {
+            "type": "breach_disclosed",
+            "captured_at": "2026-05-09T07:57:09.802162",
+            "days_ago": 6,
+            "payload": {
+              "agency": "ca_ag",
+              "reported_date": "05/07/2026"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Berger & Williams, LLP",
+        "domain": "bwrllp.com",
+        "industry": "legal_professional",
+        "headcount": null,
+        "country": "US",
+        "city": "San Diego",
+        "state": "CA",
+        "dm_name": null,
+        "dm_title": null,
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": null,
+        "insight": null,
+        "signals": [
+          {
+            "type": "breach_disclosed",
+            "captured_at": "2026-05-09T07:57:09.802162",
+            "days_ago": 6,
+            "payload": {
+              "agency": "ca_ag",
+              "reported_date": "05/05/2026"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Frontwave Credit Union",
+        "domain": "frontwavecu.com",
+        "industry": "fintech",
+        "headcount": 120,
+        "country": "US",
+        "city": "Oceanside",
+        "state": "CA",
+        "dm_name": "Bill Birnie",
+        "dm_title": "President/CEO",
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": null,
+        "insight": null,
+        "signals": [
+          {
+            "type": "breach_disclosed",
+            "captured_at": "2026-05-09T07:57:09.802162",
+            "days_ago": 6,
+            "payload": {
+              "agency": "ca_ag",
+              "reported_date": "04/28/2026"
+            }
+          }
+        ]
+      },
+      {
+        "name": "L.A. Care Health Plan",
+        "domain": "lacare.org",
+        "industry": "healthcare",
+        "headcount": null,
+        "country": "US",
+        "city": "Los Angeles",
+        "state": "CA",
+        "dm_name": "T. M.",
+        "dm_title": "Chief Information And Technology Officer",
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": null,
+        "insight": null,
+        "signals": [
+          {
+            "type": "breach_disclosed",
+            "captured_at": "2026-05-09T07:57:09.802162",
+            "days_ago": 6,
+            "payload": {
+              "agency": "ca_ag",
+              "reported_date": "04/27/2026"
+            }
+          }
+        ]
+      },
+      {
+        "name": "New  Congol  LLC  dba  New  Congoleum",
+        "domain": "congoleum.com",
+        "industry": "manufacturing",
+        "headcount": null,
+        "country": "US",
+        "city": "Trenton",
+        "state": "NJ",
+        "dm_name": null,
+        "dm_title": null,
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": null,
+        "insight": null,
+        "signals": [
+          {
+            "type": "breach_disclosed",
+            "captured_at": "2026-05-09T07:57:13.098372",
+            "days_ago": 6,
+            "payload": {
+              "agency": "me_ag",
+              "reported_date": "2026-05-08"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Financial Foundations, Inc.",
+        "domain": "financial-foundationsinc.com",
+        "industry": "fintech",
+        "headcount": 10,
+        "country": "US",
+        "city": "SOUTHBOROUGH",
+        "state": "MA",
+        "dm_name": "Eric Meushaw",
+        "dm_title": "President",
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": null,
+        "insight": null,
+        "signals": [
+          {
+            "type": "breach_disclosed",
+            "captured_at": "2026-05-09T07:57:13.098372",
+            "days_ago": 6,
+            "payload": {
+              "agency": "me_ag",
+              "reported_date": "2026-05-08"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Lautrec, Ltd.",
+        "domain": "lautrecltd.com",
+        "industry": "other",
+        "headcount": null,
+        "country": "US",
+        "city": "Farmington Hills",
+        "state": "MI",
+        "dm_name": null,
+        "dm_title": null,
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": null,
+        "insight": null,
+        "signals": [
+          {
+            "type": "breach_disclosed",
+            "captured_at": "2026-05-09T07:57:13.098372",
+            "days_ago": 6,
+            "payload": {
+              "agency": "me_ag",
+              "reported_date": "2026-05-08"
+            }
+          }
+        ]
+      },
+      {
+        "name": "2nd Swing",
+        "domain": "2ndswing.com",
+        "industry": "ecommerce_retail",
+        "headcount": null,
+        "country": "US",
+        "city": "Eden Prairie",
+        "state": "MN",
+        "dm_name": "Simon Kallal",
+        "dm_title": "Chief Executive Officer",
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": null,
+        "insight": null,
+        "signals": [
+          {
+            "type": "breach_disclosed",
+            "captured_at": "2026-05-09T07:57:13.098372",
+            "days_ago": 6,
+            "payload": {
+              "agency": "me_ag",
+              "reported_date": "2026-05-07"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Gateways Community Services",
+        "domain": "gatewayscs.org",
+        "industry": "healthcare",
+        "headcount": null,
+        "country": "US",
+        "city": "Nashua",
+        "state": "NH",
+        "dm_name": "Sandy Pelletier",
+        "dm_title": "President & Chief Executive Officer",
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": null,
+        "insight": null,
+        "signals": [
+          {
+            "type": "breach_disclosed",
+            "captured_at": "2026-05-09T07:57:13.098372",
+            "days_ago": 6,
+            "payload": {
+              "agency": "me_ag",
+              "reported_date": "2026-05-05"
+            }
+          }
+        ]
+      },
+      {
+        "name": "ISC Constructors, LLC",
+        "domain": "iscgrp.com",
+        "industry": "construction",
+        "headcount": null,
+        "country": "US",
+        "city": "Baton Rouge",
+        "state": "LA",
+        "dm_name": null,
+        "dm_title": null,
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": null,
+        "insight": null,
+        "signals": [
+          {
+            "type": "job_posted_it_support",
+            "captured_at": "2026-05-10T08:07:46.896712",
+            "days_ago": 5,
+            "payload": {
+              "title": "Level 1 IT Support Technician",
+              "url": "https://www.indeed.com/viewjob?jk=f7b65e7d9fada4e8",
+              "date_posted": "2026-05-10",
+              "site": "indeed"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Toyota North America",
+        "domain": "toyota.com",
+        "industry": "manufacturing",
+        "headcount": null,
+        "country": "US",
+        "city": "Plano",
+        "state": "TX",
+        "dm_name": null,
+        "dm_title": null,
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": null,
+        "insight": null,
+        "signals": [
+          {
+            "type": "job_posted_cloud_devops",
+            "captured_at": "2026-05-10T08:07:46.896712",
+            "days_ago": 5,
+            "payload": {
+              "title": "Cloud / DevOps Engineer",
+              "url": "https://www.linkedin.com/jobs/view/4407985943",
+              "date_posted": "2026-05-02",
+              "site": "linkedin"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Slingshot Aerospace",
+        "domain": "slingshotaerospace.com",
+        "industry": "software_saas",
+        "headcount": null,
+        "country": "US",
+        "city": "El Segundo",
+        "state": "CA",
+        "dm_name": "Tim Solms",
+        "dm_title": "Chief Executive Officer",
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": null,
+        "insight": null,
+        "signals": [
+          {
+            "type": "exec_hired",
+            "captured_at": "2026-05-10T08:07:58.152595",
+            "days_ago": 5,
+            "payload": {
+              "title": "Chief Information Security Officer (CISO)",
+              "url": "https://www.adzuna.com/details/5724003914?utm_medium=api&utm_source=3aa14b35",
+              "date_posted": "2026-05-09T04:51:26Z",
+              "site": "adzuna"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Blue Enterprises, Inc. dba Hogan Transports, Inc.",
+        "domain": "hogan1.com",
+        "industry": "logistics_transport",
+        "headcount": null,
+        "country": "US",
+        "city": "Saint Louis",
+        "state": "MO",
+        "dm_name": null,
+        "dm_title": null,
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": null,
+        "insight": null,
+        "signals": [
+          {
+            "type": "breach_disclosed",
+            "captured_at": "2026-05-10T08:08:17.613417",
+            "days_ago": 5,
+            "payload": {
+              "agency": "ca_ag",
+              "reported_date": "05/08/2026"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Miller Insurance Protection Team",
+        "domain": "millerinsurance.com",
+        "industry": "other",
+        "headcount": null,
+        "country": "US",
+        "city": "Jonestown",
+        "state": "PA",
+        "dm_name": null,
+        "dm_title": null,
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": null,
+        "insight": null,
+        "signals": [
+          {
+            "type": "breach_disclosed",
+            "captured_at": "2026-05-10T08:08:20.710630",
+            "days_ago": 5,
+            "payload": {
+              "agency": "me_ag",
+              "reported_date": "2026-05-09"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Charlie Condon Law Firm, LLC",
+        "domain": "charliecondon.com",
+        "industry": "legal_professional",
+        "headcount": null,
+        "country": "US",
+        "city": "Mount Pleasant",
+        "state": "SC",
+        "dm_name": "Charlie Condon",
+        "dm_title": "Founder",
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": null,
+        "insight": null,
+        "signals": [
+          {
+            "type": "breach_disclosed",
+            "captured_at": "2026-05-10T08:08:20.710630",
+            "days_ago": 5,
+            "payload": {
+              "agency": "me_ag",
+              "reported_date": "2026-05-09"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Matic",
+        "domain": "maticrobots.com",
+        "industry": "software_saas",
+        "headcount": null,
+        "country": "US",
+        "city": "Mountain View",
+        "state": "CA",
+        "dm_name": null,
+        "dm_title": null,
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": null,
+        "insight": null,
+        "signals": [
+          {
+            "type": "job_posted_it_support",
+            "captured_at": "2026-05-11T09:39:16.945467",
+            "days_ago": 4,
+            "payload": {
+              "title": "IT Support Technician",
+              "url": "https://www.linkedin.com/jobs/view/4387866229",
+              "date_posted": "2026-05-01",
+              "site": "linkedin"
+            }
+          }
+        ]
+      },
+      {
+        "name": "BWH HOTELS",
+        "domain": "bwhhotelgroup.com",
+        "industry": "hospitality_food",
+        "headcount": null,
+        "country": "US",
+        "city": "Phoenix",
+        "state": "AZ",
+        "dm_name": "Larry Cuculic",
+        "dm_title": "President and Chief Executive Officer",
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": null,
+        "insight": null,
+        "signals": [
+          {
+            "type": "job_posted_security",
+            "captured_at": "2026-05-11T09:39:16.945467",
+            "days_ago": 4,
+            "payload": {
+              "title": "Managing Director, Information Security and Enterprise Architecture",
+              "url": "https://www.indeed.com/viewjob?jk=9d756e322a590f18",
+              "date_posted": "2026-05-10",
+              "site": "indeed"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Supreme Court of Virginia",
+        "domain": "courts.state.va.us",
+        "industry": "government_nonprofit",
+        "headcount": null,
+        "country": "US",
+        "city": "Richmond",
+        "state": "VA",
+        "dm_name": null,
+        "dm_title": null,
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": null,
+        "insight": null,
+        "signals": [
+          {
+            "type": "job_posted_security",
+            "captured_at": "2026-05-11T09:39:16.945467",
+            "days_ago": 4,
+            "payload": {
+              "title": "Information Security Officer - Governance, Risk, and Compliance",
+              "url": "https://www.indeed.com/viewjob?jk=6ad15a94f8dc355e",
+              "date_posted": "2026-05-09",
+              "site": "indeed"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Point of Rental Software",
+        "domain": "pointofrental.com",
+        "industry": "software_saas",
+        "headcount": null,
+        "country": "US",
+        "city": "Fort Worth",
+        "state": "TX",
+        "dm_name": "Wayne Harris",
+        "dm_title": "CEO",
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": null,
+        "insight": null,
+        "signals": [
+          {
+            "type": "job_posted_cloud_devops",
+            "captured_at": "2026-05-11T09:39:16.945467",
+            "days_ago": 4,
+            "payload": {
+              "title": "DevOps Engineer",
+              "url": "https://www.linkedin.com/jobs/view/4409900489",
+              "date_posted": "2026-05-06",
+              "site": "linkedin"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Adecco US, Inc.",
+        "domain": "adeccousa.com",
+        "industry": "logistics_transport",
+        "headcount": null,
+        "country": "US",
+        "city": "Jacksonville",
+        "state": "FL",
+        "dm_name": "Geno Cutolo",
+        "dm_title": "Head of Adecco North America",
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": null,
+        "insight": null,
+        "signals": [
+          {
+            "type": "exec_hired",
+            "captured_at": "2026-05-11T09:39:27.958675",
+            "days_ago": 4,
+            "payload": {
+              "title": "Chief Information Security Officer (CISO)",
+              "url": "https://www.adzuna.com/land/ad/5721045986?se=8JCuTx1N8RGet_aYIayg-g&utm_medium=api&utm_source=3aa14b35&v=15ED1A3D43A7E24BF508613B22C9DE381262F4DB",
+              "date_posted": "2026-05-06T21:29:23Z",
+              "site": "adzuna"
+            }
+          }
+        ]
+      },
+      {
+        "name": "GrayRobinson",
+        "domain": "gray-robinson.com",
+        "industry": "legal_professional",
+        "headcount": null,
+        "country": "US",
+        "city": "Orlando",
+        "state": "FL",
+        "dm_name": "Dean Cannon",
+        "dm_title": "President and Chief Executive Officer",
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": null,
+        "insight": null,
+        "signals": [
+          {
+            "type": "breach_disclosed",
+            "captured_at": "2026-05-11T09:39:49.168226",
+            "days_ago": 4,
+            "payload": {
+              "agency": "me_ag",
+              "reported_date": "2026-05-04"
+            }
+          }
+        ]
+      },
+      {
+        "name": "b-ONE Ortho, Corp.",
+        "domain": "b1.co",
+        "industry": "healthcare",
+        "headcount": 30,
+        "country": "US",
+        "city": "Cedar Knolls",
+        "state": "NJ",
+        "dm_name": "Jim Duncan",
+        "dm_title": "General Manager",
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": null,
+        "insight": null,
+        "signals": [
+          {
+            "type": "job_posted_it_support",
+            "captured_at": "2026-05-12T08:39:37.936748",
+            "days_ago": 3,
+            "payload": {
+              "title": "IT Support",
+              "url": "https://www.indeed.com/viewjob?jk=01d14ec0d797d510",
+              "date_posted": "2026-05-12",
+              "site": "indeed"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Passport Health",
+        "domain": "passporthealth.com",
+        "industry": "healthcare",
+        "headcount": null,
+        "country": "US",
+        "city": null,
+        "state": null,
+        "dm_name": null,
+        "dm_title": null,
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": null,
+        "insight": null,
+        "signals": [
+          {
+            "type": "job_posted_it_support",
+            "captured_at": "2026-05-12T08:39:37.936748",
+            "days_ago": 3,
+            "payload": {
+              "title": "IT Help Desk Technician",
+              "url": "https://www.linkedin.com/jobs/view/4411763484",
+              "date_posted": "2026-05-08",
+              "site": "linkedin"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Thompson Valley EMS",
+        "domain": "tvems.org",
+        "industry": "healthcare",
+        "headcount": 100,
+        "country": "US",
+        "city": "Loveland",
+        "state": "CO",
+        "dm_name": "James Robinson",
+        "dm_title": "Chief EMS and CEO",
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": null,
+        "insight": null,
+        "signals": [
+          {
+            "type": "job_posted_it_support",
+            "captured_at": "2026-05-12T08:39:37.936748",
+            "days_ago": 3,
+            "payload": {
+              "title": "IT Support Specialist",
+              "url": "https://www.indeed.com/viewjob?jk=aac5fa6e7284f3dc",
+              "date_posted": "2026-05-11",
+              "site": "indeed"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Murray Osorio PLLC",
+        "domain": "murrayosorio.com",
+        "industry": "legal_professional",
+        "headcount": null,
+        "country": "US",
+        "city": "Fairfax",
+        "state": "VA",
+        "dm_name": null,
+        "dm_title": null,
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": null,
+        "insight": null,
+        "signals": [
+          {
+            "type": "job_posted_it_support",
+            "captured_at": "2026-05-12T08:39:37.936748",
+            "days_ago": 3,
+            "payload": {
+              "title": "IT Support Specialist",
+              "url": "https://www.indeed.com/viewjob?jk=e80df16a60f0d736",
+              "date_posted": "2026-05-12",
+              "site": "indeed"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Snap Finance",
+        "domain": "snapfinance.com",
+        "industry": "fintech",
+        "headcount": null,
+        "country": "US",
+        "city": "Salt Lake City",
+        "state": "UT",
+        "dm_name": "Ted Saunders",
+        "dm_title": "CEO",
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": null,
+        "insight": null,
+        "signals": [
+          {
+            "type": "job_posted_security",
+            "captured_at": "2026-05-12T08:39:37.936748",
+            "days_ago": 3,
+            "payload": {
+              "title": "Sr. Security Engineer",
+              "url": "https://www.indeed.com/viewjob?jk=cabcfd901000ef45",
+              "date_posted": "2026-05-11",
+              "site": "indeed"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Panasonic North America",
+        "domain": "panasonic.com",
+        "industry": "manufacturing",
+        "headcount": null,
+        "country": "US",
+        "city": "Newark",
+        "state": "NJ",
+        "dm_name": "Steve Carrington",
+        "dm_title": "Chief Information Officer",
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": null,
+        "insight": null,
+        "signals": [
+          {
+            "type": "exec_hired",
+            "captured_at": "2026-05-12T08:39:37.936748",
+            "days_ago": 3,
+            "payload": {
+              "title": "CISO",
+              "url": "https://www.linkedin.com/jobs/view/4398274486",
+              "date_posted": "2026-05-07",
+              "site": "linkedin"
+            }
+          }
+        ]
+      },
+      {
+        "name": "LIFE Outreach International",
+        "domain": "lifetoday.org",
+        "industry": "government_nonprofit",
+        "headcount": 140,
+        "country": "US",
+        "city": "Fort Worth",
+        "state": "TX",
+        "dm_name": "James Robison",
+        "dm_title": "Chairman",
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": null,
+        "insight": null,
+        "signals": [
+          {
+            "type": "job_posted_cloud_devops",
+            "captured_at": "2026-05-12T08:39:37.936748",
+            "days_ago": 3,
+            "payload": {
+              "title": "DevOps Developer",
+              "url": "https://www.indeed.com/viewjob?jk=31fda60428da4af6",
+              "date_posted": "2026-05-11",
+              "site": "indeed"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Versa Designed Surfaces",
+        "domain": "versadesignedsurfaces.com",
+        "industry": "manufacturing",
+        "headcount": 250,
+        "country": "US",
+        "city": "New Albany",
+        "state": "IN",
+        "dm_name": "Phil Tarullo",
+        "dm_title": "Co-Founder & CEO",
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": null,
+        "insight": null,
+        "signals": [
+          {
+            "type": "job_posted_it_support",
+            "captured_at": "2026-05-12T08:39:50.450461",
+            "days_ago": 3,
+            "payload": {
+              "title": "Application/Database Developer/IT Support",
+              "url": "https://www.adzuna.com/details/5725838709?utm_medium=api&utm_source=3aa14b35",
+              "date_posted": "2026-05-11T09:14:10Z",
+              "site": "adzuna"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Best Western International",
+        "domain": "bestwestern.com",
+        "industry": "hospitality_food",
+        "headcount": null,
+        "country": "US",
+        "city": "Phoenix",
+        "state": "AZ",
+        "dm_name": "Larry Cuculic",
+        "dm_title": "President & CEO",
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": null,
+        "insight": null,
+        "signals": [
+          {
+            "type": "exec_hired",
+            "captured_at": "2026-05-12T08:39:50.450461",
+            "days_ago": 3,
+            "payload": {
+              "title": "Managing Director, Information Security and Enterprise Architecture (CISO)",
+              "url": "https://www.adzuna.com/details/5725100650?utm_medium=api&utm_source=3aa14b35",
+              "date_posted": "2026-05-10T06:38:13Z",
+              "site": "adzuna"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Six Axis, LLC",
+        "domain": "sixaxisllc.com",
+        "industry": "other",
+        "headcount": null,
+        "country": "US",
+        "city": "Andrews",
+        "state": "SC",
+        "dm_name": "Jeff Reichert",
+        "dm_title": "CEO",
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": null,
+        "insight": null,
+        "signals": [
+          {
+            "type": "exec_hired",
+            "captured_at": "2026-05-12T08:39:50.450461",
+            "days_ago": 3,
+            "payload": {
+              "title": "VP of IT",
+              "url": "https://www.adzuna.com/details/5723235728?utm_medium=api&utm_source=3aa14b35",
+              "date_posted": "2026-05-08T16:24:07Z",
+              "site": "adzuna"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Chaffey Joint Union High School District",
+        "domain": "cjuhsd.net",
+        "industry": "education",
+        "headcount": null,
+        "country": "US",
+        "city": "Ontario",
+        "state": "CA",
+        "dm_name": "Kurt Schlatter",
+        "dm_title": "Chief Technology Officer",
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": null,
+        "insight": null,
+        "signals": [
+          {
+            "type": "breach_disclosed",
+            "captured_at": "2026-05-12T08:40:14.312754",
+            "days_ago": 3,
+            "payload": {
+              "agency": "ca_ag",
+              "reported_date": "05/08/2026"
+            }
+          }
+        ]
+      },
+      {
+        "name": "DocketWise",
+        "domain": "docketwise.com",
+        "industry": "legal_professional",
+        "headcount": 30,
+        "country": "US",
+        "city": "Philadelphia",
+        "state": "PA",
+        "dm_name": "Jeremy Peskin",
+        "dm_title": "Co-Founder & CEO",
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": null,
+        "insight": null,
+        "signals": [
+          {
+            "type": "breach_disclosed",
+            "captured_at": "2026-05-12T08:40:14.312754",
+            "days_ago": 3,
+            "payload": {
+              "agency": "ca_ag",
+              "reported_date": "05/01/2026"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Accelerate Infrastructure Opportunities LLC",
+        "domain": "we-are-accelerate.com",
+        "industry": "other",
+        "headcount": null,
+        "country": "US",
+        "city": "Plano",
+        "state": "TX",
+        "dm_name": "Brennan Potts",
+        "dm_title": "Founder & CEO",
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": null,
+        "insight": null,
+        "signals": [
+          {
+            "type": "breach_disclosed",
+            "captured_at": "2026-05-12T08:40:16.517516",
+            "days_ago": 3,
+            "payload": {
+              "agency": "me_ag",
+              "reported_date": "2026-05-11"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Lamb-Star Engineering, LLC",
+        "domain": "lamb-star.com",
+        "industry": "manufacturing",
+        "headcount": 140,
+        "country": "US",
+        "city": "Frisco",
+        "state": "TX",
+        "dm_name": "John Lamb",
+        "dm_title": "Partner",
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": null,
+        "insight": null,
+        "signals": [
+          {
+            "type": "breach_disclosed",
+            "captured_at": "2026-05-12T08:40:16.517516",
+            "days_ago": 3,
+            "payload": {
+              "agency": "me_ag",
+              "reported_date": "2026-05-11"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Wisconsin Education Association Council",
+        "domain": "weac.org",
+        "industry": "education",
+        "headcount": 190,
+        "country": "US",
+        "city": "Madison",
+        "state": "WI",
+        "dm_name": "Peggy Wirtz-Olsen",
+        "dm_title": "President",
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": null,
+        "insight": null,
+        "signals": [
+          {
+            "type": "breach_disclosed",
+            "captured_at": "2026-05-12T08:40:16.517516",
+            "days_ago": 3,
+            "payload": {
+              "agency": "me_ag",
+              "reported_date": "2026-05-11"
+            }
+          }
+        ]
+      },
+      {
+        "name": "American Lending Center",
+        "domain": "americanlendingcenter.com",
+        "industry": "fintech",
+        "headcount": 60,
+        "country": "US",
+        "city": "Irvine",
+        "state": "CA",
+        "dm_name": "John Shen",
+        "dm_title": "Founder & CEO",
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": null,
+        "insight": null,
+        "signals": [
+          {
+            "type": "breach_disclosed",
+            "captured_at": "2026-05-12T08:40:16.517516",
+            "days_ago": 3,
+            "payload": {
+              "agency": "me_ag",
+              "reported_date": "2026-05-11"
+            }
+          }
+        ]
+      },
+      {
+        "name": "ACME Truck Line, Inc.",
+        "domain": "acmetruck.com",
+        "industry": "logistics_transport",
+        "headcount": null,
+        "country": "US",
+        "city": "Gretna",
+        "state": "LA",
+        "dm_name": "Tyler Coatney",
+        "dm_title": "CEO",
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": null,
+        "insight": null,
+        "signals": [
+          {
+            "type": "breach_disclosed",
+            "captured_at": "2026-05-12T08:40:16.517516",
+            "days_ago": 3,
+            "payload": {
+              "agency": "me_ag",
+              "reported_date": "2026-05-01"
+            }
+          }
+        ]
+      },
+      {
+        "name": "NCH Corporation",
+        "domain": "nch.com",
+        "industry": "manufacturing",
+        "headcount": null,
+        "country": "US",
+        "city": "Irving",
+        "state": "TX",
+        "dm_name": null,
+        "dm_title": null,
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": null,
+        "insight": null,
+        "signals": [
+          {
+            "type": "breach_disclosed",
+            "captured_at": "2026-05-12T08:40:16.517516",
+            "days_ago": 3,
+            "payload": {
+              "agency": "me_ag",
+              "reported_date": "2026-05-01"
+            }
+          }
+        ]
+      },
+      {
+        "name": "LevelUP HCS",
+        "domain": "leveluphcs.com",
+        "industry": "healthcare",
+        "headcount": null,
+        "country": "US",
+        "city": "New York",
+        "state": "NY",
+        "dm_name": "Curtis Grajeda",
+        "dm_title": "Founder & CEO",
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": null,
+        "insight": null,
+        "signals": [
+          {
+            "type": "job_posted_it_support",
+            "captured_at": "2026-05-13T08:44:14.886041",
+            "days_ago": 2,
+            "payload": {
+              "title": "Help Desk Analyst",
+              "url": "https://www.linkedin.com/jobs/view/4409988415",
+              "date_posted": "2026-05-06",
+              "site": "linkedin"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Terraboost Media",
+        "domain": "terraboost.com",
+        "industry": "other",
+        "headcount": null,
+        "country": "US",
+        "city": "Miami Beach",
+        "state": "FL",
+        "dm_name": null,
+        "dm_title": null,
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": null,
+        "insight": null,
+        "signals": [
+          {
+            "type": "job_posted_it_support",
+            "captured_at": "2026-05-13T08:44:14.886041",
+            "days_ago": 2,
+            "payload": {
+              "title": "IT Support Specialist",
+              "url": "https://www.linkedin.com/jobs/view/4412956014",
+              "date_posted": "2026-05-11",
+              "site": "linkedin"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Seattle Seahawks / First & Goal Inc.",
+        "domain": "seahawks.com",
+        "industry": "media_entertainment",
+        "headcount": null,
+        "country": "US",
+        "city": "Seattle",
+        "state": "WA",
+        "dm_name": "Brent Rannow",
+        "dm_title": "Director of IT / Information Security Officer",
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": null,
+        "insight": null,
+        "signals": [
+          {
+            "type": "job_posted_it_support",
+            "captured_at": "2026-05-13T08:44:14.886041",
+            "days_ago": 2,
+            "payload": {
+              "title": "IT Support Specialist",
+              "url": "https://www.indeed.com/viewjob?jk=d878c04b2b639001",
+              "date_posted": "2026-05-12",
+              "site": "indeed"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Jacksonville Transportation Authority",
+        "domain": "jtafla.com",
+        "industry": "logistics_transport",
+        "headcount": null,
+        "country": "US",
+        "city": "Jacksonville",
+        "state": "FL",
+        "dm_name": "Nat Ford",
+        "dm_title": "CEO",
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": null,
+        "insight": null,
+        "signals": [
+          {
+            "type": "exec_hired",
+            "captured_at": "2026-05-13T08:44:14.886041",
+            "days_ago": 2,
+            "payload": {
+              "title": "Chief Information Security Officer (CISO)",
+              "url": "https://www.linkedin.com/jobs/view/4409658974",
+              "date_posted": "2026-05-08",
+              "site": "linkedin"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Outlook Amusements",
+        "domain": "outlookamusements.com",
+        "industry": "other",
+        "headcount": null,
+        "country": "US",
+        "city": "Burbank",
+        "state": "CA",
+        "dm_name": "Jason Freeland",
+        "dm_title": "CEO",
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": null,
+        "insight": null,
+        "signals": [
+          {
+            "type": "job_posted_cloud_devops",
+            "captured_at": "2026-05-13T08:44:14.886041",
+            "days_ago": 2,
+            "payload": {
+              "title": "Senior DevOps Engineer",
+              "url": "https://www.indeed.com/viewjob?jk=b2e24ee36e8cb7cb",
+              "date_posted": "2026-05-12",
+              "site": "indeed"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Confidential Careers",
+        "domain": null,
+        "industry": "education",
+        "headcount": null,
+        "country": "US",
+        "city": null,
+        "state": null,
+        "dm_name": null,
+        "dm_title": null,
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": null,
+        "insight": null,
+        "signals": [
+          {
+            "type": "exec_hired",
+            "captured_at": "2026-05-13T08:44:14.886041",
+            "days_ago": 2,
+            "payload": {
+              "title": "Senior Vice President of IT",
+              "url": "https://www.linkedin.com/jobs/view/4413825377",
+              "date_posted": "nan",
+              "site": "linkedin"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Planned Parenthood",
+        "domain": "plannedparenthood.org",
+        "industry": "healthcare",
+        "headcount": null,
+        "country": "US",
+        "city": "New York",
+        "state": "NY",
+        "dm_name": "Alexis McGill Johnson",
+        "dm_title": "CEO / President",
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": null,
+        "insight": null,
+        "signals": [
+          {
+            "type": "job_posted_it_leadership",
+            "captured_at": "2026-05-13T08:44:14.886041",
+            "days_ago": 2,
+            "payload": {
+              "title": "IT Director",
+              "url": "https://www.indeed.com/viewjob?jk=6518b72632eb2f37",
+              "date_posted": "2026-05-12",
+              "site": "indeed"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Coldstream Wealth Management",
+        "domain": "coldstream.com",
+        "industry": "fintech",
+        "headcount": 230,
+        "country": "US",
+        "city": "Bellevue",
+        "state": "WA",
+        "dm_name": "Kevin Fitzwilson",
+        "dm_title": "CEO",
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": null,
+        "insight": null,
+        "signals": [
+          {
+            "type": "job_posted_it_leadership",
+            "captured_at": "2026-05-13T08:44:26.339652",
+            "days_ago": 2,
+            "payload": {
+              "title": "Director of IT",
+              "url": "https://www.adzuna.com/land/ad/5727766171?se=0HuS9qdO8RGQz7TsmflU2w&utm_medium=api&utm_source=3aa14b35&v=7F0BD44B341B3BBA10D0513BDC7F237379FB74FA",
+              "date_posted": "2026-05-13T01:46:45Z",
+              "site": "adzuna"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Winona County",
+        "domain": "winonacounty.mn.us",
+        "industry": "government_nonprofit",
+        "headcount": null,
+        "country": "US",
+        "city": "Winona",
+        "state": "MN",
+        "dm_name": "Chad Lang",
+        "dm_title": "Information Technology Director",
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": null,
+        "insight": null,
+        "signals": [
+          {
+            "type": "breach_disclosed",
+            "captured_at": "2026-05-13T08:44:45.603936",
+            "days_ago": 2,
+            "payload": {
+              "agency": "me_ag",
+              "reported_date": "2026-05-12"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Young & Company",
+        "domain": "youngco.io",
+        "industry": "other",
+        "headcount": 20,
+        "country": "US",
+        "city": null,
+        "state": null,
+        "dm_name": "Greg Young",
+        "dm_title": "President",
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": null,
+        "insight": null,
+        "signals": [
+          {
+            "type": "breach_disclosed",
+            "captured_at": "2026-05-13T08:44:45.603936",
+            "days_ago": 2,
+            "payload": {
+              "agency": "me_ag",
+              "reported_date": "2026-05-11"
+            }
+          }
+        ]
+      },
+      {
+        "name": "mgrm",
+        "domain": "monogramortho.com",
+        "industry": "software_saas",
+        "headcount": null,
+        "country": "US",
+        "city": "Austin",
+        "state": "TX",
+        "dm_name": "Benjamin Sexson",
+        "dm_title": "CEO",
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": null,
+        "insight": null,
+        "signals": [
+          {
+            "type": "job_posted_it_support",
+            "captured_at": "2026-05-14T08:37:33.826819",
+            "days_ago": 1,
+            "payload": {
+              "title": "IT Support Technician \u2013 School Systems & User Support",
+              "url": "https://www.indeed.com/viewjob?jk=cc6987f72b2c53dd",
+              "date_posted": "2026-05-14",
+              "site": "indeed"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Setpoint Systems Corporation",
+        "domain": "setpointusa.com",
+        "industry": "software_saas",
+        "headcount": 150,
+        "country": "US",
+        "city": "Ogden",
+        "state": "UT",
+        "dm_name": "Aaron Nahale",
+        "dm_title": "President",
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": null,
+        "insight": null,
+        "signals": [
+          {
+            "type": "job_posted_it_support",
+            "captured_at": "2026-05-14T08:37:33.826819",
+            "days_ago": 1,
+            "payload": {
+              "title": "IT Help Desk",
+              "url": "https://www.indeed.com/viewjob?jk=9ec4aef909da20d5",
+              "date_posted": "2026-05-13",
+              "site": "indeed"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Safe Air Technology",
+        "domain": "safeairtechnology.com",
+        "industry": "other",
+        "headcount": 60,
+        "country": "US",
+        "city": "Baton Rouge",
+        "state": "LA",
+        "dm_name": "David Ratcliff",
+        "dm_title": "CEO",
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": null,
+        "insight": null,
+        "signals": [
+          {
+            "type": "job_posted_it_support",
+            "captured_at": "2026-05-14T08:37:33.826819",
+            "days_ago": 1,
+            "payload": {
+              "title": "IT Support Technician",
+              "url": "https://www.linkedin.com/jobs/view/4414150730",
+              "date_posted": "nan",
+              "site": "linkedin"
+            }
+          }
+        ]
+      },
+      {
+        "name": "AD Mortgage",
+        "domain": "admortgage.com",
+        "industry": "fintech",
+        "headcount": null,
+        "country": "US",
+        "city": "Fort Lauderdale",
+        "state": "FL",
+        "dm_name": "Max Slyusarchuk",
+        "dm_title": "CEO",
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": null,
+        "insight": null,
+        "signals": [
+          {
+            "type": "exec_hired",
+            "captured_at": "2026-05-14T08:37:33.826819",
+            "days_ago": 1,
+            "payload": {
+              "title": "Head Of Information Security",
+              "url": "https://www.indeed.com/viewjob?jk=97a8a550f0696d94",
+              "date_posted": "2026-05-13",
+              "site": "indeed"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Wolfe, LLC",
+        "domain": "wolfe.com",
+        "industry": "software_saas",
+        "headcount": null,
+        "country": "US",
+        "city": "Pittsburgh",
+        "state": "PA",
+        "dm_name": "Jason Wolfe",
+        "dm_title": "CEO and Founder",
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": null,
+        "insight": null,
+        "signals": [
+          {
+            "type": "job_posted_cloud_devops",
+            "captured_at": "2026-05-15T08:49:09.120779",
+            "days_ago": 0,
+            "payload": {
+              "title": "DevOps Engineer",
+              "url": "https://www.adzuna.com/land/ad/5730114859?se=EIzA8jpQ8RGD8MZJ4ev-Ow&utm_medium=api&utm_source=3aa14b35&v=75ED0C17101D761585A644E94606F78CDEE9D7CF",
+              "date_posted": "2026-05-15T02:09:00Z",
+              "site": "adzuna"
+            }
+          },
+          {
+            "type": "exec_hired",
+            "captured_at": "2026-05-14T08:37:33.826819",
+            "days_ago": 1,
+            "payload": {
+              "title": "VP of DevOps",
+              "url": "https://www.indeed.com/viewjob?jk=d1b6de65729ec2e9",
+              "date_posted": "2026-05-13",
+              "site": "indeed"
+            }
+          }
+        ]
+      },
+      {
+        "name": "DriveWealth",
+        "domain": "drivewealth.com",
+        "industry": "fintech",
+        "headcount": null,
+        "country": "US",
+        "city": "New York",
+        "state": "NY",
+        "dm_name": "Naureen Hassan",
+        "dm_title": "Chief Executive Officer",
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": null,
+        "insight": null,
+        "signals": [
+          {
+            "type": "exec_hired",
+            "captured_at": "2026-05-14T08:37:33.826819",
+            "days_ago": 1,
+            "payload": {
+              "title": "Chief Information Security Officer",
+              "url": "https://www.linkedin.com/jobs/view/4405488774",
+              "date_posted": "nan",
+              "site": "linkedin"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Goosehead Insurance",
+        "domain": "goosehead.com",
+        "industry": "other",
+        "headcount": null,
+        "country": "US",
+        "city": "Westlake",
+        "state": "TX",
+        "dm_name": "Mark E. Jones",
+        "dm_title": "Chairman and Chief Executive Officer (CEO)",
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": null,
+        "insight": null,
+        "signals": [
+          {
+            "type": "job_posted_cloud_devops",
+            "captured_at": "2026-05-14T08:37:33.826819",
+            "days_ago": 1,
+            "payload": {
+              "title": "DevOps Engineer",
+              "url": "https://www.indeed.com/viewjob?jk=ff03bab2be9ed39f",
+              "date_posted": "2026-05-13",
+              "site": "indeed"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Automobile Club of Southern California",
+        "domain": "aaa.com",
+        "industry": "government_nonprofit",
+        "headcount": null,
+        "country": "US",
+        "city": "Los Angeles",
+        "state": "CA",
+        "dm_name": null,
+        "dm_title": null,
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": null,
+        "insight": null,
+        "signals": [
+          {
+            "type": "breach_disclosed",
+            "captured_at": "2026-05-14T08:38:03.501491",
+            "days_ago": 1,
+            "payload": {
+              "agency": "ca_ag",
+              "reported_date": "05/08/2026"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Extant Aerospace",
+        "domain": "extantaerospace.com",
+        "industry": "other",
+        "headcount": 170,
+        "country": "US",
+        "city": "Melbourne",
+        "state": "FL",
+        "dm_name": "Jim Gerwien",
+        "dm_title": "CEO",
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": null,
+        "insight": null,
+        "signals": [
+          {
+            "type": "breach_disclosed",
+            "captured_at": "2026-05-14T08:38:06.112600",
+            "days_ago": 1,
+            "payload": {
+              "agency": "me_ag",
+              "reported_date": "2026-05-13"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Hawaii Employers Mutual Insurance Company, Inc.",
+        "domain": "hemic.com",
+        "industry": "other",
+        "headcount": null,
+        "country": "US",
+        "city": "Honolulu",
+        "state": "HI",
+        "dm_name": "Martin J. Welch",
+        "dm_title": "CEO",
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": null,
+        "insight": null,
+        "signals": [
+          {
+            "type": "breach_disclosed",
+            "captured_at": "2026-05-14T08:38:06.112600",
+            "days_ago": 1,
+            "payload": {
+              "agency": "me_ag",
+              "reported_date": "2026-05-13"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Dental Studies Institute",
+        "domain": "dentalstudiesinstitute.com",
+        "industry": "education",
+        "headcount": 10,
+        "country": "US",
+        "city": "Fairfield",
+        "state": "NJ",
+        "dm_name": null,
+        "dm_title": null,
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": null,
+        "insight": null,
+        "signals": [
+          {
+            "type": "breach_disclosed",
+            "captured_at": "2026-05-14T08:38:06.112600",
+            "days_ago": 1,
+            "payload": {
+              "agency": "me_ag",
+              "reported_date": "2026-05-13"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Self Opportunity, Inc.",
+        "domain": "selfopportunity.com",
+        "industry": "other",
+        "headcount": null,
+        "country": "US",
+        "city": "Lewisville",
+        "state": "TX",
+        "dm_name": "Sean Self",
+        "dm_title": "President and CEO",
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": null,
+        "insight": null,
+        "signals": [
+          {
+            "type": "exec_hired",
+            "captured_at": "2026-05-15T08:48:58.034970",
+            "days_ago": 0,
+            "payload": {
+              "title": "Chief Information Officer (CIO)",
+              "url": "https://www.linkedin.com/jobs/view/4414145234",
+              "date_posted": "nan",
+              "site": "linkedin"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Faro",
+        "domain": "faro.com",
+        "industry": "software_saas",
+        "headcount": null,
+        "country": "US",
+        "city": "Lake Mary",
+        "state": "FL",
+        "dm_name": null,
+        "dm_title": null,
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": null,
+        "insight": null,
+        "signals": [
+          {
+            "type": "job_posted_security",
+            "captured_at": "2026-05-15T08:48:58.034970",
+            "days_ago": 0,
+            "payload": {
+              "title": "Senior Security Engineer",
+              "url": "https://www.linkedin.com/jobs/view/4414298431",
+              "date_posted": "2026-05-13",
+              "site": "linkedin"
+            }
+          },
+          {
+            "type": "job_posted_cloud_devops",
+            "captured_at": "2026-05-15T08:48:58.034970",
+            "days_ago": 0,
+            "payload": {
+              "title": "DevOps Engineer",
+              "url": "https://www.linkedin.com/jobs/view/4414988794",
+              "date_posted": "nan",
+              "site": "linkedin"
+            }
+          }
+        ]
+      },
+      {
+        "name": "The Patrick J. McGovern Foundation",
+        "domain": "mcgovern.org",
+        "industry": "government_nonprofit",
+        "headcount": null,
+        "country": "US",
+        "city": "Boston",
+        "state": "MA",
+        "dm_name": "Vilas Dhar",
+        "dm_title": "President and Trustee",
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": null,
+        "insight": null,
+        "signals": [
+          {
+            "type": "job_posted_cloud_devops",
+            "captured_at": "2026-05-15T08:48:58.034970",
+            "days_ago": 0,
+            "payload": {
+              "title": "Jr DevOps Engineer",
+              "url": "https://www.linkedin.com/jobs/view/4404704093",
+              "date_posted": "nan",
+              "site": "linkedin"
+            }
+          }
+        ]
+      },
+      {
+        "name": "GreenSlate",
+        "domain": "gslate.com",
+        "industry": "software_saas",
+        "headcount": null,
+        "country": "US",
+        "city": "New York",
+        "state": "NY",
+        "dm_name": "John Finn",
+        "dm_title": "Founder & Executive Chairman",
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": null,
+        "insight": null,
+        "signals": [
+          {
+            "type": "job_posted_it_leadership",
+            "captured_at": "2026-05-15T08:48:58.034970",
+            "days_ago": 0,
+            "payload": {
+              "title": "Director of IT",
+              "url": "https://www.linkedin.com/jobs/view/4414253574",
+              "date_posted": "2026-05-13",
+              "site": "linkedin"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Gilbert Mechanical Contractors LLC",
+        "domain": "gilbertmech.com",
+        "industry": "construction",
+        "headcount": null,
+        "country": "US",
+        "city": "Edina",
+        "state": "MN",
+        "dm_name": null,
+        "dm_title": null,
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": null,
+        "insight": null,
+        "signals": [
+          {
+            "type": "job_posted_it_support",
+            "captured_at": "2026-05-15T08:49:09.120779",
+            "days_ago": 0,
+            "payload": {
+              "title": "IT Support Associate",
+              "url": "https://www.adzuna.com/land/ad/5728649318?se=KnXx8DpQ8RGD8MZJ4ev-Ow&utm_medium=api&utm_source=3aa14b35&v=368B4174FA802B393A26C008ABAAA64597D7D7F8",
+              "date_posted": "2026-05-13T21:33:46Z",
+              "site": "adzuna"
+            }
+          }
+        ]
+      },
+      {
+        "name": "TCWGlobal",
+        "domain": "tcwglobal.com",
+        "industry": "software_saas",
+        "headcount": null,
+        "country": "US",
+        "city": "San Diego",
+        "state": "CA",
+        "dm_name": null,
+        "dm_title": null,
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": null,
+        "insight": null,
+        "signals": [
+          {
+            "type": "job_posted_cloud_devops",
+            "captured_at": "2026-05-15T08:49:09.120779",
+            "days_ago": 0,
+            "payload": {
+              "title": "Devops Engineer",
+              "url": "https://www.adzuna.com/land/ad/5728818897?se=EIzA8jpQ8RGD8MZJ4ev-Ow&utm_medium=api&utm_source=3aa14b35&v=6B69AE70A8230815707A5B1D8BEC15CFC29BDC62",
+              "date_posted": "2026-05-14T00:16:25Z",
+              "site": "adzuna"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Outlier AI",
+        "domain": "outlier.ai",
+        "industry": "software_saas",
+        "headcount": null,
+        "country": "US",
+        "city": "Oakland",
+        "state": "CA",
+        "dm_name": null,
+        "dm_title": null,
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": null,
+        "insight": null,
+        "signals": [
+          {
+            "type": "job_posted_cloud_devops",
+            "captured_at": "2026-05-15T08:49:09.120779",
+            "days_ago": 0,
+            "payload": {
+              "title": "DevOps Engineer (Remote) (Hiring Immediately)",
+              "url": "https://www.adzuna.com/land/ad/5729817476?se=EIzA8jpQ8RGD8MZJ4ev-Ow&utm_medium=api&utm_source=3aa14b35&v=7EC4F448F784D2352F8D5DD980CB3577EE863DA3",
+              "date_posted": "2026-05-14T18:41:16Z",
+              "site": "adzuna"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Brightfarms Inc",
+        "domain": "brightfarms.com",
+        "industry": "other",
+        "headcount": null,
+        "country": "US",
+        "city": "Irvington",
+        "state": "NY",
+        "dm_name": null,
+        "dm_title": null,
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": null,
+        "insight": null,
+        "signals": [
+          {
+            "type": "job_posted_security",
+            "captured_at": "2026-05-15T08:49:09.120779",
+            "days_ago": 0,
+            "payload": {
+              "title": "Director, IT Security",
+              "url": "https://www.adzuna.com/details/5720045803?utm_medium=api&utm_source=3aa14b35",
+              "date_posted": "2026-05-05T23:05:58Z",
+              "site": "adzuna"
+            }
+          }
+        ]
+      },
+      {
+        "name": "OCFO",
+        "domain": null,
+        "industry": "other",
+        "headcount": null,
+        "country": "US",
+        "city": "Washington",
+        "state": "DC",
+        "dm_name": "Glen Lee",
+        "dm_title": "Chief Financial Officer",
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": null,
+        "insight": null,
+        "signals": [
+          {
+            "type": "job_posted_security",
+            "captured_at": "2026-05-15T08:49:09.120779",
+            "days_ago": 0,
+            "payload": {
+              "title": "Director, IT Security",
+              "url": "https://www.adzuna.com/details/5726581016?utm_medium=api&utm_source=3aa14b35",
+              "date_posted": "2026-05-12T03:54:08Z",
+              "site": "adzuna"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Las Lomitas Elementary School District",
+        "domain": "llesd.org",
+        "industry": "education",
+        "headcount": null,
+        "country": "US",
+        "city": "Menlo Park",
+        "state": "CA",
+        "dm_name": null,
+        "dm_title": null,
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": null,
+        "insight": null,
+        "signals": [
+          {
+            "type": "breach_disclosed",
+            "captured_at": "2026-05-15T08:49:31.279311",
+            "days_ago": 0,
+            "payload": {
+              "agency": "ca_ag",
+              "reported_date": "05/11/2026"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Carlysle Engineering, Inc",
+        "domain": "carlysle.net",
+        "industry": "other",
+        "headcount": 20,
+        "country": "US",
+        "city": "Jamaica Plain",
+        "state": "MA",
+        "dm_name": "John R Duggan",
+        "dm_title": "President",
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": null,
+        "insight": null,
+        "signals": [
+          {
+            "type": "breach_disclosed",
+            "captured_at": "2026-05-15T08:49:33.569316",
+            "days_ago": 0,
+            "payload": {
+              "agency": "me_ag",
+              "reported_date": "2026-05-14"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Cornick, Garber & Sandler, LLP on behalf of Voxx International Corporation",
+        "domain": "voxxintl.com",
+        "industry": "legal_professional",
+        "headcount": null,
+        "country": "US",
+        "city": "Hauppauge",
+        "state": "NY",
+        "dm_name": "Jonathan Babad",
+        "dm_title": "Senior Director, Information Technology",
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": null,
+        "insight": null,
+        "signals": [
+          {
+            "type": "breach_disclosed",
+            "captured_at": "2026-05-15T08:49:33.569316",
+            "days_ago": 0,
+            "payload": {
+              "agency": "me_ag",
+              "reported_date": "2026-05-14"
             }
           }
         ]
