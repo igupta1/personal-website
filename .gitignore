@@ -38,3 +38,13 @@ pipeline/**/*.pyc
 pipeline/**/*.egg-info/
 pipeline/data/smoke/
 
+# --- Python pipeline (insurance_pipeline/) ---
+insurance_pipeline/.venv/
+insurance_pipeline/.pytest_cache/
+insurance_pipeline/.mypy_cache/
+insurance_pipeline/.ruff_cache/
+insurance_pipeline/**/__pycache__/
+insurance_pipeline/**/*.pyc
+insurance_pipeline/**/*.egg-info/
+insurance_pipeline/data/smoke/
+
