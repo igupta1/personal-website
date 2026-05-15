@@ -5,6 +5,23 @@ as a fourth niche on the shared pipeline. Result: the `/insurance`
 dashboard was 96% MSP leads sorted by a 0 insurance score. This plan
 throws that out and builds insurance as a sibling pipeline.
 
+## v1-of-v2 ship: scope-reduction note
+
+FMCSA deferred to a follow-up. MCMIS's monthly ZIP is 250MB and the
+L&I "recently granted" HTML page needs real-traffic testing to nail
+the parser — that's its own dedicated iteration. v1 ships with:
+
+1. **`funding.py`** — ported from msp_pipeline. TechCrunch + PR
+   Newswire RSS + LLM headline extraction. Already battle-tested in
+   the MSP pipeline. Emits `FUNDING_RAISED` (insurance weight 25).
+2. **`sos_fl.py`** — best-effort FL SunBiz scraper. May need
+   parser-iteration after first real run.
+
+Source-diversity criterion may fail this ship (if SunBiz parser
+needs iteration, funding alone carries). Volume + smell-test
+criteria should pass — funding produces ~5-10 fresh US-SMB
+candidates per run, all relevant for D&O / benefits insurance.
+
 ## Constraints (set by user)
 
 1. **MSP/MSSP/Cloud pages unchanged.** Revert every v1 edit that

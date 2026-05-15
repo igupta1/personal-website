@@ -28,9 +28,7 @@ from insurance_pipeline.models import (
     SignalType,
     SourceName,
 )
-# Tier 1 source modules land in `insurance_pipeline.sources`. Imports
-# are added to `_SOURCES` below as each source ships (next two steps
-# in the build order: FMCSA, then FL SunBiz).
+from insurance_pipeline.sources import funding, sos_fl
 
 log = logging.getLogger("insurance.daily_run")
 
@@ -169,9 +167,13 @@ def main(argv: list[str] | None = None) -> int:
 # --- Stages ----------------------------------------------------------------
 
 
-# Source registry. Each entry is (name, fetch-callable). The list is
-# empty until FMCSA + SunBiz sources land in subsequent commits.
-_SOURCES: tuple[tuple[str, Any], ...] = ()
+# Source registry. Each entry is (name, fetch-callable). FMCSA is
+# deferred to a follow-up — MCMIS bulk-data integration needs its own
+# iteration. v1 ships with funding + SunBiz.
+_SOURCES: tuple[tuple[str, Any], ...] = (
+    ("funding", funding.fetch),
+    ("sos_fl", sos_fl.fetch),
+)
 
 
 def _fetch_all(

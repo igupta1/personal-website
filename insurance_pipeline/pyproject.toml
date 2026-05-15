@@ -10,6 +10,7 @@ requires-python = ">=3.11"
 dependencies = [
     "requests>=2.31",
     "beautifulsoup4>=4.12",
+    "feedparser>=6.0",
     "rapidfuzz>=3.0",
     "openai>=1.50",
     "google-genai>=0.3",
@@ -40,5 +41,5 @@ warn_unused_ignores = true
 warn_redundant_casts = true
 
 [[tool.mypy.overrides]]
-module = ["requests", "requests.*", "bs4"]
+module = ["requests", "requests.*", "bs4", "feedparser"]
 ignore_missing_imports = true
