@@ -48,7 +48,9 @@ jobs:
           GEMINI_API_KEY:           ${{ secrets.GEMINI_API_KEY }}
           APOLLO_API_KEY:           ${{ secrets.APOLLO_API_KEY }}
           INSURANCE_UPLOAD_URL:     https://www.ishaangpta.com/api/upload-insurance-leads
-          INSURANCE_UPLOAD_API_KEY: ${{ secrets.INSURANCE_UPLOAD_API_KEY }}
+          # Reuses LEADS_UPLOAD_API_KEY (same Bearer secret as the MSP
+          # pipeline — different blob key on the receiving end).
+          INSURANCE_UPLOAD_API_KEY: ${{ secrets.LEADS_UPLOAD_API_KEY }}
           LIMIT:                    ${{ inputs.limit }}
         run: |
           args=("--upload")

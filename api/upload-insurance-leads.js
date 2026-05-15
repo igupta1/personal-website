@@ -14,7 +14,10 @@ module.exports = async function handler(req, res) {
     return res.status(405).json({ error: 'method not allowed' });
   }
 
-  const expected = process.env.INSURANCE_UPLOAD_API_KEY;
+  // Reuses LEADS_UPLOAD_API_KEY so the user doesn't have to set a
+  // second Vercel env var for v1. Rotating one rotates both — fine
+  // for now, separable later if needed.
+  const expected = process.env.LEADS_UPLOAD_API_KEY;
   if (!expected) {
     return res.status(500).json({ error: 'server misconfigured: no API key' });
   }
