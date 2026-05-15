@@ -1,30 +1,662 @@
 {
-  "generated_at": "2026-05-15T23:17:36.731318",
+  "generated_at": "2026-05-15T23:38:24.594974",
   "leads": [
     {
-      "name": "Kodiak AI",
-      "domain": "kodiak.ai",
-      "industry": "other",
-      "headcount": 280,
+      "name": "HAAG PERFORMANCE LLC",
+      "domain": "haagperformance.com",
+      "industry": "logistics_transport",
+      "headcount": 2,
       "country": "US",
-      "city": "Mountain View",
+      "city": "Lodi",
       "state": "CA",
-      "dm_name": "Surajit Datta",
-      "dm_title": "Chief Financial Officer",
-      "dm_email": "surajit@kodiak.ai",
-      "dm_linkedin_url": "http://www.linkedin.com/in/surajit-datta-350649",
-      "score": 24.99992618204017,
-      "insight": "Kodiak AI recently raised funding, which may indicate a need for expanded commercial insurance coverage as they grow.",
+      "dm_name": "Mike Haag",
+      "dm_title": "Owner",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "score": 49.99746492792749,
+      "insight": "HAAG PERFORMANCE LLC, with a newly issued motor carrier authority for 1 fleet unit on 2026-05-14, presents an insurance opportunity.",
       "signals": [
         {
-          "type": "funding_raised",
-          "captured_at": "2026-05-15T23:17:23.137370",
+          "type": "new_motor_carrier_authority",
+          "captured_at": "2026-05-15T23:34:39.651525",
           "days_ago": 0,
           "payload": {
-            "feed_title": "Kodiak AI raises $100M at a steep discount, sending its stock tumbling 37%",
-            "feed_url": "https://techcrunch.com/category/startups/feed/",
-            "link": "https://techcrunch.com/2026/05/07/kodiak-ai-raises-100m-at-a-steep-discount-sending-its-stock-tumbling-37/",
-            "published": "Thu, 07 May 2026 21:49:24 +0000"
+            "usdot": "4582411",
+            "dba_name": "",
+            "issue_date": "2026-05-14",
+            "fleet_size_power_units": 1,
+            "drivers": 1,
+            "carrier_operation": "A",
+            "city": "LODI",
+            "state": "CA",
+            "officer_name": "MICHAEL ALLEN HAAG"
+          }
+        }
+      ]
+    },
+    {
+      "name": "FLO MECHANICAL LLC",
+      "domain": null,
+      "industry": "logistics_transport",
+      "headcount": 10,
+      "country": "US",
+      "city": "Hockessin",
+      "state": "DE",
+      "dm_name": "Lawrence Shub",
+      "dm_title": "President",
+      "dm_email": null,
+      "dm_linkedin_url": "http://www.linkedin.com/in/lawrence-shub-3b86b810",
+      "score": 49.997464918167225,
+      "insight": "FLO MECHANICAL LLC recently received a new motor carrier authority with a fleet size of 1, issued on 2026-05-14.",
+      "signals": [
+        {
+          "type": "new_motor_carrier_authority",
+          "captured_at": "2026-05-15T23:34:39.651525",
+          "days_ago": 0,
+          "payload": {
+            "usdot": "4582413",
+            "dba_name": "",
+            "issue_date": "2026-05-14",
+            "fleet_size_power_units": 1,
+            "drivers": 1,
+            "carrier_operation": "A",
+            "city": "HOCKESSIN",
+            "state": "DE",
+            "officer_name": "MARK THOMPSON"
+          }
+        }
+      ]
+    },
+    {
+      "name": "GEDEON K MAFU",
+      "domain": null,
+      "industry": "logistics_transport",
+      "headcount": null,
+      "country": "US",
+      "city": "ALBANY",
+      "state": "NY",
+      "dm_name": null,
+      "dm_title": null,
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "score": 49.997464909008634,
+      "insight": "GEDEON K MAFU just received a new motor carrier authority for 1 power unit, issued on 05/14/2026.",
+      "signals": [
+        {
+          "type": "new_motor_carrier_authority",
+          "captured_at": "2026-05-15T23:34:39.651525",
+          "days_ago": 0,
+          "payload": {
+            "usdot": "4582414",
+            "dba_name": "SKY TRANSPORTATION",
+            "issue_date": "2026-05-14",
+            "fleet_size_power_units": 1,
+            "drivers": 1,
+            "carrier_operation": "C",
+            "city": "ALBANY",
+            "state": "NY",
+            "officer_name": "GEDEON K MAFU"
+          }
+        }
+      ]
+    },
+    {
+      "name": "LISBOA CAFE & MINI-MARKET LLC",
+      "domain": null,
+      "industry": "hospitality_food",
+      "headcount": null,
+      "country": "US",
+      "city": "Boston",
+      "state": "MA",
+      "dm_name": "Raquel Semedo",
+      "dm_title": "Founder",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "score": 49.9974648993687,
+      "insight": "LISBOA CAFE & MINI-MARKET LLC recently obtained a new motor carrier authority (USDOT: 4582415) for a fleet size of 1, effective 05/14/2026.",
+      "signals": [
+        {
+          "type": "new_motor_carrier_authority",
+          "captured_at": "2026-05-15T23:34:39.651525",
+          "days_ago": 0,
+          "payload": {
+            "usdot": "4582415",
+            "dba_name": "LISBOA CAFE",
+            "issue_date": "2026-05-14",
+            "fleet_size_power_units": 1,
+            "drivers": 1,
+            "carrier_operation": "C",
+            "city": "BOSTON",
+            "state": "MA",
+            "officer_name": "RAQUEL SEMEDO"
+          }
+        }
+      ]
+    },
+    {
+      "name": "LUDIN INC",
+      "domain": "ludinconsulting.com",
+      "industry": "logistics_transport",
+      "headcount": 2,
+      "country": "US",
+      "city": "Denver",
+      "state": "CO",
+      "dm_name": null,
+      "dm_title": null,
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "score": 49.997464889608445,
+      "insight": "Ludin Inc has recently obtained a new motor carrier authority with a fleet size of 1 power unit, effective May 14, 2026.",
+      "signals": [
+        {
+          "type": "new_motor_carrier_authority",
+          "captured_at": "2026-05-15T23:34:39.651525",
+          "days_ago": 0,
+          "payload": {
+            "usdot": "4582416",
+            "dba_name": "",
+            "issue_date": "2026-05-14",
+            "fleet_size_power_units": 1,
+            "drivers": 4,
+            "carrier_operation": "A",
+            "city": "FRISCO",
+            "state": "TX",
+            "officer_name": "ALI AHMAD JAN"
+          }
+        }
+      ]
+    },
+    {
+      "name": "DCF HAULING LLC",
+      "domain": null,
+      "industry": "logistics_transport",
+      "headcount": null,
+      "country": "US",
+      "city": "Plymouth",
+      "state": "NC",
+      "dm_name": null,
+      "dm_title": null,
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "score": 49.997464881011396,
+      "insight": "DCF HAULING LLC has recently obtained a new motor carrier authority with a fleet size of 1 power unit, effective from May 14, 2026.",
+      "signals": [
+        {
+          "type": "new_motor_carrier_authority",
+          "captured_at": "2026-05-15T23:34:39.651525",
+          "days_ago": 0,
+          "payload": {
+            "usdot": "4582417",
+            "dba_name": "",
+            "issue_date": "2026-05-14",
+            "fleet_size_power_units": 1,
+            "drivers": 1,
+            "carrier_operation": "A",
+            "city": "DILLSBURG",
+            "state": "PA",
+            "officer_name": "DONALD FITTING"
+          }
+        }
+      ]
+    },
+    {
+      "name": "ONYX FREIGHT GROUP LLC",
+      "domain": null,
+      "industry": "logistics_transport",
+      "headcount": null,
+      "country": "US",
+      "city": "Lexington",
+      "state": "KY",
+      "dm_name": "Ramone Sanford",
+      "dm_title": null,
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "score": 49.99746487115755,
+      "insight": "ONYX FREIGHT GROUP LLC obtained a new motor carrier authority for 1 power unit, issued on 2026-05-14.",
+      "signals": [
+        {
+          "type": "new_motor_carrier_authority",
+          "captured_at": "2026-05-15T23:34:39.651525",
+          "days_ago": 0,
+          "payload": {
+            "usdot": "4582418",
+            "dba_name": "",
+            "issue_date": "2026-05-14",
+            "fleet_size_power_units": 1,
+            "drivers": 1,
+            "carrier_operation": "A",
+            "city": "LOUISVILLE",
+            "state": "KY",
+            "officer_name": "ALPHONZO A SCOTT"
+          }
+        }
+      ]
+    },
+    {
+      "name": "NOVALINK FREIGHT INC",
+      "domain": "novalinklogistics.com",
+      "industry": "logistics_transport",
+      "headcount": 14,
+      "country": "US",
+      "city": "Ontario",
+      "state": "CA",
+      "dm_name": "Alex Xu",
+      "dm_title": null,
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "score": 49.99746486070204,
+      "insight": "Novalink Freight Inc recently secured a new motor carrier authority with 1 power unit, effective from May 14, 2026.",
+      "signals": [
+        {
+          "type": "new_motor_carrier_authority",
+          "captured_at": "2026-05-15T23:34:39.651525",
+          "days_ago": 0,
+          "payload": {
+            "usdot": "4582419",
+            "dba_name": "",
+            "issue_date": "2026-05-14",
+            "fleet_size_power_units": 1,
+            "drivers": 1,
+            "carrier_operation": "A",
+            "city": "ELMIRA",
+            "state": "NY",
+            "officer_name": "SAFAK GOKCE"
+          }
+        }
+      ]
+    },
+    {
+      "name": "GURSHARANJIT S KHAROD",
+      "domain": null,
+      "industry": null,
+      "headcount": null,
+      "country": null,
+      "city": null,
+      "state": null,
+      "dm_name": null,
+      "dm_title": null,
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "score": 49.9974648522788,
+      "insight": "GURSHARANJIT S KHAROD recently obtained a new motor carrier authority with 1 power unit and 2 drivers, effective May 14, 2026.",
+      "signals": [
+        {
+          "type": "new_motor_carrier_authority",
+          "captured_at": "2026-05-15T23:34:39.651525",
+          "days_ago": 0,
+          "payload": {
+            "usdot": "4582420",
+            "dba_name": "KHAROD TRUCKING",
+            "issue_date": "2026-05-14",
+            "fleet_size_power_units": 1,
+            "drivers": 2,
+            "carrier_operation": "C",
+            "city": "FREMONT",
+            "state": "CA",
+            "officer_name": "GURSHARANJIT SINGH KHAROD"
+          }
+        }
+      ]
+    },
+    {
+      "name": "RIVERBEND TRANSPORTATION LLC",
+      "domain": "rbm.us",
+      "industry": "logistics_transport",
+      "headcount": 30,
+      "country": "US",
+      "city": "IDAHO FALLS",
+      "state": "ID",
+      "dm_name": "Kade Kraus",
+      "dm_title": "CFO",
+      "dm_email": "kkraus@rbm.us",
+      "dm_linkedin_url": "http://www.linkedin.com/in/kade-kraus-01a78310",
+      "score": 49.99746484282606,
+      "insight": "RIVERBEND TRANSPORTATION LLC has filed for a new motor carrier authority with a fleet size of 1 unit, effective 05/14/2026.",
+      "signals": [
+        {
+          "type": "new_motor_carrier_authority",
+          "captured_at": "2026-05-15T23:34:39.651525",
+          "days_ago": 0,
+          "payload": {
+            "usdot": "4582421",
+            "dba_name": "",
+            "issue_date": "2026-05-14",
+            "fleet_size_power_units": 1,
+            "drivers": 2,
+            "carrier_operation": "A",
+            "city": "FORT COLLINS",
+            "state": "CO",
+            "officer_name": "NATHAN RYNE SCHLAISS"
+          }
+        }
+      ]
+    },
+    {
+      "name": "DULESKI TRANSPORT LLC",
+      "domain": null,
+      "industry": "logistics_transport",
+      "headcount": null,
+      "country": "US",
+      "city": "Howell",
+      "state": "MI",
+      "dm_name": null,
+      "dm_title": null,
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "score": 49.99746483448305,
+      "insight": "Duleski Transport LLC recently obtained a new motor carrier authority for a fleet size of 1, issued on 2026-05-14.",
+      "signals": [
+        {
+          "type": "new_motor_carrier_authority",
+          "captured_at": "2026-05-15T23:34:39.651525",
+          "days_ago": 0,
+          "payload": {
+            "usdot": "4582422",
+            "dba_name": "",
+            "issue_date": "2026-05-14",
+            "fleet_size_power_units": 1,
+            "drivers": 1,
+            "carrier_operation": "A",
+            "city": "WINDSOR",
+            "state": "WI",
+            "officer_name": "ARMIN DULESKI"
+          }
+        }
+      ]
+    },
+    {
+      "name": "NURTRANSPORT",
+      "domain": "nurtransports.com",
+      "industry": "logistics_transport",
+      "headcount": 6,
+      "country": "US",
+      "city": "Denver",
+      "state": "CO",
+      "dm_name": "Mohamed Koura",
+      "dm_title": "Owner / President",
+      "dm_email": "mkoura@vitaltransportcorp.com",
+      "dm_linkedin_url": "http://www.linkedin.com/in/mohamed-koura-b5924544",
+      "score": 49.99746482458908,
+      "insight": "NURTRANSPORT has recently obtained a new motor carrier authority with 2 drivers, effective May 14, 2026.",
+      "signals": [
+        {
+          "type": "new_motor_carrier_authority",
+          "captured_at": "2026-05-15T23:34:39.651525",
+          "days_ago": 0,
+          "payload": {
+            "usdot": "4582423",
+            "dba_name": "SY HUSSAIN OR SYEDA HUSSAIN",
+            "issue_date": "2026-05-14",
+            "fleet_size_power_units": 0,
+            "drivers": 2,
+            "carrier_operation": "C",
+            "city": "SANTA ANA",
+            "state": "CA",
+            "officer_name": "SYEDA HUSSAIN"
+          }
+        }
+      ]
+    },
+    {
+      "name": "DO-WELL GROUP LIMITED LIABILITY COMPANY",
+      "domain": "thedowellgroup.com",
+      "industry": "logistics_transport",
+      "headcount": 10,
+      "country": "US",
+      "city": "Chicago",
+      "state": "IL",
+      "dm_name": "Alison Sawyer",
+      "dm_title": "Director of Operations",
+      "dm_email": null,
+      "dm_linkedin_url": "http://www.linkedin.com/in/alison-sawyer",
+      "score": 49.99746481633966,
+      "insight": "DO-WELL GROUP LLC just obtained a new motor carrier authority with 1 power unit and 1 driver, issued on 05/14/2026.",
+      "signals": [
+        {
+          "type": "new_motor_carrier_authority",
+          "captured_at": "2026-05-15T23:34:39.651525",
+          "days_ago": 0,
+          "payload": {
+            "usdot": "4582424",
+            "dba_name": "",
+            "issue_date": "2026-05-14",
+            "fleet_size_power_units": 1,
+            "drivers": 1,
+            "carrier_operation": "C",
+            "city": "MESQUITE",
+            "state": "TX",
+            "officer_name": "SUNIL MUZAFFAR"
+          }
+        }
+      ]
+    },
+    {
+      "name": "LEONELS TRUCKING INC",
+      "domain": null,
+      "industry": "logistics_transport",
+      "headcount": null,
+      "country": "US",
+      "city": "Saint Petersburg",
+      "state": "FL",
+      "dm_name": "Leonel Carrillo",
+      "dm_title": "Owner",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "score": 49.99746480710084,
+      "insight": "LEONELS TRUCKING INC has recently obtained a new motor carrier authority for a fleet of 1 power unit, effective May 14, 2026.",
+      "signals": [
+        {
+          "type": "new_motor_carrier_authority",
+          "captured_at": "2026-05-15T23:34:39.651525",
+          "days_ago": 0,
+          "payload": {
+            "usdot": "4582425",
+            "dba_name": "",
+            "issue_date": "2026-05-14",
+            "fleet_size_power_units": 1,
+            "drivers": 1,
+            "carrier_operation": "A",
+            "city": "METHUEN",
+            "state": "MA",
+            "officer_name": "CHRISTIAN J FIGUEROA JOMAL FIGUEROA"
+          }
+        }
+      ]
+    },
+    {
+      "name": "TOGETHER WE CAN TRANSIT SERVICES LLC",
+      "domain": "wecantransit.com",
+      "industry": "logistics_transport",
+      "headcount": null,
+      "country": "US",
+      "city": "Fort Wayne",
+      "state": "IN",
+      "dm_name": "Virginia Gail Richardson",
+      "dm_title": "Company Officer",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "score": 49.997464797795175,
+      "insight": "TOGETHER WE CAN TRANSIT SERVICES LLC recently obtained a new motor carrier authority with a fleet size of 2 trucks, effective 05/14/2026.",
+      "signals": [
+        {
+          "type": "new_motor_carrier_authority",
+          "captured_at": "2026-05-15T23:34:39.651525",
+          "days_ago": 0,
+          "payload": {
+            "usdot": "4582426",
+            "dba_name": "",
+            "issue_date": "2026-05-14",
+            "fleet_size_power_units": 2,
+            "drivers": 2,
+            "carrier_operation": "A",
+            "city": "WATERBURY",
+            "state": "CT",
+            "officer_name": "BIANCA TORRES DOZIER"
+          }
+        }
+      ]
+    },
+    {
+      "name": "BENJAMIN SCOTT GARLIT",
+      "domain": null,
+      "industry": "logistics_transport",
+      "headcount": null,
+      "country": "US",
+      "city": "BRAZIL",
+      "state": "IN",
+      "dm_name": null,
+      "dm_title": null,
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "score": 49.99746478852961,
+      "insight": "They have obtained a new motor carrier authority (USDOT 4582427) with a fleet size of 1 power unit, issued on 2026-05-14.",
+      "signals": [
+        {
+          "type": "new_motor_carrier_authority",
+          "captured_at": "2026-05-15T23:34:39.651525",
+          "days_ago": 0,
+          "payload": {
+            "usdot": "4582427",
+            "dba_name": "",
+            "issue_date": "2026-05-14",
+            "fleet_size_power_units": 1,
+            "drivers": 1,
+            "carrier_operation": "A",
+            "city": "BRAZIL",
+            "state": "IN",
+            "officer_name": "BENJAMIN SCOTT GARLIT"
+          }
+        }
+      ]
+    },
+    {
+      "name": "ICT PARTY BUS LLC",
+      "domain": null,
+      "industry": "logistics_transport",
+      "headcount": null,
+      "country": "US",
+      "city": "Wichita",
+      "state": "KS",
+      "dm_name": null,
+      "dm_title": null,
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "score": 49.9974647788362,
+      "insight": "ICT PARTY BUS LLC recently obtained a new motor carrier authority with a fleet size of 3 power units, effective May 14, 2026.",
+      "signals": [
+        {
+          "type": "new_motor_carrier_authority",
+          "captured_at": "2026-05-15T23:34:39.651525",
+          "days_ago": 0,
+          "payload": {
+            "usdot": "4582428",
+            "dba_name": "",
+            "issue_date": "2026-05-14",
+            "fleet_size_power_units": 3,
+            "drivers": 2,
+            "carrier_operation": "C",
+            "city": "WICHITA",
+            "state": "KS",
+            "officer_name": "BOBBY FLEMING"
+          }
+        }
+      ]
+    },
+    {
+      "name": "ONETOUCH HOME SOLUTIONS LLC",
+      "domain": null,
+      "industry": "logistics_transport",
+      "headcount": 10,
+      "country": "US",
+      "city": "Harwich",
+      "state": "MA",
+      "dm_name": "Edwin Valerio",
+      "dm_title": "President",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "score": 49.997464770479816,
+      "insight": "ONETOUCH HOME SOLUTIONS LLC recently obtained a new motor carrier authority with 1 power unit effective 2026-05-14, indicating a need for commercial auto and GL",
+      "signals": [
+        {
+          "type": "new_motor_carrier_authority",
+          "captured_at": "2026-05-15T23:34:39.651525",
+          "days_ago": 0,
+          "payload": {
+            "usdot": "4582429",
+            "dba_name": "",
+            "issue_date": "2026-05-14",
+            "fleet_size_power_units": 1,
+            "drivers": 1,
+            "carrier_operation": "A",
+            "city": "CHATHAM",
+            "state": "MA",
+            "officer_name": "EDWIN VALERIO"
+          }
+        }
+      ]
+    },
+    {
+      "name": "MARTINS ALUMINUM PRODUCTS LLC",
+      "domain": null,
+      "industry": "manufacturing",
+      "headcount": null,
+      "country": "US",
+      "city": "Southbury",
+      "state": "CT",
+      "dm_name": "Katherine Osborn",
+      "dm_title": "Owner/Member",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "score": 49.99746476121425,
+      "insight": "MARTINS ALUMINUM PRODUCTS LLC recently obtained a new motor carrier authority with 1 power unit and 4 drivers, issued on 2026-05-14.",
+      "signals": [
+        {
+          "type": "new_motor_carrier_authority",
+          "captured_at": "2026-05-15T23:34:39.651525",
+          "days_ago": 0,
+          "payload": {
+            "usdot": "4582430",
+            "dba_name": "",
+            "issue_date": "2026-05-14",
+            "fleet_size_power_units": 1,
+            "drivers": 4,
+            "carrier_operation": "C",
+            "city": "SOUTHBURY",
+            "state": "CT",
+            "officer_name": "ORMONDE H OSBORN"
+          }
+        }
+      ]
+    },
+    {
+      "name": "ANCHOR POINTS ENTERPRISES",
+      "domain": "anchorpoints.io",
+      "industry": "logistics_transport",
+      "headcount": 12,
+      "country": "US",
+      "city": "New York",
+      "state": "NY",
+      "dm_name": null,
+      "dm_title": null,
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "score": 49.99746475216262,
+      "insight": "Anchor Points Enterprises has recently obtained a new motor carrier authority with a fleet size of 1 unit, issued on 2026-05-14.",
+      "signals": [
+        {
+          "type": "new_motor_carrier_authority",
+          "captured_at": "2026-05-15T23:34:39.651525",
+          "days_ago": 0,
+          "payload": {
+            "usdot": "4582431",
+            "dba_name": "BRITTANY C GADSON",
+            "issue_date": "2026-05-14",
+            "fleet_size_power_units": 1,
+            "drivers": 2,
+            "carrier_operation": "A",
+            "city": "CHARLOTTE",
+            "state": "NC",
+            "officer_name": "BRITTANY CATRENA GADSON"
           }
         }
       ]
