@@ -2,7 +2,7 @@ const { put } = require('@vercel/blob');
 
 const BLOB_KEY = 'leads-current.json';
 const MAX_BODY_BYTES = 5 * 1024 * 1024;
-const REQUIRED_NICHES = ['it_msp', 'mssp', 'cloud'];
+const REQUIRED_NICHES = ['it_msp', 'mssp', 'cloud', 'insurance'];
 
 module.exports = async function handler(req, res) {
   if (req.method !== 'POST') {

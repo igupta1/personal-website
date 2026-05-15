@@ -58,6 +58,61 @@ def test_director_of_it_beats_director_of_ops() -> None:
     assert _score_person(it_dir) > _score_person(ops_dir)
 
 
+def test_cfo_beats_coo_at_same_seniority() -> None:
+    # CFO is the insurance buyer; COO is general ops. Same c_suite bucket;
+    # the finance bonus (60) should beat the ops bonus (30).
+    cfo = _person("Chief Financial Officer", "c_suite")
+    coo = _person("Chief Operating Officer", "c_suite")
+    assert _score_person(cfo) > _score_person(coo)
+
+
+def test_cfo_beats_hr_director() -> None:
+    # The plan's exact requirement: at an insurance prospect with both
+    # roles, the CFO is the better buyer.
+    cfo = _person("Chief Financial Officer", "c_suite")
+    hr_dir = _person("HR Director", "director")
+    assert _score_person(cfo) > _score_person(hr_dir)
+
+
+def test_cio_beats_cfo_at_same_seniority() -> None:
+    # IT scoring still wins for MSP/MSSP/Cloud niches — a tech company
+    # with both a CIO and CFO should surface the CIO.
+    cio = _person("Chief Information Officer", "c_suite")
+    cfo = _person("Chief Financial Officer", "c_suite")
+    assert _score_person(cio) > _score_person(cfo)
+
+
+def test_hr_director_no_longer_disqualified() -> None:
+    # Pre-insurance, "human resources" was a disqualifying keyword that
+    # forced HR Director to -1000. Now it's a legitimate fallback buyer
+    # (group benefits) and should score positive — just below finance.
+    hr_dir = _person("HR Director", "director")
+    assert _score_person(hr_dir) > 0
+
+
+def test_controller_recognized_as_finance() -> None:
+    controller = _person("Controller", "director")
+    ops_mgr = _person("Operations Manager", "manager")
+    # Even at lower seniority, controller's finance bonus should beat
+    # an ops manager.
+    assert _score_person(controller) > _score_person(ops_mgr)
+
+
+def test_pick_best_picks_cfo_at_insurance_prospect() -> None:
+    # At an insurance prospect without a tech exec, the Apollo response
+    # often includes a mix of c-suite and director-level candidates.
+    # _pick_best should land on the CFO.
+    people = [
+        _person("HR Director", "director"),
+        _person("Office Manager", "manager"),
+        _person("Chief Financial Officer", "c_suite"),
+        _person("VP of Sales", "vp"),  # disqualified
+    ]
+    chosen = _pick_best(people)
+    assert chosen is not None
+    assert chosen["title"] == "Chief Financial Officer"
+
+
 def test_pick_best_returns_highest_score() -> None:
     people = [
         _person("CEO", "c_suite"),

@@ -42,6 +42,15 @@ _NICHE_FRAMING: dict[NicheName, str] = {
         "consultancy that helps SMBs (10-250 employees) plan, migrate, "
         "and optimize their AWS / GCP / Azure footprint."
     ),
+    NicheName.INSURANCE: (
+        "You are summarizing leads for a salesperson at an independent "
+        "insurance agency that sells commercial lines (general "
+        "liability, workers compensation, commercial auto, property, "
+        "D&O / EPLI, group benefits) to SMBs (10-250 employees) and "
+        "newly-formed entities. The agent prospects on buying "
+        "triggers — new entity registrations, blue-collar / fleet "
+        "hiring, new finance or HR leadership, fresh funding."
+    ),
 }
 
 
@@ -100,9 +109,14 @@ _SCORING_SIGNAL_TYPES = frozenset(
         SignalType.JOB_IT_LEADERSHIP,
         SignalType.JOB_SECURITY,
         SignalType.JOB_CLOUD_DEVOPS,
+        SignalType.JOB_OPS_ROLE,
+        SignalType.JOB_BLUE_COLLAR,
+        SignalType.JOB_FLEET_ROLE,
+        SignalType.JOB_FINANCE_OPS,
         SignalType.EXEC_HIRED,
         SignalType.FUNDING_RAISED,
         SignalType.BREACH_DISCLOSED,
+        SignalType.NEW_BUSINESS_FILED,
     }
 )
 
@@ -111,9 +125,14 @@ _SIGNAL_PAYLOAD_FIELDS: dict[SignalType, tuple[str, ...]] = {
     SignalType.JOB_IT_LEADERSHIP: ("title", "location"),
     SignalType.JOB_SECURITY: ("title", "location"),
     SignalType.JOB_CLOUD_DEVOPS: ("title", "location"),
+    SignalType.JOB_OPS_ROLE: ("title", "location"),
+    SignalType.JOB_BLUE_COLLAR: ("title", "location"),
+    SignalType.JOB_FLEET_ROLE: ("title", "location"),
+    SignalType.JOB_FINANCE_OPS: ("title", "location"),
     SignalType.EXEC_HIRED: ("title", "location"),
     SignalType.FUNDING_RAISED: ("title", "amount_usd", "round"),
     SignalType.BREACH_DISCLOSED: ("disclosed_on", "records_affected", "title"),
+    SignalType.NEW_BUSINESS_FILED: ("state", "filing_type", "filed_on"),
 }
 
 

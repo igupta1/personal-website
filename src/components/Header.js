@@ -62,6 +62,14 @@ function Header() {
               Cloud
             </NavLink>
           </li>
+          <li>
+            <NavLink
+              to="/insurance"
+              className={({ isActive }) => (isActive ? "active" : "")}
+            >
+              Insurance
+            </NavLink>
+          </li>
         </ul>
       </nav>
     </header>

@@ -28,7 +28,13 @@ from msp_pipeline.models import (
     SignalType,
     SourceName,
 )
-from msp_pipeline.sources import breaches, funding, jobs
+from msp_pipeline.sources import (
+    breaches,
+    business_filings,
+    funding,
+    jobs,
+    jobs_insurance,
+)
 
 log = logging.getLogger("daily_run")
 
@@ -47,9 +53,14 @@ _SCORING_SIGNAL_TYPES: frozenset[SignalType] = frozenset(
         SignalType.JOB_IT_LEADERSHIP,
         SignalType.JOB_SECURITY,
         SignalType.JOB_CLOUD_DEVOPS,
+        SignalType.JOB_OPS_ROLE,
+        SignalType.JOB_BLUE_COLLAR,
+        SignalType.JOB_FLEET_ROLE,
+        SignalType.JOB_FINANCE_OPS,
         SignalType.EXEC_HIRED,
         SignalType.FUNDING_RAISED,
         SignalType.BREACH_DISCLOSED,
+        SignalType.NEW_BUSINESS_FILED,
     }
 )
 
@@ -57,11 +68,13 @@ _NICHE_SCORE_COL: dict[NicheName, str] = {
     NicheName.IT_MSP: "it_msp_score",
     NicheName.MSSP: "mssp_score",
     NicheName.CLOUD: "cloud_score",
+    NicheName.INSURANCE: "insurance_score",
 }
 _NICHE_INSIGHT_COL: dict[NicheName, str] = {
     NicheName.IT_MSP: "it_msp_insight",
     NicheName.MSSP: "mssp_insight",
     NicheName.CLOUD: "cloud_insight",
+    NicheName.INSURANCE: "insurance_insight",
 }
 
 
@@ -186,8 +199,10 @@ def _fetch_all(
     out: list[LeadCandidate] = []
     for name, fn in (
         ("jobs", jobs.fetch),
+        ("jobs_insurance", jobs_insurance.fetch),
         ("funding", funding.fetch),
         ("breaches", breaches.fetch),
+        ("business_filings", business_filings.fetch),
     ):
         try:
             cs = fn(since=since, limit=per_source_limit)

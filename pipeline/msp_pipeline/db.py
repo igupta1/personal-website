@@ -19,30 +19,32 @@ from msp_pipeline.models import (
 
 _DDL = """
 CREATE TABLE IF NOT EXISTS leads (
-    id              INTEGER PRIMARY KEY AUTOINCREMENT,
-    name            TEXT NOT NULL,
-    name_key        TEXT NOT NULL UNIQUE,
-    domain          TEXT,
-    industry        TEXT,
-    headcount       INTEGER,
-    country         TEXT,
-    dm_name         TEXT,
-    dm_title        TEXT,
-    dm_email        TEXT,
-    dm_linkedin_url TEXT,
-    value_prop      TEXT,
-    signals         TEXT NOT NULL DEFAULT '[]',
-    it_msp_score    REAL,
-    mssp_score      REAL,
-    cloud_score     REAL,
-    it_msp_insight  TEXT,
-    mssp_insight    TEXT,
-    cloud_insight   TEXT,
-    it_msp_outreach TEXT,
-    mssp_outreach   TEXT,
-    cloud_outreach  TEXT,
-    created_at      TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    updated_at      TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+    id                INTEGER PRIMARY KEY AUTOINCREMENT,
+    name              TEXT NOT NULL,
+    name_key          TEXT NOT NULL UNIQUE,
+    domain            TEXT,
+    industry          TEXT,
+    headcount         INTEGER,
+    country           TEXT,
+    dm_name           TEXT,
+    dm_title          TEXT,
+    dm_email          TEXT,
+    dm_linkedin_url   TEXT,
+    value_prop        TEXT,
+    signals           TEXT NOT NULL DEFAULT '[]',
+    it_msp_score      REAL,
+    mssp_score        REAL,
+    cloud_score       REAL,
+    insurance_score   REAL,
+    it_msp_insight    TEXT,
+    mssp_insight      TEXT,
+    cloud_insight     TEXT,
+    insurance_insight TEXT,
+    it_msp_outreach   TEXT,
+    mssp_outreach     TEXT,
+    cloud_outreach    TEXT,
+    created_at        TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at        TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 )
 """
 
@@ -55,18 +57,22 @@ _MIGRATIONS: tuple[tuple[str, str], ...] = (
     ("dm_email", "TEXT"),
     ("dm_linkedin_url", "TEXT"),
     ("value_prop", "TEXT"),
+    ("insurance_score", "REAL"),
+    ("insurance_insight", "TEXT"),
 )
 
 _INDEXES = (
-    "CREATE INDEX IF NOT EXISTS idx_leads_it_msp_score ON leads(it_msp_score DESC)",
-    "CREATE INDEX IF NOT EXISTS idx_leads_mssp_score   ON leads(mssp_score DESC)",
-    "CREATE INDEX IF NOT EXISTS idx_leads_cloud_score  ON leads(cloud_score DESC)",
+    "CREATE INDEX IF NOT EXISTS idx_leads_it_msp_score    ON leads(it_msp_score DESC)",
+    "CREATE INDEX IF NOT EXISTS idx_leads_mssp_score      ON leads(mssp_score DESC)",
+    "CREATE INDEX IF NOT EXISTS idx_leads_cloud_score     ON leads(cloud_score DESC)",
+    "CREATE INDEX IF NOT EXISTS idx_leads_insurance_score ON leads(insurance_score DESC)",
 )
 
 _NICHE_SCORE_COLUMN: dict[NicheName, str] = {
     NicheName.IT_MSP: "it_msp_score",
     NicheName.MSSP: "mssp_score",
     NicheName.CLOUD: "cloud_score",
+    NicheName.INSURANCE: "insurance_score",
 }
 
 _UPDATABLE_FIELDS = frozenset({
@@ -82,9 +88,11 @@ _UPDATABLE_FIELDS = frozenset({
     "it_msp_score",
     "mssp_score",
     "cloud_score",
+    "insurance_score",
     "it_msp_insight",
     "mssp_insight",
     "cloud_insight",
+    "insurance_insight",
 })
 
 _LEGAL_SUFFIXES = (

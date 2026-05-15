@@ -22,9 +22,14 @@ const SIGNAL_KIND_META = {
   job_posted_it_leadership: { label: "IT Leadership", pill: "bg-indigo-500/15 text-indigo-300 ring-indigo-400/30" },
   job_posted_security:      { label: "Security",      pill: "bg-rose-500/15 text-rose-300 ring-rose-400/30" },
   job_posted_cloud_devops:  { label: "Cloud / DevOps",pill: "bg-cyan-500/15 text-cyan-300 ring-cyan-400/30" },
+  job_posted_ops_role:      { label: "Ops hire",      pill: "bg-sky-500/15 text-sky-300 ring-sky-400/30" },
+  job_posted_blue_collar:   { label: "Blue-collar",   pill: "bg-orange-500/15 text-orange-300 ring-orange-400/30" },
+  job_posted_fleet_role:    { label: "Fleet",         pill: "bg-yellow-500/15 text-yellow-300 ring-yellow-400/30" },
+  job_posted_finance_ops:   { label: "Finance / HR",  pill: "bg-teal-500/15 text-teal-300 ring-teal-400/30" },
   exec_hired:               { label: "Exec hire",     pill: "bg-purple-500/15 text-purple-300 ring-purple-400/30" },
   funding_raised:           { label: "Funding",       pill: "bg-emerald-500/15 text-emerald-300 ring-emerald-400/30" },
   breach_disclosed:         { label: "Breach",        pill: "bg-amber-500/15 text-amber-300 ring-amber-400/30" },
+  new_business_filed:       { label: "New entity",    pill: "bg-lime-500/15 text-lime-300 ring-lime-400/30" },
 };
 
 const AGENCY_LABELS = {
@@ -92,6 +97,11 @@ function SignalRow({ signal }) {
     const agencyLabel = AGENCY_LABELS[payload.agency] || payload.agency || "state AG";
     primary = agencyLabel;
     if (payload.reported_date) extra = `reported ${formatDate(payload.reported_date)}`;
+  } else if (signal.type === "new_business_filed") {
+    const filingType = payload.filing_type || "Entity";
+    const state = payload.state || "?";
+    primary = `${filingType} filed in ${state}`;
+    if (payload.filed_on) extra = `filed ${formatDate(payload.filed_on)}`;
   }
 
   return (
