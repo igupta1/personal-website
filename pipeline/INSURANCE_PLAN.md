@@ -5,22 +5,32 @@ as a fourth niche on the shared pipeline. Result: the `/insurance`
 dashboard was 96% MSP leads sorted by a 0 insurance score. This plan
 throws that out and builds insurance as a sibling pipeline.
 
-## v1-of-v2 ship: scope-reduction note
+## v1-of-v2 ship: scope-reduction note (post-smoke)
 
-FMCSA deferred to a follow-up. MCMIS's monthly ZIP is 250MB and the
-L&I "recently granted" HTML page needs real-traffic testing to nail
-the parser — that's its own dedicated iteration. v1 ships with:
+What the first smoke run revealed:
 
-1. **`funding.py`** — ported from msp_pipeline. TechCrunch + PR
-   Newswire RSS + LLM headline extraction. Already battle-tested in
-   the MSP pipeline. Emits `FUNDING_RAISED` (insurance weight 25).
-2. **`sos_fl.py`** — best-effort FL SunBiz scraper. May need
-   parser-iteration after first real run.
+1. **FMCSA deferred** — same as planned, MCMIS bulk needs its own
+   iteration.
+2. **FL SunBiz blocked by Cloudflare.** SunBiz's search-by-date UI
+   sits behind Cloudflare's bot-challenge page ("Just a moment...").
+   Plain `requests` scraping returns the challenge HTML, not the
+   results table. Shipping SunBiz requires either Playwright /
+   headless browser (heavyweight in CI) or a paid bypass service
+   (Bright Data, ScraperAPI, OpenCorporates with a key). The
+   `sos_fl.py` parser is kept on disk for when we wire one of those
+   in. **Not in `_SOURCES` for v1.**
+3. **SMB cap raised 250 → 500.** Insurance buyers span the lower
+   middle market more broadly than IT-MSP buyers do. A 340-person
+   fintech (Kodiak AI in the first smoke) is squarely a CFO-buying-
+   D&O target, not enterprise. The MSP cap was too tight here.
+4. **funding alone carries v1.** Until SunBiz unblocks or FMCSA
+   lands, funding is the only live source. Source-diversity
+   criterion fails by design this ship.
 
-Source-diversity criterion may fail this ship (if SunBiz parser
-needs iteration, funding alone carries). Volume + smell-test
-criteria should pass — funding produces ~5-10 fresh US-SMB
-candidates per run, all relevant for D&O / benefits insurance.
+Path back to source-diversity in priority order:
+- OpenCorporates paid key → SunBiz/CO/WA filings, no scraping
+- FMCSA MCMIS monthly bulk → real commercial-auto signal
+- Playwright in cron → SunBiz scrape, but slow runners
 
 ## Constraints (set by user)
 

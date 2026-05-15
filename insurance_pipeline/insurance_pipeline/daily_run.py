@@ -28,7 +28,14 @@ from insurance_pipeline.models import (
     SignalType,
     SourceName,
 )
-from insurance_pipeline.sources import funding, sos_fl
+from insurance_pipeline.sources import funding
+
+# sos_fl module exists but is NOT wired here. The SunBiz search UI is
+# fronted by Cloudflare's bot challenge ("Just a moment..." page),
+# which blocks plain `requests` scraping from GitHub Actions runners.
+# Real shipping requires either a headless browser (Playwright) or a
+# paid Cloudflare-bypass service. Keeping the source code on disk so
+# the parser logic is preserved for when we wire one of those in.
 
 log = logging.getLogger("insurance.daily_run")
 
@@ -172,7 +179,6 @@ def main(argv: list[str] | None = None) -> int:
 # iteration. v1 ships with funding + SunBiz.
 _SOURCES: tuple[tuple[str, Any], ...] = (
     ("funding", funding.fetch),
-    ("sos_fl", sos_fl.fetch),
 )
 
 
@@ -274,7 +280,7 @@ def _apollo_enrich_top_n(conn: sqlite3.Connection, *, n: int) -> set[int]:
         if not result.org_found:
             continue
 
-        if result.headcount is not None and result.headcount > 250:
+        if result.headcount is not None and result.headcount > enrichment._SMB_HEADCOUNT_CAP:
             log.info(
                 "apollo: deleting lead %d (%s) — apollo headcount=%d exceeds SMB cap",
                 lead_id, lead.name, result.headcount,

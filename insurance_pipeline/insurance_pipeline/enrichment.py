@@ -34,6 +34,14 @@ log = logging.getLogger(__name__)
 # inside enrich(). Drops leads that obviously don't fit "SMB commercial
 # insurance buyer" without burning Gemini tokens on them.
 
+# Insurance buyers span "SMB" more broadly than the MSP pipeline does.
+# Independent insurance agents sell commercial lines to companies up to
+# roughly the lower middle market — a 400-person logistics company or
+# a 350-person fintech has exactly the buyer (CFO) and exactly the
+# coverage needs (D&O, EPLI, commercial auto) the agent prospects on.
+# Tuned looser than msp_pipeline's 250 cap.
+_SMB_HEADCOUNT_CAP = 500
+
 _BLOCKED_TLDS: tuple[str, ...] = (".gov", ".mil", ".edu")
 
 _BLOCKED_NAME_RES: tuple[re.Pattern[str], ...] = (
@@ -125,7 +133,7 @@ def _disqualification_reason(lead: Lead) -> str | None:
         return "blocked_name_pattern"
     if _is_insurance_vendor(lead.name):
         return "insurance_vendor_name"
-    if lead.headcount is not None and lead.headcount > 250:
+    if lead.headcount is not None and lead.headcount > _SMB_HEADCOUNT_CAP:
         return f"oversized={lead.headcount}"
     if lead.headcount == 0:
         return "zero_headcount"
@@ -231,7 +239,7 @@ DM_NAME: <full name of the person most likely to handle insurance / \
 vendor purchasing at this company. Pick based on size and industry: \
 - Companies under 25 employees or owner-operator businesses: prefer \
   Owner, Founder, President, CEO. \
-- Mid-size companies (25-250 employees): prefer CFO, COO, Controller, \
+- Mid-size companies (25-500 employees): prefer CFO, COO, Controller, \
   VP / Director of Finance, VP / Director of Operations, Office \
   Manager, HR Director. \
 - Trucking / logistics companies: also consider Safety Director, \
@@ -404,7 +412,9 @@ def enrich(conn: sqlite3.Connection, lead: Lead, *, force: bool = False) -> bool
         else lookup.headcount
     )
 
-    oversized = effective_headcount is not None and effective_headcount > 250
+    oversized = (
+        effective_headcount is not None and effective_headcount > _SMB_HEADCOUNT_CAP
+    )
     if lookup.country != "US" or oversized or lookup.is_insurance_vendor:
         log.info(
             "enrich: deleting lead %d (%s) — country=%r headcount=%r vendor=%s",
