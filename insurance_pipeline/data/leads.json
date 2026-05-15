@@ -1,4 +1,33 @@
 {
-  "generated_at": "2026-05-15T23:14:21.649774",
-  "leads": []
+  "generated_at": "2026-05-15T23:17:36.731318",
+  "leads": [
+    {
+      "name": "Kodiak AI",
+      "domain": "kodiak.ai",
+      "industry": "other",
+      "headcount": 280,
+      "country": "US",
+      "city": "Mountain View",
+      "state": "CA",
+      "dm_name": "Surajit Datta",
+      "dm_title": "Chief Financial Officer",
+      "dm_email": "surajit@kodiak.ai",
+      "dm_linkedin_url": "http://www.linkedin.com/in/surajit-datta-350649",
+      "score": 24.99992618204017,
+      "insight": "Kodiak AI recently raised funding, which may indicate a need for expanded commercial insurance coverage as they grow.",
+      "signals": [
+        {
+          "type": "funding_raised",
+          "captured_at": "2026-05-15T23:17:23.137370",
+          "days_ago": 0,
+          "payload": {
+            "feed_title": "Kodiak AI raises $100M at a steep discount, sending its stock tumbling 37%",
+            "feed_url": "https://techcrunch.com/category/startups/feed/",
+            "link": "https://techcrunch.com/2026/05/07/kodiak-ai-raises-100m-at-a-steep-discount-sending-its-stock-tumbling-37/",
+            "published": "Thu, 07 May 2026 21:49:24 +0000"
+          }
+        }
+      ]
+    }
+  ]
 }
