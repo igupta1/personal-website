@@ -9,7 +9,6 @@ class NicheName(str, Enum):
     IT_MSP = "it_msp"
     MSSP = "mssp"
     CLOUD = "cloud"
-    INSURANCE = "insurance"
 
 
 class SignalType(str, Enum):
@@ -17,14 +16,9 @@ class SignalType(str, Enum):
     JOB_IT_LEADERSHIP = "job_posted_it_leadership"
     JOB_SECURITY = "job_posted_security"
     JOB_CLOUD_DEVOPS = "job_posted_cloud_devops"
-    JOB_OPS_ROLE = "job_posted_ops_role"
-    JOB_BLUE_COLLAR = "job_posted_blue_collar"
-    JOB_FLEET_ROLE = "job_posted_fleet_role"
-    JOB_FINANCE_OPS = "job_posted_finance_ops"
     EXEC_HIRED = "exec_hired"
     FUNDING_RAISED = "funding_raised"
     BREACH_DISCLOSED = "breach_disclosed"
-    NEW_BUSINESS_FILED = "new_business_filed"
     LOCATION_CAPTURED = "location_captured"
     ENRICHMENT_RUN = "enrichment_run"
     APOLLO_ENRICHED = "apollo_enriched"
@@ -34,7 +28,6 @@ class SourceName(str, Enum):
     JOBS = "jobs"
     FUNDING = "funding"
     BREACHES = "breaches"
-    FILINGS = "filings"
     COMPUTED = "computed"
     APOLLO = "apollo"
 
@@ -63,11 +56,9 @@ class Lead(BaseModel):
     it_msp_score: float | None = None
     mssp_score: float | None = None
     cloud_score: float | None = None
-    insurance_score: float | None = None
     it_msp_insight: str | None = None
     mssp_insight: str | None = None
     cloud_insight: str | None = None
-    insurance_insight: str | None = None
     created_at: datetime | None = None
     updated_at: datetime | None = None
 

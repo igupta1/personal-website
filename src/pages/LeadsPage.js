@@ -19,7 +19,7 @@ function bandFor(value) {
   return SIZE_BANDS.find((b) => b.value === value) || SIZE_BANDS[0];
 }
 
-export default function LeadsPage({ niche, title, subtitle }) {
+export default function LeadsPage({ niche, title, subtitle, apiPath }) {
   const [leads, setLeads] = useState(null);
   const [error, setError] = useState(null);
   const [generatedAt, setGeneratedAt] = useState(null);
@@ -36,7 +36,10 @@ export default function LeadsPage({ niche, title, subtitle }) {
     let cancelled = false;
     setLeads(null);
     setError(null);
-    fetch(`/api/generate-leads?niche=${niche}`)
+    // Insurance reads from its own dedicated endpoint (no `niche` qs);
+    // MSP/MSSP/Cloud share `/api/generate-leads?niche=<n>`.
+    const url = apiPath ?? `/api/generate-leads?niche=${niche}`;
+    fetch(url)
       .then((r) =>
         r.ok ? r.json() : Promise.reject(new Error(`HTTP ${r.status}`))
       )
@@ -51,7 +54,7 @@ export default function LeadsPage({ niche, title, subtitle }) {
     return () => {
       cancelled = true;
     };
-  }, [niche]);
+  }, [niche, apiPath]);
 
   const visibleLeads = useMemo(() => {
     if (!leads) return [];

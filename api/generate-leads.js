@@ -1,7 +1,7 @@
 const { list } = require('@vercel/blob');
 
 const BLOB_KEY = 'leads-current.json';
-const VALID_NICHES = ['it_msp', 'mssp', 'cloud', 'insurance'];
+const VALID_NICHES = ['it_msp', 'mssp', 'cloud'];
 const CACHE_HEADER = 'public, s-maxage=300, stale-while-revalidate=3600';
 
 let _cachedBlobUrl = null;

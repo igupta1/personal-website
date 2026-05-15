@@ -60,9 +60,9 @@ def test_init_db_idempotent(tmp_path: Path) -> None:
 
 def test_init_db_migrates_legacy_db_missing_columns(tmp_path: Path) -> None:
     """A pre-existing leads.db that doesn't yet have the columns from
-    _MIGRATIONS (e.g. insurance_score) must open cleanly. Indexes that
-    reference migrated columns must be created AFTER the ALTER TABLEs
-    land, not before — otherwise CREATE INDEX hits 'no such column'."""
+    _MIGRATIONS must open cleanly. If indexes that reference migrated
+    columns ever run before the ALTER TABLEs land, CREATE INDEX hits
+    'no such column' — this test catches that ordering regression."""
     import sqlite3
 
     p = tmp_path / "legacy.db"
@@ -87,8 +87,11 @@ def test_init_db_migrates_legacy_db_missing_columns(tmp_path: Path) -> None:
     # Must not raise.
     conn = init_db(p)
     cols = {row[1] for row in conn.execute("PRAGMA table_info(leads)").fetchall()}
-    assert "insurance_score" in cols
-    assert "insurance_insight" in cols
+    # dm_* columns are in _MIGRATIONS (added post-original-schema); they
+    # should land on a legacy DB after init_db runs.
+    assert "dm_name" in cols
+    assert "dm_email" in cols
+    assert "value_prop" in cols
 
 
 def test_upsert_inserts_new_then_merges_fuzzy(tmp_path: Path) -> None:

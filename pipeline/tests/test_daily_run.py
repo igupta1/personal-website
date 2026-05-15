@@ -58,10 +58,8 @@ def test_main_dry_run_makes_no_writes(
 
     fetch_mock = MagicMock(return_value=[_candidate("Test Co")])
     monkeypatch.setattr(daily_run.jobs, "fetch", fetch_mock)
-    monkeypatch.setattr(daily_run.jobs_insurance, "fetch", fetch_mock)
     monkeypatch.setattr(daily_run.funding, "fetch", fetch_mock)
     monkeypatch.setattr(daily_run.breaches, "fetch", fetch_mock)
-    monkeypatch.setattr(daily_run.business_filings, "fetch", fetch_mock)
 
     enrich_mock = MagicMock()
     generate_mock = MagicMock()
@@ -82,7 +80,7 @@ def test_main_dry_run_makes_no_writes(
     assert not out_path.exists()
     enrich_mock.assert_not_called()
     generate_mock.assert_not_called()
-    assert fetch_mock.call_count == 5
+    assert fetch_mock.call_count == 3
 
 
 def test_main_end_to_end_smoke(
@@ -95,11 +93,6 @@ def test_main_end_to_end_smoke(
         daily_run.jobs,
         "fetch",
         MagicMock(return_value=[_candidate("Acme Co", SignalType.JOB_SECURITY)]),
-    )
-    monkeypatch.setattr(
-        daily_run.jobs_insurance,
-        "fetch",
-        MagicMock(return_value=[]),
     )
     monkeypatch.setattr(
         daily_run.funding,
@@ -118,11 +111,6 @@ def test_main_end_to_end_smoke(
                 _candidate("Gamma LLC", SignalType.BREACH_DISCLOSED, SourceName.BREACHES)
             ]
         ),
-    )
-    monkeypatch.setattr(
-        daily_run.business_filings,
-        "fetch",
-        MagicMock(return_value=[]),
     )
 
     monkeypatch.setattr(
@@ -151,7 +139,7 @@ def test_main_end_to_end_smoke(
 
     payload = json.loads(out_path.read_text())
     assert "generated_at" in payload
-    assert set(payload["niches"].keys()) == {"it_msp", "mssp", "cloud", "insurance"}
+    assert set(payload["niches"].keys()) == {"it_msp", "mssp", "cloud"}
     for leads in payload["niches"].values():
         assert len(leads) == 3
         for lead in leads:
@@ -183,11 +171,6 @@ def test_per_source_failure_isolated(
         MagicMock(side_effect=RuntimeError("jobs down")),
     )
     monkeypatch.setattr(
-        daily_run.jobs_insurance,
-        "fetch",
-        MagicMock(return_value=[]),
-    )
-    monkeypatch.setattr(
         daily_run.funding,
         "fetch",
         MagicMock(
@@ -204,11 +187,6 @@ def test_per_source_failure_isolated(
                 _candidate("Breach Co", SignalType.BREACH_DISCLOSED, SourceName.BREACHES)
             ]
         ),
-    )
-    monkeypatch.setattr(
-        daily_run.business_filings,
-        "fetch",
-        MagicMock(return_value=[]),
     )
     monkeypatch.setattr(
         "msp_pipeline.enrichment.lookup_company",
@@ -306,7 +284,7 @@ def test_json_output_shape(tmp_path: Path) -> None:
 
     output = daily_run._build_output(conn)
     assert "generated_at" in output
-    assert set(output["niches"].keys()) == {"it_msp", "mssp", "cloud", "insurance"}
+    assert set(output["niches"].keys()) == {"it_msp", "mssp", "cloud"}
 
     it_leads = output["niches"]["it_msp"]
     assert len(it_leads) == 3
@@ -438,7 +416,7 @@ def test_upload_called_when_flag_set(
     assert call.args[0] == "https://example.com/api/upload-leads"
     assert call.kwargs["headers"] == {"Authorization": "Bearer secret-token"}
     assert "niches" in call.kwargs["json"]
-    assert set(call.kwargs["json"]["niches"].keys()) == {"it_msp", "mssp", "cloud", "insurance"}
+    assert set(call.kwargs["json"]["niches"].keys()) == {"it_msp", "mssp", "cloud"}
 
 
 def test_upload_skipped_without_flag(
@@ -477,10 +455,8 @@ def test_rescore_only_skips_fetch_and_enrich(
     enrich_mock = MagicMock()
     generate_mock = MagicMock()
     monkeypatch.setattr(daily_run.jobs, "fetch", fetch_mock)
-    monkeypatch.setattr(daily_run.jobs_insurance, "fetch", fetch_mock)
     monkeypatch.setattr(daily_run.funding, "fetch", fetch_mock)
     monkeypatch.setattr(daily_run.breaches, "fetch", fetch_mock)
-    monkeypatch.setattr(daily_run.business_filings, "fetch", fetch_mock)
     monkeypatch.setattr("msp_pipeline.enrichment.enrich", enrich_mock)
     monkeypatch.setattr("msp_pipeline.outreach.generate", generate_mock)
 

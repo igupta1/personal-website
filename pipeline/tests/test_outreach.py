@@ -238,7 +238,7 @@ def test_generate_per_niche_framing_differs(monkeypatch: pytest.MonkeyPatch) -> 
     for niche in NicheName:
         generate(lead, niche, 50.0)
 
-    assert len({*prompts}) == len(NicheName)
+    assert len({*prompts}) == 3
     assert "IT managed service provider" in prompts[0]
     assert "managed security service provider" in prompts[1]
     assert "cloud consultancy" in prompts[2]

@@ -44,14 +44,13 @@ jobs:
       - name: Run daily pipeline
         working-directory: pipeline
         env:
-          OPENAI_API_KEY:         ${{ secrets.OPENAI_API_KEY }}
-          GEMINI_API_KEY:         ${{ secrets.GEMINI_API_KEY }}
-          ADZUNA_APP_ID:          ${{ secrets.ADZUNA_APP_ID }}
-          ADZUNA_APP_KEY:         ${{ secrets.ADZUNA_APP_KEY }}
-          OPENCORPORATES_API_KEY: ${{ secrets.OPENCORPORATES_API_KEY }}
-          LEADS_UPLOAD_URL:       https://www.ishaangpta.com/api/upload-leads
-          LEADS_UPLOAD_API_KEY:   ${{ secrets.LEADS_UPLOAD_API_KEY }}
-          LIMIT:                  ${{ inputs.limit }}
+          OPENAI_API_KEY:       ${{ secrets.OPENAI_API_KEY }}
+          GEMINI_API_KEY:       ${{ secrets.GEMINI_API_KEY }}
+          ADZUNA_APP_ID:        ${{ secrets.ADZUNA_APP_ID }}
+          ADZUNA_APP_KEY:       ${{ secrets.ADZUNA_APP_KEY }}
+          LEADS_UPLOAD_URL:     https://www.ishaangpta.com/api/upload-leads
+          LEADS_UPLOAD_API_KEY: ${{ secrets.LEADS_UPLOAD_API_KEY }}
+          LIMIT:                ${{ inputs.limit }}
         run: |
           args=("--upload")
           if [[ -n "$LIMIT" ]]; then

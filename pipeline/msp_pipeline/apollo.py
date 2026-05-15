@@ -34,26 +34,14 @@ _TIMEOUT = 20
 # Title filter sent to Apollo's people-search. OR-matched as substrings.
 # Order doesn't matter to Apollo; our own ranking re-orders the response.
 _DM_TITLES: tuple[str, ...] = (
-    # IT / security / engineering — the MSP/MSSP/Cloud buyer.
     "Chief Information Officer", "CIO",
     "Chief Technology Officer", "CTO",
     "Chief Information Security Officer", "CISO",
     "VP of Information Technology", "VP of Technology", "Vice President of IT",
     "Director of Information Technology", "Director of IT", "IT Director",
     "Head of IT", "IT Manager", "Head of Engineering",
-    # Finance / ops — the insurance buyer (workers comp, GL, D&O,
-    # commercial auto, group benefits). Also the small-biz fallback
-    # for the other niches when no tech exec exists.
-    "Chief Financial Officer", "CFO",
-    "Controller", "VP of Finance", "Vice President of Finance",
-    "Director of Finance", "Finance Director",
+    # Small-business fallbacks — no tech exec exists, so the COO/founder is the buyer.
     "Chief Operating Officer", "COO",
-    "VP of Operations", "Vice President of Operations",
-    "Director of Operations", "Operations Director",
-    "HR Director", "Director of Human Resources",
-    "VP of Human Resources", "Head of People", "Head of HR",
-    "Office Manager",
-    # Owner-operator / very-small-business fallback for any niche.
     "President", "Owner",
     "Founder", "Co-Founder",
     "Chief Executive Officer", "CEO",
@@ -179,30 +167,11 @@ _IT_PHRASES: tuple[str, ...] = (
 # "dire**cto**r" and "cio" hits "asso**cio**ate". Pre-compiled for speed.
 _IT_ABBREV_RE = re.compile(r"\b(cto|cio|ciso|it)\b", re.IGNORECASE)
 
-# Finance / ops keywords — the insurance buyer (CFO, controller, VP of
-# Finance). Scored below IT but above general ops so a CFO beats both a
-# Director of Operations and an HR director at the same org.
-_FINANCE_PHRASES: tuple[str, ...] = ("finance", "financial")
-_FINANCE_ABBREV_RE = re.compile(r"\b(cfo|controller)\b", re.IGNORECASE)
-
-# General operations / people keywords — the insurance buyer at small
-# companies (COO, Director of Ops, HR Director, Office Manager). Loses
-# to finance at the same seniority.
-_OPS_PHRASES: tuple[str, ...] = (
-    "operations", "operating", "people", "human resources",
-)
-_OPS_ABBREV_RE = re.compile(r"\b(coo|chro|hr)\b", re.IGNORECASE)
-
-# Title substrings that disqualify a candidate as a decision maker.
-# Apollo's people-search sometimes returns the wrong person at orgs with
-# multiple senior people (e.g. a Marketing Director when we asked for
-# "Director" titles). Hitting one of these forces a heavy negative score
-# so the candidate falls below alternatives.
-#
-# Note: "human resources" used to be disqualifying back when the only
-# buyer we cared about was IT. With insurance in the niche set, HR
-# Director is a legitimate buyer of group benefits — kept off this list,
-# scored via _OPS_PHRASES instead.
+# Title substrings that disqualify a candidate as an IT/security/cloud
+# decision maker. Apollo's people-search sometimes returns the wrong person
+# at orgs with multiple senior people (e.g. an HR director when we asked for
+# "Director" titles). Hitting one of these forces a heavy negative score so
+# the candidate falls below alternatives.
 _DISQUALIFYING_TITLE_KEYWORDS: tuple[str, ...] = (
     "recruitment", "recruiting", "talent acquisition",
     "marketing", "communications",
@@ -210,26 +179,20 @@ _DISQUALIFYING_TITLE_KEYWORDS: tuple[str, ...] = (
     "medical officer", "clinical",
     "civil engineering",  # common at construction/AE firms
     "diversity", "equity and inclusion",
+    "human resources",
     "facilities",
 )
 
 
 def _score_person(person: dict[str, Any]) -> int:
-    """Higher = better DM candidate. Combines seniority bucket + role
-    focus. IT keywords (+100) beat finance (+60) beat ops (+30), so a
-    CIO always wins at an org that has one; at orgs without a tech exec,
-    a CFO wins over a COO; at orgs without finance either, ops/HR wins.
-    Disqualifying titles get a large negative score so they never beat
-    a legitimate candidate at the same org."""
+    """Higher = better DM candidate. Combines seniority bucket + IT focus.
+    Disqualifying titles get a large negative score so they never beat a
+    legitimate IT/security candidate at the same org."""
     title = (person.get("title") or "").lower()
     seniority = (person.get("seniority") or "").lower()
     score = _SENIORITY_WEIGHT.get(seniority, 0)
     if any(k in title for k in _IT_PHRASES) or _IT_ABBREV_RE.search(title):
         score += 100
-    elif any(k in title for k in _FINANCE_PHRASES) or _FINANCE_ABBREV_RE.search(title):
-        score += 60
-    elif any(k in title for k in _OPS_PHRASES) or _OPS_ABBREV_RE.search(title):
-        score += 30
     if any(k in title for k in _DISQUALIFYING_TITLE_KEYWORDS):
         score -= 1000
     return score

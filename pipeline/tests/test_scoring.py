@@ -15,7 +15,6 @@ from msp_pipeline.models import (
 )
 from msp_pipeline.scoring import (
     SIGNAL_WEIGHTS,
-    _is_insurance_vendor,
     score,
 )
 
@@ -88,25 +87,14 @@ def test_score_clamps_to_100() -> None:
             SignalType.JOB_IT_LEADERSHIP,
             SignalType.JOB_SECURITY,
             SignalType.JOB_CLOUD_DEVOPS,
-            SignalType.JOB_OPS_ROLE,
-            SignalType.JOB_BLUE_COLLAR,
-            SignalType.JOB_FLEET_ROLE,
-            SignalType.JOB_FINANCE_OPS,
             SignalType.EXEC_HIRED,
             SignalType.FUNDING_RAISED,
             SignalType.BREACH_DISCLOSED,
-            SignalType.NEW_BUSINESS_FILED,
         )
     ])
     result = score(lead, now=_now())
     for niche, val in result.items():
         raw_sum = sum(SIGNAL_WEIGHTS[niche].values())
-        if raw_sum == 0:
-            # Defensive: a niche added to NicheName before its weights
-            # land would still pass this test. Saturation invariant
-            # doesn't apply to an empty weights dict.
-            assert val == 0.0
-            continue
         assert raw_sum > 100.0, f"sanity: {niche} weights should sum past 100"
         assert val == 100.0
 
@@ -151,112 +139,3 @@ def test_score_is_pure_no_db_writes(tmp_path: Path) -> None:
     assert refreshed.it_msp_score is None
     assert refreshed.mssp_score is None
     assert refreshed.cloud_score is None
-    assert refreshed.insurance_score is None
-
-
-# --- Insurance niche --------------------------------------------------------
-
-
-def _insurance_lead(name: str, *signals: Signal) -> Lead:
-    return Lead(name=name, name_key=name.lower().replace(" ", "_"), signals=list(signals))
-
-
-def test_insurance_weights_score_insurance_signals() -> None:
-    lead = _insurance_lead(
-        "Pioneer Logistics LLC",
-        _signal(type=SignalType.NEW_BUSINESS_FILED, captured_at=_now()),
-    )
-    result = score(lead, now=_now())
-    assert result[NicheName.INSURANCE] == 45.0
-    # MSP/MSSP/Cloud don't recognize NEW_BUSINESS_FILED.
-    assert result[NicheName.IT_MSP] == 0.0
-    assert result[NicheName.MSSP] == 0.0
-    assert result[NicheName.CLOUD] == 0.0
-
-
-def test_insurance_weights_for_all_insurance_signal_types() -> None:
-    # Each of the four jobs_insurance signal types should produce a
-    # non-zero insurance score. Catches a wiring miss where a new
-    # SignalType was added but not weighted.
-    for sig_type in (
-        SignalType.JOB_OPS_ROLE,
-        SignalType.JOB_BLUE_COLLAR,
-        SignalType.JOB_FLEET_ROLE,
-        SignalType.JOB_FINANCE_OPS,
-        SignalType.NEW_BUSINESS_FILED,
-    ):
-        lead = _insurance_lead("Acme Co", _signal(type=sig_type, captured_at=_now()))
-        result = score(lead, now=_now())
-        assert result[NicheName.INSURANCE] > 0.0, (
-            f"insurance score should be > 0 for {sig_type.value}"
-        )
-
-
-def test_insurance_vendor_name_zeroes_insurance_score() -> None:
-    lead = _insurance_lead(
-        "Acme Insurance Brokers",
-        # A signal that would score 45 for insurance if the lead
-        # weren't a vendor — proves the override beats the weights.
-        _signal(type=SignalType.NEW_BUSINESS_FILED, captured_at=_now()),
-    )
-    result = score(lead, now=_now())
-    assert result[NicheName.INSURANCE] == 0.0
-
-
-def test_insurance_vendor_filter_preserves_other_niche_scores() -> None:
-    # An insurance brokerage that just disclosed a breach is still a
-    # real MSSP lead. The insurance score must zero out without
-    # touching the MSSP / IT_MSP / CLOUD scores.
-    lead = _insurance_lead(
-        "Acme Insurance Brokers",
-        _signal(type=SignalType.BREACH_DISCLOSED, captured_at=_now()),
-    )
-    result = score(lead, now=_now())
-    assert result[NicheName.INSURANCE] == 0.0
-    assert result[NicheName.MSSP] == 45.0
-    assert result[NicheName.IT_MSP] == 35.0
-    assert result[NicheName.CLOUD] == 8.0
-
-
-def test_is_insurance_vendor_recognizes_patterns() -> None:
-    matches = [
-        "Acme Insurance Agency",
-        "Acme Insurance Brokers, LLC",
-        "Acme Insurance Services Inc.",
-        "Acme Insurance Company",
-        "Acme Mutual Insurance Co",
-        "Acme Casualty Group",
-        "Acme Indemnity Corp",
-        "Acme Reinsurance Holdings",
-        "Acme Re-Insurance Ltd",
-        "Acme MGA",
-        "Acme Managing General Agent",
-        "Acme Wholesale Insurance",
-        "Lloyd's Underwriters",
-        "Acme TPA",
-        "Acme Third Party Administrator",
-        "Acme Claims Adjusters",
-        "Acme Adjusting Services",
-        "Acme Independent Adjusters",
-    ]
-    for name in matches:
-        assert _is_insurance_vendor(name), f"expected match: {name!r}"
-
-
-def test_is_insurance_vendor_ignores_non_insurance_names() -> None:
-    non_matches = [
-        "Pioneer Logistics LLC",
-        "Acme Manufacturing",
-        "Berger & Williams, LLP",
-        # IT-vendor-shaped names that we don't want to insurance-zero
-        # (they're still valid for MSP/MSSP/Cloud niches, but they
-        # have no insurance score anyway from weights).
-        "Acme IT Services",
-        "Cloud Solutions Group",
-        # Real-estate companies — "Property" alone shouldn't match.
-        "Acme Property Management",
-        # Risk-something names that aren't insurance.
-        "Acme Risk Capital Partners",
-    ]
-    for name in non_matches:
-        assert not _is_insurance_vendor(name), f"unexpected match: {name!r}"

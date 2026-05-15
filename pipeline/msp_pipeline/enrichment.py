@@ -239,20 +239,12 @@ DOMAIN: <primary website domain like "acme.com" without https or path, or "unkno
 IS_IT_VENDOR: <"yes" if this company is itself an IT services / IT staffing / \
 IT consulting / managed-service-provider / cloud-consultancy / cybersecurity \
 firm (i.e. they SELL IT services), otherwise "no">
-DM_NAME: <full name of the person most likely to handle vendor / service \
-purchasing decisions at this company. Pick based on the company's apparent \
-industry and size: \
-- Tech / software / cybersecurity / cloud companies with 25+ employees: \
-  prefer CIO, CTO, CISO, VP or Director of IT, Head of Engineering. \
-- Non-tech companies with 50+ employees (logistics, construction, \
-  manufacturing, real estate, healthcare, retail, professional services): \
-  prefer CFO, COO, Controller, VP or Director of Finance, VP or Director \
-  of Operations, HR Director. \
-- Companies under 25 employees or newly-formed entities of any industry: \
-  prefer Owner, Founder, President, CEO, Office Manager. \
-Use "unknown" only if you genuinely cannot identify a likely buyer.>
-DM_TITLE: <their job title (e.g. "Director of IT", "CFO", "Owner & CEO", \
-"Office Manager") or "unknown">
+DM_NAME: <full name of the most likely IT / security / technology decision \
+maker (CIO, CTO, CISO, VP/Director of IT, Head of IT). For very small \
+companies that don't have a tech exec, use the CEO / Founder / COO who \
+would handle vendor decisions. Otherwise "unknown".>
+DM_TITLE: <their job title (e.g. "Director of IT", "COO", "Founder & CEO") \
+or "unknown">
 VALUE_PROP: <ONE sentence (max 25 words), present tense, plain language, \
 describing what the company does or sells. Examples: "Sells subscription \
 billing software to Shopify stores." / "Family-owned auto dealership in \
