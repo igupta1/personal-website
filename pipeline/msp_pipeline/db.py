@@ -278,15 +278,17 @@ def init_db(path: Path) -> sqlite3.Connection:
     conn.row_factory = sqlite3.Row
     with conn:
         conn.execute(_DDL)
-        for stmt in _INDEXES:
-            conn.execute(stmt)
-        # Idempotent column migrations: add any column from _MIGRATIONS that
-        # isn't already on the table. Lets older committed DBs open cleanly.
+        # Idempotent column migrations FIRST: add any column from
+        # _MIGRATIONS that isn't already on the table. Indexes below
+        # may reference these columns, so the ALTER TABLEs must land
+        # before CREATE INDEX runs against an older committed DB.
         cur = conn.execute("PRAGMA table_info(leads)")
         existing_cols = {row[1] for row in cur.fetchall()}
         for col_name, col_type in _MIGRATIONS:
             if col_name not in existing_cols:
                 conn.execute(f"ALTER TABLE leads ADD COLUMN {col_name} {col_type}")
+        for stmt in _INDEXES:
+            conn.execute(stmt)
     return conn
 
 

@@ -58,6 +58,39 @@ def test_init_db_idempotent(tmp_path: Path) -> None:
     init_db(p)
 
 
+def test_init_db_migrates_legacy_db_missing_columns(tmp_path: Path) -> None:
+    """A pre-existing leads.db that doesn't yet have the columns from
+    _MIGRATIONS (e.g. insurance_score) must open cleanly. Indexes that
+    reference migrated columns must be created AFTER the ALTER TABLEs
+    land, not before — otherwise CREATE INDEX hits 'no such column'."""
+    import sqlite3
+
+    p = tmp_path / "legacy.db"
+    legacy_ddl = """
+    CREATE TABLE IF NOT EXISTS leads (
+        id              INTEGER PRIMARY KEY AUTOINCREMENT,
+        name            TEXT NOT NULL,
+        name_key        TEXT NOT NULL UNIQUE,
+        signals         TEXT NOT NULL DEFAULT '[]',
+        it_msp_score    REAL,
+        mssp_score      REAL,
+        cloud_score     REAL,
+        created_at      TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        updated_at      TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+    )
+    """
+    pre = sqlite3.connect(p)
+    with pre:
+        pre.execute(legacy_ddl)
+    pre.close()
+
+    # Must not raise.
+    conn = init_db(p)
+    cols = {row[1] for row in conn.execute("PRAGMA table_info(leads)").fetchall()}
+    assert "insurance_score" in cols
+    assert "insurance_insight" in cols
+
+
 def test_upsert_inserts_new_then_merges_fuzzy(tmp_path: Path) -> None:
     conn = init_db(tmp_path / "leads.db")
 
