@@ -34,13 +34,19 @@ log = logging.getLogger(__name__)
 # inside enrich(). Drops leads that obviously don't fit "SMB commercial
 # insurance buyer" without burning Gemini tokens on them.
 
-# Insurance buyers span "SMB" more broadly than the MSP pipeline does.
-# Independent insurance agents sell commercial lines to companies up to
-# roughly the lower middle market — a 400-person logistics company or
-# a 350-person fintech has exactly the buyer (CFO) and exactly the
-# coverage needs (D&O, EPLI, commercial auto) the agent prospects on.
-# Tuned looser than msp_pipeline's 250 cap.
-_SMB_HEADCOUNT_CAP = 500
+_SMB_HEADCOUNT_CAP = 250
+
+# Sources that are US-only by definition. When Gemini fails to find a
+# small carrier on the web and returns country="unknown", we trust the
+# source and treat the lead as US rather than deleting it.
+_US_ONLY_SOURCES: frozenset[SourceName] = frozenset({
+    SourceName.FMCSA,
+    SourceName.SOS_FL,
+    SourceName.SOS_CO,
+    SourceName.SOS_WA,
+    SourceName.OSHA,
+    SourceName.BUILDING_PERMITS,
+})
 
 _BLOCKED_TLDS: tuple[str, ...] = (".gov", ".mil", ".edu")
 
@@ -239,7 +245,7 @@ DM_NAME: <full name of the person most likely to handle insurance / \
 vendor purchasing at this company. Pick based on size and industry: \
 - Companies under 25 employees or owner-operator businesses: prefer \
   Owner, Founder, President, CEO. \
-- Mid-size companies (25-500 employees): prefer CFO, COO, Controller, \
+- Mid-size companies (25-250 employees): prefer CFO, COO, Controller, \
   VP / Director of Finance, VP / Director of Operations, Office \
   Manager, HR Director. \
 - Trucking / logistics companies: also consider Safety Director, \
@@ -411,11 +417,21 @@ def enrich(conn: sqlite3.Connection, lead: Lead, *, force: bool = False) -> bool
         lead.headcount if has_apollo and lead.headcount is not None
         else lookup.headcount
     )
+    has_us_only_source = any(s.source in _US_ONLY_SOURCES for s in lead.signals)
 
     oversized = (
         effective_headcount is not None and effective_headcount > _SMB_HEADCOUNT_CAP
     )
-    if lookup.country != "US" or oversized or lookup.is_insurance_vendor:
+    # Country check: explicit non-US deletes. "unknown" only deletes
+    # when no US-only source is present — owner-operator carriers from
+    # FMCSA often aren't discoverable on the web, so Gemini's "unknown"
+    # is information, not a verdict.
+    explicit_non_us = lookup.country is not None and lookup.country != "US"
+    unknown_and_unconfirmed = lookup.country is None and not has_us_only_source
+    if (
+        explicit_non_us or unknown_and_unconfirmed
+        or oversized or lookup.is_insurance_vendor
+    ):
         log.info(
             "enrich: deleting lead %d (%s) — country=%r headcount=%r vendor=%s",
             lead.id, lead.name, lookup.country, effective_headcount,
@@ -424,7 +440,20 @@ def enrich(conn: sqlite3.Connection, lead: Lead, *, force: bool = False) -> bool
         db.delete_lead(conn, lead.id)
         return False
 
-    if lookup.city or lookup.state:
+    # Prefer Gemini city/state when available; fall back to the source's
+    # own payload (FMCSA carries phy_city / phy_state).
+    captured_city = lookup.city
+    captured_state = lookup.state
+    if not captured_city and not captured_state and has_us_only_source:
+        for s in lead.signals:
+            if s.source in _US_ONLY_SOURCES:
+                p = s.payload
+                if p.get("city") or p.get("state"):
+                    captured_city = p.get("city") or None
+                    captured_state = p.get("state") or None
+                    break
+
+    if captured_city or captured_state:
         db.append_signal(
             conn,
             lead.id,
@@ -432,15 +461,17 @@ def enrich(conn: sqlite3.Connection, lead: Lead, *, force: bool = False) -> bool
                 type=SignalType.LOCATION_CAPTURED,
                 source=SourceName.COMPUTED,
                 captured_at=_utcnow(),
-                payload={"city": lookup.city, "state": lookup.state},
+                payload={"city": captured_city, "state": captured_state},
             ),
         )
 
     industry = classify_industry(lead)
 
+    # Country=US when Gemini confirms OR when a US-only source vouches.
+    country_value = "US" if (lookup.country == "US" or has_us_only_source) else None
     updates: dict[str, object] = {
         "industry": industry.value,
-        "country": "US",
+        "country": country_value,
         "value_prop": lookup.value_prop,
     }
     if not has_apollo:

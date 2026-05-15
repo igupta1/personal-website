@@ -28,7 +28,7 @@ from insurance_pipeline.models import (
     SignalType,
     SourceName,
 )
-from insurance_pipeline.sources import funding
+from insurance_pipeline.sources import fmcsa, funding
 
 # sos_fl module exists but is NOT wired here. The SunBiz search UI is
 # fronted by Cloudflare's bot challenge ("Just a moment..." page),
@@ -178,6 +178,7 @@ def main(argv: list[str] | None = None) -> int:
 # deferred to a follow-up — MCMIS bulk-data integration needs its own
 # iteration. v1 ships with funding + SunBiz.
 _SOURCES: tuple[tuple[str, Any], ...] = (
+    ("fmcsa", fmcsa.fetch),
     ("funding", funding.fetch),
 )
 

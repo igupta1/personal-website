@@ -23,7 +23,7 @@ _FRAMING = (
     "You are summarizing leads for a salesperson at an independent "
     "insurance agency that sells commercial lines (general "
     "liability, workers compensation, commercial auto, property, "
-    "D&O / EPLI, group benefits) to SMBs (10-500 employees) and "
+    "D&O / EPLI, group benefits) to SMBs (10-250 employees) and "
     "newly-formed entities. The agent prospects on buying triggers — "
     "new motor-carrier authorities, new business registrations, "
     "construction permits, fresh funding."
