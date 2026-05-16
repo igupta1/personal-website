@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-16T21:03:17.221143",
+  "generated_at": "2026-05-16T22:43:01.289937",
   "leads": [
     {
       "name": "EDEN TRANSPORTATION LLC",
@@ -13,8 +13,14 @@
       "dm_title": "Owner",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 78.79150089979396,
-      "insight": "Fleet size of 34 power units with a new motor carrier authority issued on 2026-05-14 shows EDEN TRANSPORTATION's growth.",
+      "score": 78.66332173891948,
+      "insight": "Commercial Auto $170K/yr + WC $108K/yr",
+      "trigger_type": "motor_carrier",
+      "est_annual_premium_usd": 278000,
+      "coverages": [
+        "Commercial Auto",
+        "Workers Comp"
+      ],
       "signals": [
         {
           "type": "new_motor_carrier_authority",
@@ -46,8 +52,14 @@
       "dm_title": "Certified Mechanical Contractor",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 64.57818045452312,
-      "insight": "Files new motor carrier authority with 4 power units and 16 drivers, issued on May 14, 2026.",
+      "score": 64.47312373414093,
+      "insight": "Commercial Auto $20K/yr + WC $48K/yr",
+      "trigger_type": "motor_carrier",
+      "est_annual_premium_usd": 68000,
+      "coverages": [
+        "Commercial Auto",
+        "Workers Comp"
+      ],
       "signals": [
         {
           "type": "new_motor_carrier_authority",
@@ -79,8 +91,15 @@
       "dm_title": "Chief Financial Officer",
       "dm_email": "gray@wcstexas.com",
       "dm_linkedin_url": "http://www.linkedin.com/in/gregory-don-ray",
-      "score": 59.98470322340773,
-      "insight": "With a funding of $442,000 secured today for hazardous waste treatment and disposal, the company may need increased insurance coverage.",
+      "score": 59.88712026499535,
+      "insight": "Pollution Liability + GL \u00b7 est. $8.0K/yr",
+      "trigger_type": "federal_contract",
+      "est_annual_premium_usd": 7955.999999999999,
+      "coverages": [
+        "Pollution Liability",
+        "GL",
+        "Workers Comp"
+      ],
       "signals": [
         {
           "type": "funding_raised",
@@ -110,8 +129,14 @@
       "dm_title": "President",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 59.98470320818483,
-      "insight": "Funding of $419,653 for engineering services was raised today, indicating a timely moment to discuss insurance options.",
+      "score": 59.88712025045384,
+      "insight": "Professional Liability (E&O) + GL \u00b7 est. $5.0K/yr",
+      "trigger_type": "federal_contract",
+      "est_annual_premium_usd": 5035.836,
+      "coverages": [
+        "Professional Liability (E&O)",
+        "GL"
+      ],
       "signals": [
         {
           "type": "funding_raised",
@@ -141,8 +166,14 @@
       "dm_title": "Vice President of Operations",
       "dm_email": "hkiger@daengineering.com",
       "dm_linkedin_url": "http://www.linkedin.com/in/hannah-kiger-sadler-7125658",
-      "score": 59.984703175878295,
-      "insight": "Won contract for architectural services worth $352,482, signaling expansion for DESIGN-AIRE ENGINEERING, INC.",
+      "score": 59.88712023817042,
+      "insight": "Professional Liability (E&O) + GL \u00b7 est. $4.2K/yr",
+      "trigger_type": "federal_contract",
+      "est_annual_premium_usd": 4229.784,
+      "coverages": [
+        "Professional Liability (E&O)",
+        "GL"
+      ],
       "signals": [
         {
           "type": "funding_raised",
@@ -172,8 +203,15 @@
       "dm_title": "General Manager",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 59.98470299578618,
-      "insight": "$359,072.67 in new funding raised today positions the company to expand their public shooting range offerings in Dallas.",
+      "score": 59.887120225438586,
+      "insight": "Cyber + E&O \u00b7 est. $4.3K/yr",
+      "trigger_type": "federal_contract",
+      "est_annual_premium_usd": 4308.87204,
+      "coverages": [
+        "Cyber",
+        "E&O",
+        "GL"
+      ],
       "signals": [
         {
           "type": "funding_raised",
@@ -203,8 +241,15 @@
       "dm_title": "Vice President/CFO",
       "dm_email": "jstrohecker@elitealuminum.com",
       "dm_linkedin_url": "http://www.linkedin.com/in/jeffrey-strohecker-bb607412",
-      "score": 59.984702963912746,
-      "insight": "With a recent funding raise of $397,143.80 for prefabricated metal building manufacturing, they signal growth in the construction sector.",
+      "score": 59.88712021347546,
+      "insight": "GL + Builders Risk \u00b7 est. $6.4K/yr",
+      "trigger_type": "federal_contract",
+      "est_annual_premium_usd": 6354.3008,
+      "coverages": [
+        "GL",
+        "Builders Risk",
+        "Workers Comp"
+      ],
       "signals": [
         {
           "type": "funding_raised",
@@ -234,8 +279,15 @@
       "dm_title": "CEO",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 59.984702827243574,
-      "insight": "Funding raised today includes a $498,389.90 contract for analytical laboratory instrument manufacturing, indicating growth.",
+      "score": 59.88712020149633,
+      "insight": "Professional Liability + Cyber \u00b7 est. $6.0K/yr",
+      "trigger_type": "federal_contract",
+      "est_annual_premium_usd": 5980.678800000001,
+      "coverages": [
+        "Professional Liability",
+        "Cyber",
+        "GL"
+      ],
       "signals": [
         {
           "type": "funding_raised",
@@ -265,8 +317,15 @@
       "dm_title": "VP/GM",
       "dm_email": "dennis.fallen@fisherbioservices.com",
       "dm_linkedin_url": "http://www.linkedin.com/in/dennis-fallen-70a5a17",
-      "score": 57.507475577017416,
-      "insight": "With $325,221 in funding raised today for testing laboratories, the company is a timely prospect for commercial insurance.",
+      "score": 57.41392286049934,
+      "insight": "Professional Liability + Cyber \u00b7 est. $3.9K/yr",
+      "trigger_type": "federal_contract",
+      "est_annual_premium_usd": 3902.65692,
+      "coverages": [
+        "Professional Liability",
+        "Cyber",
+        "GL"
+      ],
       "signals": [
         {
           "type": "funding_raised",
@@ -296,8 +355,15 @@
       "dm_title": "Controller",
       "dm_email": "coliphant@enviroapplications.com",
       "dm_linkedin_url": "http://www.linkedin.com/in/cynthia-oliphant-16298334",
-      "score": 51.69559179022588,
-      "insight": "The company has secured a contract for remediation services worth $267,087.75, making it essential to discuss their insurance options this week.",
+      "score": 51.61149371084704,
+      "insight": "Pollution Liability + GL \u00b7 est. $4.8K/yr",
+      "trigger_type": "federal_contract",
+      "est_annual_premium_usd": 4807.5795,
+      "coverages": [
+        "Pollution Liability",
+        "GL",
+        "Workers Comp"
+      ],
       "signals": [
         {
           "type": "funding_raised",
@@ -327,8 +393,14 @@
       "dm_title": "President",
       "dm_email": "rob.donofrio@cpmiteam.com",
       "dm_linkedin_url": "http://www.linkedin.com/in/rob-d-onofrio-pe-ceng-8882603",
-      "score": 50.883474058865886,
-      "insight": "With a contract for engineering services worth $258,964.50 raised today, the company is primed to secure essential coverage.",
+      "score": 50.80069695318527,
+      "insight": "Professional Liability (E&O) + GL \u00b7 est. $3.1K/yr",
+      "trigger_type": "federal_contract",
+      "est_annual_premium_usd": 3107.574,
+      "coverages": [
+        "Professional Liability (E&O)",
+        "GL"
+      ],
       "signals": [
         {
           "type": "funding_raised",
@@ -358,8 +430,14 @@
       "dm_title": "Owner / Officer",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 49.581080178719006,
-      "insight": "With a new motor carrier authority issued today for a fleet of 2 power units, Kenila Logistics LLC is a timely prospect.",
+      "score": 49.50042086830618,
+      "insight": "Commercial Auto $10K/yr + WC $18K/yr",
+      "trigger_type": "motor_carrier",
+      "est_annual_premium_usd": 28000,
+      "coverages": [
+        "Commercial Auto",
+        "Workers Comp"
+      ],
       "signals": [
         {
           "type": "new_motor_carrier_authority",
@@ -391,8 +469,15 @@
       "dm_title": "President/Owner",
       "dm_email": "vsavage@uptodatebookkeeping.com",
       "dm_linkedin_url": "http://www.linkedin.com/in/vickysavage",
-      "score": 49.14286792143853,
-      "insight": "Having raised $241,554 today for their clinical decision support resource, the company operates in the healthcare sector in Waltham, MA.",
+      "score": 49.06292242423492,
+      "insight": "Cyber + E&O \u00b7 est. $2.9K/yr",
+      "trigger_type": "federal_contract",
+      "est_annual_premium_usd": 2898.648,
+      "coverages": [
+        "Cyber",
+        "E&O",
+        "D&O"
+      ],
       "signals": [
         {
           "type": "funding_raised",
@@ -422,8 +507,14 @@
       "dm_title": "Owner / Officer",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 47.25232713675086,
-      "insight": "New motor carrier authority filed today for AB & SON LLC, with a fleet of 5 power units and 5 drivers in Midland, TX.",
+      "score": 47.17545627330826,
+      "insight": "Commercial Auto $25K/yr + WC $15K/yr",
+      "trigger_type": "motor_carrier",
+      "est_annual_premium_usd": 40000,
+      "coverages": [
+        "Commercial Auto",
+        "Workers Comp"
+      ],
       "signals": [
         {
           "type": "new_motor_carrier_authority",
@@ -455,8 +546,14 @@
       "dm_title": "Owner / Officer",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 46.38230078765475,
-      "insight": "With a new motor carrier authority registered today for one power unit and four drivers, the company is set for logistics operations.",
+      "score": 46.30684529610748,
+      "insight": "Commercial Auto $5K/yr + WC $12K/yr",
+      "trigger_type": "motor_carrier",
+      "est_annual_premium_usd": 17000,
+      "coverages": [
+        "Commercial Auto",
+        "Workers Comp"
+      ],
       "signals": [
         {
           "type": "new_motor_carrier_authority",
@@ -488,8 +585,14 @@
       "dm_title": "Owner / Officer",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 45.69907045730605,
-      "insight": "With a new motor carrier authority issued today for 4 power units and 2 drivers, they may require commercial auto insurance.",
+      "score": 45.624726456184455,
+      "insight": "Commercial Auto $20K/yr + WC $6K/yr",
+      "trigger_type": "motor_carrier",
+      "est_annual_premium_usd": 26000,
+      "coverages": [
+        "Commercial Auto",
+        "Workers Comp"
+      ],
       "signals": [
         {
           "type": "new_motor_carrier_authority",
@@ -517,12 +620,18 @@
       "country": "US",
       "city": "Los Angeles",
       "state": "CA",
-      "dm_name": "OTILIO NONE LOPEZ SR.",
+      "dm_name": "OTILIO LOPEZ SR.",
       "dm_title": "Owner / Officer",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 45.67724952697556,
-      "insight": "Commercial auto + WC for fleet size of 1, 4 drivers under new motor carrier authority issued on 2026-05-14.",
+      "score": 45.60294102721041,
+      "insight": "Commercial Auto $5K/yr + WC $12K/yr",
+      "trigger_type": "motor_carrier",
+      "est_annual_premium_usd": 17000,
+      "coverages": [
+        "Commercial Auto",
+        "Workers Comp"
+      ],
       "signals": [
         {
           "type": "new_motor_carrier_authority",
@@ -554,8 +663,14 @@
       "dm_title": "Owner / Officer",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 45.451786325839144,
-      "insight": "With a new motor carrier authority issued today for a fleet of 1 power unit and 4 drivers, the company operates in the logistics_transport sector in Frisco, TX.",
+      "score": 45.377844617305136,
+      "insight": "Commercial Auto $5K/yr + WC $12K/yr",
+      "trigger_type": "motor_carrier",
+      "est_annual_premium_usd": 17000,
+      "coverages": [
+        "Commercial Auto",
+        "Workers Comp"
+      ],
       "signals": [
         {
           "type": "new_motor_carrier_authority",
@@ -587,8 +702,14 @@
       "dm_title": "Owner/Member",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 45.451786314486725,
-      "insight": "Files new motor carrier authority for 1 power unit and 4 drivers as of May 14, 2026, for their installation services.",
+      "score": 45.377844608968495,
+      "insight": "Commercial Auto $5K/yr + WC $12K/yr",
+      "trigger_type": "motor_carrier",
+      "est_annual_premium_usd": 17000,
+      "coverages": [
+        "Commercial Auto",
+        "Workers Comp"
+      ],
       "signals": [
         {
           "type": "new_motor_carrier_authority",
@@ -609,37 +730,6 @@
       ]
     },
     {
-      "name": "MERIDIAN IMAGING SOLUTIONS, INC.",
-      "domain": "whymeridian.com",
-      "industry": "other",
-      "headcount": 0,
-      "country": "US",
-      "city": "Alexandria",
-      "state": "VA",
-      "dm_name": "Matt Williams",
-      "dm_title": "VP",
-      "dm_email": null,
-      "dm_linkedin_url": null,
-      "score": 45.439393383485054,
-      "insight": "D&O exposure as the company raises $204,509.81 in funding for an internet service provider contract today.",
-      "signals": [
-        {
-          "type": "funding_raised",
-          "captured_at": "2026-05-16T20:45:36.228585",
-          "days_ago": 0,
-          "payload": {
-            "filing_type": "Federal contract",
-            "filed_on": "",
-            "amount_usd": 204509.81,
-            "title": "contract: INTERNET SERVICE PROVIDERS",
-            "naics": "INTERNET SERVICE PROVIDERS",
-            "agency": "",
-            "state": "VA"
-          }
-        }
-      ]
-    },
-    {
       "name": "NAMBE PUEBLO HEALTHCARE SERVICES, LLC",
       "domain": null,
       "industry": "healthcare",
@@ -651,8 +741,15 @@
       "dm_title": null,
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 45.28633933676168,
-      "insight": "With a recent contract worth $202,978.88 in specialty trade contracting, they are active in Santa Fe's healthcare sector.",
+      "score": 45.2126676084488,
+      "insight": "Cyber + E&O \u00b7 est. $2.4K/yr",
+      "trigger_type": "federal_contract",
+      "est_annual_premium_usd": 2435.74656,
+      "coverages": [
+        "Cyber",
+        "E&O",
+        "GL"
+      ],
       "signals": [
         {
           "type": "funding_raised",
@@ -682,8 +779,15 @@
       "dm_title": "Training Management and Assessment Compliance Officer",
       "dm_email": "ryan.gregory@chenega.com",
       "dm_linkedin_url": "http://www.linkedin.com/in/ryan-gregory-69b86315a",
-      "score": 44.20680141593362,
-      "insight": "Raised $192,180.75 for SECURITY SYSTEMS SERVICES contract, underscoring their operations in sensitive government facilities.",
+      "score": 44.134886086880734,
+      "insight": "GL + E&O \u00b7 est. $2.9K/yr",
+      "trigger_type": "federal_contract",
+      "est_annual_premium_usd": 2882.71125,
+      "coverages": [
+        "GL",
+        "E&O",
+        "Workers Comp"
+      ],
       "signals": [
         {
           "type": "funding_raised",
@@ -713,8 +817,14 @@
       "dm_title": "Owner / Officer",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 44.10217192082599,
-      "insight": "With a new motor carrier authority issued today for 1 power unit and 3 drivers, the company is in a critical decision window.",
+      "score": 44.03042577646921,
+      "insight": "Commercial Auto $5K/yr + WC $9K/yr",
+      "trigger_type": "motor_carrier",
+      "est_annual_premium_usd": 14000,
+      "coverages": [
+        "Commercial Auto",
+        "Workers Comp"
+      ],
       "signals": [
         {
           "type": "new_motor_carrier_authority",
@@ -746,8 +856,14 @@
       "dm_title": "Owner / Officer",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 44.10217190998757,
-      "insight": "With a new motor carrier authority issued for 3 power units and drivers in Falls Church, VA, WPC LLC is entering the logistics sector.",
+      "score": 44.030425768179946,
+      "insight": "Commercial Auto $15K/yr + WC $9K/yr",
+      "trigger_type": "motor_carrier",
+      "est_annual_premium_usd": 24000,
+      "coverages": [
+        "Commercial Auto",
+        "Workers Comp"
+      ],
       "signals": [
         {
           "type": "new_motor_carrier_authority",
@@ -779,8 +895,14 @@
       "dm_title": "Owner / Officer",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 43.884483302590034,
-      "insight": "A new motor carrier authority was issued today for ICT PARTY BUS LLC, with a fleet size of 3 power units and 2 drivers.",
+      "score": 43.813091302478,
+      "insight": "Commercial Auto $15K/yr + WC $6K/yr",
+      "trigger_type": "motor_carrier",
+      "est_annual_premium_usd": 21000,
+      "coverages": [
+        "Commercial Auto",
+        "Workers Comp"
+      ],
       "signals": [
         {
           "type": "new_motor_carrier_authority",
@@ -812,8 +934,14 @@
       "dm_title": "Owner / Officer",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 43.183521328514345,
-      "insight": "Commercial auto + WC for fleet size 1 with 2 drivers and new motor carrier authority issued today.",
+      "score": 43.113269668170794,
+      "insight": "Commercial Auto $5K/yr + WC $6K/yr",
+      "trigger_type": "motor_carrier",
+      "est_annual_premium_usd": 11000,
+      "coverages": [
+        "Commercial Auto",
+        "Workers Comp"
+      ],
       "signals": [
         {
           "type": "new_motor_carrier_authority",
@@ -845,8 +973,14 @@
       "dm_title": "Chief Executive Officer",
       "dm_email": "nick@movecars.com",
       "dm_linkedin_url": "http://www.linkedin.com/in/nickolaus",
-      "score": 43.18352131077655,
-      "insight": "With a new motor carrier authority issued today for a fleet size of 2 power units, Covenant Ark LLC is in a critical window for coverage.",
+      "score": 43.113269659961965,
+      "insight": "Commercial Auto $10K/yr + WC $6K/yr",
+      "trigger_type": "motor_carrier",
+      "est_annual_premium_usd": 16000,
+      "coverages": [
+        "Commercial Auto",
+        "Workers Comp"
+      ],
       "signals": [
         {
           "type": "new_motor_carrier_authority",
@@ -878,8 +1012,14 @@
       "dm_title": "Director of Operations",
       "dm_email": "cstone@dmttruck.com",
       "dm_linkedin_url": "http://www.linkedin.com/in/colby-stone-8056a915a",
-      "score": 43.18352129784273,
-      "insight": "With a new motor carrier authority issued today for one power unit and two drivers, the company is likely seeking commercial auto coverage.",
+      "score": 43.113269652295,
+      "insight": "Commercial Auto $5K/yr + WC $6K/yr",
+      "trigger_type": "motor_carrier",
+      "est_annual_premium_usd": 11000,
+      "coverages": [
+        "Commercial Auto",
+        "Workers Comp"
+      ],
       "signals": [
         {
           "type": "new_motor_carrier_authority",
@@ -911,8 +1051,14 @@
       "dm_title": "Owner",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 43.18352128599444,
-      "insight": "With a new motor carrier authority issued today for 2 power units, the company is now authorized to operate in the trucking sector.",
+      "score": 43.11326964361348,
+      "insight": "Commercial Auto $10K/yr + WC $3K/yr",
+      "trigger_type": "motor_carrier",
+      "est_annual_premium_usd": 13000,
+      "coverages": [
+        "Commercial Auto",
+        "Workers Comp"
+      ],
       "signals": [
         {
           "type": "new_motor_carrier_authority",
@@ -944,8 +1090,14 @@
       "dm_title": "Owner / Officer",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 43.18352127565893,
-      "insight": "Files new motor carrier authority with 1 power unit and 2 drivers in Gonzales, TX, effective May 14, 2026.",
+      "score": 43.11326963561217,
+      "insight": "Commercial Auto $5K/yr + WC $6K/yr",
+      "trigger_type": "motor_carrier",
+      "est_annual_premium_usd": 11000,
+      "coverages": [
+        "Commercial Auto",
+        "Workers Comp"
+      ],
       "signals": [
         {
           "type": "new_motor_carrier_authority",
@@ -977,8 +1129,14 @@
       "dm_title": "Owner / Officer",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 43.18352126339491,
-      "insight": "Commercial auto + WC for TIMER TRUCKING LLC, with 1 power unit and 2 drivers, newly authorized today.",
+      "score": 43.113269627829915,
+      "insight": "Commercial Auto $5K/yr + WC $6K/yr",
+      "trigger_type": "motor_carrier",
+      "est_annual_premium_usd": 11000,
+      "coverages": [
+        "Commercial Auto",
+        "Workers Comp"
+      ],
       "signals": [
         {
           "type": "new_motor_carrier_authority",
@@ -1010,8 +1168,14 @@
       "dm_title": "Owner / Officer",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 42.547410268342546,
-      "insight": "With a new motor carrier authority issued today for 2 power units, the company is likely making swift insurance decisions.",
+      "score": 42.47819347304685,
+      "insight": "Commercial Auto $10K/yr + WC $3K/yr",
+      "trigger_type": "motor_carrier",
+      "est_annual_premium_usd": 13000,
+      "coverages": [
+        "Commercial Auto",
+        "Workers Comp"
+      ],
       "signals": [
         {
           "type": "new_motor_carrier_authority",
@@ -1043,8 +1207,14 @@
       "dm_title": "Chief Financial Officer",
       "dm_email": "ilewis@tmhmidsouth.com",
       "dm_linkedin_url": "http://www.linkedin.com/in/isaac-lewis-42a8177",
-      "score": 42.547410257112524,
-      "insight": "Adds 2 trucks to their fleet with a new motor carrier authority issued today for USDOT 4582459.",
+      "score": 42.47819346400474,
+      "insight": "Commercial Auto $10K/yr + WC $6K/yr",
+      "trigger_type": "motor_carrier",
+      "est_annual_premium_usd": 16000,
+      "coverages": [
+        "Commercial Auto",
+        "Workers Comp"
+      ],
       "signals": [
         {
           "type": "new_motor_carrier_authority",
@@ -1076,8 +1246,14 @@
       "dm_title": null,
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 42.5311378498702,
-      "insight": "New motor carrier authority issued today with a fleet size of 2 power units positions the company for growth in logistics.",
+      "score": 42.46194753296626,
+      "insight": "Commercial Auto $10K/yr + WC $3K/yr",
+      "trigger_type": "motor_carrier",
+      "est_annual_premium_usd": 13000,
+      "coverages": [
+        "Commercial Auto",
+        "Workers Comp"
+      ],
       "signals": [
         {
           "type": "new_motor_carrier_authority",
@@ -1101,7 +1277,7 @@
       "name": "DANCE OUT COMPETITION LLC",
       "domain": "thedanceout.com",
       "industry": "media_entertainment",
-      "headcount": 1,
+      "headcount": null,
       "country": "US",
       "city": "Liberty",
       "state": "MO",
@@ -1109,8 +1285,14 @@
       "dm_title": "Owner / Officer",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 42.5270942078511,
-      "insight": "New motor carrier authority issued today for a fleet size of 1 power unit, signaling the need for commercial auto coverage.",
+      "score": 42.45791047171617,
+      "insight": "Commercial Auto $5K/yr + WC $6K/yr",
+      "trigger_type": "motor_carrier",
+      "est_annual_premium_usd": 11000,
+      "coverages": [
+        "Commercial Auto",
+        "Workers Comp"
+      ],
       "signals": [
         {
           "type": "new_motor_carrier_authority",
@@ -1142,8 +1324,14 @@
       "dm_title": "Owner / Officer",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 42.317180195141255,
-      "insight": "Commercial auto + WC for a new motor carrier authority with a fleet size of 1 and 2 drivers issued today.",
+      "score": 42.248337952274454,
+      "insight": "Commercial Auto $5K/yr + WC $6K/yr",
+      "trigger_type": "motor_carrier",
+      "est_annual_premium_usd": 11000,
+      "coverages": [
+        "Commercial Auto",
+        "Workers Comp"
+      ],
       "signals": [
         {
           "type": "new_motor_carrier_authority",
@@ -1175,8 +1363,14 @@
       "dm_title": "CFO",
       "dm_email": "kkraus@rbm.us",
       "dm_linkedin_url": "http://www.linkedin.com/in/kade-kraus-01a78310",
-      "score": 42.31718018510364,
-      "insight": "With a new motor carrier authority issued today, the company is set for growth with a fleet size of 1 power unit and 2 drivers.",
+      "score": 42.24833794299882,
+      "insight": "Commercial Auto $5K/yr + WC $6K/yr",
+      "trigger_type": "motor_carrier",
+      "est_annual_premium_usd": 11000,
+      "coverages": [
+        "Commercial Auto",
+        "Workers Comp"
+      ],
       "signals": [
         {
           "type": "new_motor_carrier_authority",
@@ -1208,8 +1402,14 @@
       "dm_title": "Owner / President",
       "dm_email": "mkoura@vitaltransportcorp.com",
       "dm_linkedin_url": "http://www.linkedin.com/in/mohamed-koura-b5924544",
-      "score": 42.317180173753314,
-      "insight": "With a new motor carrier authority issued on May 14, 2026, and a fleet of 2 drivers, the company requires liability coverage.",
+      "score": 42.24833793448016,
+      "insight": "Commercial Auto $10K/yr + WC $6K/yr",
+      "trigger_type": "motor_carrier",
+      "est_annual_premium_usd": 16000,
+      "coverages": [
+        "Commercial Auto",
+        "Workers Comp"
+      ],
       "signals": [
         {
           "type": "new_motor_carrier_authority",
@@ -1241,8 +1441,14 @@
       "dm_title": "Company Officer",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 42.31718016370438,
-      "insight": "Commercial auto + WC for TOGETHER WE CAN TRANSIT SERVICES LLC with fleet size of 2 units and a new motor carrier authority issued today.",
+      "score": 42.248337926526396,
+      "insight": "Commercial Auto $10K/yr + WC $6K/yr",
+      "trigger_type": "motor_carrier",
+      "est_annual_premium_usd": 16000,
+      "coverages": [
+        "Commercial Auto",
+        "Workers Comp"
+      ],
       "signals": [
         {
           "type": "new_motor_carrier_authority",
@@ -1274,8 +1480,14 @@
       "dm_title": "Owner / Officer",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 42.31718015228616,
-      "insight": "Fleet size of 1 power unit and newly issued motor carrier authority on 2026-05-14 positions them for logistics insurance.",
+      "score": 42.24833791833537,
+      "insight": "Commercial Auto $5K/yr + WC $6K/yr",
+      "trigger_type": "motor_carrier",
+      "est_annual_premium_usd": 11000,
+      "coverages": [
+        "Commercial Auto",
+        "Workers Comp"
+      ],
       "signals": [
         {
           "type": "new_motor_carrier_authority",
@@ -1307,8 +1519,14 @@
       "dm_title": "Owner",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 41.58750259712498,
-      "insight": "Files new motor carrier authority with 1 truck, effective May 14, 2026.",
+      "score": 41.519847415890425,
+      "insight": "Commercial Auto $5K/yr + WC $3K/yr",
+      "trigger_type": "motor_carrier",
+      "est_annual_premium_usd": 8000,
+      "coverages": [
+        "Commercial Auto",
+        "Workers Comp"
+      ],
       "signals": [
         {
           "type": "new_motor_carrier_authority",
@@ -1340,8 +1558,14 @@
       "dm_title": "Owner / Officer",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 41.58413146502722,
-      "insight": "With a new motor carrier authority issued today for a fleet of 1 power unit and 1 driver, they are ready to expand their trucking services.",
+      "score": 41.51648177328626,
+      "insight": "Commercial Auto $5K/yr + WC $3K/yr",
+      "trigger_type": "motor_carrier",
+      "est_annual_premium_usd": 8000,
+      "coverages": [
+        "Commercial Auto",
+        "Workers Comp"
+      ],
       "signals": [
         {
           "type": "new_motor_carrier_authority",
@@ -1373,8 +1597,14 @@
       "dm_title": "Owner / Officer",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 41.58413145330638,
-      "insight": "Files for new motor carrier authority with 1 power unit, effective May 14, 2026.",
+      "score": 41.516481764615406,
+      "insight": "Commercial Auto $5K/yr + WC $3K/yr",
+      "trigger_type": "motor_carrier",
+      "est_annual_premium_usd": 8000,
+      "coverages": [
+        "Commercial Auto",
+        "Workers Comp"
+      ],
       "signals": [
         {
           "type": "new_motor_carrier_authority",
@@ -1406,8 +1636,14 @@
       "dm_title": "Owner / Officer",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 41.58413144352048,
-      "insight": "A new motor carrier authority issued today with one power unit makes this lead relevant for commercial auto coverage.",
+      "score": 41.51648175716579,
+      "insight": "Commercial Auto $5K/yr + WC $3K/yr",
+      "trigger_type": "motor_carrier",
+      "est_annual_premium_usd": 8000,
+      "coverages": [
+        "Commercial Auto",
+        "Workers Comp"
+      ],
       "signals": [
         {
           "type": "new_motor_carrier_authority",
@@ -1439,8 +1675,14 @@
       "dm_title": "Owner / Officer",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 41.5841314326559,
-      "insight": "Files new motor carrier authority with 1 power unit effective May 14, 2026.",
+      "score": 41.516481748916824,
+      "insight": "Commercial Auto $5K/yr + WC $3K/yr",
+      "trigger_type": "motor_carrier",
+      "est_annual_premium_usd": 8000,
+      "coverages": [
+        "Commercial Auto",
+        "Workers Comp"
+      ],
       "signals": [
         {
           "type": "new_motor_carrier_authority",
@@ -1472,8 +1714,14 @@
       "dm_title": "Owner / Officer",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 41.58413142150221,
-      "insight": "A new motor carrier authority was issued today for QUINNS TRANSPORT LLC with a fleet size of 1 power unit.",
+      "score": 41.51648174085659,
+      "insight": "Commercial Auto $5K/yr + WC $3K/yr",
+      "trigger_type": "motor_carrier",
+      "est_annual_premium_usd": 8000,
+      "coverages": [
+        "Commercial Auto",
+        "Workers Comp"
+      ],
       "signals": [
         {
           "type": "new_motor_carrier_authority",
@@ -1505,8 +1753,13 @@
       "dm_title": "Owner / Officer",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 41.58413141061539,
-      "insight": "Commercial auto + WC for new motor carrier authority issued today (USDOT 4582551) for EVINN JAMES TRANSPORT.",
+      "score": 41.516481733529105,
+      "insight": "Commercial Auto \u00b7 est. $5K/yr",
+      "trigger_type": "motor_carrier",
+      "est_annual_premium_usd": 5000,
+      "coverages": [
+        "Commercial Auto"
+      ],
       "signals": [
         {
           "type": "new_motor_carrier_authority",
@@ -1538,8 +1791,14 @@
       "dm_title": "Owner / Officer",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 41.58413140052924,
-      "insight": "With a new motor carrier authority issued today for a fleet of 1 power unit and 1 driver, they're entering the logistics sector.",
+      "score": 41.516481725413364,
+      "insight": "Commercial Auto $5K/yr + WC $3K/yr",
+      "trigger_type": "motor_carrier",
+      "est_annual_premium_usd": 8000,
+      "coverages": [
+        "Commercial Auto",
+        "Workers Comp"
+      ],
       "signals": [
         {
           "type": "new_motor_carrier_authority",
@@ -1571,8 +1830,14 @@
       "dm_title": "Owner / Officer",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 41.58413139030965,
-      "insight": "Fleet size of 1 and new motor carrier authority issued today positions them for enhanced operational capacity.",
+      "score": 41.51648171707557,
+      "insight": "Commercial Auto $5K/yr + WC $3K/yr",
+      "trigger_type": "motor_carrier",
+      "est_annual_premium_usd": 8000,
+      "coverages": [
+        "Commercial Auto",
+        "Workers Comp"
+      ],
       "signals": [
         {
           "type": "new_motor_carrier_authority",
@@ -1604,8 +1869,14 @@
       "dm_title": "Owner / Officer",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 41.58413137835528,
-      "insight": "With a new motor carrier authority issued today and one power unit, the company is in an ideal position to secure essential coverage.",
+      "score": 41.51648170924849,
+      "insight": "Commercial Auto $5K/yr + WC $3K/yr",
+      "trigger_type": "motor_carrier",
+      "est_annual_premium_usd": 8000,
+      "coverages": [
+        "Commercial Auto",
+        "Workers Comp"
+      ],
       "signals": [
         {
           "type": "new_motor_carrier_authority",
@@ -1637,8 +1908,14 @@
       "dm_title": "President, CEO",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 41.58413136848042,
-      "insight": "With a new motor carrier authority granted today for one power unit and one driver, they are launching logistics services in Pembroke Pines.",
+      "score": 41.51648170101062,
+      "insight": "Commercial Auto $5K/yr + WC $3K/yr",
+      "trigger_type": "motor_carrier",
+      "est_annual_premium_usd": 8000,
+      "coverages": [
+        "Commercial Auto",
+        "Workers Comp"
+      ],
       "signals": [
         {
           "type": "new_motor_carrier_authority",
@@ -1670,8 +1947,14 @@
       "dm_title": "Owner",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 40.97158004460909,
-      "insight": "With a new motor carrier authority issued today for 1 power unit and 1 driver, they are positioned for insurance needs.",
+      "score": 40.90492688774677,
+      "insight": "Commercial Auto $5K/yr + WC $3K/yr",
+      "trigger_type": "motor_carrier",
+      "est_annual_premium_usd": 8000,
+      "coverages": [
+        "Commercial Auto",
+        "Workers Comp"
+      ],
       "signals": [
         {
           "type": "new_motor_carrier_authority",
@@ -1703,8 +1986,13 @@
       "dm_title": "Owner / Officer",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 40.971580034978295,
-      "insight": "New motor carrier authority issued today with USDOT 4582454 for HIGH TORQUE LLC, specializing in interstate freight.",
+      "score": 40.904926878886414,
+      "insight": "Commercial Auto \u00b7 est. $5K/yr",
+      "trigger_type": "motor_carrier",
+      "est_annual_premium_usd": 5000,
+      "coverages": [
+        "Commercial Auto"
+      ],
       "signals": [
         {
           "type": "new_motor_carrier_authority",
@@ -1736,8 +2024,13 @@
       "dm_title": "Owner / Officer",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 40.97158002328768,
-      "insight": "With a new motor carrier authority issued today, the company is now eligible to operate a logistics fleet in Jasper, TN.",
+      "score": 40.904926870890215,
+      "insight": "Commercial Auto \u00b7 est. $5K/yr",
+      "trigger_type": "motor_carrier",
+      "est_annual_premium_usd": 5000,
+      "coverages": [
+        "Commercial Auto"
+      ],
       "signals": [
         {
           "type": "new_motor_carrier_authority",
@@ -1769,8 +2062,14 @@
       "dm_title": "Owner / Officer",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 40.971580013426795,
-      "insight": "New motor carrier authority issued today with 1 power unit and 1 driver; the company may need commercial auto insurance.",
+      "score": 40.904926863265935,
+      "insight": "Commercial Auto $5K/yr + WC $3K/yr",
+      "trigger_type": "motor_carrier",
+      "est_annual_premium_usd": 8000,
+      "coverages": [
+        "Commercial Auto",
+        "Workers Comp"
+      ],
       "signals": [
         {
           "type": "new_motor_carrier_authority",
@@ -1802,8 +2101,14 @@
       "dm_title": "Owner",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 40.96664862594357,
-      "insight": "With a new motor carrier authority issued today for 1 power unit, the company is expanding its operations in construction.",
+      "score": 40.90000350114348,
+      "insight": "Commercial Auto $5K/yr + WC $3K/yr",
+      "trigger_type": "motor_carrier",
+      "est_annual_premium_usd": 8000,
+      "coverages": [
+        "Commercial Auto",
+        "Workers Comp"
+      ],
       "signals": [
         {
           "type": "new_motor_carrier_authority",
@@ -1835,8 +2140,14 @@
       "dm_title": "Owner / Officer",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 40.95591027858283,
-      "insight": "Commercial auto + WC for E&O TRUCKING LLC with a new motor carrier authority issued today for 1 power unit and 1 driver.",
+      "score": 40.889282623395566,
+      "insight": "Commercial Auto $5K/yr + WC $3K/yr",
+      "trigger_type": "motor_carrier",
+      "est_annual_premium_usd": 8000,
+      "coverages": [
+        "Commercial Auto",
+        "Workers Comp"
+      ],
       "signals": [
         {
           "type": "new_motor_carrier_authority",
@@ -1868,8 +2179,14 @@
       "dm_title": "Owner / Officer",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 40.95591026593287,
-      "insight": "With a new motor carrier authority issued today for one power unit, the company is ready to secure essential insurance before operations begin.",
+      "score": 40.88928261335767,
+      "insight": "Commercial Auto $5K/yr + WC $3K/yr",
+      "trigger_type": "motor_carrier",
+      "est_annual_premium_usd": 8000,
+      "coverages": [
+        "Commercial Auto",
+        "Workers Comp"
+      ],
       "signals": [
         {
           "type": "new_motor_carrier_authority",
@@ -1901,8 +2218,14 @@
       "dm_title": "Founder / CEO",
       "dm_email": "mitch@junkmastersmn.com",
       "dm_linkedin_url": "http://www.linkedin.com/in/mitch-harrison-0804b915a",
-      "score": 40.95591025396196,
-      "insight": "With a new motor carrier authority issued today for 1 power unit and 1 driver, the company is expanding their logistics capabilities.",
+      "score": 40.88928260424922,
+      "insight": "Commercial Auto $5K/yr + WC $3K/yr",
+      "trigger_type": "motor_carrier",
+      "est_annual_premium_usd": 8000,
+      "coverages": [
+        "Commercial Auto",
+        "Workers Comp"
+      ],
       "signals": [
         {
           "type": "new_motor_carrier_authority",
@@ -1934,8 +2257,14 @@
       "dm_title": "Owner / Officer",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 40.9559102434039,
-      "insight": "A new motor carrier authority for 1 power unit has been issued to the company today, indicating an imminent need for general liability and workers compensation.",
+      "score": 40.889282595949915,
+      "insight": "Commercial Auto $5K/yr + WC $3K/yr",
+      "trigger_type": "motor_carrier",
+      "est_annual_premium_usd": 8000,
+      "coverages": [
+        "Commercial Auto",
+        "Workers Comp"
+      ],
       "signals": [
         {
           "type": "new_motor_carrier_authority",
@@ -1967,8 +2296,14 @@
       "dm_title": "Owner / Officer",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 40.95591023403965,
-      "insight": "New motor carrier authority filed today with a fleet size of 1, indicating MARYJ SERVICES CORP is entering the logistics sector.",
+      "score": 40.88928258624005,
+      "insight": "Commercial Auto $5K/yr + WC $3K/yr",
+      "trigger_type": "motor_carrier",
+      "est_annual_premium_usd": 8000,
+      "coverages": [
+        "Commercial Auto",
+        "Workers Comp"
+      ],
       "signals": [
         {
           "type": "new_motor_carrier_authority",
@@ -2000,8 +2335,14 @@
       "dm_title": "Owner / Officer",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 40.95591022372254,
-      "insight": "A new motor carrier authority has been issued today for TREE WRANGLER SERVICE LLC, with a fleet size of 1 power unit.",
+      "score": 40.88928257847654,
+      "insight": "Commercial Auto $5K/yr + WC $3K/yr",
+      "trigger_type": "motor_carrier",
+      "est_annual_premium_usd": 8000,
+      "coverages": [
+        "Commercial Auto",
+        "Workers Comp"
+      ],
       "signals": [
         {
           "type": "new_motor_carrier_authority",
@@ -2033,8 +2374,14 @@
       "dm_title": "Owner / Officer",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 40.95201634537493,
-      "insight": "Filed new motor carrier authority with 1 power unit, effective May 14, 2026.",
+      "score": 40.88539503834158,
+      "insight": "Commercial Auto $5K/yr + WC $3K/yr",
+      "trigger_type": "motor_carrier",
+      "est_annual_premium_usd": 8000,
+      "coverages": [
+        "Commercial Auto",
+        "Workers Comp"
+      ],
       "signals": [
         {
           "type": "new_motor_carrier_authority",
@@ -2066,8 +2413,13 @@
       "dm_title": "Owner / Officer",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 40.95201633577064,
-      "insight": "New motor carrier authority issued today for USDOT 4582436, placing AJ EXPRESS CARGO LLC in the logistics industry.",
+      "score": 40.885395030152395,
+      "insight": "Commercial Auto \u00b7 est. $5K/yr",
+      "trigger_type": "motor_carrier",
+      "est_annual_premium_usd": 5000,
+      "coverages": [
+        "Commercial Auto"
+      ],
       "signals": [
         {
           "type": "new_motor_carrier_authority",
@@ -2099,8 +2451,13 @@
       "dm_title": "Owner / Officer",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 40.952016325202635,
-      "insight": "They have a new motor carrier authority issued today, marking a crucial moment for securing liability coverage for their fleet.",
+      "score": 40.885395021569614,
+      "insight": "Commercial Auto \u00b7 est. $5K/yr",
+      "trigger_type": "motor_carrier",
+      "est_annual_premium_usd": 5000,
+      "coverages": [
+        "Commercial Auto"
+      ],
       "signals": [
         {
           "type": "new_motor_carrier_authority",
@@ -2132,8 +2489,13 @@
       "dm_title": "Owner / Officer",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 40.95201631614591,
-      "insight": "With a new motor carrier authority issued today, the company is set to operate under USDOT 4582440, indicating a fleet expansion.",
+      "score": 40.88539501409111,
+      "insight": "Commercial Auto \u00b7 est. $5K/yr",
+      "trigger_type": "motor_carrier",
+      "est_annual_premium_usd": 5000,
+      "coverages": [
+        "Commercial Auto"
+      ],
       "signals": [
         {
           "type": "new_motor_carrier_authority",
@@ -2165,8 +2527,15 @@
       "dm_title": null,
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 40.80789622191158,
-      "insight": "With a recent funding of $158,183.03 for administrative management consulting services, the company operates in Fairfax, VA.",
+      "score": 40.741509825321515,
+      "insight": "E&O + D&O \u00b7 est. $1.6K/yr",
+      "trigger_type": "federal_contract",
+      "est_annual_premium_usd": 1581.8303,
+      "coverages": [
+        "E&O",
+        "D&O",
+        "GL"
+      ],
       "signals": [
         {
           "type": "funding_raised",
@@ -2196,8 +2565,14 @@
       "dm_title": "Owner",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 40.74987689839306,
-      "insight": "Files for new motor carrier authority with 1 power unit effective May 14, 2026.",
+      "score": 40.68358443187924,
+      "insight": "Commercial Auto $5K/yr + WC $3K/yr",
+      "trigger_type": "motor_carrier",
+      "est_annual_premium_usd": 8000,
+      "coverages": [
+        "Commercial Auto",
+        "Workers Comp"
+      ],
       "signals": [
         {
           "type": "new_motor_carrier_authority",
@@ -2229,8 +2604,14 @@
       "dm_title": "President",
       "dm_email": null,
       "dm_linkedin_url": "http://www.linkedin.com/in/lawrence-shub-3b86b810",
-      "score": 40.74987688902143,
-      "insight": "New motor carrier authority issued today with a fleet size of 1 for FLO MECHANICAL LLC, indicating their expansion into transportation.",
+      "score": 40.6835844240895,
+      "insight": "Commercial Auto $5K/yr + WC $3K/yr",
+      "trigger_type": "motor_carrier",
+      "est_annual_premium_usd": 8000,
+      "coverages": [
+        "Commercial Auto",
+        "Workers Comp"
+      ],
       "signals": [
         {
           "type": "new_motor_carrier_authority",
@@ -2262,8 +2643,14 @@
       "dm_title": "Owner / Officer",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 40.74987687920301,
-      "insight": "Commercial auto + WC for new motor carrier authority (USDOT: 4582414) with 1 power unit issued today in Albany, NY.",
+      "score": 40.683584416495606,
+      "insight": "Commercial Auto $5K/yr + WC $3K/yr",
+      "trigger_type": "motor_carrier",
+      "est_annual_premium_usd": 8000,
+      "coverages": [
+        "Commercial Auto",
+        "Workers Comp"
+      ],
       "signals": [
         {
           "type": "new_motor_carrier_authority",
@@ -2295,8 +2682,14 @@
       "dm_title": "Founder",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 40.74987686990766,
-      "insight": "With a new motor carrier authority issued today for 1 power unit, the company may need commercial auto coverage soon.",
+      "score": 40.68358440922808,
+      "insight": "Commercial Auto $5K/yr + WC $3K/yr",
+      "trigger_type": "motor_carrier",
+      "est_annual_premium_usd": 8000,
+      "coverages": [
+        "Commercial Auto",
+        "Workers Comp"
+      ],
       "signals": [
         {
           "type": "new_motor_carrier_authority",
@@ -2328,8 +2721,14 @@
       "dm_title": "Owner / Officer",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 40.7498768598495,
-      "insight": "With a new motor carrier authority issued today for a fleet size of 1 power unit, the company is entering the logistics sector.",
+      "score": 40.683584396803674,
+      "insight": "Commercial Auto $5K/yr + WC $3K/yr",
+      "trigger_type": "motor_carrier",
+      "est_annual_premium_usd": 8000,
+      "coverages": [
+        "Commercial Auto",
+        "Workers Comp"
+      ],
       "signals": [
         {
           "type": "new_motor_carrier_authority",
@@ -2361,8 +2760,14 @@
       "dm_title": null,
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 40.74987684972596,
-      "insight": "Files new motor carrier authority with 1 power unit effective 2026-05-14, indicating entry into freight transportation.",
+      "score": 40.683584388491724,
+      "insight": "Commercial Auto $5K/yr + WC $3K/yr",
+      "trigger_type": "motor_carrier",
+      "est_annual_premium_usd": 8000,
+      "coverages": [
+        "Commercial Auto",
+        "Workers Comp"
+      ],
       "signals": [
         {
           "type": "new_motor_carrier_authority",
@@ -2394,8 +2799,14 @@
       "dm_title": null,
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 40.7498768396896,
-      "insight": "New motor carrier authority issued today for Novalink Freight Inc with a fleet size of 1 power unit.",
+      "score": 40.68358437957052,
+      "insight": "Commercial Auto $5K/yr + WC $3K/yr",
+      "trigger_type": "motor_carrier",
+      "est_annual_premium_usd": 8000,
+      "coverages": [
+        "Commercial Auto",
+        "Workers Comp"
+      ],
       "signals": [
         {
           "type": "new_motor_carrier_authority",
@@ -2427,8 +2838,14 @@
       "dm_title": "Owner / Officer",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 40.74987682942439,
-      "insight": "New motor carrier authority issued today for Duleski Transport LLC, fleet size 1 tractor and 1 driver, effective May 14, 2026.",
+      "score": 40.683584370899545,
+      "insight": "Commercial Auto $5K/yr + WC $3K/yr",
+      "trigger_type": "motor_carrier",
+      "est_annual_premium_usd": 8000,
+      "coverages": [
+        "Commercial Auto",
+        "Workers Comp"
+      ],
       "signals": [
         {
           "type": "new_motor_carrier_authority",
@@ -2460,8 +2877,14 @@
       "dm_title": "Director of Operations",
       "dm_email": null,
       "dm_linkedin_url": "http://www.linkedin.com/in/alison-sawyer",
-      "score": 40.74987679862877,
-      "insight": "Adds 1 truck to their fleet with a new motor carrier authority issued May 14, 2026.",
+      "score": 40.68358436214153,
+      "insight": "Commercial Auto $5K/yr + WC $3K/yr",
+      "trigger_type": "motor_carrier",
+      "est_annual_premium_usd": 8000,
+      "coverages": [
+        "Commercial Auto",
+        "Workers Comp"
+      ],
       "signals": [
         {
           "type": "new_motor_carrier_authority",
@@ -2493,8 +2916,14 @@
       "dm_title": "Owner",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 40.749876786892436,
-      "insight": "Fleet size of 1 and a new motor carrier authority issued today (USDOT 4582425) signal LEONELS TRUCKING INC's entry into the logistics market.",
+      "score": 40.68358434500629,
+      "insight": "Commercial Auto $5K/yr + WC $3K/yr",
+      "trigger_type": "motor_carrier",
+      "est_annual_premium_usd": 8000,
+      "coverages": [
+        "Commercial Auto",
+        "Workers Comp"
+      ],
       "signals": [
         {
           "type": "new_motor_carrier_authority",
@@ -2526,8 +2955,14 @@
       "dm_title": "Owner / Officer",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 40.74987677728107,
-      "insight": "With a new motor carrier authority issued today for a fleet size of 1 power unit, they are in prime decision-making mode.",
+      "score": 40.68358433608508,
+      "insight": "Commercial Auto $5K/yr + WC $3K/yr",
+      "trigger_type": "motor_carrier",
+      "est_annual_premium_usd": 8000,
+      "coverages": [
+        "Commercial Auto",
+        "Workers Comp"
+      ],
       "signals": [
         {
           "type": "new_motor_carrier_authority",
@@ -2559,8 +2994,14 @@
       "dm_title": "President",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 40.7498767664601,
-      "insight": "With a new motor carrier authority issued today for a single power unit, the company may need commercial auto insurance.",
+      "score": 40.68358432784928,
+      "insight": "Commercial Auto $5K/yr + WC $3K/yr",
+      "trigger_type": "motor_carrier",
+      "est_annual_premium_usd": 8000,
+      "coverages": [
+        "Commercial Auto",
+        "Workers Comp"
+      ],
       "signals": [
         {
           "type": "new_motor_carrier_authority",
@@ -2592,8 +3033,15 @@
       "dm_title": "President",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 39.8228445013305,
-      "insight": "A $148,330 contract for administrative management services signals a strategic expansion for the company.",
+      "score": 39.7580603974281,
+      "insight": "E&O + D&O \u00b7 est. $1.5K/yr",
+      "trigger_type": "federal_contract",
+      "est_annual_premium_usd": 1483.3,
+      "coverages": [
+        "E&O",
+        "D&O",
+        "GL"
+      ],
       "signals": [
         {
           "type": "funding_raised",
@@ -2623,8 +3071,15 @@
       "dm_title": "President",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 36.27974806863469,
-      "insight": "They secured a $112,890 contract in miscellaneous fabricated metal product manufacturing, highlighting a potential need for liability coverage.",
+      "score": 36.220727875868214,
+      "insight": "Product Liability + GL \u00b7 est. $1.6K/yr",
+      "trigger_type": "federal_contract",
+      "est_annual_premium_usd": 1580.46,
+      "coverages": [
+        "Product Liability",
+        "GL",
+        "Workers Comp"
+      ],
       "signals": [
         {
           "type": "funding_raised",
@@ -2654,8 +3109,14 @@
       "dm_title": null,
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 35.762976018528256,
-      "insight": "The company secured $107,720.96 in contract funding for architectural services, necessitating coverage for their operations.",
+      "score": 35.704796343827546,
+      "insight": "Professional Liability (E&O) + GL \u00b7 est. $1.3K/yr",
+      "trigger_type": "federal_contract",
+      "est_annual_premium_usd": 1292.6515200000001,
+      "coverages": [
+        "Professional Liability (E&O)",
+        "GL"
+      ],
       "signals": [
         {
           "type": "funding_raised",
@@ -2685,8 +3146,14 @@
       "dm_title": "President",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 35.32712708816098,
-      "insight": "With a contract for architectural services valued at $103,361.36 secured today, the company may need immediate coverage solutions.",
+      "score": 35.26965652756033,
+      "insight": "Professional Liability (E&O) + GL \u00b7 est. $1.2K/yr",
+      "trigger_type": "federal_contract",
+      "est_annual_premium_usd": 1240.3363200000001,
+      "coverages": [
+        "Professional Liability (E&O)",
+        "GL"
+      ],
       "signals": [
         {
           "type": "funding_raised",
@@ -2716,8 +3183,15 @@
       "dm_title": "Director of Operations & Business Development Manager, Mid Atlantic Region",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 34.56038650894222,
-      "insight": "With $95,692 in funding raised today for local delivery contracts, the company is in a prime window for securing insurance.",
+      "score": 34.50416339166181,
+      "insight": "Commercial Auto + GL \u00b7 est. $1.7K/yr",
+      "trigger_type": "federal_contract",
+      "est_annual_premium_usd": 1722.456,
+      "coverages": [
+        "Commercial Auto",
+        "GL",
+        "Workers Comp"
+      ],
       "signals": [
         {
           "type": "funding_raised",
@@ -2747,8 +3221,15 @@
       "dm_title": null,
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 34.4629654810268,
-      "insight": "Funding of $94,717.54 was raised today for Strategic Communications LLC, indicating a need for enhanced commercial insurance solutions.",
+      "score": 34.40690071490523,
+      "insight": "Cyber + E&O \u00b7 est. $1.1K/yr",
+      "trigger_type": "federal_contract",
+      "est_annual_premium_usd": 1136.61048,
+      "coverages": [
+        "Cyber",
+        "E&O",
+        "GL"
+      ],
       "signals": [
         {
           "type": "funding_raised",
@@ -2778,8 +3259,15 @@
       "dm_title": null,
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 33.356591612823806,
-      "insight": "Contract amount of $83,650.98 for water supply services indicates a need for General Liability and Commercial Auto coverage.",
+      "score": 33.302326710137756,
+      "insight": "GL + Pollution Liability \u00b7 est. $1.2K/yr",
+      "trigger_type": "federal_contract",
+      "est_annual_premium_usd": 1171.11372,
+      "coverages": [
+        "GL",
+        "Pollution Liability",
+        "Property"
+      ],
       "signals": [
         {
           "type": "funding_raised",
@@ -2809,8 +3297,15 @@
       "dm_title": "Owner",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 33.31859414258976,
-      "insight": "Funding raised today for a contract worth $83,270.91 in commercial and institutional building construction makes them a strong prospect.",
+      "score": 33.26439120828627,
+      "insight": "GL + Builders Risk \u00b7 est. $1.3K/yr",
+      "trigger_type": "federal_contract",
+      "est_annual_premium_usd": 1332.33456,
+      "coverages": [
+        "GL",
+        "Builders Risk",
+        "Workers Comp"
+      ],
       "signals": [
         {
           "type": "funding_raised",
@@ -2840,8 +3335,15 @@
       "dm_title": "President",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 31.508639838414677,
-      "insight": "A contract for prefabricated metal building manufacturing worth $65,166.75 was secured today, signaling a potential insurance need.",
+      "score": 31.457381220601917,
+      "insight": "GL + Builders Risk \u00b7 est. $1.0K/yr",
+      "trigger_type": "federal_contract",
+      "est_annual_premium_usd": 1042.6680000000001,
+      "coverages": [
+        "GL",
+        "Builders Risk",
+        "Workers Comp"
+      ],
       "signals": [
         {
           "type": "funding_raised",
@@ -2871,8 +3373,14 @@
       "dm_title": "President and CEO",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 30.12906551685035,
-      "insight": "With $51,367.49 in funding raised today for a contract related to FITNESS AND RECREATIONAL SPORTS CENTERS, they may need new commercial insurance coverage.",
+      "score": 30.0800513335914,
+      "insight": "GL + Professional Liability \u00b7 est. $616/yr",
+      "trigger_type": "federal_contract",
+      "est_annual_premium_usd": 616.40988,
+      "coverages": [
+        "GL",
+        "Professional Liability"
+      ],
       "signals": [
         {
           "type": "funding_raised",
@@ -2902,8 +3410,15 @@
       "dm_title": "President & CEO",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 29.84160693123537,
-      "insight": "Workers Compensation + D&O exposure as the company secured a $48,492 contract for environmental consulting services today.",
+      "score": 29.793060274874016,
+      "insight": "E&O + D&O \u00b7 est. $485/yr",
+      "trigger_type": "federal_contract",
+      "est_annual_premium_usd": 484.9217,
+      "coverages": [
+        "E&O",
+        "D&O",
+        "GL"
+      ],
       "signals": [
         {
           "type": "funding_raised",
@@ -2933,8 +3448,15 @@
       "dm_title": "CEO",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 29.71080624975115,
-      "insight": "Secured contract for professional and management development training worth $47,183.83 today.",
+      "score": 29.662472412876916,
+      "insight": "E&O + D&O \u00b7 est. $472/yr",
+      "trigger_type": "federal_contract",
+      "est_annual_premium_usd": 471.8383,
+      "coverages": [
+        "E&O",
+        "D&O",
+        "GL"
+      ],
       "signals": [
         {
           "type": "funding_raised",
@@ -2964,8 +3486,15 @@
       "dm_title": null,
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 29.657436914121337,
-      "insight": "Won contract for water supply and irrigation systems for $46,650, enhancing service offerings in water treatment solutions.",
+      "score": 29.60918983790495,
+      "insight": "GL + Pollution Liability \u00b7 est. $653/yr",
+      "trigger_type": "federal_contract",
+      "est_annual_premium_usd": 653.1,
+      "coverages": [
+        "GL",
+        "Pollution Liability",
+        "Property"
+      ],
       "signals": [
         {
           "type": "funding_raised",
@@ -2995,8 +3524,15 @@
       "dm_title": null,
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 28.269990804020782,
-      "insight": "$32,772 contract awarded today in the real estate sector suggests funding activity for Communications Leasing Inc.",
+      "score": 28.224000765857678,
+      "insight": "Cyber + E&O \u00b7 est. $393/yr",
+      "trigger_type": "federal_contract",
+      "est_annual_premium_usd": 393.264,
+      "coverages": [
+        "Cyber",
+        "E&O",
+        "GL"
+      ],
       "signals": [
         {
           "type": "funding_raised",
@@ -3026,8 +3562,15 @@
       "dm_title": "Managing Member",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 28.183072803468804,
-      "insight": "Raised $31,902.60 for a contract in commercial and institutional building construction.",
+      "score": 28.13722432507618,
+      "insight": "GL + Builders Risk \u00b7 est. $510/yr",
+      "trigger_type": "federal_contract",
+      "est_annual_premium_usd": 510.4416,
+      "coverages": [
+        "GL",
+        "Builders Risk",
+        "Workers Comp"
+      ],
       "signals": [
         {
           "type": "funding_raised",
@@ -3057,8 +3600,15 @@
       "dm_title": "CEO",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 28.094397438845892,
-      "insight": "Won contract for computing infrastructure services worth $31,015.62 today.",
+      "score": 28.048693190940376,
+      "insight": "Cyber + E&O \u00b7 est. $372/yr",
+      "trigger_type": "federal_contract",
+      "est_annual_premium_usd": 372.18744,
+      "coverages": [
+        "Cyber",
+        "E&O",
+        "D&O"
+      ],
       "signals": [
         {
           "type": "funding_raised",
@@ -3088,8 +3638,14 @@
       "dm_title": null,
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 27.525876464258836,
-      "insight": "A contract for translation and interpretation services worth $25,328.96 was awarded today, signaling potential insurance needs.",
+      "score": 27.481097044113458,
+      "insight": "E&O + GL \u00b7 est. $203/yr",
+      "trigger_type": "federal_contract",
+      "est_annual_premium_usd": 202.63168,
+      "coverages": [
+        "E&O",
+        "GL"
+      ],
       "signals": [
         {
           "type": "funding_raised",
@@ -3119,8 +3675,15 @@
       "dm_title": null,
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 24.99054918776204,
-      "insight": "Funding of Estately Operations LLC filed today indicates potential for increased liability and workers compensation needs.",
+      "score": 24.949894351956075,
+      "insight": "D&O + EPLI \u00b7 post-funding policy",
+      "trigger_type": "funding_event",
+      "est_annual_premium_usd": null,
+      "coverages": [
+        "D&O",
+        "EPLI",
+        "Cyber"
+      ],
       "signals": [
         {
           "type": "funding_raised",
@@ -3147,8 +3710,15 @@
       "dm_title": "CEO",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 24.990477487524316,
-      "insight": "Funding raised today may necessitate general liability and workers compensation coverage as Nectar Social expands operations.",
+      "score": 24.94982276917489,
+      "insight": "D&O + EPLI \u00b7 post-funding policy",
+      "trigger_type": "funding_event",
+      "est_annual_premium_usd": null,
+      "coverages": [
+        "D&O",
+        "EPLI",
+        "Cyber"
+      ],
       "signals": [
         {
           "type": "funding_raised",
@@ -3175,8 +3745,15 @@
       "dm_title": "Owner",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 24.62241844951731,
-      "insight": "Filed funding raised today for Pinnacle Harbor LLC (Filer #0002133145) to expand operations in custom laser-engraved furniture.",
+      "score": 24.58236249396623,
+      "insight": "D&O + EPLI \u00b7 post-funding policy",
+      "trigger_type": "funding_event",
+      "est_annual_premium_usd": null,
+      "coverages": [
+        "D&O",
+        "EPLI",
+        "Cyber"
+      ],
       "signals": [
         {
           "type": "funding_raised",
@@ -3203,8 +3780,15 @@
       "dm_title": null,
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 24.619441716093995,
-      "insight": "Funding raised today signals potential growth for Summit Ridge 2024 LLC in New York's competitive real estate market.",
+      "score": 24.5793906045177,
+      "insight": "D&O + EPLI \u00b7 post-funding policy",
+      "trigger_type": "funding_event",
+      "est_annual_premium_usd": null,
+      "coverages": [
+        "D&O",
+        "EPLI",
+        "Cyber"
+      ],
       "signals": [
         {
           "type": "funding_raised",
@@ -3231,8 +3815,15 @@
       "dm_title": "Founder & CEO",
       "dm_email": "isaiah@auxiliumhealth.xyz",
       "dm_linkedin_url": "http://www.linkedin.com/in/isaiah-kaiser",
-      "score": 24.613000898296626,
-      "insight": "Funding raised today indicates Auxilium Health, Inc. is expanding, warranting consideration for commercial liability and workers compensation policies.",
+      "score": 24.572960266575418,
+      "insight": "D&O + EPLI \u00b7 post-funding policy",
+      "trigger_type": "funding_event",
+      "est_annual_premium_usd": null,
+      "coverages": [
+        "D&O",
+        "EPLI",
+        "Cyber"
+      ],
       "signals": [
         {
           "type": "funding_raised",
@@ -3251,7 +3842,7 @@
       "name": "Majesty Therapeutics, Inc.",
       "domain": "majestytherapeutics.com",
       "industry": "healthcare",
-      "headcount": 1,
+      "headcount": null,
       "country": "US",
       "city": "Lauderdale-by-the-Sea",
       "state": "FL",
@@ -3259,8 +3850,15 @@
       "dm_title": "Co-Founder and Executive Chairman",
       "dm_email": "shawn@majestytherapeutics.com",
       "dm_linkedin_url": "http://www.linkedin.com/in/shawn-titcomb-3086913",
-      "score": 24.61300089210959,
-      "insight": "Funding raised for D&O exposure as Majesty Therapeutics, Inc. filed today, indicating their growth in the biotechnology sector.",
+      "score": 24.572960261738977,
+      "insight": "D&O + EPLI \u00b7 post-funding policy",
+      "trigger_type": "funding_event",
+      "est_annual_premium_usd": null,
+      "coverages": [
+        "D&O",
+        "EPLI",
+        "Cyber"
+      ],
       "signals": [
         {
           "type": "funding_raised",
@@ -3287,8 +3885,15 @@
       "dm_title": null,
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 24.610661916600534,
-      "insight": "Funding raised today indicates JR Hyde Park Blvd LLC's readiness for commercial insurance solutions as they embark on new projects.",
+      "score": 24.570625092647884,
+      "insight": "D&O + EPLI \u00b7 post-funding policy",
+      "trigger_type": "funding_event",
+      "est_annual_premium_usd": null,
+      "coverages": [
+        "D&O",
+        "EPLI",
+        "Cyber"
+      ],
       "signals": [
         {
           "type": "funding_raised",
@@ -3315,8 +3920,15 @@
       "dm_title": "Co-Founder",
       "dm_email": null,
       "dm_linkedin_url": "http://www.linkedin.com/in/frankjiji11",
-      "score": 24.61066191064443,
-      "insight": "Funding raised today for SKYX Platforms Corp. highlights their expansion into smart home technology in Pompano Beach, FL.",
+      "score": 24.57062508767392,
+      "insight": "D&O + EPLI \u00b7 post-funding policy",
+      "trigger_type": "funding_event",
+      "est_annual_premium_usd": null,
+      "coverages": [
+        "D&O",
+        "EPLI",
+        "Cyber"
+      ],
       "signals": [
         {
           "type": "funding_raised",
@@ -3343,8 +3955,15 @@
       "dm_title": "Chief Executive Officer",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 24.61066190397096,
-      "insight": "Funding raised today indicates RenX Enterprises Corp. may need to review their commercial insurance coverage.",
+      "score": 24.57062508300221,
+      "insight": "D&O + EPLI \u00b7 post-funding policy",
+      "trigger_type": "funding_event",
+      "est_annual_premium_usd": null,
+      "coverages": [
+        "D&O",
+        "EPLI",
+        "Cyber"
+      ],
       "signals": [
         {
           "type": "funding_raised",
@@ -3371,8 +3990,15 @@
       "dm_title": "Co-Founder & CEO",
       "dm_email": "simone@prismlayer.ai",
       "dm_linkedin_url": "http://www.linkedin.com/in/simone-garreau-b3571b10",
-      "score": 24.610661897738435,
-      "insight": "With a new funding round filed today, the company may look to expand its workforce of 4 employees in Washington, DC.",
+      "score": 24.57062507818594,
+      "insight": "D&O + EPLI \u00b7 post-funding policy",
+      "trigger_type": "funding_event",
+      "est_annual_premium_usd": null,
+      "coverages": [
+        "D&O",
+        "EPLI",
+        "Cyber"
+      ],
       "signals": [
         {
           "type": "funding_raised",
@@ -3399,8 +4025,15 @@
       "dm_title": "Senior Vice President / Chief Financial Officer",
       "dm_email": null,
       "dm_linkedin_url": "http://www.linkedin.com/in/david-skilton-8ba329b",
-      "score": 24.610661892177212,
-      "insight": "Filed funding paperwork today, raising capital for Copper State Credit Union's expansion in Arizona.",
+      "score": 24.57062507332368,
+      "insight": "D&O + EPLI \u00b7 post-funding policy",
+      "trigger_type": "funding_event",
+      "est_annual_premium_usd": null,
+      "coverages": [
+        "D&O",
+        "EPLI",
+        "Cyber"
+      ],
       "signals": [
         {
           "type": "funding_raised",
