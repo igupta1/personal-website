@@ -9,7 +9,7 @@ export default function Insurance() {
     <LeadsPage
       niche="insurance"
       title="Independent Insurance Agency Leads"
-      subtitle="SMBs and newly-formed entities (≤250 employees) with recent buying triggers — new business registrations, blue-collar / fleet hiring, finance or HR leadership changes."
+      subtitle="US SMBs (≤250 employees) with recent commercial buying triggers — newly-issued motor carrier authorities (commercial auto), fresh private-securities offerings (D&O / EPLI). Refreshed nightly."
       apiPath="/api/generate-insurance-leads"
     />
   );

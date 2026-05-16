@@ -32,11 +32,40 @@ def test_blank_lead_scores_zero() -> None:
 
 
 def test_single_fresh_signal_full_weight() -> None:
+    # FMCSA score is fleet-size-aware (see fmcsa_scoring tests below).
+    # A signal with no fleet info falls back to SIGNAL_WEIGHTS = 30.
     lead = _lead(_signal(type=SignalType.NEW_MOTOR_CARRIER_AUTHORITY, captured_at=_now()))
-    assert score(lead, now=_now()) == 50.0
+    assert score(lead, now=_now()) == 30.0
 
     lead = _lead(_signal(type=SignalType.NEW_BUSINESS_FILED, captured_at=_now()))
     assert score(lead, now=_now()) == 45.0
+
+
+def test_fmcsa_scoring_scales_by_fleet_size() -> None:
+    # 1-truck owner-operator → low ~$3K policy → score 22
+    # 25-truck fleet → real commission → score 60
+    # 50+ truck → saturation → 100
+    # formula: min(100, 20 + power_units * 1.6)
+    for power_units, expected in [(1, 21.6), (5, 28), (10, 36), (25, 60), (50, 100), (100, 100)]:
+        lead = _lead(_signal(
+            type=SignalType.NEW_MOTOR_CARRIER_AUTHORITY,
+            captured_at=_now(),
+            payload={"fleet_size_power_units": power_units},
+        ))
+        actual = score(lead, now=_now())
+        assert abs(actual - expected) < 0.5, (
+            f"expected {expected} for {power_units} power units, got {actual}"
+        )
+
+
+def test_fmcsa_missing_fleet_size_uses_flat_fallback() -> None:
+    lead = _lead(_signal(
+        type=SignalType.NEW_MOTOR_CARRIER_AUTHORITY,
+        captured_at=_now(),
+        payload={},
+    ))
+    # Falls back to SIGNAL_WEIGHTS = 30.
+    assert score(lead, now=_now()) == 30.0
 
 
 def test_recency_decay_halves_at_one_half_life() -> None:

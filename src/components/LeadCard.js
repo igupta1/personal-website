@@ -30,6 +30,7 @@ const SIGNAL_KIND_META = {
   funding_raised:           { label: "Funding",       pill: "bg-emerald-500/15 text-emerald-300 ring-emerald-400/30" },
   breach_disclosed:         { label: "Breach",        pill: "bg-amber-500/15 text-amber-300 ring-amber-400/30" },
   new_business_filed:       { label: "New entity",    pill: "bg-lime-500/15 text-lime-300 ring-lime-400/30" },
+  new_motor_carrier_authority: { label: "Motor carrier", pill: "bg-yellow-500/15 text-yellow-300 ring-yellow-400/30" },
 };
 
 const AGENCY_LABELS = {
@@ -102,6 +103,24 @@ function SignalRow({ signal }) {
     const state = payload.state || "?";
     primary = `${filingType} filed in ${state}`;
     if (payload.filed_on) extra = `filed ${formatDate(payload.filed_on)}`;
+  } else if (signal.type === "new_motor_carrier_authority") {
+    const fleet = payload.fleet_size_power_units;
+    const drivers = payload.drivers;
+    if (fleet) {
+      const unit = fleet === 1 ? "truck" : "trucks";
+      primary = drivers && drivers > 1
+        ? `Motor carrier · ${fleet} ${unit} · ${drivers} drivers`
+        : `Motor carrier · ${fleet} ${unit}`;
+    } else {
+      primary = "Motor carrier authority";
+    }
+    if (payload.issue_date) extra = `authority ${formatDate(payload.issue_date)}`;
+    if (payload.usdot) {
+      link = {
+        href: `https://safer.fmcsa.dot.gov/CompanySnapshot.aspx?query=${payload.usdot}`,
+        label: `USDOT ${payload.usdot}`,
+      };
+    }
   }
 
   return (

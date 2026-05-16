@@ -28,7 +28,7 @@ from insurance_pipeline.models import (
     SignalType,
     SourceName,
 )
-from insurance_pipeline.sources import fmcsa, funding
+from insurance_pipeline.sources import edgar_form_d, fmcsa, funding
 
 # sos_fl module exists but is NOT wired here. The SunBiz search UI is
 # fronted by Cloudflare's bot challenge ("Just a moment..." page),
@@ -103,14 +103,15 @@ def main(argv: list[str] | None = None) -> int:
 
         score_changes = _rescore_all(conn, all_ids)
         apollo_ids = _apollo_enrich_top_n(conn, n=args.apollo_top_n)
+        fallback_dms = _apply_source_dm_fallbacks(conn)
         copy_calls = _regen_copy(
             conn, score_changes,
             force_regen_ids=apollo_ids,
             model=args.copy_model,
         )
         log.info(
-            "re-scored %d leads, apollo-enriched %d, regenerated copy %d times",
-            len(score_changes), len(apollo_ids), copy_calls,
+            "re-scored %d, apollo-enriched %d, fallback-DMs %d, regen %d",
+            len(score_changes), len(apollo_ids), fallback_dms, copy_calls,
         )
 
         output = _build_output(conn)
@@ -147,14 +148,15 @@ def main(argv: list[str] | None = None) -> int:
 
     score_changes = _rescore_all(conn, enriched_ids)
     apollo_ids = _apollo_enrich_top_n(conn, n=args.apollo_top_n)
+    fallback_dms = _apply_source_dm_fallbacks(conn)
     copy_calls = _regen_copy(
         conn, score_changes,
         force_regen_ids=apollo_ids,
         model=args.copy_model,
     )
     log.info(
-        "re-scored %d leads, apollo-enriched %d, generated copy %d times",
-        len(score_changes), len(apollo_ids), copy_calls,
+        "re-scored %d, apollo-enriched %d, fallback-DMs %d, regen %d",
+        len(score_changes), len(apollo_ids), fallback_dms, copy_calls,
     )
 
     output = _build_output(conn)
@@ -180,6 +182,7 @@ def main(argv: list[str] | None = None) -> int:
 _SOURCES: tuple[tuple[str, Any], ...] = (
     ("fmcsa", fmcsa.fetch),
     ("funding", funding.fetch),
+    ("edgar_form_d", edgar_form_d.fetch),
 )
 
 
@@ -248,6 +251,36 @@ def _rescore_all(
         except Exception:
             log.exception("rescore: update_lead failed for id=%s", lead_id)
     return changes
+
+
+def _apply_source_dm_fallbacks(conn: sqlite3.Connection) -> int:
+    """For leads where Apollo + Gemini both failed to populate dm_name,
+    fall back to the source signal's officer/contact field. Today only
+    FMCSA carries a usable officer name in its payload; structured the
+    same way other US-only sources could add fallbacks later.
+
+    Returns the number of leads where a fallback was applied."""
+    filled = 0
+    for lead in db.iter_leads(conn):
+        if lead.id is None or lead.dm_name:
+            continue
+        for sig in lead.signals:
+            if sig.type != SignalType.NEW_MOTOR_CARRIER_AUTHORITY:
+                continue
+            officer = (sig.payload.get("officer_name") or "").strip()
+            if not officer:
+                continue
+            try:
+                db.update_lead(
+                    conn, lead.id,
+                    dm_name=officer,
+                    dm_title=lead.dm_title or "Owner / Officer",
+                )
+                filled += 1
+            except Exception:
+                log.exception("dm-fallback: update_lead failed for id=%s", lead.id)
+            break
+    return filled
 
 
 def _apollo_enrich_top_n(conn: sqlite3.Connection, *, n: int) -> set[int]:
