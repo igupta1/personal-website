@@ -72,6 +72,13 @@ def _safe_int(v: object) -> int:
         return 0
 
 
+def _safe_float(v: object) -> float:
+    try:
+        return float(str(v).strip())
+    except (TypeError, ValueError):
+        return 0.0
+
+
 def _days_since(iso_date: str | None, now: datetime) -> int:
     if not iso_date:
         return 9999
@@ -82,12 +89,46 @@ def _days_since(iso_date: str | None, now: datetime) -> int:
     return max(0, (now - d).days)
 
 
+def _federal_contract_weight(amount_usd: float, days_since_award: int) -> float:
+    """Federal-contract score scales with award size + recency bonus.
+
+    Commission value scales roughly linearly with policy value, which
+    in turn correlates with contract value. A $400K federal contract
+    winner is buying a much bigger D&O / E&O / cyber policy than a
+    1-truck owner-operator.
+
+    - $25K   → 28 + 20 (fresh)  = 48
+    - $100K  → 35 + 20          = 55
+    - $250K  → 50 + 20          = 70
+    - $500K  → 60 (cap) + 20    = 80
+    - $400K, 35d old            → 60
+    """
+    if amount_usd <= 0:
+        return float(SIGNAL_WEIGHTS[SignalType.FUNDING_RAISED])
+    size = min(60.0, 25.0 + amount_usd / 10000.0)
+    if days_since_award <= 7:
+        size += 20.0
+    elif days_since_award <= 30:
+        size += 10.0
+    return min(100.0, size)
+
+
 def _signal_weight(sig: Signal, now: datetime) -> float:
     if sig.type == SignalType.NEW_MOTOR_CARRIER_AUTHORITY:
         power_units = _safe_int(sig.payload.get("fleet_size_power_units"))
         drivers = _safe_int(sig.payload.get("drivers"))
         age = _days_since(sig.payload.get("issue_date"), now)
         return _fmcsa_weight(power_units, drivers, age)
+    if sig.type == SignalType.FUNDING_RAISED:
+        # USAspending federal contracts carry `filing_type` and
+        # `amount_usd`. Scale by award size so a $400K winner outranks
+        # a $25K winner. Form D / RSS funding signals (no amount) fall
+        # back to the flat SIGNAL_WEIGHTS value.
+        if sig.payload.get("filing_type") == "Federal contract":
+            amount = _safe_float(sig.payload.get("amount_usd"))
+            age = _days_since(sig.payload.get("filed_on"), now)
+            return _federal_contract_weight(amount, age)
+        return float(SIGNAL_WEIGHTS.get(sig.type, 0))
     return float(SIGNAL_WEIGHTS.get(sig.type, 0))
 
 

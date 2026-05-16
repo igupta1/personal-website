@@ -89,6 +89,65 @@ def test_fmcsa_unknown_size_unknown_age_falls_back() -> None:
     assert 21 <= actual <= 22
 
 
+def test_federal_contract_scales_by_award_amount() -> None:
+    """Federal contracts → award-size-aware weight + recency bonus."""
+    today_iso = _now().date().isoformat()
+    # $25K, fresh → 25 + 2.5 + 20 = 47.5
+    lead = _lead(_signal(
+        type=SignalType.FUNDING_RAISED,
+        captured_at=_now(),
+        payload={"filing_type": "Federal contract", "amount_usd": 25_000, "filed_on": today_iso},
+    ))
+    assert 47 <= score(lead, now=_now()) <= 48
+
+    # $250K, fresh → 50 + 20 = 70
+    lead = _lead(_signal(
+        type=SignalType.FUNDING_RAISED,
+        captured_at=_now(),
+        payload={"filing_type": "Federal contract", "amount_usd": 250_000, "filed_on": today_iso},
+    ))
+    assert 69 <= score(lead, now=_now()) <= 71
+
+    # $500K, fresh → 60 (cap) + 20 = 80
+    lead = _lead(_signal(
+        type=SignalType.FUNDING_RAISED,
+        captured_at=_now(),
+        payload={"filing_type": "Federal contract", "amount_usd": 500_000, "filed_on": today_iso},
+    ))
+    assert 79 <= score(lead, now=_now()) <= 81
+
+
+def test_federal_contract_recency_bonus_decays() -> None:
+    """Old contracts lose the recency bonus."""
+    old_iso = (_now() - timedelta(days=50)).date().isoformat()
+    lead = _lead(_signal(
+        type=SignalType.FUNDING_RAISED,
+        captured_at=_now(),
+        payload={"filing_type": "Federal contract", "amount_usd": 250_000, "filed_on": old_iso},
+    ))
+    # $250K, 50d old → 50 + 0 = 50
+    assert 49 <= score(lead, now=_now()) <= 51
+
+
+def test_form_d_funding_uses_flat_weight() -> None:
+    """Form D / RSS funding signals don't carry amount → flat 25."""
+    lead = _lead(_signal(
+        type=SignalType.FUNDING_RAISED,
+        captured_at=_now(),
+        payload={"filing_type": "Form D"},
+    ))
+    assert score(lead, now=_now()) == 25.0
+
+
+def test_funding_signal_without_payload_uses_flat() -> None:
+    lead = _lead(_signal(
+        type=SignalType.FUNDING_RAISED,
+        captured_at=_now(),
+        payload={"feed_title": "Acme raises $20M Series A"},
+    ))
+    assert score(lead, now=_now()) == 25.0
+
+
 def test_recency_decay_halves_at_one_half_life() -> None:
     fresh = _lead(_signal(type=SignalType.NEW_BUSINESS_FILED, captured_at=_now()))
     stale = _lead(

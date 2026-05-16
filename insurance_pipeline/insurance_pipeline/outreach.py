@@ -89,8 +89,17 @@ Hard rules — the LLM grading this rejects insights that violate any:
    "has filed for", "indicating a need for".
 3. Do NOT use generic filler: "growing companies", "highlighting the
    need", "presents an opportunity", "may indicate".
-4. DO lead with a concrete detail from the signal payload.
-5. DO follow the STYLE directive above for this specific lead.
+4. Do NOT use marketing-fluff hedge language: "positioned for",
+   "poised for", "may require", "well-positioned", "in a prime
+   position", "primed for", "potential need for", "potential
+   insurance needs", "imminent need". These are content-free.
+5. Output ENGLISH ONLY. No non-English characters or words anywhere
+   in the sentence.
+6. Do NOT echo "0 days ago" or "0d ago" — the signal context already
+   uses "today" / "yesterday" for fresh signals; mirror that
+   phrasing.
+7. DO lead with a concrete detail from the signal payload.
+8. DO follow the STYLE directive above for this specific lead.
 """
 
 
@@ -168,6 +177,16 @@ def _describe_location(lead: Lead) -> str:
     return lead.country or "unknown"
 
 
+def _humanize_days_ago(days_ago: int) -> str:
+    """Render days-ago as natural language. The LLM otherwise echoes
+    '0 days ago' / '1 days ago' literally in the insight."""
+    if days_ago <= 0:
+        return "today"
+    if days_ago == 1:
+        return "yesterday"
+    return f"{days_ago}d ago"
+
+
 def _format_signal(sig: Signal, days_ago: int) -> str:
     fields = _SIGNAL_PAYLOAD_FIELDS.get(sig.type, ())
     parts: list[str] = []
@@ -176,7 +195,7 @@ def _format_signal(sig: Signal, days_ago: int) -> str:
         if val:
             parts.append(f"{field}={val!r}")
     detail = f" - {'; '.join(parts)}" if parts else ""
-    return f"- {sig.type.value} ({days_ago}d ago){detail}"
+    return f"- {sig.type.value} ({_humanize_days_ago(days_ago)}){detail}"
 
 
 def _describe_signals(

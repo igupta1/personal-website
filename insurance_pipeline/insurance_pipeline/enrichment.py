@@ -154,6 +154,53 @@ def _is_financial_vehicle(name: str) -> bool:
     return any(p.search(name) for p in _FINANCIAL_VEHICLE_NAME_RES)
 
 
+# Mega-corp prefix deny-list. Many of these have hundreds of named
+# subsidiaries that show up in federal-contract or FMCSA filings with
+# small reported employee counts (because they report at the
+# subsidiary level), passing the SMB-cap check despite being huge
+# enterprises with their own captive insurance programs.
+#
+# Pattern is intentionally conservative — we'd rather miss a few
+# enterprise subsidiaries than nuke a real SMB whose name happens to
+# contain "Verizon" or similar. Prefix-anchored, case-insensitive.
+_MEGACORP_PREFIX_RES: tuple[re.Pattern[str], ...] = (
+    re.compile(r"^(?:AT&?T|ATT)\b", re.IGNORECASE),
+    re.compile(r"^Verizon\b", re.IGNORECASE),
+    re.compile(r"^T-Mobile\b", re.IGNORECASE),
+    re.compile(r"^Sprint\b", re.IGNORECASE),
+    re.compile(r"^Comcast\b", re.IGNORECASE),
+    re.compile(r"^Johnson\s+Controls\b", re.IGNORECASE),
+    re.compile(r"^AECOM\b", re.IGNORECASE),
+    re.compile(r"^CDM\s+(?:Smith|Federal)\b", re.IGNORECASE),
+    re.compile(r"^Tetra\s+Tech\b", re.IGNORECASE),
+    re.compile(r"^Compass\s+PTS\b", re.IGNORECASE),  # AECOM JV
+    re.compile(r"^Laboratory\s+Corporation\b", re.IGNORECASE),  # LabCorp
+    re.compile(r"^Honeywell\b", re.IGNORECASE),
+    re.compile(r"^Siemens\b", re.IGNORECASE),
+    re.compile(r"^Raytheon\b", re.IGNORECASE),
+    re.compile(r"^Lockheed\b", re.IGNORECASE),
+    re.compile(r"^Northrop\b", re.IGNORECASE),
+    re.compile(r"^Boeing\b", re.IGNORECASE),
+    re.compile(r"^General\s+Dynamics\b", re.IGNORECASE),
+    re.compile(r"^Booz\s+Allen\b", re.IGNORECASE),
+    re.compile(r"^Leidos\b", re.IGNORECASE),
+    re.compile(r"^SAIC\b", re.IGNORECASE),
+    re.compile(r"^IBM\b", re.IGNORECASE),
+    re.compile(r"^Oracle\b", re.IGNORECASE),
+    re.compile(r"^Microsoft\b", re.IGNORECASE),
+    re.compile(r"^Amazon\b", re.IGNORECASE),
+    re.compile(r"^Google\b", re.IGNORECASE),
+    re.compile(r"^Cisco\b", re.IGNORECASE),
+    re.compile(r"^Accenture\b", re.IGNORECASE),
+    re.compile(r"^Deloitte\b", re.IGNORECASE),
+    re.compile(r"^Aramark\b", re.IGNORECASE),
+)
+
+
+def _is_megacorp_subsidiary(name: str) -> bool:
+    return any(p.match(name) for p in _MEGACORP_PREFIX_RES)
+
+
 def _disqualification_reason(lead: Lead) -> str | None:
     if _domain_blocked(lead.domain):
         return f"blocked_domain={lead.domain}"
@@ -163,6 +210,8 @@ def _disqualification_reason(lead: Lead) -> str | None:
         return "insurance_vendor_name"
     if _is_financial_vehicle(lead.name):
         return "financial_vehicle"
+    if _is_megacorp_subsidiary(lead.name):
+        return "megacorp_subsidiary"
     if lead.headcount is not None and lead.headcount > _SMB_HEADCOUNT_CAP:
         return f"oversized={lead.headcount}"
     if lead.headcount == 0:

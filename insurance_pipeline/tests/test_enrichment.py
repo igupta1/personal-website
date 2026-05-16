@@ -89,6 +89,44 @@ def test_disqualification_reason_insurance_vendor() -> None:
     assert enrichment._disqualification_reason(lead) == "insurance_vendor_name"
 
 
+def test_disqualification_reason_megacorp_subsidiary() -> None:
+    from insurance_pipeline.models import Lead
+
+    for name in (
+        "ATT MOBILITY LLC",
+        "AT&T Wireless Inc.",
+        "VERIZON CONNECT NWF INC",
+        "Johnson Controls Fire Protection LP",
+        "AECOM USA Inc",
+        "CDM Federal Programs Corporation",
+        "Tetra Tech NUS",
+        "Compass PTS JV LLC",
+        "Honeywell International Inc",
+        "Microsoft Federal Sales LLC",
+    ):
+        lead = Lead(name=name, name_key=name.lower())
+        assert enrichment._disqualification_reason(lead) == "megacorp_subsidiary", (
+            f"expected megacorp_subsidiary for {name!r}"
+        )
+
+
+def test_megacorp_filter_only_matches_at_prefix() -> None:
+    """Prefix-anchored — megacorp names buried mid-string don't trigger.
+    The prefix match accepts the tradeoff that a real SMB named with a
+    megacorp prefix (e.g. 'Boeing Avenue Diner LLC') would get caught;
+    in practice companies don't name themselves after streets/locations
+    that match major brands, so the false-positive risk is small and
+    well below the noise that megacorp subsidiaries create."""
+    for name in (
+        "Smith & Verizon Plumbing Inc",  # 'Verizon' is in the middle, not prefix
+        "Acme Honeywell Repair Service",  # mid-string
+        "Pioneer Comcast Cabinetry LLC",  # mid-string
+    ):
+        assert not enrichment._is_megacorp_subsidiary(name), (
+            f"expected NOT megacorp: {name!r}"
+        )
+
+
 def test_purge_disqualified_deletes_vendor_rows(tmp_path: Path) -> None:
     conn = db.init_db(tmp_path / "leads.db")
     keeper = db.upsert_lead(conn, _candidate("Pioneer Logistics LLC"))
