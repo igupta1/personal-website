@@ -28,7 +28,7 @@ from insurance_pipeline.models import (
     SignalType,
     SourceName,
 )
-from insurance_pipeline.sources import edgar_form_d, fmcsa, funding
+from insurance_pipeline.sources import edgar_form_d, fmcsa, funding, usaspending
 
 # sos_fl module exists but is NOT wired here. The SunBiz search UI is
 # fronted by Cloudflare's bot challenge ("Just a moment..." page),
@@ -183,6 +183,7 @@ _SOURCES: tuple[tuple[str, Any], ...] = (
     ("fmcsa", fmcsa.fetch),
     ("funding", funding.fetch),
     ("edgar_form_d", edgar_form_d.fetch),
+    ("usaspending", usaspending.fetch),
 )
 
 

@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta  # noqa: F401 — timedelta used below
 from typing import Any
 
 from insurance_pipeline.models import Lead, Signal, SignalType, SourceName
@@ -32,40 +32,61 @@ def test_blank_lead_scores_zero() -> None:
 
 
 def test_single_fresh_signal_full_weight() -> None:
-    # FMCSA score is fleet-size-aware (see fmcsa_scoring tests below).
-    # A signal with no fleet info falls back to SIGNAL_WEIGHTS = 30.
-    lead = _lead(_signal(type=SignalType.NEW_MOTOR_CARRIER_AUTHORITY, captured_at=_now()))
-    assert score(lead, now=_now()) == 30.0
-
     lead = _lead(_signal(type=SignalType.NEW_BUSINESS_FILED, captured_at=_now()))
     assert score(lead, now=_now()) == 45.0
 
 
-def test_fmcsa_scoring_scales_by_fleet_size() -> None:
-    # 1-truck owner-operator → low ~$3K policy → score 22
-    # 25-truck fleet → real commission → score 60
-    # 50+ truck → saturation → 100
-    # formula: min(100, 20 + power_units * 1.6)
-    for power_units, expected in [(1, 21.6), (5, 28), (10, 36), (25, 60), (50, 100), (100, 100)]:
-        lead = _lead(_signal(
-            type=SignalType.NEW_MOTOR_CARRIER_AUTHORITY,
-            captured_at=_now(),
-            payload={"fleet_size_power_units": power_units},
-        ))
-        actual = score(lead, now=_now())
-        assert abs(actual - expected) < 0.5, (
-            f"expected {expected} for {power_units} power units, got {actual}"
-        )
+def _fmcsa_signal(*, power_units: int = 0, drivers: int = 0, issue_offset_days: int = 0):
+    issue_dt = _now() - timedelta(days=issue_offset_days)
+    return _signal(
+        type=SignalType.NEW_MOTOR_CARRIER_AUTHORITY,
+        captured_at=_now(),
+        payload={
+            "fleet_size_power_units": power_units,
+            "drivers": drivers,
+            "issue_date": issue_dt.date().isoformat(),
+        },
+    )
 
 
-def test_fmcsa_missing_fleet_size_uses_flat_fallback() -> None:
+def test_fmcsa_fresh_owner_operator_gets_recency_bonus() -> None:
+    # 1 truck, issued today → 21.6 + 20 (fresh ≤7d) = 41.6
+    lead = _lead(_fmcsa_signal(power_units=1, drivers=1, issue_offset_days=0))
+    actual = score(lead, now=_now())
+    assert 41 <= actual <= 42, f"expected ~41.6, got {actual}"
+
+
+def test_fmcsa_old_owner_operator_loses_bonus() -> None:
+    # 1 truck, issued 50 days ago → 21.6 + 0 (no bonus) = 21.6
+    lead = _lead(_fmcsa_signal(power_units=1, drivers=1, issue_offset_days=50))
+    actual = score(lead, now=_now())
+    assert 21 <= actual <= 22, f"expected ~21.6, got {actual}"
+
+
+def test_fmcsa_uses_drivers_when_power_units_is_zero() -> None:
+    # power_units=0 (unreported) but drivers=5 → size=5, fresh → 28 + 20 = 48
+    lead = _lead(_fmcsa_signal(power_units=0, drivers=5, issue_offset_days=0))
+    actual = score(lead, now=_now())
+    assert 47 <= actual <= 49
+
+
+def test_fmcsa_fleet_saturates_at_100() -> None:
+    # 100-truck fleet, fresh → 60 (cap on size) + 20 = 80
+    # 100-truck fleet, fresh + drivers also high → still 80 (size cap)
+    lead = _lead(_fmcsa_signal(power_units=100, drivers=200, issue_offset_days=0))
+    actual = score(lead, now=_now())
+    assert 79 <= actual <= 81
+
+
+def test_fmcsa_unknown_size_unknown_age_falls_back() -> None:
+    # No payload data → size=1 (max(0,0,1)) + 9999d age (no bonus) = 21.6
     lead = _lead(_signal(
         type=SignalType.NEW_MOTOR_CARRIER_AUTHORITY,
         captured_at=_now(),
         payload={},
     ))
-    # Falls back to SIGNAL_WEIGHTS = 30.
-    assert score(lead, now=_now()) == 30.0
+    actual = score(lead, now=_now())
+    assert 21 <= actual <= 22
 
 
 def test_recency_decay_halves_at_one_half_life() -> None:
