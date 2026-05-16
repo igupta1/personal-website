@@ -50,20 +50,42 @@ _TITLE_RE = re.compile(
     re.IGNORECASE,
 )
 
-# Drop obvious financial-vehicle names. These file Form D constantly
-# and aren't insurance buyers (they invest, they don't operate).
+# Drop obvious financial-vehicle names. Form D filings are dominated
+# by funds, partnerships, REITs, and PE vehicles. These file Form D
+# constantly and aren't insurance buyers (they invest, they don't
+# operate).
 _FINANCIAL_ENTITY_RE = re.compile(
     r"\b("
     r"venture[s]?|capital|partner[s]?|partnership|"
     r"holdings?|investors?|invest|investment[s]?|"
-    r"reit|trust|"
+    r"reit|trust|bancshares|bancorp|"
     r"fund[s]?|funding|"
     r"opportunity|opportunities|"
-    r"l\.?p\.?$|l\.?l\.?p\.?$|"
     r"asset\s+management|management\s+l\.?p\.?|"
-    r"family\s+office"
+    r"family\s+office|"
+    r"finance\s+(?:corp|company|inc|llc|l\.?p\.?)"
     r")\b",
     re.IGNORECASE,
+)
+
+# Names ending in LP / L.P. / LLP / L.L.P. (with optional comma/space)
+# are partnerships — always financial vehicles in Form D context.
+_LP_SUFFIX_RE = re.compile(
+    r",?\s*L\.?\s?L?\s?P\.?\s*$",
+    re.IGNORECASE,
+)
+
+# Hard-coded prefix filter for major PE / VC firms whose subsidiary
+# entity names sometimes slip past the keyword filter (TPG XYZ Equity
+# II without the "Capital" or "Partners" word).
+_FINANCIAL_FIRM_PREFIX_RES: tuple[re.Pattern[str], ...] = (
+    re.compile(r"^TPG\b", re.IGNORECASE),
+    re.compile(r"^Blackstone\b", re.IGNORECASE),
+    re.compile(r"^KKR\b", re.IGNORECASE),
+    re.compile(r"^Apollo\s+Global", re.IGNORECASE),
+    re.compile(r"^Carlyle\b", re.IGNORECASE),
+    re.compile(r"^GS\s+(?:Finance|Capital|Investment)", re.IGNORECASE),
+    re.compile(r"^MidOcean\b", re.IGNORECASE),
 )
 
 
@@ -86,7 +108,13 @@ def _parse_rss_date(value: Any) -> datetime | None:
 
 
 def _is_operating_company(name: str) -> bool:
-    return not _FINANCIAL_ENTITY_RE.search(name)
+    if _FINANCIAL_ENTITY_RE.search(name):
+        return False
+    if _LP_SUFFIX_RE.search(name):
+        return False
+    if any(p.match(name) for p in _FINANCIAL_FIRM_PREFIX_RES):
+        return False
+    return True
 
 
 def _extract_company_name(title: str) -> str | None:

@@ -65,6 +65,17 @@ def test_is_operating_company_filters_vc_funds() -> None:
         "Stellar Asset Management",
         "Hudson Family Office",
         "Smith Family Trust",
+        # LP/LLP suffix variants seen in production noise
+        "TPG AG Asset Based Credit Equity II, L.P.",
+        "MidOcean Energy II-B, L.P.",
+        "Stellar Co II, LP",
+        # Bank holding companies
+        "MC Bancshares, Inc./LA",
+        "First National Bancorp",
+        # GS / Big PE prefixed
+        "GS Finance Corp.",
+        "Blackstone Real Estate Income Fund II",
+        "KKR Credit Fund III LP",
     ):
         assert not edgar_form_d._is_operating_company(name), (
             f"expected FILTERED: {name!r}"
@@ -76,6 +87,8 @@ def test_is_operating_company_filters_vc_funds() -> None:
         "Acme Health Co",
         "Bright Solutions LLC",
         "Tier One Manufacturing Inc",
+        "SKYX Platforms Corp.",
+        "Prism Layer AI, Inc.",
     ):
         assert edgar_form_d._is_operating_company(name), f"expected KEPT: {name!r}"
 
