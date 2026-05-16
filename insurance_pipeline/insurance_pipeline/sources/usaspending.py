@@ -104,8 +104,11 @@ def fetch(*, since: datetime, limit: int | None = None) -> list[LeadCandidate]:
             "naics_description",
             "Place of Performance State Code",
         ],
-        "sort": "Award Date",
-        "order": "desc",
+        # Sort omitted intentionally — USAspending's `Award Date` field
+        # comes back as null for most contracts via this endpoint, and
+        # `sort: "Award Date"` against an all-null field returns 0
+        # rows. Default ordering is fine for our use case (we re-sort
+        # in scoring by recency_decay against signal captured_at).
         "limit": _LIMIT_PER_PAGE,
         "page": 1,
     }

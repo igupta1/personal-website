@@ -106,3 +106,8 @@ def test_request_body_shape(monkeypatch) -> None:
     assert filters["award_amounts"][0]["lower_bound"] == 25_000
     assert filters["award_amounts"][0]["upper_bound"] == 500_000
     assert "time_period" in filters
+    # No date_type in the time_period filter (its presence makes the
+    # API return 0). No sort field (Award Date returns null and sort
+    # on null returns 0). Both confirmed against the live API.
+    assert "date_type" not in filters["time_period"][0]
+    assert "sort" not in body
