@@ -27,11 +27,20 @@ export const SIZE_BANDS = [
   { value: "unknown", label: "Size unknown" },
 ];
 
+const TRIGGER_TYPES = [
+  { value: "any", label: "All triggers" },
+  { value: "motor_carrier", label: "Motor carrier (commercial auto)" },
+  { value: "federal_contract", label: "Federal contract (cyber / E&O / GL)" },
+  { value: "funding_event", label: "Funding event (D&O / EPLI)" },
+  { value: "new_entity", label: "New business filing" },
+];
+
 export default function LeadFilters({
   leads,
   industry, setIndustry,
   sizeBand, setSizeBand,
   state, setState,
+  trigger, setTrigger,
 }) {
   const availableIndustries = useMemo(() => {
     const counts = {};
@@ -49,14 +58,25 @@ export default function LeadFilters({
     return Object.entries(counts).sort((a, b) => a[0].localeCompare(b[0]));
   }, [leads]);
 
+  const availableTriggers = useMemo(() => {
+    const counts = {};
+    for (const l of leads) {
+      const t = l.trigger_type || "other";
+      counts[t] = (counts[t] || 0) + 1;
+    }
+    return counts;
+  }, [leads]);
+
   const clearAll = () => {
     setIndustry("any");
     setSizeBand("any");
     setState("any");
+    if (setTrigger) setTrigger("any");
   };
 
   const hasActiveFilters =
-    industry !== "any" || sizeBand !== "any" || state !== "any";
+    industry !== "any" || sizeBand !== "any" || state !== "any" ||
+    (trigger && trigger !== "any");
 
   const selectClass =
     "w-full px-3 py-2.5 border border-slate-700 rounded-lg text-sm " +
@@ -75,7 +95,29 @@ export default function LeadFilters({
 
   return (
     <div className="bg-slate-800/70 backdrop-blur border border-slate-700/70 rounded-2xl shadow-lg shadow-black/10 mb-6 overflow-hidden">
-      <div className="px-5 py-4 grid grid-cols-1 md:grid-cols-3 gap-4 items-end">
+      <div className={`px-5 py-4 grid grid-cols-1 gap-4 items-end ${setTrigger ? "md:grid-cols-4" : "md:grid-cols-3"}`}>
+        {setTrigger && (
+          <div>
+            <label className="block text-[10px] font-semibold text-gray-400 uppercase tracking-widest mb-1.5">
+              Trigger type
+            </label>
+            <select
+              value={trigger || "any"}
+              onChange={(e) => setTrigger(e.target.value)}
+              className={selectClass}
+              style={chevronStyle}
+            >
+              {TRIGGER_TYPES.map((t) => {
+                const n = t.value === "any" ? leads.length : (availableTriggers[t.value] || 0);
+                return (
+                  <option key={t.value} value={t.value}>
+                    {t.label} ({n})
+                  </option>
+                );
+              })}
+            </select>
+          </div>
+        )}
         <div>
           <label className="block text-[10px] font-semibold text-gray-400 uppercase tracking-widest mb-1.5">
             Industry

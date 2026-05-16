@@ -20,7 +20,7 @@ from typing import Any
 
 import requests
 
-from insurance_pipeline import apollo, db, enrichment, outreach, scoring
+from insurance_pipeline import apollo, db, enrichment, policy_fit, scoring
 from insurance_pipeline.models import (
     Lead,
     LeadCandidate,
@@ -386,35 +386,53 @@ def _regen_copy(
     force_regen_ids: set[int],
     model: str,
 ) -> int:
-    del force_regen_ids  # insight prompt has no DM-aware greeting; kept for parity
-    copy_calls = 0
-    for lead_id, (old, new) in score_changes.items():
+    """Refresh insight + policy-fit tagline for every scored lead.
+
+    v1 used LLM-generated insights; we replaced them with deterministic
+    `policy_fit.estimate_policy_fit` taglines because the LLM kept
+    drifting into "may need" / "positioned for" filler and the
+    structured tagline ("Commercial Auto $20K + WC $15K/yr") is
+    actually more useful for agent triage than a sentence. Saves the
+    OpenAI cost per cron run too.
+
+    `model` and `force_regen_ids` are kept in the signature for parity
+    with the prior interface.
+    """
+    del force_regen_ids, model
+    refreshed = 0
+    for lead_id, (_old, new) in score_changes.items():
         lead = db.get_lead(conn, lead_id=lead_id)
         if lead is None:
             continue
-        insight_missing = lead.insight is None
-        should_regen = new >= INSIGHT_THRESHOLD and (
-            insight_missing
-            or old is None
-            or old < INSIGHT_THRESHOLD
-            or abs(new - old) > INSIGHT_DELTA_THRESHOLD
-        )
         updates: dict[str, Any] = {}
-        if should_regen:
-            try:
-                copy = outreach.generate(lead, new, model=model)
-                updates["insight"] = copy.insight
-                copy_calls += 1
-            except Exception:
-                log.exception("outreach.generate failed for %s", lead.name)
-        elif new < INSIGHT_THRESHOLD and lead.insight is not None:
-            updates["insight"] = None
+        if new < INSIGHT_THRESHOLD:
+            if lead.insight is not None:
+                updates["insight"] = None
+        else:
+            top_sig = _top_scoring_signal(lead)
+            fit = policy_fit.estimate_policy_fit(top_sig) if top_sig else None
+            tagline = fit["tagline"] if fit else None
+            if tagline != lead.insight:
+                updates["insight"] = tagline
+                refreshed += 1
         if updates:
             try:
                 db.update_lead(conn, lead_id, **updates)
             except Exception:
                 log.exception("regen: update_lead failed for id=%s", lead_id)
-    return copy_calls
+    return refreshed
+
+
+def _top_scoring_signal(lead: Lead) -> Signal | None:
+    """The signal we score the lead by — used as the basis for the
+    policy-fit tagline. Picks the most-recent scoring-type signal."""
+    relevant = [
+        s for s in lead.signals if s.type in _SCORING_SIGNAL_TYPES
+    ]
+    if not relevant:
+        return None
+    relevant.sort(key=lambda s: s.captured_at, reverse=True)
+    return relevant[0]
 
 
 # --- JSON output -----------------------------------------------------------
@@ -450,22 +468,43 @@ def _lead_to_json(lead: Lead, *, now: datetime) -> dict[str, Any]:
         key=lambda s: s.captured_at,
         reverse=True,
     )[:SIGNAL_LIMIT_IN_JSON]
+    top_sig = relevant[0] if relevant else None
+    fit = policy_fit.estimate_policy_fit(top_sig) if top_sig else None
     return {
         "name": lead.name,
         "domain": lead.domain,
         "industry": lead.industry,
-        "headcount": lead.headcount,
+        # Headcount of 0 or 1 from Apollo is almost always a stub /
+        # SPV / placeholder, not real. Render as unknown.
+        "headcount": lead.headcount if (lead.headcount or 0) > 1 else None,
         "country": lead.country,
         "city": city,
         "state": state,
-        "dm_name": lead.dm_name,
+        "dm_name": _clean_dm_name(lead.dm_name),
         "dm_title": lead.dm_title,
         "dm_email": lead.dm_email,
         "dm_linkedin_url": lead.dm_linkedin_url,
         "score": lead.score,
         "insight": lead.insight,
+        "trigger_type": (
+            policy_fit.trigger_type(top_sig) if top_sig else "other"
+        ),
+        "est_annual_premium_usd": fit["est_annual_premium_usd"] if fit else None,
+        "coverages": fit["coverages"] if fit else [],
         "signals": [_signal_to_json(s, now) for s in relevant],
     }
+
+
+def _clean_dm_name(name: str | None) -> str | None:
+    """Strip FMCSA data artifacts: literal 'NONE' tokens in officer
+    name fields (used as a sentinel for unknown middle/suffix), and
+    collapse whitespace."""
+    if not name:
+        return name
+    import re as _re
+    cleaned = _re.sub(r"\bNONE\b", "", name, flags=_re.IGNORECASE)
+    cleaned = _re.sub(r"\s+", " ", cleaned).strip()
+    return cleaned or None
 
 
 def _signal_to_json(s: Signal, now: datetime) -> dict[str, Any]:

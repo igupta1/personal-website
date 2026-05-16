@@ -27,6 +27,7 @@ export default function LeadsPage({ niche, title, subtitle, apiPath }) {
   const [industry, setIndustry] = useState("any");
   const [sizeBand, setSizeBand] = useState("any");
   const [state, setState] = useState("any");
+  const [trigger, setTrigger] = useState("any");
 
   useEffect(() => {
     document.title = `${title} — Ishaan Gupta`;
@@ -56,6 +57,12 @@ export default function LeadsPage({ niche, title, subtitle, apiPath }) {
     };
   }, [niche, apiPath]);
 
+  // Insurance niche emits a trigger_type field; the MSP niches don't,
+  // so the dropdown is only rendered when at least one lead carries
+  // the field (the LeadFilters component gates rendering on
+  // `setTrigger` being truthy, which we hand in only for insurance).
+  const supportsTriggerFilter = !!(leads && leads.length && leads.some((l) => l.trigger_type != null));
+
   const visibleLeads = useMemo(() => {
     if (!leads) return [];
     let out = leads;
@@ -75,8 +82,11 @@ export default function LeadsPage({ niche, title, subtitle, apiPath }) {
     if (state !== "any") {
       out = out.filter((l) => l.state === state);
     }
+    if (supportsTriggerFilter && trigger !== "any") {
+      out = out.filter((l) => l.trigger_type === trigger);
+    }
     return out;
-  }, [leads, industry, sizeBand, state]);
+  }, [leads, industry, sizeBand, state, trigger, supportsTriggerFilter]);
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8">
@@ -122,6 +132,8 @@ export default function LeadsPage({ niche, title, subtitle, apiPath }) {
             setSizeBand={setSizeBand}
             state={state}
             setState={setState}
+            trigger={supportsTriggerFilter ? trigger : undefined}
+            setTrigger={supportsTriggerFilter ? setTrigger : undefined}
           />
 
           <div className="flex items-center justify-between mb-4">

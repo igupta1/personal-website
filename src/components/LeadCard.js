@@ -153,10 +153,20 @@ function SignalRow({ signal }) {
   );
 }
 
+function namesMatch(a, b) {
+  if (!a || !b) return false;
+  const norm = (s) => s.toUpperCase().replace(/[^A-Z\s]/g, "").replace(/\s+/g, " ").trim();
+  return norm(a) === norm(b);
+}
+
 export default function LeadCard({ lead }) {
   const industryLabel = prettyIndustry(lead.industry);
   const location = [lead.city, lead.state].filter(Boolean).join(", ");
   const renderableSignals = (lead.signals || []).filter((s) => SIGNAL_KIND_META[s.type]);
+  // FMCSA owner-operators often file under their own personal name —
+  // the DM panel then duplicates the lead title verbatim. Hide it.
+  const dmRedundantWithName = namesMatch(lead.name, lead.dm_name);
+  const showDmPanel = lead.dm_name && !dmRedundantWithName;
 
   return (
     <div className="bg-slate-800/70 backdrop-blur border border-slate-700/70 rounded-2xl p-5 shadow-lg shadow-black/10 hover:bg-slate-800 hover:border-slate-600 hover:-translate-y-0.5 transition-all duration-150 flex flex-col">
@@ -202,8 +212,10 @@ export default function LeadCard({ lead }) {
 
       {/* Likely decision maker — featured panel: this is the highest-value
           piece of information for someone using the lead magnet, so it gets
-          a distinct treatment instead of a single-line label. */}
-      {lead.dm_name && (
+          a distinct treatment instead of a single-line label. Hidden when
+          the DM name duplicates the lead name (owner-operator carriers
+          filed under the owner's own name). */}
+      {showDmPanel && (
         <div className="mt-3 rounded-lg border border-emerald-500/20 bg-emerald-500/5 px-3 py-2.5">
           <div className="text-[10px] font-semibold tracking-widest text-emerald-400 uppercase mb-1">
             Decision maker
