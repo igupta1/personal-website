@@ -79,10 +79,13 @@ def fetch(*, since: datetime, limit: int | None = None) -> list[LeadCandidate]:
 
     body = {
         "filters": {
+            # date_type is omitted intentionally — including it as
+            # "action_date" returns 0 results from USAspending (API
+            # quirk we verified directly). Default behavior matches
+            # contracts in the window correctly.
             "time_period": [{
                 "start_date": effective_since.date().isoformat(),
                 "end_date": captured_at.date().isoformat(),
-                "date_type": "action_date",
             }],
             "award_type_codes": ["A", "B", "C", "D"],  # contracts
             "award_amounts": [{
