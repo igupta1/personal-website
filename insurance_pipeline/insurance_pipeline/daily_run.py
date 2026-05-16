@@ -84,6 +84,21 @@ def main(argv: list[str] | None = None) -> int:
         args.db_path.parent.mkdir(parents=True, exist_ok=True)
         conn = db.init_db(args.db_path)
 
+        if args.clear_insights:
+            # One-shot: null out every lead's insight so the regen
+            # gate sees them as missing and re-runs the LLM against
+            # the new prompt. Use after a prompt-template change.
+            cleared = 0
+            for lead in db.iter_leads(conn):
+                if lead.id is None or lead.insight is None:
+                    continue
+                try:
+                    db.update_lead(conn, lead.id, insight=None)
+                    cleared += 1
+                except Exception:
+                    log.exception("clear-insights failed for id=%s", lead.id)
+            log.info("clear-insights: nulled %d insight rows", cleared)
+
         if args.reenrich:
             existing_ids = [
                 lead.id for lead in db.iter_leads(conn) if lead.id is not None
@@ -513,6 +528,13 @@ def _parse_args(argv: list[str] | None) -> argparse.Namespace:
         "--rescore-only",
         action="store_true",
         help="Skip fetch / upsert / enrichment. Dedup, rescore, regen, write, upload.",
+    )
+    parser.add_argument(
+        "--clear-insights",
+        action="store_true",
+        help="One-shot: null out every lead's insight before rescoring. "
+        "Use after an outreach-prompt change so existing leads regenerate "
+        "their insight against the new prompt. Only honored in --rescore-only.",
     )
     parser.add_argument(
         "--apollo-top-n",

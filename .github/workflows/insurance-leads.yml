@@ -9,6 +9,11 @@ on:
         description: "Per-source candidate cap (empty = no cap; e.g. 5 for a quick smoke)"
         required: false
         default: ""
+      clear_insights:
+        description: "One-shot: clear insights + rescore-only after a prompt-template change"
+        type: boolean
+        required: false
+        default: false
 
 permissions:
   contents: write
@@ -52,8 +57,12 @@ jobs:
           # pipeline — different blob key on the receiving end).
           INSURANCE_UPLOAD_API_KEY: ${{ secrets.LEADS_UPLOAD_API_KEY }}
           LIMIT:                    ${{ inputs.limit }}
+          CLEAR_INSIGHTS:           ${{ inputs.clear_insights }}
         run: |
           args=("--upload")
+          if [[ "$CLEAR_INSIGHTS" == "true" ]]; then
+            args+=("--rescore-only" "--clear-insights")
+          fi
           if [[ -n "$LIMIT" ]]; then
             args+=("--limit" "$LIMIT")
           fi
