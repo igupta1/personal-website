@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-16T04:46:21.377449",
+  "generated_at": "2026-05-16T04:50:51.608048",
   "leads": [
     {
       "name": "AJ EXPRESS CARGO LLC",
@@ -13,7 +13,7 @@
       "dm_title": "Owner / Officer",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 29.99893503444971,
+      "score": 29.996365608979247,
       "insight": "AJ EXPRESS CARGO LLC recently obtained a new motor carrier authority (USDOT 4582436) effective 2026-05-14.",
       "signals": [
         {
@@ -46,7 +46,7 @@
       "dm_title": "Owner / Officer",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 29.998935019263584,
+      "score": 29.99636559018472,
       "insight": "CARGO CREED LLC has obtained a new motor carrier authority (USDOT 4582438) effective 2026-05-14.",
       "signals": [
         {
@@ -79,7 +79,7 @@
       "dm_title": "Owner / Officer",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 29.9989350030105,
+      "score": 29.996365570491776,
       "insight": "RAPID COURIER SOLUTION LLC recently obtained a new motor carrier authority (USDOT 4582440) issued on May 14, 2026.",
       "signals": [
         {
@@ -112,7 +112,7 @@
       "dm_title": "Owner / President",
       "dm_email": "mkoura@vitaltransportcorp.com",
       "dm_linkedin_url": "http://www.linkedin.com/in/mohamed-koura-b5924544",
-      "score": 29.850860204628216,
+      "score": 29.84830350052193,
       "insight": "NURTRANSPORT has obtained a new motor carrier authority for a fleet of 2 drivers, which signals their imminent insurance needs.",
       "signals": [
         {
@@ -139,13 +139,13 @@
       "industry": "logistics_transport",
       "headcount": null,
       "country": "US",
-      "city": "Midland",
+      "city": "MIDLAND",
       "state": "TX",
       "dm_name": "J ABRAHAM BEDOYA SR.",
       "dm_title": "Owner / Officer",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 27.99900600924151,
+      "score": 27.996607875038514,
       "insight": "AB & SON LLC just filed for a new motor carrier authority with 5 power units, effective 05/14/2026.",
       "signals": [
         {
@@ -178,7 +178,7 @@
       "dm_title": "Certified Mechanical Contractor",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 26.399062795977937,
+      "score": 26.396801693307868,
       "insight": "DOOD ENTERPRISES INC has obtained a new motor carrier authority with 4 power units and 16 drivers, issued on 05/14/2026.",
       "signals": [
         {
@@ -200,85 +200,57 @@
       ]
     },
     {
-      "name": "JR Hyde Park Blvd LLC",
-      "domain": null,
-      "industry": "real_estate",
-      "headcount": null,
+      "name": "Auxilium Health, Inc.",
+      "domain": "auxiliumhealth.xyz",
+      "industry": "healthcare",
+      "headcount": 7,
       "country": "US",
-      "city": "Tampa",
-      "state": "FL",
-      "dm_name": null,
-      "dm_title": null,
-      "dm_email": null,
-      "dm_linkedin_url": null,
-      "score": 24.999189201960643,
-      "insight": "JR Hyde Park Blvd LLC has recently raised funding, signaling a potential need for commercial insurance services.",
+      "city": "Cleveland",
+      "state": "OH",
+      "dm_name": "Isaiah Kaiser",
+      "dm_title": "Founder & CEO",
+      "dm_email": "isaiah@auxiliumhealth.xyz",
+      "dm_linkedin_url": "http://www.linkedin.com/in/isaiah-kaiser",
+      "score": 24.99942359121923,
+      "insight": "Auxilium Health, Inc. just raised funding, making them a prime candidate for insurance as they expand operations.",
       "signals": [
         {
           "type": "funding_raised",
-          "captured_at": "2026-05-16T04:43:14.856496",
+          "captured_at": "2026-05-16T04:49:10.234173",
           "days_ago": 0,
           "payload": {
-            "title": "D - JR Hyde Park Blvd LLC (0002135301) (Filer)",
+            "title": "D - Auxilium Health, Inc. (0002135544) (Filer)",
             "filing_type": "Form D",
             "filed_on": "",
-            "link": "https://www.sec.gov/Archives/edgar/data/2135301/000213530126000001/0002135301-26-000001-index.htm"
+            "link": "https://www.sec.gov/Archives/edgar/data/2135544/000213554426000002/0002135544-26-000002-index.htm"
           }
         }
       ]
     },
     {
-      "name": "SKYX Platforms Corp.",
-      "domain": "skyxplatforms.com",
-      "industry": "other",
-      "headcount": 76,
+      "name": "Majesty Therapeutics, Inc.",
+      "domain": "majestytherapeutics.com",
+      "industry": "healthcare",
+      "headcount": 1,
       "country": "US",
-      "city": "Pompano Beach",
+      "city": "Sea Ranch Lakes",
       "state": "FL",
-      "dm_name": "Frank Fang",
-      "dm_title": "Co-Founder",
-      "dm_email": null,
-      "dm_linkedin_url": "http://www.linkedin.com/in/frankjiji11",
-      "score": 24.999189195790173,
-      "insight": "SKYX Platforms Corp. has recently raised funding, signaling potential growth and a need for commercial insurance solutions.",
+      "dm_name": "Shawn Titcomb",
+      "dm_title": "Co-Founder and Executive Chairman",
+      "dm_email": "shawn@majestytherapeutics.com",
+      "dm_linkedin_url": "http://www.linkedin.com/in/shawn-titcomb-3086913",
+      "score": 24.999423584320006,
+      "insight": "Majesty Therapeutics, Inc. recently filed for funding, indicating an opportunity for insurance coverage as they expand.",
       "signals": [
         {
           "type": "funding_raised",
-          "captured_at": "2026-05-16T04:43:14.856496",
+          "captured_at": "2026-05-16T04:49:10.234173",
           "days_ago": 0,
           "payload": {
-            "title": "D - SKYX Platforms Corp. (0001598981) (Filer)",
+            "title": "D - Majesty Therapeutics, Inc. (0002135155) (Filer)",
             "filing_type": "Form D",
             "filed_on": "",
-            "link": "https://www.sec.gov/Archives/edgar/data/1598981/000149315226023938/0001493152-26-023938-index.htm"
-          }
-        }
-      ]
-    },
-    {
-      "name": "RenX Enterprises Corp.",
-      "domain": "renxent.com",
-      "industry": "other",
-      "headcount": null,
-      "country": "US",
-      "city": "Miami",
-      "state": "FL",
-      "dm_name": "David Villarreal",
-      "dm_title": "Chief Executive Officer",
-      "dm_email": null,
-      "dm_linkedin_url": null,
-      "score": 24.99918918957291,
-      "insight": "RenX Enterprises Corp. recently filed a funding raise, indicating a new financial influx for their environmental solutions business.",
-      "signals": [
-        {
-          "type": "funding_raised",
-          "captured_at": "2026-05-16T04:43:14.856496",
-          "days_ago": 0,
-          "payload": {
-            "title": "D - RenX Enterprises Corp. (0001959023) (Filer)",
-            "filing_type": "Form D",
-            "filed_on": "",
-            "link": "https://www.sec.gov/Archives/edgar/data/1959023/000121390026057937/0001213900-26-057937-index.htm"
+            "link": "https://www.sec.gov/Archives/edgar/data/2135155/000149315226023677/0001493152-26-023677-index.htm"
           }
         }
       ]
@@ -312,34 +284,6 @@
       ]
     },
     {
-      "name": "Estately Operations LLC",
-      "domain": "estately.com",
-      "industry": "real_estate",
-      "headcount": 0,
-      "country": "US",
-      "city": "Seattle",
-      "state": "WA",
-      "dm_name": "Galen Ward",
-      "dm_title": "Founder & CEO",
-      "dm_email": null,
-      "dm_linkedin_url": null,
-      "score": 24.999189170025296,
-      "insight": "Estately Operations LLC recently filed for funding, marking a significant growth milestone for the emerging real estate platform.",
-      "signals": [
-        {
-          "type": "funding_raised",
-          "captured_at": "2026-05-16T04:43:14.856496",
-          "days_ago": 0,
-          "payload": {
-            "title": "D - Estately Operations LLC (0002131672) (Filer)",
-            "filing_type": "Form D",
-            "filed_on": "",
-            "link": "https://www.sec.gov/Archives/edgar/data/2131672/000090514826002406/0000905148-26-002406-index.htm"
-          }
-        }
-      ]
-    },
-    {
       "name": "TPG AG Asset Based Credit Equity II, L.P.",
       "domain": null,
       "industry": "fintech",
@@ -363,34 +307,6 @@
             "filing_type": "Form D",
             "filed_on": "",
             "link": "https://www.sec.gov/Archives/edgar/data/2131679/000213167926000001/0002131679-26-000001-index.htm"
-          }
-        }
-      ]
-    },
-    {
-      "name": "MidOcean Energy II-B, L.P.",
-      "domain": "midoceanenergy.com",
-      "industry": "other",
-      "headcount": 0,
-      "country": "US",
-      "city": "Washington",
-      "state": "DC",
-      "dm_name": null,
-      "dm_title": null,
-      "dm_email": null,
-      "dm_linkedin_url": null,
-      "score": 24.999189157055948,
-      "insight": "MidOcean Energy II-B, L.P. recently filed for funding, indicating a financing event that may require comprehensive insurance solutions.",
-      "signals": [
-        {
-          "type": "funding_raised",
-          "captured_at": "2026-05-16T04:43:14.856496",
-          "days_ago": 0,
-          "payload": {
-            "title": "D - MidOcean Energy II-B, L.P. (0002122969) (Filer)",
-            "filing_type": "Form D",
-            "filed_on": "",
-            "link": "https://www.sec.gov/Archives/edgar/data/2122969/000095010326007292/0000950103-26-007292-index.htm"
           }
         }
       ]
@@ -424,6 +340,90 @@
       ]
     },
     {
+      "name": "JR Hyde Park Blvd LLC",
+      "domain": null,
+      "industry": "real_estate",
+      "headcount": null,
+      "country": "US",
+      "city": "Tampa",
+      "state": "FL",
+      "dm_name": null,
+      "dm_title": null,
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "score": 24.997047930895302,
+      "insight": "JR Hyde Park Blvd LLC has recently raised funding, signaling a potential need for commercial insurance services.",
+      "signals": [
+        {
+          "type": "funding_raised",
+          "captured_at": "2026-05-16T04:43:14.856496",
+          "days_ago": 0,
+          "payload": {
+            "title": "D - JR Hyde Park Blvd LLC (0002135301) (Filer)",
+            "filing_type": "Form D",
+            "filed_on": "",
+            "link": "https://www.sec.gov/Archives/edgar/data/2135301/000213530126000001/0002135301-26-000001-index.htm"
+          }
+        }
+      ]
+    },
+    {
+      "name": "SKYX Platforms Corp.",
+      "domain": "skyxplatforms.com",
+      "industry": "other",
+      "headcount": 76,
+      "country": "US",
+      "city": "Pompano Beach",
+      "state": "FL",
+      "dm_name": "Frank Fang",
+      "dm_title": "Co-Founder",
+      "dm_email": null,
+      "dm_linkedin_url": "http://www.linkedin.com/in/frankjiji11",
+      "score": 24.99704792304083,
+      "insight": "SKYX Platforms Corp. has recently raised funding, signaling potential growth and a need for commercial insurance solutions.",
+      "signals": [
+        {
+          "type": "funding_raised",
+          "captured_at": "2026-05-16T04:43:14.856496",
+          "days_ago": 0,
+          "payload": {
+            "title": "D - SKYX Platforms Corp. (0001598981) (Filer)",
+            "filing_type": "Form D",
+            "filed_on": "",
+            "link": "https://www.sec.gov/Archives/edgar/data/1598981/000149315226023938/0001493152-26-023938-index.htm"
+          }
+        }
+      ]
+    },
+    {
+      "name": "RenX Enterprises Corp.",
+      "domain": "renxent.com",
+      "industry": "other",
+      "headcount": null,
+      "country": "US",
+      "city": "Miami",
+      "state": "FL",
+      "dm_name": "David Villarreal",
+      "dm_title": "Chief Executive Officer",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "score": 24.99704791423045,
+      "insight": "RenX Enterprises Corp. recently filed a funding raise, indicating a new financial influx for their environmental solutions business.",
+      "signals": [
+        {
+          "type": "funding_raised",
+          "captured_at": "2026-05-16T04:43:14.856496",
+          "days_ago": 0,
+          "payload": {
+            "title": "D - RenX Enterprises Corp. (0001959023) (Filer)",
+            "filing_type": "Form D",
+            "filed_on": "",
+            "link": "https://www.sec.gov/Archives/edgar/data/1959023/000121390026057937/0001213900-26-057937-index.htm"
+          }
+        }
+      ]
+    },
+    {
       "name": "Prism Layer AI, Inc.",
       "domain": "prismlayer.ai",
       "industry": "software_saas",
@@ -435,7 +435,7 @@
       "dm_title": "Co-Founder & CEO",
       "dm_email": "simone@prismlayer.ai",
       "dm_linkedin_url": "http://www.linkedin.com/in/simone-garreau-b3571b10",
-      "score": 24.99918914494231,
+      "score": 24.99704790707118,
       "insight": "Prism Layer AI, Inc. recently raised funding, indicating a potential need for tailored commercial insurance solutions.",
       "signals": [
         {
@@ -463,7 +463,7 @@
       "dm_title": "Senior Vice President / Chief Financial Officer",
       "dm_email": null,
       "dm_linkedin_url": "http://www.linkedin.com/in/david-skilton-8ba329b",
-      "score": 24.99918913894566,
+      "score": 24.997047885025182,
       "insight": "Copper State Credit Union recently raised funding, indicating financial growth that may prompt a need for updated insurance coverage.",
       "signals": [
         {
@@ -491,7 +491,7 @@
       "dm_title": "Owner / Officer",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 24.799119647584437,
+      "score": 24.79699559352403,
       "insight": "WPC LLC recently obtained a new motor carrier authority with a fleet size of 3 power units, effective May 14, 2026.",
       "signals": [
         {
@@ -524,7 +524,7 @@
       "dm_title": "Owner / Officer",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 24.676711072777387,
+      "score": 24.674597509386015,
       "insight": "ICT PARTY BUS LLC received a new motor carrier authority for 3 power units, issued on 2026-05-14.",
       "signals": [
         {
@@ -546,6 +546,39 @@
       ]
     },
     {
+      "name": "MOVING CHAMPS LLC",
+      "domain": "movingchamps.com",
+      "industry": "logistics_transport",
+      "headcount": null,
+      "country": "US",
+      "city": "Overland Park",
+      "state": "KS",
+      "dm_name": "Joshua Lesher",
+      "dm_title": null,
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "score": 23.199395033784505,
+      "insight": "MOVING CHAMPS LLC has filed for a new motor carrier authority with a fleet size of 2 power units, effective May 14, 2026.",
+      "signals": [
+        {
+          "type": "new_motor_carrier_authority",
+          "captured_at": "2026-05-16T04:48:58.926779",
+          "days_ago": 0,
+          "payload": {
+            "usdot": "4582442",
+            "dba_name": "",
+            "issue_date": "2026-05-14",
+            "fleet_size_power_units": 2,
+            "drivers": 1,
+            "carrier_operation": "A",
+            "city": "INDEPENDENCE",
+            "state": "MO",
+            "officer_name": "BRANDON HERRERA"
+          }
+        }
+      ]
+    },
+    {
       "name": "TOGETHER WE CAN TRANSIT SERVICES LLC",
       "domain": "wecantransit.com",
       "industry": "logistics_transport",
@@ -557,7 +590,7 @@
       "dm_title": "Company Officer",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 23.08466520822001,
+      "score": 23.08268801145355,
       "insight": "Together We Can Transit Services LLC has obtained a new motor carrier authority with 2 power units, effective 05/14/2026.",
       "signals": [
         {
@@ -579,6 +612,204 @@
       ]
     },
     {
+      "name": "E&O TRUCKING LLC",
+      "domain": null,
+      "industry": "logistics_transport",
+      "headcount": null,
+      "country": "US",
+      "city": "SAUK VILLAGE",
+      "state": "IL",
+      "dm_name": "ERIC ORNELAS",
+      "dm_title": "Owner / Officer",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "score": 21.599436749423624,
+      "insight": "E&O TRUCKING LLC has recently obtained a new motor carrier authority (USDOT 4582443) for a single power unit, issued on 05/14/2026.",
+      "signals": [
+        {
+          "type": "new_motor_carrier_authority",
+          "captured_at": "2026-05-16T04:48:58.926779",
+          "days_ago": 0,
+          "payload": {
+            "usdot": "4582443",
+            "dba_name": "",
+            "issue_date": "2026-05-14",
+            "fleet_size_power_units": 1,
+            "drivers": 1,
+            "carrier_operation": "A",
+            "city": "SAUK VILLAGE",
+            "state": "IL",
+            "officer_name": "ERIC ORNELAS"
+          }
+        }
+      ]
+    },
+    {
+      "name": "EIGHTY3 TRANSPORT LLC",
+      "domain": null,
+      "industry": "logistics_transport",
+      "headcount": null,
+      "country": "US",
+      "city": "BOERNE",
+      "state": "TX",
+      "dm_name": "JUAN JOSE VALDEZ JR.",
+      "dm_title": "Owner / Officer",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "score": 21.599436742342156,
+      "insight": "EIGHTY3 TRANSPORT LLC has obtained a new motor carrier authority with a fleet size of 1 power unit, effective May 14, 2026.",
+      "signals": [
+        {
+          "type": "new_motor_carrier_authority",
+          "captured_at": "2026-05-16T04:48:58.926779",
+          "days_ago": 0,
+          "payload": {
+            "usdot": "4582444",
+            "dba_name": "",
+            "issue_date": "2026-05-14",
+            "fleet_size_power_units": 1,
+            "drivers": 1,
+            "carrier_operation": "A",
+            "city": "BOERNE",
+            "state": "TX",
+            "officer_name": "JUAN JOSE VALDEZ JR."
+          }
+        }
+      ]
+    },
+    {
+      "name": "JUNK MASTERS PRO LLC",
+      "domain": "junkmastersmn.com",
+      "industry": "logistics_transport",
+      "headcount": 7,
+      "country": "US",
+      "city": "Eden Prairie",
+      "state": "MN",
+      "dm_name": "Mitch Harrison",
+      "dm_title": "Founder / CEO",
+      "dm_email": "mitch@junkmastersmn.com",
+      "dm_linkedin_url": "http://www.linkedin.com/in/mitch-harrison-0804b915a",
+      "score": 21.599436730050666,
+      "insight": "JUNK MASTERS PRO LLC recently obtained a new motor carrier authority with a fleet size of 1, effective May 14, 2026.",
+      "signals": [
+        {
+          "type": "new_motor_carrier_authority",
+          "captured_at": "2026-05-16T04:48:58.926779",
+          "days_ago": 0,
+          "payload": {
+            "usdot": "4582445",
+            "dba_name": "",
+            "issue_date": "2026-05-14",
+            "fleet_size_power_units": 1,
+            "drivers": 1,
+            "carrier_operation": "C",
+            "city": "MASSAPEQUA PARK",
+            "state": "NY",
+            "officer_name": "JEROME A ALESSI JR"
+          }
+        }
+      ]
+    },
+    {
+      "name": "TAPPAN TRUCKING LLC",
+      "domain": null,
+      "industry": "logistics_transport",
+      "headcount": null,
+      "country": "US",
+      "city": "Tappan",
+      "state": "NY",
+      "dm_name": "PAMELA TAPPAN",
+      "dm_title": "Owner / Officer",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "score": 21.599436722928765,
+      "insight": "TAPPAN TRUCKING LLC recently obtained a new motor carrier authority with a fleet size of 1 power unit, effective from May 14, 2026.",
+      "signals": [
+        {
+          "type": "new_motor_carrier_authority",
+          "captured_at": "2026-05-16T04:48:58.926779",
+          "days_ago": 0,
+          "payload": {
+            "usdot": "4582446",
+            "dba_name": "",
+            "issue_date": "2026-05-14",
+            "fleet_size_power_units": 1,
+            "drivers": 1,
+            "carrier_operation": "C",
+            "city": "MEMPHIS",
+            "state": "TN",
+            "officer_name": "PAMELA TAPPAN"
+          }
+        }
+      ]
+    },
+    {
+      "name": "MARYJ SERVICES CORP",
+      "domain": null,
+      "industry": "logistics_transport",
+      "headcount": null,
+      "country": "US",
+      "city": "FAR ROCKAWAY",
+      "state": "NY",
+      "dm_name": "MARIA JOSE MALDONADORIVADENEIRA",
+      "dm_title": "Owner / Officer",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "score": 21.599436716950525,
+      "insight": "MARYJ SERVICES CORP has obtained a new motor carrier authority for 1 power unit, effective from May 14, 2026.",
+      "signals": [
+        {
+          "type": "new_motor_carrier_authority",
+          "captured_at": "2026-05-16T04:48:58.926779",
+          "days_ago": 0,
+          "payload": {
+            "usdot": "4582448",
+            "dba_name": "",
+            "issue_date": "2026-05-14",
+            "fleet_size_power_units": 1,
+            "drivers": 1,
+            "carrier_operation": "C",
+            "city": "FAR ROCKAWAY",
+            "state": "NY",
+            "officer_name": "MARIA JOSE MALDONADORIVADENEIRA"
+          }
+        }
+      ]
+    },
+    {
+      "name": "TREE WRANGLER SERVICE LLC",
+      "domain": null,
+      "industry": "logistics_transport",
+      "headcount": null,
+      "country": "US",
+      "city": "PORTOLA",
+      "state": "CA",
+      "dm_name": "KEVIN COOK",
+      "dm_title": "Owner / Officer",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "score": 21.599436709811297,
+      "insight": "TREE WRANGLER SERVICE LLC has obtained a new motor carrier authority with a fleet size of 1 unit, issued on May 14, 2026.",
+      "signals": [
+        {
+          "type": "new_motor_carrier_authority",
+          "captured_at": "2026-05-16T04:48:58.926779",
+          "days_ago": 0,
+          "payload": {
+            "usdot": "4582450",
+            "dba_name": "",
+            "issue_date": "2026-05-14",
+            "fleet_size_power_units": 1,
+            "drivers": 1,
+            "carrier_operation": "C",
+            "city": "PORTOLA",
+            "state": "CA",
+            "officer_name": "KEVIN COOK"
+          }
+        }
+      ]
+    },
+    {
       "name": "WESTCREEK TRANSPORT INC",
       "domain": null,
       "industry": "logistics_transport",
@@ -590,7 +821,7 @@
       "dm_title": "Owner / Officer",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 21.59923324723786,
+      "score": 21.597383265540728,
       "insight": "WESTCREEK TRANSPORT INC has recently obtained a new motor carrier authority with a fleet size of 1, effective from May 14, 2026.",
       "signals": [
         {
@@ -614,7 +845,7 @@
     {
       "name": "DANCE OUT COMPETITION LLC",
       "domain": "thedanceout.com",
-      "industry": "logistics_transport",
+      "industry": "media_entertainment",
       "headcount": 1,
       "country": "US",
       "city": "Liberty",
@@ -623,7 +854,7 @@
       "dm_title": "Owner / Officer",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 21.599233235934186,
+      "score": 21.597383252661302,
       "insight": "DANCE OUT COMPETITION LLC has recently obtained a new motor carrier authority for 1 power unit, effective May 14, 2026.",
       "signals": [
         {
@@ -650,13 +881,13 @@
       "industry": "logistics_transport",
       "headcount": null,
       "country": "US",
-      "city": "DOWNEY",
-      "state": "CA",
+      "city": "Miami",
+      "state": "FL",
       "dm_name": "CARLOS ALFREDO ROJAS",
       "dm_title": "Owner / Officer",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 21.599233230198596,
+      "score": 21.597383246602774,
       "insight": "CARLOS A ROJAS recently obtained a new motor carrier authority with 1 power unit, issued on 2026-05-14.",
       "signals": [
         {
@@ -689,7 +920,7 @@
       "dm_title": "Owner / Officer",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 21.599233219310793,
+      "score": 21.59738323177122,
       "insight": "PHILLIPS FREIGHT TRANSPORT LLC recently obtained a new motor carrier authority with 1 power unit and 4 drivers, effective 05/14/2026.",
       "signals": [
         {
@@ -722,7 +953,7 @@
       "dm_title": "Owner",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 21.49261941288268,
+      "score": 21.490778632563345,
       "insight": "HAAG PERFORMANCE LLC recently obtained a new motor carrier authority with a fleet size of 1 power unit, issued on 2026-05-14.",
       "signals": [
         {
@@ -755,7 +986,7 @@
       "dm_title": "President",
       "dm_email": null,
       "dm_linkedin_url": "http://www.linkedin.com/in/lawrence-shub-3b86b810",
-      "score": 21.49261940452005,
+      "score": 21.490778624983026,
       "insight": "FLO MECHANICAL LLC recently obtained a new motor carrier authority with a fleet size of 1 power unit, effective May 14, 2026.",
       "signals": [
         {
@@ -788,7 +1019,7 @@
       "dm_title": "Owner / Officer",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 21.4926193986346,
+      "score": 21.490778618316483,
       "insight": "GEDEON K MAFU recently obtained a new motor carrier authority with 1 power unit and 1 driver, effective May 14, 2026.",
       "signals": [
         {
@@ -821,7 +1052,7 @@
       "dm_title": "Founder",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 21.49261939327792,
+      "score": 21.490778612678657,
       "insight": "LISBOA CAFE & MINI-MARKET LLC has recently obtained a new motor carrier authority with 1 power unit effective May 14, 2026.",
       "signals": [
         {
@@ -854,7 +1085,7 @@
       "dm_title": "Owner / Officer",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 21.4926193876626,
+      "score": 21.490778605190293,
       "insight": "LUDIN INC recently obtained a new motor carrier authority for 1 power unit with an issue date of May 14, 2026.",
       "signals": [
         {
@@ -887,7 +1118,7 @@
       "dm_title": "Owner / Officer",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 21.492619382116253,
+      "score": 21.490778593776714,
       "insight": "DCF HAULING LLC recently obtained a new motor carrier authority with 1 power unit, effective May 14, 2026.",
       "signals": [
         {
@@ -920,7 +1151,7 @@
       "dm_title": null,
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 21.492619376633126,
+      "score": 21.490778574104667,
       "insight": "The company ONYX FREIGHT GROUP LLC has obtained a new motor carrier authority with a fleet size of 1, issued on 2026-05-14.",
       "signals": [
         {
@@ -953,7 +1184,7 @@
       "dm_title": null,
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 21.49261936909239,
+      "score": 21.49077856764502,
       "insight": "Novalink Freight Inc has obtained a new motor carrier authority with 1 power unit effective May 14, 2026.",
       "signals": [
         {
@@ -977,16 +1208,16 @@
     {
       "name": "GURSHARANJIT S KHAROD",
       "domain": null,
-      "industry": null,
+      "industry": "logistics_transport",
       "headcount": null,
-      "country": null,
-      "city": null,
-      "state": null,
+      "country": "US",
+      "city": "Wilmington",
+      "state": "DELAWARE",
       "dm_name": "GURSHARANJIT SINGH KHAROD",
       "dm_title": "Owner / Officer",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 21.492619363540296,
+      "score": 21.490778559627927,
       "insight": "GURSHARANJIT S KHAROD has obtained a new motor carrier authority with 1 power unit and 2 drivers, effective May 14, 2026.",
       "signals": [
         {
@@ -1019,7 +1250,7 @@
       "dm_title": "CFO",
       "dm_email": "kkraus@rbm.us",
       "dm_linkedin_url": "http://www.linkedin.com/in/kade-kraus-01a78310",
-      "score": 21.492619358493982,
+      "score": 21.490778553323448,
       "insight": "RIVERBEND TRANSPORTATION LLC has secured a new motor carrier authority (USDOT 4582421) with a fleet size of 1, effective May 14, 2026.",
       "signals": [
         {
@@ -1052,7 +1283,7 @@
       "dm_title": "Owner / Officer",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 21.49261935334996,
+      "score": 21.490778526864172,
       "insight": "Duleski Transport LLC obtained a new motor carrier authority with a fleet size of 1, effective May 14, 2026.",
       "signals": [
         {
@@ -1085,7 +1316,7 @@
       "dm_title": "Director of Operations",
       "dm_email": null,
       "dm_linkedin_url": "http://www.linkedin.com/in/alison-sawyer",
-      "score": 21.492619342406698,
+      "score": 21.490778512439157,
       "insight": "DO-WELL GROUP LIMITED LIABILITY COMPANY recently obtained a new motor carrier authority (USDOT: 4582424) with a fleet size of 1, effective 05/14/2026.",
       "signals": [
         {
@@ -1118,7 +1349,7 @@
       "dm_title": "Owner",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 21.49261933725118,
+      "score": 21.49077849907159,
       "insight": "LEONELS TRUCKING INC has filed for a new motor carrier authority with a fleet size of 1, effective May 14, 2026.",
       "signals": [
         {
@@ -1151,7 +1382,7 @@
       "dm_title": "Owner / Officer",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 21.492619326486093,
+      "score": 21.490778486726995,
       "insight": "Benjamin Scott Garlit has recently obtained a new motor carrier authority with 1 power unit and 1 driver, effective from May 14, 2026.",
       "signals": [
         {
@@ -1184,7 +1415,7 @@
       "dm_title": "President",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 21.492619315312933,
+      "score": 21.490778468606646,
       "insight": "ONETOUCH HOME SOLUTIONS LLC recently obtained a new motor carrier authority with a fleet size of 1, issued May 14, 2026.",
       "signals": [
         {
@@ -1217,7 +1448,7 @@
       "dm_title": "Owner/Member",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 21.492619309668875,
+      "score": 21.490778463020543,
       "insight": "MARTINS ALUMINUM PRODUCTS LLC recently obtained a new motor carrier authority with a fleet size of 1 unit, effective from May 14, 2026.",
       "signals": [
         {
@@ -1250,7 +1481,7 @@
       "dm_title": "Owner / Officer",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 21.492619303024753,
+      "score": 21.490778455359766,
       "insight": "ANCHOR POINTS ENTERPRISES recently obtained a new motor carrier authority, with a fleet size of 1 and an issue date of 2026-05-14.",
       "signals": [
         {
