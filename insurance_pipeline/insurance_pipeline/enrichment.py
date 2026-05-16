@@ -132,6 +132,28 @@ def _is_insurance_vendor(name: str) -> bool:
     return any(p.search(name) for p in _INSURANCE_VENDOR_NAME_RES)
 
 
+# Financial-vehicle names that slip past EDGAR's source-level filter
+# end up in the DB and persist across runs. This list purges them at
+# enrichment time so existing rows get cleaned out on the next cron.
+# Pattern is intentionally narrower than EDGAR's — we don't want to
+# delete a real "Smith Capital LLC" that's an operating company.
+_FINANCIAL_VEHICLE_NAME_RES: tuple[re.Pattern[str], ...] = (
+    re.compile(r"\bBancshares\b", re.IGNORECASE),
+    re.compile(r"\bBancorp\b", re.IGNORECASE),
+    re.compile(r"\bFinance\s+(?:Corp|Company|Inc|LLC|L\.?P\.?)", re.IGNORECASE),
+    re.compile(r",\s*L\.?\s?L?\s?P\.?\s*$", re.IGNORECASE),  # name ending in ", L.P." / ", LP" / ", LLP"
+    re.compile(r"^TPG\b", re.IGNORECASE),
+    re.compile(r"^Blackstone\b", re.IGNORECASE),
+    re.compile(r"^KKR\b", re.IGNORECASE),
+    re.compile(r"^Carlyle\b", re.IGNORECASE),
+    re.compile(r"^MidOcean\b", re.IGNORECASE),
+)
+
+
+def _is_financial_vehicle(name: str) -> bool:
+    return any(p.search(name) for p in _FINANCIAL_VEHICLE_NAME_RES)
+
+
 def _disqualification_reason(lead: Lead) -> str | None:
     if _domain_blocked(lead.domain):
         return f"blocked_domain={lead.domain}"
@@ -139,6 +161,8 @@ def _disqualification_reason(lead: Lead) -> str | None:
         return "blocked_name_pattern"
     if _is_insurance_vendor(lead.name):
         return "insurance_vendor_name"
+    if _is_financial_vehicle(lead.name):
+        return "financial_vehicle"
     if lead.headcount is not None and lead.headcount > _SMB_HEADCOUNT_CAP:
         return f"oversized={lead.headcount}"
     if lead.headcount == 0:
