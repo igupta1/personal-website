@@ -44,8 +44,8 @@ def test_oversized_headcount_disqualified():
 
 
 def test_at_cap_passes():
-    # SMB cap is 50 — exactly 50 should pass (it's the cap, not over).
-    lead = _bare_lead("Acme Robotics", headcount=50)
+    # SMB cap is 75 — exactly 75 should pass (it's the cap, not over).
+    lead = _bare_lead("Acme Robotics", headcount=75)
     assert enrichment._disqualification_reason(lead) is None
 
 

@@ -20,83 +20,169 @@ class Copy(BaseModel):
 
 _FRAMING = (
     "You are summarizing leads for a fractional CFO. The product: "
-    "part-time CFO services for sub-50-employee US companies. The "
-    "buyer is the founder / CEO who has financial complexity (raised "
-    "money, hiring a controller, taking on a board) but isn't big "
-    "enough to justify a $300K full-time CFO. Buying triggers: a "
-    "Controller / VP Finance posting (they need finance leadership "
-    "but are sizing down from CFO), a recent Form D / Series A "
-    "(fresh cash, new board reporting obligations)."
+    "part-time CFO services for sub-75-employee US companies. The "
+    "buyer is the founder / CEO."
 )
 
 
-_INSIGHT_STYLES: tuple[str, ...] = (
-    "Open with the specific finance hire they're making (Controller, "
-    "VP Finance, Accounting Manager). Name the title in the first "
-    "three words. Then the implication for fractional-CFO timing.",
+# Style rotation kept for variety, but every style is now signal-
+# scoped: a hiring-flavored style on a Form-D-only lead caused the
+# RenX-style hallucination ("transition from CFO" with no CFO in
+# payload). The runner picks a style consistent with what the lead
+# actually has — see _pick_style.
+_HIRING_STYLES: tuple[str, ...] = (
+    "Open with the EXACT posting title from the signal payload. Then "
+    "the implication: a Controller hire signals they've outgrown "
+    "founder-as-CFO but aren't big enough for a $300K CFO comp.",
 
-    "Lead with the funding moment (Form D filed, Series A closed) "
-    "and the reporting / board-prep load it creates. Frame the "
-    "fractional CFO as the bridge before a full-time hire makes sense.",
+    "Action-first verb opener: 'Hiring [exact title]', 'Filling [exact "
+    "title]'. Then the gap a fractional CFO closes.",
 
-    "Frame the urgency window — fresh hire postings get bound to a "
-    "candidate within 6-10 weeks. Why call this week vs. next month.",
+    "Frame the urgency window — finance-lead postings typically bind "
+    "to a candidate in 6-10 weeks. Why this week beats next month.",
+)
+_FUNDING_STYLES: tuple[str, ...] = (
+    "Lead with the filing or round itself (Form D filed today, seed "
+    "closed). Then the reporting / board-prep load a fractional CFO "
+    "absorbs. Do NOT speculate about hiring they haven't disclosed.",
 
-    "Highlight what's distinctive about this company's stage or "
-    "vertical. Stage-aware: 'Seed-stage [vertical] company in "
-    "[state]...', 'Post-Series-A [vertical] hiring its first "
-    "Controller...'.",
+    "Open with the date detail (filed today / yesterday / Xd ago) "
+    "then the investor-side load: new board, new reporting cadence, "
+    "first audit cycle.",
 
-    "Open with the decision maker (founder / CEO / managing "
-    "partner), then the buying-window signal, then the fractional-"
-    "CFO angle.",
+    "Highlight what's distinctive about the stage or industry from "
+    "the signal payload. Do NOT add roles, hires, or transitions the "
+    "payload doesn't reference.",
+)
+_COMBINED_STYLES: tuple[str, ...] = (
+    "Bridge the two signals: 'Filed [filing] AND hiring [exact "
+    "title]'. The co-occurrence is the strongest fractional-CFO "
+    "trigger on the page.",
 
-    "Action-first verb opener. 'Hiring a Controller for...', "
-    "'Closed seed round...', 'Filed Form D after...'. Then the "
-    "implication.",
+    "Open with the hiring title, end with the funding-side urgency "
+    "(or vice versa). Tie both to the same buying moment.",
 )
 
 
 _PROMPT_TEMPLATE = """\
 {framing}
 
-STYLE FOR THIS LEAD: {style}
+==========================================================
+GROUND TRUTH — the ONLY information about this lead.
+Do not introduce facts that are not in this block.
+==========================================================
 
-Lead profile:
-- Company: {name}
-- What they do: {value_prop}
-- Industry: {industry}
-- Headcount: {headcount}
-- Location: {location}
-- Heat score: {score:.0f}/100
+Company:    {name}
+What they do: {value_prop}
+Industry:   {industry}
+Headcount:  {headcount}
+Location:   {location}
+Heat score: {score:.0f}/100
 
-Recent signals (most recent first):
+Signals present on this lead (newest first):
 {signals}
 
-Write ONE sentence (<= 140 chars), THIRD PERSON, naming the specific
-buying moment that makes this lead a fit for a fractional CFO — the
-actual posting title, the filing type, the round size if known. Use
-the company name or pronouns like "they" / "the company" — NEVER
-"you" or "your". This text is shown to the fractional CFO scanning a
-list of leads.
+Signal-type guidance:
+{signal_guidance}
+
+STYLE FOR THIS LEAD: {style}
+
+==========================================================
+
+Write ONE sentence (<= 140 chars), THIRD PERSON, naming the SPECIFIC
+buying moment that's already in the signal payload above. Shown to
+a fractional CFO scanning leads.
 
 Hard rules — the LLM grading this rejects insights that violate any:
-1. Do NOT start the sentence with the company name.
-2. Do NOT use these phrases: "recently posted", "recently filed",
-   "just filed", "effective [date]", "indicating a need for",
-   "in need of a CFO".
-3. Do NOT use generic filler: "growing companies", "presents an
-   opportunity", "may indicate", "ideal candidate".
-4. Do NOT use marketing-fluff hedge language: "positioned for",
-   "poised for", "may require", "well-positioned", "primed for",
-   "potential need for".
-5. Output ENGLISH ONLY.
-6. Do NOT echo "0 days ago" or "0d ago" — use "today" / "yesterday"
-   for fresh signals.
-7. DO lead with a concrete detail from the signal payload (the title
-   they're hiring for, the funding round, the filing type).
-8. DO follow the STYLE directive above.
+
+OPENING (the most common failure mode):
+1. Do NOT open with "The company", "They", "The firm", a pronoun, or
+   the lead's name. Open with a SPECIFIC detail from the signal
+   payload above — the posting title in quotes, the filing type, the
+   date, the round.
+
+HALLUCINATION GUARD (the second-most-common failure mode):
+2. Do NOT mention any role title (CFO, Chief Financial Officer,
+   Controller, VP Finance, Accounting Manager, etc.) UNLESS that
+   exact title appears in the signal payload above. Specifically
+   forbidden: "transition from CFO" / "step up from Controller" /
+   "planning to hire a Controller" when those roles are not in the
+   signals list.
+3. Do NOT cross signal types. If the only signal is FUNDING_RAISED,
+   do NOT mention hiring, postings, or finance-lead titles. If the
+   only signal is JOB_POSTED_FINANCE_LEAD, do NOT mention funding,
+   Form D, or investor-side context.
+4. Do NOT speculate about future hiring, future filings, or future
+   moves the company has not made. Stay on what the signals actually
+   say.
+
+PHRASING:
+5. Do NOT use: "recently posted", "recently filed", "just filed",
+   "effective [date]", "indicating a need for", "in need of a CFO".
+6. Do NOT use filler: "growing companies", "presents an opportunity",
+   "may indicate", "ideal candidate".
+7. Do NOT use hedge language: "positioned for", "poised for", "may
+   require", "well-positioned", "primed for", "potential need for".
+8. Output ENGLISH ONLY.
+9. Do NOT echo "0 days ago" or "0d ago" — use "today" / "yesterday".
+
+POSITIVE:
+10. DO follow the STYLE directive above.
+11. DO use concrete payload values: the EXACT posting title in
+    quotes, the filing type ("Form D"), the published date phrasing.
 """
+
+
+def _pick_style(lead: Lead, seed: int) -> str:
+    """Pick a style consistent with the signal types actually present
+    on the lead. Stops the LLM from being primed with a hiring-flavored
+    style when the only signal is funding (the RenX failure mode)."""
+    has_hire = any(s.type == SignalType.JOB_POSTED_FINANCE_LEAD for s in lead.signals)
+    has_fund = any(s.type == SignalType.FUNDING_RAISED for s in lead.signals)
+    if has_hire and has_fund:
+        bucket = _COMBINED_STYLES
+    elif has_hire:
+        bucket = _HIRING_STYLES
+    elif has_fund:
+        bucket = _FUNDING_STYLES
+    else:
+        bucket = _HIRING_STYLES  # fallback — shouldn't happen for scored leads
+    return bucket[seed % len(bucket)]
+
+
+def _signal_guidance(lead: Lead) -> str:
+    """Explicit per-signal-set instruction injected into the prompt.
+    The previous version relied on a single shared rule list; the
+    LLM still leaked title mentions onto funding-only leads because
+    the framing block primed it with role-title vocabulary.
+
+    Surfacing the present-signal-set as a labeled directive prevents
+    cross-contamination."""
+    has_hire = any(s.type == SignalType.JOB_POSTED_FINANCE_LEAD for s in lead.signals)
+    has_fund = any(s.type == SignalType.FUNDING_RAISED for s in lead.signals)
+    if has_hire and has_fund:
+        return (
+            "BOTH a hiring signal AND a funding signal are present. "
+            "Reference the EXACT posting title from the payload AND the "
+            "filing type. Tie them together as the buying moment."
+        )
+    if has_hire:
+        return (
+            "ONLY a hiring signal is present. Reference the EXACT "
+            "posting title (in quotes). Do NOT mention funding, Form D, "
+            "Series A, board prep, or investor reporting — none of "
+            "those are in the payload for this lead."
+        )
+    if has_fund:
+        return (
+            "ONLY a funding signal is present. Reference the filing "
+            "type (e.g. Form D) and the date. Do NOT mention any role "
+            "title (Controller, VP Finance, CFO, Accounting Manager, "
+            "etc.) — no hiring signal exists for this lead. Frame the "
+            "value as board prep / investor reporting / fresh-cash "
+            "discipline, not hiring."
+        )
+    return "Signal context unclear. Stick to what's literally in the payload."
 
 
 def generate(
@@ -106,7 +192,7 @@ def generate(
     model: str = "gpt-4o-mini",
 ) -> Copy:
     seed = lead.id if lead.id is not None else hash(lead.name)
-    style = _INSIGHT_STYLES[seed % len(_INSIGHT_STYLES)]
+    style = _pick_style(lead, seed)
 
     prompt = _PROMPT_TEMPLATE.format(
         framing=_FRAMING,
@@ -118,6 +204,7 @@ def generate(
         location=_describe_location(lead),
         score=score,
         signals=_describe_signals(lead),
+        signal_guidance=_signal_guidance(lead),
     )
     return llm.call_openai(prompt, response_model=Copy, model=model)
 

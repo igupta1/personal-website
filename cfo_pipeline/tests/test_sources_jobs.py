@@ -31,6 +31,30 @@ def test_classifies_accounting_manager_titles():
     assert jobs._is_finance_lead_title("Director of Accounting")
 
 
+def test_classifies_fpa_leadership_titles():
+    assert jobs._is_finance_lead_title("FP&A Manager")
+    assert jobs._is_finance_lead_title("FP&A Director")
+    assert jobs._is_finance_lead_title("Senior FP&A Manager")
+    assert jobs._is_finance_lead_title("VP FP&A")
+    assert jobs._is_finance_lead_title("Head of FP&A")
+    # FPA without ampersand
+    assert jobs._is_finance_lead_title("FPA Manager")
+    # FP&A Analyst is IC-level — not a buying signal.
+    assert not jobs._is_finance_lead_title("FP&A Analyst")
+    assert not jobs._is_finance_lead_title("Senior FP&A Analyst")
+
+
+def test_classifies_senior_accountant_with_specialist_exclusion():
+    assert jobs._is_finance_lead_title("Senior Accountant")
+    assert jobs._is_finance_lead_title("Sr. Accountant")
+    assert jobs._is_finance_lead_title("Senior Staff Accountant")
+    # Specialist IC tracks aren't the buying signal:
+    assert not jobs._is_finance_lead_title("Senior Tax Accountant")
+    assert not jobs._is_finance_lead_title("Senior Audit Accountant")
+    assert not jobs._is_finance_lead_title("Senior Cost Accountant")
+    assert not jobs._is_finance_lead_title("Senior Payroll Accountant")
+
+
 def test_unrelated_titles_dont_match():
     assert not jobs._is_finance_lead_title("Senior Software Engineer")
     assert not jobs._is_finance_lead_title("Director of Marketing")

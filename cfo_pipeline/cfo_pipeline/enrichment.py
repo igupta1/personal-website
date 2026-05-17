@@ -44,7 +44,10 @@ log = logging.getLogger(__name__)
 # don't fit "SMB buying a fractional CFO" without burning Gemini tokens
 # on them.
 
-_SMB_HEADCOUNT_CAP = 50
+# 75 instead of 50 (spec said "~50") because the smoke run cut several
+# plausible targets at 60-70 — fractional-CFO buyers exist comfortably
+# up to ~75. The tilde in the spec was load-bearing.
+_SMB_HEADCOUNT_CAP = 75
 
 _BLOCKED_TLDS: tuple[str, ...] = (".gov", ".mil", ".edu")
 

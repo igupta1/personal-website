@@ -10,7 +10,7 @@ export default function CFO() {
     <LeadsPage
       niche="cfo"
       title="Fractional CFO Leads"
-      subtitle="US SMBs (≤~50 employees) currently hiring finance leadership one rung below CFO — Controllers, VP / Director of Finance, Accounting Managers. Companies with an open full-time CFO posting are excluded. Recent Form D filings and announced rounds boost urgency. Refreshed nightly."
+      subtitle="US SMBs (≤~75 employees) currently hiring finance leadership one rung below CFO — Controllers, VP / Director of Finance, Accounting Managers, FP&A. Companies with an open full-time CFO posting are excluded. Recent Form D filings and announced rounds boost urgency. Refreshed nightly."
       apiPath="/api/generate-cfo-leads"
     />
   );

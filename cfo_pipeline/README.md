@@ -6,7 +6,7 @@ enrichment prompt, own Apollo title list, own JSON output shape.
 
 ## What this surfaces
 
-US SMBs (≤~50 employees) currently in the buying window for a
+US SMBs (≤~75 employees) currently in the buying window for a
 fractional CFO. The buying-signal model:
 
 - **Primary (gate):** the company is hiring finance leadership one

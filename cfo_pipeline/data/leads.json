@@ -1,6 +1,36 @@
 {
-  "generated_at": "2026-05-17T02:17:14.376811",
+  "generated_at": "2026-05-17T18:53:33.906857",
   "leads": [
+    {
+      "name": "Coveleigh Club",
+      "domain": "coveleighclub.com",
+      "industry": "hospitality_food",
+      "headcount": 68,
+      "country": "US",
+      "city": "Rye",
+      "state": "NY",
+      "dm_name": "Mauro Piccininni",
+      "dm_title": "GM/COO",
+      "dm_email": null,
+      "dm_linkedin_url": "http://www.linkedin.com/in/mauro-piccininni-8452027",
+      "contact_strength": "verified",
+      "score": 59.995387977642714,
+      "insight": "\"Financial Controller\" posted today signals they've outgrown founder-as-CFO but aren't big enough for a $300K CFO comp.",
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-05-17T18:48:38.677561",
+          "days_ago": 0,
+          "payload": {
+            "title": "Financial Controller",
+            "url": "https://www.indeed.com/viewjob?jk=55fae937c012b643",
+            "date_posted": "2026-05-17",
+            "site": "indeed"
+          }
+        }
+      ]
+    },
     {
       "name": "Qualitypartssupply",
       "domain": "qualitypartssupply.com",
@@ -14,8 +44,8 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 59.999278204414104,
-      "insight": "The company posted a job for an 'Experienced Business Office Comptroller' today, requiring immediate finance leadership.",
+      "score": 59.04770673389847,
+      "insight": "\"Experienced Business office Comptroller\" job posted today signals urgent hiring needs in finance, typically binding in 6-10 weeks.",
       "trigger_type": "finance_hire",
       "signals": [
         {
@@ -27,66 +57,6 @@
             "url": "https://www.indeed.com/viewjob?jk=9abefcd1f51a5ac5",
             "date_posted": "2026-05-16",
             "site": "indeed"
-          }
-        }
-      ]
-    },
-    {
-      "name": "RenX Enterprises Corp.",
-      "domain": "renxent.com",
-      "industry": "other",
-      "headcount": 40,
-      "country": "US",
-      "city": "Miami",
-      "state": "FL",
-      "dm_name": "David Villarreal",
-      "dm_title": "Chief Executive Officer",
-      "dm_email": null,
-      "dm_linkedin_url": null,
-      "contact_strength": "partial",
-      "score": 24.999821744119487,
-      "insight": "Form D filed today signals fresh funding, indicating the company may hire a Controller as they transition from CFO.",
-      "trigger_type": "form_d",
-      "signals": [
-        {
-          "type": "funding_raised",
-          "captured_at": "2026-05-17T02:16:37.280618",
-          "days_ago": 0,
-          "payload": {
-            "title": "D - RenX Enterprises Corp. (0001959023) (Filer)",
-            "filing_type": "Form D",
-            "filed_on": "",
-            "link": "https://www.sec.gov/Archives/edgar/data/1959023/000121390026057937/0001213900-26-057937-index.htm"
-          }
-        }
-      ]
-    },
-    {
-      "name": "Estately Operations LLC",
-      "domain": "estately.com",
-      "industry": "real_estate",
-      "headcount": null,
-      "country": "US",
-      "city": "Seattle",
-      "state": "WA",
-      "dm_name": "Galen Ward",
-      "dm_title": "Founder & CEO",
-      "dm_email": null,
-      "dm_linkedin_url": null,
-      "contact_strength": "partial",
-      "score": 24.99982174060965,
-      "insight": "Funding raised today via Form D suggests Estately Operations LLC, a seed-stage real estate company in Seattle, is seeking financial leadership.",
-      "trigger_type": "form_d",
-      "signals": [
-        {
-          "type": "funding_raised",
-          "captured_at": "2026-05-17T02:16:37.280618",
-          "days_ago": 0,
-          "payload": {
-            "title": "D - Estately Operations LLC (0002131672) (Filer)",
-            "filing_type": "Form D",
-            "filed_on": "",
-            "link": "https://www.sec.gov/Archives/edgar/data/2131672/000090514826002406/0000905148-26-002406-index.htm"
           }
         }
       ]
@@ -104,10 +74,23 @@
       "dm_email": "simone@prismlayer.ai",
       "dm_linkedin_url": "http://www.linkedin.com/in/simone-garreau-b3571b10",
       "contact_strength": "verified",
-      "score": 24.999821737420717,
-      "insight": "Filed Form D today, signaling fresh cash and new board reporting obligations for the company.",
+      "score": 49.60234045889638,
+      "insight": "Funding raised today via 'Form D' filing shows active investor interest in Prism Layer AI, Inc.'s enterprise risk management solutions.",
       "trigger_type": "form_d",
       "signals": [
+        {
+          "type": "funding_raised",
+          "captured_at": "2026-05-17T18:50:57.861397",
+          "days_ago": 0,
+          "payload": {
+            "title": "D - Prism Layer AI, Inc.",
+            "filing_type": "Form D",
+            "filed_on": "2026-05-15",
+            "link": "https://www.sec.gov/Archives/edgar/data/2133683/000213368326000001/0002133683-26-000001-index.htm",
+            "biz_state": "DE",
+            "biz_location": "Newark, DE"
+          }
+        },
         {
           "type": "funding_raised",
           "captured_at": "2026-05-17T02:16:37.280618",
@@ -117,6 +100,194 @@
             "filing_type": "Form D",
             "filed_on": "",
             "link": "https://www.sec.gov/Archives/edgar/data/2133683/000213368326000001/0002133683-26-000001-index.htm"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Alpha Wave CI V, LLC",
+      "domain": null,
+      "industry": "fintech",
+      "headcount": null,
+      "country": "US",
+      "city": "New York",
+      "state": "NY",
+      "dm_name": "Rick Gerson",
+      "dm_title": "Co-Founder, Chairman & Chief Investment Officer",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "partial",
+      "score": 24.999008767391,
+      "insight": "Funding raised today via 'Form D' filing signals a new board, new reporting cadence, and first audit cycle for Alpha Wave CI V, LLC.",
+      "trigger_type": "form_d",
+      "signals": [
+        {
+          "type": "funding_raised",
+          "captured_at": "2026-05-17T18:50:57.861397",
+          "days_ago": 0,
+          "payload": {
+            "title": "D - Alpha Wave CI V, LLC",
+            "filing_type": "Form D",
+            "filed_on": "2026-05-15",
+            "link": "https://www.sec.gov/Archives/edgar/data/1741615/000090266426002484/0000902664-26-002484-index.htm",
+            "biz_state": "NY",
+            "biz_location": "New York, NY"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Vadnais Heights H.A. LLC",
+      "domain": null,
+      "industry": "other",
+      "headcount": null,
+      "country": "US",
+      "city": "Vadnais Heights",
+      "state": "MN",
+      "dm_name": null,
+      "dm_title": null,
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "cold",
+      "score": 24.99900876438267,
+      "insight": "Funding raised today via \"Form D\" filing signals an opportunity for enhanced board prep and investor reporting.",
+      "trigger_type": "form_d",
+      "signals": [
+        {
+          "type": "funding_raised",
+          "captured_at": "2026-05-17T18:50:57.861397",
+          "days_ago": 0,
+          "payload": {
+            "title": "D - Vadnais Heights H.A. LLC",
+            "filing_type": "Form D",
+            "filed_on": "2026-05-15",
+            "link": "https://www.sec.gov/Archives/edgar/data/2133678/000213367826000001/0002133678-26-000001-index.htm",
+            "biz_state": "MN",
+            "biz_location": "Eden Prairie, MN"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Tugboat Solutions Inc.",
+      "domain": "tugboat.claims",
+      "industry": "software_saas",
+      "headcount": 11,
+      "country": "US",
+      "city": "Grand Forks",
+      "state": "ND",
+      "dm_name": "Aaron Mooney",
+      "dm_title": "Founder, COO",
+      "dm_email": "aaron@tugboat.claims",
+      "dm_linkedin_url": "http://www.linkedin.com/in/aaron-mooney-321408141",
+      "contact_strength": "verified",
+      "score": 24.99900876131417,
+      "insight": "Funding raised today via 'Form D' filing indicates potential needs for board preparation and investor reporting.",
+      "trigger_type": "form_d",
+      "signals": [
+        {
+          "type": "funding_raised",
+          "captured_at": "2026-05-17T18:50:57.861397",
+          "days_ago": 0,
+          "payload": {
+            "title": "D - Tugboat Solutions Inc.",
+            "filing_type": "Form D",
+            "filed_on": "2026-05-15",
+            "link": "https://www.sec.gov/Archives/edgar/data/2048397/000204839726000003/0002048397-26-000003-index.htm",
+            "biz_state": "ND",
+            "biz_location": "Grand Forks, ND"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Camber Respond LLC",
+      "domain": null,
+      "industry": "other",
+      "headcount": null,
+      "country": "US",
+      "city": "San Francisco",
+      "state": "CA",
+      "dm_name": "Michael Scott Irwin",
+      "dm_title": "Executive Officer",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "partial",
+      "score": 24.99900875838606,
+      "insight": "Form D filed today signals a fresh-cash discipline need, shaping board prep and investor reporting efforts.",
+      "trigger_type": "form_d",
+      "signals": [
+        {
+          "type": "funding_raised",
+          "captured_at": "2026-05-17T18:50:57.861397",
+          "days_ago": 0,
+          "payload": {
+            "title": "D - Camber Respond LLC",
+            "filing_type": "Form D",
+            "filed_on": "2026-05-15",
+            "link": "https://www.sec.gov/Archives/edgar/data/2131004/000147083126000447/0001470831-26-000447-index.htm",
+            "biz_state": "CA",
+            "biz_location": "San Francisco, CA"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Nectar Social",
+      "domain": "nectarsocial.com",
+      "industry": "media_entertainment",
+      "headcount": null,
+      "country": "US",
+      "city": "Palo Alto",
+      "state": "CA",
+      "dm_name": "Misbah Uraizee",
+      "dm_title": "CEO and co-founder",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "partial",
+      "score": 24.99895547926494,
+      "insight": "Form D filed today for a $30M Series A round provides an opportunity for board prep and investor reporting support.",
+      "trigger_type": "funding_event",
+      "signals": [
+        {
+          "type": "funding_raised",
+          "captured_at": "2026-05-17T18:50:49.892103",
+          "days_ago": 0,
+          "payload": {
+            "feed_title": "Marketing operating system Nectar Social raises $30M Series A led by Menlo",
+            "feed_url": "https://techcrunch.com/category/startups/feed/",
+            "link": "https://techcrunch.com/2026/05/16/marketing-operating-system-nectar-social-raises-30m-series-a-in-round-led-by-menlo/",
+            "published": "Sat, 16 May 2026 19:26:14 +0000"
+          }
+        }
+      ]
+    },
+    {
+      "name": "RenX Enterprises Corp.",
+      "domain": "renxent.com",
+      "industry": "other",
+      "headcount": 40,
+      "country": "US",
+      "city": "Miami",
+      "state": "FL",
+      "dm_name": "David Villarreal",
+      "dm_title": "Chief Executive Officer",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "partial",
+      "score": 24.603331683027374,
+      "insight": "Funding raised today via 'Form D' signals a need for enhanced board preparation and investor reporting at RenX Enterprises Corp.",
+      "trigger_type": "form_d",
+      "signals": [
+        {
+          "type": "funding_raised",
+          "captured_at": "2026-05-17T02:16:37.280618",
+          "days_ago": 0,
+          "payload": {
+            "title": "D - RenX Enterprises Corp. (0001959023) (Filer)",
+            "filing_type": "Form D",
+            "filed_on": "",
+            "link": "https://www.sec.gov/Archives/edgar/data/1959023/000121390026057937/0001213900-26-057937-index.htm"
           }
         }
       ]

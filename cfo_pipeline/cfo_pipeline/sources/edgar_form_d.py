@@ -1,19 +1,21 @@
-"""SEC EDGAR Form D filings source — ported from
-``insurance_pipeline.sources.edgar_form_d``.
+"""SEC EDGAR Form D filings source.
 
-Form D is the federal filing for private securities offerings —
-companies raising money under Reg D exemptions. For a fractional-CFO
-pitch, a fresh Form D is a strong urgency signal: the company just
-took outside money and now has board / investor reporting obligations,
-typically at a stage where they can't yet absorb a full-time CFO comp
-package.
+Two backends:
 
-Per spec, the 90-day window is enforced by the caller (``daily_run``
-sets ``since = utcnow() - 90d``). This source returns whatever EDGAR's
-``getcurrent`` feed has plus our pre-filters against VC funds /
-partnerships / single-property SPVs / vintage-year vehicles.
+1. EFTS full-text search (``efts.sec.gov/LATEST/search-index``) —
+   primary. Supports date-range queries, pages 100 hits at a time,
+   covers the full 90-day window the spec calls for. The previous
+   getcurrent-only path was a lie: it returned the last ~100 filings
+   of *all* types and our 90-day ``since`` filter was aspirational.
 
-Independent from ``insurance_pipeline``. Mirror code, mirror filters;
+2. ``getcurrent`` Atom feed — backstop, kept for the freshest filings
+   in case EFTS indexing lags by a few hours.
+
+Both emit the same ``FUNDING_RAISED`` signal shape. Operating-company
+filter (drops funds / SPVs / partnerships / vintage-year vehicles)
+applies to both.
+
+Independent from insurance_pipeline. Mirror code, mirror filters;
 no cross-imports.
 """
 
@@ -26,6 +28,7 @@ from email.utils import parsedate_to_datetime
 from typing import Any
 
 import feedparser
+import requests
 
 from cfo_pipeline.models import (
     LeadCandidate,
@@ -36,6 +39,10 @@ from cfo_pipeline.models import (
 
 _log = logging.getLogger(__name__)
 
+_EFTS_URL = "https://efts.sec.gov/LATEST/search-index"
+_EFTS_PAGE_SIZE = 100  # EFTS hard cap.
+_EFTS_DEFAULT_PAGES = 5  # 500 most-recent Form Ds; ~10% survive the operating-company filter.
+
 _EDGAR_GETCURRENT_URL = (
     "https://www.sec.gov/cgi-bin/browse-edgar"
     "?action=getcurrent&type=D&count=100&output=atom"
@@ -44,9 +51,15 @@ _USER_AGENT = (
     "ishaan-personal-website cfo-lead-magnet/0.1 (ishaangpta@g.ucla.edu)"
 )
 
-# Atom title format: "D - <Company Name> (cik) (Filer)"
+# Atom title format from getcurrent: "D - <Company Name> (cik) (Filer)"
 _TITLE_RE = re.compile(
     r"^\s*D\s*-\s*(?P<name>.+?)\s*\(\d+\)\s*\(Filer\)\s*$",
+    re.IGNORECASE,
+)
+
+# EFTS display_names format: "<Name>  (CIK <0001234567>)"
+_DISPLAY_NAME_RE = re.compile(
+    r"^\s*(?P<name>.+?)\s*\(CIK\s*\d+\)\s*$",
     re.IGNORECASE,
 )
 
@@ -62,20 +75,17 @@ _FINANCIAL_ENTITY_RE = re.compile(
     r"opportunity|opportunities|"
     r"asset\s+management|management\s+l\.?p\.?|"
     r"family\s+office|"
-    r"finance\s+(?:corp|company|inc|llc|l\.?p\.?)"
+    r"finance\s+(?:corp|company|inc|llc|l\.?p\.?)|"
+    r"spv|series\s+of"
     r")\b",
     re.IGNORECASE,
 )
 
-# Names ending in LP / L.P. / LLP / L.L.P. are partnerships — always
-# financial vehicles in Form D context.
 _LP_SUFFIX_RE = re.compile(
     r",?\s*L\.?\s?L?\s?P\.?\s*$",
     re.IGNORECASE,
 )
 
-# Hard-coded prefix filter for major PE / VC firms whose subsidiary
-# entity names sometimes slip past the keyword filter.
 _FINANCIAL_FIRM_PREFIX_RES: tuple[re.Pattern[str], ...] = (
     re.compile(r"^TPG\b", re.IGNORECASE),
     re.compile(r"^Blackstone\b", re.IGNORECASE),
@@ -86,8 +96,6 @@ _FINANCIAL_FIRM_PREFIX_RES: tuple[re.Pattern[str], ...] = (
     re.compile(r"^MidOcean\b", re.IGNORECASE),
 )
 
-# Real-estate SPV / vintage-year fund patterns. Independent SMBs don't
-# fit these shapes; this is wholesale / specialty territory.
 _VINTAGE_YEAR_RE = re.compile(
     r"\b(?:19|20|21)\d{2}\s*[,.\s]*(?:LLC|Inc|Corp(?:oration)?|LP|LLP|Ltd|Co)\.?\s*$",
     re.IGNORECASE,
@@ -131,13 +139,130 @@ def _is_operating_company(name: str) -> bool:
 
 
 def _extract_company_name(title: str) -> str | None:
+    """Used for the getcurrent Atom feed."""
     m = _TITLE_RE.match(title)
     if m is None:
         return None
     return m.group("name").strip() or None
 
 
-def fetch(*, since: datetime, limit: int | None = None) -> list[LeadCandidate]:
+def _extract_name_from_display(display: str) -> str | None:
+    """Used for the EFTS ``display_names`` field."""
+    m = _DISPLAY_NAME_RE.match(display)
+    if m is None:
+        return display.strip() or None
+    return m.group("name").strip() or None
+
+
+# --- EFTS primary path -----------------------------------------------------
+
+
+def _fetch_efts_page(
+    *, start_date: str, end_date: str, offset: int, hits: int
+) -> dict[str, Any] | None:
+    """Single page of EFTS results. Returns the parsed JSON or None on
+    error. EFTS expects ``dateRange=custom`` with ``startdt`` / ``enddt``
+    in YYYY-MM-DD."""
+    params = {
+        "q": "",
+        "forms": "D",
+        "dateRange": "custom",
+        "startdt": start_date,
+        "enddt": end_date,
+        "from": offset,
+        "hits": hits,
+    }
+    try:
+        r = requests.get(
+            _EFTS_URL,
+            params=params,
+            headers={"User-Agent": _USER_AGENT, "Accept": "application/json"},
+            timeout=20,
+        )
+        r.raise_for_status()
+        return r.json()
+    except (requests.RequestException, ValueError) as exc:
+        _log.warning("edgar efts page failed offset=%d: %s", offset, exc)
+        return None
+
+
+def _fetch_from_efts(
+    since: datetime, *, max_pages: int = _EFTS_DEFAULT_PAGES
+) -> list[LeadCandidate]:
+    captured_at = _utcnow()
+    end_date = captured_at.date().isoformat()
+    start_date = since.date().isoformat()
+
+    candidates: list[LeadCandidate] = []
+    for page in range(max_pages):
+        offset = page * _EFTS_PAGE_SIZE
+        data = _fetch_efts_page(
+            start_date=start_date, end_date=end_date,
+            offset=offset, hits=_EFTS_PAGE_SIZE,
+        )
+        if data is None:
+            break
+        hits = (data.get("hits") or {}).get("hits") or []
+        if not hits:
+            break
+        for hit in hits:
+            src = hit.get("_source") or {}
+            display_names = src.get("display_names") or []
+            if not display_names:
+                continue
+            company = _extract_name_from_display(display_names[0])
+            if not company:
+                continue
+            if not _is_operating_company(company):
+                continue
+
+            file_date = str(src.get("file_date") or "")
+            adsh = str(src.get("adsh") or "")
+            ciks = src.get("ciks") or []
+            link = (
+                f"https://www.sec.gov/Archives/edgar/data/{int(ciks[0])}/{adsh.replace('-', '')}/{adsh}-index.htm"
+                if ciks and adsh else ""
+            )
+
+            candidates.append(
+                LeadCandidate(
+                    name=company,
+                    domain=None,
+                    initial_signal=Signal(
+                        type=SignalType.FUNDING_RAISED,
+                        source=SourceName.EDGAR_FORM_D,
+                        captured_at=captured_at,
+                        payload={
+                            "title": f"D - {company}",
+                            "filing_type": "Form D",
+                            "filed_on": file_date,
+                            "link": link,
+                            "biz_state": (src.get("biz_states") or [None])[0],
+                            "biz_location": (src.get("biz_locations") or [None])[0],
+                        },
+                    ),
+                )
+            )
+        # Short-circuit when we've reached the end of the result set.
+        total = (data.get("hits") or {}).get("total") or {}
+        total_value = int(total.get("value") or 0)
+        if offset + _EFTS_PAGE_SIZE >= total_value:
+            break
+
+    _log.info(
+        "edgar efts: %d operating-company candidates from %s..%s",
+        len(candidates), start_date, end_date,
+    )
+    return candidates
+
+
+# --- getcurrent backstop ---------------------------------------------------
+
+
+def _fetch_from_getcurrent(since: datetime) -> list[LeadCandidate]:
+    """Last ~100 filings of all types from the getcurrent Atom feed.
+    Catches Form Ds that EFTS hasn't indexed yet (typically a few hours
+    of lag). Filtered to type=D entries via the title prefix."""
     captured_at = _utcnow()
 
     try:
@@ -145,7 +270,7 @@ def fetch(*, since: datetime, limit: int | None = None) -> list[LeadCandidate]:
             _EDGAR_GETCURRENT_URL, request_headers={"User-Agent": _USER_AGENT}
         )
     except Exception:
-        _log.exception("edgar form-d fetch failed")
+        _log.exception("edgar getcurrent fetch failed")
         return []
 
     candidates: list[LeadCandidate] = []
@@ -160,7 +285,6 @@ def fetch(*, since: datetime, limit: int | None = None) -> list[LeadCandidate]:
         if not company:
             continue
         if not _is_operating_company(company):
-            _log.info("edgar: skipping financial-entity filer: %r", company)
             continue
 
         updated = entry.get("updated") or entry.get("published")
@@ -187,6 +311,32 @@ def fetch(*, since: datetime, limit: int | None = None) -> list[LeadCandidate]:
             )
         )
 
-    if limit is not None:
-        candidates = candidates[:limit]
     return candidates
+
+
+# --- Public ----------------------------------------------------------------
+
+
+def fetch(*, since: datetime, limit: int | None = None) -> list[LeadCandidate]:
+    """EFTS pages (deep backfill) ∪ getcurrent (freshness backstop),
+    deduped on the operating-company name. Capped by ``limit`` if set."""
+    out: list[LeadCandidate] = []
+    seen_names: set[str] = set()
+
+    for source_name, getter in (
+        ("efts", lambda: _fetch_from_efts(since)),
+        ("getcurrent", lambda: _fetch_from_getcurrent(since)),
+    ):
+        try:
+            for cand in getter():
+                key = cand.name.strip().lower()
+                if key in seen_names:
+                    continue
+                seen_names.add(key)
+                out.append(cand)
+        except Exception:
+            _log.exception("edgar %s failed", source_name)
+
+    if limit is not None:
+        out = out[:limit]
+    return out

@@ -52,11 +52,14 @@ _log = logging.getLogger(__name__)
 # so we use the spelled-out form on the query side.
 _FINANCE_LEAD_QUERIES: tuple[str, ...] = (
     "Controller",
+    "Assistant Controller",
     "VP Finance",
     "Head of Finance",
     "Director of Finance",
     "Accounting Manager",
     "Finance Manager",
+    "FP&A Manager",
+    "Senior Accountant",
 )
 _CFO_QUERIES: tuple[str, ...] = (
     "Chief Financial Officer",
@@ -84,6 +87,25 @@ _FINANCE_MANAGER_RE = re.compile(
 )
 _HEAD_OF_ACCOUNTING_RE = re.compile(
     r"\b(?:head|director)\s+of\s+accounting\b",
+    re.IGNORECASE,
+)
+# FP&A leadership: matches "FP&A Manager", "Sr FP&A Director", "VP FP&A",
+# etc. Excludes "FP&A Analyst" (too junior — not the buying signal).
+_FPA_LEAD_RE = re.compile(
+    r"\bfp\s*&?\s*a\b.*?\b(?:manager|director|head|lead|leader|vp|vice\s+president)\b"
+    r"|\b(?:manager|director|head|lead|leader|vp|vice\s+president)\b.*?\bfp\s*&?\s*a\b",
+    re.IGNORECASE,
+)
+# Senior Accountant: weaker signal than Controller but still indicates
+# the company has finance-organization gaps a fractional CFO addresses.
+# Excludes "Senior Tax Accountant" / "Senior Audit Accountant" — those
+# are specialized IC roles that don't signal finance-leadership gap.
+_SENIOR_ACCOUNTANT_RE = re.compile(
+    r"\b(?:senior|sr\.?)\s+(?:staff\s+)?accountant\b",
+    re.IGNORECASE,
+)
+_SENIOR_ACCOUNTANT_EXCLUDE_RE = re.compile(
+    r"\b(?:tax|audit|cost|payroll|forensic|fixed[\s-]asset)\s+accountant\b",
     re.IGNORECASE,
 )
 
@@ -143,6 +165,11 @@ def _is_finance_lead_title(title: str) -> bool:
     first)."""
     if not title:
         return False
+    # Senior Accountant: include unless the title narrows to a specialist
+    # IC track (tax / audit / cost / payroll), where the buying signal
+    # weakens.
+    if _SENIOR_ACCOUNTANT_RE.search(title) and not _SENIOR_ACCOUNTANT_EXCLUDE_RE.search(title):
+        return True
     return bool(
         _CONTROLLER_RE.search(title)
         or _VP_FINANCE_RE.search(title)
@@ -150,6 +177,7 @@ def _is_finance_lead_title(title: str) -> bool:
         or _FINANCE_DIRECTOR_RE.search(title)
         or _FINANCE_MANAGER_RE.search(title)
         or _HEAD_OF_ACCOUNTING_RE.search(title)
+        or _FPA_LEAD_RE.search(title)
     )
 
 
@@ -262,7 +290,7 @@ def _fetch_from_jobspy(
                 site_name=["indeed", "linkedin"],
                 search_term=query,
                 location="United States",
-                results_wanted=10,
+                results_wanted=25,
                 hours_old=hours_old,
                 country_indeed="usa",
             )
@@ -328,7 +356,7 @@ def _fetch_from_adzuna(
                     "app_key": app_key,
                     "what": query,
                     "max_days_old": max_days_old,
-                    "results_per_page": 20,
+                    "results_per_page": 40,
                 },
                 timeout=15,
             )
