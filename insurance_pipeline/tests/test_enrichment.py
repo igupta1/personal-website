@@ -89,6 +89,47 @@ def test_disqualification_reason_insurance_vendor() -> None:
     assert enrichment._disqualification_reason(lead) == "insurance_vendor_name"
 
 
+def test_disqualification_reason_form_d_noise_pattern() -> None:
+    """Vintage-year + street-SPV regexes from the EDGAR source apply
+    retroactively to leads already in the DB. Gated to leads carrying
+    a Form D signal so the patterns can't nuke a real trucking company
+    whose name contains a year or a street word."""
+    from insurance_pipeline.models import Lead
+
+    form_d_sig = Signal(
+        type=SignalType.FUNDING_RAISED,
+        source=SourceName.FUNDING,
+        captured_at=datetime.now(timezone.utc).replace(tzinfo=None),
+        payload={"filing_type": "Form D"},
+    )
+
+    for name in (
+        "Summit Ridge 2024 LLC",
+        "JR Hyde Park Blvd LLC",
+        "Marina Bay Avenue LLC",
+        "Holdings 2024, LLC",
+    ):
+        lead = Lead(name=name, name_key=name.lower(), signals=[form_d_sig])
+        assert enrichment._disqualification_reason(lead) == "form_d_noise_pattern", (
+            f"expected form_d_noise_pattern for {name!r}"
+        )
+
+    # Same name patterns without a Form D signal: NOT purged. A motor
+    # carrier called "JR Hyde Park Blvd LLC" stays in the DB.
+    fmcsa_sig = Signal(
+        type=SignalType.NEW_MOTOR_CARRIER_AUTHORITY,
+        source=SourceName.FMCSA,
+        captured_at=datetime.now(timezone.utc).replace(tzinfo=None),
+        payload={},
+    )
+    lead = Lead(
+        name="JR Hyde Park Blvd LLC",
+        name_key="jr_hyde",
+        signals=[fmcsa_sig],
+    )
+    assert enrichment._disqualification_reason(lead) is None
+
+
 def test_disqualification_reason_megacorp_subsidiary() -> None:
     from insurance_pipeline.models import Lead
 

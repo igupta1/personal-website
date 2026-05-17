@@ -24,6 +24,10 @@ from pydantic import BaseModel
 
 from insurance_pipeline import db, llm
 from insurance_pipeline.models import Lead, Signal, SignalType, SourceName
+from insurance_pipeline.sources.edgar_form_d import (
+    _STREET_SPV_RE,
+    _VINTAGE_YEAR_RE,
+)
 
 log = logging.getLogger(__name__)
 
@@ -201,6 +205,25 @@ def _is_megacorp_subsidiary(name: str) -> bool:
     return any(p.match(name) for p in _MEGACORP_PREFIX_RES)
 
 
+def _is_form_d_noise(lead: Lead) -> bool:
+    """Vintage-year / street-SPV regexes from the EDGAR source applied
+    retroactively. Source-side filter only blocks new ingests; without
+    this, leads that predate the regex (`Summit Ridge 2024 LLC`,
+    `JR Hyde Park Blvd LLC`) stay in the DB forever. Gated to Form D
+    leads so the patterns can't accidentally nuke a real trucking
+    company with a year or street word in its name."""
+    has_form_d = any(
+        s.type == SignalType.FUNDING_RAISED
+        and s.payload.get("filing_type") == "Form D"
+        for s in lead.signals
+    )
+    if not has_form_d:
+        return False
+    return bool(
+        _VINTAGE_YEAR_RE.search(lead.name) or _STREET_SPV_RE.search(lead.name)
+    )
+
+
 def _disqualification_reason(lead: Lead) -> str | None:
     if _domain_blocked(lead.domain):
         return f"blocked_domain={lead.domain}"
@@ -212,6 +235,8 @@ def _disqualification_reason(lead: Lead) -> str | None:
         return "financial_vehicle"
     if _is_megacorp_subsidiary(lead.name):
         return "megacorp_subsidiary"
+    if _is_form_d_noise(lead):
+        return "form_d_noise_pattern"
     if lead.headcount is not None and lead.headcount > _SMB_HEADCOUNT_CAP:
         return f"oversized={lead.headcount}"
     if lead.headcount == 0:
