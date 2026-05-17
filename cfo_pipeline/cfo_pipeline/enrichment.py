@@ -207,6 +207,27 @@ _MEGACORP_PREFIX_RES: tuple[re.Pattern[str], ...] = (
 # upstream check is reliable for this class. Exact-match on the
 # normalized lead name is the durable fix — iterate this list when new
 # false positives appear on the dashboard.
+# Known recruiter / staffing firm names that don't carry the regex
+# signature (no "Search Group" / "Talent" / "Staffing" tokens). The
+# Gemini `is_recruiting_firm` lookup catches these on first enrichment,
+# but existing leads in the DB skip re-enrichment via `_should_skip`,
+# so they need a hard-coded entry to be swept on the next purge pass.
+# Iterative deny-list — extend as new false positives surface.
+_KNOWN_RECRUITER_NAMES: frozenset[str] = frozenset(
+    name.lower() for name in (
+        "Hoxton Circle",
+        "AmpersandPeople",
+        "Ampersand People",
+        "Forrer Group",
+        "Forrer Group, Inc.",
+    )
+)
+
+
+def _is_known_recruiter(name: str) -> bool:
+    return name.strip().lower() in _KNOWN_RECRUITER_NAMES
+
+
 _MEGACORP_BRAND_NAMES: frozenset[str] = frozenset(
     name.lower() for name in (
         # Match Group
@@ -292,7 +313,7 @@ def _disqualification_reason(lead: Lead) -> str | None:
     # patterns retroactively so leads ingested under a prior version
     # of the pipeline get swept out. Required by 3rd-review reqs #5
     # and #6.
-    if _is_recruiter_name(lead.name):
+    if _is_recruiter_name(lead.name) or _is_known_recruiter(lead.name):
         return "recruiter_name_pattern"
     if _is_auto_dealer_name(lead.name):
         return "auto_dealer_name_pattern"
