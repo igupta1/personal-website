@@ -9,6 +9,7 @@ import ITMsps from "./pages/ITMsps";
 import Mssps from "./pages/Mssps";
 import Cloud from "./pages/Cloud";
 import Insurance from "./pages/Insurance";
+import CFO from "./pages/CFO";
 import "./App.css";  // Use the existing App.css
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
             <Route path="/mssps" element={<Mssps />} />
             <Route path="/cloud" element={<Cloud />} />
             <Route path="/insurance" element={<Insurance />} />
+            <Route path="/cfo" element={<CFO />} />
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </main>

@@ -27,12 +27,22 @@ export const SIZE_BANDS = [
   { value: "unknown", label: "Size unknown" },
 ];
 
+// Combined across niches — insurance + CFO pipelines emit different
+// trigger_type values, but the dropdown is rendered once and gates
+// individual options on whether the current page has any leads of
+// that type (count > 0). Niche-specific entries with zero hits get
+// suppressed before render below.
 const TRIGGER_TYPES = [
   { value: "any", label: "All triggers" },
+  // Insurance niche
   { value: "motor_carrier", label: "Motor carrier (commercial auto)" },
   { value: "federal_contract", label: "Federal contract (cyber / E&O / GL)" },
-  { value: "funding_event", label: "Funding event (D&O / EPLI)" },
   { value: "new_entity", label: "New business filing" },
+  // CFO niche
+  { value: "finance_hire", label: "Finance lead hire (Controller / VP Finance)" },
+  { value: "form_d", label: "Form D filing (post-funding board prep)" },
+  // Shared
+  { value: "funding_event", label: "Funding event (TechCrunch / PRNewswire)" },
 ];
 
 export default function LeadFilters({
@@ -109,6 +119,11 @@ export default function LeadFilters({
             >
               {TRIGGER_TYPES.map((t) => {
                 const n = t.value === "any" ? leads.length : (availableTriggers[t.value] || 0);
+                // Suppress trigger options the current niche has zero
+                // hits for. Keeps the dropdown clean when an insurance
+                // page renders next to a CFO page on the same shared
+                // component.
+                if (t.value !== "any" && n === 0) return null;
                 return (
                   <option key={t.value} value={t.value}>
                     {t.label} ({n})

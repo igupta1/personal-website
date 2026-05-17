@@ -70,6 +70,14 @@ function Header() {
               Insurance
             </NavLink>
           </li>
+          <li>
+            <NavLink
+              to="/cfo"
+              className={({ isActive }) => (isActive ? "active" : "")}
+            >
+              Fractional CFO
+            </NavLink>
+          </li>
         </ul>
       </nav>
     </header>

@@ -26,6 +26,7 @@ const SIGNAL_KIND_META = {
   job_posted_blue_collar:   { label: "Blue-collar",   pill: "bg-orange-500/15 text-orange-300 ring-orange-400/30" },
   job_posted_fleet_role:    { label: "Fleet",         pill: "bg-yellow-500/15 text-yellow-300 ring-yellow-400/30" },
   job_posted_finance_ops:   { label: "Finance / HR",  pill: "bg-teal-500/15 text-teal-300 ring-teal-400/30" },
+  job_posted_finance_lead:  { label: "Finance lead",  pill: "bg-emerald-500/15 text-emerald-300 ring-emerald-400/30" },
   exec_hired:               { label: "Exec hire",     pill: "bg-purple-500/15 text-purple-300 ring-purple-400/30" },
   funding_raised:           { label: "Funding",       pill: "bg-emerald-500/15 text-emerald-300 ring-emerald-400/30" },
   breach_disclosed:         { label: "Breach",        pill: "bg-amber-500/15 text-amber-300 ring-amber-400/30" },

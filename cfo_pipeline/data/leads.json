@@ -1,0 +1,125 @@
+{
+  "generated_at": "2026-05-17T02:17:14.376811",
+  "leads": [
+    {
+      "name": "Qualitypartssupply",
+      "domain": "qualitypartssupply.com",
+      "industry": "ecommerce_retail",
+      "headcount": 13,
+      "country": "US",
+      "city": "Bruceville",
+      "state": "TX",
+      "dm_name": "Jerry Hayes",
+      "dm_title": "General Manager",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "partial",
+      "score": 59.999278204414104,
+      "insight": "The company posted a job for an 'Experienced Business Office Comptroller' today, requiring immediate finance leadership.",
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-05-17T02:16:18.957614",
+          "days_ago": 0,
+          "payload": {
+            "title": "Experienced Business office Comptroller",
+            "url": "https://www.indeed.com/viewjob?jk=9abefcd1f51a5ac5",
+            "date_posted": "2026-05-16",
+            "site": "indeed"
+          }
+        }
+      ]
+    },
+    {
+      "name": "RenX Enterprises Corp.",
+      "domain": "renxent.com",
+      "industry": "other",
+      "headcount": 40,
+      "country": "US",
+      "city": "Miami",
+      "state": "FL",
+      "dm_name": "David Villarreal",
+      "dm_title": "Chief Executive Officer",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "partial",
+      "score": 24.999821744119487,
+      "insight": "Form D filed today signals fresh funding, indicating the company may hire a Controller as they transition from CFO.",
+      "trigger_type": "form_d",
+      "signals": [
+        {
+          "type": "funding_raised",
+          "captured_at": "2026-05-17T02:16:37.280618",
+          "days_ago": 0,
+          "payload": {
+            "title": "D - RenX Enterprises Corp. (0001959023) (Filer)",
+            "filing_type": "Form D",
+            "filed_on": "",
+            "link": "https://www.sec.gov/Archives/edgar/data/1959023/000121390026057937/0001213900-26-057937-index.htm"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Estately Operations LLC",
+      "domain": "estately.com",
+      "industry": "real_estate",
+      "headcount": null,
+      "country": "US",
+      "city": "Seattle",
+      "state": "WA",
+      "dm_name": "Galen Ward",
+      "dm_title": "Founder & CEO",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "partial",
+      "score": 24.99982174060965,
+      "insight": "Funding raised today via Form D suggests Estately Operations LLC, a seed-stage real estate company in Seattle, is seeking financial leadership.",
+      "trigger_type": "form_d",
+      "signals": [
+        {
+          "type": "funding_raised",
+          "captured_at": "2026-05-17T02:16:37.280618",
+          "days_ago": 0,
+          "payload": {
+            "title": "D - Estately Operations LLC (0002131672) (Filer)",
+            "filing_type": "Form D",
+            "filed_on": "",
+            "link": "https://www.sec.gov/Archives/edgar/data/2131672/000090514826002406/0000905148-26-002406-index.htm"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Prism Layer AI, Inc.",
+      "domain": "prismlayer.ai",
+      "industry": "software_saas",
+      "headcount": 4,
+      "country": "US",
+      "city": "Washington",
+      "state": "DC",
+      "dm_name": "Simone Garreau",
+      "dm_title": "Co-Founder & CEO",
+      "dm_email": "simone@prismlayer.ai",
+      "dm_linkedin_url": "http://www.linkedin.com/in/simone-garreau-b3571b10",
+      "contact_strength": "verified",
+      "score": 24.999821737420717,
+      "insight": "Filed Form D today, signaling fresh cash and new board reporting obligations for the company.",
+      "trigger_type": "form_d",
+      "signals": [
+        {
+          "type": "funding_raised",
+          "captured_at": "2026-05-17T02:16:37.280618",
+          "days_ago": 0,
+          "payload": {
+            "title": "D - Prism Layer AI, Inc. (0002133683) (Filer)",
+            "filing_type": "Form D",
+            "filed_on": "",
+            "link": "https://www.sec.gov/Archives/edgar/data/2133683/000213368326000001/0002133683-26-000001-index.htm"
+          }
+        }
+      ]
+    }
+  ]
+}
