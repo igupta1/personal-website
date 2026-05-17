@@ -145,6 +145,23 @@ _SENIORITY_WEIGHT: dict[str, int] = {
     "senior": 10,
 }
 
+# Required operator signature on the FINAL picked title. Apollo's
+# `person_titles` filter is fuzzy — it can surface a "VP Analytical
+# Chemistry" when no Founder/CEO is indexed for a small biotech (Athos
+# Therapeutics shipped that on the 4th-review run). Demanding a hit
+# on this regex post-pick filters out the false-positive matches.
+_OPERATOR_TITLE_RE = re.compile(
+    r"\b("
+    r"founder|co[-\s]?founder|"
+    r"ceo|chief\s+executive(?:\s+officer)?|"
+    r"president|"
+    r"managing\s+(?:partner|director)|"
+    r"owner|principal|proprietor|"
+    r"coo|chief\s+operating(?:\s+officer)?"
+    r")\b",
+    re.IGNORECASE,
+)
+
 # Operator / founder keywords — the fractional-CFO buyer.
 _OPERATOR_PHRASES: tuple[str, ...] = (
     "founder", "co-founder", "cofounder", "president", "managing partner",
@@ -194,12 +211,55 @@ def _score_person(person: dict[str, Any]) -> int:
 
 
 def _pick_best(people: list[dict[str, Any]]) -> dict[str, Any] | None:
+    """Pick the best DM by score, then validate the title actually
+    looks like an operator. Without this validation Apollo returns
+    "VP <function>" titles for orgs where it has no Founder/CEO
+    record — those are not the fractional-CFO buyer."""
     if not people:
         return None
     best = max(people, key=_score_person)
     if _score_person(best) < 0:
         return None
+    title = (best.get("title") or "").strip()
+    if not _OPERATOR_TITLE_RE.search(title):
+        log.info(
+            "apollo: rejecting picked person %r (title=%r) — not an operator role",
+            best.get("name"), title,
+        )
+        return None
     return best
+
+
+# Generic / role-based email aliases. When Apollo returns an email
+# like intercom@paces.com it's a routing inbox, not the founder's
+# personal email. Hand-extending list per 4th-review (Paces shipped
+# intercom@ on the dashboard).
+_GENERIC_EMAIL_LOCALS: frozenset[str] = frozenset({
+    "info", "contact", "hello", "support", "help", "sales", "team",
+    "admin", "office", "general", "inquiries", "press", "media",
+    "intercom", "noreply", "no-reply", "donotreply", "do-not-reply",
+    "marketing", "service", "services", "billing", "accounts",
+    "hr", "careers", "jobs", "recruiting",
+})
+
+
+def _is_generic_email(email: str | None) -> bool:
+    if not email:
+        return False
+    local = email.split("@", 1)[0].strip().lower()
+    return local in _GENERIC_EMAIL_LOCALS
+
+
+def _is_doubled_name(name: str | None) -> bool:
+    """'Paces Paces' / 'Acme Acme' — Apollo / Gemini sometimes
+    return the company name in both first + last slots when no
+    person was actually indexed."""
+    if not name:
+        return False
+    tokens = name.strip().split()
+    if len(tokens) < 2:
+        return False
+    return tokens[0].lower() == tokens[-1].lower()
 
 
 def _people_include_cfo(people: list[dict[str, Any]]) -> bool:
@@ -270,6 +330,32 @@ def find_decision_maker(name: str, domain: str | None) -> Result:
     title = _sanitize_title(matched.get("title")) or _sanitize_title(chosen.get("title"))
     email = matched.get("email")
     linkedin_url = matched.get("linkedin_url")
+
+    # Quality gates on the final DM record (4th-review):
+    # - Doubled name like "Paces Paces" → Apollo didn't actually find
+    #   a person; discard the name.
+    # - Generic email alias (intercom@, info@, support@) → routing
+    #   inbox, not a real person; discard the email.
+    if _is_doubled_name(full_name):
+        log.info(
+            "apollo: discarding doubled name %r at %r (not a real person record)",
+            full_name, name,
+        )
+        full_name = None
+    if _is_generic_email(email):
+        log.info("apollo: discarding generic email %r at %r", email, name)
+        email = None
+
+    # If we no longer have a usable name AND no contact channels, do
+    # not surface this DM — better to fall back to the cold-contact
+    # badge than ship "Paces Paces / intercom@" to the dashboard.
+    if not full_name and not email and not linkedin_url:
+        return Result(
+            org_found=True,
+            apollo_person_id=person_id,
+            headcount=headcount,
+            has_full_time_cfo=has_full_time_cfo,
+        )
 
     return Result(
         org_found=True,

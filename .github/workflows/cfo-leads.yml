@@ -14,6 +14,11 @@ on:
         type: boolean
         required: false
         default: false
+      reenrich:
+        description: "Force re-enrichment on every lead (re-runs Gemini lookup against all rows, refreshes industry / DM / has_full_time_cfo per the current prompt)"
+        type: boolean
+        required: false
+        default: false
 
 permissions:
   contents: write
@@ -61,10 +66,14 @@ jobs:
           CFO_UPLOAD_API_KEY:   ${{ secrets.LEADS_UPLOAD_API_KEY }}
           LIMIT:                ${{ inputs.limit }}
           CLEAR_INSIGHTS:       ${{ inputs.clear_insights }}
+          REENRICH:             ${{ inputs.reenrich }}
         run: |
           args=("--upload")
           if [[ "$CLEAR_INSIGHTS" == "true" ]]; then
             args+=("--rescore-only" "--clear-insights")
+          fi
+          if [[ "$REENRICH" == "true" ]]; then
+            args+=("--reenrich")
           fi
           if [[ -n "$LIMIT" ]]; then
             args+=("--limit" "$LIMIT")

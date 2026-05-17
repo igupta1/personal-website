@@ -161,7 +161,17 @@ def main(argv: list[str] | None = None) -> int:
     upserted_ids = _upsert_all(conn, candidates)
     log.info("upserted %d unique leads", len(upserted_ids))
 
-    # Bullseye cross-source join (req #9). Form D's legal-entity name
+    # Dedup signals on every lead. dedup_signals_pass was previously
+    # only called in --rescore-only mode, which meant any lead that
+    # accumulated duplicate signals under the old keying (site +
+    # url + date in the hash) stayed stuck at 2-3 signals on the
+    # dashboard until a manual rescore. Run it in the regular flow
+    # so the new (type, normalized_title) dedup applies to existing
+    # rows too.
+    deduped_signals = db.dedup_signals_pass(conn)
+    log.info("deduped signals on %d leads", deduped_signals)
+
+    # Bullseye cross-source join. Form D's legal-entity name
     # ("Estately Operations LLC") and the job board's brand name
     # ("Estately") collapse to different name_keys, so the default
     # upsert dedup keeps them as separate leads. After upsert, sweep
@@ -280,16 +290,25 @@ def _upsert_all(
     return list(dict.fromkeys(ids))
 
 
-def _reconcile_bullseyes(conn: sqlite3.Connection) -> int:
-    """Merge leads sharing a brand_key OR domain. The canonical lead
-    is the one with the most signals (ties broken by lower id —
-    older); the duplicate's signals are appended (with dedup) and the
-    duplicate row is deleted.
+_MIN_BRAND_KEY_LEN_FOR_SUBSTRING = 5  # avoid "ai"/"co" matching everything
 
-    Form D's legal-entity name ("Estately Operations LLC") and the
-    job board's brand name ("Estately") collapse to different
-    name_keys, so the default upsert dedup keeps them as separate
-    leads. This pass merges them.
+
+def _reconcile_bullseyes(conn: sqlite3.Connection) -> int:
+    """Merge leads that the upsert dedup missed.
+
+    Three passes, most precise first:
+    1. Exact brand_key match (strips "Operations"/"Holdings"/etc.).
+    2. Domain match (Apollo / Gemini may have filled the same domain
+       on both rows).
+    3. Substring brand_key match — one lead's brand_key fully
+       contains the other's, AND the shorter key is at least
+       _MIN_BRAND_KEY_LEN_FOR_SUBSTRING chars. Catches the
+       Estately-Operations-LLC ↔ Estately case without conflating
+       short keys like "ai" / "co".
+
+    When the merge produces zero hits, the function logs the
+    cross-source brand_key pools so we can audit why nothing matched
+    (the user's req #3 explicit ask in the 4th-review pass).
     """
     leads = list(db.iter_leads(conn))
     by_brand: dict[str, list[Lead]] = {}
@@ -315,7 +334,7 @@ def _reconcile_bullseyes(conn: sqlite3.Connection) -> int:
         }
     )
 
-    def _merge_group(group: list[Lead]) -> None:
+    def _merge_group(group: list[Lead], why: str) -> None:
         nonlocal merges
         live = [l for l in group if l.id is not None and l.id not in merged_ids]
         if len(live) < 2:
@@ -338,16 +357,82 @@ def _reconcile_bullseyes(conn: sqlite3.Connection) -> int:
                 db.delete_lead(conn, dup.id)
                 merged_ids.add(dup.id)
                 merges += 1
-                log.info("bullseye-merge: %r <- %r", canonical.name, dup.name)
+                log.info("bullseye-merge (%s): %r <- %r", why, canonical.name, dup.name)
             except Exception:
                 log.exception("bullseye-merge: delete_lead failed for id=%s", dup.id)
 
+    # Pass 1: exact brand_key.
     for group in by_brand.values():
         if len(group) > 1:
-            _merge_group(group)
+            _merge_group(group, "exact_brand_key")
+    # Pass 2: exact domain.
     for group in by_domain.values():
         if len(group) > 1:
-            _merge_group(group)
+            _merge_group(group, "domain")
+    # Pass 3: substring brand_key. Build pools by source side so we
+    # only attempt cross-source matches (a hiring lead with two
+    # postings shouldn't merge with another hiring lead under
+    # substring rules — that's a different problem handled by
+    # dedup_signals_pass).
+    def _signal_side(lead: Lead) -> str:
+        types = {s.type for s in lead.signals}
+        has_hire = SignalType.JOB_POSTED_FINANCE_LEAD in types
+        has_fund = SignalType.FUNDING_RAISED in types
+        if has_hire and has_fund:
+            return "both"
+        if has_hire:
+            return "hire"
+        if has_fund:
+            return "fund"
+        return "none"
+
+    hire_leads: list[tuple[str, Lead]] = []
+    fund_leads: list[tuple[str, Lead]] = []
+    for lead in db.iter_leads(conn):
+        if lead.id is None or lead.id in merged_ids:
+            continue
+        bk = db.brand_key(lead.name)
+        if not bk:
+            continue
+        side = _signal_side(lead)
+        if side == "hire":
+            hire_leads.append((bk, lead))
+        elif side == "fund":
+            fund_leads.append((bk, lead))
+
+    for h_bk, h_lead in hire_leads:
+        if h_lead.id in merged_ids:
+            continue
+        for f_bk, f_lead in fund_leads:
+            if f_lead.id in merged_ids:
+                continue
+            short, long_ = (h_bk, f_bk) if len(h_bk) <= len(f_bk) else (f_bk, h_bk)
+            if len(short) < _MIN_BRAND_KEY_LEN_FOR_SUBSTRING:
+                continue
+            # Must be a token-boundary match — "ai" appearing inside
+            # "miami" should not match. Use word-boundary substring
+            # check: short must equal long, OR be a prefix/suffix
+            # followed/preceded by space, OR appear surrounded by
+            # spaces.
+            padded = f" {long_} "
+            if f" {short} " in padded or padded.startswith(f" {short} ") or padded.endswith(f" {short} "):
+                _merge_group([h_lead, f_lead], f"substring_brand_key({short}⊂{long_})")
+                break
+
+    if merges == 0:
+        # User explicitly asked for this: dump both pools so we can
+        # see why nothing matched. Limit to 25 per side to keep log
+        # output manageable.
+        log.info(
+            "bullseye: zero merges. Hiring-pool brand_keys (%d): %s",
+            len(hire_leads),
+            sorted({bk for bk, _ in hire_leads})[:25],
+        )
+        log.info(
+            "bullseye: zero merges. Funding-pool brand_keys (%d): %s",
+            len(fund_leads),
+            sorted({bk for bk, _ in fund_leads})[:25],
+        )
     return merges
 
 
@@ -533,6 +618,14 @@ def _build_output(conn: sqlite3.Connection) -> dict[str, Any]:
         rendered = _lead_to_json(lead, now=now)
         if not rendered["signals"]:
             continue  # all signals were >30d old or non-scoring
+        # 4th-review req #4c: empty-shell filter. A lead with no
+        # domain AND no DM AND no headcount AND no location is a
+        # useless card — MapperHealth shipped exactly this and
+        # diluted the dashboard. Suppress at output rather than
+        # delete from the DB (a future enrichment run might fill
+        # the missing fields).
+        if _is_empty_shell(rendered):
+            continue
         leads_out.append(rendered)
     # Bullseye boost — leads with BOTH a hiring signal AND a funding
     # signal sort above single-signal leads of the same score.
@@ -548,6 +641,19 @@ def _build_output(conn: sqlite3.Connection) -> dict[str, Any]:
         "generated_at": now.isoformat(),
         "leads": leads_out,
     }
+
+
+def _is_empty_shell(rendered: dict[str, Any]) -> bool:
+    """Empty-shell lead has none of: domain, dm_name, headcount, city,
+    state. There's nothing actionable on the card, so it shouldn't
+    surface even with a valid hiring/funding signal."""
+    return (
+        not rendered.get("domain")
+        and not rendered.get("dm_name")
+        and not rendered.get("headcount")
+        and not rendered.get("city")
+        and not rendered.get("state")
+    )
 
 
 def _city_state(lead: Lead) -> tuple[str | None, str | None]:
