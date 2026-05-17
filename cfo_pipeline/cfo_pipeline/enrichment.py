@@ -327,6 +327,12 @@ class Industry(str, Enum):
     GOVERNMENT_NONPROFIT = "government_nonprofit"
     CONSTRUCTION = "construction"
     OTHER = "other"
+    # Explicit unknown bucket — prior runs surfaced car dealerships,
+    # semiconductors, farmland platforms, and supplement brands all
+    # tagged as Fintech because OTHER felt too generic to the LLM and
+    # FINTECH was the soft default. The classifier prompt is now
+    # explicit that uncertainty → UNKNOWN, not FINTECH.
+    UNKNOWN = "unknown"
 
 
 def _summarize_signals(lead: Lead) -> str:
@@ -363,6 +369,16 @@ DOMAIN: <primary website domain like "acme.com" without https or path, or "unkno
 IS_CFO_COMPETITOR: <"yes" if this company itself SELLS CFO / accounting / \
 bookkeeping / fractional-CFO / financial-advisory services (i.e. they're \
 the competition, not a buyer), otherwise "no">
+IS_RECRUITING_FIRM: <"yes" if this company is a recruiting / staffing / \
+executive search firm (the lead would be the recruiter's CLIENT, not the \
+recruiter itself), otherwise "no". Examples that should be "yes": \
+Hoxton Circle, Pyxis Search Partners, AmpersandPeople, Forrer Group, \
+Robert Half, any "Search Group" / "Search Partners" / "Search Masters" / \
+"Talent Solutions".>
+IS_AUTO_DEALER: <"yes" if this company is a car dealership, auto group, \
+or vehicle reseller. The 'Finance Director' / 'Finance Manager' there is \
+the person who arranges customer auto loans, NOT a corporate finance \
+executive. Otherwise "no".>
 HAS_FULL_TIME_CFO: <"yes" if the company appears to have a full-time CFO \
 already (named CFO on the leadership page, etc.), otherwise "no". Companies \
 with a full-time CFO are NOT prospects for a fractional CFO.>
@@ -390,6 +406,12 @@ _FIELD_RE = {
     "is_cfo_competitor": re.compile(
         r"^IS_CFO_COMPETITOR:\s*(.+?)\s*$", re.MULTILINE | re.IGNORECASE
     ),
+    "is_recruiting_firm": re.compile(
+        r"^IS_RECRUITING_FIRM:\s*(.+?)\s*$", re.MULTILINE | re.IGNORECASE
+    ),
+    "is_auto_dealer": re.compile(
+        r"^IS_AUTO_DEALER:\s*(.+?)\s*$", re.MULTILINE | re.IGNORECASE
+    ),
     "has_full_time_cfo": re.compile(
         r"^HAS_FULL_TIME_CFO:\s*(.+?)\s*$", re.MULTILINE | re.IGNORECASE
     ),
@@ -413,6 +435,8 @@ class _Lookup(BaseModel):
     country: str | None = None
     domain: str | None = None
     is_cfo_competitor: bool = False
+    is_recruiting_firm: bool = False
+    is_auto_dealer: bool = False
     has_full_time_cfo: bool = False
     dm_name: str | None = None
     dm_title: str | None = None
@@ -462,6 +486,8 @@ def lookup_company(lead: Lead) -> _Lookup:
         country=(_parse_field(raw, "country") or "").upper() or None,
         domain=_parse_domain(_parse_field(raw, "domain")),
         is_cfo_competitor=_parse_yesno(_parse_field(raw, "is_cfo_competitor")),
+        is_recruiting_firm=_parse_yesno(_parse_field(raw, "is_recruiting_firm")),
+        is_auto_dealer=_parse_yesno(_parse_field(raw, "is_auto_dealer")),
         has_full_time_cfo=_parse_yesno(_parse_field(raw, "has_full_time_cfo")),
         dm_name=_parse_field(raw, "dm_name"),
         dm_title=_parse_field(raw, "dm_title"),
@@ -478,8 +504,25 @@ Classify the company "{name}" into exactly one of these industry tags:
 
 Recent signals about this company: {signals}
 
-Respond with the single best-fitting tag. Use "other" only when no other tag
-reasonably applies.
+Pick the single best-fitting tag.
+
+Rules:
+- Only use "fintech" for companies whose core product IS financial
+  technology: payments, banking software, lending platforms,
+  brokerage / trading tech, financial data services. A company
+  whose name contains a financial-sounding word is NOT fintech.
+- Use "real_estate" for property management, REITs, real-estate
+  platforms, and farmland investment vehicles.
+- Use "ecommerce_retail" for DTC brands, supplement / apparel
+  brands, online retailers.
+- Use "manufacturing" for hardware, semiconductors, industrial
+  equipment, consumer-goods producers.
+- Use "logistics_transport" for trucking, fleet operators, freight,
+  delivery, including auto dealerships.
+- Use "unknown" when you cannot confidently identify what the
+  company does from name + signals. Do NOT guess "fintech" or
+  "other" as a soft default. UNKNOWN is the correct answer when
+  you're not sure.
 """
 
 
@@ -551,32 +594,49 @@ def enrich(conn: sqlite3.Connection, lead: Lead, *, force: bool = False) -> bool
     oversized = (
         effective_headcount is not None and effective_headcount > _SMB_HEADCOUNT_CAP
     )
-    # Country check: explicit non-US deletes. "unknown" deletes too —
-    # the CFO pipeline has no FMCSA-style US-only sources, so an
-    # unknown country is genuinely unknown.
+    # Per 3rd-review spec: null/unknown headcount after Gemini+Apollo
+    # attempts → drop. Was previously kept; that's how MLB, Goldman,
+    # Formula 1 got onto the page (no discoverable headcount but
+    # actually thousands of employees).
+    headcount_unknown = effective_headcount is None
     non_us = lookup.country is not None and lookup.country != "US"
     unknown_country = lookup.country is None
-    if (
-        non_us or unknown_country
-        or oversized
-        or lookup.is_cfo_competitor
-        or lookup.has_full_time_cfo
-    ):
+    disqualifier_reason = None
+    if non_us:
+        disqualifier_reason = f"non_us_country={lookup.country!r}"
+    elif unknown_country:
+        disqualifier_reason = "unknown_country"
+    elif headcount_unknown:
+        disqualifier_reason = "unknown_headcount"
+    elif oversized:
+        disqualifier_reason = f"oversized_headcount={effective_headcount}"
+    elif lookup.is_cfo_competitor:
+        disqualifier_reason = "cfo_competitor"
+    elif lookup.is_recruiting_firm:
+        disqualifier_reason = "recruiting_firm"
+    elif lookup.is_auto_dealer:
+        disqualifier_reason = "auto_dealer"
+    elif lookup.has_full_time_cfo:
+        disqualifier_reason = "has_full_time_cfo"
+
+    if disqualifier_reason is not None:
         log.info(
-            "enrich: deleting lead %d (%s) — country=%r headcount=%r competitor=%s has_cfo=%s",
-            lead.id, lead.name, lookup.country, effective_headcount,
-            lookup.is_cfo_competitor, lookup.has_full_time_cfo,
+            "enrich: deleting lead %d (%s) — %s",
+            lead.id, lead.name, disqualifier_reason,
         )
         db.delete_lead(conn, lead.id)
-        # has_full_time_cfo → also mark disqualified so a future Form D
-        # filing for the same company doesn't resurrect it.
-        if lookup.has_full_time_cfo:
+        # Sticky disqualifiers — recruiting firms, auto dealers, and
+        # CFO-having companies should stay out across runs even if a
+        # fresh signal appears.
+        if disqualifier_reason in (
+            "has_full_time_cfo", "recruiting_firm", "auto_dealer", "cfo_competitor",
+        ):
             from cfo_pipeline.models import Disqualifier
             db.mark_disqualified(
                 conn,
                 Disqualifier(
                     name=lead.name,
-                    reason="has_full_time_cfo_per_gemini",
+                    reason=f"{disqualifier_reason}_per_gemini",
                     source=SourceName.COMPUTED,
                     payload={},
                 ),

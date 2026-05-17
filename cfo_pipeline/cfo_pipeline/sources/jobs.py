@@ -127,13 +127,54 @@ _PART_TIME_QUALIFIER_RE = re.compile(
 # hits. A "Robert Half" job posting for a Controller is a posting on
 # BEHALF of an unnamed client; the lead would be the staffing firm,
 # not the actual hiring company. Useless for outreach.
+#
+# Expanded in the 3rd-review pass to catch the "Search Group" /
+# "Search Partners" / "Search Masters" naming convention. "Search"
+# alone is too generic to match (real companies have "Search" in
+# their name), so it's only flagged when paired with Group / Partners
+# / Masters / Inc / LLC at the end of the company name.
 _RECRUITER_NAME_PATTERN = re.compile(
     r"\b(staffing|recruit(?:ing|er|ers|ment)|"
-    r"personnel\s+services?|talent\s+(?:group|agency|partners|solutions)|"
-    r"\btalent$|robert\s+half|aerotek|kelly\s+services|adecco|"
-    r"randstad|manpower|teksystems|insight\s+global)",
+    r"personnel\s+services?|talent\s+(?:group|agency|partners|solutions|acquisition)|"
+    r"\btalent$|"
+    r"robert\s+half|aerotek|kelly\s+services|adecco|"
+    r"randstad|manpower|teksystems|insight\s+global|"
+    r"executive\s+search|"
+    r"search\s+(?:group|partners|partner|masters|consultants|associates|advisors|firm)\b)",
     re.IGNORECASE,
 )
+_RECRUITER_SUFFIX_RE = re.compile(
+    r"\bsearch\s+(?:inc|llc|ltd|co)\.?\s*$|"
+    r"\bsearch\s*$",
+    re.IGNORECASE,
+)
+
+# Auto dealership exclusion. Brand at any position OR dealer-specific
+# suffix at end. The brand list is the user-supplied core (Honda /
+# Toyota / etc) plus a few more common in dealer names; the suffix
+# patterns (Auto Mall / Auto Group / X Motors at end) catch named
+# multi-brand dealers.
+_AUTO_BRAND_RE = re.compile(
+    r"\b(honda|toyota|ford|chevrolet|chevy|bmw|mercedes(?:[-\s]benz)?|"
+    r"nissan|hyundai|subaru|kia|volkswagen|vw|audi|lexus|infiniti|"
+    r"acura|cadillac|jeep|ram|dodge|chrysler|mazda|porsche|jaguar|"
+    r"land\s+rover|range\s+rover|mini|fiat|gmc|buick|lincoln|volvo)\b",
+    re.IGNORECASE,
+)
+_AUTO_SUFFIX_RE = re.compile(
+    r"\b(auto\s+(?:mall|group|center|nation|park|haus|world|plaza)|"
+    r"automotive\s+group|"
+    r"dealership|car\s+(?:store|center)|"
+    r"motors|motor\s+(?:co|company|cars)|"
+    r"carwarriors)\b",
+    re.IGNORECASE,
+)
+_AUTOMOTIVE_TITLE_RE = re.compile(r"^\s*automotive\b", re.IGNORECASE)
+
+# Hard 30-day cutoff on posting age (req #10). JobSpy already filters
+# by hours_old at query time but Adzuna returns older results too;
+# enforce a consistent cap at the candidate level.
+_MAX_POSTING_AGE_DAYS = 30
 
 # Indeed's company_employees_label / JobSpy's company_num_employees
 # returns strings like "1 to 10", "11 to 50", "201 to 500", "10,001+".
@@ -150,7 +191,47 @@ _ADZUNA_API = "https://api.adzuna.com/v1/api/jobs/us/search/1"
 
 
 def _is_recruiter_name(name: str) -> bool:
-    return bool(_RECRUITER_NAME_PATTERN.search(name))
+    return bool(
+        _RECRUITER_NAME_PATTERN.search(name)
+        or _RECRUITER_SUFFIX_RE.search(name)
+    )
+
+
+def _is_auto_dealer_name(name: str) -> bool:
+    return bool(_AUTO_BRAND_RE.search(name) or _AUTO_SUFFIX_RE.search(name))
+
+
+def _is_automotive_title(title: str) -> bool:
+    return bool(_AUTOMOTIVE_TITLE_RE.search(title))
+
+
+def _parse_posted_date(value: Any) -> datetime | None:
+    """Best-effort parse of JobSpy / Adzuna's date_posted field.
+    Returns None when unparseable."""
+    if not value:
+        return None
+    s = str(value).strip()
+    if not s or s.lower() in ("nan", "none"):
+        return None
+    # JobSpy returns YYYY-MM-DD. Adzuna returns ISO-8601.
+    for fmt in ("%Y-%m-%d", "%Y-%m-%dT%H:%M:%S", "%Y-%m-%dT%H:%M:%SZ"):
+        try:
+            return datetime.strptime(s[: len(fmt) + 2], fmt)
+        except ValueError:
+            continue
+    try:
+        return datetime.fromisoformat(s.replace("Z", "+00:00")).replace(tzinfo=None)
+    except (ValueError, AttributeError):
+        return None
+
+
+def _is_too_old(date_posted: str | None, now: datetime) -> bool:
+    """Drop postings older than _MAX_POSTING_AGE_DAYS at candidate
+    construction time. Cheaper than enriching and then dropping."""
+    parsed = _parse_posted_date(date_posted)
+    if parsed is None:
+        return False  # unknown age — keep, let downstream score decay it
+    return (now - parsed).days > _MAX_POSTING_AGE_DAYS
 
 
 def _utcnow() -> datetime:
@@ -304,7 +385,9 @@ def _fetch_from_jobspy(
             company = str(row.get("company") or "").strip()
             if not title or not company:
                 continue
-            if _is_recruiter_name(company):
+            if _is_recruiter_name(company) or _is_auto_dealer_name(company):
+                continue
+            if _is_automotive_title(title):
                 continue
 
             url = str(row.get("job_url") or "")
@@ -317,6 +400,8 @@ def _fetch_from_jobspy(
                         company=company, title=title, site=site, url=url,
                     )
                 )
+                continue
+            if _is_too_old(date_posted, captured_at):
                 continue
             if _is_finance_lead_title(title):
                 headcount = _read_jobspy_headcount(row)
@@ -370,7 +455,9 @@ def _fetch_from_adzuna(
             company = str((item.get("company") or {}).get("display_name") or "").strip()
             if not title or not company:
                 continue
-            if _is_recruiter_name(company):
+            if _is_recruiter_name(company) or _is_auto_dealer_name(company):
+                continue
+            if _is_automotive_title(title):
                 continue
 
             url = str(item.get("redirect_url") or "")
@@ -382,6 +469,8 @@ def _fetch_from_adzuna(
                         company=company, title=title, site="adzuna", url=url,
                     )
                 )
+                continue
+            if _is_too_old(date_posted, captured_at):
                 continue
             if _is_finance_lead_title(title):
                 candidates.append(

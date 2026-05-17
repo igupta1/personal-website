@@ -43,6 +43,19 @@ _EFTS_URL = "https://efts.sec.gov/LATEST/search-index"
 _EFTS_PAGE_SIZE = 100  # EFTS hard cap.
 _EFTS_DEFAULT_PAGES = 5  # 500 most-recent Form Ds; ~10% survive the operating-company filter.
 
+# Item 6 (pooled investment fund) flag patterns. Form D XML reliably
+# carries one or both of these fields; matching either is enough.
+_POOLED_FUND_FLAG_RES: tuple[re.Pattern[str], ...] = (
+    re.compile(
+        r"<isPooledInvestmentFundType>\s*true\s*</isPooledInvestmentFundType>",
+        re.IGNORECASE,
+    ),
+    re.compile(
+        r"<industryGroupType>\s*Pooled\s+Investment\s+Fund\s*</industryGroupType>",
+        re.IGNORECASE,
+    ),
+)
+
 _EDGAR_GETCURRENT_URL = (
     "https://www.sec.gov/cgi-bin/browse-edgar"
     "?action=getcurrent&type=D&count=100&output=atom"
@@ -115,6 +128,52 @@ _TRANCHE_SUFFIX_RE = re.compile(
     re.IGNORECASE,
 )
 
+# 3rd-review expansion: numbered series indicators (II / III / IV /
+# trailing digits / "XI" / "XVI") at end of name. Conservative — must
+# be at the END before legal suffix (or as the legal suffix's
+# neighbor).
+_ROMAN_NUMERAL_TAIL_RE = re.compile(
+    r"\b(?:II|III|IV|V|VI|VII|VIII|IX|X|XI|XII|XIII|XIV|XV|XVI|XVII|XVIII|XIX|XX)"
+    r"(?:\s+(?:LLC|Inc|Corp|Ltd|LP|LLP|Co))?\s*$",
+    re.IGNORECASE,
+)
+# "Acme 278 LLC" — trailing-number SPV identifier.
+_TRAILING_DIGIT_SPV_RE = re.compile(
+    r"\b\d{2,4}\s+(?:LLC|Inc|Corp|Ltd|LP|LLP|Co)\.?\s*$",
+    re.IGNORECASE,
+)
+# Ticker-style 3-5 char alphanumeric "name" like ACE5, APE5, LCH 4, EMT XI.
+# Conservative: only flag when the whole name (modulo legal suffix) is
+# a short ticker-ish token possibly with a 1-2 digit/letter suffix.
+_TICKER_LLC_RE = re.compile(
+    r"^\s*[A-Z]{2,5}\s*[\dIVX]{0,3}\s+(?:LLC|Inc|Corp|Ltd|LP|LLP|Co)\.?\s*$",
+)
+
+# Real-estate / property fund keywords (req #4). Conservative —
+# multiple of these often co-occur in fund names.
+_REAL_ESTATE_KEYWORDS_RE = re.compile(
+    r"\b(Apartments?|Properties|Real\s+Estate|Hospitality|Hotels?|"
+    r"Housing|Multifamily|Industrial\s+Trust|Residential|"
+    r"Commercial\s+Management|Crossing|Stone\s+Ridge|Centerville|"
+    r"City\s+Center|Owner\s+(?:LLC|LP|Inc|Corp)|Lessor\s+(?:LLC|LP)|"
+    r"Realty)\b",
+    re.IGNORECASE,
+)
+
+# Investment vehicle keywords (req #4).
+_INVESTMENT_VEHICLE_KEYWORDS_RE = re.compile(
+    r"\b(SPV\d*|"
+    r"(?:Investment|Investor|Investing)\s+Vehicle|"
+    r"Investco|Equities|"
+    r"Capital|Holdings?|"
+    r"Private\s+Credit|"
+    r"Investments?\s+LLC|"
+    r"Multi[-\s]?Strategy|"
+    r"Co[-\s]?Invest(?:ment)?|Coinvest|"
+    r"(?:Direct|Access)(?:\s+[IVX]+)?\s+(?:LLC|Inc|Fund|Vehicle))\b",
+    re.IGNORECASE,
+)
+
 
 def _utcnow() -> datetime:
     return datetime.now(timezone.utc).replace(tzinfo=None)
@@ -147,6 +206,16 @@ def _is_operating_company(name: str) -> bool:
         return False
     if _TRANCHE_SUFFIX_RE.search(name):
         return False
+    if _ROMAN_NUMERAL_TAIL_RE.search(name):
+        return False
+    if _TRAILING_DIGIT_SPV_RE.search(name):
+        return False
+    if _TICKER_LLC_RE.search(name):
+        return False
+    if _REAL_ESTATE_KEYWORDS_RE.search(name):
+        return False
+    if _INVESTMENT_VEHICLE_KEYWORDS_RE.search(name):
+        return False
     return True
 
 
@@ -167,6 +236,41 @@ def _extract_name_from_display(display: str) -> str | None:
 
 
 # --- EFTS primary path -----------------------------------------------------
+
+
+def _form_d_xml_url(adsh: str, cik: str) -> str | None:
+    if not adsh or not cik:
+        return None
+    try:
+        cik_int = int(cik)
+    except (TypeError, ValueError):
+        return None
+    return (
+        f"https://www.sec.gov/Archives/edgar/data/{cik_int}/"
+        f"{adsh.replace('-', '')}/primary_doc.xml"
+    )
+
+
+def _is_pooled_fund_xml(adsh: str, cik: str) -> bool | None:
+    """Fetch the Form D XML and check Item 6 / industryGroupType for
+    pooled-fund flag. Returns True/False on a successful fetch, None
+    on network error (treat as 'unknown — fall through to other
+    filters')."""
+    url = _form_d_xml_url(adsh, cik)
+    if url is None:
+        return None
+    try:
+        r = requests.get(
+            url,
+            headers={"User-Agent": _USER_AGENT},
+            timeout=15,
+        )
+        r.raise_for_status()
+    except requests.RequestException as exc:
+        _log.warning("edgar form-d xml fetch failed adsh=%s: %s", adsh, exc)
+        return None
+    xml = r.text
+    return any(p.search(xml) for p in _POOLED_FUND_FLAG_RES)
 
 
 def _fetch_efts_page(
@@ -231,6 +335,17 @@ def _fetch_from_efts(
             file_date = str(src.get("file_date") or "")
             adsh = str(src.get("adsh") or "")
             ciks = src.get("ciks") or []
+
+            # Item 6 / industryGroupType check. Only fires for names
+            # that survived the regex filter — those are most likely
+            # to be misclassified operating-cos that are actually
+            # pooled funds. Adds ~0.3s per surviving candidate.
+            if ciks and adsh:
+                is_fund = _is_pooled_fund_xml(adsh, ciks[0])
+                if is_fund is True:
+                    _log.info("edgar efts: skipping pooled fund: %s", company)
+                    continue
+
             link = (
                 f"https://www.sec.gov/Archives/edgar/data/{int(ciks[0])}/{adsh.replace('-', '')}/{adsh}-index.htm"
                 if ciks and adsh else ""

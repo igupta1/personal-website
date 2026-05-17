@@ -26,7 +26,7 @@ from typing import Any
 
 import requests
 
-from cfo_pipeline import apollo, db, enrichment, outreach, scoring
+from cfo_pipeline import apollo, db, enrichment, scoring
 from cfo_pipeline.models import (
     Disqualifier,
     Lead,
@@ -36,6 +36,7 @@ from cfo_pipeline.models import (
     SourceName,
 )
 from cfo_pipeline.sources import edgar_form_d, funding, jobs
+from cfo_pipeline import outreach  # kept for trigger_type helper
 
 log = logging.getLogger("cfo.daily_run")
 
@@ -160,6 +161,15 @@ def main(argv: list[str] | None = None) -> int:
     upserted_ids = _upsert_all(conn, candidates)
     log.info("upserted %d unique leads", len(upserted_ids))
 
+    # Bullseye cross-source join (req #9). Form D's legal-entity name
+    # ("Estately Operations LLC") and the job board's brand name
+    # ("Estately") collapse to different name_keys, so the default
+    # upsert dedup keeps them as separate leads. After upsert, sweep
+    # for leads sharing brand_key (aggressive normalization) OR domain
+    # and merge them.
+    merged_count = _reconcile_bullseyes(conn)
+    log.info("reconciled %d bullseye merges", merged_count)
+
     enriched_ids = _enrich_all(conn, upserted_ids, force=args.reenrich)
     log.info("kept %d enriched leads", len(enriched_ids))
 
@@ -268,6 +278,77 @@ def _upsert_all(
     if refused:
         log.info("upsert: refused %d disqualified candidates", refused)
     return list(dict.fromkeys(ids))
+
+
+def _reconcile_bullseyes(conn: sqlite3.Connection) -> int:
+    """Merge leads sharing a brand_key OR domain. The canonical lead
+    is the one with the most signals (ties broken by lower id —
+    older); the duplicate's signals are appended (with dedup) and the
+    duplicate row is deleted.
+
+    Form D's legal-entity name ("Estately Operations LLC") and the
+    job board's brand name ("Estately") collapse to different
+    name_keys, so the default upsert dedup keeps them as separate
+    leads. This pass merges them.
+    """
+    leads = list(db.iter_leads(conn))
+    by_brand: dict[str, list[Lead]] = {}
+    by_domain: dict[str, list[Lead]] = {}
+    for lead in leads:
+        if lead.id is None:
+            continue
+        bk = db.brand_key(lead.name)
+        if bk:
+            by_brand.setdefault(bk, []).append(lead)
+        if lead.domain:
+            dk = lead.domain.lower().strip()
+            if dk:
+                by_domain.setdefault(dk, []).append(lead)
+
+    merged_ids: set[int] = set()
+    merges = 0
+    _NON_SCORING = frozenset(
+        {
+            SignalType.ENRICHMENT_RUN,
+            SignalType.LOCATION_CAPTURED,
+            SignalType.APOLLO_ENRICHED,
+        }
+    )
+
+    def _merge_group(group: list[Lead]) -> None:
+        nonlocal merges
+        live = [l for l in group if l.id is not None and l.id not in merged_ids]
+        if len(live) < 2:
+            return
+        live.sort(key=lambda l: (-len(l.signals), l.id or 0))
+        canonical, *duplicates = live
+        for dup in duplicates:
+            assert dup.id is not None and canonical.id is not None
+            for sig in dup.signals:
+                if sig.type in _NON_SCORING:
+                    continue
+                try:
+                    db.append_signal(conn, canonical.id, sig)
+                except Exception:
+                    log.exception(
+                        "bullseye-merge: append_signal failed canonical=%s dup=%s",
+                        canonical.id, dup.id,
+                    )
+            try:
+                db.delete_lead(conn, dup.id)
+                merged_ids.add(dup.id)
+                merges += 1
+                log.info("bullseye-merge: %r <- %r", canonical.name, dup.name)
+            except Exception:
+                log.exception("bullseye-merge: delete_lead failed for id=%s", dup.id)
+
+    for group in by_brand.values():
+        if len(group) > 1:
+            _merge_group(group)
+    for group in by_domain.values():
+        if len(group) > 1:
+            _merge_group(group)
+    return merges
 
 
 def _enrich_all(
@@ -416,49 +497,27 @@ def _regen_copy(
     force_regen_ids: set[int],
     model: str,
 ) -> int:
-    """Refresh insight for every scored lead that crossed the
-    threshold or had Apollo data land. LLM-generated single-sentence
-    insight per lead."""
-    refreshed = 0
-    for lead_id, (_old, new) in score_changes.items():
-        lead = db.get_lead(conn, lead_id=lead_id)
-        if lead is None:
-            continue
-        updates: dict[str, Any] = {}
-        if new < INSIGHT_THRESHOLD:
-            if lead.insight is not None:
-                updates["insight"] = None
-        else:
-            should_regen = (
-                lead.insight is None
-                or lead_id in force_regen_ids
-                or _crossed_threshold(_old, new)
-            )
-            if should_regen:
-                try:
-                    copy = outreach.generate(lead, new, model=model)
-                    updates["insight"] = copy.insight
-                    refreshed += 1
-                except Exception:
-                    log.exception("regen: outreach failed for id=%s", lead_id)
-        if updates:
-            try:
-                db.update_lead(conn, lead_id, **updates)
-            except Exception:
-                log.exception("regen: update_lead failed for id=%s", lead_id)
-    return refreshed
+    """Insight generation removed per 3rd-review req #8. The LLM kept
+    leaking the same autopilot phrases ("$300K CFO comp", "6-10
+    weeks", "outgrown founder-as-CFO") across companies of wildly
+    different stages — pattern was obvious to readers and damaged
+    credibility.
 
-
-def _crossed_threshold(old: float | None, new: float) -> bool:
-    """Returns True when the score moved across INSIGHT_THRESHOLD by
-    >= 10 points either direction — used as a regen trigger so we
-    refresh the insight when a lead heats up or cools down materially.
+    This function now just NULLs out any insight that's still on a
+    lead row from a prior run. Signature kept for upstream callers.
     """
-    if old is None:
-        return new >= INSIGHT_THRESHOLD
-    return abs(new - old) >= 10 and (
-        (old < INSIGHT_THRESHOLD <= new) or (new < INSIGHT_THRESHOLD <= old)
-    )
+    del force_regen_ids, model  # unused
+    cleared = 0
+    for lead_id, _ in score_changes.items():
+        lead = db.get_lead(conn, lead_id=lead_id)
+        if lead is None or lead.insight is None:
+            continue
+        try:
+            db.update_lead(conn, lead_id, insight=None)
+            cleared += 1
+        except Exception:
+            log.exception("regen: clearing insight failed for id=%s", lead_id)
+    return cleared
 
 
 # --- JSON output -----------------------------------------------------------
@@ -466,12 +525,28 @@ def _crossed_threshold(old: float | None, new: float) -> bool:
 
 def _build_output(conn: sqlite3.Connection) -> dict[str, Any]:
     now = _utcnow()
+    # Per req #10: drop leads where every scoring signal is > 30 days
+    # old. Bullseye leads sort first (req #9) so they surface above
+    # single-signal leads at the same score.
+    leads_out: list[dict[str, Any]] = []
+    for lead in db.iter_leads(conn):
+        rendered = _lead_to_json(lead, now=now)
+        if not rendered["signals"]:
+            continue  # all signals were >30d old or non-scoring
+        leads_out.append(rendered)
+    # Bullseye boost — leads with BOTH a hiring signal AND a funding
+    # signal sort above single-signal leads of the same score.
+    def _bullseye_key(l: dict[str, Any]) -> tuple[int, float]:
+        types = {s["type"] for s in l["signals"]}
+        is_bullseye = (
+            SignalType.JOB_POSTED_FINANCE_LEAD.value in types
+            and SignalType.FUNDING_RAISED.value in types
+        )
+        return (0 if is_bullseye else 1, -(l.get("score") or 0))
+    leads_out.sort(key=_bullseye_key)
     return {
         "generated_at": now.isoformat(),
-        "leads": [
-            _lead_to_json(lead, now=now)
-            for lead in db.iter_leads(conn)
-        ],
+        "leads": leads_out,
     }
 
 
@@ -489,10 +564,16 @@ def _city_state(lead: Lead) -> tuple[str | None, str | None]:
 
 def _lead_to_json(lead: Lead, *, now: datetime) -> dict[str, Any]:
     city, state = _city_state(lead)
+    # Per req #10: drop scoring signals where the payload's own date
+    # (posting date for jobs, filing date for Form D) is > 30 days
+    # old. captured_at reflects when the pipeline observed the signal,
+    # not when the event itself occurred — and JobSpy returns leads
+    # going back ~90 days. The 30-day window is enforced here so the
+    # output reflects the actual recency story.
+    scoring_sigs = [s for s in lead.signals if s.type in _SCORING_SIGNAL_TYPES]
+    fresh_sigs = [s for s in scoring_sigs if not _signal_too_old(s, now)]
     relevant = sorted(
-        (s for s in lead.signals if s.type in _SCORING_SIGNAL_TYPES),
-        key=lambda s: s.captured_at,
-        reverse=True,
+        fresh_sigs, key=lambda s: _signal_age_days(s, now)
     )[:SIGNAL_LIMIT_IN_JSON]
     top_sig = relevant[0] if relevant else None
     cleaned_dm = _clean_dm_name(lead.dm_name)
@@ -512,7 +593,11 @@ def _lead_to_json(lead: Lead, *, now: datetime) -> dict[str, Any]:
             lead.name, cleaned_dm, lead.dm_email, lead.dm_linkedin_url
         ),
         "score": lead.score,
-        "insight": lead.insight,
+        # Insight intentionally null — see _regen_copy. Field kept in
+        # the schema (req says don't change output schema) so the
+        # React side keeps working; the LeadCard already conditionally
+        # renders it so null collapses cleanly.
+        "insight": None,
         "trigger_type": outreach.trigger_type(top_sig) if top_sig else "other",
         "signals": [_signal_to_json(s, now) for s in relevant],
     }
@@ -552,11 +637,55 @@ def _names_match(a: str | None, b: str | None) -> bool:
     return _norm(a) == _norm(b)
 
 
+def _payload_event_date(s: Signal) -> datetime | None:
+    """Per req #10: the date the EVENT happened (job posted, Form D
+    filed) — not when the pipeline captured it. Used for the days_ago
+    label so 'today' only fires when the event itself is today."""
+    p = s.payload or {}
+    candidates: list[str] = []
+    if s.type == SignalType.JOB_POSTED_FINANCE_LEAD:
+        v = p.get("date_posted")
+        if v:
+            candidates.append(str(v))
+    elif s.type == SignalType.FUNDING_RAISED:
+        v = p.get("filed_on") or p.get("published")
+        if v:
+            candidates.append(str(v))
+    for raw in candidates:
+        raw = raw.strip()
+        if not raw:
+            continue
+        # YYYY-MM-DD or ISO timestamp prefix
+        try:
+            return datetime.fromisoformat(raw[:19].replace("Z", ""))
+        except ValueError:
+            pass
+        try:
+            return datetime.strptime(raw[:10], "%Y-%m-%d")
+        except ValueError:
+            continue
+    return None
+
+
+def _signal_age_days(s: Signal, now: datetime) -> int:
+    """Days between the EVENT date (preferred) and now. Falls back to
+    captured_at when the payload has no event date."""
+    event_dt = _payload_event_date(s)
+    base = event_dt if event_dt is not None else s.captured_at
+    return max(0, (now - base).days)
+
+
+def _signal_too_old(s: Signal, now: datetime) -> bool:
+    """Drop signals older than 30 days at output time. Uses the EVENT
+    date, not captured_at."""
+    return _signal_age_days(s, now) > 30
+
+
 def _signal_to_json(s: Signal, now: datetime) -> dict[str, Any]:
     return {
         "type": s.type.value,
         "captured_at": s.captured_at.isoformat(),
-        "days_ago": max(0, (now - s.captured_at).days),
+        "days_ago": _signal_age_days(s, now),
         "payload": s.payload,
     }
 

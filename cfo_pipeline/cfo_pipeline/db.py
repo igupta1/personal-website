@@ -145,6 +145,54 @@ def name_key(name: str) -> str:
 _name_key = name_key
 
 
+# Aggressive operational-suffix list. Stripped on top of name_key for
+# the bullseye cross-source join only — NOT used for the primary
+# upsert (where it would conflate "Acme Holdings" with "Acme", a
+# legitimately different company).
+#
+# Form D filings carry legal-entity names ("Estately Operations LLC")
+# while job boards carry brand names ("Estately"). The default
+# name_key strips the legal suffix but keeps "Operations", so the two
+# don't merge. brand_key strips this second tier for the join pass.
+_OPERATIONAL_SUFFIXES = (
+    "operations",
+    "holdings",
+    "global",
+    "international",
+    "group",
+    "solutions",
+    "ventures",
+    "labs",
+    "industries",
+    "studios",
+    "technologies",
+    "systems",
+    "services",
+)
+
+
+def brand_key(name: str) -> str:
+    """Aggressive normalization for cross-source matching. Starts from
+    name_key and strips the operational suffixes above. Returns ""
+    when the entire name is operational suffixes (caller should
+    discard)."""
+    s = _name_key(name)
+    while True:
+        stripped = False
+        for suffix in _OPERATIONAL_SUFFIXES:
+            if s.endswith(" " + suffix):
+                s = s[: -len(suffix) - 1].strip()
+                stripped = True
+                break
+            if s == suffix:
+                s = ""
+                stripped = True
+                break
+        if not stripped:
+            break
+    return s
+
+
 def _row_to_lead(row: sqlite3.Row) -> Lead:
     data = dict(row)
     raw = data.get("signals") or "[]"
@@ -168,9 +216,38 @@ def _get_lead_by_name_key(conn: sqlite3.Connection, name_key: str) -> Lead | Non
 _NEVER_DEDUP: frozenset[SignalType] = frozenset({SignalType.ENRICHMENT_RUN})
 
 
+_BRACKETED_ID_RE = re.compile(r"\([^)]*\)")
+_NON_ALNUM_RE = re.compile(r"[^a-z0-9\s]")
+_WS_RE = re.compile(r"\s+")
+
+
+def _normalize_job_title(title: str) -> str:
+    """Lowercase, strip bracketed IDs like '(10660JFXV)', strip
+    punctuation, collapse whitespace. Used to dedup the same posting
+    across job boards (Indeed + LinkedIn + Google Jobs give the same
+    role 3 distinct rows otherwise)."""
+    s = (title or "").lower()
+    s = _BRACKETED_ID_RE.sub(" ", s)
+    s = _NON_ALNUM_RE.sub(" ", s)
+    s = _WS_RE.sub(" ", s).strip()
+    return s
+
+
 def _signal_dedup_key(sig_dict: dict[str, Any]) -> str:
+    """Per-signal-type dedup keys:
+
+    - job_posted_finance_lead: ``(type, normalized_title)``. Strips
+      board / url / date_posted / bracketed IDs so multi-board cross-
+      postings collapse into one signal. This was the regression
+      reported on the 3rd review pass.
+    - everything else: type + full payload (back-compat with prior
+      behavior for FUNDING_RAISED / APOLLO_ENRICHED markers).
+    """
     sig_type_str = sig_dict["type"]
     payload = sig_dict.get("payload") or {}
+    if sig_type_str == SignalType.JOB_POSTED_FINANCE_LEAD.value:
+        title = _normalize_job_title(str(payload.get("title") or ""))
+        return f"{sig_type_str}|{title}"
     return f"{sig_type_str}|{json.dumps(payload, sort_keys=True, default=str)}"
 
 
