@@ -30,8 +30,18 @@ from pydantic import BaseModel
 from cfo_pipeline import db, llm
 from cfo_pipeline.models import Lead, Signal, SignalType, SourceName
 from cfo_pipeline.sources.edgar_form_d import (
+    _INVESTMENT_VEHICLE_KEYWORDS_RE,
+    _REAL_ESTATE_KEYWORDS_RE,
+    _ROMAN_NUMERAL_TAIL_RE,
     _STREET_SPV_RE,
+    _TICKER_LLC_RE,
+    _TRAILING_DIGIT_SPV_RE,
+    _TRANCHE_SUFFIX_RE,
     _VINTAGE_YEAR_RE,
+)
+from cfo_pipeline.sources.jobs import (
+    _is_auto_dealer_name,
+    _is_recruiter_name,
 )
 
 log = logging.getLogger(__name__)
@@ -214,6 +224,14 @@ _MEGACORP_BRAND_NAMES: frozenset[str] = frozenset(
         # Mid-tier captives
         "Red Hat", "NetSuite", "Slack", "MuleSoft", "Tableau", "Heroku",
         "Splunk", "Figma",
+        # 3rd-review leaks
+        "MLB", "Major League Baseball", "Major League Baseball (MLB)",
+        "Formula 1", "Formula 1 Las Vegas Grand Prix", "F1",
+        "NFL", "NBA", "NHL", "MLS", "PGA",
+        "Goldman Sachs", "Goldman Sachs Private Credit Corp.",
+        "Box", "Raytheon", "Viasat", "Hilton", "Temu",
+        "Tractor Supply", "Kettering Health Network", "Koch Foods",
+        "BronxCare Health System", "Paramount Pictures",
     )
 )
 
@@ -227,10 +245,18 @@ def _is_megacorp_subsidiary(name: str) -> bool:
 
 
 def _is_form_d_noise(lead: Lead) -> bool:
-    """Vintage-year / street-SPV regexes from the EDGAR source applied
-    retroactively. Gated to leads that actually have a Form D signal
-    so we don't accidentally drop a real operating company that
-    happens to have a year-looking name."""
+    """Vintage-year / street-SPV / tranche / real-estate / vehicle
+    regexes from the EDGAR source applied retroactively. Gated to
+    leads that actually have a Form D signal so we don't accidentally
+    drop a real operating company that happens to have a year or
+    'series' word in its name.
+
+    The 3rd-review pass exposed that source-only filters left dozens
+    of pre-existing rows untouched (Lightstone Direct I, Alpha Wave CI
+    V, Cupressus Apartments, Reno City Center Owner, BWM Private
+    Equity II, HG SPV1, Level 5 Multifamily, MCR Macon Investco, ZRP
+    Avalon Crossing, Vadnais Heights, etc.). This function now
+    mirrors the full EDGAR-source filter at purge time."""
     has_form_d = any(
         s.type == SignalType.FUNDING_RAISED
         and s.payload.get("filing_type") == "Form D"
@@ -238,8 +264,16 @@ def _is_form_d_noise(lead: Lead) -> bool:
     )
     if not has_form_d:
         return False
+    name = lead.name
     return bool(
-        _VINTAGE_YEAR_RE.search(lead.name) or _STREET_SPV_RE.search(lead.name)
+        _VINTAGE_YEAR_RE.search(name)
+        or _STREET_SPV_RE.search(name)
+        or _TRANCHE_SUFFIX_RE.search(name)
+        or _ROMAN_NUMERAL_TAIL_RE.search(name)
+        or _TRAILING_DIGIT_SPV_RE.search(name)
+        or _TICKER_LLC_RE.search(name)
+        or _REAL_ESTATE_KEYWORDS_RE.search(name)
+        or _INVESTMENT_VEHICLE_KEYWORDS_RE.search(name)
     )
 
 
@@ -254,12 +288,31 @@ def _disqualification_reason(lead: Lead) -> str | None:
         return "financial_vehicle"
     if _is_megacorp_subsidiary(lead.name):
         return "megacorp_subsidiary"
+    # Recruiting firms + auto dealers — apply the source-level name
+    # patterns retroactively so leads ingested under a prior version
+    # of the pipeline get swept out. Required by 3rd-review reqs #5
+    # and #6.
+    if _is_recruiter_name(lead.name):
+        return "recruiter_name_pattern"
+    if _is_auto_dealer_name(lead.name):
+        return "auto_dealer_name_pattern"
     if _is_form_d_noise(lead):
         return "form_d_noise_pattern"
     if lead.headcount is not None and lead.headcount > _SMB_HEADCOUNT_CAP:
         return f"oversized={lead.headcount}"
     if lead.headcount == 0:
         return "zero_headcount"
+    # Per req #2: null headcount excludes IF the lead has been through
+    # enrichment at least once. We can't punish brand-new leads on the
+    # first run (enrichment hasn't tried yet), so the check is gated
+    # on ENRICHMENT_RUN presence. Brand-new leads with no enrichment
+    # marker are kept; the regular enrich() flow will sweep them on
+    # the same run.
+    has_enrichment_run = any(
+        s.type == SignalType.ENRICHMENT_RUN for s in lead.signals
+    )
+    if has_enrichment_run and lead.headcount is None:
+        return "unknown_headcount_post_enrichment"
     return None
 
 
