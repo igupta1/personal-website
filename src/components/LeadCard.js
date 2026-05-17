@@ -193,6 +193,17 @@ const CONTACT_BADGE = {
   },
 };
 
+// FMCSA owner-operator cards file under the operator's own name —
+// the lead name *is* the contact, and the filing includes business
+// address + USDOT. "No contact" undersells that public-record data.
+const FILING_BADGE = {
+  label: "Filing contact",
+  dot: "bg-sky-400",
+  text: "text-sky-300",
+  ring: "ring-sky-400/30",
+  bg: "bg-sky-500/10",
+};
+
 export default function LeadCard({ lead }) {
   const industryLabel = prettyIndustry(lead.industry);
   const location = [lead.city, lead.state].filter(Boolean).join(", ");
@@ -202,7 +213,14 @@ export default function LeadCard({ lead }) {
   const dmRedundantWithName = namesMatch(lead.name, lead.dm_name);
   const showDmPanel = lead.dm_name && !dmRedundantWithName;
   const contactStrength = contactStrengthFor(lead);
-  const badge = CONTACT_BADGE[contactStrength];
+  const hasFmcsaSignal = (lead.signals || []).some(
+    (s) => s.type === "new_motor_carrier_authority"
+  );
+  // Owner-operator FMCSA cards: lead name IS the contact, regulator
+  // address sits in the signal row. Promote the badge from "cold" to
+  // "Filing contact" so the framing matches the data quality.
+  const useFilingBadge = hasFmcsaSignal && !showDmPanel && contactStrength === "cold";
+  const badge = useFilingBadge ? FILING_BADGE : CONTACT_BADGE[contactStrength];
 
   return (
     <div className="bg-slate-800/70 backdrop-blur border border-slate-700/70 rounded-2xl p-5 shadow-lg shadow-black/10 hover:bg-slate-800 hover:border-slate-600 hover:-translate-y-0.5 transition-all duration-150 flex flex-col">
@@ -270,11 +288,18 @@ export default function LeadCard({ lead }) {
           <div className="text-sm text-white font-semibold leading-tight">
             {lead.dm_name}
           </div>
-          {lead.dm_title && lead.dm_title.length <= 80 && !lead.dm_title.includes("|") && (
-            <div className="text-[12px] text-gray-300 mt-0.5">
-              {lead.dm_title}
-            </div>
-          )}
+          {(() => {
+            // Apollo sometimes returns a name with no title (or a
+            // long "Founder | CEO | CTO" pipe-stuffed string). Hide
+            // noisy strings; fall back to "Contact" when null so the
+            // row keeps its two-line shape instead of a floating name.
+            const t = lead.dm_title;
+            const usable = t && t.length <= 80 && !t.includes("|");
+            const label = usable ? t : "Contact";
+            return (
+              <div className="text-[12px] text-gray-300 mt-0.5">{label}</div>
+            );
+          })()}
           {(lead.dm_email || lead.dm_linkedin_url) && (
             <div className="mt-2 flex items-center gap-1.5 flex-wrap">
               {lead.dm_email && (
