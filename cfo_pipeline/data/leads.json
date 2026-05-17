@@ -1,6 +1,1377 @@
 {
-  "generated_at": "2026-05-17T18:53:33.906857",
+  "generated_at": "2026-05-17T19:36:50.820462",
   "leads": [
+    {
+      "name": "E2B",
+      "domain": "e2b.dev",
+      "industry": "fintech",
+      "headcount": 28,
+      "country": "US",
+      "city": "San Francisco",
+      "state": "CA",
+      "dm_name": "Vasek Mlejnsky",
+      "dm_title": "Co-Founder & CEO",
+      "dm_email": "vasek@e2b.dev",
+      "dm_linkedin_url": "http://www.linkedin.com/in/mlejva",
+      "contact_strength": "verified",
+      "score": 100.0,
+      "insight": "\"Head of Finance\" job postings on 2026-05-03 and 2026-05-01 signal urgent hiring needs in the next 6-10 weeks.",
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-05-17T19:21:26.403770",
+          "days_ago": 0,
+          "payload": {
+            "title": "Head of Finance",
+            "url": "https://www.adzuna.com/details/5717613113?utm_medium=api&utm_source=3aa14b35",
+            "date_posted": "2026-05-03T00:25:04Z",
+            "site": "adzuna"
+          }
+        },
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-05-17T19:19:27.688108",
+          "days_ago": 0,
+          "payload": {
+            "title": "Head of Finance",
+            "url": "https://www.linkedin.com/jobs/view/4407215801",
+            "date_posted": "2026-05-01",
+            "site": "linkedin"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Tinder",
+      "domain": "tinder.com",
+      "industry": "media_entertainment",
+      "headcount": null,
+      "country": "US",
+      "city": "West Hollywood",
+      "state": "CA",
+      "dm_name": "Faye Iosotaluno",
+      "dm_title": "CEO",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "partial",
+      "score": 100.0,
+      "insight": "'Sr. Finance Manager, FP&A' posted today signals they've outgrown founder-as-CFO but aren't big enough for a $300K CFO comp.",
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-05-17T19:19:27.688108",
+          "days_ago": 0,
+          "payload": {
+            "title": "Sr. Finance Manager, FP&A",
+            "url": "https://www.linkedin.com/jobs/view/4411759245",
+            "date_posted": "2026-05-08",
+            "site": "linkedin"
+          }
+        },
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-05-17T19:19:27.688108",
+          "days_ago": 0,
+          "payload": {
+            "title": "Sr. Finance Manager, FP&A",
+            "url": "https://www.linkedin.com/jobs/view/4411754348",
+            "date_posted": "2026-05-08",
+            "site": "linkedin"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Hadley Designs",
+      "domain": "hadleydesigns.com",
+      "industry": "fintech",
+      "headcount": 14,
+      "country": "US",
+      "city": "Flower Mound",
+      "state": "TX",
+      "dm_name": "Joshua Hadley",
+      "dm_title": "Chief Executive Officer",
+      "dm_email": "josh@hadleydesigns.com",
+      "dm_linkedin_url": "http://www.linkedin.com/in/joshhadley",
+      "contact_strength": "verified",
+      "score": 100.0,
+      "insight": "Hiring \"Head of Finance\" today, a fractional CFO can bridge strategy and execution for Hadley Designs' financial growth.",
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-05-17T19:21:26.403770",
+          "days_ago": 0,
+          "payload": {
+            "title": "Head of Finance",
+            "url": "https://www.adzuna.com/details/5731097852?utm_medium=api&utm_source=3aa14b35",
+            "date_posted": "2026-05-16T00:41:08Z",
+            "site": "adzuna"
+          }
+        },
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-05-17T19:21:15.282300",
+          "days_ago": 0,
+          "payload": {
+            "title": "Head of Finance",
+            "url": "https://www.indeed.com/viewjob?jk=01d39a8bb5cf0303",
+            "date_posted": "2026-05-16",
+            "site": "indeed"
+          }
+        }
+      ]
+    },
+    {
+      "name": "NorthPoint Search Group",
+      "domain": "northpointsearchgroup.com",
+      "industry": "fintech",
+      "headcount": 30,
+      "country": "US",
+      "city": "Alpharetta",
+      "state": "GA",
+      "dm_name": "Gus Cawley",
+      "dm_title": "CEO",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "partial",
+      "score": 100.0,
+      "insight": "\"Head of Finance\" job posted today signals they've outgrown founder-as-CFO but aren't big enough for a $300K CFO comp.",
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-05-17T19:21:26.403770",
+          "days_ago": 0,
+          "payload": {
+            "title": "Head of Finance",
+            "url": "https://www.adzuna.com/details/5699184347?utm_medium=api&utm_source=3aa14b35",
+            "date_posted": "2026-04-14T16:10:16Z",
+            "site": "adzuna"
+          }
+        },
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-05-17T19:21:26.403770",
+          "days_ago": 0,
+          "payload": {
+            "title": "Head of Finance",
+            "url": "https://www.adzuna.com/land/ad/5701316186?se=Mtu5myVS8RGH_dNRytL1PQ&utm_medium=api&utm_source=3aa14b35&v=8CBB517F5B7E9A6655D94EA61F89E6C01EF3AADB",
+            "date_posted": "2026-04-16T06:09:06Z",
+            "site": "adzuna"
+          }
+        }
+      ]
+    },
+    {
+      "name": "AQR Flex 1 Series LLC - Series B9",
+      "domain": null,
+      "industry": "fintech",
+      "headcount": null,
+      "country": "US",
+      "city": "GREENWICH",
+      "state": "CT",
+      "dm_name": "Cliff Asness",
+      "dm_title": "Founder, Managing Principal and Chief Investment Officer",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "partial",
+      "score": 100.0,
+      "insight": "Funding raised today with a \"Form D\" filing indicates a pivotal moment for board prep and investor reporting in fintech.",
+      "trigger_type": "form_d",
+      "signals": [
+        {
+          "type": "funding_raised",
+          "captured_at": "2026-05-17T19:21:49.108796",
+          "days_ago": 0,
+          "payload": {
+            "title": "D - AQR Flex 1 Series LLC - Series B9",
+            "filing_type": "Form D",
+            "filed_on": "2026-05-14",
+            "link": "https://www.sec.gov/Archives/edgar/data/2075806/000140508626000306/0001405086-26-000306-index.htm",
+            "biz_state": "CT",
+            "biz_location": "Greenwich, CT"
+          }
+        },
+        {
+          "type": "funding_raised",
+          "captured_at": "2026-05-17T19:21:49.108796",
+          "days_ago": 0,
+          "payload": {
+            "title": "D - AQR Flex 1 Series LLC - Series K9",
+            "filing_type": "Form D",
+            "filed_on": "2026-05-14",
+            "link": "https://www.sec.gov/Archives/edgar/data/2115950/000140508626000310/0001405086-26-000310-index.htm",
+            "biz_state": "CT",
+            "biz_location": "Greenwich, CT"
+          }
+        },
+        {
+          "type": "funding_raised",
+          "captured_at": "2026-05-17T19:21:49.108796",
+          "days_ago": 0,
+          "payload": {
+            "title": "D - AQR Flex 1 Series LLC - Series B8",
+            "filing_type": "Form D",
+            "filed_on": "2026-05-14",
+            "link": "https://www.sec.gov/Archives/edgar/data/2075807/000140508626000307/0001405086-26-000307-index.htm",
+            "biz_state": "CT",
+            "biz_location": "Greenwich, CT"
+          }
+        },
+        {
+          "type": "funding_raised",
+          "captured_at": "2026-05-17T19:21:49.108796",
+          "days_ago": 0,
+          "payload": {
+            "title": "D - AQR Flex 1 Series LLC - Series A42",
+            "filing_type": "Form D",
+            "filed_on": "2026-05-14",
+            "link": "https://www.sec.gov/Archives/edgar/data/2110396/000140508626000304/0001405086-26-000304-index.htm",
+            "biz_state": "CT",
+            "biz_location": "Greenwich, CT"
+          }
+        },
+        {
+          "type": "funding_raised",
+          "captured_at": "2026-05-17T19:21:49.108796",
+          "days_ago": 0,
+          "payload": {
+            "title": "D - AQR Flex 1 Series LLC - Series A47",
+            "filing_type": "Form D",
+            "filed_on": "2026-05-14",
+            "link": "https://www.sec.gov/Archives/edgar/data/2110391/000140508626000305/0001405086-26-000305-index.htm",
+            "biz_state": "CT",
+            "biz_location": "Greenwich, CT"
+          }
+        },
+        {
+          "type": "funding_raised",
+          "captured_at": "2026-05-17T19:21:49.108796",
+          "days_ago": 0,
+          "payload": {
+            "title": "D - AQR Flex 1 Series LLC - Series A6",
+            "filing_type": "Form D",
+            "filed_on": "2026-05-14",
+            "link": "https://www.sec.gov/Archives/edgar/data/2069455/000140508626000312/0001405086-26-000312-index.htm",
+            "biz_state": "CT",
+            "biz_location": "Greenwich, CT"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Search Masters, Inc",
+      "domain": "searchmasters.com",
+      "industry": "fintech",
+      "headcount": 45,
+      "country": "US",
+      "city": "Independence",
+      "state": "OH",
+      "dm_name": "Jon Venesile",
+      "dm_title": "President",
+      "dm_email": "jon@searchmasters.com",
+      "dm_linkedin_url": "http://www.linkedin.com/in/jonvenesile",
+      "contact_strength": "verified",
+      "score": 59.98676440625468,
+      "insight": "\"Assistant Controller (10660JFXV)\" posted today shows Search Masters, Inc has outgrown founder-as-CFO yet isn't ready for a full-time CFO.",
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-05-17T19:21:26.403770",
+          "days_ago": 0,
+          "payload": {
+            "title": "Assistant Controller (10660JFXV)",
+            "url": "https://www.adzuna.com/land/ad/5731029009?se=jD91miVS8RGNw-9vM3bulQ&utm_medium=api&utm_source=3aa14b35&v=C0F086A22940B3F1E0068AED42AA540BDC4722CC",
+            "date_posted": "2026-05-15T23:37:39Z",
+            "site": "adzuna"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Sniffspot",
+      "domain": "sniffspot.com",
+      "industry": "other",
+      "headcount": 26,
+      "country": "US",
+      "city": "Seattle",
+      "state": "WA",
+      "dm_name": "David Adams",
+      "dm_title": "Founder",
+      "dm_email": "david@sniffspot.com",
+      "dm_linkedin_url": "http://www.linkedin.com/in/david-a-85aa1526",
+      "contact_strength": "verified",
+      "score": 59.986764361145894,
+      "insight": "Hiring \"Head of Finance\" today, revealing a critical gap that a fractional CFO can effectively fill.",
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-05-17T19:21:26.403770",
+          "days_ago": 0,
+          "payload": {
+            "title": "Head of Finance",
+            "url": "https://www.adzuna.com/details/5715365934?utm_medium=api&utm_source=3aa14b35",
+            "date_posted": "2026-05-01T01:13:24Z",
+            "site": "adzuna"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Campton Hills, IL",
+      "domain": "villageofcamptonhills.org",
+      "industry": "fintech",
+      "headcount": null,
+      "country": "US",
+      "city": "Campton Hills",
+      "state": "IL",
+      "dm_name": "Barbara Wojnicki",
+      "dm_title": "President",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "partial",
+      "score": 59.986764350510356,
+      "insight": "The posting for \"Head of Finance\" today signals a critical need to fill this role within 6-10 weeks.",
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-05-17T19:21:26.403770",
+          "days_ago": 0,
+          "payload": {
+            "title": "Head of Finance",
+            "url": "https://www.adzuna.com/details/5706612279?utm_medium=api&utm_source=3aa14b35",
+            "date_posted": "2026-04-21T20:21:53Z",
+            "site": "adzuna"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Hauler Hero",
+      "domain": "haulerhero.com",
+      "industry": "logistics_transport",
+      "headcount": 51,
+      "country": "US",
+      "city": "San Diego",
+      "state": "CA",
+      "dm_name": "Ben Sikma",
+      "dm_title": "President",
+      "dm_email": "ben@haulerhero.com",
+      "dm_linkedin_url": "http://www.linkedin.com/in/ben-sikma-9912662",
+      "contact_strength": "verified",
+      "score": 59.986764339521905,
+      "insight": "\"Head of Finance\" job posted today indicates an urgent hiring timeline, typically binding in 6-10 weeks.",
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-05-17T19:21:26.403770",
+          "days_ago": 0,
+          "payload": {
+            "title": "Head of Finance",
+            "url": "https://www.adzuna.com/details/5721371003?utm_medium=api&utm_source=3aa14b35",
+            "date_posted": "2026-05-07T03:33:09Z",
+            "site": "adzuna"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Aurelius Systems",
+      "domain": "aureliussystems.com",
+      "industry": "fintech",
+      "headcount": 22,
+      "country": "US",
+      "city": "San Francisco",
+      "state": "CA",
+      "dm_name": "Michael Laframboise",
+      "dm_title": "CEO",
+      "dm_email": "michael@aureliussystems.us",
+      "dm_linkedin_url": "http://www.linkedin.com/in/michael-laframboise",
+      "contact_strength": "verified",
+      "score": 59.986764328822204,
+      "insight": "\"Head of Finance\" job posted today suggests they've outgrown founder-as-CFO but aren't ready for a full-time $300K CFO.",
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-05-17T19:21:26.403770",
+          "days_ago": 0,
+          "payload": {
+            "title": "Head of Finance",
+            "url": "https://www.adzuna.com/details/5721324411?utm_medium=api&utm_source=3aa14b35",
+            "date_posted": "2026-05-07T02:27:29Z",
+            "site": "adzuna"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Hyperbolic Labs",
+      "domain": "hyperbolic.xyz",
+      "industry": "fintech",
+      "headcount": 38,
+      "country": "US",
+      "city": "Irvine",
+      "state": "CA",
+      "dm_name": "Jasper Zhang",
+      "dm_title": "CEO &amp; Cofounder",
+      "dm_email": "jasper@hyperbolic.ai",
+      "dm_linkedin_url": "http://www.linkedin.com/in/yuezhang95",
+      "contact_strength": "verified",
+      "score": 59.98676431408003,
+      "insight": "Hiring \"Head of Finance\" today highlights the gap for strategic financial leadership that a fractional CFO can close.",
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-05-17T19:21:26.403770",
+          "days_ago": 0,
+          "payload": {
+            "title": "Head of Finance",
+            "url": "https://www.adzuna.com/details/5713586936?utm_medium=api&utm_source=3aa14b35",
+            "date_posted": "2026-04-29T05:29:47Z",
+            "site": "adzuna"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Tin Can",
+      "domain": "tincan.kids",
+      "industry": "fintech",
+      "headcount": 38,
+      "country": "US",
+      "city": "Seattle",
+      "state": "WA",
+      "dm_name": "Chet Kittleson",
+      "dm_title": "Co-Founder / CEO",
+      "dm_email": "chet@tincan.kids",
+      "dm_linkedin_url": "http://www.linkedin.com/in/ckittleson",
+      "contact_strength": "verified",
+      "score": 59.98676430278679,
+      "insight": "\"Head of Finance\" job posted today signals a prompt need for financial leadership as they aim to fill this role quickly.",
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-05-17T19:21:26.403770",
+          "days_ago": 0,
+          "payload": {
+            "title": "Head of Finance",
+            "url": "https://www.adzuna.com/details/5692882940?utm_medium=api&utm_source=3aa14b35",
+            "date_posted": "2026-04-08T02:55:31Z",
+            "site": "adzuna"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Brooklyn Waldorf School",
+      "domain": "brooklynwaldorf.org",
+      "industry": "education",
+      "headcount": 49,
+      "country": "US",
+      "city": "Brooklyn",
+      "state": "NY",
+      "dm_name": "Yoni Binus",
+      "dm_title": "Head of School",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "partial",
+      "score": 59.98676428044093,
+      "insight": "Hiring \"Head of Finance & Operations\" today, indicating a gap a fractional CFO can effectively fill.",
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-05-17T19:21:26.403770",
+          "days_ago": 0,
+          "payload": {
+            "title": "Head of Finance & Operations",
+            "url": "https://www.adzuna.com/details/5708795140?utm_medium=api&utm_source=3aa14b35",
+            "date_posted": "2026-04-23T19:49:54Z",
+            "site": "adzuna"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Rule Supplements",
+      "domain": "rulesupplements.com",
+      "industry": "ecommerce_retail",
+      "headcount": null,
+      "country": "US",
+      "city": "Akron",
+      "state": "IA",
+      "dm_name": "Tyson Rule",
+      "dm_title": "Owner",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "partial",
+      "score": 59.98676426855416,
+      "insight": "\"Accounting Manager & Executive Assistant\" job posted today signals urgency for financial leadership in the near term.",
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-05-17T19:21:26.403770",
+          "days_ago": 0,
+          "payload": {
+            "title": "Accounting Manager & Executive Assistant",
+            "url": "https://www.adzuna.com/land/ad/5718684092?se=FIYrnSVS8RGNw-9vM3bulQ&utm_medium=api&utm_source=3aa14b35&v=744D74F836D8335D17408E037A84998762DADA55",
+            "date_posted": "2026-05-04T13:16:27Z",
+            "site": "adzuna"
+          }
+        }
+      ]
+    },
+    {
+      "name": "LIVE | WORK",
+      "domain": "livework.inc",
+      "industry": "other",
+      "headcount": null,
+      "country": "US",
+      "city": "Foothill Ranch",
+      "state": "CA",
+      "dm_name": null,
+      "dm_title": null,
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "cold",
+      "score": 59.98486047932134,
+      "insight": "Hiring \"Senior Controller $175k to $200 (DOE)\" today, highlighting the gap a fractional CFO can efficiently fill.",
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-05-17T19:19:27.688108",
+          "days_ago": 0,
+          "payload": {
+            "title": "Senior Controller $175k to $200 (DOE)",
+            "url": "https://www.linkedin.com/jobs/view/4413833728",
+            "date_posted": "2026-05-12",
+            "site": "linkedin"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Segrera Associates",
+      "domain": "segrera.com",
+      "industry": "fintech",
+      "headcount": 16,
+      "country": "US",
+      "city": "Miami",
+      "state": "FL",
+      "dm_name": "Carlos Segrera",
+      "dm_title": "CEO & Co-Founder",
+      "dm_email": "csegrera@segrera.com",
+      "dm_linkedin_url": "http://www.linkedin.com/in/carlossegrera",
+      "contact_strength": "verified",
+      "score": 59.98486045413692,
+      "insight": "Hiring \"Assistant Controller\" today; a fractional CFO could streamline financial management amidst this recruitment.",
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-05-17T19:19:27.688108",
+          "days_ago": 0,
+          "payload": {
+            "title": "Assistant Controller",
+            "url": "https://www.linkedin.com/jobs/view/4413413628",
+            "date_posted": "2026-05-12",
+            "site": "linkedin"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Create Wellness",
+      "domain": "trycreate.co",
+      "industry": "healthcare",
+      "headcount": 50,
+      "country": "US",
+      "city": "New York",
+      "state": "NY",
+      "dm_name": "Sienna McCormick",
+      "dm_title": "Co-Founder/Co-CEO",
+      "dm_email": "sienna@trycreate.co",
+      "dm_linkedin_url": "http://www.linkedin.com/in/sienna-mccormick-86b42255",
+      "contact_strength": "verified",
+      "score": 59.98486044295633,
+      "insight": "Hiring \"Controller\" today closes the financial leadership gap for Create Wellness.",
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-05-17T19:19:27.688108",
+          "days_ago": 0,
+          "payload": {
+            "title": "Controller",
+            "url": "https://www.linkedin.com/jobs/view/4385161405",
+            "date_posted": "2026-03-13",
+            "site": "linkedin"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Luxury Auto Mall of Sioux Falls",
+      "domain": "luxurymall.com",
+      "industry": "other",
+      "headcount": null,
+      "country": "US",
+      "city": "Sioux Falls",
+      "state": "SD",
+      "dm_name": "James Hueners",
+      "dm_title": "General Manager",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "partial",
+      "score": 59.98486042136511,
+      "insight": "Hiring \"Automotive Assistant Controller\" today closes gaps in financial oversight and strategy for Luxury Auto Mall of Sioux Falls.",
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-05-17T19:19:27.688108",
+          "days_ago": 0,
+          "payload": {
+            "title": "Automotive Assistant Controller",
+            "url": "https://www.indeed.com/viewjob?jk=f43c595eecbfc5d4",
+            "date_posted": "2026-05-14",
+            "site": "indeed"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Goodwood Barbecue Co",
+      "domain": "goodwoodbbq.com",
+      "industry": "hospitality_food",
+      "headcount": 34,
+      "country": "US",
+      "city": "Boise",
+      "state": "ID",
+      "dm_name": "Steve Cooper",
+      "dm_title": "Restaurateur",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "partial",
+      "score": 59.984860409334345,
+      "insight": "\"Assistant Controller/Senior Financial Accountant\" posted today signals they've outgrown founder-as-CFO but aren't ready for a $300K CFO.",
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-05-17T19:19:27.688108",
+          "days_ago": 0,
+          "payload": {
+            "title": "Assistant Controller/Senior Financial Accountant",
+            "url": "https://www.linkedin.com/jobs/view/4408688378",
+            "date_posted": "2026-05-15",
+            "site": "linkedin"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Hoxton Circle",
+      "domain": "hoxton-circle.com",
+      "industry": "fintech",
+      "headcount": 10,
+      "country": "US",
+      "city": "New York",
+      "state": "NY",
+      "dm_name": "Lisa Alvarado",
+      "dm_title": "Vice President",
+      "dm_email": "lma@hoxtoncircle.com",
+      "dm_linkedin_url": "http://www.linkedin.com/in/lisa-alvarado-99380712",
+      "contact_strength": "verified",
+      "score": 59.984860386106945,
+      "insight": "Hiring \"Senior Accountant Financial Reporting\" today closes the gap in financial oversight and strategic insight for Hoxton Circle.",
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-05-17T19:19:27.688108",
+          "days_ago": 0,
+          "payload": {
+            "title": "Senior Accountant Financial Reporting",
+            "url": "https://www.linkedin.com/jobs/view/4410156578",
+            "date_posted": "2026-05-12",
+            "site": "linkedin"
+          }
+        }
+      ]
+    },
+    {
+      "name": "San Francisco Compute Company",
+      "domain": "sfcompute.com",
+      "industry": "fintech",
+      "headcount": 44,
+      "country": "US",
+      "city": "San Francisco",
+      "state": "CA",
+      "dm_name": "Ethan Anderson",
+      "dm_title": "Co-Founder, Chief Operating Officer",
+      "dm_email": "ethan@sfcompute.com",
+      "dm_linkedin_url": "http://www.linkedin.com/in/ethan-anderson-yc",
+      "contact_strength": "verified",
+      "score": 59.98486037417241,
+      "insight": "Job posting for \"Senior Accounting Manager\" today shows urgency as hiring typically binds candidates in 6-10 weeks.",
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-05-17T19:19:27.688108",
+          "days_ago": 0,
+          "payload": {
+            "title": "Senior Accounting Manager",
+            "url": "https://www.linkedin.com/jobs/view/4413809409",
+            "date_posted": "2026-05-12",
+            "site": "linkedin"
+          }
+        }
+      ]
+    },
+    {
+      "name": "AZALEA WANG",
+      "domain": "azaleawang.com",
+      "industry": "ecommerce_retail",
+      "headcount": 19,
+      "country": "US",
+      "city": "El Monte",
+      "state": "CA",
+      "dm_name": "Renee Cox",
+      "dm_title": "Chief Executive Officer",
+      "dm_email": "renee@azaleawang.com",
+      "dm_linkedin_url": "http://www.linkedin.com/in/renee-cox-7974253b3",
+      "contact_strength": "verified",
+      "score": 59.984860362286014,
+      "insight": "\"Assistant Controller\" today; hiring signals they have outgrown founder-as-CFO but aren't ready for a full-time CFO.",
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-05-17T19:19:27.688108",
+          "days_ago": 0,
+          "payload": {
+            "title": "Assistant Controller",
+            "url": "https://www.linkedin.com/jobs/view/4415401354",
+            "date_posted": "nan",
+            "site": "linkedin"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Forrer Group, Inc.",
+      "domain": "forrergroup.com",
+      "industry": "fintech",
+      "headcount": 8,
+      "country": "US",
+      "city": "Alpharetta",
+      "state": "GA",
+      "dm_name": null,
+      "dm_title": null,
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "cold",
+      "score": 59.984860351009175,
+      "insight": "Hiring \"Vice President Finance\" today closes the gap for financial leadership in a niche fintech with 8 employees.",
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-05-17T19:19:27.688108",
+          "days_ago": 0,
+          "payload": {
+            "title": "Vice President Finance",
+            "url": "https://www.linkedin.com/jobs/view/4415066991",
+            "date_posted": "2026-05-15",
+            "site": "linkedin"
+          }
+        }
+      ]
+    },
+    {
+      "name": "GAC Enterprises, LLC",
+      "domain": "gacenterprisesllc.com",
+      "industry": "fintech",
+      "headcount": null,
+      "country": "US",
+      "city": "Greensboro",
+      "state": "NC",
+      "dm_name": "Guillermo Amaya",
+      "dm_title": "C.E.O.",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "partial",
+      "score": 59.984860339122775,
+      "insight": "\"Vice President of Finance\" posted today signals urgency for finance leadership within 6-10 weeks.",
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-05-17T19:19:27.688108",
+          "days_ago": 0,
+          "payload": {
+            "title": "Vice President of Finance",
+            "url": "https://www.linkedin.com/jobs/view/4412993454",
+            "date_posted": "2026-05-11",
+            "site": "linkedin"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Paces",
+      "domain": "paces.com",
+      "industry": "fintech",
+      "headcount": 70,
+      "country": "US",
+      "city": "Brooklyn",
+      "state": "NY",
+      "dm_name": "James McWalter",
+      "dm_title": "CEO",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "partial",
+      "score": 59.98486032649849,
+      "insight": "Hiring \"Head of Finance\" today closes the gap in financial leadership for Paces, a ~70-employee fintech company.",
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-05-17T19:19:27.688108",
+          "days_ago": 0,
+          "payload": {
+            "title": "Head of Finance",
+            "url": "https://www.linkedin.com/jobs/view/4415143875",
+            "date_posted": "2026-05-16",
+            "site": "linkedin"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Symplast",
+      "domain": "symplast.com",
+      "industry": "healthcare",
+      "headcount": 70,
+      "country": "US",
+      "city": "Plantation",
+      "state": "FL",
+      "dm_name": "Shashi Kusuma",
+      "dm_title": "Co-Founder & CEO",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "partial",
+      "score": 59.98486031445168,
+      "insight": "Hiring \"Head of Finance\" today closes the strategic financial oversight gap in a rapidly evolving healthcare company.",
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-05-17T19:19:27.688108",
+          "days_ago": 0,
+          "payload": {
+            "title": "Head of Finance",
+            "url": "https://www.linkedin.com/jobs/view/4410995088",
+            "date_posted": "2026-05-06",
+            "site": "linkedin"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Monstro",
+      "domain": "monstro.com",
+      "industry": "fintech",
+      "headcount": 40,
+      "country": "US",
+      "city": "New York",
+      "state": "NY",
+      "dm_name": null,
+      "dm_title": null,
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "cold",
+      "score": 59.98486030328712,
+      "insight": "\"SVP - Head of Finance & Accounting\" posted today signals urgency to bring on finance leadership within 6-10 weeks.",
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-05-17T19:19:27.688108",
+          "days_ago": 0,
+          "payload": {
+            "title": "SVP - Head of Finance & Accounting",
+            "url": "https://www.linkedin.com/jobs/view/4414202227",
+            "date_posted": "2026-05-05",
+            "site": "linkedin"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Pyxis - Navigate Your Future",
+      "domain": "pyxissearchpartners.io",
+      "industry": "fintech",
+      "headcount": null,
+      "country": "US",
+      "city": "New York",
+      "state": "NY",
+      "dm_name": null,
+      "dm_title": null,
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "cold",
+      "score": 59.98486028002765,
+      "insight": "\"Financial Controller | Accounting\" posted today signals they've outgrown founder-as-CFO but aren't big enough for costly CFO comp.",
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-05-17T19:19:27.688108",
+          "days_ago": 0,
+          "payload": {
+            "title": "Financial Controller | Accounting",
+            "url": "https://www.indeed.com/viewjob?jk=a9137a1d216d62fc",
+            "date_posted": "2026-05-17",
+            "site": "indeed"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Route 128 Honda",
+      "domain": "route128honda.com",
+      "industry": "other",
+      "headcount": null,
+      "country": "US",
+      "city": "Reading",
+      "state": "MA",
+      "dm_name": "Daniel Loggins",
+      "dm_title": "Managing Owner",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "partial",
+      "score": 59.98486026796479,
+      "insight": "\"Finance Director \u2013 Route 128 Honda (Top Volume Store | 4.7\u2b50 Reputation)\" posted today emphasizes an urgent hiring need.",
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-05-17T19:19:27.688108",
+          "days_ago": 0,
+          "payload": {
+            "title": "Finance Director \u2013 Route 128 Honda (Top Volume Store | 4.7\u2b50 Reputation)",
+            "url": "https://www.indeed.com/viewjob?jk=6ce47ddd8bc4db2b",
+            "date_posted": "2026-05-16",
+            "site": "indeed"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Barti",
+      "domain": "barti.com",
+      "industry": "fintech",
+      "headcount": null,
+      "country": "US",
+      "city": "San Francisco",
+      "state": "CA",
+      "dm_name": "Colton Calandrella",
+      "dm_title": "CEO",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "partial",
+      "score": 59.98486025567736,
+      "insight": "A posting for a finance lead titled \"Director of Finance\" appeared today, signaling urgency for a hiring process to start.",
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-05-17T19:19:27.688108",
+          "days_ago": 0,
+          "payload": {
+            "title": "Director of Finance",
+            "url": "https://www.linkedin.com/jobs/view/4415534935",
+            "date_posted": "2026-05-15",
+            "site": "linkedin"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Vetcove",
+      "domain": "vetcove.com",
+      "industry": "healthcare",
+      "headcount": null,
+      "country": "US",
+      "city": "Miami",
+      "state": "FL",
+      "dm_name": "Alexander Kates",
+      "dm_title": "CEO",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "partial",
+      "score": 59.98486024539507,
+      "insight": "Hiring \"Senior Accounting Manager\" today highlights a gap for strategic financial oversight with a fractional CFO.",
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-05-17T19:19:27.688108",
+          "days_ago": 0,
+          "payload": {
+            "title": "Senior Accounting Manager",
+            "url": "https://www.linkedin.com/jobs/view/4415532950",
+            "date_posted": "2026-05-15",
+            "site": "linkedin"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Saint Rocco's Treats",
+      "domain": "saintroccostreats.shop",
+      "industry": "ecommerce_retail",
+      "headcount": 10,
+      "country": "US",
+      "city": "Pipersville",
+      "state": "PA",
+      "dm_name": "Kolby Rush",
+      "dm_title": "Co-Founder",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "partial",
+      "score": 59.98486023474383,
+      "insight": "\"Senior Accounting Manager\" job posted today suggests they've outgrown founder-as-CFO but aren't ready for full-time CFO costs.",
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-05-17T19:19:27.688108",
+          "days_ago": 0,
+          "payload": {
+            "title": "Senior Accounting Manager",
+            "url": "https://www.linkedin.com/jobs/view/4414681779",
+            "date_posted": "2026-05-14",
+            "site": "linkedin"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Formula 1 Las Vegas Grand Prix",
+      "domain": "f1lasvegasgp.com",
+      "industry": "media_entertainment",
+      "headcount": null,
+      "country": "US",
+      "city": "Las Vegas",
+      "state": "NV",
+      "dm_name": "Emily Prazer",
+      "dm_title": "President & CEO",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "partial",
+      "score": 59.984860220178575,
+      "insight": "\"Accounting Manager\" job posted today suggests they've outgrown founder-as-CFO but aren't ready for a full-time CFO.",
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-05-17T19:19:27.688108",
+          "days_ago": 0,
+          "payload": {
+            "title": "Accounting Manager",
+            "url": "https://www.linkedin.com/jobs/view/4408479474",
+            "date_posted": "2026-05-06",
+            "site": "linkedin"
+          }
+        }
+      ]
+    },
+    {
+      "name": "AmpersandPeople",
+      "domain": "ampersandpeople.com",
+      "industry": "fintech",
+      "headcount": 20,
+      "country": "US",
+      "city": "Los Altos",
+      "state": "CA",
+      "dm_name": "Samantha Schneider",
+      "dm_title": "CEO & Principal",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "partial",
+      "score": 59.9848602065437,
+      "insight": "Hiring \"Senior Accounting Manager\" today; a fractional CFO can fill financial strategy gaps as they scale.",
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-05-17T19:19:27.688108",
+          "days_ago": 0,
+          "payload": {
+            "title": "Senior Accounting Manager",
+            "url": "https://www.linkedin.com/jobs/view/4408009724",
+            "date_posted": "2026-04-28",
+            "site": "linkedin"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Tres Health",
+      "domain": "tres.health",
+      "industry": "healthcare",
+      "headcount": null,
+      "country": "US",
+      "city": "Boca Raton",
+      "state": "FL",
+      "dm_name": "Mike Feeney",
+      "dm_title": "Managing Partner",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "partial",
+      "score": 59.98486019486584,
+      "insight": "Hiring \"Accounting Manager\" today closes gaps in financial strategy and oversight for Tres Health.",
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-05-17T19:19:27.688108",
+          "days_ago": 0,
+          "payload": {
+            "title": "Accounting Manager",
+            "url": "https://www.linkedin.com/jobs/view/4387735390",
+            "date_posted": "2026-03-19",
+            "site": "linkedin"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Handshake",
+      "domain": null,
+      "industry": null,
+      "headcount": null,
+      "country": null,
+      "city": null,
+      "state": null,
+      "dm_name": null,
+      "dm_title": null,
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "cold",
+      "score": 59.98486017125345,
+      "insight": "\"Senior FP&A Manager\" job posted today indicates urgency to fill finance leadership within 6-10 weeks.",
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-05-17T19:19:27.688108",
+          "days_ago": 0,
+          "payload": {
+            "title": "Senior FP&A Manager",
+            "url": "https://www.linkedin.com/jobs/view/4379242799",
+            "date_posted": "2026-05-03",
+            "site": "linkedin"
+          }
+        }
+      ]
+    },
+    {
+      "name": "BlinkRx",
+      "domain": "blinkrx.com",
+      "industry": "healthcare",
+      "headcount": null,
+      "country": "US",
+      "city": "New York",
+      "state": "NY",
+      "dm_name": "Geoffrey Chaiken",
+      "dm_title": "CEO",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "partial",
+      "score": 59.98486016012098,
+      "insight": "Hiring \"Senior Accountant (Eastern Time Zone preferred)\" highlights the gap a fractional CFO could fill for financial oversight.",
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-05-17T19:19:27.688108",
+          "days_ago": 0,
+          "payload": {
+            "title": "Senior Accountant (Eastern Time Zone preferred)",
+            "url": "https://www.linkedin.com/jobs/view/4415141798",
+            "date_posted": "2026-05-16",
+            "site": "linkedin"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Hunt Companies, Inc",
+      "domain": "huntcompanies.com",
+      "industry": "real_estate",
+      "headcount": null,
+      "country": "US",
+      "city": "El Paso",
+      "state": "TX",
+      "dm_name": "Chris Hunt",
+      "dm_title": "Chief Executive Officer",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "partial",
+      "score": 59.984860149277246,
+      "insight": "\"Senior Accountant\" job posted today signals urgent finance hiring within 6-10 weeks at Hunt Companies, Inc.",
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-05-17T19:19:27.688108",
+          "days_ago": 0,
+          "payload": {
+            "title": "Senior Accountant",
+            "url": "https://www.linkedin.com/jobs/view/4415104439",
+            "date_posted": "2026-05-15",
+            "site": "linkedin"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Eaton Fiber",
+      "domain": "eatonfiber.com",
+      "industry": "other",
+      "headcount": null,
+      "country": "US",
+      "city": null,
+      "state": null,
+      "dm_name": null,
+      "dm_title": null,
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "cold",
+      "score": 59.98486013800041,
+      "insight": "Hiring \"Senior Accountant\" today closes the gap for strategic financial oversight and growth planning.",
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-05-17T19:19:27.688108",
+          "days_ago": 0,
+          "payload": {
+            "title": "Senior Accountant",
+            "url": "https://www.linkedin.com/jobs/view/4371537273",
+            "date_posted": "2026-05-14",
+            "site": "linkedin"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Lila Sciences",
+      "domain": "lila.ai",
+      "industry": "healthcare",
+      "headcount": null,
+      "country": "US",
+      "city": "Cambridge",
+      "state": "MA",
+      "dm_name": "Geoffrey von Maltzahn",
+      "dm_title": "CEO",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "partial",
+      "score": 59.9848601263065,
+      "insight": "A new finance-lead posting for a \"Senior Accountant\" was made today, typically binding to a candidate in 6-10 weeks.",
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-05-17T19:19:27.688108",
+          "days_ago": 0,
+          "payload": {
+            "title": "Senior Accountant",
+            "url": "https://www.linkedin.com/jobs/view/4414675101",
+            "date_posted": "2026-05-14",
+            "site": "linkedin"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Major League Baseball (MLB)",
+      "domain": "mlb.com",
+      "industry": "media_entertainment",
+      "headcount": null,
+      "country": "US",
+      "city": "New York",
+      "state": "NY",
+      "dm_name": "Rob Manfred",
+      "dm_title": "Commissioner",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "partial",
+      "score": 59.984860115302354,
+      "insight": "Hiring \"Senior Accountant\" today fills the strategic finance gap for MLB, enhancing financial oversight and management.",
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-05-17T19:19:27.688108",
+          "days_ago": 0,
+          "payload": {
+            "title": "Senior Accountant",
+            "url": "https://www.linkedin.com/jobs/view/4279837488",
+            "date_posted": "2026-05-05",
+            "site": "linkedin"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Cuv\u00e9e",
+      "domain": "cuvee.com",
+      "industry": "fintech",
+      "headcount": 50,
+      "country": "US",
+      "city": "Denver",
+      "state": "CO",
+      "dm_name": "Larry Mueller",
+      "dm_title": "CEO and Founder",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "partial",
+      "score": 59.984860103849066,
+      "insight": "\"Senior Accountant\" job posted today signals they've outgrown founder-as-CFO but aren't big enough for a $300K CFO comp.",
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-05-17T19:19:27.688108",
+          "days_ago": 0,
+          "payload": {
+            "title": "Senior Accountant",
+            "url": "https://www.linkedin.com/jobs/view/4408322484",
+            "date_posted": "2026-05-02",
+            "site": "linkedin"
+          }
+        }
+      ]
+    },
     {
       "name": "Coveleigh Club",
       "domain": "coveleighclub.com",
@@ -14,7 +1385,7 @@
       "dm_email": null,
       "dm_linkedin_url": "http://www.linkedin.com/in/mauro-piccininni-8452027",
       "contact_strength": "verified",
-      "score": 59.995387977642714,
+      "score": 59.95520780238196,
       "insight": "\"Financial Controller\" posted today signals they've outgrown founder-as-CFO but aren't big enough for a $300K CFO comp.",
       "trigger_type": "finance_hire",
       "signals": [
@@ -62,6 +1433,51 @@
       ]
     },
     {
+      "name": "EMT XI LLC",
+      "domain": null,
+      "industry": "other",
+      "headcount": null,
+      "country": "US",
+      "city": "Carrollton",
+      "state": "TX",
+      "dm_name": null,
+      "dm_title": null,
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "cold",
+      "score": 49.98927331951596,
+      "insight": "Form D filed today suggests preparation for a new board and investor reporting, along with the first audit cycle.",
+      "trigger_type": "form_d",
+      "signals": [
+        {
+          "type": "funding_raised",
+          "captured_at": "2026-05-17T19:21:49.108796",
+          "days_ago": 0,
+          "payload": {
+            "title": "D - EMT XI LLC",
+            "filing_type": "Form D",
+            "filed_on": "2026-05-14",
+            "link": "https://www.sec.gov/Archives/edgar/data/2023525/000202352526000001/0002023525-26-000001-index.htm",
+            "biz_state": "KY",
+            "biz_location": "Lexington, KY"
+          }
+        },
+        {
+          "type": "funding_raised",
+          "captured_at": "2026-05-17T19:21:49.108796",
+          "days_ago": 0,
+          "payload": {
+            "title": "D - EMT XVI LLC",
+            "filing_type": "Form D",
+            "filed_on": "2026-05-14",
+            "link": "https://www.sec.gov/Archives/edgar/data/2023521/000202352126000001/0002023521-26-000001-index.htm",
+            "biz_state": "KY",
+            "biz_location": "Lexington, KY"
+          }
+        }
+      ]
+    },
+    {
       "name": "Prism Layer AI, Inc.",
       "domain": "prismlayer.ai",
       "industry": "software_saas",
@@ -74,7 +1490,7 @@
       "dm_email": "simone@prismlayer.ai",
       "dm_linkedin_url": "http://www.linkedin.com/in/simone-garreau-b3571b10",
       "contact_strength": "verified",
-      "score": 49.60234045889638,
+      "score": 49.56912022784583,
       "insight": "Funding raised today via 'Form D' filing shows active investor interest in Prism Layer AI, Inc.'s enterprise risk management solutions.",
       "trigger_type": "form_d",
       "signals": [
@@ -105,6 +1521,1798 @@
       ]
     },
     {
+      "name": "Cupressus Apartments LLC",
+      "domain": null,
+      "industry": "real_estate",
+      "headcount": null,
+      "country": "US",
+      "city": "Bridgeport",
+      "state": "CT",
+      "dm_name": null,
+      "dm_title": null,
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "cold",
+      "score": 24.99463684403622,
+      "insight": "Form D filed today indicates Cupressus Apartments LLC's recent funding round, highlighting the need for board prep and investor reporting.",
+      "trigger_type": "form_d",
+      "signals": [
+        {
+          "type": "funding_raised",
+          "captured_at": "2026-05-17T19:21:49.108796",
+          "days_ago": 0,
+          "payload": {
+            "title": "D - Cupressus Apartments LLC",
+            "filing_type": "Form D",
+            "filed_on": "2026-05-15",
+            "link": "https://www.sec.gov/Archives/edgar/data/2135456/000213545626000001/0002135456-26-000001-index.htm",
+            "biz_state": "WA",
+            "biz_location": "Seattle, WA"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Shortcut Mobile, Inc.",
+      "domain": "shortcut.com",
+      "industry": "software_saas",
+      "headcount": null,
+      "country": "US",
+      "city": "New York",
+      "state": "NY",
+      "dm_name": "Kurt Schrader",
+      "dm_title": "CEO",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "partial",
+      "score": 24.994636834812283,
+      "insight": "Funding raised via \"Form D\" filed today indicates a need for new board prep and investor reporting.",
+      "trigger_type": "form_d",
+      "signals": [
+        {
+          "type": "funding_raised",
+          "captured_at": "2026-05-17T19:21:49.108796",
+          "days_ago": 0,
+          "payload": {
+            "title": "D - Shortcut Mobile, Inc.",
+            "filing_type": "Form D",
+            "filed_on": "2026-05-15",
+            "link": "https://www.sec.gov/Archives/edgar/data/2135306/000213530626000001/0002135306-26-000001-index.htm",
+            "biz_state": "PA",
+            "biz_location": "Philadelphia, PA"
+          }
+        }
+      ]
+    },
+    {
+      "name": "MEDICAL EXERCISE INC.",
+      "domain": "medx.clinic",
+      "industry": "healthcare",
+      "headcount": null,
+      "country": "US",
+      "city": "North Palm Beach",
+      "state": "FL",
+      "dm_name": "Matthew Degelman",
+      "dm_title": "Director, President, Secretary",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "partial",
+      "score": 24.9946368303741,
+      "insight": "Form D filed today signals the need for structured investor reporting and board preparation.",
+      "trigger_type": "form_d",
+      "signals": [
+        {
+          "type": "funding_raised",
+          "captured_at": "2026-05-17T19:21:49.108796",
+          "days_ago": 0,
+          "payload": {
+            "title": "D - MEDICAL EXERCISE INC.",
+            "filing_type": "Form D",
+            "filed_on": "2026-05-15",
+            "link": "https://www.sec.gov/Archives/edgar/data/2001249/000121390026057793/0001213900-26-057793-index.htm",
+            "biz_state": "FL",
+            "biz_location": "North Palm Beach, FL"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Estately Operations LLC",
+      "domain": "estately.com",
+      "industry": "real_estate",
+      "headcount": null,
+      "country": "US",
+      "city": "Seattle",
+      "state": "WA",
+      "dm_name": "Galen Ward",
+      "dm_title": "Co-Founder & CEO",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "partial",
+      "score": 24.994636825915862,
+      "insight": "Funding raised filed as 'Form D' today signals preparation for new board, investor reporting, and first audit cycle.",
+      "trigger_type": "form_d",
+      "signals": [
+        {
+          "type": "funding_raised",
+          "captured_at": "2026-05-17T19:21:49.108796",
+          "days_ago": 0,
+          "payload": {
+            "title": "D - Estately Operations LLC",
+            "filing_type": "Form D",
+            "filed_on": "2026-05-15",
+            "link": "https://www.sec.gov/Archives/edgar/data/2131672/000090514826002406/0000905148-26-002406-index.htm",
+            "biz_state": "IL",
+            "biz_location": "Chicago, IL"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Acretrader 278 LLC",
+      "domain": "acretrader.com",
+      "industry": "fintech",
+      "headcount": null,
+      "country": "US",
+      "city": "Fayetteville",
+      "state": "AR",
+      "dm_name": "Rob Moore",
+      "dm_title": "General Manager",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "partial",
+      "score": 24.99463682149773,
+      "insight": "Form D filed today signals board prep and investor reporting needs as Acretrader 278 LLC closes a funding round.",
+      "trigger_type": "form_d",
+      "signals": [
+        {
+          "type": "funding_raised",
+          "captured_at": "2026-05-17T19:21:49.108796",
+          "days_ago": 0,
+          "payload": {
+            "title": "D - Acretrader 278 LLC",
+            "filing_type": "Form D",
+            "filed_on": "2026-05-15",
+            "link": "https://www.sec.gov/Archives/edgar/data/2091451/000209145126000001/0002091451-26-000001-index.htm",
+            "biz_state": "AR",
+            "biz_location": "Fayetteville, AR"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Robey Street Equity LLC",
+      "domain": null,
+      "industry": "fintech",
+      "headcount": null,
+      "country": "US",
+      "city": "NEW YORK",
+      "state": "NY",
+      "dm_name": "John P. Moran",
+      "dm_title": "Manager",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "partial",
+      "score": 24.994636816698605,
+      "insight": "Funding raised with Form D filed today signals a new board structure and fresh investor reporting for Robey Street Equity LLC.",
+      "trigger_type": "form_d",
+      "signals": [
+        {
+          "type": "funding_raised",
+          "captured_at": "2026-05-17T19:21:49.108796",
+          "days_ago": 0,
+          "payload": {
+            "title": "D - Robey Street Equity LLC",
+            "filing_type": "Form D",
+            "filed_on": "2026-05-15",
+            "link": "https://www.sec.gov/Archives/edgar/data/2134974/000213497426000001/0002134974-26-000001-index.htm",
+            "biz_state": "NY",
+            "biz_location": "New York, NY"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Reno City Center Owner, LLC",
+      "domain": null,
+      "industry": "real_estate",
+      "headcount": null,
+      "country": "US",
+      "city": "Reno",
+      "state": "NV",
+      "dm_name": "Christopher Beavor",
+      "dm_title": "CEO",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "partial",
+      "score": 24.99463681220695,
+      "insight": "Funding raised today with filing type 'Form D' highlights a need for board prep and investor reporting discipline.",
+      "trigger_type": "form_d",
+      "signals": [
+        {
+          "type": "funding_raised",
+          "captured_at": "2026-05-17T19:21:49.108796",
+          "days_ago": 0,
+          "payload": {
+            "title": "D - Reno City Center Owner, LLC",
+            "filing_type": "Form D",
+            "filed_on": "2026-05-15",
+            "link": "https://www.sec.gov/Archives/edgar/data/2135374/000213537426000001/0002135374-26-000001-index.htm",
+            "biz_state": "NC",
+            "biz_location": "Charlotte, NC"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Graton Station",
+      "domain": null,
+      "industry": "other",
+      "headcount": null,
+      "country": "US",
+      "city": "Graton",
+      "state": "CA",
+      "dm_name": "Matt Jorgensen",
+      "dm_title": "Organizer",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "partial",
+      "score": 24.99463680731425,
+      "insight": "Form D filed today signifies preparations for board reporting and fresh-cash discipline at Graton Station.",
+      "trigger_type": "form_d",
+      "signals": [
+        {
+          "type": "funding_raised",
+          "captured_at": "2026-05-17T19:21:49.108796",
+          "days_ago": 0,
+          "payload": {
+            "title": "D - Graton Station",
+            "filing_type": "Form D",
+            "filed_on": "2026-05-15",
+            "link": "https://www.sec.gov/Archives/edgar/data/2099701/000209970126000001/0002099701-26-000001-index.htm",
+            "biz_state": "CA",
+            "biz_location": "Graton, CA"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Pearl Street Hospitality LLC",
+      "domain": null,
+      "industry": "hospitality_food",
+      "headcount": null,
+      "country": "US",
+      "city": "Denver",
+      "state": "CO",
+      "dm_name": "Jake Soffes",
+      "dm_title": "Founder",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "partial",
+      "score": 24.9946368028627,
+      "insight": "Funding raised today via \"Form D\" signals a focus on board prep, investor reporting, and fresh-cash discipline.",
+      "trigger_type": "form_d",
+      "signals": [
+        {
+          "type": "funding_raised",
+          "captured_at": "2026-05-17T19:21:49.108796",
+          "days_ago": 0,
+          "payload": {
+            "title": "D - Pearl Street Hospitality LLC",
+            "filing_type": "Form D",
+            "filed_on": "2026-05-15",
+            "link": "https://www.sec.gov/Archives/edgar/data/2126595/000212659526000001/0002126595-26-000001-index.htm",
+            "biz_state": "TX",
+            "biz_location": "Weatherford, TX"
+          }
+        }
+      ]
+    },
+    {
+      "name": "MOVA Technologies, Inc.",
+      "domain": "movatechnologies.com",
+      "industry": "other",
+      "headcount": null,
+      "country": "US",
+      "city": "Pulaski",
+      "state": "VA",
+      "dm_name": "Steve Critchfield",
+      "dm_title": "Founder",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "partial",
+      "score": 24.994636798297517,
+      "insight": "\"Form D\" filed today indicates MOVA Technologies has secured funding, necessitating board prep and investor reporting.",
+      "trigger_type": "form_d",
+      "signals": [
+        {
+          "type": "funding_raised",
+          "captured_at": "2026-05-17T19:21:49.108796",
+          "days_ago": 0,
+          "payload": {
+            "title": "D - MOVA Technologies, Inc.",
+            "filing_type": "Form D",
+            "filed_on": "2026-05-15",
+            "link": "https://www.sec.gov/Archives/edgar/data/1682315/000168231526000001/0001682315-26-000001-index.htm",
+            "biz_state": "VA",
+            "biz_location": "Blacksburg, VA"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Data Management & Compliance, Inc. DBA Warchest",
+      "domain": "dmcapp.com",
+      "industry": "other",
+      "headcount": null,
+      "country": "US",
+      "city": "Washington",
+      "state": "DC",
+      "dm_name": null,
+      "dm_title": null,
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "cold",
+      "score": 24.99463679389944,
+      "insight": "Form D filing on '2026-05-15' signals fresh funding for compliance software geared towards Democratic campaigns.",
+      "trigger_type": "form_d",
+      "signals": [
+        {
+          "type": "funding_raised",
+          "captured_at": "2026-05-17T19:21:49.108796",
+          "days_ago": 0,
+          "payload": {
+            "title": "D - Data Management & Compliance, Inc. DBA Warchest",
+            "filing_type": "Form D",
+            "filed_on": "2026-05-15",
+            "link": "https://www.sec.gov/Archives/edgar/data/2134306/000213430626000001/0002134306-26-000001-index.htm",
+            "biz_state": "MA",
+            "biz_location": "Lexington, MA"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Trellis Bioscience, Inc.",
+      "domain": "trellisbio.com",
+      "industry": "healthcare",
+      "headcount": 20,
+      "country": "US",
+      "city": "Redwood City",
+      "state": "CA",
+      "dm_name": "Stefan Ryser",
+      "dm_title": "President & CEO",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "partial",
+      "score": 24.99463678873938,
+      "insight": "Form D filed today reflects Trellis Bioscience's funding raised, indicating a need for board prep and investor reporting.",
+      "trigger_type": "form_d",
+      "signals": [
+        {
+          "type": "funding_raised",
+          "captured_at": "2026-05-17T19:21:49.108796",
+          "days_ago": 0,
+          "payload": {
+            "title": "D - Trellis Bioscience, Inc.",
+            "filing_type": "Form D",
+            "filed_on": "2026-05-15",
+            "link": "https://www.sec.gov/Archives/edgar/data/1162015/000092963826001870/0000929638-26-001870-index.htm",
+            "biz_state": "CA",
+            "biz_location": "Menlo Park, CA"
+          }
+        }
+      ]
+    },
+    {
+      "name": "SC Honea Path N Shirley, LLC",
+      "domain": null,
+      "industry": "real_estate",
+      "headcount": null,
+      "country": "US",
+      "city": "Honea Path",
+      "state": "SC",
+      "dm_name": null,
+      "dm_title": null,
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "cold",
+      "score": 24.99463678329191,
+      "insight": "Form D filed today indicates board prep, new reporting cadence, and initiation of first audit cycle.",
+      "trigger_type": "form_d",
+      "signals": [
+        {
+          "type": "funding_raised",
+          "captured_at": "2026-05-17T19:21:49.108796",
+          "days_ago": 0,
+          "payload": {
+            "title": "D - SC Honea Path N Shirley, LLC",
+            "filing_type": "Form D",
+            "filed_on": "2026-05-15",
+            "link": "https://www.sec.gov/Archives/edgar/data/2127125/000212712526000001/0002127125-26-000001-index.htm",
+            "biz_state": "SC",
+            "biz_location": "Greenville, SC"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Scope Anesthesia of North Carolina, PLLC",
+      "domain": "scope-nc.com",
+      "industry": "healthcare",
+      "headcount": null,
+      "country": "US",
+      "city": "Charlotte",
+      "state": "NC",
+      "dm_name": "Thomas Wherry",
+      "dm_title": "Founder and Chief Executive Officer",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "partial",
+      "score": 24.99463677784444,
+      "insight": "Form D filed today, indicating a need for sophisticated board prep and investor reporting as they manage fresh capital.",
+      "trigger_type": "form_d",
+      "signals": [
+        {
+          "type": "funding_raised",
+          "captured_at": "2026-05-17T19:21:49.108796",
+          "days_ago": 0,
+          "payload": {
+            "title": "D - Scope Anesthesia of North Carolina, PLLC",
+            "filing_type": "Form D",
+            "filed_on": "2026-05-15",
+            "link": "https://www.sec.gov/Archives/edgar/data/2005209/000200520926000003/0002005209-26-000003-index.htm",
+            "biz_state": "NC",
+            "biz_location": "Charlotte, NC"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Global Gardens LLC",
+      "domain": null,
+      "industry": "other",
+      "headcount": null,
+      "country": "US",
+      "city": "Brandon",
+      "state": "FL",
+      "dm_name": "Michael Elliott Bisnow",
+      "dm_title": "Manager",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "partial",
+      "score": 24.994636773259206,
+      "insight": "Filed today, a \"Form D\" presents needs for board prep, new reporting cadence, and audit cycle for investor engagement.",
+      "trigger_type": "form_d",
+      "signals": [
+        {
+          "type": "funding_raised",
+          "captured_at": "2026-05-17T19:21:49.108796",
+          "days_ago": 0,
+          "payload": {
+            "title": "D - Global Gardens LLC",
+            "filing_type": "Form D",
+            "filed_on": "2026-05-15",
+            "link": "https://www.sec.gov/Archives/edgar/data/2129812/000212981226000002/0002129812-26-000002-index.htm",
+            "biz_state": "FL",
+            "biz_location": "Brandon, FL"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Kepler Software, Inc.",
+      "domain": null,
+      "industry": "software_saas",
+      "headcount": null,
+      "country": "US",
+      "city": "New York",
+      "state": "NY",
+      "dm_name": null,
+      "dm_title": null,
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "cold",
+      "score": 24.994636768780918,
+      "insight": "Funding raised today via \"Form D\" filing signals a critical phase for board prep and investor reporting as Kepler Software, Inc. progresses.",
+      "trigger_type": "form_d",
+      "signals": [
+        {
+          "type": "funding_raised",
+          "captured_at": "2026-05-17T19:21:49.108796",
+          "days_ago": 0,
+          "payload": {
+            "title": "D - Kepler Software, Inc.",
+            "filing_type": "Form D",
+            "filed_on": "2026-05-15",
+            "link": "https://www.sec.gov/Archives/edgar/data/2126990/000212699026000001/0002126990-26-000001-index.htm",
+            "biz_state": "CA",
+            "biz_location": "San Francisco, CA"
+          }
+        }
+      ]
+    },
+    {
+      "name": "BWM Private Equity II LLC",
+      "domain": null,
+      "industry": "other",
+      "headcount": null,
+      "country": "US",
+      "city": "Boston",
+      "state": "MA",
+      "dm_name": "Thomas N OConnor",
+      "dm_title": "Founder",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "partial",
+      "score": 24.994636764182314,
+      "insight": "Form D filed today suggests BWM Private Equity II LLC may benefit from enhanced board prep and investor reporting.",
+      "trigger_type": "form_d",
+      "signals": [
+        {
+          "type": "funding_raised",
+          "captured_at": "2026-05-17T19:21:49.108796",
+          "days_ago": 0,
+          "payload": {
+            "title": "D - BWM Private Equity II LLC",
+            "filing_type": "Form D",
+            "filed_on": "2026-05-15",
+            "link": "https://www.sec.gov/Archives/edgar/data/2124370/000212437026000001/0002124370-26-000001-index.htm",
+            "biz_state": "OK",
+            "biz_location": "Tulsa, OK"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Athos Therapeutics, Inc.",
+      "domain": "athostx.com",
+      "industry": "healthcare",
+      "headcount": 40,
+      "country": "US",
+      "city": "Los Angeles",
+      "state": "CA",
+      "dm_name": "Dimitrios Iliopoulos",
+      "dm_title": "President & CEO",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "partial",
+      "score": 24.994636758761583,
+      "insight": "Funding raised today via \"Form D\" indicates a critical moment for board preparation and investor reporting.",
+      "trigger_type": "form_d",
+      "signals": [
+        {
+          "type": "funding_raised",
+          "captured_at": "2026-05-17T19:21:49.108796",
+          "days_ago": 0,
+          "payload": {
+            "title": "D - Athos Therapeutics, Inc.",
+            "filing_type": "Form D",
+            "filed_on": "2026-05-15",
+            "link": "https://www.sec.gov/Archives/edgar/data/1885079/000188507926000001/0001885079-26-000001-index.htm",
+            "biz_state": "CA",
+            "biz_location": "Torrance, CA"
+          }
+        }
+      ]
+    },
+    {
+      "name": "KittyHawk Heavy Agentic Healthcare LLC",
+      "domain": null,
+      "industry": "healthcare",
+      "headcount": null,
+      "country": "US",
+      "city": "Lewes",
+      "state": "DE",
+      "dm_name": "William Weisman",
+      "dm_title": "Managing Director",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "partial",
+      "score": 24.99463675390899,
+      "insight": "Form D filed today indicates that board prep and investor reporting needs are increasing for this healthcare investment firm.",
+      "trigger_type": "form_d",
+      "signals": [
+        {
+          "type": "funding_raised",
+          "captured_at": "2026-05-17T19:21:49.108796",
+          "days_ago": 0,
+          "payload": {
+            "title": "D - KittyHawk Heavy Agentic Healthcare LLC",
+            "filing_type": "Form D",
+            "filed_on": "2026-05-15",
+            "link": "https://www.sec.gov/Archives/edgar/data/2135064/000213506426000001/0002135064-26-000001-index.htm",
+            "biz_state": "DE",
+            "biz_location": "Lewes, DE"
+          }
+        }
+      ]
+    },
+    {
+      "name": "GENI COMPUTERS, INC.",
+      "domain": "geni-computers.com",
+      "industry": "software_saas",
+      "headcount": null,
+      "country": "US",
+      "city": "New York",
+      "state": "NY",
+      "dm_name": null,
+      "dm_title": null,
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "cold",
+      "score": 24.99463674931707,
+      "insight": "Funding raised via \"Form D\" filed today showcases GENI COMPUTERS, INC.'s focus on board prep and investor reporting.",
+      "trigger_type": "form_d",
+      "signals": [
+        {
+          "type": "funding_raised",
+          "captured_at": "2026-05-17T19:21:49.108796",
+          "days_ago": 0,
+          "payload": {
+            "title": "D - GENI COMPUTERS, INC.",
+            "filing_type": "Form D",
+            "filed_on": "2026-05-15",
+            "link": "https://www.sec.gov/Archives/edgar/data/2135268/000213526826000001/0002135268-26-000001-index.htm",
+            "biz_state": "NY",
+            "biz_location": "Brooklyn, NY"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Pathway Access Vehicle, LLC",
+      "domain": null,
+      "industry": "logistics_transport",
+      "headcount": 30,
+      "country": "US",
+      "city": "Menlo Park",
+      "state": "CA",
+      "dm_name": null,
+      "dm_title": null,
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "cold",
+      "score": 24.994636744845465,
+      "insight": "Form D filed today indicates a need for board prep and investor reporting as the company navigates recent funding.",
+      "trigger_type": "form_d",
+      "signals": [
+        {
+          "type": "funding_raised",
+          "captured_at": "2026-05-17T19:21:49.108796",
+          "days_ago": 0,
+          "payload": {
+            "title": "D - Pathway Access Vehicle, LLC",
+            "filing_type": "Form D",
+            "filed_on": "2026-05-15",
+            "link": "https://www.sec.gov/Archives/edgar/data/2039513/000203951326000003/0002039513-26-000003-index.htm",
+            "biz_state": "IN",
+            "biz_location": "Indianapolis, IN"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Lightstone Direct I LLC - Series Abernathy Industrial",
+      "domain": null,
+      "industry": "real_estate",
+      "headcount": null,
+      "country": "US",
+      "city": null,
+      "state": "SC",
+      "dm_name": "David Lichtenstein",
+      "dm_title": "CEO",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "partial",
+      "score": 24.994636739885927,
+      "insight": "Funding raised today via \"Form D\" filing indicates a fresh need for board prep and investor reporting discipline.",
+      "trigger_type": "form_d",
+      "signals": [
+        {
+          "type": "funding_raised",
+          "captured_at": "2026-05-17T19:21:49.108796",
+          "days_ago": 0,
+          "payload": {
+            "title": "D - Lightstone Direct I LLC - Series Abernathy Industrial",
+            "filing_type": "Form D",
+            "filed_on": "2026-05-15",
+            "link": "https://www.sec.gov/Archives/edgar/data/2127609/000118518526001876/0001185185-26-001876-index.htm",
+            "biz_state": "NJ",
+            "biz_location": "Lakewood, NJ"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Vadnais Heights Senior Coupon LLC",
+      "domain": null,
+      "industry": "healthcare",
+      "headcount": null,
+      "country": "US",
+      "city": "Vadnais Heights",
+      "state": "MN",
+      "dm_name": null,
+      "dm_title": null,
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "cold",
+      "score": 24.994636735347484,
+      "insight": "Funding raised via 'Form D' filed today highlights a need for enhanced board prep and investor reporting in healthcare.",
+      "trigger_type": "form_d",
+      "signals": [
+        {
+          "type": "funding_raised",
+          "captured_at": "2026-05-17T19:21:49.108796",
+          "days_ago": 0,
+          "payload": {
+            "title": "D - Vadnais Heights Senior Coupon LLC",
+            "filing_type": "Form D",
+            "filed_on": "2026-05-15",
+            "link": "https://www.sec.gov/Archives/edgar/data/2133677/000213367726000001/0002133677-26-000001-index.htm",
+            "biz_state": "MN",
+            "biz_location": "Eden Prairie, MN"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Momentum Commercial Management LLC",
+      "domain": null,
+      "industry": "real_estate",
+      "headcount": null,
+      "country": "US",
+      "city": "Tulsa",
+      "state": "OK",
+      "dm_name": null,
+      "dm_title": null,
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "cold",
+      "score": 24.994636730869193,
+      "insight": "Form D filed today signals fresh funding, highlighting a potential need for investor reporting and board prep support.",
+      "trigger_type": "form_d",
+      "signals": [
+        {
+          "type": "funding_raised",
+          "captured_at": "2026-05-17T19:21:49.108796",
+          "days_ago": 0,
+          "payload": {
+            "title": "D - Momentum Commercial Management LLC",
+            "filing_type": "Form D",
+            "filed_on": "2026-05-15",
+            "link": "https://www.sec.gov/Archives/edgar/data/2134720/000213472026000002/0002134720-26-000002-index.htm",
+            "biz_state": "OK",
+            "biz_location": "Tulsa, OK"
+          }
+        }
+      ]
+    },
+    {
+      "name": "ZRP Avalon Crossing LLC",
+      "domain": null,
+      "industry": "real_estate",
+      "headcount": null,
+      "country": "US",
+      "city": "Mt. Pleasant",
+      "state": "SC",
+      "dm_name": null,
+      "dm_title": null,
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "cold",
+      "score": 24.994636726384222,
+      "insight": "Funding raised via \"Form D\" filed today signals the need for enhanced board prep and investor reporting discipline.",
+      "trigger_type": "form_d",
+      "signals": [
+        {
+          "type": "funding_raised",
+          "captured_at": "2026-05-17T19:21:49.108796",
+          "days_ago": 0,
+          "payload": {
+            "title": "D - ZRP Avalon Crossing LLC",
+            "filing_type": "Form D",
+            "filed_on": "2026-05-15",
+            "link": "https://www.sec.gov/Archives/edgar/data/2129400/000212940026000002/0002129400-26-000002-index.htm",
+            "biz_state": "SC",
+            "biz_location": "Mt. Pleasant, SC"
+          }
+        }
+      ]
+    },
+    {
+      "name": "MedZero, Inc.",
+      "domain": "medzero.com",
+      "industry": "healthcare",
+      "headcount": 10,
+      "country": "US",
+      "city": "Portland",
+      "state": "OR",
+      "dm_name": "Craig Froude",
+      "dm_title": "Chairman & CEO",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "partial",
+      "score": 24.994636721852462,
+      "insight": "Funding raised via 'Form D' filing today indicates a focus on board prep and investor reporting for MedZero, Inc.",
+      "trigger_type": "form_d",
+      "signals": [
+        {
+          "type": "funding_raised",
+          "captured_at": "2026-05-17T19:21:49.108796",
+          "days_ago": 0,
+          "payload": {
+            "title": "D - MedZero, Inc.",
+            "filing_type": "Form D",
+            "filed_on": "2026-05-15",
+            "link": "https://www.sec.gov/Archives/edgar/data/1854430/000185443026000001/0001854430-26-000001-index.htm",
+            "biz_state": "OR",
+            "biz_location": "Portland, OR"
+          }
+        }
+      ]
+    },
+    {
+      "name": "FFA HVI 5, LLC",
+      "domain": null,
+      "industry": "other",
+      "headcount": null,
+      "country": "US",
+      "city": "Newark",
+      "state": "DE",
+      "dm_name": null,
+      "dm_title": null,
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "cold",
+      "score": 24.99463671670577,
+      "insight": "Filed today, the \"Form D\" indicates a new board, new reporting cadence, and the first audit cycle for FFA HVI 5, LLC.",
+      "trigger_type": "form_d",
+      "signals": [
+        {
+          "type": "funding_raised",
+          "captured_at": "2026-05-17T19:21:49.108796",
+          "days_ago": 0,
+          "payload": {
+            "title": "D - FFA HVI 5, LLC",
+            "filing_type": "Form D",
+            "filed_on": "2026-05-15",
+            "link": "https://www.sec.gov/Archives/edgar/data/2128765/000212876526000001/0002128765-26-000001-index.htm",
+            "biz_state": "DE",
+            "biz_location": "Newark, DE"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Man Systematic Global Core Equities (Delaware) LLC",
+      "domain": null,
+      "industry": "other",
+      "headcount": null,
+      "country": "US",
+      "city": "NEW YORK",
+      "state": "NY",
+      "dm_name": "Douglas Hamilton",
+      "dm_title": "Vice-President of Man Investments (USA) Corp (Managing Member of the Issuer)",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "partial",
+      "score": 24.99463671223417,
+      "insight": "Form D filed today indicates a need for board prep and investor reporting that a fractional CFO can effectively manage.",
+      "trigger_type": "form_d",
+      "signals": [
+        {
+          "type": "funding_raised",
+          "captured_at": "2026-05-17T19:21:49.108796",
+          "days_ago": 0,
+          "payload": {
+            "title": "D - Man Systematic Global Core Equities (Delaware) LLC",
+            "filing_type": "Form D",
+            "filed_on": "2026-05-15",
+            "link": "https://www.sec.gov/Archives/edgar/data/2135003/000213500326000001/0002135003-26-000001-index.htm",
+            "biz_state": "NY",
+            "biz_location": "New York, NY"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Ananya Health, Inc.",
+      "domain": "ananya.health",
+      "industry": "healthcare",
+      "headcount": 10,
+      "country": "US",
+      "city": "Oakland",
+      "state": "CA",
+      "dm_name": "Anu Parvatiyar",
+      "dm_title": "Co-Founder & CEO",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "partial",
+      "score": 24.99463670794303,
+      "insight": "Filing type 'Form D' today indicates new board prep and investor reporting for Ananya Health, Inc.",
+      "trigger_type": "form_d",
+      "signals": [
+        {
+          "type": "funding_raised",
+          "captured_at": "2026-05-17T19:21:49.108796",
+          "days_ago": 0,
+          "payload": {
+            "title": "D - Ananya Health, Inc.",
+            "filing_type": "Form D",
+            "filed_on": "2026-05-15",
+            "link": "https://www.sec.gov/Archives/edgar/data/2064779/000114036126021530/0001140361-26-021530-index.htm",
+            "biz_state": "CA",
+            "biz_location": "Oakland, CA"
+          }
+        }
+      ]
+    },
+    {
+      "name": "HG SPV1, LLC",
+      "domain": null,
+      "industry": "real_estate",
+      "headcount": null,
+      "country": "US",
+      "city": "NEWARK",
+      "state": "DE",
+      "dm_name": null,
+      "dm_title": null,
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "cold",
+      "score": 24.994636703270903,
+      "insight": "Filing type 'Form D' was submitted today, reflecting fresh efforts to attract investors for their hedge fund.",
+      "trigger_type": "form_d",
+      "signals": [
+        {
+          "type": "funding_raised",
+          "captured_at": "2026-05-17T19:21:49.108796",
+          "days_ago": 0,
+          "payload": {
+            "title": "D - HG SPV1, LLC",
+            "filing_type": "Form D",
+            "filed_on": "2026-05-15",
+            "link": "https://www.sec.gov/Archives/edgar/data/2128674/000212867426000001/0002128674-26-000001-index.htm",
+            "biz_state": "DE",
+            "biz_location": "Newark, DE"
+          }
+        }
+      ]
+    },
+    {
+      "name": "MapperHealth, LLC",
+      "domain": null,
+      "industry": null,
+      "headcount": null,
+      "country": null,
+      "city": null,
+      "state": null,
+      "dm_name": null,
+      "dm_title": null,
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "cold",
+      "score": 24.994636698973082,
+      "insight": "Form D filed today on May 15, 2026, highlights a board prep and investor reporting opportunity for a fractional CFO.",
+      "trigger_type": "form_d",
+      "signals": [
+        {
+          "type": "funding_raised",
+          "captured_at": "2026-05-17T19:21:49.108796",
+          "days_ago": 0,
+          "payload": {
+            "title": "D - MapperHealth, LLC",
+            "filing_type": "Form D",
+            "filed_on": "2026-05-15",
+            "link": "https://www.sec.gov/Archives/edgar/data/1942430/000194243026000004/0001942430-26-000004-index.htm",
+            "biz_state": "AZ",
+            "biz_location": "Scottsdale, AZ"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Majesty Therapeutics, Inc.",
+      "domain": null,
+      "industry": "healthcare",
+      "headcount": null,
+      "country": "US",
+      "city": "Sea Ranch Lakes",
+      "state": "FL",
+      "dm_name": "Shawn Titcomb",
+      "dm_title": "President and Chief Executive Officer",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "partial",
+      "score": 24.99463669480226,
+      "insight": "Form D filed today signals fresh funding for Majesty Therapeutics, necessitating board prep and investor reporting support.",
+      "trigger_type": "form_d",
+      "signals": [
+        {
+          "type": "funding_raised",
+          "captured_at": "2026-05-17T19:21:49.108796",
+          "days_ago": 0,
+          "payload": {
+            "title": "D - Majesty Therapeutics, Inc.",
+            "filing_type": "Form D",
+            "filed_on": "2026-05-15",
+            "link": "https://www.sec.gov/Archives/edgar/data/2135155/000149315226023677/0001493152-26-023677-index.htm",
+            "biz_state": "FL",
+            "biz_location": "Sea Ranch Lakes, FL"
+          }
+        }
+      ]
+    },
+    {
+      "name": "DPF Resolutions, LLC",
+      "domain": "dpfresol.com",
+      "industry": "other",
+      "headcount": null,
+      "country": "US",
+      "city": "San Antonio",
+      "state": "TX",
+      "dm_name": null,
+      "dm_title": null,
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "cold",
+      "score": 24.99463669017692,
+      "insight": "Form D filed today signals a need for board prep and investor reporting as DPF Resolutions secures fresh capital.",
+      "trigger_type": "form_d",
+      "signals": [
+        {
+          "type": "funding_raised",
+          "captured_at": "2026-05-17T19:21:49.108796",
+          "days_ago": 0,
+          "payload": {
+            "title": "D - DPF Resolutions, LLC",
+            "filing_type": "Form D",
+            "filed_on": "2026-05-15",
+            "link": "https://www.sec.gov/Archives/edgar/data/2135136/000213471826000012/0002134718-26-000012-index.htm",
+            "biz_state": "TX",
+            "biz_location": "San Antonio, TX"
+          }
+        }
+      ]
+    },
+    {
+      "name": "DPCK LLC",
+      "domain": null,
+      "industry": "other",
+      "headcount": null,
+      "country": "US",
+      "city": "SPOKANE",
+      "state": "WA",
+      "dm_name": "Theiline McMahon Cramer",
+      "dm_title": "Executive Officer, Director",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "partial",
+      "score": 24.99463668363996,
+      "insight": "Form D filed today indicates upcoming board prep and investor reporting for DPCK LLC.",
+      "trigger_type": "form_d",
+      "signals": [
+        {
+          "type": "funding_raised",
+          "captured_at": "2026-05-17T19:21:49.108796",
+          "days_ago": 0,
+          "payload": {
+            "title": "D - DPCK LLC",
+            "filing_type": "Form D",
+            "filed_on": "2026-05-15",
+            "link": "https://www.sec.gov/Archives/edgar/data/2135512/000213551226000001/0002135512-26-000001-index.htm",
+            "biz_state": "WA",
+            "biz_location": "Spokane, WA"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Sportsline Technologies Inc.",
+      "domain": "sportsline.com",
+      "industry": "software_saas",
+      "headcount": null,
+      "country": "US",
+      "city": "Fort Lauderdale",
+      "state": "FL",
+      "dm_name": "Michael Levy",
+      "dm_title": "CEO",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "partial",
+      "score": 24.99463667859353,
+      "insight": "Funding raised with a 'Form D' filing today signals a focus on board prep and investor reporting at Sportsline Technologies Inc.",
+      "trigger_type": "form_d",
+      "signals": [
+        {
+          "type": "funding_raised",
+          "captured_at": "2026-05-17T19:21:49.108796",
+          "days_ago": 0,
+          "payload": {
+            "title": "D - Sportsline Technologies Inc.",
+            "filing_type": "Form D",
+            "filed_on": "2026-05-15",
+            "link": "https://www.sec.gov/Archives/edgar/data/2134435/000213443526000001/0002134435-26-000001-index.htm",
+            "biz_state": "NY",
+            "biz_location": "New York, NY"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Kin Denver DVM Group LLC",
+      "domain": null,
+      "industry": "healthcare",
+      "headcount": null,
+      "country": "US",
+      "city": "Denver",
+      "state": "CO",
+      "dm_name": "Stephen Christie",
+      "dm_title": "Chief Executive Officer",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "partial",
+      "score": 24.994636673954822,
+      "insight": "Form D filed today by a veterinary hospital reflects a need for investor reporting and board prep that a fractional CFO can manage.",
+      "trigger_type": "form_d",
+      "signals": [
+        {
+          "type": "funding_raised",
+          "captured_at": "2026-05-17T19:21:49.108796",
+          "days_ago": 0,
+          "payload": {
+            "title": "D - Kin Denver DVM Group LLC",
+            "filing_type": "Form D",
+            "filed_on": "2026-05-15",
+            "link": "https://www.sec.gov/Archives/edgar/data/2115693/000211569326000001/0002115693-26-000001-index.htm",
+            "biz_state": "CO",
+            "biz_location": "Greenwood Village, CO"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Posh Nutrition LLC",
+      "domain": null,
+      "industry": "healthcare",
+      "headcount": null,
+      "country": "US",
+      "city": "Phoenix",
+      "state": "AZ",
+      "dm_name": "Gabriela Macias",
+      "dm_title": "Executive Officer",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "partial",
+      "score": 24.994636669456483,
+      "insight": "Form D filed today signals funding raised, highlighting the need for board prep and investor reporting.",
+      "trigger_type": "form_d",
+      "signals": [
+        {
+          "type": "funding_raised",
+          "captured_at": "2026-05-17T19:21:49.108796",
+          "days_ago": 0,
+          "payload": {
+            "title": "D - Posh Nutrition LLC",
+            "filing_type": "Form D",
+            "filed_on": "2026-05-15",
+            "link": "https://www.sec.gov/Archives/edgar/data/2135078/000213507826000001/0002135078-26-000001-index.htm",
+            "biz_state": "AZ",
+            "biz_location": "Phoenix, AZ"
+          }
+        }
+      ]
+    },
+    {
+      "name": "ACE5 LLC",
+      "domain": null,
+      "industry": "other",
+      "headcount": null,
+      "country": "US",
+      "city": "New York",
+      "state": "NY",
+      "dm_name": null,
+      "dm_title": null,
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "cold",
+      "score": 24.994636664557103,
+      "insight": "Form D filed today indicates a funding round, highlighting the need for board prep and investor reporting.",
+      "trigger_type": "form_d",
+      "signals": [
+        {
+          "type": "funding_raised",
+          "captured_at": "2026-05-17T19:21:49.108796",
+          "days_ago": 0,
+          "payload": {
+            "title": "D - ACE5 LLC",
+            "filing_type": "Form D",
+            "filed_on": "2026-05-14",
+            "link": "https://www.sec.gov/Archives/edgar/data/2134406/000213440626000001/0002134406-26-000001-index.htm",
+            "biz_state": "NY",
+            "biz_location": "New York, NY"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Oakridge Dairy LLC",
+      "domain": "oakridgedairy.com",
+      "industry": "other",
+      "headcount": 40,
+      "country": "US",
+      "city": "Ellington",
+      "state": "CT",
+      "dm_name": "Seth Bahler",
+      "dm_title": "CEO",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "partial",
+      "score": 24.994636655286374,
+      "insight": "Filing a \"Form D\" today, the company raises funding, emphasizing fresh cash discipline for community-focused dairy.",
+      "trigger_type": "form_d",
+      "signals": [
+        {
+          "type": "funding_raised",
+          "captured_at": "2026-05-17T19:21:49.108796",
+          "days_ago": 0,
+          "payload": {
+            "title": "D - Oakridge Dairy LLC",
+            "filing_type": "Form D",
+            "filed_on": "2026-05-14",
+            "link": "https://www.sec.gov/Archives/edgar/data/1673234/000167323426000001/0001673234-26-000001-index.htm",
+            "biz_state": "CT",
+            "biz_location": "Ellington, CT"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Level 5 Stone Ridge Centerville Ohio LLC",
+      "domain": null,
+      "industry": "other",
+      "headcount": null,
+      "country": "US",
+      "city": "Centerville",
+      "state": "OH",
+      "dm_name": "Luke Kassler",
+      "dm_title": "Managing Partner, CEO",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "partial",
+      "score": 24.994636650654353,
+      "insight": "Form D filed today signals a need for investor reporting and board prep to complement the fresh-cash discipline.",
+      "trigger_type": "form_d",
+      "signals": [
+        {
+          "type": "funding_raised",
+          "captured_at": "2026-05-17T19:21:49.108796",
+          "days_ago": 0,
+          "payload": {
+            "title": "D - Level 5 Stone Ridge Centerville Ohio LLC",
+            "filing_type": "Form D",
+            "filed_on": "2026-05-14",
+            "link": "https://www.sec.gov/Archives/edgar/data/2135329/000213532926000001/0002135329-26-000001-index.htm",
+            "biz_state": "OH",
+            "biz_location": "Lima, OH"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Truepointe Brick House Blue, LLC",
+      "domain": null,
+      "industry": "other",
+      "headcount": null,
+      "country": "US",
+      "city": "Dublin",
+      "state": "OH",
+      "dm_name": "Cid Rhomberg",
+      "dm_title": "Chief Experience Officer",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "partial",
+      "score": 24.994636645828496,
+      "insight": "Form D filed today indicates Truepointe Brick House Blue, LLC is gearing up for fresh-cash discipline and investor reporting.",
+      "trigger_type": "form_d",
+      "signals": [
+        {
+          "type": "funding_raised",
+          "captured_at": "2026-05-17T19:21:49.108796",
+          "days_ago": 0,
+          "payload": {
+            "title": "D - Truepointe Brick House Blue, LLC",
+            "filing_type": "Form D",
+            "filed_on": "2026-05-14",
+            "link": "https://www.sec.gov/Archives/edgar/data/2133699/000213369926000002/0002133699-26-000002-index.htm",
+            "biz_state": "OH",
+            "biz_location": "Dublin, OH"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Paxos Medical Inc.",
+      "domain": "paxosmedical.com",
+      "industry": "healthcare",
+      "headcount": null,
+      "country": "US",
+      "city": "Minneapolis",
+      "state": "MN",
+      "dm_name": null,
+      "dm_title": null,
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "cold",
+      "score": 24.994636636537717,
+      "insight": "Form D filed today highlights investor reporting and board prep needs for Paxos Medical Inc.",
+      "trigger_type": "form_d",
+      "signals": [
+        {
+          "type": "funding_raised",
+          "captured_at": "2026-05-17T19:21:49.108796",
+          "days_ago": 0,
+          "payload": {
+            "title": "D - Paxos Medical Inc.",
+            "filing_type": "Form D",
+            "filed_on": "2026-05-14",
+            "link": "https://www.sec.gov/Archives/edgar/data/2131237/000213123726000002/0002131237-26-000002-index.htm",
+            "biz_state": "DE",
+            "biz_location": "Lewes, DE"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Lunar Outpost Inc",
+      "domain": "lunaroutpost.com",
+      "industry": "other",
+      "headcount": null,
+      "country": "US",
+      "city": "Golden",
+      "state": "CO",
+      "dm_name": "Justin Cyrus",
+      "dm_title": "CEO",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "partial",
+      "score": 24.99463663217974,
+      "insight": "Form D filing today signals new board prep and investor reporting needs for Lunar Outpost Inc.",
+      "trigger_type": "form_d",
+      "signals": [
+        {
+          "type": "funding_raised",
+          "captured_at": "2026-05-17T19:21:49.108796",
+          "days_ago": 0,
+          "payload": {
+            "title": "D - Lunar Outpost Inc",
+            "filing_type": "Form D",
+            "filed_on": "2026-05-14",
+            "link": "https://www.sec.gov/Archives/edgar/data/1926627/000192662726000002/0001926627-26-000002-index.htm",
+            "biz_state": "CO",
+            "biz_location": "Arvada, CO"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Squad Technologies LLC",
+      "domain": "squadtech.com",
+      "industry": "software_saas",
+      "headcount": null,
+      "country": "US",
+      "city": "West Chester",
+      "state": "PA",
+      "dm_name": null,
+      "dm_title": null,
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "cold",
+      "score": 24.994636627414042,
+      "insight": "Funding raised today via \"Form D\" signals potential needs for board prep and investor reporting at Squad Technologies LLC.",
+      "trigger_type": "form_d",
+      "signals": [
+        {
+          "type": "funding_raised",
+          "captured_at": "2026-05-17T19:21:49.108796",
+          "days_ago": 0,
+          "payload": {
+            "title": "D - Squad Technologies LLC",
+            "filing_type": "Form D",
+            "filed_on": "2026-05-14",
+            "link": "https://www.sec.gov/Archives/edgar/data/1887456/000188745626000003/0001887456-26-000003-index.htm",
+            "biz_state": "PA",
+            "biz_location": "West Chester, PA"
+          }
+        }
+      ]
+    },
+    {
+      "name": "NovaData Solutions Inc.",
+      "domain": "novadata-solutions.com",
+      "industry": "software_saas",
+      "headcount": 10,
+      "country": "US",
+      "city": "Haverford",
+      "state": "PA",
+      "dm_name": "Anthony Troy",
+      "dm_title": "CEO",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "partial",
+      "score": 24.99463662304938,
+      "insight": "Form D filed today for funding raised at NovaData Solutions Inc., indicating a need for board prep and investor reporting.",
+      "trigger_type": "form_d",
+      "signals": [
+        {
+          "type": "funding_raised",
+          "captured_at": "2026-05-17T19:21:49.108796",
+          "days_ago": 0,
+          "payload": {
+            "title": "D - NovaData Solutions Inc.",
+            "filing_type": "Form D",
+            "filed_on": "2026-05-14",
+            "link": "https://www.sec.gov/Archives/edgar/data/1942528/000194252826000003/0001942528-26-000003-index.htm",
+            "biz_state": "PA",
+            "biz_location": "Haverford, PA"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Anabaptist Equities LLC",
+      "domain": null,
+      "industry": "real_estate",
+      "headcount": null,
+      "country": "US",
+      "city": "GRANDVIEW",
+      "state": "TX",
+      "dm_name": "Leland Ulrich",
+      "dm_title": "Manager",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "partial",
+      "score": 24.994636618678033,
+      "insight": "Form D filed today indicates ongoing funding activity, highlighting a need for board prep and investor reporting discipline.",
+      "trigger_type": "form_d",
+      "signals": [
+        {
+          "type": "funding_raised",
+          "captured_at": "2026-05-17T19:21:49.108796",
+          "days_ago": 0,
+          "payload": {
+            "title": "D - Anabaptist Equities LLC",
+            "filing_type": "Form D",
+            "filed_on": "2026-05-14",
+            "link": "https://www.sec.gov/Archives/edgar/data/2068587/000206858726000001/0002068587-26-000001-index.htm",
+            "biz_state": "TX",
+            "biz_location": "Grandview, TX"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Innovatio Group, LLC",
+      "domain": null,
+      "industry": "other",
+      "headcount": null,
+      "country": "US",
+      "city": "Burr Ridge",
+      "state": "IL",
+      "dm_name": null,
+      "dm_title": null,
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "cold",
+      "score": 24.994636613945755,
+      "insight": "Form D filed today indicates a fresh funding round, highlighting the need for board prep and investor reporting support.",
+      "trigger_type": "form_d",
+      "signals": [
+        {
+          "type": "funding_raised",
+          "captured_at": "2026-05-17T19:21:49.108796",
+          "days_ago": 0,
+          "payload": {
+            "title": "D - Innovatio Group, LLC",
+            "filing_type": "Form D",
+            "filed_on": "2026-05-14",
+            "link": "https://www.sec.gov/Archives/edgar/data/2134900/000213490026000001/0002134900-26-000001-index.htm",
+            "biz_state": "IL",
+            "biz_location": "Burr Ridge, IL"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Proximity Quest I, LLC",
+      "domain": null,
+      "industry": "other",
+      "headcount": null,
+      "country": "US",
+      "city": "NEW YORK",
+      "state": "NY",
+      "dm_name": "Sirni, Neil",
+      "dm_title": "Managing Member of the Ultimate MM",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "partial",
+      "score": 24.994636609226838,
+      "insight": "Funding raised today via \"Form D\" filing indicates a new board, enhanced reporting cadence, and first audit cycle for Proximity Quest I, LLC.",
+      "trigger_type": "form_d",
+      "signals": [
+        {
+          "type": "funding_raised",
+          "captured_at": "2026-05-17T19:21:49.108796",
+          "days_ago": 0,
+          "payload": {
+            "title": "D - Proximity Quest I, LLC",
+            "filing_type": "Form D",
+            "filed_on": "2026-05-14",
+            "link": "https://www.sec.gov/Archives/edgar/data/2124304/000212430426000001/0002124304-26-000001-index.htm",
+            "biz_state": "NY",
+            "biz_location": "New York, NY"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Level 5 Multifamily Growth 1 LLC",
+      "domain": null,
+      "industry": "real_estate",
+      "headcount": null,
+      "country": "US",
+      "city": null,
+      "state": null,
+      "dm_name": "Luke Kassler",
+      "dm_title": "Managing Partner, CEO",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "partial",
+      "score": 24.994636604240565,
+      "insight": "Form D filed today highlights the need for expert board prep and investor reporting as fresh capital is secured.",
+      "trigger_type": "form_d",
+      "signals": [
+        {
+          "type": "funding_raised",
+          "captured_at": "2026-05-17T19:21:49.108796",
+          "days_ago": 0,
+          "payload": {
+            "title": "D - Level 5 Multifamily Growth 1 LLC",
+            "filing_type": "Form D",
+            "filed_on": "2026-05-14",
+            "link": "https://www.sec.gov/Archives/edgar/data/2135324/000213532426000001/0002135324-26-000001-index.htm",
+            "biz_state": "OH",
+            "biz_location": "Lima, OH"
+          }
+        }
+      ]
+    },
+    {
+      "name": "iSpecimen Inc.  (ISPC)",
+      "domain": "ispecimen.com",
+      "industry": "healthcare",
+      "headcount": null,
+      "country": "US",
+      "city": "Woburn",
+      "state": "MA",
+      "dm_name": "Robert Lim",
+      "dm_title": "CEO",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "partial",
+      "score": 24.994636599675385,
+      "insight": "Form D filed today indicates new board, new reporting cadence, and first audit cycle for iSpecimen Inc.",
+      "trigger_type": "form_d",
+      "signals": [
+        {
+          "type": "funding_raised",
+          "captured_at": "2026-05-17T19:21:49.108796",
+          "days_ago": 0,
+          "payload": {
+            "title": "D - iSpecimen Inc.  (ISPC)",
+            "filing_type": "Form D",
+            "filed_on": "2026-05-14",
+            "link": "https://www.sec.gov/Archives/edgar/data/1558569/000121390026056752/0001213900-26-056752-index.htm",
+            "biz_state": "MA",
+            "biz_location": "Woburn, MA"
+          }
+        }
+      ]
+    },
+    {
+      "name": "EtiraRX, Inc.",
+      "domain": "etira.life",
+      "industry": "healthcare",
+      "headcount": null,
+      "country": "US",
+      "city": "Dallas",
+      "state": "TX",
+      "dm_name": "Russell Hayward",
+      "dm_title": "Chief Executive Officer",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "partial",
+      "score": 24.994636595029995,
+      "insight": "Funding raised today via \"Form D\" filing signals an opportunity for board prep and investor reporting in biotech.",
+      "trigger_type": "form_d",
+      "signals": [
+        {
+          "type": "funding_raised",
+          "captured_at": "2026-05-17T19:21:49.108796",
+          "days_ago": 0,
+          "payload": {
+            "title": "D - EtiraRX, Inc.",
+            "filing_type": "Form D",
+            "filed_on": "2026-05-14",
+            "link": "https://www.sec.gov/Archives/edgar/data/1996442/000199644226000002/0001996442-26-000002-index.htm",
+            "biz_state": "TX",
+            "biz_location": "Dallas, TX"
+          }
+        }
+      ]
+    },
+    {
+      "name": "APE5 LLC",
+      "domain": null,
+      "industry": "other",
+      "headcount": null,
+      "country": "US",
+      "city": "NEW YORK",
+      "state": "NY",
+      "dm_name": "Andrew Sugrue",
+      "dm_title": "Executive Officer",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "partial",
+      "score": 24.994636590625234,
+      "insight": "Form D filed today indicates investor reporting and board prep needs that a fractional CFO can support.",
+      "trigger_type": "form_d",
+      "signals": [
+        {
+          "type": "funding_raised",
+          "captured_at": "2026-05-17T19:21:49.108796",
+          "days_ago": 0,
+          "payload": {
+            "title": "D - APE5 LLC",
+            "filing_type": "Form D",
+            "filed_on": "2026-05-14",
+            "link": "https://www.sec.gov/Archives/edgar/data/2134927/000213492726000001/0002134927-26-000001-index.htm",
+            "biz_state": "NY",
+            "biz_location": "New York, NY"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Goldman Sachs Private Credit Corp.",
+      "domain": null,
+      "industry": "fintech",
+      "headcount": null,
+      "country": "US",
+      "city": "New York",
+      "state": "NY",
+      "dm_name": "David Solomon",
+      "dm_title": "Chairman and Chief Executive Officer",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "partial",
+      "score": 24.99463658617368,
+      "insight": "Funding raised today - filed a \"Form D\" for new board and investor reporting needs.",
+      "trigger_type": "form_d",
+      "signals": [
+        {
+          "type": "funding_raised",
+          "captured_at": "2026-05-17T19:21:49.108796",
+          "days_ago": 0,
+          "payload": {
+            "title": "D - Goldman Sachs Private Credit Corp.",
+            "filing_type": "Form D",
+            "filed_on": "2026-05-14",
+            "link": "https://www.sec.gov/Archives/edgar/data/1920145/000192014526000003/0001920145-26-000003-index.htm",
+            "biz_state": "NY",
+            "biz_location": "New York, NY"
+          }
+        }
+      ]
+    },
+    {
+      "name": "DADoES, Inc.",
+      "domain": "rendered.ai",
+      "industry": "other",
+      "headcount": null,
+      "country": "US",
+      "city": "Bellevue",
+      "state": "WA",
+      "dm_name": "Nathan Kundz",
+      "dm_title": "Executive Officer, Director",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "partial",
+      "score": 24.99463658109383,
+      "insight": "Form D filed today indicates fundraising efforts, highlighting the need for board prep and investor reporting support.",
+      "trigger_type": "form_d",
+      "signals": [
+        {
+          "type": "funding_raised",
+          "captured_at": "2026-05-17T19:21:49.108796",
+          "days_ago": 0,
+          "payload": {
+            "title": "D - DADoES, Inc.",
+            "filing_type": "Form D",
+            "filed_on": "2026-05-14",
+            "link": "https://www.sec.gov/Archives/edgar/data/1888581/000188858126000003/0001888581-26-000003-index.htm",
+            "biz_state": "WA",
+            "biz_location": "Bellevue, WA"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Evolution Metals & Technologies Corp.  (EMAT)",
+      "domain": "evolution-metals.com",
+      "industry": "manufacturing",
+      "headcount": null,
+      "country": "US",
+      "city": "West Palm Beach",
+      "state": "FL",
+      "dm_name": "David Wilcox",
+      "dm_title": "Executive Chairman",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "partial",
+      "score": 24.99463657644844,
+      "insight": "Funding raised today via \"Form D\" indicates a need for new board preparation and investor reporting cadence.",
+      "trigger_type": "form_d",
+      "signals": [
+        {
+          "type": "funding_raised",
+          "captured_at": "2026-05-17T19:21:49.108796",
+          "days_ago": 0,
+          "payload": {
+            "title": "D - Evolution Metals & Technologies Corp.  (EMAT)",
+            "filing_type": "Form D",
+            "filed_on": "2026-05-14",
+            "link": "https://www.sec.gov/Archives/edgar/data/1866226/000121390026056629/0001213900-26-056629-index.htm",
+            "biz_state": "FL",
+            "biz_location": "West Palm Beach, FL"
+          }
+        }
+      ]
+    },
+    {
+      "name": "MCR Macon Investco, LLC",
+      "domain": "mcrcompanies.com",
+      "industry": "real_estate",
+      "headcount": null,
+      "country": "US",
+      "city": "Phoenix",
+      "state": "AZ",
+      "dm_name": "Jeremiah Reardon",
+      "dm_title": "Managing Partner",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "partial",
+      "score": 24.994636572097146,
+      "insight": "Filing a \"Form D\" today showcases MCR Macon Investco's latest funding round, highlighting fresh capital for real estate ventures.",
+      "trigger_type": "form_d",
+      "signals": [
+        {
+          "type": "funding_raised",
+          "captured_at": "2026-05-17T19:21:49.108796",
+          "days_ago": 0,
+          "payload": {
+            "title": "D - MCR Macon Investco, LLC",
+            "filing_type": "Form D",
+            "filed_on": "2026-05-14",
+            "link": "https://www.sec.gov/Archives/edgar/data/2133432/000213343226000001/0002133432-26-000001-index.htm",
+            "biz_state": "AZ",
+            "biz_location": "Phoenix, AZ"
+          }
+        }
+      ]
+    },
+    {
       "name": "Alpha Wave CI V, LLC",
       "domain": null,
       "industry": "fintech",
@@ -117,7 +3325,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 24.999008767391,
+      "score": 24.982266163401402,
       "insight": "Funding raised today via 'Form D' filing signals a new board, new reporting cadence, and first audit cycle for Alpha Wave CI V, LLC.",
       "trigger_type": "form_d",
       "signals": [
@@ -149,7 +3357,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "cold",
-      "score": 24.99900876438267,
+      "score": 24.982266153794548,
       "insight": "Funding raised today via \"Form D\" filing signals an opportunity for enhanced board prep and investor reporting.",
       "trigger_type": "form_d",
       "signals": [
@@ -181,7 +3389,7 @@
       "dm_email": "aaron@tugboat.claims",
       "dm_linkedin_url": "http://www.linkedin.com/in/aaron-mooney-321408141",
       "contact_strength": "verified",
-      "score": 24.99900876131417,
+      "score": 24.982266149024525,
       "insight": "Funding raised today via 'Form D' filing indicates potential needs for board preparation and investor reporting.",
       "trigger_type": "form_d",
       "signals": [
@@ -213,7 +3421,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 24.99900875838606,
+      "score": 24.982266140012253,
       "insight": "Form D filed today signals a fresh-cash discipline need, shaping board prep and investor reporting efforts.",
       "trigger_type": "form_d",
       "signals": [
@@ -245,7 +3453,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 24.99895547926494,
+      "score": 24.982212927518788,
       "insight": "Form D filed today for a $30M Series A round provides an opportunity for board prep and investor reporting support.",
       "trigger_type": "funding_event",
       "signals": [
@@ -275,7 +3483,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 24.603331683027374,
+      "score": 24.58685378277878,
       "insight": "Funding raised today via 'Form D' signals a need for enhanced board preparation and investor reporting at RenX Enterprises Corp.",
       "trigger_type": "form_d",
       "signals": [
