@@ -1,6 +1,173 @@
 {
-  "generated_at": "2026-05-17T02:17:14.376811",
+  "generated_at": "2026-05-17T09:54:02.763959",
   "leads": [
+    {
+      "name": "Veero Ford & CDJR of Morris",
+      "domain": "veeromotors.com",
+      "industry": "other",
+      "headcount": null,
+      "country": "US",
+      "city": "Morris",
+      "state": "MN",
+      "dm_name": "Aaron Veerothai",
+      "dm_title": "Owner and President",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "partial",
+      "score": 100.0,
+      "insight": "Automotive Finance Manager posting today signals Veero Ford & CDJR's need for finance leadership amid growing complexities.",
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-05-17T09:49:57.713247",
+          "days_ago": 0,
+          "payload": {
+            "title": "Automotive Finance Manager \u2013 Veero Ford & Chrysler Dodge Jeep Ram of Morris",
+            "url": "https://www.indeed.com/viewjob?jk=65e20874ecd639ae",
+            "date_posted": "2026-05-16",
+            "site": "indeed"
+          }
+        },
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-05-17T09:49:57.713247",
+          "days_ago": 0,
+          "payload": {
+            "title": "Automotive Finance Manager \u2013 Veero Ford & Chrysler Dodge Jeep Ram of Morris",
+            "url": "https://www.indeed.com/viewjob?jk=aaed315318e6a725",
+            "date_posted": "2026-05-16",
+            "site": "indeed"
+          }
+        },
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-05-17T09:49:57.713247",
+          "days_ago": 0,
+          "payload": {
+            "title": "Automotive Finance Manager \u2013 Veero Ford & Chrysler Dodge Jeep Ram of Morris",
+            "url": "https://www.indeed.com/viewjob?jk=5e62a0f2180ca032",
+            "date_posted": "2026-05-16",
+            "site": "indeed"
+          }
+        },
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-05-17T09:49:57.713247",
+          "days_ago": 0,
+          "payload": {
+            "title": "Automotive Finance Manager \u2013 Veero Ford & Chrysler Dodge Jeep Ram of Morris",
+            "url": "https://www.indeed.com/viewjob?jk=490bb7760740d003",
+            "date_posted": "2026-05-16",
+            "site": "indeed"
+          }
+        },
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-05-17T09:49:57.713247",
+          "days_ago": 0,
+          "payload": {
+            "title": "Automotive Finance Manager \u2013 Veero Ford & Chrysler Dodge Jeep Ram of Morris",
+            "url": "https://www.indeed.com/viewjob?jk=db6c97f658cbb057",
+            "date_posted": "2026-05-16",
+            "site": "indeed"
+          }
+        },
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-05-17T09:49:57.713247",
+          "days_ago": 0,
+          "payload": {
+            "title": "Automotive Finance Manager \u2013 Veero Ford & Chrysler Dodge Jeep Ram of Morris",
+            "url": "https://www.indeed.com/viewjob?jk=d683b92426c32b9e",
+            "date_posted": "2026-05-16",
+            "site": "indeed"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Hadley Designs",
+      "domain": "hadleydesigns.com",
+      "industry": "fintech",
+      "headcount": 14,
+      "country": "US",
+      "city": "Dallas",
+      "state": "TX",
+      "dm_name": "Joshua Hadley",
+      "dm_title": "Chief Executive Officer",
+      "dm_email": "josh@hadleydesigns.com",
+      "dm_linkedin_url": "http://www.linkedin.com/in/joshhadley",
+      "contact_strength": "verified",
+      "score": 100.0,
+      "insight": "Hiring a Head of Finance today, indicating financial leadership needs have evolved at Hadley Designs.",
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-05-17T09:50:04.917012",
+          "days_ago": 0,
+          "payload": {
+            "title": "Head of Finance",
+            "url": "https://www.adzuna.com/details/5731097852?utm_medium=api&utm_source=3aa14b35",
+            "date_posted": "2026-05-16T00:41:08Z",
+            "site": "adzuna"
+          }
+        },
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-05-17T09:50:03.716666",
+          "days_ago": 0,
+          "payload": {
+            "title": "Head of Finance",
+            "url": "https://www.indeed.com/viewjob?jk=01d39a8bb5cf0303",
+            "date_posted": "2026-05-16",
+            "site": "indeed"
+          }
+        }
+      ]
+    },
+    {
+      "name": "NorthPoint Search Group",
+      "domain": "northpointsearchgroup.com",
+      "industry": "fintech",
+      "headcount": 30,
+      "country": "US",
+      "city": "Alpharetta",
+      "state": "GA",
+      "dm_name": "Gus Cawley",
+      "dm_title": "CEO",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "partial",
+      "score": 100.0,
+      "insight": "With a Head of Finance posting today, the company recently closed a Series A, creating new reporting obligations.",
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-05-17T09:50:04.917012",
+          "days_ago": 0,
+          "payload": {
+            "title": "Head of Finance",
+            "url": "https://www.adzuna.com/details/5699184347?utm_medium=api&utm_source=3aa14b35",
+            "date_posted": "2026-04-14T16:10:16Z",
+            "site": "adzuna"
+          }
+        },
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-05-17T09:50:04.917012",
+          "days_ago": 0,
+          "payload": {
+            "title": "Head of Finance",
+            "url": "https://www.adzuna.com/land/ad/5701316186?se=YNs_ydVR8RGNw-9vM3bulQ&utm_medium=api&utm_source=3aa14b35&v=8CBB517F5B7E9A6655D94EA61F89E6C01EF3AADB",
+            "date_posted": "2026-04-16T06:09:06Z",
+            "site": "adzuna"
+          }
+        }
+      ]
+    },
     {
       "name": "Qualitypartssupply",
       "domain": "qualitypartssupply.com",
@@ -32,6 +199,336 @@
       ]
     },
     {
+      "name": "Sniffspot",
+      "domain": "sniffspot.com",
+      "industry": "other",
+      "headcount": 26,
+      "country": "US",
+      "city": "Seattle",
+      "state": "WA",
+      "dm_name": "David Adams",
+      "dm_title": "Founder",
+      "dm_email": "david@sniffspot.com",
+      "dm_linkedin_url": "http://www.linkedin.com/in/david-a-85aa1526",
+      "contact_strength": "verified",
+      "score": 59.996619040090266,
+      "insight": "They posted a job for a Head of Finance today, highlighting their need for finance leadership after recent developments.",
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-05-17T09:50:04.917012",
+          "days_ago": 0,
+          "payload": {
+            "title": "Head of Finance",
+            "url": "https://www.adzuna.com/details/5715365934?utm_medium=api&utm_source=3aa14b35",
+            "date_posted": "2026-05-01T01:13:24Z",
+            "site": "adzuna"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Campton Hills, IL",
+      "domain": null,
+      "industry": "fintech",
+      "headcount": null,
+      "country": "US",
+      "city": "Campton Hills",
+      "state": "IL",
+      "dm_name": "Barbara Wojnicki",
+      "dm_title": "President",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "partial",
+      "score": 59.996619026244154,
+      "insight": "Head of Finance position posted today by a fintech startup in Campton Hills, IL, suggesting their need for financial leadership.",
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-05-17T09:50:04.917012",
+          "days_ago": 0,
+          "payload": {
+            "title": "Head of Finance",
+            "url": "https://www.adzuna.com/details/5706612279?utm_medium=api&utm_source=3aa14b35",
+            "date_posted": "2026-04-21T20:21:53Z",
+            "site": "adzuna"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Hauler Hero",
+      "domain": "haulerhero.com",
+      "industry": "logistics_transport",
+      "headcount": 49,
+      "country": "US",
+      "city": "San Diego",
+      "state": "CA",
+      "dm_name": "Ben Sikma",
+      "dm_title": "President",
+      "dm_email": "ben@haulerhero.com",
+      "dm_linkedin_url": "http://www.linkedin.com/in/ben-sikma-9912662",
+      "contact_strength": "verified",
+      "score": 59.996619013120025,
+      "insight": "A Head of Finance role posted today signals the need for strategic financial guidance post-Series A funding.",
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-05-17T09:50:04.917012",
+          "days_ago": 0,
+          "payload": {
+            "title": "Head of Finance",
+            "url": "https://www.adzuna.com/details/5721371003?utm_medium=api&utm_source=3aa14b35",
+            "date_posted": "2026-05-07T03:33:09Z",
+            "site": "adzuna"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Aurelius Systems",
+      "domain": "aureliussystems.com",
+      "industry": "fintech",
+      "headcount": 22,
+      "country": "US",
+      "city": "San Francisco",
+      "state": "CA",
+      "dm_name": "Michael Laframboise",
+      "dm_title": "CEO",
+      "dm_email": "michael@aureliussystems.us",
+      "dm_linkedin_url": "http://www.linkedin.com/in/michael-laframboise",
+      "contact_strength": "verified",
+      "score": 59.99661900071788,
+      "insight": "Hiring a Head of Finance today, signaling their need for strategic financial leadership amid growth.",
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-05-17T09:50:04.917012",
+          "days_ago": 0,
+          "payload": {
+            "title": "Head of Finance",
+            "url": "https://www.adzuna.com/details/5721324411?utm_medium=api&utm_source=3aa14b35",
+            "date_posted": "2026-05-07T02:27:29Z",
+            "site": "adzuna"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Rule Supplements",
+      "domain": "rulesupplements.com",
+      "industry": "ecommerce_retail",
+      "headcount": null,
+      "country": "US",
+      "city": "Akron",
+      "state": "IA",
+      "dm_name": "Tyson Rule",
+      "dm_title": "Owner",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "partial",
+      "score": 59.99661897573711,
+      "insight": "Hiring an Accounting Manager & Executive Assistant today points to their need for enhanced financial leadership.",
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-05-17T09:50:04.917012",
+          "days_ago": 0,
+          "payload": {
+            "title": "Accounting Manager & Executive Assistant",
+            "url": "https://www.adzuna.com/land/ad/5718684092?se=pH8uytVR8RGNw-9vM3bulQ&utm_medium=api&utm_source=3aa14b35&v=744D74F836D8335D17408E037A84998762DADA55",
+            "date_posted": "2026-05-04T13:16:27Z",
+            "site": "adzuna"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Grubbs Infiniti - San Antonio",
+      "domain": "infinitiofsanantonio.com",
+      "industry": "other",
+      "headcount": 25,
+      "country": "US",
+      "city": "San Antonio",
+      "state": "TX",
+      "dm_name": "George R. Grubbs III",
+      "dm_title": "President/Owner",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "partial",
+      "score": 59.99661895821687,
+      "insight": "Finance Manager posting today signals Grubbs Infiniti is scaling finance leadership after a Series A funding.",
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-05-17T09:50:04.917012",
+          "days_ago": 0,
+          "payload": {
+            "title": "Finance Manager",
+            "url": "https://www.adzuna.com/land/ad/5729424254?se=MIulytVR8RGThuL1VYUPTw&utm_medium=api&utm_source=3aa14b35&v=60ACFC394368A09A6EED663DE96322965449C114",
+            "date_posted": "2026-05-14T13:53:20Z",
+            "site": "adzuna"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Create Wellness",
+      "domain": "trycreate.co",
+      "industry": "healthcare",
+      "headcount": 42,
+      "country": "US",
+      "city": "New York",
+      "state": "NY",
+      "dm_name": "Sienna McCormick",
+      "dm_title": "Co-Founder/Co-CEO",
+      "dm_email": "sienna@trycreate.co",
+      "dm_linkedin_url": "http://www.linkedin.com/in/sienna-mccormick-86b42255",
+      "contact_strength": "verified",
+      "score": 59.99650355799163,
+      "insight": "Controller job posting today suggests they are scaling finance leadership after Series A funding.",
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-05-17T09:49:57.713247",
+          "days_ago": 0,
+          "payload": {
+            "title": "Controller",
+            "url": "https://www.linkedin.com/jobs/view/4385161405",
+            "date_posted": "2026-03-13",
+            "site": "linkedin"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Forrer Group, Inc.",
+      "domain": "forrergroup.com",
+      "industry": "fintech",
+      "headcount": 8,
+      "country": "US",
+      "city": "Alpharetta",
+      "state": "GA",
+      "dm_name": null,
+      "dm_title": null,
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "cold",
+      "score": 59.99650354449851,
+      "insight": "Vice President Finance posting today for this seed-stage fintech company in Alpharetta, GA, signals their finance leadership needs.",
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-05-17T09:49:57.713247",
+          "days_ago": 0,
+          "payload": {
+            "title": "Vice President Finance",
+            "url": "https://www.linkedin.com/jobs/view/4415066991",
+            "date_posted": "2026-05-15",
+            "site": "linkedin"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Saint Rocco's Treats",
+      "domain": "saintroccostreats.shop",
+      "industry": "ecommerce_retail",
+      "headcount": 19,
+      "country": "US",
+      "city": "Pipersville",
+      "state": "PA",
+      "dm_name": "Kolby Rush",
+      "dm_title": "Co-Founder",
+      "dm_email": "kolby.rush@saintroccostreats.shop",
+      "dm_linkedin_url": "http://www.linkedin.com/in/kolby-rush-28498a158",
+      "contact_strength": "verified",
+      "score": 59.99650352946516,
+      "insight": "With a Senior Accounting Manager job posted today, the company is facing new financial reporting demands post-Series A funding.",
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-05-17T09:49:57.713247",
+          "days_ago": 0,
+          "payload": {
+            "title": "Senior Accounting Manager",
+            "url": "https://www.linkedin.com/jobs/view/4414681779",
+            "date_posted": "2026-05-14",
+            "site": "linkedin"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Auxilium Health, Inc.",
+      "domain": "auxiliumhealth.xyz",
+      "industry": "healthcare",
+      "headcount": 7,
+      "country": "US",
+      "city": "Cleveland",
+      "state": "OH",
+      "dm_name": "Isaiah Kaiser",
+      "dm_title": "Founder & CEO",
+      "dm_email": "isaiah@auxiliumhealth.xyz",
+      "dm_linkedin_url": "http://www.linkedin.com/in/isaiah-kaiser",
+      "contact_strength": "verified",
+      "score": 24.998697980687663,
+      "insight": "Form D filed today signals increased board reporting obligations, making them ripe for fractional CFO support before hiring a full-time finance leader.",
+      "trigger_type": "form_d",
+      "signals": [
+        {
+          "type": "funding_raised",
+          "captured_at": "2026-05-17T09:50:20.887496",
+          "days_ago": 0,
+          "payload": {
+            "title": "D - Auxilium Health, Inc. (0002135544) (Filer)",
+            "filing_type": "Form D",
+            "filed_on": "",
+            "link": "https://www.sec.gov/Archives/edgar/data/2135544/000213554426000002/0002135544-26-000002-index.htm"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Majesty Therapeutics, Inc.",
+      "domain": "majestytx.com",
+      "industry": "healthcare",
+      "headcount": null,
+      "country": "US",
+      "city": "Sea Ranch Lakes",
+      "state": "FL",
+      "dm_name": "Shawn Titcomb",
+      "dm_title": "Co-Founder and Executive Chairman",
+      "dm_email": "shawn@majestytherapeutics.com",
+      "dm_linkedin_url": "http://www.linkedin.com/in/shawn-titcomb-3086913",
+      "contact_strength": "verified",
+      "score": 24.998697974804774,
+      "insight": "A Form D filing today indicates Majesty Therapeutics, Inc. has secured new funding, highlighting their need for fractional CFO services.",
+      "trigger_type": "form_d",
+      "signals": [
+        {
+          "type": "funding_raised",
+          "captured_at": "2026-05-17T09:50:20.887496",
+          "days_ago": 0,
+          "payload": {
+            "title": "D - Majesty Therapeutics, Inc. (0002135155) (Filer)",
+            "filing_type": "Form D",
+            "filed_on": "",
+            "link": "https://www.sec.gov/Archives/edgar/data/2135155/000149315226023677/0001493152-26-023677-index.htm"
+          }
+        }
+      ]
+    },
+    {
       "name": "RenX Enterprises Corp.",
       "domain": "renxent.com",
       "industry": "other",
@@ -44,7 +541,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 24.999821744119487,
+      "score": 24.81736633502561,
       "insight": "Form D filed today signals fresh funding, indicating the company may hire a Controller as they transition from CFO.",
       "trigger_type": "form_d",
       "signals": [
@@ -62,36 +559,6 @@
       ]
     },
     {
-      "name": "Estately Operations LLC",
-      "domain": "estately.com",
-      "industry": "real_estate",
-      "headcount": null,
-      "country": "US",
-      "city": "Seattle",
-      "state": "WA",
-      "dm_name": "Galen Ward",
-      "dm_title": "Founder & CEO",
-      "dm_email": null,
-      "dm_linkedin_url": null,
-      "contact_strength": "partial",
-      "score": 24.99982174060965,
-      "insight": "Funding raised today via Form D suggests Estately Operations LLC, a seed-stage real estate company in Seattle, is seeking financial leadership.",
-      "trigger_type": "form_d",
-      "signals": [
-        {
-          "type": "funding_raised",
-          "captured_at": "2026-05-17T02:16:37.280618",
-          "days_ago": 0,
-          "payload": {
-            "title": "D - Estately Operations LLC (0002131672) (Filer)",
-            "filing_type": "Form D",
-            "filed_on": "",
-            "link": "https://www.sec.gov/Archives/edgar/data/2131672/000090514826002406/0000905148-26-002406-index.htm"
-          }
-        }
-      ]
-    },
-    {
       "name": "Prism Layer AI, Inc.",
       "domain": "prismlayer.ai",
       "industry": "software_saas",
@@ -104,7 +571,7 @@
       "dm_email": "simone@prismlayer.ai",
       "dm_linkedin_url": "http://www.linkedin.com/in/simone-garreau-b3571b10",
       "contact_strength": "verified",
-      "score": 24.999821737420717,
+      "score": 24.817366329935332,
       "insight": "Filed Form D today, signaling fresh cash and new board reporting obligations for the company.",
       "trigger_type": "form_d",
       "signals": [
