@@ -89,6 +89,53 @@ def test_disqualification_reason_insurance_vendor() -> None:
     assert enrichment._disqualification_reason(lead) == "insurance_vendor_name"
 
 
+def test_disqualification_reason_enterprise_subsidiary() -> None:
+    """Subsidiaries of large multinationals whose Gemini lookup returned
+    no headcount, so the SMB-cap check couldn't fire."""
+    from insurance_pipeline.models import Lead
+
+    # Caught by domain apex-match. Names that ALSO trip the older
+    # megacorp prefix filter (Siemens, Honeywell, etc.) are excluded
+    # from this list since they get a different reason string — they're
+    # still disqualified, just by a different rule.
+    for name, domain in (
+        ("Canon U.S.A., Inc.", "usa.canon.com"),
+        ("Quest Diagnostics TB LLC", "questdiagnostics.com"),
+        ("CoreLogic Solutions, LLC", "corelogic.com"),
+    ):
+        lead = Lead(name=name, name_key=name.lower(), domain=domain)
+        assert enrichment._disqualification_reason(lead) == "enterprise_subsidiary", (
+            f"expected enterprise_subsidiary for {name!r} / {domain!r}"
+        )
+
+    # Caught by name-pattern (no domain or unrelated domain). Bosch
+    # Mitsubishi etc. aren't in the megacorp prefix list so this
+    # filter is what catches them.
+    for name in (
+        "Canon U.S.A., Inc.",
+        "Bosch USA Inc",
+        "Mitsubishi North America Corp",
+        "Acme Worldwide",
+    ):
+        lead = Lead(name=name, name_key=name.lower())  # no domain
+        assert enrichment._disqualification_reason(lead) == "enterprise_subsidiary", (
+            f"expected enterprise_subsidiary for {name!r}"
+        )
+
+    # Negative: real SMBs that mention "USA" or "America" mid-name shouldn't trigger
+    for name, domain in (
+        ("Pioneer Engineering LLC", "pioneer-eng.com"),
+        ("Acme Holdings", "acme.com"),
+        ("USA Trucking Co", None),  # 'USA' at start, not as suffix
+        ("American Pipe Co", None),
+    ):
+        lead = Lead(name=name, name_key=name.lower(), domain=domain)
+        reason = enrichment._disqualification_reason(lead)
+        assert reason != "enterprise_subsidiary", (
+            f"unexpected enterprise_subsidiary for {name!r}: got {reason!r}"
+        )
+
+
 def test_disqualification_reason_form_d_noise_pattern() -> None:
     """Vintage-year + street-SPV regexes from the EDGAR source apply
     retroactively to leads already in the DB. Gated to leads carrying

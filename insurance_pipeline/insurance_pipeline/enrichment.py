@@ -205,6 +205,74 @@ def _is_megacorp_subsidiary(name: str) -> bool:
     return any(p.match(name) for p in _MEGACORP_PREFIX_RES)
 
 
+# Apex domains of large multinationals whose US/regional subsidiaries
+# slip through the SMB filters when Gemini fails to return headcount
+# (Canon U.S.A., Quest Diagnostics TB LLC, CoreLogic Solutions LLC all
+# had headcount=None at enrichment time). The subsidiary LLC name
+# itself looks SMB-shaped; the parent's domain is the giveaway.
+#
+# Intentionally narrow. Not a comprehensive corporate-parent DB.
+_LARGE_ENTERPRISE_DOMAINS: frozenset[str] = frozenset({
+    "canon.com",
+    "questdiagnostics.com",
+    "corelogic.com",
+    "siemens.com",
+    "ge.com",
+    "abb.com",
+    "honeywell.com",
+    "3m.com",
+    "bosch.com",
+    "panasonic.com",
+    "samsung.com",
+    "hitachi.com",
+    "philips.com",
+    "schneider-electric.com",
+    "emerson.com",
+    "rockwellautomation.com",
+    "thermofisher.com",
+    "labcorp.com",
+    "danaher.com",
+    "caterpillar.com",
+    "johndeere.com",
+    "fmc.com",
+    "fluor.com",
+    "kbr.com",
+})
+
+
+def _apex_domain(domain: str | None) -> str | None:
+    """Strip subdomains. 'usa.canon.com' → 'canon.com'.
+    Keeps the last two labels; doesn't handle multi-part TLDs like
+    .co.uk (those don't show up in US lead data)."""
+    if not domain:
+        return None
+    parts = domain.lower().strip().rstrip("/").split(".")
+    if len(parts) < 2:
+        return None
+    return ".".join(parts[-2:])
+
+
+def _enterprise_apex(domain: str | None) -> bool:
+    apex = _apex_domain(domain)
+    return apex is not None and apex in _LARGE_ENTERPRISE_DOMAINS
+
+
+# Regional-subsidiary suffix: "Canon U.S.A., Inc.", "Bosch USA Inc",
+# "Siemens Americas LLC". Anchored to the end of the name, gated to
+# the recognizable region tokens.
+_ENTERPRISE_SUBSIDIARY_NAME_RE = re.compile(
+    r"\b(?:U\.?\s?S\.?\s?A\.?|USA|Americas?|North\s+America|Worldwide)"
+    r"(?:\s*[,.]?\s*(?:Inc\.?|LLC|Corp(?:oration)?|Ltd))?\s*$",
+    re.IGNORECASE,
+)
+
+
+def _is_enterprise_subsidiary(lead: Lead) -> bool:
+    if _enterprise_apex(lead.domain):
+        return True
+    return bool(_ENTERPRISE_SUBSIDIARY_NAME_RE.search(lead.name))
+
+
 def _is_form_d_noise(lead: Lead) -> bool:
     """Vintage-year / street-SPV regexes from the EDGAR source applied
     retroactively. Source-side filter only blocks new ingests; without
@@ -235,6 +303,8 @@ def _disqualification_reason(lead: Lead) -> str | None:
         return "financial_vehicle"
     if _is_megacorp_subsidiary(lead.name):
         return "megacorp_subsidiary"
+    if _is_enterprise_subsidiary(lead):
+        return "enterprise_subsidiary"
     if _is_form_d_noise(lead):
         return "form_d_noise_pattern"
     if lead.headcount is not None and lead.headcount > _SMB_HEADCOUNT_CAP:
