@@ -95,6 +95,18 @@ function SignalRow({ signal }) {
   } else if (signal.type === "funding_raised") {
     primary = payload.feed_title || payload.title || "(no headline)";
     if (payload.link) link = { href: payload.link, label: "Read" };
+    // USAspending contracts share NAICS-description titles across distinct
+    // awards (e.g. two "ENGINEERING SERVICES" contracts to the same firm).
+    // Surface amount + state so duplicate-looking rows are visibly different.
+    if (payload.filing_type === "Federal contract") {
+      const bits = [];
+      const amt = Number(payload.amount_usd);
+      if (Number.isFinite(amt) && amt > 0) {
+        bits.push(amt >= 1_000_000 ? `$${(amt / 1_000_000).toFixed(1)}M` : `$${Math.round(amt / 1000)}K`);
+      }
+      if (payload.state) bits.push(payload.state);
+      if (bits.length) extra = bits.join(" · ");
+    }
   } else if (signal.type === "breach_disclosed") {
     const agencyLabel = AGENCY_LABELS[payload.agency] || payload.agency || "state AG";
     primary = agencyLabel;
