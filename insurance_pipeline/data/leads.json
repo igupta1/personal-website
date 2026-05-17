@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-16T22:43:01.289937",
+  "generated_at": "2026-05-17T00:31:10.215363",
   "leads": [
     {
       "name": "EDEN TRANSPORTATION LLC",
@@ -13,10 +13,10 @@
       "dm_title": "Owner",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 78.66332173891948,
-      "insight": "Commercial Auto $170K/yr + WC $108K/yr",
+      "contact_strength": "partial",
+      "score": 78.5268934085751,
+      "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
-      "est_annual_premium_usd": 278000,
       "coverages": [
         "Commercial Auto",
         "Workers Comp"
@@ -52,10 +52,10 @@
       "dm_title": "Certified Mechanical Contractor",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 64.47312373414093,
-      "insight": "Commercial Auto $20K/yr + WC $48K/yr",
+      "contact_strength": "partial",
+      "score": 64.36130591737218,
+      "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
-      "est_annual_premium_usd": 68000,
       "coverages": [
         "Commercial Auto",
         "Workers Comp"
@@ -91,10 +91,10 @@
       "dm_title": "Chief Financial Officer",
       "dm_email": "gray@wcstexas.com",
       "dm_linkedin_url": "http://www.linkedin.com/in/gregory-don-ray",
-      "score": 59.88712026499535,
-      "insight": "Pollution Liability + GL \u00b7 est. $8.0K/yr",
+      "contact_strength": "verified",
+      "score": 59.78325609964973,
+      "insight": "Pollution Liability + GL",
       "trigger_type": "federal_contract",
-      "est_annual_premium_usd": 7955.999999999999,
       "coverages": [
         "Pollution Liability",
         "GL",
@@ -129,10 +129,10 @@
       "dm_title": "President",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 59.88712025045384,
-      "insight": "Professional Liability (E&O) + GL \u00b7 est. $5.0K/yr",
+      "contact_strength": "partial",
+      "score": 59.783256083950384,
+      "insight": "Professional Liability (E&O) + GL",
       "trigger_type": "federal_contract",
-      "est_annual_premium_usd": 5035.836,
       "coverages": [
         "Professional Liability (E&O)",
         "GL"
@@ -166,10 +166,10 @@
       "dm_title": "Vice President of Operations",
       "dm_email": "hkiger@daengineering.com",
       "dm_linkedin_url": "http://www.linkedin.com/in/hannah-kiger-sadler-7125658",
-      "score": 59.88712023817042,
-      "insight": "Professional Liability (E&O) + GL \u00b7 est. $4.2K/yr",
+      "contact_strength": "verified",
+      "score": 59.78325606890651,
+      "insight": "Professional Liability (E&O) + GL",
       "trigger_type": "federal_contract",
-      "est_annual_premium_usd": 4229.784,
       "coverages": [
         "Professional Liability (E&O)",
         "GL"
@@ -203,10 +203,10 @@
       "dm_title": "General Manager",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 59.887120225438586,
-      "insight": "Cyber + E&O \u00b7 est. $4.3K/yr",
+      "contact_strength": "partial",
+      "score": 59.78325605347895,
+      "insight": "Cyber + E&O",
       "trigger_type": "federal_contract",
-      "est_annual_premium_usd": 4308.87204,
       "coverages": [
         "Cyber",
         "E&O",
@@ -241,10 +241,10 @@
       "dm_title": "Vice President/CFO",
       "dm_email": "jstrohecker@elitealuminum.com",
       "dm_linkedin_url": "http://www.linkedin.com/in/jeffrey-strohecker-bb607412",
-      "score": 59.88712021347546,
-      "insight": "GL + Builders Risk \u00b7 est. $6.4K/yr",
+      "contact_strength": "verified",
+      "score": 59.783256038275205,
+      "insight": "GL + Builders Risk",
       "trigger_type": "federal_contract",
-      "est_annual_premium_usd": 6354.3008,
       "coverages": [
         "GL",
         "Builders Risk",
@@ -279,10 +279,10 @@
       "dm_title": "CEO",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 59.88712020149633,
-      "insight": "Professional Liability + Cyber \u00b7 est. $6.0K/yr",
+      "contact_strength": "partial",
+      "score": 59.78325602255987,
+      "insight": "Professional Liability + Cyber",
       "trigger_type": "federal_contract",
-      "est_annual_premium_usd": 5980.678800000001,
       "coverages": [
         "Professional Liability",
         "Cyber",
@@ -317,10 +317,10 @@
       "dm_title": "VP/GM",
       "dm_email": "dennis.fallen@fisherbioservices.com",
       "dm_linkedin_url": "http://www.linkedin.com/in/dennis-fallen-70a5a17",
-      "score": 57.41392286049934,
-      "insight": "Professional Liability + Cyber \u00b7 est. $3.9K/yr",
+      "contact_strength": "verified",
+      "score": 57.314348022880786,
+      "insight": "Professional Liability + Cyber",
       "trigger_type": "federal_contract",
-      "est_annual_premium_usd": 3902.65692,
       "coverages": [
         "Professional Liability",
         "Cyber",
@@ -355,10 +355,10 @@
       "dm_title": "Controller",
       "dm_email": "coliphant@enviroapplications.com",
       "dm_linkedin_url": "http://www.linkedin.com/in/cynthia-oliphant-16298334",
-      "score": 51.61149371084704,
-      "insight": "Pollution Liability + GL \u00b7 est. $4.8K/yr",
+      "contact_strength": "verified",
+      "score": 51.521982213600154,
+      "insight": "Pollution Liability + GL",
       "trigger_type": "federal_contract",
-      "est_annual_premium_usd": 4807.5795,
       "coverages": [
         "Pollution Liability",
         "GL",
@@ -393,10 +393,10 @@
       "dm_title": "President",
       "dm_email": "rob.donofrio@cpmiteam.com",
       "dm_linkedin_url": "http://www.linkedin.com/in/rob-d-onofrio-pe-ceng-8882603",
-      "score": 50.80069695318527,
-      "insight": "Professional Liability (E&O) + GL \u00b7 est. $3.1K/yr",
+      "contact_strength": "verified",
+      "score": 50.71259164431695,
+      "insight": "Professional Liability (E&O) + GL",
       "trigger_type": "federal_contract",
-      "est_annual_premium_usd": 3107.574,
       "coverages": [
         "Professional Liability (E&O)",
         "GL"
@@ -430,10 +430,10 @@
       "dm_title": "Owner / Officer",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 49.50042086830618,
-      "insight": "Commercial Auto $10K/yr + WC $18K/yr",
+      "contact_strength": "partial",
+      "score": 49.414570670136406,
+      "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
-      "est_annual_premium_usd": 28000,
       "coverages": [
         "Commercial Auto",
         "Workers Comp"
@@ -469,10 +469,10 @@
       "dm_title": "President/Owner",
       "dm_email": "vsavage@uptodatebookkeeping.com",
       "dm_linkedin_url": "http://www.linkedin.com/in/vickysavage",
-      "score": 49.06292242423492,
-      "insight": "Cyber + E&O \u00b7 est. $2.9K/yr",
+      "contact_strength": "verified",
+      "score": 48.97783098818258,
+      "insight": "Cyber + E&O",
       "trigger_type": "federal_contract",
-      "est_annual_premium_usd": 2898.648,
       "coverages": [
         "Cyber",
         "E&O",
@@ -507,10 +507,10 @@
       "dm_title": "Owner / Officer",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 47.17545627330826,
-      "insight": "Commercial Auto $25K/yr + WC $15K/yr",
+      "contact_strength": "partial",
+      "score": 47.09363833001409,
+      "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
-      "est_annual_premium_usd": 40000,
       "coverages": [
         "Commercial Auto",
         "Workers Comp"
@@ -546,10 +546,10 @@
       "dm_title": "Owner / Officer",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 46.30684529610748,
-      "insight": "Commercial Auto $5K/yr + WC $12K/yr",
+      "contact_strength": "partial",
+      "score": 46.22653381530143,
+      "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
-      "est_annual_premium_usd": 17000,
       "coverages": [
         "Commercial Auto",
         "Workers Comp"
@@ -585,10 +585,10 @@
       "dm_title": "Owner / Officer",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 45.624726456184455,
-      "insight": "Commercial Auto $20K/yr + WC $6K/yr",
+      "contact_strength": "partial",
+      "score": 45.54559799872354,
+      "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
-      "est_annual_premium_usd": 26000,
       "coverages": [
         "Commercial Auto",
         "Workers Comp"
@@ -624,10 +624,10 @@
       "dm_title": "Owner / Officer",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 45.60294102721041,
-      "insight": "Commercial Auto $5K/yr + WC $12K/yr",
+      "contact_strength": "partial",
+      "score": 45.52385027923177,
+      "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
-      "est_annual_premium_usd": 17000,
       "coverages": [
         "Commercial Auto",
         "Workers Comp"
@@ -663,10 +663,10 @@
       "dm_title": "Owner / Officer",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 45.377844617305136,
-      "insight": "Commercial Auto $5K/yr + WC $12K/yr",
+      "contact_strength": "partial",
+      "score": 45.299144178084525,
+      "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
-      "est_annual_premium_usd": 17000,
       "coverages": [
         "Commercial Auto",
         "Workers Comp"
@@ -675,7 +675,7 @@
         {
           "type": "new_motor_carrier_authority",
           "captured_at": "2026-05-15T23:34:39.651525",
-          "days_ago": 0,
+          "days_ago": 1,
           "payload": {
             "usdot": "4582416",
             "dba_name": "",
@@ -702,10 +702,10 @@
       "dm_title": "Owner/Member",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 45.377844608968495,
-      "insight": "Commercial Auto $5K/yr + WC $12K/yr",
+      "contact_strength": "partial",
+      "score": 45.299144108127315,
+      "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
-      "est_annual_premium_usd": 17000,
       "coverages": [
         "Commercial Auto",
         "Workers Comp"
@@ -714,7 +714,7 @@
         {
           "type": "new_motor_carrier_authority",
           "captured_at": "2026-05-15T23:34:39.651525",
-          "days_ago": 0,
+          "days_ago": 1,
           "payload": {
             "usdot": "4582430",
             "dba_name": "",
@@ -741,10 +741,10 @@
       "dm_title": null,
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 45.2126676084488,
-      "insight": "Cyber + E&O \u00b7 est. $2.4K/yr",
+      "contact_strength": "cold",
+      "score": 45.134253510353766,
+      "insight": "Cyber + E&O",
       "trigger_type": "federal_contract",
-      "est_annual_premium_usd": 2435.74656,
       "coverages": [
         "Cyber",
         "E&O",
@@ -779,10 +779,10 @@
       "dm_title": "Training Management and Assessment Compliance Officer",
       "dm_email": "ryan.gregory@chenega.com",
       "dm_linkedin_url": "http://www.linkedin.com/in/ryan-gregory-69b86315a",
-      "score": 44.134886086880734,
-      "insight": "GL + E&O \u00b7 est. $2.9K/yr",
+      "contact_strength": "verified",
+      "score": 44.058341167717096,
+      "insight": "GL + E&O",
       "trigger_type": "federal_contract",
-      "est_annual_premium_usd": 2882.71125,
       "coverages": [
         "GL",
         "E&O",
@@ -817,10 +817,10 @@
       "dm_title": "Owner / Officer",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 44.03042577646921,
-      "insight": "Commercial Auto $5K/yr + WC $9K/yr",
+      "contact_strength": "partial",
+      "score": 43.95406170116713,
+      "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
-      "est_annual_premium_usd": 14000,
       "coverages": [
         "Commercial Auto",
         "Workers Comp"
@@ -856,10 +856,10 @@
       "dm_title": "Owner / Officer",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 44.030425768179946,
-      "insight": "Commercial Auto $15K/yr + WC $9K/yr",
+      "contact_strength": "partial",
+      "score": 43.954061104352576,
+      "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
-      "est_annual_premium_usd": 24000,
       "coverages": [
         "Commercial Auto",
         "Workers Comp"
@@ -895,10 +895,10 @@
       "dm_title": "Owner / Officer",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 43.813091302478,
-      "insight": "Commercial Auto $15K/yr + WC $6K/yr",
+      "contact_strength": "partial",
+      "score": 43.737103074122274,
+      "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
-      "est_annual_premium_usd": 21000,
       "coverages": [
         "Commercial Auto",
         "Workers Comp"
@@ -907,7 +907,7 @@
         {
           "type": "new_motor_carrier_authority",
           "captured_at": "2026-05-15T23:34:39.651525",
-          "days_ago": 0,
+          "days_ago": 1,
           "payload": {
             "usdot": "4582428",
             "dba_name": "",
@@ -934,10 +934,10 @@
       "dm_title": "Owner / Officer",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 43.113269668170794,
-      "insight": "Commercial Auto $5K/yr + WC $6K/yr",
+      "contact_strength": "cold",
+      "score": 43.03849518261085,
+      "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
-      "est_annual_premium_usd": 11000,
       "coverages": [
         "Commercial Auto",
         "Workers Comp"
@@ -973,10 +973,10 @@
       "dm_title": "Chief Executive Officer",
       "dm_email": "nick@movecars.com",
       "dm_linkedin_url": "http://www.linkedin.com/in/nickolaus",
-      "score": 43.113269659961965,
-      "insight": "Commercial Auto $10K/yr + WC $6K/yr",
+      "contact_strength": "verified",
+      "score": 43.03849517156196,
+      "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
-      "est_annual_premium_usd": 16000,
       "coverages": [
         "Commercial Auto",
         "Workers Comp"
@@ -1012,10 +1012,10 @@
       "dm_title": "Director of Operations",
       "dm_email": "cstone@dmttruck.com",
       "dm_linkedin_url": "http://www.linkedin.com/in/colby-stone-8056a915a",
-      "score": 43.113269652295,
-      "insight": "Commercial Auto $5K/yr + WC $6K/yr",
+      "contact_strength": "verified",
+      "score": 43.03849515849895,
+      "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
-      "est_annual_premium_usd": 11000,
       "coverages": [
         "Commercial Auto",
         "Workers Comp"
@@ -1051,10 +1051,10 @@
       "dm_title": "Owner",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 43.11326964361348,
-      "insight": "Commercial Auto $10K/yr + WC $3K/yr",
+      "contact_strength": "partial",
+      "score": 43.038495146851574,
+      "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
-      "est_annual_premium_usd": 13000,
       "coverages": [
         "Commercial Auto",
         "Workers Comp"
@@ -1090,10 +1090,10 @@
       "dm_title": "Owner / Officer",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 43.11326963561217,
-      "insight": "Commercial Auto $5K/yr + WC $6K/yr",
+      "contact_strength": "partial",
+      "score": 43.03849513590627,
+      "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
-      "est_annual_premium_usd": 11000,
       "coverages": [
         "Commercial Auto",
         "Workers Comp"
@@ -1129,10 +1129,10 @@
       "dm_title": "Owner / Officer",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 43.113269627829915,
-      "insight": "Commercial Auto $5K/yr + WC $6K/yr",
+      "contact_strength": "partial",
+      "score": 43.038495124811334,
+      "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
-      "est_annual_premium_usd": 11000,
       "coverages": [
         "Commercial Auto",
         "Workers Comp"
@@ -1168,10 +1168,10 @@
       "dm_title": "Owner / Officer",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 42.47819347304685,
-      "insight": "Commercial Auto $10K/yr + WC $3K/yr",
+      "contact_strength": "partial",
+      "score": 42.40452042671758,
+      "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
-      "est_annual_premium_usd": 13000,
       "coverages": [
         "Commercial Auto",
         "Workers Comp"
@@ -1207,10 +1207,10 @@
       "dm_title": "Chief Financial Officer",
       "dm_email": "ilewis@tmhmidsouth.com",
       "dm_linkedin_url": "http://www.linkedin.com/in/isaac-lewis-42a8177",
-      "score": 42.47819346400474,
-      "insight": "Commercial Auto $10K/yr + WC $6K/yr",
+      "contact_strength": "verified",
+      "score": 42.4045204160469,
+      "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
-      "est_annual_premium_usd": 16000,
       "coverages": [
         "Commercial Auto",
         "Workers Comp"
@@ -1246,10 +1246,10 @@
       "dm_title": null,
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 42.46194753296626,
-      "insight": "Commercial Auto $10K/yr + WC $3K/yr",
+      "contact_strength": "partial",
+      "score": 42.38830265850353,
+      "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
-      "est_annual_premium_usd": 13000,
       "coverages": [
         "Commercial Auto",
         "Workers Comp"
@@ -1285,10 +1285,10 @@
       "dm_title": "Owner / Officer",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 42.45791047171617,
-      "insight": "Commercial Auto $5K/yr + WC $6K/yr",
+      "contact_strength": "partial",
+      "score": 42.38427259647505,
+      "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
-      "est_annual_premium_usd": 11000,
       "coverages": [
         "Commercial Auto",
         "Workers Comp"
@@ -1324,10 +1324,10 @@
       "dm_title": "Owner / Officer",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 42.248337952274454,
-      "insight": "Commercial Auto $5K/yr + WC $6K/yr",
+      "contact_strength": "partial",
+      "score": 42.17506355114981,
+      "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
-      "est_annual_premium_usd": 11000,
       "coverages": [
         "Commercial Auto",
         "Workers Comp"
@@ -1336,7 +1336,7 @@
         {
           "type": "new_motor_carrier_authority",
           "captured_at": "2026-05-15T23:34:39.651525",
-          "days_ago": 0,
+          "days_ago": 1,
           "payload": {
             "usdot": "4582420",
             "dba_name": "KHAROD TRUCKING",
@@ -1363,10 +1363,10 @@
       "dm_title": "CFO",
       "dm_email": "kkraus@rbm.us",
       "dm_linkedin_url": "http://www.linkedin.com/in/kade-kraus-01a78310",
-      "score": 42.24833794299882,
-      "insight": "Commercial Auto $5K/yr + WC $6K/yr",
+      "contact_strength": "verified",
+      "score": 42.17506354010829,
+      "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
-      "est_annual_premium_usd": 11000,
       "coverages": [
         "Commercial Auto",
         "Workers Comp"
@@ -1375,7 +1375,7 @@
         {
           "type": "new_motor_carrier_authority",
           "captured_at": "2026-05-15T23:34:39.651525",
-          "days_ago": 0,
+          "days_ago": 1,
           "payload": {
             "usdot": "4582421",
             "dba_name": "",
@@ -1402,10 +1402,10 @@
       "dm_title": "Owner / President",
       "dm_email": "mkoura@vitaltransportcorp.com",
       "dm_linkedin_url": "http://www.linkedin.com/in/mohamed-koura-b5924544",
-      "score": 42.24833793448016,
-      "insight": "Commercial Auto $10K/yr + WC $6K/yr",
+      "contact_strength": "verified",
+      "score": 42.175063529574295,
+      "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
-      "est_annual_premium_usd": 16000,
       "coverages": [
         "Commercial Auto",
         "Workers Comp"
@@ -1414,7 +1414,7 @@
         {
           "type": "new_motor_carrier_authority",
           "captured_at": "2026-05-15T23:34:39.651525",
-          "days_ago": 0,
+          "days_ago": 1,
           "payload": {
             "usdot": "4582423",
             "dba_name": "SY HUSSAIN OR SYEDA HUSSAIN",
@@ -1441,10 +1441,10 @@
       "dm_title": "Company Officer",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 42.248337926526396,
-      "insight": "Commercial Auto $10K/yr + WC $6K/yr",
+      "contact_strength": "partial",
+      "score": 42.175063519683164,
+      "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
-      "est_annual_premium_usd": 16000,
       "coverages": [
         "Commercial Auto",
         "Workers Comp"
@@ -1453,7 +1453,7 @@
         {
           "type": "new_motor_carrier_authority",
           "captured_at": "2026-05-15T23:34:39.651525",
-          "days_ago": 0,
+          "days_ago": 1,
           "payload": {
             "usdot": "4582426",
             "dba_name": "",
@@ -1480,10 +1480,10 @@
       "dm_title": "Owner / Officer",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 42.24833791833537,
-      "insight": "Commercial Auto $5K/yr + WC $6K/yr",
+      "contact_strength": "partial",
+      "score": 42.17506350197613,
+      "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
-      "est_annual_premium_usd": 11000,
       "coverages": [
         "Commercial Auto",
         "Workers Comp"
@@ -1492,7 +1492,7 @@
         {
           "type": "new_motor_carrier_authority",
           "captured_at": "2026-05-15T23:34:39.651525",
-          "days_ago": 0,
+          "days_ago": 1,
           "payload": {
             "usdot": "4582431",
             "dba_name": "BRITTANY C GADSON",
@@ -1519,10 +1519,10 @@
       "dm_title": "Owner",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 41.519847415890425,
-      "insight": "Commercial Auto $5K/yr + WC $3K/yr",
+      "contact_strength": "partial",
+      "score": 41.447836471449385,
+      "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
-      "est_annual_premium_usd": 8000,
       "coverages": [
         "Commercial Auto",
         "Workers Comp"
@@ -1558,10 +1558,10 @@
       "dm_title": "Owner / Officer",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 41.51648177328626,
-      "insight": "Commercial Auto $5K/yr + WC $3K/yr",
+      "contact_strength": "partial",
+      "score": 41.444476663279964,
+      "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
-      "est_annual_premium_usd": 8000,
       "coverages": [
         "Commercial Auto",
         "Workers Comp"
@@ -1597,10 +1597,10 @@
       "dm_title": "Owner / Officer",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 41.516481764615406,
-      "insight": "Commercial Auto $5K/yr + WC $3K/yr",
+      "contact_strength": "partial",
+      "score": 41.444476651908815,
+      "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
-      "est_annual_premium_usd": 8000,
       "coverages": [
         "Commercial Auto",
         "Workers Comp"
@@ -1636,10 +1636,10 @@
       "dm_title": "Owner / Officer",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 41.51648175716579,
-      "insight": "Commercial Auto $5K/yr + WC $3K/yr",
+      "contact_strength": "cold",
+      "score": 41.44447664017192,
+      "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
-      "est_annual_premium_usd": 8000,
       "coverages": [
         "Commercial Auto",
         "Workers Comp"
@@ -1675,10 +1675,10 @@
       "dm_title": "Owner / Officer",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 41.516481748916824,
-      "insight": "Commercial Auto $5K/yr + WC $3K/yr",
+      "contact_strength": "partial",
+      "score": 41.44447663052972,
+      "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
-      "est_annual_premium_usd": 8000,
       "coverages": [
         "Commercial Auto",
         "Workers Comp"
@@ -1714,10 +1714,10 @@
       "dm_title": "Owner / Officer",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 41.51648174085659,
-      "insight": "Commercial Auto $5K/yr + WC $3K/yr",
+      "contact_strength": "partial",
+      "score": 41.44447661985679,
+      "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
-      "est_annual_premium_usd": 8000,
       "coverages": [
         "Commercial Auto",
         "Workers Comp"
@@ -1753,10 +1753,10 @@
       "dm_title": "Owner / Officer",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 41.516481733529105,
-      "insight": "Commercial Auto \u00b7 est. $5K/yr",
+      "contact_strength": "partial",
+      "score": 41.444476609538526,
+      "insight": "Commercial Auto",
       "trigger_type": "motor_carrier",
-      "est_annual_premium_usd": 5000,
       "coverages": [
         "Commercial Auto"
       ],
@@ -1791,10 +1791,10 @@
       "dm_title": "Owner / Officer",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 41.516481725413364,
-      "insight": "Commercial Auto $5K/yr + WC $3K/yr",
+      "contact_strength": "partial",
+      "score": 41.444476598355784,
+      "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
-      "est_annual_premium_usd": 8000,
       "coverages": [
         "Commercial Auto",
         "Workers Comp"
@@ -1830,10 +1830,10 @@
       "dm_title": "Owner / Officer",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 41.51648171707557,
-      "insight": "Commercial Auto $5K/yr + WC $3K/yr",
+      "contact_strength": "partial",
+      "score": 41.444476588115094,
+      "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
-      "est_annual_premium_usd": 8000,
       "coverages": [
         "Commercial Auto",
         "Workers Comp"
@@ -1869,10 +1869,10 @@
       "dm_title": "Owner / Officer",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 41.51648170924849,
-      "insight": "Commercial Auto $5K/yr + WC $3K/yr",
+      "contact_strength": "partial",
+      "score": 41.444476578273395,
+      "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
-      "est_annual_premium_usd": 8000,
       "coverages": [
         "Commercial Auto",
         "Workers Comp"
@@ -1908,10 +1908,10 @@
       "dm_title": "President, CEO",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 41.51648170101062,
-      "insight": "Commercial Auto $5K/yr + WC $3K/yr",
+      "contact_strength": "partial",
+      "score": 41.44447656709065,
+      "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
-      "est_annual_premium_usd": 8000,
       "coverages": [
         "Commercial Auto",
         "Workers Comp"
@@ -1947,10 +1947,10 @@
       "dm_title": "Owner",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 40.90492688774677,
-      "insight": "Commercial Auto $5K/yr + WC $3K/yr",
+      "contact_strength": "partial",
+      "score": 40.83398241567979,
+      "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
-      "est_annual_premium_usd": 8000,
       "coverages": [
         "Commercial Auto",
         "Workers Comp"
@@ -1986,10 +1986,10 @@
       "dm_title": "Owner / Officer",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 40.904926878886414,
-      "insight": "Commercial Auto \u00b7 est. $5K/yr",
+      "contact_strength": "partial",
+      "score": 40.833982405087646,
+      "insight": "Commercial Auto",
       "trigger_type": "motor_carrier",
-      "est_annual_premium_usd": 5000,
       "coverages": [
         "Commercial Auto"
       ],
@@ -2024,10 +2024,10 @@
       "dm_title": "Owner / Officer",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 40.904926870890215,
-      "insight": "Commercial Auto \u00b7 est. $5K/yr",
+      "contact_strength": "partial",
+      "score": 40.83398239594783,
+      "insight": "Commercial Auto",
       "trigger_type": "motor_carrier",
-      "est_annual_premium_usd": 5000,
       "coverages": [
         "Commercial Auto"
       ],
@@ -2062,10 +2062,10 @@
       "dm_title": "Owner / Officer",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 40.904926863265935,
-      "insight": "Commercial Auto $5K/yr + WC $3K/yr",
+      "contact_strength": "partial",
+      "score": 40.8339823852574,
+      "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
-      "est_annual_premium_usd": 8000,
       "coverages": [
         "Commercial Auto",
         "Workers Comp"
@@ -2101,10 +2101,10 @@
       "dm_title": "Owner",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 40.90000350114348,
-      "insight": "Commercial Auto $5K/yr + WC $3K/yr",
+      "contact_strength": "partial",
+      "score": 40.82906753469626,
+      "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
-      "est_annual_premium_usd": 8000,
       "coverages": [
         "Commercial Auto",
         "Workers Comp"
@@ -2140,10 +2140,10 @@
       "dm_title": "Owner / Officer",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 40.889282623395566,
-      "insight": "Commercial Auto $5K/yr + WC $3K/yr",
+      "contact_strength": "partial",
+      "score": 40.81836524848794,
+      "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
-      "est_annual_premium_usd": 8000,
       "coverages": [
         "Commercial Auto",
         "Workers Comp"
@@ -2179,10 +2179,10 @@
       "dm_title": "Owner / Officer",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 40.88928261335767,
-      "insight": "Commercial Auto $5K/yr + WC $3K/yr",
+      "contact_strength": "partial",
+      "score": 40.81836523788893,
+      "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
-      "est_annual_premium_usd": 8000,
       "coverages": [
         "Commercial Auto",
         "Workers Comp"
@@ -2218,10 +2218,10 @@
       "dm_title": "Founder / CEO",
       "dm_email": "mitch@junkmastersmn.com",
       "dm_linkedin_url": "http://www.linkedin.com/in/mitch-harrison-0804b915a",
-      "score": 40.88928260424922,
-      "insight": "Commercial Auto $5K/yr + WC $3K/yr",
+      "contact_strength": "verified",
+      "score": 40.81836522738816,
+      "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
-      "est_annual_premium_usd": 8000,
       "coverages": [
         "Commercial Auto",
         "Workers Comp"
@@ -2257,10 +2257,10 @@
       "dm_title": "Owner / Officer",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 40.889282595949915,
-      "insight": "Commercial Auto $5K/yr + WC $3K/yr",
+      "contact_strength": "partial",
+      "score": 40.818365216952884,
+      "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
-      "est_annual_premium_usd": 8000,
       "coverages": [
         "Commercial Auto",
         "Workers Comp"
@@ -2296,10 +2296,10 @@
       "dm_title": "Owner / Officer",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 40.88928258624005,
-      "insight": "Commercial Auto $5K/yr + WC $3K/yr",
+      "contact_strength": "partial",
+      "score": 40.81836520592817,
+      "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
-      "est_annual_premium_usd": 8000,
       "coverages": [
         "Commercial Auto",
         "Workers Comp"
@@ -2335,10 +2335,10 @@
       "dm_title": "Owner / Officer",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 40.88928257847654,
-      "insight": "Commercial Auto $5K/yr + WC $3K/yr",
+      "contact_strength": "partial",
+      "score": 40.81836519480521,
+      "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
-      "est_annual_premium_usd": 8000,
       "coverages": [
         "Commercial Auto",
         "Workers Comp"
@@ -2374,10 +2374,10 @@
       "dm_title": "Owner / Officer",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 40.88539503834158,
-      "insight": "Commercial Auto $5K/yr + WC $3K/yr",
+      "contact_strength": "partial",
+      "score": 40.81448439325127,
+      "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
-      "est_annual_premium_usd": 8000,
       "coverages": [
         "Commercial Auto",
         "Workers Comp"
@@ -2413,10 +2413,10 @@
       "dm_title": "Owner / Officer",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 40.885395030152395,
-      "insight": "Commercial Auto \u00b7 est. $5K/yr",
+      "contact_strength": "partial",
+      "score": 40.81448438206388,
+      "insight": "Commercial Auto",
       "trigger_type": "motor_carrier",
-      "est_annual_premium_usd": 5000,
       "coverages": [
         "Commercial Auto"
       ],
@@ -2451,10 +2451,10 @@
       "dm_title": "Owner / Officer",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 40.885395021569614,
-      "insight": "Commercial Auto \u00b7 est. $5K/yr",
+      "contact_strength": "partial",
+      "score": 40.81448436980688,
+      "insight": "Commercial Auto",
       "trigger_type": "motor_carrier",
-      "est_annual_premium_usd": 5000,
       "coverages": [
         "Commercial Auto"
       ],
@@ -2489,10 +2489,10 @@
       "dm_title": "Owner / Officer",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 40.88539501409111,
-      "insight": "Commercial Auto \u00b7 est. $5K/yr",
+      "contact_strength": "partial",
+      "score": 40.81448435853217,
+      "insight": "Commercial Auto",
       "trigger_type": "motor_carrier",
-      "est_annual_premium_usd": 5000,
       "coverages": [
         "Commercial Auto"
       ],
@@ -2527,10 +2527,10 @@
       "dm_title": null,
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 40.741509825321515,
-      "insight": "E&O + D&O \u00b7 est. $1.6K/yr",
+      "contact_strength": "cold",
+      "score": 40.67084871846946,
+      "insight": "E&O + D&O",
       "trigger_type": "federal_contract",
-      "est_annual_premium_usd": 1581.8303,
       "coverages": [
         "E&O",
         "D&O",
@@ -2565,10 +2565,10 @@
       "dm_title": "Owner",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 40.68358443187924,
-      "insight": "Commercial Auto $5K/yr + WC $3K/yr",
+      "contact_strength": "partial",
+      "score": 40.61302378948617,
+      "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
-      "est_annual_premium_usd": 8000,
       "coverages": [
         "Commercial Auto",
         "Workers Comp"
@@ -2577,7 +2577,7 @@
         {
           "type": "new_motor_carrier_authority",
           "captured_at": "2026-05-15T23:34:39.651525",
-          "days_ago": 0,
+          "days_ago": 1,
           "payload": {
             "usdot": "4582411",
             "dba_name": "",
@@ -2604,10 +2604,10 @@
       "dm_title": "President",
       "dm_email": null,
       "dm_linkedin_url": "http://www.linkedin.com/in/lawrence-shub-3b86b810",
-      "score": 40.6835844240895,
-      "insight": "Commercial Auto $5K/yr + WC $3K/yr",
+      "contact_strength": "verified",
+      "score": 40.61302377810421,
+      "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
-      "est_annual_premium_usd": 8000,
       "coverages": [
         "Commercial Auto",
         "Workers Comp"
@@ -2616,7 +2616,7 @@
         {
           "type": "new_motor_carrier_authority",
           "captured_at": "2026-05-15T23:34:39.651525",
-          "days_ago": 0,
+          "days_ago": 1,
           "payload": {
             "usdot": "4582413",
             "dba_name": "",
@@ -2643,10 +2643,10 @@
       "dm_title": "Owner / Officer",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 40.683584416495606,
-      "insight": "Commercial Auto $5K/yr + WC $3K/yr",
+      "contact_strength": "cold",
+      "score": 40.613023767906064,
+      "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
-      "est_annual_premium_usd": 8000,
       "coverages": [
         "Commercial Auto",
         "Workers Comp"
@@ -2655,7 +2655,7 @@
         {
           "type": "new_motor_carrier_authority",
           "captured_at": "2026-05-15T23:34:39.651525",
-          "days_ago": 0,
+          "days_ago": 1,
           "payload": {
             "usdot": "4582414",
             "dba_name": "SKY TRANSPORTATION",
@@ -2682,10 +2682,10 @@
       "dm_title": "Founder",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 40.68358440922808,
-      "insight": "Commercial Auto $5K/yr + WC $3K/yr",
+      "contact_strength": "partial",
+      "score": 40.61302375607882,
+      "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
-      "est_annual_premium_usd": 8000,
       "coverages": [
         "Commercial Auto",
         "Workers Comp"
@@ -2694,7 +2694,7 @@
         {
           "type": "new_motor_carrier_authority",
           "captured_at": "2026-05-15T23:34:39.651525",
-          "days_ago": 0,
+          "days_ago": 1,
           "payload": {
             "usdot": "4582415",
             "dba_name": "LISBOA CAFE",
@@ -2721,10 +2721,10 @@
       "dm_title": "Owner / Officer",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 40.683584396803674,
-      "insight": "Commercial Auto $5K/yr + WC $3K/yr",
+      "contact_strength": "partial",
+      "score": 40.61302374590238,
+      "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
-      "est_annual_premium_usd": 8000,
       "coverages": [
         "Commercial Auto",
         "Workers Comp"
@@ -2733,7 +2733,7 @@
         {
           "type": "new_motor_carrier_authority",
           "captured_at": "2026-05-15T23:34:39.651525",
-          "days_ago": 0,
+          "days_ago": 1,
           "payload": {
             "usdot": "4582417",
             "dba_name": "",
@@ -2760,10 +2760,10 @@
       "dm_title": null,
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 40.683584388491724,
-      "insight": "Commercial Auto $5K/yr + WC $3K/yr",
+      "contact_strength": "partial",
+      "score": 40.61302373497657,
+      "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
-      "est_annual_premium_usd": 8000,
       "coverages": [
         "Commercial Auto",
         "Workers Comp"
@@ -2772,7 +2772,7 @@
         {
           "type": "new_motor_carrier_authority",
           "captured_at": "2026-05-15T23:34:39.651525",
-          "days_ago": 0,
+          "days_ago": 1,
           "payload": {
             "usdot": "4582418",
             "dba_name": "",
@@ -2799,10 +2799,10 @@
       "dm_title": null,
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 40.68358437957052,
-      "insight": "Commercial Auto $5K/yr + WC $3K/yr",
+      "contact_strength": "partial",
+      "score": 40.61302372374666,
+      "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
-      "est_annual_premium_usd": 8000,
       "coverages": [
         "Commercial Auto",
         "Workers Comp"
@@ -2811,7 +2811,7 @@
         {
           "type": "new_motor_carrier_authority",
           "captured_at": "2026-05-15T23:34:39.651525",
-          "days_ago": 0,
+          "days_ago": 1,
           "payload": {
             "usdot": "4582419",
             "dba_name": "",
@@ -2838,10 +2838,10 @@
       "dm_title": "Owner / Officer",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 40.683584370899545,
-      "insight": "Commercial Auto $5K/yr + WC $3K/yr",
+      "contact_strength": "partial",
+      "score": 40.61302371202802,
+      "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
-      "est_annual_premium_usd": 8000,
       "coverages": [
         "Commercial Auto",
         "Workers Comp"
@@ -2850,7 +2850,7 @@
         {
           "type": "new_motor_carrier_authority",
           "captured_at": "2026-05-15T23:34:39.651525",
-          "days_ago": 0,
+          "days_ago": 1,
           "payload": {
             "usdot": "4582422",
             "dba_name": "",
@@ -2877,10 +2877,10 @@
       "dm_title": "Director of Operations",
       "dm_email": null,
       "dm_linkedin_url": "http://www.linkedin.com/in/alison-sawyer",
-      "score": 40.68358436214153,
-      "insight": "Commercial Auto $5K/yr + WC $3K/yr",
+      "contact_strength": "verified",
+      "score": 40.61302370007044,
+      "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
-      "est_annual_premium_usd": 8000,
       "coverages": [
         "Commercial Auto",
         "Workers Comp"
@@ -2889,7 +2889,7 @@
         {
           "type": "new_motor_carrier_authority",
           "captured_at": "2026-05-15T23:34:39.651525",
-          "days_ago": 0,
+          "days_ago": 1,
           "payload": {
             "usdot": "4582424",
             "dba_name": "",
@@ -2916,10 +2916,10 @@
       "dm_title": "Owner",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 40.68358434500629,
-      "insight": "Commercial Auto $5K/yr + WC $3K/yr",
+      "contact_strength": "partial",
+      "score": 40.613023687569836,
+      "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
-      "est_annual_premium_usd": 8000,
       "coverages": [
         "Commercial Auto",
         "Workers Comp"
@@ -2928,7 +2928,7 @@
         {
           "type": "new_motor_carrier_authority",
           "captured_at": "2026-05-15T23:34:39.651525",
-          "days_ago": 0,
+          "days_ago": 1,
           "payload": {
             "usdot": "4582425",
             "dba_name": "",
@@ -2955,10 +2955,10 @@
       "dm_title": "Owner / Officer",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 40.68358433608508,
-      "insight": "Commercial Auto $5K/yr + WC $3K/yr",
+      "contact_strength": "cold",
+      "score": 40.61302367818624,
+      "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
-      "est_annual_premium_usd": 8000,
       "coverages": [
         "Commercial Auto",
         "Workers Comp"
@@ -2967,7 +2967,7 @@
         {
           "type": "new_motor_carrier_authority",
           "captured_at": "2026-05-15T23:34:39.651525",
-          "days_ago": 0,
+          "days_ago": 1,
           "payload": {
             "usdot": "4582427",
             "dba_name": "",
@@ -2994,10 +2994,10 @@
       "dm_title": "President",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 40.68358432784928,
-      "insight": "Commercial Auto $5K/yr + WC $3K/yr",
+      "contact_strength": "partial",
+      "score": 40.613023667303864,
+      "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
-      "est_annual_premium_usd": 8000,
       "coverages": [
         "Commercial Auto",
         "Workers Comp"
@@ -3006,7 +3006,7 @@
         {
           "type": "new_motor_carrier_authority",
           "captured_at": "2026-05-15T23:34:39.651525",
-          "days_ago": 0,
+          "days_ago": 1,
           "payload": {
             "usdot": "4582429",
             "dba_name": "",
@@ -3033,10 +3033,10 @@
       "dm_title": "President",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 39.7580603974281,
-      "insight": "E&O + D&O \u00b7 est. $1.5K/yr",
+      "contact_strength": "partial",
+      "score": 39.68910494061173,
+      "insight": "E&O + D&O",
       "trigger_type": "federal_contract",
-      "est_annual_premium_usd": 1483.3,
       "coverages": [
         "E&O",
         "D&O",
@@ -3071,10 +3071,10 @@
       "dm_title": "President",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 36.220727875868214,
-      "insight": "Product Liability + GL \u00b7 est. $1.6K/yr",
+      "contact_strength": "partial",
+      "score": 36.157907484007744,
+      "insight": "Product Liability + GL",
       "trigger_type": "federal_contract",
-      "est_annual_premium_usd": 1580.46,
       "coverages": [
         "Product Liability",
         "GL",
@@ -3109,10 +3109,10 @@
       "dm_title": null,
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 35.704796343827546,
-      "insight": "Professional Liability (E&O) + GL \u00b7 est. $1.3K/yr",
+      "contact_strength": "cold",
+      "score": 35.64287076938404,
+      "insight": "Professional Liability (E&O) + GL",
       "trigger_type": "federal_contract",
-      "est_annual_premium_usd": 1292.6515200000001,
       "coverages": [
         "Professional Liability (E&O)",
         "GL"
@@ -3146,10 +3146,10 @@
       "dm_title": "President",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 35.26965652756033,
-      "insight": "Professional Liability (E&O) + GL \u00b7 est. $1.2K/yr",
+      "contact_strength": "partial",
+      "score": 35.20848564801432,
+      "insight": "Professional Liability (E&O) + GL",
       "trigger_type": "federal_contract",
-      "est_annual_premium_usd": 1240.3363200000001,
       "coverages": [
         "Professional Liability (E&O)",
         "GL"
@@ -3183,10 +3183,10 @@
       "dm_title": "Director of Operations & Business Development Manager, Mid Atlantic Region",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 34.50416339166181,
-      "insight": "Commercial Auto + GL \u00b7 est. $1.7K/yr",
+      "contact_strength": "partial",
+      "score": 34.444320164499956,
+      "insight": "Commercial Auto + GL",
       "trigger_type": "federal_contract",
-      "est_annual_premium_usd": 1722.456,
       "coverages": [
         "Commercial Auto",
         "GL",
@@ -3221,10 +3221,10 @@
       "dm_title": null,
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 34.40690071490523,
-      "insight": "Cyber + E&O \u00b7 est. $1.1K/yr",
+      "contact_strength": "cold",
+      "score": 34.347226173924305,
+      "insight": "Cyber + E&O",
       "trigger_type": "federal_contract",
-      "est_annual_premium_usd": 1136.61048,
       "coverages": [
         "Cyber",
         "E&O",
@@ -3259,10 +3259,10 @@
       "dm_title": null,
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 33.302326710137756,
-      "insight": "GL + Pollution Liability \u00b7 est. $1.2K/yr",
+      "contact_strength": "cold",
+      "score": 33.244567914918576,
+      "insight": "GL + Pollution Liability",
       "trigger_type": "federal_contract",
-      "est_annual_premium_usd": 1171.11372,
       "coverages": [
         "GL",
         "Pollution Liability",
@@ -3297,10 +3297,10 @@
       "dm_title": "Owner",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 33.26439120828627,
-      "insight": "GL + Builders Risk \u00b7 est. $1.3K/yr",
+      "contact_strength": "partial",
+      "score": 33.20669820574174,
+      "insight": "GL + Builders Risk",
       "trigger_type": "federal_contract",
-      "est_annual_premium_usd": 1332.33456,
       "coverages": [
         "GL",
         "Builders Risk",
@@ -3335,10 +3335,10 @@
       "dm_title": "President",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 31.457381220601917,
-      "insight": "GL + Builders Risk \u00b7 est. $1.0K/yr",
+      "contact_strength": "partial",
+      "score": 31.402822254044445,
+      "insight": "GL + Builders Risk",
       "trigger_type": "federal_contract",
-      "est_annual_premium_usd": 1042.6680000000001,
       "coverages": [
         "GL",
         "Builders Risk",
@@ -3373,10 +3373,10 @@
       "dm_title": "President and CEO",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 30.0800513335914,
-      "insight": "GL + Professional Liability \u00b7 est. $616/yr",
+      "contact_strength": "partial",
+      "score": 30.027881175573427,
+      "insight": "GL + Professional Liability",
       "trigger_type": "federal_contract",
-      "est_annual_premium_usd": 616.40988,
       "coverages": [
         "GL",
         "Professional Liability"
@@ -3410,10 +3410,10 @@
       "dm_title": "President & CEO",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 29.793060274874016,
-      "insight": "E&O + D&O \u00b7 est. $485/yr",
+      "contact_strength": "partial",
+      "score": 29.74138786577856,
+      "insight": "E&O + D&O",
       "trigger_type": "federal_contract",
-      "est_annual_premium_usd": 484.9217,
       "coverages": [
         "E&O",
         "D&O",
@@ -3448,10 +3448,10 @@
       "dm_title": "CEO",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 29.662472412876916,
-      "insight": "E&O + D&O \u00b7 est. $472/yr",
+      "contact_strength": "partial",
+      "score": 29.61102649058305,
+      "insight": "E&O + D&O",
       "trigger_type": "federal_contract",
-      "est_annual_premium_usd": 471.8383,
       "coverages": [
         "E&O",
         "D&O",
@@ -3486,10 +3486,10 @@
       "dm_title": null,
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 29.60918983790495,
-      "insight": "GL + Pollution Liability \u00b7 est. $653/yr",
+      "contact_strength": "cold",
+      "score": 29.557836327018176,
+      "insight": "GL + Pollution Liability",
       "trigger_type": "federal_contract",
-      "est_annual_premium_usd": 653.1,
       "coverages": [
         "GL",
         "Pollution Liability",
@@ -3524,10 +3524,10 @@
       "dm_title": null,
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 28.224000765857678,
-      "insight": "Cyber + E&O \u00b7 est. $393/yr",
+      "contact_strength": "cold",
+      "score": 28.175049694427717,
+      "insight": "Cyber + E&O",
       "trigger_type": "federal_contract",
-      "est_annual_premium_usd": 393.264,
       "coverages": [
         "Cyber",
         "E&O",
@@ -3562,10 +3562,10 @@
       "dm_title": "Managing Member",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 28.13722432507618,
-      "insight": "GL + Builders Risk \u00b7 est. $510/yr",
+      "contact_strength": "partial",
+      "score": 28.08842375462552,
+      "insight": "GL + Builders Risk",
       "trigger_type": "federal_contract",
-      "est_annual_premium_usd": 510.4416,
       "coverages": [
         "GL",
         "Builders Risk",
@@ -3600,10 +3600,10 @@
       "dm_title": "CEO",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 28.048693190940376,
-      "insight": "Cyber + E&O \u00b7 est. $372/yr",
+      "contact_strength": "partial",
+      "score": 28.00004616514994,
+      "insight": "Cyber + E&O",
       "trigger_type": "federal_contract",
-      "est_annual_premium_usd": 372.18744,
       "coverages": [
         "Cyber",
         "E&O",
@@ -3638,10 +3638,10 @@
       "dm_title": null,
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 27.481097044113458,
-      "insight": "E&O + GL \u00b7 est. $203/yr",
+      "contact_strength": "cold",
+      "score": 27.43343444274965,
+      "insight": "E&O + GL",
       "trigger_type": "federal_contract",
-      "est_annual_premium_usd": 202.63168,
       "coverages": [
         "E&O",
         "GL"
@@ -3675,10 +3675,10 @@
       "dm_title": null,
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 24.949894351956075,
-      "insight": "D&O + EPLI \u00b7 post-funding policy",
+      "contact_strength": "cold",
+      "score": 7.970118979782809,
+      "insight": null,
       "trigger_type": "funding_event",
-      "est_annual_premium_usd": null,
       "coverages": [
         "D&O",
         "EPLI",
@@ -3710,10 +3710,10 @@
       "dm_title": "CEO",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 24.94982276917489,
-      "insight": "D&O + EPLI \u00b7 post-funding policy",
+      "contact_strength": "partial",
+      "score": 7.970096112467185,
+      "insight": null,
       "trigger_type": "funding_event",
-      "est_annual_premium_usd": null,
       "coverages": [
         "D&O",
         "EPLI",
@@ -3745,10 +3745,10 @@
       "dm_title": "Owner",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 24.58236249396623,
-      "insight": "D&O + EPLI \u00b7 post-funding policy",
+      "contact_strength": "partial",
+      "score": 7.852712764486753,
+      "insight": null,
       "trigger_type": "funding_event",
-      "est_annual_premium_usd": null,
       "coverages": [
         "D&O",
         "EPLI",
@@ -3780,10 +3780,10 @@
       "dm_title": null,
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 24.5793906045177,
-      "insight": "D&O + EPLI \u00b7 post-funding policy",
+      "contact_strength": "cold",
+      "score": 7.851763408685058,
+      "insight": null,
       "trigger_type": "funding_event",
-      "est_annual_premium_usd": null,
       "coverages": [
         "D&O",
         "EPLI",
@@ -3815,10 +3815,10 @@
       "dm_title": "Founder & CEO",
       "dm_email": "isaiah@auxiliumhealth.xyz",
       "dm_linkedin_url": "http://www.linkedin.com/in/isaiah-kaiser",
-      "score": 24.572960266575418,
-      "insight": "D&O + EPLI \u00b7 post-funding policy",
+      "contact_strength": "verified",
+      "score": 7.849709268152794,
+      "insight": null,
       "trigger_type": "funding_event",
-      "est_annual_premium_usd": null,
       "coverages": [
         "D&O",
         "EPLI",
@@ -3850,10 +3850,10 @@
       "dm_title": "Co-Founder and Executive Chairman",
       "dm_email": "shawn@majestytherapeutics.com",
       "dm_linkedin_url": "http://www.linkedin.com/in/shawn-titcomb-3086913",
-      "score": 24.572960261738977,
-      "insight": "D&O + EPLI \u00b7 post-funding policy",
+      "contact_strength": "verified",
+      "score": 7.849709265889907,
+      "insight": null,
       "trigger_type": "funding_event",
-      "est_annual_premium_usd": null,
       "coverages": [
         "D&O",
         "EPLI",
@@ -3885,10 +3885,10 @@
       "dm_title": null,
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 24.570625092647884,
-      "insight": "D&O + EPLI \u00b7 post-funding policy",
+      "contact_strength": "cold",
+      "score": 7.848963307346499,
+      "insight": null,
       "trigger_type": "funding_event",
-      "est_annual_premium_usd": null,
       "coverages": [
         "D&O",
         "EPLI",
@@ -3920,10 +3920,10 @@
       "dm_title": "Co-Founder",
       "dm_email": null,
       "dm_linkedin_url": "http://www.linkedin.com/in/frankjiji11",
-      "score": 24.57062508767392,
-      "insight": "D&O + EPLI \u00b7 post-funding policy",
+      "contact_strength": "verified",
+      "score": 7.848963304964188,
+      "insight": null,
       "trigger_type": "funding_event",
-      "est_annual_premium_usd": null,
       "coverages": [
         "D&O",
         "EPLI",
@@ -3955,10 +3955,10 @@
       "dm_title": "Chief Executive Officer",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "score": 24.57062508300221,
-      "insight": "D&O + EPLI \u00b7 post-funding policy",
+      "contact_strength": "partial",
+      "score": 7.8489633028421455,
+      "insight": null,
       "trigger_type": "funding_event",
-      "est_annual_premium_usd": null,
       "coverages": [
         "D&O",
         "EPLI",
@@ -3990,10 +3990,10 @@
       "dm_title": "Co-Founder & CEO",
       "dm_email": "simone@prismlayer.ai",
       "dm_linkedin_url": "http://www.linkedin.com/in/simone-garreau-b3571b10",
-      "score": 24.57062507818594,
-      "insight": "D&O + EPLI \u00b7 post-funding policy",
+      "contact_strength": "verified",
+      "score": 7.8489633004661306,
+      "insight": null,
       "trigger_type": "funding_event",
-      "est_annual_premium_usd": null,
       "coverages": [
         "D&O",
         "EPLI",
@@ -4025,10 +4025,10 @@
       "dm_title": "Senior Vice President / Chief Financial Officer",
       "dm_email": null,
       "dm_linkedin_url": "http://www.linkedin.com/in/david-skilton-8ba329b",
-      "score": 24.57062507332368,
-      "insight": "D&O + EPLI \u00b7 post-funding policy",
+      "contact_strength": "verified",
+      "score": 7.84896329836088,
+      "insight": null,
       "trigger_type": "funding_event",
-      "est_annual_premium_usd": null,
       "coverages": [
         "D&O",
         "EPLI",
