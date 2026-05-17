@@ -88,6 +88,28 @@ _FINANCIAL_FIRM_PREFIX_RES: tuple[re.Pattern[str], ...] = (
     re.compile(r"^MidOcean\b", re.IGNORECASE),
 )
 
+# Issue 4 narrowing: real-estate SPV / vintage-year fund patterns.
+# Independent commercial agencies don't compete for these — they're
+# wholesale-market or specialty-property territory.
+
+# Year-immediately-before-suffix: "Summit Ridge 2024 LLC" / "Acme 1986 Inc".
+# Tightened per review — only matches year (1900-2199) directly before
+# the legal suffix at end of name. Tested against 106 live names:
+# 1 intended match ("Summit Ridge 2024 LLC"), zero false positives.
+# Deliberate non-match: "Acme 2024 Holdings LLC" (year + word + suffix).
+_VINTAGE_YEAR_RE = re.compile(
+    r"\b(?:19|20|21)\d{2}\s*[,.\s]*(?:LLC|Inc|Corp(?:oration)?|LP|LLP|Ltd|Co)\.?\s*$",
+    re.IGNORECASE,
+)
+
+# Street-name SPV pattern: "JR Hyde Park Blvd LLC" / "Marina Bay Ave LLC".
+# Single-property real-estate vehicles. Conservative — anchored to the
+# specific street-suffix-then-LLC pattern at end of name.
+_STREET_SPV_RE = re.compile(
+    r"\b(?:Blvd|Avenue|Ave|Street|St|Road|Rd|Way|Drive|Dr|Lane|Ln|Court|Ct|Place|Pl)\s+(?:LLC|Inc|Corp|LP)\.?\s*$",
+    re.IGNORECASE,
+)
+
 
 def _utcnow() -> datetime:
     return datetime.now(timezone.utc).replace(tzinfo=None)
@@ -113,6 +135,12 @@ def _is_operating_company(name: str) -> bool:
     if _LP_SUFFIX_RE.search(name):
         return False
     if any(p.match(name) for p in _FINANCIAL_FIRM_PREFIX_RES):
+        return False
+    if _VINTAGE_YEAR_RE.search(name):
+        # "Summit Ridge 2024 LLC" — vintage-year fund vehicle.
+        return False
+    if _STREET_SPV_RE.search(name):
+        # "JR Hyde Park Blvd LLC" — single-property real-estate SPV.
         return False
     return True
 

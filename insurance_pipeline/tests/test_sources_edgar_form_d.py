@@ -93,6 +93,69 @@ def test_is_operating_company_filters_vc_funds() -> None:
         assert edgar_form_d._is_operating_company(name), f"expected KEPT: {name!r}"
 
 
+# --- Issue 4 narrowing: real-estate SPV + vintage-year filters --------
+
+
+def test_vintage_year_pattern_filters() -> None:
+    """Year (1900-2199) immediately before legal suffix at end of name."""
+    for name in (
+        "Summit Ridge 2024 LLC",
+        "Acme 1986 Inc",
+        "Pioneer 2030 Corp",
+        "Holdings 2024, LLC",
+    ):
+        assert not edgar_form_d._is_operating_company(name), (
+            f"expected FILTERED (vintage-year): {name!r}"
+        )
+
+
+def test_vintage_year_doesnt_overmatch() -> None:
+    """Deliberate non-match: year + word + suffix. Confirmed by review."""
+    for name in (
+        "Acme 2024 Holdings LLC",   # year mid-name → not caught (deliberate)
+        "US 1031 Exchange Services Inc",  # year-like number in middle
+        "3M Company",  # no year, no suffix issue
+        "Acme Inc. (2024)",  # year after suffix
+    ):
+        # These should NOT trigger the vintage-year rule. Some may still
+        # be filtered by other rules — we assert the vintage rule
+        # specifically doesn't fire.
+        assert not edgar_form_d._VINTAGE_YEAR_RE.search(name), (
+            f"vintage-year regex over-matched: {name!r}"
+        )
+
+
+def test_street_spv_pattern_filters() -> None:
+    """Single-property real-estate SPVs: '<street name> Blvd LLC' etc."""
+    for name in (
+        "JR Hyde Park Blvd LLC",
+        "Marina Bay Avenue LLC",
+        "Sunset Drive LLC",
+        "5th Avenue Inc",
+        "Madison Court LP",
+    ):
+        assert not edgar_form_d._is_operating_company(name), (
+            f"expected FILTERED (street-SPV): {name!r}"
+        )
+
+
+def test_street_spv_doesnt_catch_real_companies() -> None:
+    """Street-name pattern is anchored to suffix-immediately-after-
+    street-type. A real company with a street word mid-name shouldn't
+    trigger."""
+    for name in (
+        "Drive Logistics Inc",  # 'Drive' at start, not suffix
+        "Park Place Catering",   # no LLC suffix at end
+        "Avenue Capital LLC",    # 'Avenue' but followed by Capital
+    ):
+        # Vintage / financial filters may still drop some of these
+        # (e.g. Avenue Capital LLC). We assert the STREET rule didn't
+        # fire.
+        assert not edgar_form_d._STREET_SPV_RE.search(name), (
+            f"street-SPV regex over-matched: {name!r}"
+        )
+
+
 def test_fetch_extracts_form_d_operating_companies(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:

@@ -1,26 +1,20 @@
-"""Deterministic policy-fit + premium estimation per signal.
+"""Deterministic policy-fit hint per signal.
 
-Replaces the LLM-generated insight with a structured tagline an
-insurance agent can triage in 2 seconds:
+Returns the recommended P&C product lines an agent would pitch given
+the signal. v1 included rough premium-dollar estimates; the prior
+review pulled those — the error band on individual leads (2-10×
+either direction) was wide enough that any experienced commercial-
+lines agent could spot the miss, and seeing one wrong number erodes
+trust in every other field on the card. Lines-of-business tags
+alone are defensible and do the actual triage work.
 
-  "Commercial Auto $20K + WC $15K/yr"          ← FMCSA, 5 trucks 5 drivers
-  "Cyber + E&O · est. $5.3K/yr"                ← Federal contract, $442K
-  "D&O + EPLI · post-funding policy"           ← Form D / TechCrunch
-  "GL + WC starter pack"                       ← New business filing
-
-The premium estimates are heuristic — intended as a triage hint, not
-a quote. The exact numbers don't have to be right; the *ordering* by
-premium size has to be right, so an agent can sort their call list
-by commission value.
-
-Industry rate sources (rough industry-average blended rates):
-- Commercial auto: $4-5K/truck/year for new authority carriers
-  (higher risk surcharge, no claims history)
-- Workers comp for truck drivers: $3K/driver/year (class code 7228
-  typical range)
-- Federal contract premium-to-revenue: 1-2% blended depending on
-  vertical (Pollution Liability runs higher, Professional Liability
-  lower)
+Examples:
+  "Commercial Auto + Workers Comp"   ← FMCSA, 5 trucks 5 drivers
+  "Commercial Auto"                  ← FMCSA, 1 truck owner-op
+  "Pollution Liability + GL"         ← Federal contract, hazardous waste NAICS
+  "Professional Liability (E&O) + GL" ← Federal contract, engineering NAICS
+  "D&O + EPLI · post-funding policy" ← Form D / TechCrunch
+  "GL + WC starter pack"             ← New business filing
 """
 
 from __future__ import annotations
@@ -81,93 +75,40 @@ def _safe_int(v: Any) -> int:
         return 0
 
 
-def _safe_float(v: Any) -> float:
-    try:
-        return float(str(v).strip())
-    except (TypeError, ValueError):
-        return 0.0
-
-
-def _fmt_money_k(amount_usd: float) -> str:
-    """Format dollars as compact 'K/yr' for ≤140-char taglines."""
-    if amount_usd <= 0:
-        return "—"
-    if amount_usd < 1000:
-        return f"${amount_usd:.0f}/yr"
-    k = amount_usd / 1000.0
-    # Drop trailing .0 for whole-thousands: "$5K/yr" not "$5.0K/yr".
-    if k == int(k):
-        return f"${int(k)}K/yr"
-    if amount_usd < 10_000:
-        return f"${k:.1f}K/yr"
-    return f"${k:.0f}K/yr"
-
-
 def _fmcsa_fit(sig: Signal) -> dict[str, Any]:
-    trucks = _safe_int(sig.payload.get("fleet_size_power_units"))
     drivers = _safe_int(sig.payload.get("drivers"))
-    # Commercial auto is per-truck; WC is per-driver. They're orthogonal.
-    # When MCMIS reports trucks=0 but drivers>0 (incomplete MCS-150
-    # filing), use drivers as a fallback for the truck count.
-    if trucks > 0:
-        auto_count = trucks
-    elif drivers > 0:
-        auto_count = drivers
-    else:
-        auto_count = 1
-    auto_premium = auto_count * 5000
-    wc_premium = drivers * 3000
-    total = auto_premium + wc_premium
-
     coverages = ["Commercial Auto"]
-    if wc_premium > 0:
+    if drivers > 0:
         coverages.append("Workers Comp")
-
-    if wc_premium > 0:
-        tagline = (
-            f"Commercial Auto {_fmt_money_k(auto_premium)} + "
-            f"WC {_fmt_money_k(wc_premium)}"
-        )
-    else:
-        tagline = f"Commercial Auto · est. {_fmt_money_k(auto_premium)}"
-
+    tagline = " + ".join(coverages)
     return {
         "coverages": coverages,
-        "est_annual_premium_usd": total,
         "tagline": tagline,
     }
 
 
 def _federal_contract_fit(sig: Signal) -> dict[str, Any]:
-    amount = _safe_float(sig.payload.get("amount_usd"))
     naics = sig.payload.get("naics") or ""
-    coverages, rate = _coverages_for_naics(naics)
-    estimated = amount * rate
-    # Show the top two coverage products for brevity.
-    cov_str = " + ".join(coverages[:2])
-    tagline = f"{cov_str} · est. {_fmt_money_k(estimated)}"
+    coverages, _rate = _coverages_for_naics(naics)
+    # Show the top two coverage products for brevity in the tagline;
+    # full list stays in `coverages` for any future filter/sort use.
+    tagline = " + ".join(coverages[:2])
     return {
         "coverages": coverages,
-        "est_annual_premium_usd": estimated,
         "tagline": tagline,
     }
 
 
 def _equity_funding_fit(sig: Signal) -> dict[str, Any]:
-    """Form D / TechCrunch RSS funding — no amount typically available,
-    so the tagline is qualitative."""
     return {
         "coverages": ["D&O", "EPLI", "Cyber"],
-        "est_annual_premium_usd": None,
         "tagline": "D&O + EPLI · post-funding policy",
     }
 
 
 def _new_entity_fit(sig: Signal) -> dict[str, Any]:
-    """SoS new business filing — likely starter coverage need."""
     return {
         "coverages": ["GL", "Workers Comp", "Property"],
-        "est_annual_premium_usd": None,
         "tagline": "GL + WC starter pack",
     }
 
@@ -177,7 +118,6 @@ def estimate_policy_fit(sig: Signal) -> dict[str, Any] | None:
 
     Returns dict with:
       - coverages: list[str] of recommended P&C product lines
-      - est_annual_premium_usd: float or None (rough heuristic)
       - tagline: short agent-facing string (≤80 chars)
     Or None if the signal type doesn't carry enough info.
     """

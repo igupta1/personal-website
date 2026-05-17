@@ -57,10 +57,16 @@ def test_fetch_extracts_contracts(monkeypatch) -> None:
         _result("Pioneer Engineering LLC", amount=50_000),  # dedup
     ]
 
+    # First page returns the data, second page returns empty (signals
+    # end of paging).
+    page_responses = [results, []]
+    call_count = {"i": 0}
+
     def fake_post(url: str, **kwargs: Any) -> MagicMock:
         resp = MagicMock()
         resp.raise_for_status = MagicMock()
-        resp.json = MagicMock(return_value={"results": results})
+        resp.json = MagicMock(return_value={"results": page_responses[call_count["i"]] if call_count["i"] < len(page_responses) else []})
+        call_count["i"] += 1
         return resp
 
     with patch.object(usaspending.requests, "post", side_effect=fake_post):
@@ -103,11 +109,38 @@ def test_request_body_shape(monkeypatch) -> None:
     body = captured[0]
     filters = body["filters"]
     assert filters["award_type_codes"] == ["A", "B", "C", "D"]
-    assert filters["award_amounts"][0]["lower_bound"] == 25_000
-    assert filters["award_amounts"][0]["upper_bound"] == 500_000
+    # Issue 5 widened the amount range from 25K-500K to 10K-2M.
+    assert filters["award_amounts"][0]["lower_bound"] == 10_000
+    assert filters["award_amounts"][0]["upper_bound"] == 2_000_000
     assert "time_period" in filters
     # No date_type in the time_period filter (its presence makes the
     # API return 0). No sort field (Award Date returns null and sort
     # on null returns 0). Both confirmed against the live API.
     assert "date_type" not in filters["time_period"][0]
     assert "sort" not in body
+    assert body["limit"] == 100  # API silently caps higher values
+    assert body["page"] == 1
+
+
+def test_paginates_until_empty(monkeypatch) -> None:
+    """Walks pages until USAspending returns fewer than _LIMIT_PER_PAGE
+    rows (or empty). Confirms we don't stop after page 1."""
+    page_1 = [_result(f"Co {i}", amount=50_000 + i) for i in range(100)]  # full page
+    page_2 = [_result(f"Co2 {i}", amount=60_000 + i) for i in range(45)]  # partial → stop
+    seen_pages: list[int] = []
+
+    def fake_post(url: str, **kwargs: Any) -> MagicMock:
+        body = kwargs.get("json") or {}
+        page = body.get("page", 1)
+        seen_pages.append(page)
+        resp = MagicMock()
+        resp.raise_for_status = MagicMock()
+        resp.json = MagicMock(return_value={"results": page_1 if page == 1 else page_2})
+        return resp
+
+    with patch.object(usaspending.requests, "post", side_effect=fake_post):
+        cands = usaspending.fetch(since=_now() - timedelta(days=14))
+
+    # Should fetch page 1 (full), page 2 (partial → stop), and not page 3.
+    assert seen_pages == [1, 2]
+    assert len(cands) == 145  # 100 + 45, all unique names

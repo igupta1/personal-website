@@ -137,9 +137,32 @@ export default function LeadsPage({ niche, title, subtitle, apiPath }) {
           />
 
           <div className="flex items-center justify-between mb-4">
-            <span className="inline-flex items-center gap-1.5 text-xs text-gray-400">
+            <span className="inline-flex items-center gap-1.5 text-xs text-gray-400 flex-wrap">
               <span className="font-semibold text-gray-200">{visibleLeads.length}</span>
-              <span>of {leads.length} leads</span>
+              <span>{visibleLeads.length === leads.length ? "leads" : `of ${leads.length} leads`}</span>
+              {supportsTriggerFilter && trigger === "any" && (() => {
+                // Surface the trigger-mix breakdown when no trigger
+                // filter is applied — gives the agent a one-glance
+                // signal that the dashboard splits into ~3 distinct
+                // sales plays and the dropdown narrows by specialty.
+                const counts = {};
+                for (const l of leads) {
+                  const t = l.trigger_type || "other";
+                  counts[t] = (counts[t] || 0) + 1;
+                }
+                const labels = [
+                  ["motor_carrier", "motor carrier"],
+                  ["federal_contract", "federal contract"],
+                  ["funding_event", "funding event"],
+                  ["new_entity", "new entity"],
+                ];
+                const parts = labels
+                  .filter(([k]) => counts[k])
+                  .map(([k, label]) => `${counts[k]} ${label}`);
+                return parts.length > 0 ? (
+                  <span className="text-gray-500">· {parts.join(" · ")}</span>
+                ) : null;
+              })()}
             </span>
           </div>
 

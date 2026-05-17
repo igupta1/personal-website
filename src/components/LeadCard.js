@@ -159,6 +159,40 @@ function namesMatch(a, b) {
   return norm(a) === norm(b);
 }
 
+// Match daily_run._contact_strength server-side categorization.
+// Client computes its own as a safety net for older blobs that
+// predate the JSON `contact_strength` field.
+function contactStrengthFor(lead) {
+  if (lead.contact_strength) return lead.contact_strength;
+  if (!lead.dm_name || namesMatch(lead.name, lead.dm_name)) return "cold";
+  if (lead.dm_email || lead.dm_linkedin_url) return "verified";
+  return "partial";
+}
+
+const CONTACT_BADGE = {
+  verified: {
+    label: "Verified contact",
+    dot: "bg-emerald-400",
+    text: "text-emerald-300",
+    ring: "ring-emerald-400/30",
+    bg: "bg-emerald-500/10",
+  },
+  partial: {
+    label: "Name only — research needed",
+    dot: "bg-amber-400",
+    text: "text-amber-300",
+    ring: "ring-amber-400/30",
+    bg: "bg-amber-500/10",
+  },
+  cold: {
+    label: "No contact — research needed",
+    dot: "bg-gray-500",
+    text: "text-gray-400",
+    ring: "ring-gray-500/30",
+    bg: "bg-gray-500/10",
+  },
+};
+
 export default function LeadCard({ lead }) {
   const industryLabel = prettyIndustry(lead.industry);
   const location = [lead.city, lead.state].filter(Boolean).join(", ");
@@ -167,6 +201,8 @@ export default function LeadCard({ lead }) {
   // the DM panel then duplicates the lead title verbatim. Hide it.
   const dmRedundantWithName = namesMatch(lead.name, lead.dm_name);
   const showDmPanel = lead.dm_name && !dmRedundantWithName;
+  const contactStrength = contactStrengthFor(lead);
+  const badge = CONTACT_BADGE[contactStrength];
 
   return (
     <div className="bg-slate-800/70 backdrop-blur border border-slate-700/70 rounded-2xl p-5 shadow-lg shadow-black/10 hover:bg-slate-800 hover:border-slate-600 hover:-translate-y-0.5 transition-all duration-150 flex flex-col">
@@ -210,13 +246,24 @@ export default function LeadCard({ lead }) {
         </div>
       </div>
 
-      {/* Likely decision maker — featured panel: this is the highest-value
-          piece of information for someone using the lead magnet, so it gets
-          a distinct treatment instead of a single-line label. Hidden when
-          the DM name duplicates the lead name (owner-operator carriers
-          filed under the owner's own name). */}
+      {/* Contact-strength badge: agent sees at a glance whether this
+          card is "Verified" (clickable email/LinkedIn), "Partial" (name
+          only, will need to look up the person), or "Cold" (no DM). */}
+      {badge && (
+        <div className={`mt-3 inline-flex self-start items-center gap-1.5 px-2 py-0.5 rounded-full ring-1 ${badge.bg} ${badge.ring}`}>
+          <span className={`h-1.5 w-1.5 rounded-full ${badge.dot}`} />
+          <span className={`text-[10px] font-semibold tracking-wide ${badge.text}`}>
+            {badge.label}
+          </span>
+        </div>
+      )}
+
+      {/* Likely decision maker — featured panel. Hidden when the DM
+          name duplicates the lead name (owner-operator carriers filed
+          under the owner's own name). The contact-strength badge
+          above already communicates "no contact" for those cases. */}
       {showDmPanel && (
-        <div className="mt-3 rounded-lg border border-emerald-500/20 bg-emerald-500/5 px-3 py-2.5">
+        <div className="mt-2 rounded-lg border border-emerald-500/20 bg-emerald-500/5 px-3 py-2.5">
           <div className="text-[10px] font-semibold tracking-widest text-emerald-400 uppercase mb-1">
             Decision maker
           </div>

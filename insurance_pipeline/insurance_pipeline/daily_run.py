@@ -315,11 +315,25 @@ def _apollo_enrich_top_n(conn: sqlite3.Connection, *, n: int) -> set[int]:
         target_ids.add(top_lead.id)
 
     enriched: set[int] = set()
+    skipped_no_domain = 0
     for lead_id in target_ids:
         lead = db.get_lead(conn, lead_id=lead_id)
         if lead is None:
             continue
         if any(s.type == SignalType.APOLLO_ENRICHED for s in lead.signals):
+            continue
+        # Data-driven skip: Apollo whiffs 100% on FMCSA-only leads that
+        # have no domain (measured against the live dashboard, n=47,
+        # zero email/LinkedIn hits across fleet sizes 1-11+). Skip them
+        # to free Apollo budget for leads that can actually be matched.
+        # FMCSA officer-fallback in _apply_source_dm_fallbacks still runs
+        # so these leads still get a DM name.
+        scoring_sigs = [s for s in lead.signals if s.type in _SCORING_SIGNAL_TYPES]
+        all_fmcsa = bool(scoring_sigs) and all(
+            s.type == SignalType.NEW_MOTOR_CARRIER_AUTHORITY for s in scoring_sigs
+        )
+        if all_fmcsa and lead.domain is None:
+            skipped_no_domain += 1
             continue
         try:
             result = apollo.find_decision_maker(lead.name, lead.domain)
@@ -376,6 +390,11 @@ def _apollo_enrich_top_n(conn: sqlite3.Connection, *, n: int) -> set[int]:
         except Exception:
             log.exception("apollo: append marker failed for id=%s", lead_id)
 
+    if skipped_no_domain:
+        log.info(
+            "apollo: skipped %d FMCSA-only no-domain leads (data-driven heuristic)",
+            skipped_no_domain,
+        )
     return enriched
 
 
@@ -470,6 +489,7 @@ def _lead_to_json(lead: Lead, *, now: datetime) -> dict[str, Any]:
     )[:SIGNAL_LIMIT_IN_JSON]
     top_sig = relevant[0] if relevant else None
     fit = policy_fit.estimate_policy_fit(top_sig) if top_sig else None
+    cleaned_dm = _clean_dm_name(lead.dm_name)
     return {
         "name": lead.name,
         "domain": lead.domain,
@@ -480,16 +500,18 @@ def _lead_to_json(lead: Lead, *, now: datetime) -> dict[str, Any]:
         "country": lead.country,
         "city": city,
         "state": state,
-        "dm_name": _clean_dm_name(lead.dm_name),
+        "dm_name": cleaned_dm,
         "dm_title": lead.dm_title,
         "dm_email": lead.dm_email,
         "dm_linkedin_url": lead.dm_linkedin_url,
+        "contact_strength": _contact_strength(
+            lead.name, cleaned_dm, lead.dm_email, lead.dm_linkedin_url
+        ),
         "score": lead.score,
         "insight": lead.insight,
         "trigger_type": (
             policy_fit.trigger_type(top_sig) if top_sig else "other"
         ),
-        "est_annual_premium_usd": fit["est_annual_premium_usd"] if fit else None,
         "coverages": fit["coverages"] if fit else [],
         "signals": [_signal_to_json(s, now) for s in relevant],
     }
@@ -505,6 +527,46 @@ def _clean_dm_name(name: str | None) -> str | None:
     cleaned = _re.sub(r"\bNONE\b", "", name, flags=_re.IGNORECASE)
     cleaned = _re.sub(r"\s+", " ", cleaned).strip()
     return cleaned or None
+
+
+def _contact_strength(
+    lead_name: str,
+    dm_name: str | None,
+    dm_email: str | None,
+    dm_linkedin: str | None,
+) -> str:
+    """Three-state badge for how actionable a lead's contact is.
+
+    'verified': DM name + at least one reachable channel (email or LinkedIn)
+    'partial':  DM name only — research needed to reach them
+    'cold':     no DM, OR DM duplicates the company name (owner-operator
+                filed under their own personal name — no actual person
+                surfaced beyond the lead title)
+
+    The merge across multiple signals already happened at write time
+    (Apollo writes the fields it found in _apollo_enrich_top_n; the
+    FMCSA officer fallback only fills name/title when Apollo didn't).
+    This function reads the lead row's final dm_* columns — which
+    reflect the union of best-available — and resolves the badge.
+    """
+    if not dm_name:
+        return "cold"
+    if _names_match(lead_name, dm_name):
+        return "cold"
+    if dm_email or dm_linkedin:
+        return "verified"
+    return "partial"
+
+
+def _names_match(a: str | None, b: str | None) -> bool:
+    if not a or not b:
+        return False
+    import re as _re
+
+    def _norm(s: str) -> str:
+        return _re.sub(r"\s+", " ", _re.sub(r"[^a-z\s]", "", s.lower())).strip()
+
+    return _norm(a) == _norm(b)
 
 
 def _signal_to_json(s: Signal, now: datetime) -> dict[str, Any]:

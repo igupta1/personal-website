@@ -30,7 +30,15 @@ SIGNAL_WEIGHTS: dict[SignalType, float] = {
     SignalType.NEW_MOTOR_CARRIER_AUTHORITY: 30,
     SignalType.NEW_BUSINESS_FILED: 45,
     SignalType.BUILDING_PERMIT_ISSUED: 30,
-    SignalType.FUNDING_RAISED: 25,
+    # FUNDING_RAISED is the catch-all for Form D + USAspending federal
+    # contracts + TechCrunch RSS. Federal contracts override this with
+    # a size-aware weight inside `_signal_weight`; this flat value is
+    # what Form D and TechCrunch RSS effectively use. Demoted in Issue
+    # 4 (was 25) because the buyer for fresh Series A D&O isn't the
+    # independent commercial agency — it's a specialist broker. Form D
+    # remains in the dataset for D&O-specialist agents who filter to
+    # the "Funding event" trigger, just doesn't crowd the default page.
+    SignalType.FUNDING_RAISED: 8,
     SignalType.OSHA_INSPECTION_RECORDED: 20,
 }
 

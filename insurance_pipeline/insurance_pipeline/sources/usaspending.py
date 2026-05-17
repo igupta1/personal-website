@@ -41,14 +41,20 @@ _USASPENDING_URL = (
 )
 _MAX_FILING_AGE_DAYS = 60
 _TIMEOUT_S = 60
-_LIMIT_PER_PAGE = 100
 
-# Award-amount window. Below 10K is too small to trigger meaningful
-# insurance need; above 500K usually means an established mid-market
-# contractor that already has coverage. Sweet spot is 25-200K for SMB
-# first-federal-contract triggers.
-_MIN_AWARD = 25_000
-_MAX_AWARD = 500_000
+# USAspending caps each search response at 100 results regardless of
+# what `limit` we pass (we verified empirically: limit=200 silently
+# returns 0). To get >100 leads per run we paginate. Issue 5 raised
+# the practical cap from ~30 unique recipients to ~150-250.
+_LIMIT_PER_PAGE = 100
+_MAX_PAGES = 5
+
+# Award-amount window, loosened in Issue 5. Lower bound 10K to surface
+# small first-time SMB federal contractors; upper bound 2M to admit
+# lower-middle-market firms whose contract sits below their major-
+# carrier captive program.
+_MIN_AWARD = 10_000
+_MAX_AWARD = 2_000_000
 
 # Government / public-sector winners — not insurance buyers in the
 # agent-prospect sense. Filter at parse time.
@@ -71,13 +77,8 @@ def _is_gov_entity(name: str) -> bool:
     return any(p.search(name) for p in _GOV_ENTITY_PATTERNS)
 
 
-def fetch(*, since: datetime, limit: int | None = None) -> list[LeadCandidate]:
-    captured_at = _utcnow()
-    effective_since = max(
-        since, captured_at - timedelta(days=_MAX_FILING_AGE_DAYS)
-    )
-
-    body = {
+def _build_body(*, effective_since: datetime, captured_at: datetime, page: int) -> dict:
+    return {
         "filters": {
             # date_type is omitted intentionally — including it as
             # "action_date" returns 0 results from USAspending (API
@@ -110,9 +111,11 @@ def fetch(*, since: datetime, limit: int | None = None) -> list[LeadCandidate]:
         # rows. Default ordering is fine for our use case (we re-sort
         # in scoring by recency_decay against signal captured_at).
         "limit": _LIMIT_PER_PAGE,
-        "page": 1,
+        "page": page,
     }
 
+
+def _fetch_one_page(body: dict) -> list[dict]:
     try:
         resp = requests.post(
             _USASPENDING_URL,
@@ -122,17 +125,44 @@ def fetch(*, since: datetime, limit: int | None = None) -> list[LeadCandidate]:
         resp.raise_for_status()
         data = resp.json()
     except Exception:
-        _log.exception("usaspending fetch failed")
+        _log.exception("usaspending fetch failed (page=%s)", body.get("page"))
         return []
-
     results = data.get("results") or []
     if not isinstance(results, list):
-        _log.warning("usaspending: non-list results")
+        _log.warning("usaspending: non-list results page=%s", body.get("page"))
         return []
+    return results
+
+
+def fetch(*, since: datetime, limit: int | None = None) -> list[LeadCandidate]:
+    captured_at = _utcnow()
+    effective_since = max(
+        since, captured_at - timedelta(days=_MAX_FILING_AGE_DAYS)
+    )
+
+    # Paginate. USAspending caps each response at 100 regardless of the
+    # `limit` parameter; pulling _MAX_PAGES gives us up to ~500 raw
+    # results, which after gov-entity filtering + dedup typically yields
+    # ~150-250 unique recipients per run.
+    all_results: list[dict] = []
+    for page in range(1, _MAX_PAGES + 1):
+        body = _build_body(
+            effective_since=effective_since,
+            captured_at=captured_at,
+            page=page,
+        )
+        page_results = _fetch_one_page(body)
+        if not page_results:
+            # Either error or empty — stop walking pages.
+            break
+        all_results.extend(page_results)
+        if len(page_results) < _LIMIT_PER_PAGE:
+            # Last page (fewer than full). No need to ask for more.
+            break
 
     candidates: list[LeadCandidate] = []
     seen_names: set[str] = set()
-    for row in results:
+    for row in all_results:
         name = (row.get("Recipient Name") or "").strip()
         if not name:
             continue

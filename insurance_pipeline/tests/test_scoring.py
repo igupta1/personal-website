@@ -129,14 +129,16 @@ def test_federal_contract_recency_bonus_decays() -> None:
     assert 49 <= score(lead, now=_now()) <= 51
 
 
-def test_form_d_funding_uses_flat_weight() -> None:
-    """Form D / RSS funding signals don't carry amount → flat 25."""
+def test_form_d_funding_uses_demoted_flat_weight() -> None:
+    """Issue 4 demoted FUNDING_RAISED 25→8. Form D / RSS funding
+    signals (no amount) fall through to the flat weight; the buyer for
+    Series A D&O is a specialist broker, not an independent agency."""
     lead = _lead(_signal(
         type=SignalType.FUNDING_RAISED,
         captured_at=_now(),
         payload={"filing_type": "Form D"},
     ))
-    assert score(lead, now=_now()) == 25.0
+    assert score(lead, now=_now()) == 8.0
 
 
 def test_funding_signal_without_payload_uses_flat() -> None:
@@ -145,7 +147,7 @@ def test_funding_signal_without_payload_uses_flat() -> None:
         captured_at=_now(),
         payload={"feed_title": "Acme raises $20M Series A"},
     ))
-    assert score(lead, now=_now()) == 25.0
+    assert score(lead, now=_now()) == 8.0
 
 
 def test_recency_decay_halves_at_one_half_life() -> None:
