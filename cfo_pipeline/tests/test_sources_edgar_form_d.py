@@ -52,3 +52,22 @@ def test_drops_vintage_year_spv():
 def test_drops_street_spv():
     assert not edgar_form_d._is_operating_company("JR Hyde Park Blvd LLC")
     assert not edgar_form_d._is_operating_company("Marina Bay Avenue LLC")
+
+
+def test_drops_tranche_suffix_spv():
+    """The AQR-style hedge-fund SPV name pattern. Two formats:
+    dash-separated "...LLC - Series B9" and bare "... Series B9"."""
+    assert not edgar_form_d._is_operating_company("AQR Flex 1 Series LLC - Series B9")
+    assert not edgar_form_d._is_operating_company("Some Fund - Series 2024")
+    assert not edgar_form_d._is_operating_company("Acme Vehicle - Series A1")
+    # Bare suffix
+    assert not edgar_form_d._is_operating_company("Bridgewater Pure Alpha Series II")
+    assert not edgar_form_d._is_operating_company("Whatever Series B9")
+
+
+def test_tranche_filter_preserves_real_companies():
+    """The regex must not flag a real company that happens to have
+    'Series' in its name in a non-tranche context."""
+    # No tranche suffix — these are real operating companies.
+    assert edgar_form_d._is_operating_company("Series A Productions LLC")
+    assert edgar_form_d._is_operating_company("Time Series Analytics Inc")

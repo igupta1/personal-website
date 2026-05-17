@@ -105,6 +105,16 @@ _STREET_SPV_RE = re.compile(
     re.IGNORECASE,
 )
 
+# Tranche-suffix SPV — e.g. "AQR Flex 1 Series LLC - Series B9".
+# Hedge-fund / PE shops sequence their Reg-D-exempt SPVs by letter+
+# digit tranche (Series A1, B9, etc.). Source-level filter so we
+# don't waste Gemini tokens on them.
+_TRANCHE_SUFFIX_RE = re.compile(
+    r"\s+-\s+Series\s+\S+\s*$"
+    r"|\bSeries\s+(?:[A-Z]\d+|[IVX]{1,5}|\d+)\s*$",
+    re.IGNORECASE,
+)
+
 
 def _utcnow() -> datetime:
     return datetime.now(timezone.utc).replace(tzinfo=None)
@@ -134,6 +144,8 @@ def _is_operating_company(name: str) -> bool:
     if _VINTAGE_YEAR_RE.search(name):
         return False
     if _STREET_SPV_RE.search(name):
+        return False
+    if _TRANCHE_SUFFIX_RE.search(name):
         return False
     return True
 

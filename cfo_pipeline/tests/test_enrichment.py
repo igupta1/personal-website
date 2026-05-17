@@ -54,6 +54,38 @@ def test_megacorp_subsidiary_disqualified():
     assert enrichment._disqualification_reason(lead) == "megacorp_subsidiary"
 
 
+def test_megacorp_brand_names_disqualified():
+    """Consumer-brand surfaces that aren't caught by Gemini's
+    has_full_time_cfo lookup or Apollo's headcount cap. The Tinder
+    case from the first uncapped run motivated this list."""
+    brands = [
+        "Tinder",
+        "Hinge",
+        "Instagram",
+        "WhatsApp",
+        "LinkedIn",
+        "GitHub",
+        "Twitch",
+        "Hulu",
+        "Whole Foods",
+        "Slack",
+    ]
+    for b in brands:
+        assert enrichment._disqualification_reason(_bare_lead(b)) == "megacorp_subsidiary", b
+
+
+def test_brand_match_is_case_insensitive_and_trimmed():
+    assert enrichment._is_megacorp_subsidiary("  tinder  ")
+    assert enrichment._is_megacorp_subsidiary("TINDER")
+
+
+def test_unrelated_name_not_misflagged_as_brand():
+    """The brand list is exact-match — substrings must not trigger."""
+    assert not enrichment._is_megacorp_subsidiary("Slacker Records")
+    assert not enrichment._is_megacorp_subsidiary("Tinder Box Pizza")
+    assert not enrichment._is_megacorp_subsidiary("Hinge Health")  # actual standalone co
+
+
 def test_form_d_noise_only_disqualifies_form_d_leads():
     """The vintage-year regex must not nuke an operating company that
     happens to have a year in its name unless the lead actually has a

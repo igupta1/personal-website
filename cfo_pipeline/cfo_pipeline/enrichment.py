@@ -138,6 +138,18 @@ _FINANCIAL_VEHICLE_NAME_RES: tuple[re.Pattern[str], ...] = (
     re.compile(r"^KKR\b", re.IGNORECASE),
     re.compile(r"^Carlyle\b", re.IGNORECASE),
     re.compile(r"^MidOcean\b", re.IGNORECASE),
+    # Tranche-suffix SPV: "AQR Flex 1 Series LLC - Series B9", "Some
+    # Vehicle - Series 2024". The dash-separated tranche label at the
+    # end is the cheap-to-detect SPV fingerprint.
+    re.compile(r"\s+-\s+Series\s+\S+\s*$", re.IGNORECASE),
+    # Bare letter+digit "Series" suffix at end: "X Series B9" / "Y
+    # Series II". Conservative — only matches when the tranche label
+    # looks like a fund/series identifier (letter+digit, Roman numeral,
+    # or pure digits).
+    re.compile(
+        r"\bSeries\s+(?:[A-Z]\d+|[IVX]{1,5}|\d+)\s*$",
+        re.IGNORECASE,
+    ),
 )
 
 
@@ -178,8 +190,40 @@ _MEGACORP_PREFIX_RES: tuple[re.Pattern[str], ...] = (
 )
 
 
+# Brand-name deny list. Distinct from _MEGACORP_PREFIX_RES because
+# these are CONSUMER-BRAND names (no parent prefix) that surface in
+# job scrapes as if they were standalone companies. Tinder slipped
+# past Gemini (`has_full_time_cfo=no`) AND Apollo (hc=None), so neither
+# upstream check is reliable for this class. Exact-match on the
+# normalized lead name is the durable fix — iterate this list when new
+# false positives appear on the dashboard.
+_MEGACORP_BRAND_NAMES: frozenset[str] = frozenset(
+    name.lower() for name in (
+        # Match Group
+        "Tinder", "Hinge", "OkCupid", "Match", "Plenty of Fish", "Meetic", "BLK",
+        # Meta / Alphabet / Apple / Microsoft / Amazon brand surfaces
+        "Instagram", "WhatsApp", "Threads", "Reality Labs",
+        "YouTube", "Waymo", "Verily", "DeepMind", "Wing", "Fitbit", "Nest",
+        "LinkedIn", "GitHub", "Xbox", "Bethesda", "Activision",
+        "Activision Blizzard", "Mojang", "Skype", "Bing",
+        "Twitch", "Whole Foods", "Audible", "IMDb", "Zappos", "Ring", "Eero",
+        "Beats", "Beats by Dre",
+        # Disney / Comcast / others
+        "Hulu", "ESPN", "Marvel", "Lucasfilm", "Pixar", "Disney+",
+        "NBC", "Peacock", "Sky", "Universal Pictures", "DreamWorks",
+        # Mid-tier captives
+        "Red Hat", "NetSuite", "Slack", "MuleSoft", "Tableau", "Heroku",
+        "Splunk", "Figma",
+    )
+)
+
+
 def _is_megacorp_subsidiary(name: str) -> bool:
-    return any(p.match(name) for p in _MEGACORP_PREFIX_RES)
+    if any(p.match(name) for p in _MEGACORP_PREFIX_RES):
+        return True
+    # Exact-match against brand names (case-insensitive, trimmed).
+    cleaned = name.strip().lower()
+    return cleaned in _MEGACORP_BRAND_NAMES
 
 
 def _is_form_d_noise(lead: Lead) -> bool:
