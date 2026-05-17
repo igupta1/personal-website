@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-17T03:33:41.193903",
+  "generated_at": "2026-05-17T09:28:05.519870",
   "leads": [
     {
       "name": "K.F. DAVIS ENGINEERING, INC",
@@ -65,7 +65,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 94.38675630827989,
+      "score": 93.85127658190375,
       "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
       "coverages": [
@@ -120,7 +120,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 78.29765758799081,
+      "score": 77.85345528308633,
       "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
       "coverages": [
@@ -131,7 +131,7 @@
         {
           "type": "new_motor_carrier_authority",
           "captured_at": "2026-05-16T05:12:49.371108",
-          "days_ago": 0,
+          "days_ago": 1,
           "payload": {
             "usdot": "4582460",
             "dba_name": "",
@@ -159,7 +159,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 65.59079678059621,
+      "score": 65.21868375082458,
       "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
       "coverages": [
@@ -198,7 +198,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 64.17342255087704,
+      "score": 63.809350583794014,
       "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
       "coverages": [
@@ -209,7 +209,7 @@
         {
           "type": "new_motor_carrier_authority",
           "captured_at": "2026-05-16T04:43:03.381666",
-          "days_ago": 0,
+          "days_ago": 1,
           "payload": {
             "usdot": "4582441",
             "dba_name": "RIVER CITY MECHANICAL",
@@ -225,19 +225,207 @@
       ]
     },
     {
+      "name": "ODELL INTERNATIONAL, LLC",
+      "domain": null,
+      "industry": "other",
+      "headcount": null,
+      "country": "US",
+      "city": "Mooresville",
+      "state": "NC",
+      "dm_name": null,
+      "dm_title": null,
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "cold",
+      "score": 59.993163564233654,
+      "insight": "Professional Liability (E&O) + GL",
+      "trigger_type": "federal_contract",
+      "coverages": [
+        "Professional Liability (E&O)",
+        "GL"
+      ],
+      "signals": [
+        {
+          "type": "funding_raised",
+          "captured_at": "2026-05-17T09:20:50.641556",
+          "days_ago": 0,
+          "payload": {
+            "filing_type": "Federal contract",
+            "filed_on": "",
+            "amount_usd": 1139731.46,
+            "title": "contract: ARCHITECTURAL SERVICES",
+            "naics": "ARCHITECTURAL SERVICES",
+            "agency": "",
+            "state": "SC"
+          }
+        }
+      ]
+    },
+    {
+      "name": "BOGART PROPERTIES, INC.",
+      "domain": "bogartproperties.com",
+      "industry": "real_estate",
+      "headcount": null,
+      "country": "US",
+      "city": "Gainesville",
+      "state": "FL",
+      "dm_name": null,
+      "dm_title": null,
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "cold",
+      "score": 59.993163414518094,
+      "insight": "Cyber + E&O",
+      "trigger_type": "federal_contract",
+      "coverages": [
+        "Cyber",
+        "E&O",
+        "GL"
+      ],
+      "signals": [
+        {
+          "type": "funding_raised",
+          "captured_at": "2026-05-17T09:20:50.641556",
+          "days_ago": 0,
+          "payload": {
+            "filing_type": "Federal contract",
+            "filed_on": "",
+            "amount_usd": 1364400.0,
+            "title": "contract: HOTELS (EXCEPT CASINO HOTELS) AND MOTELS",
+            "naics": "HOTELS (EXCEPT CASINO HOTELS) AND MOTELS",
+            "agency": "",
+            "state": "DC"
+          }
+        }
+      ]
+    },
+    {
+      "name": "ENGILITY SERVICES, LLC",
+      "domain": null,
+      "industry": "government_nonprofit",
+      "headcount": null,
+      "country": "US",
+      "city": null,
+      "state": null,
+      "dm_name": null,
+      "dm_title": null,
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "cold",
+      "score": 59.99316326303777,
+      "insight": "Professional Liability (E&O) + GL",
+      "trigger_type": "federal_contract",
+      "coverages": [
+        "Professional Liability (E&O)",
+        "GL"
+      ],
+      "signals": [
+        {
+          "type": "funding_raised",
+          "captured_at": "2026-05-17T09:20:50.641556",
+          "days_ago": 0,
+          "payload": {
+            "filing_type": "Federal contract",
+            "filed_on": "",
+            "amount_usd": 877117.77,
+            "title": "contract: ENGINEERING SERVICES",
+            "naics": "ENGINEERING SERVICES",
+            "agency": "",
+            "state": "MA"
+          }
+        }
+      ]
+    },
+    {
+      "name": "VISIONARY INTEGRATION PROFESSIONALS LLC",
+      "domain": "trustvip.com",
+      "industry": "other",
+      "headcount": 190,
+      "country": "US",
+      "city": "Folsom",
+      "state": "CA",
+      "dm_name": "Benjamin Hansen",
+      "dm_title": "Chief Financial Officer",
+      "dm_email": null,
+      "dm_linkedin_url": "http://www.linkedin.com/in/benjamin-g-hansen-cpa",
+      "contact_strength": "verified",
+      "score": 59.99316324975396,
+      "insight": "Cyber + E&O",
+      "trigger_type": "federal_contract",
+      "coverages": [
+        "Cyber",
+        "E&O",
+        "GL"
+      ],
+      "signals": [
+        {
+          "type": "funding_raised",
+          "captured_at": "2026-05-17T09:20:50.641556",
+          "days_ago": 0,
+          "payload": {
+            "filing_type": "Federal contract",
+            "filed_on": "",
+            "amount_usd": 1008505.37,
+            "title": "contract: COMPUTER SYSTEMS DESIGN SERVICES",
+            "naics": "COMPUTER SYSTEMS DESIGN SERVICES",
+            "agency": "",
+            "state": "VT"
+          }
+        }
+      ]
+    },
+    {
+      "name": "AQUILENT, INC.",
+      "domain": "aquilent.com",
+      "industry": "other",
+      "headcount": 150,
+      "country": "US",
+      "city": null,
+      "state": null,
+      "dm_name": null,
+      "dm_title": null,
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "cold",
+      "score": 59.99316294591094,
+      "insight": "Cyber + E&O",
+      "trigger_type": "federal_contract",
+      "coverages": [
+        "Cyber",
+        "E&O",
+        "GL"
+      ],
+      "signals": [
+        {
+          "type": "funding_raised",
+          "captured_at": "2026-05-17T09:20:50.641556",
+          "days_ago": 0,
+          "payload": {
+            "filing_type": "Federal contract",
+            "filed_on": "",
+            "amount_usd": 1979328.11,
+            "title": "contract: COMPUTER SYSTEMS DESIGN SERVICES",
+            "naics": "COMPUTER SYSTEMS DESIGN SERVICES",
+            "agency": "",
+            "state": "DC"
+          }
+        }
+      ]
+    },
+    {
       "name": "LILIUM-SERES JV",
       "domain": "liliumllc.com",
       "industry": "other",
       "headcount": 4,
       "country": "US",
-      "city": "Charleston",
+      "city": "CHARLESTON",
       "state": "SC",
       "dm_name": "Connor Rosenbaum",
       "dm_title": "Chief Operations Officer & Part Owner",
       "dm_email": "crosenbaum@liliumllc.com",
       "dm_linkedin_url": "http://www.linkedin.com/in/connor-rosenbaum-4224b171",
       "contact_strength": "verified",
-      "score": 59.991738956964596,
+      "score": 59.651390795237525,
       "insight": "Pollution Liability + GL",
       "trigger_type": "federal_contract",
       "coverages": [
@@ -263,44 +451,6 @@
       ]
     },
     {
-      "name": "PATRIOT CONSTRUCTION INC",
-      "domain": "patriotconstruction.com",
-      "industry": "construction",
-      "headcount": 29,
-      "country": "US",
-      "city": "Stockton",
-      "state": "CA",
-      "dm_name": "Gregory Kunkle",
-      "dm_title": "President and CEO",
-      "dm_email": "greg@patriotconstruction.com",
-      "dm_linkedin_url": "http://www.linkedin.com/in/gregory-kunkle-51907212b",
-      "contact_strength": "verified",
-      "score": 59.99173894559021,
-      "insight": "GL + Builders Risk",
-      "trigger_type": "federal_contract",
-      "coverages": [
-        "GL",
-        "Builders Risk",
-        "Workers Comp"
-      ],
-      "signals": [
-        {
-          "type": "funding_raised",
-          "captured_at": "2026-05-17T03:24:46.508458",
-          "days_ago": 0,
-          "payload": {
-            "filing_type": "Federal contract",
-            "filed_on": "",
-            "amount_usd": 1653632.0,
-            "title": "contract: COMMERCIAL AND INSTITUTIONAL BUILDING CONSTRUCTION",
-            "naics": "COMMERCIAL AND INSTITUTIONAL BUILDING CONSTRUCTION",
-            "agency": "",
-            "state": "AS"
-          }
-        }
-      ]
-    },
-    {
       "name": "BES DESIGN/BUILD, LLC",
       "domain": "bes-design-build.com",
       "industry": "construction",
@@ -313,7 +463,7 @@
       "dm_email": "wbolton@besdesignbuild.com",
       "dm_linkedin_url": "http://www.linkedin.com/in/walt-bolton-70b47738",
       "contact_strength": "verified",
-      "score": 59.991738908515146,
+      "score": 59.65139075071592,
       "insight": "Professional Liability (E&O) + GL",
       "trigger_type": "federal_contract",
       "coverages": [
@@ -343,14 +493,14 @@
       "industry": "other",
       "headcount": 4,
       "country": "US",
-      "city": "BEL AIR",
+      "city": "Bel Air",
       "state": "MD",
       "dm_name": "Douglass Derby",
       "dm_title": "Owner",
       "dm_email": "d.derby@dellc-sdvosb.com",
       "dm_linkedin_url": "http://www.linkedin.com/in/douglass-derby-88019011",
       "contact_strength": "verified",
-      "score": 59.99173888462732,
+      "score": 59.651390727186936,
       "insight": "Professional Liability (E&O) + GL",
       "trigger_type": "federal_contract",
       "coverages": [
@@ -387,7 +537,7 @@
       "dm_email": "mriggs@harrelldg.com",
       "dm_linkedin_url": "http://www.linkedin.com/in/mindy-r-725018200",
       "contact_strength": "verified",
-      "score": 59.991738872113885,
+      "score": 59.65139071538257,
       "insight": "Professional Liability (E&O) + GL",
       "trigger_type": "federal_contract",
       "coverages": [
@@ -424,7 +574,7 @@
       "dm_email": "elleni.raney@crc-intl.com",
       "dm_linkedin_url": "http://www.linkedin.com/in/elleni-r-76474a182",
       "contact_strength": "verified",
-      "score": 59.99173882520455,
+      "score": 59.65139066974432,
       "insight": "E&O + D&O",
       "trigger_type": "federal_contract",
       "coverages": [
@@ -462,7 +612,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "cold",
-      "score": 59.991738814439785,
+      "score": 59.651390659519194,
       "insight": "GL + Builders Risk",
       "trigger_type": "federal_contract",
       "coverages": [
@@ -490,7 +640,7 @@
     {
       "name": "TECHNOLOGY MANAGEMENT COMPANY, INC.",
       "domain": "technologymanagementco.com",
-      "industry": "software_saas",
+      "industry": "other",
       "headcount": null,
       "country": "US",
       "city": "Alexandria",
@@ -500,7 +650,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "cold",
-      "score": 59.99173879167496,
+      "score": 59.651390637633256,
       "insight": "GL + Builders Risk",
       "trigger_type": "federal_contract",
       "coverages": [
@@ -538,7 +688,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 59.99173876852511,
+      "score": 59.651390591947155,
       "insight": "Professional Liability (E&O) + GL",
       "trigger_type": "federal_contract",
       "coverages": [
@@ -575,7 +725,7 @@
       "dm_email": null,
       "dm_linkedin_url": "http://www.linkedin.com/in/dan-keelean-b195494",
       "contact_strength": "verified",
-      "score": 59.9917387468512,
+      "score": 59.65139056969433,
       "insight": "Professional Liability (E&O) + GL",
       "trigger_type": "federal_contract",
       "coverages": [
@@ -612,7 +762,7 @@
       "dm_email": "sfeldman@govplace.com",
       "dm_linkedin_url": "http://www.linkedin.com/in/simone-feldman-06004b12",
       "contact_strength": "verified",
-      "score": 59.991738644192914,
+      "score": 59.65139043817133,
       "insight": "Cyber + E&O",
       "trigger_type": "federal_contract",
       "coverages": [
@@ -643,14 +793,14 @@
       "industry": "manufacturing",
       "headcount": 3,
       "country": "US",
-      "city": "Gladstone",
+      "city": "Escanaba",
       "state": "MI",
       "dm_name": "Loriann Pimley",
       "dm_title": "Owner",
       "dm_email": "lpimley@bulldogsupply.net",
       "dm_linkedin_url": "http://www.linkedin.com/in/loriann-pimley-1377a5b2",
       "contact_strength": "verified",
-      "score": 59.99173854276992,
+      "score": 59.6513903413117,
       "insight": "Product Liability + GL",
       "trigger_type": "federal_contract",
       "coverages": [
@@ -688,7 +838,7 @@
       "dm_email": "jharris@potomacwave.com",
       "dm_linkedin_url": "http://www.linkedin.com/in/jorlick",
       "contact_strength": "verified",
-      "score": 59.9917385325827,
+      "score": 59.651390330576106,
       "insight": "Professional Liability (E&O) + GL",
       "trigger_type": "federal_contract",
       "coverages": [
@@ -725,7 +875,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 59.991738521224356,
+      "score": 59.65139032009574,
       "insight": "E&O + D&O",
       "trigger_type": "federal_contract",
       "coverages": [
@@ -753,7 +903,7 @@
     {
       "name": "CENTRAL LAKE ARMOR EXPRESS INC",
       "domain": "armorexpress.com",
-      "industry": "manufacturing",
+      "industry": "other",
       "headcount": 130,
       "country": "US",
       "city": "Central Lake",
@@ -763,7 +913,7 @@
       "dm_email": null,
       "dm_linkedin_url": "http://www.linkedin.com/in/bonita-wellington-078085a",
       "contact_strength": "verified",
-      "score": 59.991738508117336,
+      "score": 59.6513903089454,
       "insight": "Product Liability + GL",
       "trigger_type": "federal_contract",
       "coverages": [
@@ -801,7 +951,7 @@
       "dm_email": "jeff.sorensen@kcorpalaska.com",
       "dm_linkedin_url": "http://www.linkedin.com/in/jeff-sorensen-bb76b462",
       "contact_strength": "verified",
-      "score": 59.99173845283362,
+      "score": 59.65139025647977,
       "insight": "Cyber + E&O",
       "trigger_type": "federal_contract",
       "coverages": [
@@ -829,7 +979,7 @@
     {
       "name": "BLUE TECH INC.",
       "domain": "bluetech.com",
-      "industry": "other",
+      "industry": "software_saas",
       "headcount": 74,
       "country": "US",
       "city": "San Diego",
@@ -839,7 +989,7 @@
       "dm_email": "gstone@bluetech.com",
       "dm_linkedin_url": "http://www.linkedin.com/in/gstone",
       "contact_strength": "verified",
-      "score": 59.99173844006351,
+      "score": 59.65139024394161,
       "insight": "Cyber + E&O",
       "trigger_type": "federal_contract",
       "coverages": [
@@ -877,7 +1027,7 @@
       "dm_email": "vspencer@mayatech.com",
       "dm_linkedin_url": "http://www.linkedin.com/in/valerie-spencer-18a292b",
       "contact_strength": "verified",
-      "score": 59.99173829797185,
+      "score": 59.65139009081982,
       "insight": "E&O + D&O",
       "trigger_type": "federal_contract",
       "coverages": [
@@ -905,7 +1055,7 @@
     {
       "name": "JAMES BELL ASSOCIATES INC",
       "domain": "jbassoc.com",
-      "industry": "healthcare",
+      "industry": "government_nonprofit",
       "headcount": 61,
       "country": "US",
       "city": "Arlington",
@@ -915,7 +1065,7 @@
       "dm_email": "lyon@jbassoc.com",
       "dm_linkedin_url": "http://www.linkedin.com/in/kate-lyon-07712816",
       "contact_strength": "verified",
-      "score": 59.991738286437034,
+      "score": 59.65139007963757,
       "insight": "E&O + D&O",
       "trigger_type": "federal_contract",
       "coverages": [
@@ -941,44 +1091,6 @@
       ]
     },
     {
-      "name": "APPRIO INC",
-      "domain": "apprioinc.com",
-      "industry": "software_saas",
-      "headcount": null,
-      "country": "US",
-      "city": "Washington",
-      "state": "DC",
-      "dm_name": "Kali Durgampudi",
-      "dm_title": "President and CEO",
-      "dm_email": null,
-      "dm_linkedin_url": null,
-      "contact_strength": "partial",
-      "score": 59.99173827462948,
-      "insight": "E&O + D&O",
-      "trigger_type": "federal_contract",
-      "coverages": [
-        "E&O",
-        "D&O",
-        "GL"
-      ],
-      "signals": [
-        {
-          "type": "funding_raised",
-          "captured_at": "2026-05-17T03:24:46.508458",
-          "days_ago": 0,
-          "payload": {
-            "filing_type": "Federal contract",
-            "filed_on": "",
-            "amount_usd": 612817.75,
-            "title": "contract: HUMAN RESOURCES CONSULTING SERVICES (2007), HUMAN RESOURCES AND EXECUTIVE SEARCH CONSULTING SERVICES (2002)",
-            "naics": "HUMAN RESOURCES CONSULTING SERVICES (2007), HUMAN RESOURCES AND EXECUTIVE SEARCH CONSULTING SERVICES (2002)",
-            "agency": "",
-            "state": "AL"
-          }
-        }
-      ]
-    },
-    {
       "name": "TALU LLC",
       "domain": null,
       "industry": "other",
@@ -991,7 +1103,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "cold",
-      "score": 59.991738204457995,
+      "score": 59.6513900139319,
       "insight": "Product Liability + GL",
       "trigger_type": "federal_contract",
       "coverages": [
@@ -1029,7 +1141,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 59.99173819298735,
+      "score": 59.65139000314846,
       "insight": "Cyber + E&O",
       "trigger_type": "federal_contract",
       "coverages": [
@@ -1067,7 +1179,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "cold",
-      "score": 59.99173818082686,
+      "score": 59.65138999327426,
       "insight": "E&O + D&O",
       "trigger_type": "federal_contract",
       "coverages": [
@@ -1105,7 +1217,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 59.99173816897118,
+      "score": 59.651389980161845,
       "insight": "E&O + D&O",
       "trigger_type": "federal_contract",
       "coverages": [
@@ -1143,7 +1255,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "cold",
-      "score": 59.99173814517961,
+      "score": 59.65138995765378,
       "insight": "E&O + D&O",
       "trigger_type": "federal_contract",
       "coverages": [
@@ -1181,7 +1293,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 59.991738131206276,
+      "score": 59.651389945913216,
       "insight": "Cyber + E&O",
       "trigger_type": "federal_contract",
       "coverages": [
@@ -1219,7 +1331,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "cold",
-      "score": 59.991738119061836,
+      "score": 59.65138993560833,
       "insight": "GL + E&O",
       "trigger_type": "federal_contract",
       "coverages": [
@@ -1257,7 +1369,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "cold",
-      "score": 59.99173807398139,
+      "score": 59.651389878070006,
       "insight": "Cyber + E&O",
       "trigger_type": "federal_contract",
       "coverages": [
@@ -1295,7 +1407,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 59.991738060473295,
+      "score": 59.651389868132,
       "insight": "E&O + D&O",
       "trigger_type": "federal_contract",
       "coverages": [
@@ -1333,7 +1445,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 59.991738036296695,
+      "score": 59.65138984584727,
       "insight": "Cyber + E&O",
       "trigger_type": "federal_contract",
       "coverages": [
@@ -1371,7 +1483,7 @@
       "dm_email": "gray@wcstexas.com",
       "dm_linkedin_url": "http://www.linkedin.com/in/gregory-don-ray",
       "contact_strength": "verified",
-      "score": 59.60873572503511,
+      "score": 59.27056044336055,
       "insight": "Pollution Liability + GL",
       "trigger_type": "federal_contract",
       "coverages": [
@@ -1409,7 +1521,7 @@
       "dm_email": "hkiger@daengineering.com",
       "dm_linkedin_url": "http://www.linkedin.com/in/hannah-kiger-sadler-7125658",
       "contact_strength": "verified",
-      "score": 59.60873562859543,
+      "score": 59.27056034513805,
       "insight": "Professional Liability (E&O) + GL",
       "trigger_type": "federal_contract",
       "coverages": [
@@ -1446,7 +1558,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 59.60873540114126,
+      "score": 59.270560082075455,
       "insight": "Cyber + E&O",
       "trigger_type": "federal_contract",
       "coverages": [
@@ -1484,7 +1596,7 @@
       "dm_email": "jstrohecker@elitealuminum.com",
       "dm_linkedin_url": "http://www.linkedin.com/in/jeffrey-strohecker-bb607412",
       "contact_strength": "verified",
-      "score": 59.60873533124242,
+      "score": 59.27056000393492,
       "insight": "GL + Builders Risk",
       "trigger_type": "federal_contract",
       "coverages": [
@@ -1522,7 +1634,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 59.60873509521229,
+      "score": 59.2705597684672,
       "insight": "Professional Liability + Cyber",
       "trigger_type": "federal_contract",
       "coverages": [
@@ -1560,7 +1672,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 59.19169462378055,
+      "score": 58.85588530419107,
       "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
       "coverages": [
@@ -1599,7 +1711,7 @@
       "dm_email": "dennis.fallen@fisherbioservices.com",
       "dm_linkedin_url": "http://www.linkedin.com/in/dennis-fallen-70a5a17",
       "contact_strength": "verified",
-      "score": 57.14703442752459,
+      "score": 56.82282494619305,
       "insight": "Professional Liability + Cyber",
       "trigger_type": "federal_contract",
       "coverages": [
@@ -1637,7 +1749,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 56.169499609829565,
+      "score": 55.85083593556719,
       "insight": "Cyber + E&O",
       "trigger_type": "federal_contract",
       "coverages": [
@@ -1675,7 +1787,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 56.04088319023923,
+      "score": 55.722949193897065,
       "insight": "Cyber + E&O",
       "trigger_type": "federal_contract",
       "coverages": [
@@ -1713,7 +1825,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 53.29065709026645,
+      "score": 52.98832581101715,
       "insight": "Cyber + E&O",
       "trigger_type": "federal_contract",
       "coverages": [
@@ -1751,7 +1863,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 52.792592821378655,
+      "score": 52.49308716890619,
       "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
       "coverages": [
@@ -1790,7 +1902,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 52.79259246298713,
+      "score": 52.4930868553345,
       "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
       "coverages": [
@@ -1829,7 +1941,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 52.792592358643326,
+      "score": 52.493086752761826,
       "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
       "coverages": [
@@ -1868,7 +1980,7 @@
       "dm_email": "coliphant@enviroapplications.com",
       "dm_linkedin_url": "http://www.linkedin.com/in/cynthia-oliphant-16298334",
       "contact_strength": "verified",
-      "score": 51.3715780353005,
+      "score": 51.080134171467954,
       "insight": "Pollution Liability + GL",
       "trigger_type": "federal_contract",
       "coverages": [
@@ -1906,7 +2018,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 51.19281735267482,
+      "score": 50.90238762543436,
       "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
       "coverages": [
@@ -1945,7 +2057,7 @@
       "dm_email": "rob.donofrio@cpmiteam.com",
       "dm_linkedin_url": "http://www.linkedin.com/in/rob-d-onofrio-pe-ceng-8882603",
       "contact_strength": "verified",
-      "score": 50.56455046275727,
+      "score": 50.277685107705196,
       "insight": "Professional Liability (E&O) + GL",
       "trigger_type": "federal_contract",
       "coverages": [
@@ -1982,7 +2094,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 49.59304143187782,
+      "score": 49.31168767856554,
       "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
       "coverages": [
@@ -2009,6 +2121,44 @@
       ]
     },
     {
+      "name": "UPTODATE, INC",
+      "domain": "uptodate.com",
+      "industry": "healthcare",
+      "headcount": 250,
+      "country": "US",
+      "city": "Waltham",
+      "state": "MA",
+      "dm_name": null,
+      "dm_title": null,
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "cold",
+      "score": 49.14979909028372,
+      "insight": "Cyber + E&O",
+      "trigger_type": "federal_contract",
+      "coverages": [
+        "Cyber",
+        "E&O",
+        "D&O"
+      ],
+      "signals": [
+        {
+          "type": "funding_raised",
+          "captured_at": "2026-05-17T09:20:50.641556",
+          "days_ago": 0,
+          "payload": {
+            "filing_type": "Federal contract",
+            "filed_on": "",
+            "amount_usd": 241554.0,
+            "title": "contract: INTERNET PUBLISHING AND BROADCASTING AND WEB SEARCH PORTALS",
+            "naics": "INTERNET PUBLISHING AND BROADCASTING AND WEB SEARCH PORTALS",
+            "agency": "",
+            "state": "DC"
+          }
+        }
+      ]
+    },
+    {
       "name": "KENILA LOGISTICS LLC",
       "domain": null,
       "industry": "logistics_transport",
@@ -2021,7 +2171,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 49.27032039247054,
+      "score": 48.99079733021351,
       "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
       "coverages": [
@@ -2060,7 +2210,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 47.9932662490096,
+      "score": 47.720988379638726,
       "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
       "coverages": [
@@ -2099,7 +2249,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 46.956162860463365,
+      "score": 46.68976873766635,
       "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
       "coverages": [
@@ -2110,7 +2260,7 @@
         {
           "type": "new_motor_carrier_authority",
           "captured_at": "2026-05-16T04:43:03.381666",
-          "days_ago": 0,
+          "days_ago": 1,
           "payload": {
             "usdot": "4582439",
             "dba_name": "",
@@ -2138,7 +2288,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 46.39349079554858,
+      "score": 46.13028885405205,
       "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
       "coverages": [
@@ -2177,7 +2327,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 46.39349077862618,
+      "score": 46.13028883817553,
       "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
       "coverages": [
@@ -2216,7 +2366,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 46.39349076170379,
+      "score": 46.1302888220523,
       "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
       "coverages": [
@@ -2255,7 +2405,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 46.39349074445882,
+      "score": 46.13028880289439,
       "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
       "coverages": [
@@ -2294,7 +2444,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 46.39349073504233,
+      "score": 46.13028879422213,
       "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
       "coverages": [
@@ -2333,7 +2483,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 46.39349069772373,
+      "score": 46.130288758546236,
       "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
       "coverages": [
@@ -2372,7 +2522,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 46.39349068865461,
+      "score": 46.13028874984931,
       "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
       "coverages": [
@@ -2411,7 +2561,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 46.39349060826082,
+      "score": 46.13028868042194,
       "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
       "coverages": [
@@ -2450,7 +2600,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 46.39349054945425,
+      "score": 46.130288645498545,
       "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
       "coverages": [
@@ -2489,7 +2639,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 46.39349048793066,
+      "score": 46.13028858270797,
       "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
       "coverages": [
@@ -2528,7 +2678,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 46.393490469928906,
+      "score": 46.13028856569654,
       "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
       "coverages": [
@@ -2567,7 +2717,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 46.39349043211405,
+      "score": 46.13028853269756,
       "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
       "coverages": [
@@ -2606,7 +2756,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 46.39349042340472,
+      "score": 46.13028852316179,
       "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
       "coverages": [
@@ -2645,7 +2795,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 46.3934904148939,
+      "score": 46.13028851543941,
       "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
       "coverages": [
@@ -2684,7 +2834,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 46.39349029197079,
+      "score": 46.130288395310814,
       "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
       "coverages": [
@@ -2723,7 +2873,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 46.39349020814041,
+      "score": 46.13028831531143,
       "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
       "coverages": [
@@ -2762,7 +2912,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 46.3934901815658,
+      "score": 46.13028828935636,
       "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
       "coverages": [
@@ -2801,7 +2951,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 46.09159014774778,
+      "score": 45.83010082097929,
       "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
       "coverages": [
@@ -2840,7 +2990,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "cold",
-      "score": 45.77969535018441,
+      "score": 45.5199756419321,
       "insight": "Cyber + E&O",
       "trigger_type": "federal_contract",
       "coverages": [
@@ -2878,7 +3028,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 45.4447230337236,
+      "score": 45.18690374224789,
       "insight": "Cyber + E&O",
       "trigger_type": "federal_contract",
       "coverages": [
@@ -2916,7 +3066,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 45.41264146708672,
+      "score": 45.15500413300696,
       "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
       "coverages": [
@@ -2927,7 +3077,7 @@
         {
           "type": "new_motor_carrier_authority",
           "captured_at": "2026-05-16T05:12:49.371108",
-          "days_ago": 0,
+          "days_ago": 1,
           "payload": {
             "usdot": "4582452",
             "dba_name": "",
@@ -2955,7 +3105,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 45.39095745114193,
+      "score": 45.1334431288885,
       "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
       "coverages": [
@@ -2966,7 +3116,7 @@
         {
           "type": "new_motor_carrier_authority",
           "captured_at": "2026-05-16T04:43:03.381666",
-          "days_ago": 0,
+          "days_ago": 1,
           "payload": {
             "usdot": "4582437",
             "dba_name": "",
@@ -2994,7 +3144,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 45.16690765777011,
+      "score": 44.9106643507403,
       "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
       "coverages": [
@@ -3033,7 +3183,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 45.166907483961374,
+      "score": 44.910664231169584,
       "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
       "coverages": [
@@ -3072,7 +3222,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "cold",
-      "score": 45.00249702551555,
+      "score": 44.747186569794984,
       "insight": "Cyber + E&O",
       "trigger_type": "federal_contract",
       "coverages": [
@@ -3110,7 +3260,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 44.79371503955928,
+      "score": 44.53958905346981,
       "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
       "coverages": [
@@ -3149,7 +3299,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 44.793714982433144,
+      "score": 44.539589010543715,
       "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
       "coverages": [
@@ -3188,7 +3338,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 44.79371496369855,
+      "score": 44.539588985233515,
       "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
       "coverages": [
@@ -3227,7 +3377,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 44.79371457307507,
+      "score": 44.53958861066635,
       "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
       "coverages": [
@@ -3266,7 +3416,7 @@
       "dm_email": "ryan.gregory@chenega.com",
       "dm_linkedin_url": "http://www.linkedin.com/in/ryan-gregory-69b86315a",
       "contact_strength": "verified",
-      "score": 43.9297252480267,
+      "score": 43.68050088655245,
       "insight": "GL + E&O",
       "trigger_type": "federal_contract",
       "coverages": [
@@ -3304,7 +3454,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 43.82575207975829,
+      "score": 43.577117544354515,
       "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
       "coverages": [
@@ -3315,7 +3465,7 @@
         {
           "type": "new_motor_carrier_authority",
           "captured_at": "2026-05-16T04:43:03.381666",
-          "days_ago": 0,
+          "days_ago": 1,
           "payload": {
             "usdot": "4582432",
             "dba_name": "",
@@ -3343,7 +3493,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 43.82575206699544,
+      "score": 43.577117536640024,
       "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
       "coverages": [
@@ -3354,7 +3504,7 @@
         {
           "type": "new_motor_carrier_authority",
           "captured_at": "2026-05-16T04:43:03.381666",
-          "days_ago": 0,
+          "days_ago": 1,
           "payload": {
             "usdot": "4582433",
             "dba_name": "",
@@ -3382,7 +3532,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 43.60942793647043,
+      "score": 43.36202065264562,
       "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
       "coverages": [
@@ -3409,6 +3559,45 @@
       ]
     },
     {
+      "name": "ALLIED SYSTEMS COMPANY",
+      "domain": "alliedsystems.com",
+      "industry": "logistics_transport",
+      "headcount": 200,
+      "country": "US",
+      "city": "Sherwood",
+      "state": "OR",
+      "dm_name": "Dave McCart",
+      "dm_title": "HR Director",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "partial",
+      "score": 43.19494966981878,
+      "insight": "Commercial Auto + Workers Comp",
+      "trigger_type": "motor_carrier",
+      "coverages": [
+        "Commercial Auto",
+        "Workers Comp"
+      ],
+      "signals": [
+        {
+          "type": "new_motor_carrier_authority",
+          "captured_at": "2026-05-17T09:20:39.482684",
+          "days_ago": 0,
+          "payload": {
+            "usdot": "4582455",
+            "dba_name": "",
+            "issue_date": "2026-05-14",
+            "fleet_size_power_units": 1,
+            "drivers": 2,
+            "carrier_operation": "A",
+            "city": "SHERWOOD",
+            "state": "OR",
+            "officer_name": "JEFFERSON RINK"
+          }
+        }
+      ]
+    },
+    {
       "name": "TMR METAL RECYCLING INC",
       "domain": null,
       "industry": "logistics_transport",
@@ -3421,7 +3610,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 43.19393978489623,
+      "score": 42.94888970364058,
       "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
       "coverages": [
@@ -3460,7 +3649,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 43.19393976949897,
+      "score": 42.94888968725106,
       "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
       "coverages": [
@@ -3499,7 +3688,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 43.19393969817258,
+      "score": 42.94888961498554,
       "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
       "coverages": [
@@ -3538,7 +3727,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 43.19393966696223,
+      "score": 42.94888958491702,
       "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
       "coverages": [
@@ -3577,7 +3766,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 43.19393958998748,
+      "score": 42.948889509550476,
       "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
       "coverages": [
@@ -3616,7 +3805,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 43.19393957085931,
+      "score": 42.94888949435542,
       "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
       "coverages": [
@@ -3655,7 +3844,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 43.19393938519123,
+      "score": 42.94888933859176,
       "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
       "coverages": [
@@ -3694,7 +3883,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 43.193939255001794,
+      "score": 42.948889211518384,
       "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
       "coverages": [
@@ -3733,7 +3922,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 43.193939245310645,
+      "score": 42.94888920305372,
       "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
       "coverages": [
@@ -3772,7 +3961,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 43.193939229093274,
+      "score": 42.94888918549269,
       "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
       "coverages": [
@@ -3811,7 +4000,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "cold",
-      "score": 43.19393918566215,
+      "score": 42.94888914490363,
       "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
       "coverages": [
@@ -3850,7 +4039,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 43.19393916775836,
+      "score": 42.94888912908837,
       "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
       "coverages": [
@@ -3889,7 +4078,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 43.193939126394824,
+      "score": 42.9488890891425,
       "insight": "Commercial Auto",
       "trigger_type": "motor_carrier",
       "coverages": [
@@ -3927,7 +4116,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "cold",
-      "score": 42.91285976544155,
+      "score": 42.669404187977676,
       "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
       "coverages": [
@@ -3966,7 +4155,7 @@
       "dm_email": "nick@movecars.com",
       "dm_linkedin_url": "http://www.linkedin.com/in/nickolaus",
       "contact_strength": "verified",
-      "score": 42.912859756743,
+      "score": 42.66940417918013,
       "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
       "coverages": [
@@ -4005,7 +4194,7 @@
       "dm_email": "cstone@dmttruck.com",
       "dm_linkedin_url": "http://www.linkedin.com/in/colby-stone-8056a915a",
       "contact_strength": "verified",
-      "score": 42.91285973685567,
+      "score": 42.66940416313688,
       "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
       "coverages": [
@@ -4044,7 +4233,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 42.91285966126546,
+      "score": 42.66940410818361,
       "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
       "coverages": [
@@ -4083,7 +4272,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 42.9128596512472,
+      "score": 42.66940409978544,
       "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
       "coverages": [
@@ -4122,7 +4311,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 42.91285963093527,
+      "score": 42.66940408339987,
       "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
       "coverages": [
@@ -4161,7 +4350,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 42.280735131808036,
+      "score": 42.04086588523373,
       "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
       "coverages": [
@@ -4172,7 +4361,7 @@
         {
           "type": "new_motor_carrier_authority",
           "captured_at": "2026-05-16T05:12:49.371108",
-          "days_ago": 0,
+          "days_ago": 1,
           "payload": {
             "usdot": "4582456",
             "dba_name": "",
@@ -4200,7 +4389,7 @@
       "dm_email": "ilewis@tmhmidsouth.com",
       "dm_linkedin_url": "http://www.linkedin.com/in/isaac-lewis-42a8177",
       "contact_strength": "verified",
-      "score": 42.28073510606285,
+      "score": 42.04086586068015,
       "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
       "coverages": [
@@ -4211,7 +4400,7 @@
         {
           "type": "new_motor_carrier_authority",
           "captured_at": "2026-05-16T05:12:49.371108",
-          "days_ago": 0,
+          "days_ago": 1,
           "payload": {
             "usdot": "4582459",
             "dba_name": "",
@@ -4239,7 +4428,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 42.2645648360834,
+      "score": 42.024787330676375,
       "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
       "coverages": [
@@ -4250,7 +4439,7 @@
         {
           "type": "new_motor_carrier_authority",
           "captured_at": "2026-05-16T04:48:58.926779",
-          "days_ago": 0,
+          "days_ago": 1,
           "payload": {
             "usdot": "4582442",
             "dba_name": "",
@@ -4278,7 +4467,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 42.260546624707494,
+      "score": 42.02079190238682,
       "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
       "coverages": [
@@ -4289,7 +4478,7 @@
         {
           "type": "new_motor_carrier_authority",
           "captured_at": "2026-05-16T04:43:03.381666",
-          "days_ago": 0,
+          "days_ago": 1,
           "payload": {
             "usdot": "4582434",
             "dba_name": "",
@@ -4317,7 +4506,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 42.051948465584715,
+      "score": 41.81337712280655,
       "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
       "coverages": [
@@ -4356,7 +4545,7 @@
       "dm_email": "kkraus@rbm.us",
       "dm_linkedin_url": "http://www.linkedin.com/in/kade-kraus-01a78310",
       "contact_strength": "verified",
-      "score": 42.05194845581242,
+      "score": 41.813377113704696,
       "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
       "coverages": [
@@ -4395,7 +4584,7 @@
       "dm_email": "mkoura@vitaltransportcorp.com",
       "dm_linkedin_url": "http://www.linkedin.com/in/mohamed-koura-b5924544",
       "contact_strength": "verified",
-      "score": 42.05194842630438,
+      "score": 41.81337709858711,
       "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
       "coverages": [
@@ -4434,7 +4623,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 42.05194839604289,
+      "score": 41.813377075586466,
       "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
       "coverages": [
@@ -4473,7 +4662,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 42.05194833661072,
+      "score": 41.81337703542199,
       "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
       "coverages": [
@@ -4500,6 +4689,45 @@
       ]
     },
     {
+      "name": "ANDREW HOWARD",
+      "domain": null,
+      "industry": "logistics_transport",
+      "headcount": null,
+      "country": "US",
+      "city": "SCARBOROUGH",
+      "state": "ME",
+      "dm_name": "Andrew Howard",
+      "dm_title": "President & CEO",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "cold",
+      "score": 41.595136451180466,
+      "insight": "Commercial Auto + Workers Comp",
+      "trigger_type": "motor_carrier",
+      "coverages": [
+        "Commercial Auto",
+        "Workers Comp"
+      ],
+      "signals": [
+        {
+          "type": "new_motor_carrier_authority",
+          "captured_at": "2026-05-17T09:20:39.482684",
+          "days_ago": 0,
+          "payload": {
+            "usdot": "4582492",
+            "dba_name": "",
+            "issue_date": "2026-05-14",
+            "fleet_size_power_units": 1,
+            "drivers": 1,
+            "carrier_operation": "C",
+            "city": "SCARBOROUGH",
+            "state": "ME",
+            "officer_name": "ANDREW HOWARD"
+          }
+        }
+      ]
+    },
+    {
       "name": "NAAJ TRANSPORT INC",
       "domain": null,
       "industry": "logistics_transport",
@@ -4512,7 +4740,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 41.594164138379305,
+      "score": 41.35818998549219,
       "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
       "coverages": [
@@ -4551,7 +4779,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 41.59416409076164,
+      "score": 41.35818993812255,
       "insight": "Commercial Auto",
       "trigger_type": "motor_carrier",
       "coverages": [
@@ -4589,7 +4817,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 41.5941640579376,
+      "score": 41.35818990588288,
       "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
       "coverages": [
@@ -4628,7 +4856,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 41.59416402282221,
+      "score": 41.358189875213725,
       "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
       "coverages": [
@@ -4667,7 +4895,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 41.59416401325641,
+      "score": 41.358189867980535,
       "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
       "coverages": [
@@ -4706,7 +4934,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 41.594164004458094,
+      "score": 41.35818985934274,
       "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
       "coverages": [
@@ -4745,7 +4973,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 41.59416398123322,
+      "score": 41.35818984358235,
       "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
       "coverages": [
@@ -4774,17 +5002,17 @@
     {
       "name": "NATE KIELTY CONSTRUCTION LLC",
       "domain": null,
-      "industry": null,
+      "industry": "construction",
       "headcount": null,
-      "country": null,
-      "city": null,
-      "state": null,
+      "country": "US",
+      "city": "WATKINS",
+      "state": "MN",
       "dm_name": "NATHANYL EDWARD KIELTY",
       "dm_title": "Owner / Officer",
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 41.594163953247694,
+      "score": 41.35818982839709,
       "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
       "coverages": [
@@ -4823,7 +5051,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 41.59416393085705,
+      "score": 41.35818981198416,
       "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
       "coverages": [
@@ -4862,7 +5090,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 41.59416392259264,
+      "score": 41.35818980409844,
       "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
       "coverages": [
@@ -4901,7 +5129,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 41.59416390334981,
+      "score": 41.358189779633896,
       "insight": "Commercial Auto",
       "trigger_type": "motor_carrier",
       "coverages": [
@@ -4939,7 +5167,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 41.594163876910386,
+      "score": 41.35818975648549,
       "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
       "coverages": [
@@ -4978,7 +5206,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 41.594163860948846,
+      "score": 41.35818974147717,
       "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
       "coverages": [
@@ -5017,7 +5245,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 41.59416384399736,
+      "score": 41.358189726048586,
       "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
       "coverages": [
@@ -5056,7 +5284,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "cold",
-      "score": 41.59416380451062,
+      "score": 41.35818968892043,
       "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
       "coverages": [
@@ -5095,7 +5323,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 41.594163773544125,
+      "score": 41.35818965851671,
       "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
       "coverages": [
@@ -5134,7 +5362,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 41.594163766113944,
+      "score": 41.35818965112869,
       "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
       "coverages": [
@@ -5173,7 +5401,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "cold",
-      "score": 41.59416375050834,
+      "score": 41.35818963706047,
       "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
       "coverages": [
@@ -5212,7 +5440,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 41.594163742777845,
+      "score": 41.35818962920793,
       "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
       "coverages": [
@@ -5251,7 +5479,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 41.594163734991724,
+      "score": 41.35818961969639,
       "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
       "coverages": [
@@ -5290,7 +5518,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 41.59416369413686,
+      "score": 41.35818957857561,
       "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
       "coverages": [
@@ -5329,7 +5557,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 41.59416368461555,
+      "score": 41.35818957004841,
       "insight": "Commercial Auto",
       "trigger_type": "motor_carrier",
       "coverages": [
@@ -5367,7 +5595,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 41.59416366823134,
+      "score": 41.358189554343326,
       "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
       "coverages": [
@@ -5406,7 +5634,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 41.594163651780384,
+      "score": 41.35818953950091,
       "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
       "coverages": [
@@ -5445,7 +5673,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 41.594163626764704,
+      "score": 41.35818951612024,
       "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
       "coverages": [
@@ -5484,7 +5712,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "cold",
-      "score": 41.59416361881174,
+      "score": 41.358189508898114,
       "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
       "coverages": [
@@ -5523,7 +5751,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 41.59416359536441,
+      "score": 41.35818948566122,
       "insight": "Commercial Auto",
       "trigger_type": "motor_carrier",
       "coverages": [
@@ -5561,7 +5789,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 41.59416358708888,
+      "score": 41.358189477875044,
       "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
       "coverages": [
@@ -5600,7 +5828,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 41.59416357944736,
+      "score": 41.358189470243694,
       "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
       "coverages": [
@@ -5639,7 +5867,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 41.59416357130531,
+      "score": 41.35818946274507,
       "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
       "coverages": [
@@ -5678,7 +5906,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 41.5941635637639,
+      "score": 41.358189456031695,
       "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
       "coverages": [
@@ -5717,7 +5945,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 41.59416355567746,
+      "score": 41.358189448333995,
       "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
       "coverages": [
@@ -5756,7 +5984,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 41.59416354799146,
+      "score": 41.35818943953029,
       "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
       "coverages": [
@@ -5795,7 +6023,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 41.594163539960626,
+      "score": 41.35818943140126,
       "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
       "coverages": [
@@ -5834,7 +6062,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 41.32684456149228,
+      "score": 41.092386853746,
       "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
       "coverages": [
@@ -5873,7 +6101,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 41.32349462572026,
+      "score": 41.08905592367152,
       "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
       "coverages": [
@@ -5912,7 +6140,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 41.3234946057849,
+      "score": 41.08905589990459,
       "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
       "coverages": [
@@ -5951,7 +6179,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "cold",
-      "score": 41.32349459699964,
+      "score": 41.089055892608584,
       "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
       "coverages": [
@@ -5990,7 +6218,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 41.32349455131629,
+      "score": 41.089055853370624,
       "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
       "coverages": [
@@ -6029,7 +6257,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 41.323494542133204,
+      "score": 41.089055843997905,
       "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
       "coverages": [
@@ -6068,7 +6296,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 41.32349453298327,
+      "score": 41.08905583525149,
       "insight": "Commercial Auto",
       "trigger_type": "motor_carrier",
       "coverages": [
@@ -6106,7 +6334,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 41.32349449949983,
+      "score": 41.08905581595666,
       "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
       "coverages": [
@@ -6145,7 +6373,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 41.32349446895585,
+      "score": 41.08905579190404,
       "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
       "coverages": [
@@ -6184,7 +6412,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 41.32349445070019,
+      "score": 41.08905577690549,
       "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
       "coverages": [
@@ -6223,7 +6451,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 41.32349443620175,
+      "score": 41.08905576918096,
       "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
       "coverages": [
@@ -6262,7 +6490,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 40.71478204439925,
+      "score": 40.4837968469132,
       "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
       "coverages": [
@@ -6273,7 +6501,7 @@
         {
           "type": "new_motor_carrier_authority",
           "captured_at": "2026-05-16T05:12:49.371108",
-          "days_ago": 0,
+          "days_ago": 1,
           "payload": {
             "usdot": "4582447",
             "dba_name": "CAJUN ROLL OFFS AND RENTALS",
@@ -6301,7 +6529,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 40.714781990057936,
+      "score": 40.483796794168484,
       "insight": "Commercial Auto",
       "trigger_type": "motor_carrier",
       "coverages": [
@@ -6311,7 +6539,7 @@
         {
           "type": "new_motor_carrier_authority",
           "captured_at": "2026-05-16T05:12:49.371108",
-          "days_ago": 0,
+          "days_ago": 1,
           "payload": {
             "usdot": "4582454",
             "dba_name": "HIGH TORQUE",
@@ -6339,7 +6567,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 40.7147819702638,
+      "score": 40.483796770751646,
       "insight": "Commercial Auto",
       "trigger_type": "motor_carrier",
       "coverages": [
@@ -6349,7 +6577,7 @@
         {
           "type": "new_motor_carrier_authority",
           "captured_at": "2026-05-16T05:12:49.371108",
-          "days_ago": 0,
+          "days_ago": 1,
           "payload": {
             "usdot": "4582457",
             "dba_name": "",
@@ -6377,7 +6605,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 40.71478196179305,
+      "score": 40.48379676366056,
       "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
       "coverages": [
@@ -6388,7 +6616,7 @@
         {
           "type": "new_motor_carrier_authority",
           "captured_at": "2026-05-16T05:12:49.371108",
-          "days_ago": 0,
+          "days_ago": 1,
           "payload": {
             "usdot": "4582458",
             "dba_name": "",
@@ -6416,7 +6644,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 40.70988155998874,
+      "score": 40.47892416471354,
       "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
       "coverages": [
@@ -6427,7 +6655,7 @@
         {
           "type": "new_motor_carrier_authority",
           "captured_at": "2026-05-16T05:05:19.258525",
-          "days_ago": 0,
+          "days_ago": 1,
           "payload": {
             "usdot": "4582449",
             "dba_name": "",
@@ -6455,7 +6683,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 40.6992105746997,
+      "score": 40.46831371845594,
       "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
       "coverages": [
@@ -6466,7 +6694,7 @@
         {
           "type": "new_motor_carrier_authority",
           "captured_at": "2026-05-16T04:48:58.926779",
-          "days_ago": 0,
+          "days_ago": 1,
           "payload": {
             "usdot": "4582443",
             "dba_name": "",
@@ -6494,7 +6722,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 40.69921056666753,
+      "score": 40.46831370948454,
       "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
       "coverages": [
@@ -6505,7 +6733,7 @@
         {
           "type": "new_motor_carrier_authority",
           "captured_at": "2026-05-16T04:48:58.926779",
-          "days_ago": 0,
+          "days_ago": 1,
           "payload": {
             "usdot": "4582444",
             "dba_name": "",
@@ -6533,7 +6761,7 @@
       "dm_email": "mitch@junkmastersmn.com",
       "dm_linkedin_url": "http://www.linkedin.com/in/mitch-harrison-0804b915a",
       "contact_strength": "verified",
-      "score": 40.69921055890746,
+      "score": 40.46831370203904,
       "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
       "coverages": [
@@ -6544,7 +6772,7 @@
         {
           "type": "new_motor_carrier_authority",
           "captured_at": "2026-05-16T04:48:58.926779",
-          "days_ago": 0,
+          "days_ago": 1,
           "payload": {
             "usdot": "4582445",
             "dba_name": "",
@@ -6572,7 +6800,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 40.699210551506546,
+      "score": 40.46831369410655,
       "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
       "coverages": [
@@ -6583,7 +6811,7 @@
         {
           "type": "new_motor_carrier_authority",
           "captured_at": "2026-05-16T04:48:58.926779",
-          "days_ago": 0,
+          "days_ago": 1,
           "payload": {
             "usdot": "4582446",
             "dba_name": "",
@@ -6611,7 +6839,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 40.69921053580136,
+      "score": 40.46831367829568,
       "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
       "coverages": [
@@ -6622,7 +6850,7 @@
         {
           "type": "new_motor_carrier_authority",
           "captured_at": "2026-05-16T04:48:58.926779",
-          "days_ago": 0,
+          "days_ago": 1,
           "payload": {
             "usdot": "4582448",
             "dba_name": "",
@@ -6650,7 +6878,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 40.69921051970438,
+      "score": 40.46831366422714,
       "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
       "coverages": [
@@ -6661,7 +6889,7 @@
         {
           "type": "new_motor_carrier_authority",
           "captured_at": "2026-05-16T04:48:58.926779",
-          "days_ago": 0,
+          "days_ago": 1,
           "payload": {
             "usdot": "4582450",
             "dba_name": "",
@@ -6689,7 +6917,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 40.69534118143005,
+      "score": 40.46446626860307,
       "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
       "coverages": [
@@ -6700,7 +6928,7 @@
         {
           "type": "new_motor_carrier_authority",
           "captured_at": "2026-05-16T04:43:03.381666",
-          "days_ago": 0,
+          "days_ago": 1,
           "payload": {
             "usdot": "4582435",
             "dba_name": "TRANSPORTES ROJAS",
@@ -6728,7 +6956,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 40.69534117152683,
+      "score": 40.46446626114746,
       "insight": "Commercial Auto",
       "trigger_type": "motor_carrier",
       "coverages": [
@@ -6738,7 +6966,7 @@
         {
           "type": "new_motor_carrier_authority",
           "captured_at": "2026-05-16T04:43:03.381666",
-          "days_ago": 0,
+          "days_ago": 1,
           "payload": {
             "usdot": "4582436",
             "dba_name": "",
@@ -6766,7 +6994,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 40.69534115443017,
+      "score": 40.46446624662578,
       "insight": "Commercial Auto",
       "trigger_type": "motor_carrier",
       "coverages": [
@@ -6776,7 +7004,7 @@
         {
           "type": "new_motor_carrier_authority",
           "captured_at": "2026-05-16T04:43:03.381666",
-          "days_ago": 0,
+          "days_ago": 1,
           "payload": {
             "usdot": "4582438",
             "dba_name": "",
@@ -6804,7 +7032,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 40.69534113810617,
+      "score": 40.46446623173619,
       "insight": "Commercial Auto",
       "trigger_type": "motor_carrier",
       "coverages": [
@@ -6814,7 +7042,7 @@
         {
           "type": "new_motor_carrier_authority",
           "captured_at": "2026-05-16T04:43:03.381666",
-          "days_ago": 0,
+          "days_ago": 1,
           "payload": {
             "usdot": "4582440",
             "dba_name": "",
@@ -6842,7 +7070,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "cold",
-      "score": 40.552123483738235,
+      "score": 40.322061096472154,
       "insight": "E&O + D&O",
       "trigger_type": "federal_contract",
       "coverages": [
@@ -6880,7 +7108,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 40.494468976406395,
+      "score": 40.26473358743877,
       "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
       "coverages": [
@@ -6919,7 +7147,7 @@
       "dm_email": null,
       "dm_linkedin_url": "http://www.linkedin.com/in/lawrence-shub-3b86b810",
       "contact_strength": "verified",
-      "score": 40.494468965588275,
+      "score": 40.26473357904011,
       "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
       "coverages": [
@@ -6958,7 +7186,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "cold",
-      "score": 40.4944689563945,
+      "score": 40.264733571513624,
       "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
       "coverages": [
@@ -6997,7 +7225,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 40.49446894680006,
+      "score": 40.264733564191715,
       "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
       "coverages": [
@@ -7036,7 +7264,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 40.49446892211006,
+      "score": 40.264733548988,
       "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
       "coverages": [
@@ -7075,7 +7303,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 40.494468913046234,
+      "score": 40.26473354121386,
       "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
       "coverages": [
@@ -7114,7 +7342,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 40.49446890256381,
+      "score": 40.26473353397809,
       "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
       "coverages": [
@@ -7153,7 +7381,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 40.49446886704487,
+      "score": 40.264733509891165,
       "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
       "coverages": [
@@ -7192,7 +7420,7 @@
       "dm_email": null,
       "dm_linkedin_url": "http://www.linkedin.com/in/alison-sawyer",
       "contact_strength": "verified",
-      "score": 40.49446884521372,
+      "score": 40.26473349475204,
       "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
       "coverages": [
@@ -7231,7 +7459,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 40.49446883564093,
+      "score": 40.26473348744091,
       "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
       "coverages": [
@@ -7270,7 +7498,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "cold",
-      "score": 40.49446881301926,
+      "score": 40.26473347147269,
       "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
       "coverages": [
@@ -7309,7 +7537,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 40.49446878829678,
+      "score": 40.26473345640894,
       "insight": "Commercial Auto + Workers Comp",
       "trigger_type": "motor_carrier",
       "coverages": [
@@ -7348,7 +7576,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 39.57324582790855,
+      "score": 39.348736865668364,
       "insight": "E&O + D&O",
       "trigger_type": "federal_contract",
       "coverages": [
@@ -7386,7 +7614,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "cold",
-      "score": 38.86416469872421,
+      "score": 38.64367853532627,
       "insight": "Cyber + E&O",
       "trigger_type": "federal_contract",
       "coverages": [
@@ -7424,7 +7652,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 38.71025000475802,
+      "score": 38.49063703759688,
       "insight": "Cyber + E&O",
       "trigger_type": "federal_contract",
       "coverages": [
@@ -7462,7 +7690,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "cold",
-      "score": 37.3830986455507,
+      "score": 37.171014943431786,
       "insight": "Cyber + E&O",
       "trigger_type": "federal_contract",
       "coverages": [
@@ -7500,7 +7728,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 37.342303271429955,
+      "score": 37.13045101104317,
       "insight": "Product Liability + GL",
       "trigger_type": "federal_contract",
       "coverages": [
@@ -7538,7 +7766,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 36.052356547782,
+      "score": 35.84782247476157,
       "insight": "Product Liability + GL",
       "trigger_type": "federal_contract",
       "coverages": [
@@ -7576,7 +7804,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "cold",
-      "score": 35.53882356983012,
+      "score": 35.33720293054079,
       "insight": "Professional Liability (E&O) + GL",
       "trigger_type": "federal_contract",
       "coverages": [
@@ -7613,7 +7841,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 35.10570637478255,
+      "score": 34.90654289467606,
       "insight": "Professional Liability (E&O) + GL",
       "trigger_type": "federal_contract",
       "coverages": [
@@ -7650,7 +7878,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 34.343771460455486,
+      "score": 34.148930618621854,
       "insight": "Commercial Auto + GL",
       "trigger_type": "federal_contract",
       "coverages": [
@@ -7688,7 +7916,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "cold",
-      "score": 34.24696111404001,
+      "score": 34.05266951662523,
       "insight": "Cyber + E&O",
       "trigger_type": "federal_contract",
       "coverages": [
@@ -7726,7 +7954,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "cold",
-      "score": 34.20248966165891,
+      "score": 34.00845035380462,
       "insight": "Professional Liability + Cyber",
       "trigger_type": "federal_contract",
       "coverages": [
@@ -7764,7 +7992,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "cold",
-      "score": 33.147521669504265,
+      "score": 32.95946746208866,
       "insight": "GL + Pollution Liability",
       "trigger_type": "federal_contract",
       "coverages": [
@@ -7802,7 +8030,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 33.10976230140477,
+      "score": 32.92192229786729,
       "insight": "GL + Builders Risk",
       "trigger_type": "federal_contract",
       "coverages": [
@@ -7840,7 +8068,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "cold",
-      "score": 32.57272724925955,
+      "score": 32.38793398853998,
       "insight": "Cyber + E&O",
       "trigger_type": "federal_contract",
       "coverages": [
@@ -7878,7 +8106,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 32.561765627318245,
+      "score": 32.377034558364095,
       "insight": "Professional Liability (Malpractice) + Cyber",
       "trigger_type": "federal_contract",
       "coverages": [
@@ -7915,7 +8143,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 31.31115235797495,
+      "score": 31.133516335439474,
       "insight": "GL + Builders Risk",
       "trigger_type": "federal_contract",
       "coverages": [
@@ -7953,7 +8181,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 30.767959748945955,
+      "score": 30.593405390698347,
       "insight": "Cyber + E&O",
       "trigger_type": "federal_contract",
       "coverages": [
@@ -7991,7 +8219,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "cold",
-      "score": 30.630193878135906,
+      "score": 30.456421096358774,
       "insight": "Product Liability + GL",
       "trigger_type": "federal_contract",
       "coverages": [
@@ -8029,7 +8257,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 29.940224771225967,
+      "score": 29.770366351750422,
       "insight": "GL + Professional Liability",
       "trigger_type": "federal_contract",
       "coverages": [
@@ -8066,7 +8294,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 29.654567945747385,
+      "score": 29.486330131487033,
       "insight": "E&O + D&O",
       "trigger_type": "federal_contract",
       "coverages": [
@@ -8104,7 +8332,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 29.524587057931743,
+      "score": 29.35708666014131,
       "insight": "E&O + D&O",
       "trigger_type": "federal_contract",
       "coverages": [
@@ -8142,7 +8370,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "cold",
-      "score": 29.471552266638348,
+      "score": 29.304352756924228,
       "insight": "GL + Pollution Liability",
       "trigger_type": "federal_contract",
       "coverages": [
@@ -8180,7 +8408,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "cold",
-      "score": 28.092802301930014,
+      "score": 27.933424799867755,
       "insight": "Cyber + E&O",
       "trigger_type": "federal_contract",
       "coverages": [
@@ -8218,7 +8446,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 28.006429004042023,
+      "score": 27.847541492942597,
       "insight": "GL + Builders Risk",
       "trigger_type": "federal_contract",
       "coverages": [
@@ -8256,7 +8484,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 27.918309438571058,
+      "score": 27.759921855871944,
       "insight": "Cyber + E&O",
       "trigger_type": "federal_contract",
       "coverages": [
@@ -8282,6 +8510,44 @@
       ]
     },
     {
+      "name": "CANON U.S.A., INC.",
+      "domain": "usa.canon.com",
+      "industry": "manufacturing",
+      "headcount": null,
+      "country": "US",
+      "city": "Melville",
+      "state": "NY",
+      "dm_name": null,
+      "dm_title": null,
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "cold",
+      "score": 27.651148648024833,
+      "insight": "Product Liability + GL",
+      "trigger_type": "federal_contract",
+      "coverages": [
+        "Product Liability",
+        "GL",
+        "Workers Comp"
+      ],
+      "signals": [
+        {
+          "type": "funding_raised",
+          "captured_at": "2026-05-17T09:20:50.641556",
+          "days_ago": 0,
+          "payload": {
+            "filing_type": "Federal contract",
+            "filed_on": "",
+            "amount_usd": 26543.0,
+            "title": "contract: PHOTOGRAPHIC AND PHOTOCOPYING EQUIPMENT MANUFACTURING",
+            "naics": "PHOTOGRAPHIC AND PHOTOCOPYING EQUIPMENT MANUFACTURING",
+            "agency": "",
+            "state": "MO"
+          }
+        }
+      ]
+    },
+    {
       "name": "CORELOGIC SOLUTIONS, LLC",
       "domain": "corelogic.com",
       "industry": "real_estate",
@@ -8294,7 +8560,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "cold",
-      "score": 27.50943970840868,
+      "score": 27.353371745836178,
       "insight": "Cyber + E&O",
       "trigger_type": "federal_contract",
       "coverages": [
@@ -8332,7 +8598,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "cold",
-      "score": 27.35335183759819,
+      "score": 27.198169402461282,
       "insight": "E&O + GL",
       "trigger_type": "federal_contract",
       "coverages": [
@@ -8369,7 +8635,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 27.08766470295188,
+      "score": 26.93398957714933,
       "insight": "Product Liability + GL",
       "trigger_type": "federal_contract",
       "coverages": [
@@ -8407,7 +8673,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "cold",
-      "score": 26.836304303715767,
+      "score": 26.684055207282384,
       "insight": "Cyber + E&O",
       "trigger_type": "federal_contract",
       "coverages": [
@@ -8445,7 +8711,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 26.82465411556178,
+      "score": 26.67247113693227,
       "insight": "Cyber + E&O",
       "trigger_type": "federal_contract",
       "coverages": [
@@ -8483,7 +8749,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "cold",
-      "score": 26.51974800758292,
+      "score": 26.36929481443351,
       "insight": "E&O + D&O",
       "trigger_type": "federal_contract",
       "coverages": [
@@ -8509,6 +8775,44 @@
       ]
     },
     {
+      "name": "RD3, INC.",
+      "domain": "rd3inc.com",
+      "industry": "other",
+      "headcount": 10,
+      "country": "US",
+      "city": "Greenwood Village",
+      "state": "CO",
+      "dm_name": "Rob de Grasse",
+      "dm_title": "President",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "partial",
+      "score": 26.22534915868498,
+      "insight": "E&O + D&O",
+      "trigger_type": "federal_contract",
+      "coverages": [
+        "E&O",
+        "D&O",
+        "GL"
+      ],
+      "signals": [
+        {
+          "type": "funding_raised",
+          "captured_at": "2026-05-17T09:20:50.641556",
+          "days_ago": 0,
+          "payload": {
+            "filing_type": "Federal contract",
+            "filed_on": "",
+            "amount_usd": 12283.38,
+            "title": "contract: PROFESSIONAL AND MANAGEMENT DEVELOPMENT TRAINING",
+            "naics": "PROFESSIONAL AND MANAGEMENT DEVELOPMENT TRAINING",
+            "agency": "",
+            "state": "MD"
+          }
+        }
+      ]
+    },
+    {
       "name": "CAL-CERT, CO",
       "domain": "cal-cert.com",
       "industry": "other",
@@ -8521,7 +8825,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "cold",
-      "score": 26.213390165502403,
+      "score": 26.064675018878578,
       "insight": "Cyber + E&O",
       "trigger_type": "federal_contract",
       "coverages": [
@@ -8559,7 +8863,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 26.106404824911383,
+      "score": 25.95829663191414,
       "insight": "Cyber + E&O",
       "trigger_type": "federal_contract",
       "coverages": [
@@ -8597,7 +8901,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 26.020416734952445,
+      "score": 25.872796375603475,
       "insight": "Product Liability + GL",
       "trigger_type": "federal_contract",
       "coverages": [
@@ -8635,7 +8939,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "cold",
-      "score": 7.946852986389495,
+      "score": 7.901768499703961,
       "insight": null,
       "trigger_type": "funding_event",
       "coverages": [
@@ -8670,7 +8974,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 7.946830194361555,
+      "score": 7.901745835647555,
       "insight": null,
       "trigger_type": "funding_event",
       "coverages": [
@@ -8705,7 +9009,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 7.8297894990564325,
+      "score": 7.7853691428588885,
       "insight": null,
       "trigger_type": "funding_event",
       "coverages": [
@@ -8717,7 +9021,7 @@
         {
           "type": "funding_raised",
           "captured_at": "2026-05-16T05:13:00.771852",
-          "days_ago": 0,
+          "days_ago": 1,
           "payload": {
             "title": "D - Pinnacle Harbor LLC (0002133145) (Filer)",
             "filing_type": "Form D",
@@ -8740,7 +9044,7 @@
       "dm_email": "isaiah@auxiliumhealth.xyz",
       "dm_linkedin_url": "http://www.linkedin.com/in/isaiah-kaiser",
       "contact_strength": "verified",
-      "score": 7.8267947737369825,
+      "score": 7.782391407480438,
       "insight": null,
       "trigger_type": "funding_event",
       "coverages": [
@@ -8752,7 +9056,7 @@
         {
           "type": "funding_raised",
           "captured_at": "2026-05-16T04:49:10.234173",
-          "days_ago": 0,
+          "days_ago": 1,
           "payload": {
             "title": "D - Auxilium Health, Inc. (0002135544) (Filer)",
             "filing_type": "Form D",
@@ -8775,7 +9079,7 @@
       "dm_email": "shawn@majestytherapeutics.com",
       "dm_linkedin_url": "http://www.linkedin.com/in/shawn-titcomb-3086913",
       "contact_strength": "verified",
-      "score": 7.826794771976749,
+      "score": 7.782391405940387,
       "insight": null,
       "trigger_type": "funding_event",
       "coverages": [
@@ -8787,7 +9091,7 @@
         {
           "type": "funding_raised",
           "captured_at": "2026-05-16T04:49:10.234173",
-          "days_ago": 0,
+          "days_ago": 1,
           "payload": {
             "title": "D - Majesty Therapeutics, Inc. (0002135155) (Filer)",
             "filing_type": "Form D",
@@ -8810,7 +9114,7 @@
       "dm_email": null,
       "dm_linkedin_url": "http://www.linkedin.com/in/frankjiji11",
       "contact_strength": "verified",
-      "score": 7.826051002284177,
+      "score": 7.781651855668832,
       "insight": null,
       "trigger_type": "funding_event",
       "coverages": [
@@ -8822,7 +9126,7 @@
         {
           "type": "funding_raised",
           "captured_at": "2026-05-16T04:43:14.856496",
-          "days_ago": 0,
+          "days_ago": 1,
           "payload": {
             "title": "D - SKYX Platforms Corp. (0001598981) (Filer)",
             "filing_type": "Form D",
@@ -8845,7 +9149,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 7.826051000706186,
+      "score": 7.781651854176788,
       "insight": null,
       "trigger_type": "funding_event",
       "coverages": [
@@ -8857,7 +9161,7 @@
         {
           "type": "funding_raised",
           "captured_at": "2026-05-16T04:43:14.856496",
-          "days_ago": 0,
+          "days_ago": 1,
           "payload": {
             "title": "D - RenX Enterprises Corp. (0001959023) (Filer)",
             "filing_type": "Form D",
@@ -8880,7 +9184,7 @@
       "dm_email": "simone@prismlayer.ai",
       "dm_linkedin_url": "http://www.linkedin.com/in/simone-garreau-b3571b10",
       "contact_strength": "verified",
-      "score": 7.826050997857849,
+      "score": 7.781651851140678,
       "insight": null,
       "trigger_type": "funding_event",
       "coverages": [
@@ -8892,7 +9196,7 @@
         {
           "type": "funding_raised",
           "captured_at": "2026-05-16T04:43:14.856496",
-          "days_ago": 0,
+          "days_ago": 1,
           "payload": {
             "title": "D - Prism Layer AI, Inc. (0002133683) (Filer)",
             "filing_type": "Form D",
@@ -8915,7 +9219,7 @@
       "dm_email": null,
       "dm_linkedin_url": "http://www.linkedin.com/in/david-skilton-8ba329b",
       "contact_strength": "verified",
-      "score": 7.826050991541701,
+      "score": 7.7816518450747,
       "insight": null,
       "trigger_type": "funding_event",
       "coverages": [
@@ -8927,7 +9231,7 @@
         {
           "type": "funding_raised",
           "captured_at": "2026-05-16T04:43:14.856496",
-          "days_ago": 0,
+          "days_ago": 1,
           "payload": {
             "title": "D - Copper State Credit Union (0002133883) (Filer)",
             "filing_type": "Form D",
