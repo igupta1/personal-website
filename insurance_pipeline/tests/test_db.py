@@ -94,6 +94,36 @@ def test_upsert_inserts_then_merges_fuzzy(tmp_path: Path) -> None:
     assert len(c.signals) == 2
 
 
+def test_upsert_dedup_key_isolates_same_name_distinct_records(tmp_path: Path) -> None:
+    """Two candidates with identical legal names but different external
+    identifiers (e.g. two FMCSA carriers named 'FX TRUCKING LLC' with
+    different USDOTs) stay as separate leads when `dedup_key` is set.
+    Without dedup_key the fuzzy-name fallback would collapse them."""
+    conn = db.init_db(tmp_path / "leads.db")
+
+    def _fmcsa(name: str, usdot: str) -> LeadCandidate:
+        return LeadCandidate(
+            name=name,
+            dedup_key=f"usdot:{usdot}",
+            initial_signal=Signal(
+                type=SignalType.NEW_MOTOR_CARRIER_AUTHORITY,
+                source=SourceName.FMCSA,
+                captured_at=datetime.now(timezone.utc).replace(tzinfo=None),
+                payload={"usdot": usdot},
+            ),
+        )
+
+    a = db.upsert_lead(conn, _fmcsa("FX TRUCKING LLC", "4582506"))
+    b = db.upsert_lead(conn, _fmcsa("FX TRUCKING LLC", "4582521"))
+    assert a.id != b.id, "same-name candidates with distinct USDOTs must stay separate"
+
+    # Same USDOT a second time → routes to the same lead row. (The
+    # signal-level dedup in _append_signal_row collapses identical
+    # payloads, so we don't assert signal count here.)
+    c = db.upsert_lead(conn, _fmcsa("FX TRUCKING LLC", "4582506"))
+    assert c.id == a.id
+
+
 def test_iter_leads_orders_by_score_desc_nulls_last(tmp_path: Path) -> None:
     conn = db.init_db(tmp_path / "leads.db")
     a = db.upsert_lead(conn, _candidate("Aaa LLC"))

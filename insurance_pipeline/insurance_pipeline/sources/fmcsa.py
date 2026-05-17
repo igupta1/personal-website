@@ -117,16 +117,24 @@ def fetch(*, since: datetime, limit: int | None = None) -> list[LeadCandidate]:
         if power_units > _MAX_POWER_UNITS:
             continue
 
+        usdot = str(row.get("dot_number") or "").strip()
+        # USDOT-keyed dedup avoids collapsing two distinct carriers with
+        # the same legal name (e.g. two "FX TRUCKING LLC" with different
+        # USDOTs in different states). Fall back to name-based dedup if
+        # the row is missing a USDOT (shouldn't happen but defensive).
+        dedup_key = f"usdot:{usdot}" if usdot else None
+
         candidates.append(
             LeadCandidate(
                 name=name,
                 domain=None,
+                dedup_key=dedup_key,
                 initial_signal=Signal(
                     type=SignalType.NEW_MOTOR_CARRIER_AUTHORITY,
                     source=SourceName.FMCSA,
                     captured_at=captured_at,
                     payload={
-                        "usdot": str(row.get("dot_number") or "").strip(),
+                        "usdot": usdot,
                         "dba_name": (row.get("dba_name") or "").strip(),
                         "issue_date": add_dt.date().isoformat(),
                         "fleet_size_power_units": power_units,

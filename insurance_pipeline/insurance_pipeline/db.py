@@ -234,7 +234,16 @@ def upsert_lead(
     *,
     fuzz_threshold: int = 90,
 ) -> Lead:
-    new_key = _name_key(candidate.name)
+    # Sources with a unique external identifier (FMCSA → USDOT) pass
+    # `dedup_key` so two carriers with the same legal name in different
+    # states don't fuzzy-collapse into one lead. Exact match only;
+    # the fuzzy fallback is skipped.
+    if candidate.dedup_key is not None:
+        new_key = candidate.dedup_key
+        use_fuzzy = False
+    else:
+        new_key = _name_key(candidate.name)
+        use_fuzzy = True
 
     with conn:
         existing = _get_lead_by_name_key(conn, new_key)
@@ -244,22 +253,23 @@ def upsert_lead(
             assert result is not None
             return result
 
-        cur = conn.execute("SELECT id, name_key FROM leads")
-        rows = cur.fetchall()
-        if rows:
-            choices = {row["id"]: row["name_key"] for row in rows}
-            match = process.extractOne(
-                new_key,
-                choices,
-                scorer=fuzz.ratio,
-                score_cutoff=float(fuzz_threshold),
-            )
-            if match is not None:
-                _, _, matched_id = match
-                _append_signal_row(conn, matched_id, candidate.initial_signal)
-                result = _get_lead_by_id(conn, matched_id)
-                assert result is not None
-                return result
+        if use_fuzzy:
+            cur = conn.execute("SELECT id, name_key FROM leads")
+            rows = cur.fetchall()
+            if rows:
+                choices = {row["id"]: row["name_key"] for row in rows}
+                match = process.extractOne(
+                    new_key,
+                    choices,
+                    scorer=fuzz.ratio,
+                    score_cutoff=float(fuzz_threshold),
+                )
+                if match is not None:
+                    _, _, matched_id = match
+                    _append_signal_row(conn, matched_id, candidate.initial_signal)
+                    result = _get_lead_by_id(conn, matched_id)
+                    assert result is not None
+                    return result
 
         now = _utcnow()
         signals_json = json.dumps([candidate.initial_signal.model_dump(mode="json")])

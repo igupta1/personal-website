@@ -74,3 +74,8 @@ class LeadCandidate(BaseModel):
     name: str
     domain: str | None = None
     initial_signal: Signal
+    # When set, upsert dedups on this key instead of fuzzy-matching the
+    # name. FMCSA passes "usdot:<n>" so two distinct carriers with the
+    # same legal name don't collapse to one row (e.g. two "FX TRUCKING
+    # LLC" with different USDOTs in different states).
+    dedup_key: str | None = None
