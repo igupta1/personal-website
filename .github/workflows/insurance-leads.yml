@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
     inputs:
       limit:
-        description: "Per-source candidate cap (empty = no cap; e.g. 5 for a quick smoke)"
+        description: "Per-source candidate cap (empty = default 150; 0 = unbounded; e.g. 5 for a quick smoke)"
         required: false
         default: ""
       clear_insights:
@@ -56,6 +56,10 @@ jobs:
           # Reuses LEADS_UPLOAD_API_KEY (same Bearer secret as the MSP
           # pipeline — different blob key on the receiving end).
           INSURANCE_UPLOAD_API_KEY: ${{ secrets.LEADS_UPLOAD_API_KEY }}
+          # Empty (cron, or dispatch with no input) → 150. Explicit "0"
+          # → unbounded (skip --limit). USAspending alone returns ~385
+          # candidates uncapped after Issue 5; with FMCSA's full census
+          # an uncapped run blows the 90-min job timeout in enrichment.
           LIMIT:                    ${{ inputs.limit }}
           CLEAR_INSIGHTS:           ${{ inputs.clear_insights }}
         run: |
@@ -63,7 +67,8 @@ jobs:
           if [[ "$CLEAR_INSIGHTS" == "true" ]]; then
             args+=("--rescore-only" "--clear-insights")
           fi
-          if [[ -n "$LIMIT" ]]; then
+          : "${LIMIT:=150}"
+          if [[ "$LIMIT" != "0" ]]; then
             args+=("--limit" "$LIMIT")
           fi
           python -m insurance_pipeline.daily_run "${args[@]}"
