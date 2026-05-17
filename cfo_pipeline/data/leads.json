@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-17T22:33:35.396536",
+  "generated_at": "2026-05-17T22:43:01.152159",
   "leads": [
     {
       "name": "AZALEA WANG",
@@ -166,6 +166,36 @@
       ]
     },
     {
+      "name": "Barti",
+      "domain": "barti.com",
+      "industry": "unknown",
+      "headcount": 44,
+      "country": "US",
+      "city": "San Francisco",
+      "state": "CA",
+      "dm_name": "Colton Calandrella",
+      "dm_title": "Co-Founder & CEO",
+      "dm_email": "colton@barti.com",
+      "dm_linkedin_url": "http://www.linkedin.com/in/coltoncalandrella",
+      "contact_strength": "verified",
+      "score": 59.99384704736236,
+      "insight": null,
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-05-17T22:36:32.000708",
+          "days_ago": 2,
+          "payload": {
+            "title": "Director of Finance",
+            "url": "https://www.linkedin.com/jobs/view/4415534935",
+            "date_posted": "2026-05-15",
+            "site": "linkedin"
+          }
+        }
+      ]
+    },
+    {
       "name": "SUPRANATURALS LLC",
       "domain": "supranaturals.com",
       "industry": "fintech",
@@ -208,7 +238,7 @@
       "dm_email": "rachellfishman@arketa.com",
       "dm_linkedin_url": "http://www.linkedin.com/in/rachelleafishman",
       "contact_strength": "verified",
-      "score": 59.93387325239072,
+      "score": 59.924786802103405,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -238,7 +268,7 @@
       "dm_email": "hersh@mynectar.com",
       "dm_linkedin_url": "http://www.linkedin.com/in/hersh-patel-581a488",
       "contact_strength": "verified",
-      "score": 59.932067791841234,
+      "score": 59.92298156758721,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -268,7 +298,7 @@
       "dm_email": "david@sniffspot.com",
       "dm_linkedin_url": "http://www.linkedin.com/in/david-a-85aa1526",
       "contact_strength": "verified",
-      "score": 59.81541123673467,
+      "score": 59.8063427178559,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -298,7 +328,7 @@
       "dm_email": "ben@haulerhero.com",
       "dm_linkedin_url": "http://www.linkedin.com/in/ben-sikma-9912662",
       "contact_strength": "verified",
-      "score": 59.81541122457792,
+      "score": 59.80634270531716,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -328,7 +358,7 @@
       "dm_email": "michael@aureliussystems.us",
       "dm_linkedin_url": "http://www.linkedin.com/in/michael-laframboise",
       "contact_strength": "verified",
-      "score": 59.81541120911007,
+      "score": 59.80634269156293,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -358,7 +388,7 @@
       "dm_email": "jasper@hyperbolic.ai",
       "dm_linkedin_url": "http://www.linkedin.com/in/yuezhang95",
       "contact_strength": "verified",
-      "score": 59.81541118785177,
+      "score": 59.8063426792641,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -388,7 +418,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 59.815411140536455,
+      "score": 59.80634265466642,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -418,7 +448,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 59.8135125216516,
+      "score": 59.80444420932671,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -430,36 +460,6 @@
             "title": "Assistant Controller/Senior Financial Accountant",
             "url": "https://www.linkedin.com/jobs/view/4408688378",
             "date_posted": "2026-05-15",
-            "site": "linkedin"
-          }
-        }
-      ]
-    },
-    {
-      "name": "Hoxton Circle",
-      "domain": "hoxton-circle.com",
-      "industry": "fintech",
-      "headcount": 10,
-      "country": "US",
-      "city": "New York",
-      "state": "NY",
-      "dm_name": "Lisa Alvarado",
-      "dm_title": "Vice President",
-      "dm_email": "lma@hoxtoncircle.com",
-      "dm_linkedin_url": "http://www.linkedin.com/in/lisa-alvarado-99380712",
-      "contact_strength": "verified",
-      "score": 59.8135124943158,
-      "insight": null,
-      "trigger_type": "finance_hire",
-      "signals": [
-        {
-          "type": "job_posted_finance_lead",
-          "captured_at": "2026-05-17T19:19:27.688108",
-          "days_ago": 5,
-          "payload": {
-            "title": "Senior Accountant Financial Reporting",
-            "url": "https://www.linkedin.com/jobs/view/4410156578",
-            "date_posted": "2026-05-12",
             "site": "linkedin"
           }
         }
@@ -478,7 +478,7 @@
       "dm_email": "ethan@sfcompute.com",
       "dm_linkedin_url": "http://www.linkedin.com/in/ethan-anderson-yc",
       "contact_strength": "verified",
-      "score": 59.81351248020803,
+      "score": 59.80444419490122,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -496,39 +496,9 @@
       ]
     },
     {
-      "name": "Forrer Group, Inc.",
-      "domain": "forrergroup.com",
-      "industry": "other",
-      "headcount": 8,
-      "country": "US",
-      "city": "Alpharetta",
-      "state": "GA",
-      "dm_name": null,
-      "dm_title": null,
-      "dm_email": null,
-      "dm_linkedin_url": null,
-      "contact_strength": "cold",
-      "score": 59.81351246558842,
-      "insight": null,
-      "trigger_type": "finance_hire",
-      "signals": [
-        {
-          "type": "job_posted_finance_lead",
-          "captured_at": "2026-05-17T19:19:27.688108",
-          "days_ago": 2,
-          "payload": {
-            "title": "Vice President Finance",
-            "url": "https://www.linkedin.com/jobs/view/4415066991",
-            "date_posted": "2026-05-15",
-            "site": "linkedin"
-          }
-        }
-      ]
-    },
-    {
       "name": "Paces",
       "domain": "paces.com",
-      "industry": "fintech",
+      "industry": "unknown",
       "headcount": 74,
       "country": "US",
       "city": "Brooklyn",
@@ -538,7 +508,7 @@
       "dm_email": "intercom@paces.com",
       "dm_linkedin_url": "http://www.linkedin.com/in/paces-house-paces-97813375",
       "contact_strength": "verified",
-      "score": 59.813512450009085,
+      "score": 59.80444418199505,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -556,39 +526,9 @@
       ]
     },
     {
-      "name": "Monstro",
-      "domain": "monstro.com",
-      "industry": "fintech",
-      "headcount": 37,
-      "country": "US",
-      "city": "New York",
-      "state": "NY",
-      "dm_name": "Josh Weisman",
-      "dm_title": "Chief Operating Officer",
-      "dm_email": null,
-      "dm_linkedin_url": "http://www.linkedin.com/in/josh-weisman",
-      "contact_strength": "verified",
-      "score": 59.81351242459271,
-      "insight": null,
-      "trigger_type": "finance_hire",
-      "signals": [
-        {
-          "type": "job_posted_finance_lead",
-          "captured_at": "2026-05-17T19:19:27.688108",
-          "days_ago": 12,
-          "payload": {
-            "title": "SVP - Head of Finance & Accounting",
-            "url": "https://www.linkedin.com/jobs/view/4414202227",
-            "date_posted": "2026-05-05",
-            "site": "linkedin"
-          }
-        }
-      ]
-    },
-    {
       "name": "Saint Rocco's Treats",
       "domain": "saintroccostreats.shop",
-      "industry": "ecommerce_retail",
+      "industry": "hospitality_food",
       "headcount": 19,
       "country": "US",
       "city": "Pipersville",
@@ -598,7 +538,7 @@
       "dm_email": "kolby.rush@saintroccostreats.shop",
       "dm_linkedin_url": "http://www.linkedin.com/in/kolby-rush-28498a158",
       "contact_strength": "verified",
-      "score": 59.813512394169834,
+      "score": 59.80444413187369,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -610,36 +550,6 @@
             "title": "Senior Accounting Manager",
             "url": "https://www.linkedin.com/jobs/view/4414681779",
             "date_posted": "2026-05-14",
-            "site": "linkedin"
-          }
-        }
-      ]
-    },
-    {
-      "name": "AmpersandPeople",
-      "domain": "ampersandpeople.com",
-      "industry": "fintech",
-      "headcount": 28,
-      "country": "US",
-      "city": "Los Altos",
-      "state": "CA",
-      "dm_name": "Samantha Schneider",
-      "dm_title": "CEO & Principal",
-      "dm_email": null,
-      "dm_linkedin_url": null,
-      "contact_strength": "partial",
-      "score": 59.81351238066988,
-      "insight": null,
-      "trigger_type": "finance_hire",
-      "signals": [
-        {
-          "type": "job_posted_finance_lead",
-          "captured_at": "2026-05-17T19:19:27.688108",
-          "days_ago": 19,
-          "payload": {
-            "title": "Senior Accounting Manager",
-            "url": "https://www.linkedin.com/jobs/view/4408009724",
-            "date_posted": "2026-04-28",
             "site": "linkedin"
           }
         }
@@ -658,7 +568,7 @@
       "dm_email": null,
       "dm_linkedin_url": "http://www.linkedin.com/in/mauro-piccininni-8452027",
       "contact_strength": "verified",
-      "score": 59.78394456354274,
+      "score": 59.774880649784606,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -718,7 +628,7 @@
       "dm_email": "simone@prismlayer.ai",
       "dm_linkedin_url": "http://www.linkedin.com/in/simone-garreau-b3571b10",
       "contact_strength": "verified",
-      "score": 49.427525273466166,
+      "score": 49.420031668513445,
       "insight": null,
       "trigger_type": "form_d",
       "signals": [
@@ -749,33 +659,63 @@
       ]
     },
     {
-      "name": "KeyRooted Inc.",
-      "domain": null,
-      "industry": null,
-      "headcount": null,
-      "country": null,
-      "city": null,
-      "state": null,
-      "dm_name": null,
-      "dm_title": null,
-      "dm_email": null,
-      "dm_linkedin_url": null,
-      "contact_strength": "cold",
-      "score": 24.975704301997155,
+      "name": "MOVA Technologies, Inc.",
+      "domain": "movatechnologies.com",
+      "industry": "unknown",
+      "headcount": 9,
+      "country": "US",
+      "city": "Pulaski",
+      "state": "VA",
+      "dm_name": "Steven Critchfield",
+      "dm_title": "President and Founder",
+      "dm_email": "scritchfield@movatechnologies.com",
+      "dm_linkedin_url": "http://www.linkedin.com/in/steven-critchfield-390a95275",
+      "contact_strength": "verified",
+      "score": 24.99839056510419,
       "insight": null,
       "trigger_type": "form_d",
       "signals": [
         {
           "type": "funding_raised",
-          "captured_at": "2026-05-17T21:25:06.723075",
+          "captured_at": "2026-05-17T22:38:54.764914",
           "days_ago": 2,
           "payload": {
-            "title": "D - KeyRooted Inc.",
+            "title": "D - MOVA Technologies, Inc.",
             "filing_type": "Form D",
             "filed_on": "2026-05-15",
-            "link": "https://www.sec.gov/Archives/edgar/data/2135370/000213537026000001/0002135370-26-000001-index.htm",
-            "biz_state": "TN",
-            "biz_location": "Hendersonville, TN"
+            "link": "https://www.sec.gov/Archives/edgar/data/1682315/000168231526000001/0001682315-26-000001-index.htm",
+            "biz_state": "VA",
+            "biz_location": "Blacksburg, VA"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Nectar Social",
+      "domain": "nectarsocial.com",
+      "industry": "unknown",
+      "headcount": 65,
+      "country": "US",
+      "city": "Palo Alto",
+      "state": "CA",
+      "dm_name": "Misbah Uraizee",
+      "dm_title": "Co-Founder & CEO",
+      "dm_email": "misbah@nectarsocial.com",
+      "dm_linkedin_url": "http://www.linkedin.com/in/misbahuraizee",
+      "contact_strength": "verified",
+      "score": 24.99834900492984,
+      "insight": null,
+      "trigger_type": "funding_event",
+      "signals": [
+        {
+          "type": "funding_raised",
+          "captured_at": "2026-05-17T22:38:48.545706",
+          "days_ago": 0,
+          "payload": {
+            "feed_title": "Marketing operating system Nectar Social raises $30M Series A led by Menlo",
+            "feed_url": "https://techcrunch.com/category/startups/feed/",
+            "link": "https://techcrunch.com/2026/05/16/marketing-operating-system-nectar-social-raises-30m-series-a-in-round-led-by-menlo/",
+            "published": "Sat, 16 May 2026 19:26:14 +0000"
           }
         }
       ]
@@ -784,16 +724,16 @@
       "name": "Trellis Bioscience, Inc.",
       "domain": "trellisbio.com",
       "industry": "healthcare",
-      "headcount": 20,
+      "headcount": 18,
       "country": "US",
       "city": "Redwood City",
       "state": "CA",
       "dm_name": "Stefan Ryser",
       "dm_title": "President & CEO",
-      "dm_email": null,
-      "dm_linkedin_url": null,
-      "contact_strength": "partial",
-      "score": 24.926344854546965,
+      "dm_email": "sryser@trellisbio.com",
+      "dm_linkedin_url": "http://www.linkedin.com/in/stefanryser",
+      "contact_strength": "verified",
+      "score": 24.91946071781863,
       "insight": null,
       "trigger_type": "form_d",
       "signals": [
@@ -816,16 +756,16 @@
       "name": "Athos Therapeutics, Inc.",
       "domain": "athostx.com",
       "industry": "healthcare",
-      "headcount": 40,
+      "headcount": 36,
       "country": "US",
       "city": "Los Angeles",
       "state": "CA",
-      "dm_name": "Dimitrios Iliopoulos",
-      "dm_title": "President & CEO",
-      "dm_email": null,
-      "dm_linkedin_url": null,
-      "contact_strength": "partial",
-      "score": 24.92634481800532,
+      "dm_name": "Phithi Nguyen",
+      "dm_title": "VP, Analytical Chemistry",
+      "dm_email": "pnguyen@athostx.com",
+      "dm_linkedin_url": "http://www.linkedin.com/in/phithi-nguyen-611a315a",
+      "contact_strength": "verified",
+      "score": 24.91946069419507,
       "insight": null,
       "trigger_type": "form_d",
       "signals": [
@@ -848,16 +788,16 @@
       "name": "MedZero, Inc.",
       "domain": "medzero.com",
       "industry": "healthcare",
-      "headcount": 10,
+      "headcount": 14,
       "country": "US",
       "city": "Portland",
       "state": "OR",
-      "dm_name": "Craig Froude",
-      "dm_title": "Chairman & CEO",
-      "dm_email": null,
-      "dm_linkedin_url": null,
-      "contact_strength": "partial",
-      "score": 24.926344796774902,
+      "dm_name": "Howard Michalski",
+      "dm_title": "President, Co-Founder",
+      "dm_email": "hkm@medzero.com",
+      "dm_linkedin_url": "http://www.linkedin.com/in/hmichalski",
+      "contact_strength": "verified",
+      "score": 24.919460688710675,
       "insight": null,
       "trigger_type": "form_d",
       "signals": [
@@ -880,16 +820,16 @@
       "name": "Ananya Health, Inc.",
       "domain": "ananya.health",
       "industry": "healthcare",
-      "headcount": 10,
+      "headcount": 12,
       "country": "US",
       "city": "Oakland",
       "state": "CA",
       "dm_name": "Anu Parvatiyar",
       "dm_title": "Co-Founder & CEO",
-      "dm_email": null,
-      "dm_linkedin_url": null,
-      "contact_strength": "partial",
-      "score": 24.926344791362315,
+      "dm_email": "anu@ananya.health",
+      "dm_linkedin_url": "http://www.linkedin.com/in/anuparvatiyar",
+      "contact_strength": "verified",
+      "score": 24.91946068343952,
       "insight": null,
       "trigger_type": "form_d",
       "signals": [
@@ -921,7 +861,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "cold",
-      "score": 24.92634478582974,
+      "score": 24.91946067827499,
       "insight": null,
       "trigger_type": "form_d",
       "signals": [
@@ -953,7 +893,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 24.926344670825547,
+      "score": 24.91946067311046,
       "insight": null,
       "trigger_type": "form_d",
       "signals": [
@@ -985,7 +925,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 24.926344628451368,
+      "score": 24.91946066784597,
       "insight": null,
       "trigger_type": "form_d",
       "signals": [
@@ -1017,7 +957,7 @@
       "dm_email": "aaron@tugboat.claims",
       "dm_linkedin_url": "http://www.linkedin.com/in/aaron-mooney-321408141",
       "contact_strength": "verified",
-      "score": 24.91090392609426,
+      "score": 24.90712723578081,
       "insight": null,
       "trigger_type": "form_d",
       "signals": [
@@ -1049,7 +989,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 24.51662133169187,
+      "score": 24.512904353521005,
       "insight": null,
       "trigger_type": "form_d",
       "signals": [
