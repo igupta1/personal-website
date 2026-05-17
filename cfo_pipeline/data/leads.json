@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-17T22:25:46.038767",
+  "generated_at": "2026-05-17T22:33:35.396536",
   "leads": [
     {
       "name": "AZALEA WANG",
@@ -125,88 +125,6 @@
       ]
     },
     {
-      "name": "Search Masters, Inc",
-      "domain": "searchmasters.com",
-      "industry": "fintech",
-      "headcount": 45,
-      "country": "US",
-      "city": "Independence",
-      "state": "OH",
-      "dm_name": "Jon Venesile",
-      "dm_title": "President",
-      "dm_email": "jon@searchmasters.com",
-      "dm_linkedin_url": "http://www.linkedin.com/in/jonvenesile",
-      "contact_strength": "verified",
-      "score": 100.0,
-      "insight": null,
-      "trigger_type": "finance_hire",
-      "signals": [
-        {
-          "type": "job_posted_finance_lead",
-          "captured_at": "2026-05-17T19:21:26.403770",
-          "days_ago": 1,
-          "payload": {
-            "title": "Assistant Controller (10660JFXV)",
-            "url": "https://www.adzuna.com/land/ad/5731029009?se=jD91miVS8RGNw-9vM3bulQ&utm_medium=api&utm_source=3aa14b35&v=C0F086A22940B3F1E0068AED42AA540BDC4722CC",
-            "date_posted": "2026-05-15T23:37:39Z",
-            "site": "adzuna"
-          }
-        },
-        {
-          "type": "job_posted_finance_lead",
-          "captured_at": "2026-05-17T21:24:44.945974",
-          "days_ago": 1,
-          "payload": {
-            "title": "Assistant Controller (10660JFXV)",
-            "url": "https://www.adzuna.com/land/ad/5731029009?se=lKBm1DZS8RGiJchPzKRtww&utm_medium=api&utm_source=3aa14b35&v=C0F086A22940B3F1E0068AED42AA540BDC4722CC",
-            "date_posted": "2026-05-15T23:37:39Z",
-            "site": "adzuna"
-          }
-        }
-      ]
-    },
-    {
-      "name": "Rule Supplements",
-      "domain": "rulesupplements.com",
-      "industry": "ecommerce_retail",
-      "headcount": null,
-      "country": "US",
-      "city": "Akron",
-      "state": "IA",
-      "dm_name": "Tyson Rule",
-      "dm_title": "Owner",
-      "dm_email": null,
-      "dm_linkedin_url": null,
-      "contact_strength": "partial",
-      "score": 100.0,
-      "insight": null,
-      "trigger_type": "finance_hire",
-      "signals": [
-        {
-          "type": "job_posted_finance_lead",
-          "captured_at": "2026-05-17T19:21:26.403770",
-          "days_ago": 13,
-          "payload": {
-            "title": "Accounting Manager & Executive Assistant",
-            "url": "https://www.adzuna.com/land/ad/5718684092?se=FIYrnSVS8RGNw-9vM3bulQ&utm_medium=api&utm_source=3aa14b35&v=744D74F836D8335D17408E037A84998762DADA55",
-            "date_posted": "2026-05-04T13:16:27Z",
-            "site": "adzuna"
-          }
-        },
-        {
-          "type": "job_posted_finance_lead",
-          "captured_at": "2026-05-17T21:24:44.945974",
-          "days_ago": 13,
-          "payload": {
-            "title": "Accounting Manager & Executive Assistant",
-            "url": "https://www.adzuna.com/land/ad/5718684092?se=-BTw1jZS8RGiJchPzKRtww&utm_medium=api&utm_source=3aa14b35&v=744D74F836D8335D17408E037A84998762DADA55",
-            "date_posted": "2026-05-04T13:16:27Z",
-            "site": "adzuna"
-          }
-        }
-      ]
-    },
-    {
       "name": "Sequence",
       "domain": "sequencehq.com",
       "industry": "fintech",
@@ -278,66 +196,6 @@
       ]
     },
     {
-      "name": "Minnesota Cannabis Services",
-      "domain": "minnesotacannabisservices.com",
-      "industry": "healthcare",
-      "headcount": null,
-      "country": "US",
-      "city": null,
-      "state": "MN",
-      "dm_name": "Cristy Aranguiz",
-      "dm_title": "Chief Executive Officer/Co-Founder",
-      "dm_email": "cristy@mncanna.com",
-      "dm_linkedin_url": "http://www.linkedin.com/in/cristyak",
-      "contact_strength": "verified",
-      "score": 59.99306495593446,
-      "insight": null,
-      "trigger_type": "finance_hire",
-      "signals": [
-        {
-          "type": "job_posted_finance_lead",
-          "captured_at": "2026-05-17T21:22:52.288111",
-          "days_ago": 17,
-          "payload": {
-            "title": "Accounting Manager",
-            "url": "https://www.linkedin.com/jobs/view/4409094274",
-            "date_posted": "2026-04-30",
-            "site": "linkedin"
-          }
-        }
-      ]
-    },
-    {
-      "name": "CARWARRIORS LLC",
-      "domain": "carwarriorsllc.com",
-      "industry": "fintech",
-      "headcount": 2,
-      "country": "US",
-      "city": "Miami",
-      "state": "FL",
-      "dm_name": "Juan Hernandez",
-      "dm_title": "Principal Owner",
-      "dm_email": "juanhernandez@carwarriorsllc.com",
-      "dm_linkedin_url": "http://www.linkedin.com/in/juan-pablo-rizo-hernandez-7093a7261",
-      "contact_strength": "verified",
-      "score": 59.993064923880105,
-      "insight": null,
-      "trigger_type": "finance_hire",
-      "signals": [
-        {
-          "type": "job_posted_finance_lead",
-          "captured_at": "2026-05-17T21:22:52.288111",
-          "days_ago": 0,
-          "payload": {
-            "title": "Automotive Finance Manager / Financier",
-            "url": "https://www.indeed.com/viewjob?jk=e22735c51f2cddc6",
-            "date_posted": "2026-05-17",
-            "site": "indeed"
-          }
-        }
-      ]
-    },
-    {
       "name": "Arketa",
       "domain": "arketa.com",
       "industry": "unknown",
@@ -350,7 +208,7 @@
       "dm_email": "rachellfishman@arketa.com",
       "dm_linkedin_url": "http://www.linkedin.com/in/rachelleafishman",
       "contact_strength": "verified",
-      "score": 59.94134162096793,
+      "score": 59.93387325239072,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -380,7 +238,7 @@
       "dm_email": "hersh@mynectar.com",
       "dm_linkedin_url": "http://www.linkedin.com/in/hersh-patel-581a488",
       "contact_strength": "verified",
-      "score": 59.93953599687855,
+      "score": 59.932067791841234,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -398,126 +256,6 @@
       ]
     },
     {
-      "name": "Luxury Auto Mall of Sioux Falls",
-      "domain": "luxurymall.com",
-      "industry": "other",
-      "headcount": null,
-      "country": "US",
-      "city": "Sioux Falls",
-      "state": "SD",
-      "dm_name": "James Hueners",
-      "dm_title": "General Manager",
-      "dm_email": null,
-      "dm_linkedin_url": null,
-      "contact_strength": "partial",
-      "score": 59.87438910540955,
-      "insight": null,
-      "trigger_type": "finance_hire",
-      "signals": [
-        {
-          "type": "job_posted_finance_lead",
-          "captured_at": "2026-05-17T19:19:27.688108",
-          "days_ago": 3,
-          "payload": {
-            "title": "Automotive Assistant Controller",
-            "url": "https://www.indeed.com/viewjob?jk=f43c595eecbfc5d4",
-            "date_posted": "2026-05-14",
-            "site": "indeed"
-          }
-        }
-      ]
-    },
-    {
-      "name": "Goodwood Barbecue Co",
-      "domain": "goodwoodbbq.com",
-      "industry": "hospitality_food",
-      "headcount": 34,
-      "country": "US",
-      "city": "Meridian",
-      "state": "ID",
-      "dm_name": "Steve Cooper",
-      "dm_title": "Restaurateur",
-      "dm_email": null,
-      "dm_linkedin_url": null,
-      "contact_strength": "partial",
-      "score": 59.87438908212885,
-      "insight": null,
-      "trigger_type": "finance_hire",
-      "signals": [
-        {
-          "type": "job_posted_finance_lead",
-          "captured_at": "2026-05-17T19:19:27.688108",
-          "days_ago": 2,
-          "payload": {
-            "title": "Assistant Controller/Senior Financial Accountant",
-            "url": "https://www.linkedin.com/jobs/view/4408688378",
-            "date_posted": "2026-05-15",
-            "site": "linkedin"
-          }
-        }
-      ]
-    },
-    {
-      "name": "San Francisco Compute Company",
-      "domain": "sfcompute.com",
-      "industry": "software_saas",
-      "headcount": 44,
-      "country": "US",
-      "city": "San Francisco",
-      "state": "CA",
-      "dm_name": "Ethan Anderson",
-      "dm_title": "Co-Founder, Chief Operating Officer",
-      "dm_email": "ethan@sfcompute.com",
-      "dm_linkedin_url": "http://www.linkedin.com/in/ethan-anderson-yc",
-      "contact_strength": "verified",
-      "score": 59.874389057935495,
-      "insight": null,
-      "trigger_type": "finance_hire",
-      "signals": [
-        {
-          "type": "job_posted_finance_lead",
-          "captured_at": "2026-05-17T19:19:27.688108",
-          "days_ago": 5,
-          "payload": {
-            "title": "Senior Accounting Manager",
-            "url": "https://www.linkedin.com/jobs/view/4413809409",
-            "date_posted": "2026-05-12",
-            "site": "linkedin"
-          }
-        }
-      ]
-    },
-    {
-      "name": "Route 128 Honda",
-      "domain": "route128honda.com",
-      "industry": "other",
-      "headcount": 23,
-      "country": "US",
-      "city": "Reading",
-      "state": "MA",
-      "dm_name": "Daniel Loggins",
-      "dm_title": "Managing Owner",
-      "dm_email": null,
-      "dm_linkedin_url": null,
-      "contact_strength": "partial",
-      "score": 59.87438894872117,
-      "insight": null,
-      "trigger_type": "finance_hire",
-      "signals": [
-        {
-          "type": "job_posted_finance_lead",
-          "captured_at": "2026-05-17T19:19:27.688108",
-          "days_ago": 1,
-          "payload": {
-            "title": "Finance Director \u2013 Route 128 Honda (Top Volume Store | 4.7\u2b50 Reputation)",
-            "url": "https://www.indeed.com/viewjob?jk=6ce47ddd8bc4db2b",
-            "date_posted": "2026-05-16",
-            "site": "indeed"
-          }
-        }
-      ]
-    },
-    {
       "name": "Sniffspot",
       "domain": "sniffspot.com",
       "industry": "other",
@@ -530,7 +268,7 @@
       "dm_email": "david@sniffspot.com",
       "dm_linkedin_url": "http://www.linkedin.com/in/david-a-85aa1526",
       "contact_strength": "verified",
-      "score": 59.82286485210985,
+      "score": 59.81541123673467,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -542,36 +280,6 @@
             "title": "Head of Finance",
             "url": "https://www.adzuna.com/details/5715365934?utm_medium=api&utm_source=3aa14b35",
             "date_posted": "2026-05-01T01:13:24Z",
-            "site": "adzuna"
-          }
-        }
-      ]
-    },
-    {
-      "name": "Campton Hills, IL",
-      "domain": "villageofcamptonhills.org",
-      "industry": "fintech",
-      "headcount": null,
-      "country": "US",
-      "city": "Campton Hills",
-      "state": "IL",
-      "dm_name": "Barbara Wojnicki",
-      "dm_title": "President",
-      "dm_email": null,
-      "dm_linkedin_url": null,
-      "contact_strength": "partial",
-      "score": 59.82286483838382,
-      "insight": null,
-      "trigger_type": "finance_hire",
-      "signals": [
-        {
-          "type": "job_posted_finance_lead",
-          "captured_at": "2026-05-17T19:21:26.403770",
-          "days_ago": 26,
-          "payload": {
-            "title": "Head of Finance",
-            "url": "https://www.adzuna.com/details/5706612279?utm_medium=api&utm_source=3aa14b35",
-            "date_posted": "2026-04-21T20:21:53Z",
             "site": "adzuna"
           }
         }
@@ -590,7 +298,7 @@
       "dm_email": "ben@haulerhero.com",
       "dm_linkedin_url": "http://www.linkedin.com/in/ben-sikma-9912662",
       "contact_strength": "verified",
-      "score": 59.8228648239059,
+      "score": 59.81541122457792,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -620,7 +328,7 @@
       "dm_email": "michael@aureliussystems.us",
       "dm_linkedin_url": "http://www.linkedin.com/in/michael-laframboise",
       "contact_strength": "verified",
-      "score": 59.822864808500114,
+      "score": 59.81541120911007,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -650,7 +358,7 @@
       "dm_email": "jasper@hyperbolic.ai",
       "dm_linkedin_url": "http://www.linkedin.com/in/yuezhang95",
       "contact_strength": "verified",
-      "score": 59.822864794230156,
+      "score": 59.81541118785177,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -680,7 +388,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 59.8228647506844,
+      "score": 59.815411140536455,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -698,31 +406,31 @@
       ]
     },
     {
-      "name": "Pyxis - Navigate Your Future",
-      "domain": "pyxissearchpartners.io",
-      "industry": "fintech",
-      "headcount": 4,
+      "name": "Goodwood Barbecue Co",
+      "domain": "goodwoodbbq.com",
+      "industry": "hospitality_food",
+      "headcount": 34,
       "country": "US",
-      "city": "New York",
-      "state": "NY",
-      "dm_name": null,
-      "dm_title": null,
+      "city": "Meridian",
+      "state": "ID",
+      "dm_name": "Steve Cooper",
+      "dm_title": "Restaurateur",
       "dm_email": null,
       "dm_linkedin_url": null,
-      "contact_strength": "cold",
-      "score": 59.8209661804103,
+      "contact_strength": "partial",
+      "score": 59.8135125216516,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
         {
           "type": "job_posted_finance_lead",
           "captured_at": "2026-05-17T19:19:27.688108",
-          "days_ago": 0,
+          "days_ago": 2,
           "payload": {
-            "title": "Financial Controller | Accounting",
-            "url": "https://www.indeed.com/viewjob?jk=a9137a1d216d62fc",
-            "date_posted": "2026-05-17",
-            "site": "indeed"
+            "title": "Assistant Controller/Senior Financial Accountant",
+            "url": "https://www.linkedin.com/jobs/view/4408688378",
+            "date_posted": "2026-05-15",
+            "site": "linkedin"
           }
         }
       ]
@@ -740,7 +448,7 @@
       "dm_email": "lma@hoxtoncircle.com",
       "dm_linkedin_url": "http://www.linkedin.com/in/lisa-alvarado-99380712",
       "contact_strength": "verified",
-      "score": 59.820966153662994,
+      "score": 59.8135124943158,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -751,6 +459,36 @@
           "payload": {
             "title": "Senior Accountant Financial Reporting",
             "url": "https://www.linkedin.com/jobs/view/4410156578",
+            "date_posted": "2026-05-12",
+            "site": "linkedin"
+          }
+        }
+      ]
+    },
+    {
+      "name": "San Francisco Compute Company",
+      "domain": "sfcompute.com",
+      "industry": "software_saas",
+      "headcount": 44,
+      "country": "US",
+      "city": "San Francisco",
+      "state": "CA",
+      "dm_name": "Ethan Anderson",
+      "dm_title": "Co-Founder, Chief Operating Officer",
+      "dm_email": "ethan@sfcompute.com",
+      "dm_linkedin_url": "http://www.linkedin.com/in/ethan-anderson-yc",
+      "contact_strength": "verified",
+      "score": 59.81351248020803,
+      "insight": null,
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-05-17T19:19:27.688108",
+          "days_ago": 5,
+          "payload": {
+            "title": "Senior Accounting Manager",
+            "url": "https://www.linkedin.com/jobs/view/4413809409",
             "date_posted": "2026-05-12",
             "site": "linkedin"
           }
@@ -770,7 +508,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "cold",
-      "score": 59.82096613660998,
+      "score": 59.81351246558842,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -791,16 +529,16 @@
       "name": "Paces",
       "domain": "paces.com",
       "industry": "fintech",
-      "headcount": 70,
+      "headcount": 74,
       "country": "US",
       "city": "Brooklyn",
       "state": "NY",
-      "dm_name": "James McWalter",
-      "dm_title": "CEO",
-      "dm_email": null,
-      "dm_linkedin_url": null,
-      "contact_strength": "partial",
-      "score": 59.82096611330206,
+      "dm_name": "Paces Paces",
+      "dm_title": "Owner/CEO",
+      "dm_email": "intercom@paces.com",
+      "dm_linkedin_url": "http://www.linkedin.com/in/paces-house-paces-97813375",
+      "contact_strength": "verified",
+      "score": 59.813512450009085,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -818,49 +556,19 @@
       ]
     },
     {
-      "name": "Symplast",
-      "domain": "symplast.com",
-      "industry": "healthcare",
-      "headcount": 70,
-      "country": "US",
-      "city": "Plantation",
-      "state": "FL",
-      "dm_name": "Shashi Kusuma",
-      "dm_title": "Co-Founder & CEO",
-      "dm_email": null,
-      "dm_linkedin_url": null,
-      "contact_strength": "partial",
-      "score": 59.82096610164011,
-      "insight": null,
-      "trigger_type": "finance_hire",
-      "signals": [
-        {
-          "type": "job_posted_finance_lead",
-          "captured_at": "2026-05-17T19:19:27.688108",
-          "days_ago": 11,
-          "payload": {
-            "title": "Head of Finance",
-            "url": "https://www.linkedin.com/jobs/view/4410995088",
-            "date_posted": "2026-05-06",
-            "site": "linkedin"
-          }
-        }
-      ]
-    },
-    {
       "name": "Monstro",
       "domain": "monstro.com",
       "industry": "fintech",
-      "headcount": 40,
+      "headcount": 37,
       "country": "US",
       "city": "New York",
       "state": "NY",
-      "dm_name": null,
-      "dm_title": null,
+      "dm_name": "Josh Weisman",
+      "dm_title": "Chief Operating Officer",
       "dm_email": null,
-      "dm_linkedin_url": null,
-      "contact_strength": "cold",
-      "score": 59.820966088730366,
+      "dm_linkedin_url": "http://www.linkedin.com/in/josh-weisman",
+      "contact_strength": "verified",
+      "score": 59.81351242459271,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -878,79 +586,19 @@
       ]
     },
     {
-      "name": "Barti",
-      "domain": "barti.com",
-      "industry": "fintech",
-      "headcount": null,
-      "country": "US",
-      "city": "San Francisco",
-      "state": "CA",
-      "dm_name": "Colton Calandrella",
-      "dm_title": "CEO",
-      "dm_email": null,
-      "dm_linkedin_url": null,
-      "contact_strength": "partial",
-      "score": 59.820965876255606,
-      "insight": null,
-      "trigger_type": "finance_hire",
-      "signals": [
-        {
-          "type": "job_posted_finance_lead",
-          "captured_at": "2026-05-17T19:19:27.688108",
-          "days_ago": 2,
-          "payload": {
-            "title": "Director of Finance",
-            "url": "https://www.linkedin.com/jobs/view/4415534935",
-            "date_posted": "2026-05-15",
-            "site": "linkedin"
-          }
-        }
-      ]
-    },
-    {
-      "name": "Vetcove",
-      "domain": "vetcove.com",
-      "industry": "healthcare",
-      "headcount": null,
-      "country": "US",
-      "city": "Miami",
-      "state": "FL",
-      "dm_name": "Alexander Kates",
-      "dm_title": "CEO",
-      "dm_email": null,
-      "dm_linkedin_url": null,
-      "contact_strength": "partial",
-      "score": 59.82096586232204,
-      "insight": null,
-      "trigger_type": "finance_hire",
-      "signals": [
-        {
-          "type": "job_posted_finance_lead",
-          "captured_at": "2026-05-17T19:19:27.688108",
-          "days_ago": 2,
-          "payload": {
-            "title": "Senior Accounting Manager",
-            "url": "https://www.linkedin.com/jobs/view/4415532950",
-            "date_posted": "2026-05-15",
-            "site": "linkedin"
-          }
-        }
-      ]
-    },
-    {
       "name": "Saint Rocco's Treats",
       "domain": "saintroccostreats.shop",
       "industry": "ecommerce_retail",
-      "headcount": 10,
+      "headcount": 19,
       "country": "US",
       "city": "Pipersville",
       "state": "PA",
       "dm_name": "Kolby Rush",
       "dm_title": "Co-Founder",
-      "dm_email": null,
-      "dm_linkedin_url": null,
-      "contact_strength": "partial",
-      "score": 59.82096584923634,
+      "dm_email": "kolby.rush@saintroccostreats.shop",
+      "dm_linkedin_url": "http://www.linkedin.com/in/kolby-rush-28498a158",
+      "contact_strength": "verified",
+      "score": 59.813512394169834,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -968,40 +616,10 @@
       ]
     },
     {
-      "name": "Formula 1 Las Vegas Grand Prix",
-      "domain": "f1lasvegasgp.com",
-      "industry": "media_entertainment",
-      "headcount": null,
-      "country": "US",
-      "city": "Las Vegas",
-      "state": "NV",
-      "dm_name": "Emily Prazer",
-      "dm_title": "President & CEO",
-      "dm_email": null,
-      "dm_linkedin_url": null,
-      "contact_strength": "partial",
-      "score": 59.82096582997571,
-      "insight": null,
-      "trigger_type": "finance_hire",
-      "signals": [
-        {
-          "type": "job_posted_finance_lead",
-          "captured_at": "2026-05-17T19:19:27.688108",
-          "days_ago": 11,
-          "payload": {
-            "title": "Accounting Manager",
-            "url": "https://www.linkedin.com/jobs/view/4408479474",
-            "date_posted": "2026-05-06",
-            "site": "linkedin"
-          }
-        }
-      ]
-    },
-    {
       "name": "AmpersandPeople",
       "domain": "ampersandpeople.com",
       "industry": "fintech",
-      "headcount": 20,
+      "headcount": 28,
       "country": "US",
       "city": "Los Altos",
       "state": "CA",
@@ -1010,7 +628,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 59.820965816858006,
+      "score": 59.81351238066988,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -1022,156 +640,6 @@
             "title": "Senior Accounting Manager",
             "url": "https://www.linkedin.com/jobs/view/4408009724",
             "date_posted": "2026-04-28",
-            "site": "linkedin"
-          }
-        }
-      ]
-    },
-    {
-      "name": "BlinkRx",
-      "domain": "blinkrx.com",
-      "industry": "healthcare",
-      "headcount": null,
-      "country": "US",
-      "city": "New York",
-      "state": "NY",
-      "dm_name": "Geoffrey Chaiken",
-      "dm_title": "CEO",
-      "dm_email": null,
-      "dm_linkedin_url": null,
-      "contact_strength": "partial",
-      "score": 59.820965787647125,
-      "insight": null,
-      "trigger_type": "finance_hire",
-      "signals": [
-        {
-          "type": "job_posted_finance_lead",
-          "captured_at": "2026-05-17T19:19:27.688108",
-          "days_ago": 1,
-          "payload": {
-            "title": "Senior Accountant (Eastern Time Zone preferred)",
-            "url": "https://www.linkedin.com/jobs/view/4415141798",
-            "date_posted": "2026-05-16",
-            "site": "linkedin"
-          }
-        }
-      ]
-    },
-    {
-      "name": "Hunt Companies, Inc",
-      "domain": "huntcompanies.com",
-      "industry": "real_estate",
-      "headcount": null,
-      "country": "US",
-      "city": "El Paso",
-      "state": "TX",
-      "dm_name": "Chris Hunt",
-      "dm_title": "Chief Executive Officer",
-      "dm_email": null,
-      "dm_linkedin_url": null,
-      "contact_strength": "partial",
-      "score": 59.820965774321465,
-      "insight": null,
-      "trigger_type": "finance_hire",
-      "signals": [
-        {
-          "type": "job_posted_finance_lead",
-          "captured_at": "2026-05-17T19:19:27.688108",
-          "days_ago": 2,
-          "payload": {
-            "title": "Senior Accountant",
-            "url": "https://www.linkedin.com/jobs/view/4415104439",
-            "date_posted": "2026-05-15",
-            "site": "linkedin"
-          }
-        }
-      ]
-    },
-    {
-      "name": "Lila Sciences",
-      "domain": "lila.ai",
-      "industry": "healthcare",
-      "headcount": null,
-      "country": "US",
-      "city": "Cambridge",
-      "state": "MA",
-      "dm_name": "Geoffrey von Maltzahn",
-      "dm_title": "CEO",
-      "dm_email": null,
-      "dm_linkedin_url": null,
-      "contact_strength": "partial",
-      "score": 59.82096576077184,
-      "insight": null,
-      "trigger_type": "finance_hire",
-      "signals": [
-        {
-          "type": "job_posted_finance_lead",
-          "captured_at": "2026-05-17T19:19:27.688108",
-          "days_ago": 3,
-          "payload": {
-            "title": "Senior Accountant",
-            "url": "https://www.linkedin.com/jobs/view/4414675101",
-            "date_posted": "2026-05-14",
-            "site": "linkedin"
-          }
-        }
-      ]
-    },
-    {
-      "name": "Major League Baseball (MLB)",
-      "domain": "mlb.com",
-      "industry": "media_entertainment",
-      "headcount": null,
-      "country": "US",
-      "city": "New York",
-      "state": "NY",
-      "dm_name": "Rob Manfred",
-      "dm_title": "Commissioner",
-      "dm_email": null,
-      "dm_linkedin_url": null,
-      "contact_strength": "partial",
-      "score": 59.82096574656633,
-      "insight": null,
-      "trigger_type": "finance_hire",
-      "signals": [
-        {
-          "type": "job_posted_finance_lead",
-          "captured_at": "2026-05-17T19:19:27.688108",
-          "days_ago": 12,
-          "payload": {
-            "title": "Senior Accountant",
-            "url": "https://www.linkedin.com/jobs/view/4279837488",
-            "date_posted": "2026-05-05",
-            "site": "linkedin"
-          }
-        }
-      ]
-    },
-    {
-      "name": "Cuv\u00e9e",
-      "domain": "cuvee.com",
-      "industry": "fintech",
-      "headcount": 50,
-      "country": "US",
-      "city": "Denver",
-      "state": "CO",
-      "dm_name": "Larry Mueller",
-      "dm_title": "CEO and Founder",
-      "dm_email": null,
-      "dm_linkedin_url": null,
-      "contact_strength": "partial",
-      "score": 59.820965734120506,
-      "insight": null,
-      "trigger_type": "finance_hire",
-      "signals": [
-        {
-          "type": "job_posted_finance_lead",
-          "captured_at": "2026-05-17T19:19:27.688108",
-          "days_ago": 15,
-          "payload": {
-            "title": "Senior Accountant",
-            "url": "https://www.linkedin.com/jobs/view/4408322484",
-            "date_posted": "2026-05-02",
             "site": "linkedin"
           }
         }
@@ -1190,7 +658,7 @@
       "dm_email": null,
       "dm_linkedin_url": "http://www.linkedin.com/in/mauro-piccininni-8452027",
       "contact_strength": "verified",
-      "score": 59.791394521798026,
+      "score": 59.78394456354274,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -1238,51 +706,6 @@
       ]
     },
     {
-      "name": "EMT XI LLC",
-      "domain": null,
-      "industry": "other",
-      "headcount": null,
-      "country": "US",
-      "city": "Carrollton",
-      "state": "TX",
-      "dm_name": null,
-      "dm_title": null,
-      "dm_email": null,
-      "dm_linkedin_url": null,
-      "contact_strength": "cold",
-      "score": 49.897210333936656,
-      "insight": null,
-      "trigger_type": "form_d",
-      "signals": [
-        {
-          "type": "funding_raised",
-          "captured_at": "2026-05-17T19:21:49.108796",
-          "days_ago": 3,
-          "payload": {
-            "title": "D - EMT XI LLC",
-            "filing_type": "Form D",
-            "filed_on": "2026-05-14",
-            "link": "https://www.sec.gov/Archives/edgar/data/2023525/000202352526000001/0002023525-26-000001-index.htm",
-            "biz_state": "KY",
-            "biz_location": "Lexington, KY"
-          }
-        },
-        {
-          "type": "funding_raised",
-          "captured_at": "2026-05-17T19:21:49.108796",
-          "days_ago": 3,
-          "payload": {
-            "title": "D - EMT XVI LLC",
-            "filing_type": "Form D",
-            "filed_on": "2026-05-14",
-            "link": "https://www.sec.gov/Archives/edgar/data/2023521/000202352126000001/0002023521-26-000001-index.htm",
-            "biz_state": "KY",
-            "biz_location": "Lexington, KY"
-          }
-        }
-      ]
-    },
-    {
       "name": "Prism Layer AI, Inc.",
       "domain": "prismlayer.ai",
       "industry": "software_saas",
@@ -1295,7 +718,7 @@
       "dm_email": "simone@prismlayer.ai",
       "dm_linkedin_url": "http://www.linkedin.com/in/simone-garreau-b3571b10",
       "contact_strength": "verified",
-      "score": 49.43368441491033,
+      "score": 49.427525273466166,
       "insight": null,
       "trigger_type": "form_d",
       "signals": [
@@ -1321,102 +744,6 @@
             "link": "https://www.sec.gov/Archives/edgar/data/2133683/000213368326000001/0002133683-26-000001-index.htm",
             "biz_state": "DE",
             "biz_location": "Newark, DE"
-          }
-        }
-      ]
-    },
-    {
-      "name": "HDVA On-chain LLC",
-      "domain": null,
-      "industry": "fintech",
-      "headcount": null,
-      "country": "US",
-      "city": "Washington",
-      "state": "DC",
-      "dm_name": null,
-      "dm_title": null,
-      "dm_email": null,
-      "dm_linkedin_url": null,
-      "contact_strength": "cold",
-      "score": 24.998008807337726,
-      "insight": null,
-      "trigger_type": "form_d",
-      "signals": [
-        {
-          "type": "funding_raised",
-          "captured_at": "2026-05-17T21:25:06.723075",
-          "days_ago": 2,
-          "payload": {
-            "title": "D - HDVA On-chain LLC",
-            "filing_type": "Form D",
-            "filed_on": "2026-05-15",
-            "link": "https://www.sec.gov/Archives/edgar/data/2128764/000212876426000001/0002128764-26-000001-index.htm",
-            "biz_state": "DE",
-            "biz_location": "Newark, DE"
-          }
-        }
-      ]
-    },
-    {
-      "name": "TFND Inc",
-      "domain": null,
-      "industry": "other",
-      "headcount": null,
-      "country": "US",
-      "city": "New York",
-      "state": "NY",
-      "dm_name": "John Philip Irwin",
-      "dm_title": "Executive",
-      "dm_email": null,
-      "dm_linkedin_url": null,
-      "contact_strength": "partial",
-      "score": 24.99800873343599,
-      "insight": null,
-      "trigger_type": "form_d",
-      "signals": [
-        {
-          "type": "funding_raised",
-          "captured_at": "2026-05-17T21:25:06.723075",
-          "days_ago": 2,
-          "payload": {
-            "title": "D - TFND Inc",
-            "filing_type": "Form D",
-            "filed_on": "2026-05-15",
-            "link": "https://www.sec.gov/Archives/edgar/data/2135331/000213533126000001/0002135331-26-000001-index.htm",
-            "biz_state": "NY",
-            "biz_location": "New York, NY"
-          }
-        }
-      ]
-    },
-    {
-      "name": "LCH 4 LLC",
-      "domain": null,
-      "industry": "other",
-      "headcount": null,
-      "country": "US",
-      "city": "Canyon Lake",
-      "state": "TX",
-      "dm_name": "Joshua Warren",
-      "dm_title": "Executive Officer",
-      "dm_email": null,
-      "dm_linkedin_url": null,
-      "contact_strength": "partial",
-      "score": 24.998008654239808,
-      "insight": null,
-      "trigger_type": "form_d",
-      "signals": [
-        {
-          "type": "funding_raised",
-          "captured_at": "2026-05-17T21:25:06.723075",
-          "days_ago": 3,
-          "payload": {
-            "title": "D - LCH 4 LLC",
-            "filing_type": "Form D",
-            "filed_on": "2026-05-14",
-            "link": "https://www.sec.gov/Archives/edgar/data/2135371/000213537126000001/0002135371-26-000001-index.htm",
-            "biz_state": "TX",
-            "biz_location": "Canyon Lake, TX"
           }
         }
       ]
@@ -1454,1286 +781,6 @@
       ]
     },
     {
-      "name": "Blitzy, Inc.",
-      "domain": "blitzy.com",
-      "industry": "software_saas",
-      "headcount": null,
-      "country": "US",
-      "city": "Cambridge",
-      "state": "MA",
-      "dm_name": "Brian Elliott",
-      "dm_title": "CEO",
-      "dm_email": null,
-      "dm_linkedin_url": null,
-      "contact_strength": "partial",
-      "score": 24.975704266004293,
-      "insight": null,
-      "trigger_type": "form_d",
-      "signals": [
-        {
-          "type": "funding_raised",
-          "captured_at": "2026-05-17T21:25:06.723075",
-          "days_ago": 2,
-          "payload": {
-            "title": "D - Blitzy, Inc.",
-            "filing_type": "Form D",
-            "filed_on": "2026-05-15",
-            "link": "https://www.sec.gov/Archives/edgar/data/2022559/000110465926062264/0001104659-26-062264-index.htm",
-            "biz_state": "MA",
-            "biz_location": "Cambridge, MA"
-          }
-        }
-      ]
-    },
-    {
-      "name": "Auxilium Health, Inc.",
-      "domain": "auxiliumhealth.xyz",
-      "industry": "healthcare",
-      "headcount": null,
-      "country": "US",
-      "city": "Cleveland",
-      "state": "OH",
-      "dm_name": "Isaiah Kaiser",
-      "dm_title": "CEO",
-      "dm_email": null,
-      "dm_linkedin_url": null,
-      "contact_strength": "partial",
-      "score": 24.97570414399323,
-      "insight": null,
-      "trigger_type": "form_d",
-      "signals": [
-        {
-          "type": "funding_raised",
-          "captured_at": "2026-05-17T21:25:06.723075",
-          "days_ago": 2,
-          "payload": {
-            "title": "D - Auxilium Health, Inc.",
-            "filing_type": "Form D",
-            "filed_on": "2026-05-15",
-            "link": "https://www.sec.gov/Archives/edgar/data/2135544/000213554426000002/0002135544-26-000002-index.htm",
-            "biz_state": "OH",
-            "biz_location": "Cleveland, OH"
-          }
-        }
-      ]
-    },
-    {
-      "name": "Solius Labs, Inc.",
-      "domain": "solius.com",
-      "industry": "other",
-      "headcount": null,
-      "country": "US",
-      "city": "Bainbridge Island",
-      "state": "WA",
-      "dm_name": "Bob Wise",
-      "dm_title": "CEO",
-      "dm_email": null,
-      "dm_linkedin_url": null,
-      "contact_strength": "partial",
-      "score": 24.975704134155137,
-      "insight": null,
-      "trigger_type": "form_d",
-      "signals": [
-        {
-          "type": "funding_raised",
-          "captured_at": "2026-05-17T21:25:06.723075",
-          "days_ago": 3,
-          "payload": {
-            "title": "D - Solius Labs, Inc.",
-            "filing_type": "Form D",
-            "filed_on": "2026-05-14",
-            "link": "https://www.sec.gov/Archives/edgar/data/1537914/000153791426000002/0001537914-26-000002-index.htm",
-            "biz_state": "WA",
-            "biz_location": "Bainbridge Island, WA"
-          }
-        }
-      ]
-    },
-    {
-      "name": "Level 5 Texas Triangle SA LLC",
-      "domain": null,
-      "industry": "other",
-      "headcount": null,
-      "country": "US",
-      "city": "Lima",
-      "state": "OH",
-      "dm_name": "Jeffrey Dulmage",
-      "dm_title": "Executive Officer",
-      "dm_email": null,
-      "dm_linkedin_url": null,
-      "contact_strength": "partial",
-      "score": 24.9757041170971,
-      "insight": null,
-      "trigger_type": "form_d",
-      "signals": [
-        {
-          "type": "funding_raised",
-          "captured_at": "2026-05-17T21:25:06.723075",
-          "days_ago": 3,
-          "payload": {
-            "title": "D - Level 5 Texas Triangle SA LLC",
-            "filing_type": "Form D",
-            "filed_on": "2026-05-14",
-            "link": "https://www.sec.gov/Archives/edgar/data/2135323/000213532326000001/0002135323-26-000001-index.htm",
-            "biz_state": "OH",
-            "biz_location": "Lima, OH"
-          }
-        }
-      ]
-    },
-    {
-      "name": "StratGrid Inc.",
-      "domain": "geogrid.com",
-      "industry": "software_saas",
-      "headcount": null,
-      "country": "US",
-      "city": "Burlington",
-      "state": "NC",
-      "dm_name": "Dustin Morissette",
-      "dm_title": "COO",
-      "dm_email": null,
-      "dm_linkedin_url": null,
-      "contact_strength": "partial",
-      "score": 24.975704112335006,
-      "insight": null,
-      "trigger_type": "form_d",
-      "signals": [
-        {
-          "type": "funding_raised",
-          "captured_at": "2026-05-17T21:25:06.723075",
-          "days_ago": 3,
-          "payload": {
-            "title": "D - StratGrid Inc.",
-            "filing_type": "Form D",
-            "filed_on": "2026-05-14",
-            "link": "https://www.sec.gov/Archives/edgar/data/2120153/000206075526000026/0002060755-26-000026-index.htm",
-            "biz_state": null,
-            "biz_location": "Calgary"
-          }
-        }
-      ]
-    },
-    {
-      "name": "Torquem Technologies Ltd.",
-      "domain": "torcue.com",
-      "industry": "software_saas",
-      "headcount": null,
-      "country": "US",
-      "city": "Parkland",
-      "state": "FL",
-      "dm_name": null,
-      "dm_title": null,
-      "dm_email": null,
-      "dm_linkedin_url": null,
-      "contact_strength": "cold",
-      "score": 24.97570410194924,
-      "insight": null,
-      "trigger_type": "form_d",
-      "signals": [
-        {
-          "type": "funding_raised",
-          "captured_at": "2026-05-17T21:25:06.723075",
-          "days_ago": 3,
-          "payload": {
-            "title": "D - Torquem Technologies Ltd.",
-            "filing_type": "Form D",
-            "filed_on": "2026-05-14",
-            "link": "https://www.sec.gov/Archives/edgar/data/2133874/000213387426000001/0002133874-26-000001-index.htm",
-            "biz_state": "DE",
-            "biz_location": "Newark, DE"
-          }
-        }
-      ]
-    },
-    {
-      "name": "IK Start USA, LLC",
-      "domain": "ikstartusa.com",
-      "industry": "other",
-      "headcount": null,
-      "country": "US",
-      "city": "Pittsburgh",
-      "state": "PA",
-      "dm_name": "David Grim",
-      "dm_title": "Co-Founder & President",
-      "dm_email": null,
-      "dm_linkedin_url": null,
-      "contact_strength": "partial",
-      "score": 24.975704082232976,
-      "insight": null,
-      "trigger_type": "form_d",
-      "signals": [
-        {
-          "type": "funding_raised",
-          "captured_at": "2026-05-17T21:25:06.723075",
-          "days_ago": 3,
-          "payload": {
-            "title": "D - IK Start USA, LLC",
-            "filing_type": "Form D",
-            "filed_on": "2026-05-14",
-            "link": "https://www.sec.gov/Archives/edgar/data/2132550/000213255026000001/0002132550-26-000001-index.htm",
-            "biz_state": "PA",
-            "biz_location": "Sewickley, PA"
-          }
-        }
-      ]
-    },
-    {
-      "name": "Cognisolv Inc.",
-      "domain": null,
-      "industry": "software_saas",
-      "headcount": null,
-      "country": "US",
-      "city": "Wilmington",
-      "state": "DE",
-      "dm_name": null,
-      "dm_title": null,
-      "dm_email": null,
-      "dm_linkedin_url": null,
-      "contact_strength": "cold",
-      "score": 24.975704062409854,
-      "insight": null,
-      "trigger_type": "form_d",
-      "signals": [
-        {
-          "type": "funding_raised",
-          "captured_at": "2026-05-17T21:25:06.723075",
-          "days_ago": 3,
-          "payload": {
-            "title": "D - Cognisolv Inc.",
-            "filing_type": "Form D",
-            "filed_on": "2026-05-14",
-            "link": "https://www.sec.gov/Archives/edgar/data/1915686/000191568626000003/0001915686-26-000003-index.htm",
-            "biz_state": "DE",
-            "biz_location": "Wilmington, DE"
-          }
-        }
-      ]
-    },
-    {
-      "name": "7819 Kensington CT, LLC",
-      "domain": null,
-      "industry": "real_estate",
-      "headcount": null,
-      "country": "US",
-      "city": "Brighton",
-      "state": "MI",
-      "dm_name": null,
-      "dm_title": null,
-      "dm_email": null,
-      "dm_linkedin_url": null,
-      "contact_strength": "cold",
-      "score": 24.975704046941406,
-      "insight": null,
-      "trigger_type": "form_d",
-      "signals": [
-        {
-          "type": "funding_raised",
-          "captured_at": "2026-05-17T21:25:06.723075",
-          "days_ago": 3,
-          "payload": {
-            "title": "D - 7819 Kensington CT, LLC",
-            "filing_type": "Form D",
-            "filed_on": "2026-05-14",
-            "link": "https://www.sec.gov/Archives/edgar/data/2133536/000213353626000001/0002133536-26-000001-index.htm",
-            "biz_state": "AZ",
-            "biz_location": "Phoenix, AZ"
-          }
-        }
-      ]
-    },
-    {
-      "name": "Cupressus Apartments LLC",
-      "domain": null,
-      "industry": "real_estate",
-      "headcount": null,
-      "country": "US",
-      "city": "Bridgeport",
-      "state": "CT",
-      "dm_name": null,
-      "dm_title": null,
-      "dm_email": null,
-      "dm_linkedin_url": null,
-      "contact_strength": "cold",
-      "score": 24.948605371155814,
-      "insight": null,
-      "trigger_type": "form_d",
-      "signals": [
-        {
-          "type": "funding_raised",
-          "captured_at": "2026-05-17T19:21:49.108796",
-          "days_ago": 2,
-          "payload": {
-            "title": "D - Cupressus Apartments LLC",
-            "filing_type": "Form D",
-            "filed_on": "2026-05-15",
-            "link": "https://www.sec.gov/Archives/edgar/data/2135456/000213545626000001/0002135456-26-000001-index.htm",
-            "biz_state": "WA",
-            "biz_location": "Seattle, WA"
-          }
-        }
-      ]
-    },
-    {
-      "name": "Acretrader 278 LLC",
-      "domain": "acretrader.com",
-      "industry": "fintech",
-      "headcount": null,
-      "country": "US",
-      "city": "Fayetteville",
-      "state": "AR",
-      "dm_name": "Rob Moore",
-      "dm_title": "General Manager",
-      "dm_email": null,
-      "dm_linkedin_url": null,
-      "contact_strength": "partial",
-      "score": 24.94860534951281,
-      "insight": null,
-      "trigger_type": "form_d",
-      "signals": [
-        {
-          "type": "funding_raised",
-          "captured_at": "2026-05-17T19:21:49.108796",
-          "days_ago": 2,
-          "payload": {
-            "title": "D - Acretrader 278 LLC",
-            "filing_type": "Form D",
-            "filed_on": "2026-05-15",
-            "link": "https://www.sec.gov/Archives/edgar/data/2091451/000209145126000001/0002091451-26-000001-index.htm",
-            "biz_state": "AR",
-            "biz_location": "Fayetteville, AR"
-          }
-        }
-      ]
-    },
-    {
-      "name": "Reno City Center Owner, LLC",
-      "domain": null,
-      "industry": "real_estate",
-      "headcount": null,
-      "country": "US",
-      "city": "Reno",
-      "state": "NV",
-      "dm_name": "Christopher Beavor",
-      "dm_title": "CEO",
-      "dm_email": null,
-      "dm_linkedin_url": null,
-      "contact_strength": "partial",
-      "score": 24.948605339858855,
-      "insight": null,
-      "trigger_type": "form_d",
-      "signals": [
-        {
-          "type": "funding_raised",
-          "captured_at": "2026-05-17T19:21:49.108796",
-          "days_ago": 2,
-          "payload": {
-            "title": "D - Reno City Center Owner, LLC",
-            "filing_type": "Form D",
-            "filed_on": "2026-05-15",
-            "link": "https://www.sec.gov/Archives/edgar/data/2135374/000213537426000001/0002135374-26-000001-index.htm",
-            "biz_state": "NC",
-            "biz_location": "Charlotte, NC"
-          }
-        }
-      ]
-    },
-    {
-      "name": "Pearl Street Hospitality LLC",
-      "domain": null,
-      "industry": "hospitality_food",
-      "headcount": null,
-      "country": "US",
-      "city": "Denver",
-      "state": "CO",
-      "dm_name": "Jake Soffes",
-      "dm_title": "Founder",
-      "dm_email": null,
-      "dm_linkedin_url": null,
-      "contact_strength": "partial",
-      "score": 24.94860533103219,
-      "insight": null,
-      "trigger_type": "form_d",
-      "signals": [
-        {
-          "type": "funding_raised",
-          "captured_at": "2026-05-17T19:21:49.108796",
-          "days_ago": 2,
-          "payload": {
-            "title": "D - Pearl Street Hospitality LLC",
-            "filing_type": "Form D",
-            "filed_on": "2026-05-15",
-            "link": "https://www.sec.gov/Archives/edgar/data/2126595/000212659526000001/0002126595-26-000001-index.htm",
-            "biz_state": "TX",
-            "biz_location": "Weatherford, TX"
-          }
-        }
-      ]
-    },
-    {
-      "name": "BWM Private Equity II LLC",
-      "domain": null,
-      "industry": "other",
-      "headcount": null,
-      "country": "US",
-      "city": "Boston",
-      "state": "MA",
-      "dm_name": "Thomas N OConnor",
-      "dm_title": "Founder",
-      "dm_email": null,
-      "dm_linkedin_url": null,
-      "contact_strength": "partial",
-      "score": 24.948605290274752,
-      "insight": null,
-      "trigger_type": "form_d",
-      "signals": [
-        {
-          "type": "funding_raised",
-          "captured_at": "2026-05-17T19:21:49.108796",
-          "days_ago": 2,
-          "payload": {
-            "title": "D - BWM Private Equity II LLC",
-            "filing_type": "Form D",
-            "filed_on": "2026-05-15",
-            "link": "https://www.sec.gov/Archives/edgar/data/2124370/000212437026000001/0002124370-26-000001-index.htm",
-            "biz_state": "OK",
-            "biz_location": "Tulsa, OK"
-          }
-        }
-      ]
-    },
-    {
-      "name": "KittyHawk Heavy Agentic Healthcare LLC",
-      "domain": null,
-      "industry": "healthcare",
-      "headcount": null,
-      "country": "US",
-      "city": "Lewes",
-      "state": "DE",
-      "dm_name": "William Weisman",
-      "dm_title": "Managing Director",
-      "dm_email": null,
-      "dm_linkedin_url": null,
-      "contact_strength": "partial",
-      "score": 24.948605281281296,
-      "insight": null,
-      "trigger_type": "form_d",
-      "signals": [
-        {
-          "type": "funding_raised",
-          "captured_at": "2026-05-17T19:21:49.108796",
-          "days_ago": 2,
-          "payload": {
-            "title": "D - KittyHawk Heavy Agentic Healthcare LLC",
-            "filing_type": "Form D",
-            "filed_on": "2026-05-15",
-            "link": "https://www.sec.gov/Archives/edgar/data/2135064/000213506426000001/0002135064-26-000001-index.htm",
-            "biz_state": "DE",
-            "biz_location": "Lewes, DE"
-          }
-        }
-      ]
-    },
-    {
-      "name": "Pathway Access Vehicle, LLC",
-      "domain": null,
-      "industry": "logistics_transport",
-      "headcount": 30,
-      "country": "US",
-      "city": "Menlo Park",
-      "state": "CA",
-      "dm_name": null,
-      "dm_title": null,
-      "dm_email": null,
-      "dm_linkedin_url": null,
-      "contact_strength": "cold",
-      "score": 24.94860527270149,
-      "insight": null,
-      "trigger_type": "form_d",
-      "signals": [
-        {
-          "type": "funding_raised",
-          "captured_at": "2026-05-17T19:21:49.108796",
-          "days_ago": 2,
-          "payload": {
-            "title": "D - Pathway Access Vehicle, LLC",
-            "filing_type": "Form D",
-            "filed_on": "2026-05-15",
-            "link": "https://www.sec.gov/Archives/edgar/data/2039513/000203951326000003/0002039513-26-000003-index.htm",
-            "biz_state": "IN",
-            "biz_location": "Indianapolis, IN"
-          }
-        }
-      ]
-    },
-    {
-      "name": "Lightstone Direct I LLC - Series Abernathy Industrial",
-      "domain": null,
-      "industry": "real_estate",
-      "headcount": null,
-      "country": "US",
-      "city": null,
-      "state": "SC",
-      "dm_name": "David Lichtenstein",
-      "dm_title": "CEO",
-      "dm_email": null,
-      "dm_linkedin_url": null,
-      "contact_strength": "partial",
-      "score": 24.948605259291362,
-      "insight": null,
-      "trigger_type": "form_d",
-      "signals": [
-        {
-          "type": "funding_raised",
-          "captured_at": "2026-05-17T19:21:49.108796",
-          "days_ago": 2,
-          "payload": {
-            "title": "D - Lightstone Direct I LLC - Series Abernathy Industrial",
-            "filing_type": "Form D",
-            "filed_on": "2026-05-15",
-            "link": "https://www.sec.gov/Archives/edgar/data/2127609/000118518526001876/0001185185-26-001876-index.htm",
-            "biz_state": "NJ",
-            "biz_location": "Lakewood, NJ"
-          }
-        }
-      ]
-    },
-    {
-      "name": "Momentum Commercial Management LLC",
-      "domain": null,
-      "industry": "real_estate",
-      "headcount": null,
-      "country": "US",
-      "city": "Tulsa",
-      "state": "OK",
-      "dm_name": null,
-      "dm_title": null,
-      "dm_email": null,
-      "dm_linkedin_url": null,
-      "contact_strength": "cold",
-      "score": 24.94860524953066,
-      "insight": null,
-      "trigger_type": "form_d",
-      "signals": [
-        {
-          "type": "funding_raised",
-          "captured_at": "2026-05-17T19:21:49.108796",
-          "days_ago": 2,
-          "payload": {
-            "title": "D - Momentum Commercial Management LLC",
-            "filing_type": "Form D",
-            "filed_on": "2026-05-15",
-            "link": "https://www.sec.gov/Archives/edgar/data/2134720/000213472026000002/0002134720-26-000002-index.htm",
-            "biz_state": "OK",
-            "biz_location": "Tulsa, OK"
-          }
-        }
-      ]
-    },
-    {
-      "name": "ZRP Avalon Crossing LLC",
-      "domain": null,
-      "industry": "real_estate",
-      "headcount": null,
-      "country": "US",
-      "city": "Mt. Pleasant",
-      "state": "SC",
-      "dm_name": null,
-      "dm_title": null,
-      "dm_email": null,
-      "dm_linkedin_url": null,
-      "contact_strength": "cold",
-      "score": 24.94860524479375,
-      "insight": null,
-      "trigger_type": "form_d",
-      "signals": [
-        {
-          "type": "funding_raised",
-          "captured_at": "2026-05-17T19:21:49.108796",
-          "days_ago": 2,
-          "payload": {
-            "title": "D - ZRP Avalon Crossing LLC",
-            "filing_type": "Form D",
-            "filed_on": "2026-05-15",
-            "link": "https://www.sec.gov/Archives/edgar/data/2129400/000212940026000002/0002129400-26-000002-index.htm",
-            "biz_state": "SC",
-            "biz_location": "Mt. Pleasant, SC"
-          }
-        }
-      ]
-    },
-    {
-      "name": "FFA HVI 5, LLC",
-      "domain": null,
-      "industry": "other",
-      "headcount": null,
-      "country": "US",
-      "city": "Newark",
-      "state": "DE",
-      "dm_name": null,
-      "dm_title": null,
-      "dm_email": null,
-      "dm_linkedin_url": null,
-      "contact_strength": "cold",
-      "score": 24.948605235913714,
-      "insight": null,
-      "trigger_type": "form_d",
-      "signals": [
-        {
-          "type": "funding_raised",
-          "captured_at": "2026-05-17T19:21:49.108796",
-          "days_ago": 2,
-          "payload": {
-            "title": "D - FFA HVI 5, LLC",
-            "filing_type": "Form D",
-            "filed_on": "2026-05-15",
-            "link": "https://www.sec.gov/Archives/edgar/data/2128765/000212876526000001/0002128765-26-000001-index.htm",
-            "biz_state": "DE",
-            "biz_location": "Newark, DE"
-          }
-        }
-      ]
-    },
-    {
-      "name": "Man Systematic Global Core Equities (Delaware) LLC",
-      "domain": null,
-      "industry": "other",
-      "headcount": null,
-      "country": "US",
-      "city": "NEW YORK",
-      "state": "NY",
-      "dm_name": "Douglas Hamilton",
-      "dm_title": "Vice-President of Man Investments (USA) Corp (Managing Member of the Issuer)",
-      "dm_email": null,
-      "dm_linkedin_url": null,
-      "contact_strength": "partial",
-      "score": 24.94860523115679,
-      "insight": null,
-      "trigger_type": "form_d",
-      "signals": [
-        {
-          "type": "funding_raised",
-          "captured_at": "2026-05-17T19:21:49.108796",
-          "days_ago": 2,
-          "payload": {
-            "title": "D - Man Systematic Global Core Equities (Delaware) LLC",
-            "filing_type": "Form D",
-            "filed_on": "2026-05-15",
-            "link": "https://www.sec.gov/Archives/edgar/data/2135003/000213500326000001/0002135003-26-000001-index.htm",
-            "biz_state": "NY",
-            "biz_location": "New York, NY"
-          }
-        }
-      ]
-    },
-    {
-      "name": "HG SPV1, LLC",
-      "domain": null,
-      "industry": "real_estate",
-      "headcount": null,
-      "country": "US",
-      "city": "NEWARK",
-      "state": "DE",
-      "dm_name": null,
-      "dm_title": null,
-      "dm_email": null,
-      "dm_linkedin_url": null,
-      "contact_strength": "cold",
-      "score": 24.948605222043245,
-      "insight": null,
-      "trigger_type": "form_d",
-      "signals": [
-        {
-          "type": "funding_raised",
-          "captured_at": "2026-05-17T19:21:49.108796",
-          "days_ago": 2,
-          "payload": {
-            "title": "D - HG SPV1, LLC",
-            "filing_type": "Form D",
-            "filed_on": "2026-05-15",
-            "link": "https://www.sec.gov/Archives/edgar/data/2128674/000212867426000001/0002128674-26-000001-index.htm",
-            "biz_state": "DE",
-            "biz_location": "Newark, DE"
-          }
-        }
-      ]
-    },
-    {
-      "name": "DPCK LLC",
-      "domain": null,
-      "industry": "other",
-      "headcount": null,
-      "country": "US",
-      "city": "SPOKANE",
-      "state": "WA",
-      "dm_name": "Theiline McMahon Cramer",
-      "dm_title": "Executive Officer, Director",
-      "dm_email": null,
-      "dm_linkedin_url": null,
-      "contact_strength": "partial",
-      "score": 24.948605203562625,
-      "insight": null,
-      "trigger_type": "form_d",
-      "signals": [
-        {
-          "type": "funding_raised",
-          "captured_at": "2026-05-17T19:21:49.108796",
-          "days_ago": 2,
-          "payload": {
-            "title": "D - DPCK LLC",
-            "filing_type": "Form D",
-            "filed_on": "2026-05-15",
-            "link": "https://www.sec.gov/Archives/edgar/data/2135512/000213551226000001/0002135512-26-000001-index.htm",
-            "biz_state": "WA",
-            "biz_location": "Spokane, WA"
-          }
-        }
-      ]
-    },
-    {
-      "name": "ACE5 LLC",
-      "domain": null,
-      "industry": "other",
-      "headcount": null,
-      "country": "US",
-      "city": "New York",
-      "state": "NY",
-      "dm_name": null,
-      "dm_title": null,
-      "dm_email": null,
-      "dm_linkedin_url": null,
-      "contact_strength": "cold",
-      "score": 24.948605171438373,
-      "insight": null,
-      "trigger_type": "form_d",
-      "signals": [
-        {
-          "type": "funding_raised",
-          "captured_at": "2026-05-17T19:21:49.108796",
-          "days_ago": 3,
-          "payload": {
-            "title": "D - ACE5 LLC",
-            "filing_type": "Form D",
-            "filed_on": "2026-05-14",
-            "link": "https://www.sec.gov/Archives/edgar/data/2134406/000213440626000001/0002134406-26-000001-index.htm",
-            "biz_state": "NY",
-            "biz_location": "New York, NY"
-          }
-        }
-      ]
-    },
-    {
-      "name": "Level 5 Stone Ridge Centerville Ohio LLC",
-      "domain": null,
-      "industry": "other",
-      "headcount": null,
-      "country": "US",
-      "city": "Centerville",
-      "state": "OH",
-      "dm_name": "Luke Kassler",
-      "dm_title": "Managing Partner, CEO",
-      "dm_email": null,
-      "dm_linkedin_url": null,
-      "contact_strength": "partial",
-      "score": 24.94860515682067,
-      "insight": null,
-      "trigger_type": "form_d",
-      "signals": [
-        {
-          "type": "funding_raised",
-          "captured_at": "2026-05-17T19:21:49.108796",
-          "days_ago": 3,
-          "payload": {
-            "title": "D - Level 5 Stone Ridge Centerville Ohio LLC",
-            "filing_type": "Form D",
-            "filed_on": "2026-05-14",
-            "link": "https://www.sec.gov/Archives/edgar/data/2135329/000213532926000001/0002135329-26-000001-index.htm",
-            "biz_state": "OH",
-            "biz_location": "Lima, OH"
-          }
-        }
-      ]
-    },
-    {
-      "name": "Anabaptist Equities LLC",
-      "domain": null,
-      "industry": "real_estate",
-      "headcount": null,
-      "country": "US",
-      "city": "GRANDVIEW",
-      "state": "TX",
-      "dm_name": "Leland Ulrich",
-      "dm_title": "Manager",
-      "dm_email": null,
-      "dm_linkedin_url": null,
-      "contact_strength": "partial",
-      "score": 24.948605111006085,
-      "insight": null,
-      "trigger_type": "form_d",
-      "signals": [
-        {
-          "type": "funding_raised",
-          "captured_at": "2026-05-17T19:21:49.108796",
-          "days_ago": 3,
-          "payload": {
-            "title": "D - Anabaptist Equities LLC",
-            "filing_type": "Form D",
-            "filed_on": "2026-05-14",
-            "link": "https://www.sec.gov/Archives/edgar/data/2068587/000206858726000001/0002068587-26-000001-index.htm",
-            "biz_state": "TX",
-            "biz_location": "Grandview, TX"
-          }
-        }
-      ]
-    },
-    {
-      "name": "Proximity Quest I, LLC",
-      "domain": null,
-      "industry": "other",
-      "headcount": null,
-      "country": "US",
-      "city": "NEW YORK",
-      "state": "NY",
-      "dm_name": "Sirni, Neil",
-      "dm_title": "Managing Member of the Ultimate MM",
-      "dm_email": null,
-      "dm_linkedin_url": null,
-      "contact_strength": "partial",
-      "score": 24.948605096888755,
-      "insight": null,
-      "trigger_type": "form_d",
-      "signals": [
-        {
-          "type": "funding_raised",
-          "captured_at": "2026-05-17T19:21:49.108796",
-          "days_ago": 3,
-          "payload": {
-            "title": "D - Proximity Quest I, LLC",
-            "filing_type": "Form D",
-            "filed_on": "2026-05-14",
-            "link": "https://www.sec.gov/Archives/edgar/data/2124304/000212430426000001/0002124304-26-000001-index.htm",
-            "biz_state": "NY",
-            "biz_location": "New York, NY"
-          }
-        }
-      ]
-    },
-    {
-      "name": "Level 5 Multifamily Growth 1 LLC",
-      "domain": null,
-      "industry": "real_estate",
-      "headcount": null,
-      "country": "US",
-      "city": null,
-      "state": null,
-      "dm_name": "Luke Kassler",
-      "dm_title": "Managing Partner, CEO",
-      "dm_email": null,
-      "dm_linkedin_url": null,
-      "contact_strength": "partial",
-      "score": 24.948605092532137,
-      "insight": null,
-      "trigger_type": "form_d",
-      "signals": [
-        {
-          "type": "funding_raised",
-          "captured_at": "2026-05-17T19:21:49.108796",
-          "days_ago": 3,
-          "payload": {
-            "title": "D - Level 5 Multifamily Growth 1 LLC",
-            "filing_type": "Form D",
-            "filed_on": "2026-05-14",
-            "link": "https://www.sec.gov/Archives/edgar/data/2135324/000213532426000001/0002135324-26-000001-index.htm",
-            "biz_state": "OH",
-            "biz_location": "Lima, OH"
-          }
-        }
-      ]
-    },
-    {
-      "name": "APE5 LLC",
-      "domain": null,
-      "industry": "other",
-      "headcount": null,
-      "country": "US",
-      "city": "NEW YORK",
-      "state": "NY",
-      "dm_name": "Andrew Sugrue",
-      "dm_title": "Executive Officer",
-      "dm_email": null,
-      "dm_linkedin_url": null,
-      "contact_strength": "partial",
-      "score": 24.948605079162043,
-      "insight": null,
-      "trigger_type": "form_d",
-      "signals": [
-        {
-          "type": "funding_raised",
-          "captured_at": "2026-05-17T19:21:49.108796",
-          "days_ago": 3,
-          "payload": {
-            "title": "D - APE5 LLC",
-            "filing_type": "Form D",
-            "filed_on": "2026-05-14",
-            "link": "https://www.sec.gov/Archives/edgar/data/2134927/000213492726000001/0002134927-26-000001-index.htm",
-            "biz_state": "NY",
-            "biz_location": "New York, NY"
-          }
-        }
-      ]
-    },
-    {
-      "name": "Goldman Sachs Private Credit Corp.",
-      "domain": null,
-      "industry": "fintech",
-      "headcount": null,
-      "country": "US",
-      "city": "New York",
-      "state": "NY",
-      "dm_name": "David Solomon",
-      "dm_title": "Chairman and Chief Executive Officer",
-      "dm_email": null,
-      "dm_linkedin_url": null,
-      "contact_strength": "partial",
-      "score": 24.948605066058814,
-      "insight": null,
-      "trigger_type": "form_d",
-      "signals": [
-        {
-          "type": "funding_raised",
-          "captured_at": "2026-05-17T19:21:49.108796",
-          "days_ago": 3,
-          "payload": {
-            "title": "D - Goldman Sachs Private Credit Corp.",
-            "filing_type": "Form D",
-            "filed_on": "2026-05-14",
-            "link": "https://www.sec.gov/Archives/edgar/data/1920145/000192014526000003/0001920145-26-000003-index.htm",
-            "biz_state": "NY",
-            "biz_location": "New York, NY"
-          }
-        }
-      ]
-    },
-    {
-      "name": "MCR Macon Investco, LLC",
-      "domain": "mcrcompanies.com",
-      "industry": "real_estate",
-      "headcount": null,
-      "country": "US",
-      "city": "Phoenix",
-      "state": "AZ",
-      "dm_name": "Jeremiah Reardon",
-      "dm_title": "Managing Partner",
-      "dm_email": null,
-      "dm_linkedin_url": null,
-      "contact_strength": "partial",
-      "score": 24.948605057472335,
-      "insight": null,
-      "trigger_type": "form_d",
-      "signals": [
-        {
-          "type": "funding_raised",
-          "captured_at": "2026-05-17T19:21:49.108796",
-          "days_ago": 3,
-          "payload": {
-            "title": "D - MCR Macon Investco, LLC",
-            "filing_type": "Form D",
-            "filed_on": "2026-05-14",
-            "link": "https://www.sec.gov/Archives/edgar/data/2133432/000213343226000001/0002133432-26-000001-index.htm",
-            "biz_state": "AZ",
-            "biz_location": "Phoenix, AZ"
-          }
-        }
-      ]
-    },
-    {
-      "name": "Alpha Wave CI V, LLC",
-      "domain": null,
-      "industry": "fintech",
-      "headcount": null,
-      "country": "US",
-      "city": "New York",
-      "state": "NY",
-      "dm_name": "Rick Gerson",
-      "dm_title": "Co-Founder, Chairman & Chief Investment Officer",
-      "dm_email": null,
-      "dm_linkedin_url": null,
-      "contact_strength": "partial",
-      "score": 24.93625747220757,
-      "insight": null,
-      "trigger_type": "form_d",
-      "signals": [
-        {
-          "type": "funding_raised",
-          "captured_at": "2026-05-17T18:50:57.861397",
-          "days_ago": 2,
-          "payload": {
-            "title": "D - Alpha Wave CI V, LLC",
-            "filing_type": "Form D",
-            "filed_on": "2026-05-15",
-            "link": "https://www.sec.gov/Archives/edgar/data/1741615/000090266426002484/0000902664-26-002484-index.htm",
-            "biz_state": "NY",
-            "biz_location": "New York, NY"
-          }
-        }
-      ]
-    },
-    {
-      "name": "Camber Respond LLC",
-      "domain": null,
-      "industry": "other",
-      "headcount": null,
-      "country": "US",
-      "city": "San Francisco",
-      "state": "CA",
-      "dm_name": "Michael Scott Irwin",
-      "dm_title": "Executive Officer",
-      "dm_email": null,
-      "dm_linkedin_url": null,
-      "contact_strength": "partial",
-      "score": 24.936257449621692,
-      "insight": null,
-      "trigger_type": "form_d",
-      "signals": [
-        {
-          "type": "funding_raised",
-          "captured_at": "2026-05-17T18:50:57.861397",
-          "days_ago": 2,
-          "payload": {
-            "title": "D - Camber Respond LLC",
-            "filing_type": "Form D",
-            "filed_on": "2026-05-15",
-            "link": "https://www.sec.gov/Archives/edgar/data/2131004/000147083126000447/0001470831-26-000447-index.htm",
-            "biz_state": "CA",
-            "biz_location": "San Francisco, CA"
-          }
-        }
-      ]
-    },
-    {
-      "name": "Shortcut Mobile, Inc.",
-      "domain": "shortcut.com",
-      "industry": "software_saas",
-      "headcount": null,
-      "country": "US",
-      "city": "New York",
-      "state": "NY",
-      "dm_name": "Kurt Schrader",
-      "dm_title": "CEO",
-      "dm_email": null,
-      "dm_linkedin_url": null,
-      "contact_strength": "partial",
-      "score": 24.926344893621593,
-      "insight": null,
-      "trigger_type": "form_d",
-      "signals": [
-        {
-          "type": "funding_raised",
-          "captured_at": "2026-05-17T19:21:49.108796",
-          "days_ago": 2,
-          "payload": {
-            "title": "D - Shortcut Mobile, Inc.",
-            "filing_type": "Form D",
-            "filed_on": "2026-05-15",
-            "link": "https://www.sec.gov/Archives/edgar/data/2135306/000213530626000001/0002135306-26-000001-index.htm",
-            "biz_state": "PA",
-            "biz_location": "Philadelphia, PA"
-          }
-        }
-      ]
-    },
-    {
-      "name": "MEDICAL EXERCISE INC.",
-      "domain": "medx.clinic",
-      "industry": "healthcare",
-      "headcount": null,
-      "country": "US",
-      "city": "North Palm Beach",
-      "state": "FL",
-      "dm_name": "Matthew Degelman",
-      "dm_title": "Director, President, Secretary",
-      "dm_email": null,
-      "dm_linkedin_url": null,
-      "contact_strength": "partial",
-      "score": 24.926344888129016,
-      "insight": null,
-      "trigger_type": "form_d",
-      "signals": [
-        {
-          "type": "funding_raised",
-          "captured_at": "2026-05-17T19:21:49.108796",
-          "days_ago": 2,
-          "payload": {
-            "title": "D - MEDICAL EXERCISE INC.",
-            "filing_type": "Form D",
-            "filed_on": "2026-05-15",
-            "link": "https://www.sec.gov/Archives/edgar/data/2001249/000121390026057793/0001213900-26-057793-index.htm",
-            "biz_state": "FL",
-            "biz_location": "North Palm Beach, FL"
-          }
-        }
-      ]
-    },
-    {
-      "name": "Estately Operations LLC",
-      "domain": "estately.com",
-      "industry": "real_estate",
-      "headcount": null,
-      "country": "US",
-      "city": "Seattle",
-      "state": "WA",
-      "dm_name": "Galen Ward",
-      "dm_title": "Co-Founder & CEO",
-      "dm_email": null,
-      "dm_linkedin_url": null,
-      "contact_strength": "partial",
-      "score": 24.926344882903066,
-      "insight": null,
-      "trigger_type": "form_d",
-      "signals": [
-        {
-          "type": "funding_raised",
-          "captured_at": "2026-05-17T19:21:49.108796",
-          "days_ago": 2,
-          "payload": {
-            "title": "D - Estately Operations LLC",
-            "filing_type": "Form D",
-            "filed_on": "2026-05-15",
-            "link": "https://www.sec.gov/Archives/edgar/data/2131672/000090514826002406/0000905148-26-002406-index.htm",
-            "biz_state": "IL",
-            "biz_location": "Chicago, IL"
-          }
-        }
-      ]
-    },
-    {
-      "name": "Robey Street Equity LLC",
-      "domain": null,
-      "industry": "fintech",
-      "headcount": null,
-      "country": "US",
-      "city": "NEW YORK",
-      "state": "NY",
-      "dm_name": "John P. Moran",
-      "dm_title": "Manager",
-      "dm_email": null,
-      "dm_linkedin_url": null,
-      "contact_strength": "partial",
-      "score": 24.926344876990548,
-      "insight": null,
-      "trigger_type": "form_d",
-      "signals": [
-        {
-          "type": "funding_raised",
-          "captured_at": "2026-05-17T19:21:49.108796",
-          "days_ago": 2,
-          "payload": {
-            "title": "D - Robey Street Equity LLC",
-            "filing_type": "Form D",
-            "filed_on": "2026-05-15",
-            "link": "https://www.sec.gov/Archives/edgar/data/2134974/000213497426000001/0002134974-26-000001-index.htm",
-            "biz_state": "NY",
-            "biz_location": "New York, NY"
-          }
-        }
-      ]
-    },
-    {
-      "name": "Graton Station",
-      "domain": null,
-      "industry": "other",
-      "headcount": null,
-      "country": "US",
-      "city": "Graton",
-      "state": "CA",
-      "dm_name": "Matt Jorgensen",
-      "dm_title": "Organizer",
-      "dm_email": null,
-      "dm_linkedin_url": null,
-      "contact_strength": "partial",
-      "score": 24.926344871911244,
-      "insight": null,
-      "trigger_type": "form_d",
-      "signals": [
-        {
-          "type": "funding_raised",
-          "captured_at": "2026-05-17T19:21:49.108796",
-          "days_ago": 2,
-          "payload": {
-            "title": "D - Graton Station",
-            "filing_type": "Form D",
-            "filed_on": "2026-05-15",
-            "link": "https://www.sec.gov/Archives/edgar/data/2099701/000209970126000001/0002099701-26-000001-index.htm",
-            "biz_state": "CA",
-            "biz_location": "Graton, CA"
-          }
-        }
-      ]
-    },
-    {
-      "name": "MOVA Technologies, Inc.",
-      "domain": "movatechnologies.com",
-      "industry": "other",
-      "headcount": null,
-      "country": "US",
-      "city": "Pulaski",
-      "state": "VA",
-      "dm_name": "Steve Critchfield",
-      "dm_title": "Founder",
-      "dm_email": null,
-      "dm_linkedin_url": null,
-      "contact_strength": "partial",
-      "score": 24.926344865892073,
-      "insight": null,
-      "trigger_type": "form_d",
-      "signals": [
-        {
-          "type": "funding_raised",
-          "captured_at": "2026-05-17T19:21:49.108796",
-          "days_ago": 2,
-          "payload": {
-            "title": "D - MOVA Technologies, Inc.",
-            "filing_type": "Form D",
-            "filed_on": "2026-05-15",
-            "link": "https://www.sec.gov/Archives/edgar/data/1682315/000168231526000001/0001682315-26-000001-index.htm",
-            "biz_state": "VA",
-            "biz_location": "Blacksburg, VA"
-          }
-        }
-      ]
-    },
-    {
-      "name": "Data Management & Compliance, Inc. DBA Warchest",
-      "domain": "dmcapp.com",
-      "industry": "other",
-      "headcount": null,
-      "country": "US",
-      "city": "Washington",
-      "state": "DC",
-      "dm_name": null,
-      "dm_title": null,
-      "dm_email": null,
-      "dm_linkedin_url": null,
-      "contact_strength": "cold",
-      "score": 24.92634486051281,
-      "insight": null,
-      "trigger_type": "form_d",
-      "signals": [
-        {
-          "type": "funding_raised",
-          "captured_at": "2026-05-17T19:21:49.108796",
-          "days_ago": 2,
-          "payload": {
-            "title": "D - Data Management & Compliance, Inc. DBA Warchest",
-            "filing_type": "Form D",
-            "filed_on": "2026-05-15",
-            "link": "https://www.sec.gov/Archives/edgar/data/2134306/000213430626000001/0002134306-26-000001-index.htm",
-            "biz_state": "MA",
-            "biz_location": "Lexington, MA"
-          }
-        }
-      ]
-    },
-    {
       "name": "Trellis Bioscience, Inc.",
       "domain": "trellisbio.com",
       "industry": "healthcare",
@@ -2766,134 +813,6 @@
       ]
     },
     {
-      "name": "SC Honea Path N Shirley, LLC",
-      "domain": null,
-      "industry": "real_estate",
-      "headcount": null,
-      "country": "US",
-      "city": "Honea Path",
-      "state": "SC",
-      "dm_name": null,
-      "dm_title": null,
-      "dm_email": null,
-      "dm_linkedin_url": null,
-      "contact_strength": "cold",
-      "score": 24.926344849381007,
-      "insight": null,
-      "trigger_type": "form_d",
-      "signals": [
-        {
-          "type": "funding_raised",
-          "captured_at": "2026-05-17T19:21:49.108796",
-          "days_ago": 2,
-          "payload": {
-            "title": "D - SC Honea Path N Shirley, LLC",
-            "filing_type": "Form D",
-            "filed_on": "2026-05-15",
-            "link": "https://www.sec.gov/Archives/edgar/data/2127125/000212712526000001/0002127125-26-000001-index.htm",
-            "biz_state": "SC",
-            "biz_location": "Greenville, SC"
-          }
-        }
-      ]
-    },
-    {
-      "name": "Scope Anesthesia of North Carolina, PLLC",
-      "domain": "scope-nc.com",
-      "industry": "healthcare",
-      "headcount": null,
-      "country": "US",
-      "city": "Charlotte",
-      "state": "NC",
-      "dm_name": "Thomas Wherry",
-      "dm_title": "Founder and Chief Executive Officer",
-      "dm_email": null,
-      "dm_linkedin_url": null,
-      "contact_strength": "partial",
-      "score": 24.926344837302665,
-      "insight": null,
-      "trigger_type": "form_d",
-      "signals": [
-        {
-          "type": "funding_raised",
-          "captured_at": "2026-05-17T19:21:49.108796",
-          "days_ago": 2,
-          "payload": {
-            "title": "D - Scope Anesthesia of North Carolina, PLLC",
-            "filing_type": "Form D",
-            "filed_on": "2026-05-15",
-            "link": "https://www.sec.gov/Archives/edgar/data/2005209/000200520926000003/0002005209-26-000003-index.htm",
-            "biz_state": "NC",
-            "biz_location": "Charlotte, NC"
-          }
-        }
-      ]
-    },
-    {
-      "name": "Global Gardens LLC",
-      "domain": null,
-      "industry": "other",
-      "headcount": null,
-      "country": "US",
-      "city": "Brandon",
-      "state": "FL",
-      "dm_name": "Michael Elliott Bisnow",
-      "dm_title": "Manager",
-      "dm_email": null,
-      "dm_linkedin_url": null,
-      "contact_strength": "partial",
-      "score": 24.92634483154346,
-      "insight": null,
-      "trigger_type": "form_d",
-      "signals": [
-        {
-          "type": "funding_raised",
-          "captured_at": "2026-05-17T19:21:49.108796",
-          "days_ago": 2,
-          "payload": {
-            "title": "D - Global Gardens LLC",
-            "filing_type": "Form D",
-            "filed_on": "2026-05-15",
-            "link": "https://www.sec.gov/Archives/edgar/data/2129812/000212981226000002/0002129812-26-000002-index.htm",
-            "biz_state": "FL",
-            "biz_location": "Brandon, FL"
-          }
-        }
-      ]
-    },
-    {
-      "name": "Kepler Software, Inc.",
-      "domain": null,
-      "industry": "software_saas",
-      "headcount": null,
-      "country": "US",
-      "city": "New York",
-      "state": "NY",
-      "dm_name": null,
-      "dm_title": null,
-      "dm_email": null,
-      "dm_linkedin_url": null,
-      "contact_strength": "cold",
-      "score": 24.926344825804247,
-      "insight": null,
-      "trigger_type": "form_d",
-      "signals": [
-        {
-          "type": "funding_raised",
-          "captured_at": "2026-05-17T19:21:49.108796",
-          "days_ago": 2,
-          "payload": {
-            "title": "D - Kepler Software, Inc.",
-            "filing_type": "Form D",
-            "filed_on": "2026-05-15",
-            "link": "https://www.sec.gov/Archives/edgar/data/2126990/000212699026000001/0002126990-26-000001-index.htm",
-            "biz_state": "CA",
-            "biz_location": "San Francisco, CA"
-          }
-        }
-      ]
-    },
-    {
       "name": "Athos Therapeutics, Inc.",
       "domain": "athostx.com",
       "industry": "healthcare",
@@ -2921,70 +840,6 @@
             "link": "https://www.sec.gov/Archives/edgar/data/1885079/000188507926000001/0001885079-26-000001-index.htm",
             "biz_state": "CA",
             "biz_location": "Torrance, CA"
-          }
-        }
-      ]
-    },
-    {
-      "name": "GENI COMPUTERS, INC.",
-      "domain": "geni-computers.com",
-      "industry": "software_saas",
-      "headcount": null,
-      "country": "US",
-      "city": "New York",
-      "state": "NY",
-      "dm_name": null,
-      "dm_title": null,
-      "dm_email": null,
-      "dm_linkedin_url": null,
-      "contact_strength": "cold",
-      "score": 24.926344812512742,
-      "insight": null,
-      "trigger_type": "form_d",
-      "signals": [
-        {
-          "type": "funding_raised",
-          "captured_at": "2026-05-17T19:21:49.108796",
-          "days_ago": 2,
-          "payload": {
-            "title": "D - GENI COMPUTERS, INC.",
-            "filing_type": "Form D",
-            "filed_on": "2026-05-15",
-            "link": "https://www.sec.gov/Archives/edgar/data/2135268/000213526826000001/0002135268-26-000001-index.htm",
-            "biz_state": "NY",
-            "biz_location": "Brooklyn, NY"
-          }
-        }
-      ]
-    },
-    {
-      "name": "Vadnais Heights Senior Coupon LLC",
-      "domain": null,
-      "industry": "healthcare",
-      "headcount": null,
-      "country": "US",
-      "city": "Vadnais Heights",
-      "state": "MN",
-      "dm_name": null,
-      "dm_title": null,
-      "dm_email": null,
-      "dm_linkedin_url": null,
-      "contact_strength": "cold",
-      "score": 24.92634480206751,
-      "insight": null,
-      "trigger_type": "form_d",
-      "signals": [
-        {
-          "type": "funding_raised",
-          "captured_at": "2026-05-17T19:21:49.108796",
-          "days_ago": 2,
-          "payload": {
-            "title": "D - Vadnais Heights Senior Coupon LLC",
-            "filing_type": "Form D",
-            "filed_on": "2026-05-15",
-            "link": "https://www.sec.gov/Archives/edgar/data/2133677/000213367726000001/0002133677-26-000001-index.htm",
-            "biz_state": "MN",
-            "biz_location": "Eden Prairie, MN"
           }
         }
       ]
@@ -3086,166 +941,6 @@
       ]
     },
     {
-      "name": "Majesty Therapeutics, Inc.",
-      "domain": null,
-      "industry": "healthcare",
-      "headcount": null,
-      "country": "US",
-      "city": "Sea Ranch Lakes",
-      "state": "FL",
-      "dm_name": "Shawn Titcomb",
-      "dm_title": "President and Chief Executive Officer",
-      "dm_email": null,
-      "dm_linkedin_url": null,
-      "contact_strength": "partial",
-      "score": 24.926344707540498,
-      "insight": null,
-      "trigger_type": "form_d",
-      "signals": [
-        {
-          "type": "funding_raised",
-          "captured_at": "2026-05-17T19:21:49.108796",
-          "days_ago": 2,
-          "payload": {
-            "title": "D - Majesty Therapeutics, Inc.",
-            "filing_type": "Form D",
-            "filed_on": "2026-05-15",
-            "link": "https://www.sec.gov/Archives/edgar/data/2135155/000149315226023677/0001493152-26-023677-index.htm",
-            "biz_state": "FL",
-            "biz_location": "Sea Ranch Lakes, FL"
-          }
-        }
-      ]
-    },
-    {
-      "name": "DPF Resolutions, LLC",
-      "domain": "dpfresol.com",
-      "industry": "other",
-      "headcount": null,
-      "country": "US",
-      "city": "San Antonio",
-      "state": "TX",
-      "dm_name": null,
-      "dm_title": null,
-      "dm_email": null,
-      "dm_linkedin_url": null,
-      "contact_strength": "cold",
-      "score": 24.926344701114715,
-      "insight": null,
-      "trigger_type": "form_d",
-      "signals": [
-        {
-          "type": "funding_raised",
-          "captured_at": "2026-05-17T19:21:49.108796",
-          "days_ago": 2,
-          "payload": {
-            "title": "D - DPF Resolutions, LLC",
-            "filing_type": "Form D",
-            "filed_on": "2026-05-15",
-            "link": "https://www.sec.gov/Archives/edgar/data/2135136/000213471826000012/0002134718-26-000012-index.htm",
-            "biz_state": "TX",
-            "biz_location": "San Antonio, TX"
-          }
-        }
-      ]
-    },
-    {
-      "name": "Sportsline Technologies Inc.",
-      "domain": "sportsline.com",
-      "industry": "software_saas",
-      "headcount": null,
-      "country": "US",
-      "city": "Fort Lauderdale",
-      "state": "FL",
-      "dm_name": "Michael Levy",
-      "dm_title": "CEO",
-      "dm_email": null,
-      "dm_linkedin_url": null,
-      "contact_strength": "partial",
-      "score": 24.9263446959021,
-      "insight": null,
-      "trigger_type": "form_d",
-      "signals": [
-        {
-          "type": "funding_raised",
-          "captured_at": "2026-05-17T19:21:49.108796",
-          "days_ago": 2,
-          "payload": {
-            "title": "D - Sportsline Technologies Inc.",
-            "filing_type": "Form D",
-            "filed_on": "2026-05-15",
-            "link": "https://www.sec.gov/Archives/edgar/data/2134435/000213443526000001/0002134435-26-000001-index.htm",
-            "biz_state": "NY",
-            "biz_location": "New York, NY"
-          }
-        }
-      ]
-    },
-    {
-      "name": "Kin Denver DVM Group LLC",
-      "domain": null,
-      "industry": "healthcare",
-      "headcount": null,
-      "country": "US",
-      "city": "Denver",
-      "state": "CO",
-      "dm_name": "Stephen Christie",
-      "dm_title": "Chief Executive Officer",
-      "dm_email": null,
-      "dm_linkedin_url": null,
-      "contact_strength": "partial",
-      "score": 24.92634469044285,
-      "insight": null,
-      "trigger_type": "form_d",
-      "signals": [
-        {
-          "type": "funding_raised",
-          "captured_at": "2026-05-17T19:21:49.108796",
-          "days_ago": 2,
-          "payload": {
-            "title": "D - Kin Denver DVM Group LLC",
-            "filing_type": "Form D",
-            "filed_on": "2026-05-15",
-            "link": "https://www.sec.gov/Archives/edgar/data/2115693/000211569326000001/0002115693-26-000001-index.htm",
-            "biz_state": "CO",
-            "biz_location": "Greenwood Village, CO"
-          }
-        }
-      ]
-    },
-    {
-      "name": "Posh Nutrition LLC",
-      "domain": null,
-      "industry": "healthcare",
-      "headcount": null,
-      "country": "US",
-      "city": "Phoenix",
-      "state": "AZ",
-      "dm_name": "Gabriela Macias",
-      "dm_title": "Executive Officer",
-      "dm_email": null,
-      "dm_linkedin_url": null,
-      "contact_strength": "partial",
-      "score": 24.926344680550873,
-      "insight": null,
-      "trigger_type": "form_d",
-      "signals": [
-        {
-          "type": "funding_raised",
-          "captured_at": "2026-05-17T19:21:49.108796",
-          "days_ago": 2,
-          "payload": {
-            "title": "D - Posh Nutrition LLC",
-            "filing_type": "Form D",
-            "filed_on": "2026-05-15",
-            "link": "https://www.sec.gov/Archives/edgar/data/2135078/000213507826000001/0002135078-26-000001-index.htm",
-            "biz_state": "AZ",
-            "biz_location": "Phoenix, AZ"
-          }
-        }
-      ]
-    },
-    {
       "name": "Oakridge Dairy LLC",
       "domain": "oakridgedairy.com",
       "industry": "other",
@@ -3273,134 +968,6 @@
             "link": "https://www.sec.gov/Archives/edgar/data/1673234/000167323426000001/0001673234-26-000001-index.htm",
             "biz_state": "CT",
             "biz_location": "Ellington, CT"
-          }
-        }
-      ]
-    },
-    {
-      "name": "Truepointe Brick House Blue, LLC",
-      "domain": null,
-      "industry": "other",
-      "headcount": null,
-      "country": "US",
-      "city": "Dublin",
-      "state": "OH",
-      "dm_name": "Cid Rhomberg",
-      "dm_title": "Chief Experience Officer",
-      "dm_email": null,
-      "dm_linkedin_url": null,
-      "contact_strength": "partial",
-      "score": 24.926344664866367,
-      "insight": null,
-      "trigger_type": "form_d",
-      "signals": [
-        {
-          "type": "funding_raised",
-          "captured_at": "2026-05-17T19:21:49.108796",
-          "days_ago": 3,
-          "payload": {
-            "title": "D - Truepointe Brick House Blue, LLC",
-            "filing_type": "Form D",
-            "filed_on": "2026-05-14",
-            "link": "https://www.sec.gov/Archives/edgar/data/2133699/000213369926000002/0002133699-26-000002-index.htm",
-            "biz_state": "OH",
-            "biz_location": "Dublin, OH"
-          }
-        }
-      ]
-    },
-    {
-      "name": "Paxos Medical Inc.",
-      "domain": "paxosmedical.com",
-      "industry": "healthcare",
-      "headcount": null,
-      "country": "US",
-      "city": "Minneapolis",
-      "state": "MN",
-      "dm_name": null,
-      "dm_title": null,
-      "dm_email": null,
-      "dm_linkedin_url": null,
-      "contact_strength": "cold",
-      "score": 24.92634464863526,
-      "insight": null,
-      "trigger_type": "form_d",
-      "signals": [
-        {
-          "type": "funding_raised",
-          "captured_at": "2026-05-17T19:21:49.108796",
-          "days_ago": 3,
-          "payload": {
-            "title": "D - Paxos Medical Inc.",
-            "filing_type": "Form D",
-            "filed_on": "2026-05-14",
-            "link": "https://www.sec.gov/Archives/edgar/data/2131237/000213123726000002/0002131237-26-000002-index.htm",
-            "biz_state": "DE",
-            "biz_location": "Lewes, DE"
-          }
-        }
-      ]
-    },
-    {
-      "name": "Lunar Outpost Inc",
-      "domain": "lunaroutpost.com",
-      "industry": "other",
-      "headcount": null,
-      "country": "US",
-      "city": "Golden",
-      "state": "CO",
-      "dm_name": "Justin Cyrus",
-      "dm_title": "CEO",
-      "dm_email": null,
-      "dm_linkedin_url": null,
-      "contact_strength": "partial",
-      "score": 24.926344638296683,
-      "insight": null,
-      "trigger_type": "form_d",
-      "signals": [
-        {
-          "type": "funding_raised",
-          "captured_at": "2026-05-17T19:21:49.108796",
-          "days_ago": 3,
-          "payload": {
-            "title": "D - Lunar Outpost Inc",
-            "filing_type": "Form D",
-            "filed_on": "2026-05-14",
-            "link": "https://www.sec.gov/Archives/edgar/data/1926627/000192662726000002/0001926627-26-000002-index.htm",
-            "biz_state": "CO",
-            "biz_location": "Arvada, CO"
-          }
-        }
-      ]
-    },
-    {
-      "name": "Squad Technologies LLC",
-      "domain": "squadtech.com",
-      "industry": "software_saas",
-      "headcount": null,
-      "country": "US",
-      "city": "West Chester",
-      "state": "PA",
-      "dm_name": null,
-      "dm_title": null,
-      "dm_email": null,
-      "dm_linkedin_url": null,
-      "contact_strength": "cold",
-      "score": 24.926344633017408,
-      "insight": null,
-      "trigger_type": "form_d",
-      "signals": [
-        {
-          "type": "funding_raised",
-          "captured_at": "2026-05-17T19:21:49.108796",
-          "days_ago": 3,
-          "payload": {
-            "title": "D - Squad Technologies LLC",
-            "filing_type": "Form D",
-            "filed_on": "2026-05-14",
-            "link": "https://www.sec.gov/Archives/edgar/data/1887456/000188745626000003/0001887456-26-000003-index.htm",
-            "biz_state": "PA",
-            "biz_location": "West Chester, PA"
           }
         }
       ]
@@ -3438,198 +1005,6 @@
       ]
     },
     {
-      "name": "Innovatio Group, LLC",
-      "domain": null,
-      "industry": "other",
-      "headcount": null,
-      "country": "US",
-      "city": "Burr Ridge",
-      "state": "IL",
-      "dm_name": null,
-      "dm_title": null,
-      "dm_email": null,
-      "dm_linkedin_url": null,
-      "contact_strength": "cold",
-      "score": 24.926344618326095,
-      "insight": null,
-      "trigger_type": "form_d",
-      "signals": [
-        {
-          "type": "funding_raised",
-          "captured_at": "2026-05-17T19:21:49.108796",
-          "days_ago": 3,
-          "payload": {
-            "title": "D - Innovatio Group, LLC",
-            "filing_type": "Form D",
-            "filed_on": "2026-05-14",
-            "link": "https://www.sec.gov/Archives/edgar/data/2134900/000213490026000001/0002134900-26-000001-index.htm",
-            "biz_state": "IL",
-            "biz_location": "Burr Ridge, IL"
-          }
-        }
-      ]
-    },
-    {
-      "name": "iSpecimen Inc.  (ISPC)",
-      "domain": "ispecimen.com",
-      "industry": "healthcare",
-      "headcount": null,
-      "country": "US",
-      "city": "Woburn",
-      "state": "MA",
-      "dm_name": "Robert Lim",
-      "dm_title": "CEO",
-      "dm_email": null,
-      "dm_linkedin_url": null,
-      "contact_strength": "partial",
-      "score": 24.926344613260124,
-      "insight": null,
-      "trigger_type": "form_d",
-      "signals": [
-        {
-          "type": "funding_raised",
-          "captured_at": "2026-05-17T19:21:49.108796",
-          "days_ago": 3,
-          "payload": {
-            "title": "D - iSpecimen Inc.  (ISPC)",
-            "filing_type": "Form D",
-            "filed_on": "2026-05-14",
-            "link": "https://www.sec.gov/Archives/edgar/data/1558569/000121390026056752/0001213900-26-056752-index.htm",
-            "biz_state": "MA",
-            "biz_location": "Woburn, MA"
-          }
-        }
-      ]
-    },
-    {
-      "name": "EtiraRX, Inc.",
-      "domain": "etira.life",
-      "industry": "healthcare",
-      "headcount": null,
-      "country": "US",
-      "city": "Dallas",
-      "state": "TX",
-      "dm_name": "Russell Hayward",
-      "dm_title": "Chief Executive Officer",
-      "dm_email": null,
-      "dm_linkedin_url": null,
-      "contact_strength": "partial",
-      "score": 24.926344608680754,
-      "insight": null,
-      "trigger_type": "form_d",
-      "signals": [
-        {
-          "type": "funding_raised",
-          "captured_at": "2026-05-17T19:21:49.108796",
-          "days_ago": 3,
-          "payload": {
-            "title": "D - EtiraRX, Inc.",
-            "filing_type": "Form D",
-            "filed_on": "2026-05-14",
-            "link": "https://www.sec.gov/Archives/edgar/data/1996442/000199644226000002/0001996442-26-000002-index.htm",
-            "biz_state": "TX",
-            "biz_location": "Dallas, TX"
-          }
-        }
-      ]
-    },
-    {
-      "name": "DADoES, Inc.",
-      "domain": "rendered.ai",
-      "industry": "other",
-      "headcount": null,
-      "country": "US",
-      "city": "Bellevue",
-      "state": "WA",
-      "dm_name": "Nathan Kundz",
-      "dm_title": "Executive Officer, Director",
-      "dm_email": null,
-      "dm_linkedin_url": null,
-      "contact_strength": "partial",
-      "score": 24.92634459844216,
-      "insight": null,
-      "trigger_type": "form_d",
-      "signals": [
-        {
-          "type": "funding_raised",
-          "captured_at": "2026-05-17T19:21:49.108796",
-          "days_ago": 3,
-          "payload": {
-            "title": "D - DADoES, Inc.",
-            "filing_type": "Form D",
-            "filed_on": "2026-05-14",
-            "link": "https://www.sec.gov/Archives/edgar/data/1888581/000188858126000003/0001888581-26-000003-index.htm",
-            "biz_state": "WA",
-            "biz_location": "Bellevue, WA"
-          }
-        }
-      ]
-    },
-    {
-      "name": "Evolution Metals & Technologies Corp.  (EMAT)",
-      "domain": "evolution-metals.com",
-      "industry": "manufacturing",
-      "headcount": null,
-      "country": "US",
-      "city": "West Palm Beach",
-      "state": "FL",
-      "dm_name": "David Wilcox",
-      "dm_title": "Executive Chairman",
-      "dm_email": null,
-      "dm_linkedin_url": null,
-      "contact_strength": "partial",
-      "score": 24.926344593129556,
-      "insight": null,
-      "trigger_type": "form_d",
-      "signals": [
-        {
-          "type": "funding_raised",
-          "captured_at": "2026-05-17T19:21:49.108796",
-          "days_ago": 3,
-          "payload": {
-            "title": "D - Evolution Metals & Technologies Corp.  (EMAT)",
-            "filing_type": "Form D",
-            "filed_on": "2026-05-14",
-            "link": "https://www.sec.gov/Archives/edgar/data/1866226/000121390026056629/0001213900-26-056629-index.htm",
-            "biz_state": "FL",
-            "biz_location": "West Palm Beach, FL"
-          }
-        }
-      ]
-    },
-    {
-      "name": "Vadnais Heights H.A. LLC",
-      "domain": null,
-      "industry": "other",
-      "headcount": null,
-      "country": "US",
-      "city": "Vadnais Heights",
-      "state": "MN",
-      "dm_name": null,
-      "dm_title": null,
-      "dm_email": null,
-      "dm_linkedin_url": null,
-      "contact_strength": "cold",
-      "score": 24.914008004452807,
-      "insight": null,
-      "trigger_type": "form_d",
-      "signals": [
-        {
-          "type": "funding_raised",
-          "captured_at": "2026-05-17T18:50:57.861397",
-          "days_ago": 2,
-          "payload": {
-            "title": "D - Vadnais Heights H.A. LLC",
-            "filing_type": "Form D",
-            "filed_on": "2026-05-15",
-            "link": "https://www.sec.gov/Archives/edgar/data/2133678/000213367826000001/0002133678-26-000001-index.htm",
-            "biz_state": "MN",
-            "biz_location": "Eden Prairie, MN"
-          }
-        }
-      ]
-    },
-    {
       "name": "Tugboat Solutions Inc.",
       "domain": "tugboat.claims",
       "industry": "software_saas",
@@ -3642,7 +1017,7 @@
       "dm_email": "aaron@tugboat.claims",
       "dm_linkedin_url": "http://www.linkedin.com/in/aaron-mooney-321408141",
       "contact_strength": "verified",
-      "score": 24.91400799950927,
+      "score": 24.91090392609426,
       "insight": null,
       "trigger_type": "form_d",
       "signals": [
@@ -3662,36 +1037,6 @@
       ]
     },
     {
-      "name": "Nectar Social",
-      "domain": "nectarsocial.com",
-      "industry": "media_entertainment",
-      "headcount": null,
-      "country": "US",
-      "city": "Palo Alto",
-      "state": "CA",
-      "dm_name": "Misbah Uraizee",
-      "dm_title": "CEO and co-founder",
-      "dm_email": null,
-      "dm_linkedin_url": null,
-      "contact_strength": "partial",
-      "score": 24.913954979056754,
-      "insight": null,
-      "trigger_type": "funding_event",
-      "signals": [
-        {
-          "type": "funding_raised",
-          "captured_at": "2026-05-17T18:50:49.892103",
-          "days_ago": 0,
-          "payload": {
-            "feed_title": "Marketing operating system Nectar Social raises $30M Series A led by Menlo",
-            "feed_url": "https://techcrunch.com/category/startups/feed/",
-            "link": "https://techcrunch.com/2026/05/16/marketing-operating-system-nectar-social-raises-30m-series-a-in-round-led-by-menlo/",
-            "published": "Sat, 16 May 2026 19:26:14 +0000"
-          }
-        }
-      ]
-    },
-    {
       "name": "RenX Enterprises Corp.",
       "domain": "renxent.com",
       "industry": "other",
@@ -3704,7 +1049,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 24.51967597009093,
+      "score": 24.51662133169187,
       "insight": null,
       "trigger_type": "form_d",
       "signals": [
