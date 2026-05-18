@@ -18,6 +18,7 @@ import argparse
 import json
 import logging
 import os
+import re
 import sqlite3
 import sys
 from datetime import datetime, timedelta, timezone
@@ -668,8 +669,81 @@ def _city_state(lead: Lead) -> tuple[str | None, str | None]:
     return p.get("city"), p.get("state")
 
 
+_GENERIC_EMAIL_LOCALS: frozenset[str] = frozenset({
+    "info", "contact", "hello", "support", "help", "sales", "team",
+    "admin", "office", "general", "inquiries", "press", "media",
+    "intercom", "noreply", "no-reply", "donotreply", "do-not-reply",
+    "marketing", "service", "services", "billing", "accounts",
+    "hr", "careers", "jobs", "recruiting",
+})
+
+_OPERATOR_TITLE_RE = re.compile(
+    r"\b("
+    r"founder|co[-\s]?founder|"
+    r"ceo|chief\s+executive(?:\s+officer)?|"
+    r"president|"
+    r"managing\s+(?:partner|director)|"
+    r"owner|principal|proprietor|"
+    r"coo|chief\s+operating(?:\s+officer)?"
+    r")\b",
+    re.IGNORECASE,
+)
+
+
+def _is_doubled_dm_name(name: str | None) -> bool:
+    if not name:
+        return False
+    tokens = name.strip().split()
+    if len(tokens) < 2:
+        return False
+    return tokens[0].lower() == tokens[-1].lower()
+
+
+def _is_generic_email_local(email: str | None) -> bool:
+    if not email:
+        return False
+    local = email.split("@", 1)[0].strip().lower()
+    return local in _GENERIC_EMAIL_LOCALS
+
+
+def _sanitize_dm_for_output(
+    lead: Lead,
+) -> tuple[str | None, str | None, str | None, str | None]:
+    """Apply the round-4 DM quality gates at render time. The Apollo
+    module enforces these on fresh lookups, but rows that were
+    Apollo-enriched under prior versions still carry bad data
+    (Paces 'Paces Paces' + intercom@, Athos VP Analytical Chemistry).
+    Cleaning at the render layer means we don't need to re-burn
+    Apollo credits to fix the dashboard.
+
+    Returns (dm_name, dm_title, dm_email, dm_linkedin_url) with any
+    failing fields nulled. If the picked title doesn't actually
+    describe an operator role, the entire DM block is suppressed —
+    a VP Analytical Chemistry isn't the fractional-CFO buyer."""
+    name = lead.dm_name
+    title = lead.dm_title
+    email = lead.dm_email
+    linkedin = lead.dm_linkedin_url
+
+    if title and not _OPERATOR_TITLE_RE.search(title):
+        # Title says non-operator (VP of X, Director of X, ...). Drop
+        # the whole panel; the lead falls back to the cold badge.
+        return None, None, None, None
+
+    if _is_doubled_dm_name(name):
+        name = None
+    if _is_generic_email_local(email):
+        email = None
+
+    # If nothing actionable is left, suppress the panel entirely.
+    if not name and not email and not linkedin:
+        return None, None, None, None
+    return name, title, email, linkedin
+
+
 def _lead_to_json(lead: Lead, *, now: datetime) -> dict[str, Any]:
     city, state = _city_state(lead)
+    dm_name, dm_title, dm_email, dm_linkedin = _sanitize_dm_for_output(lead)
     # Per req #10: drop scoring signals where the payload's own date
     # (posting date for jobs, filing date for Form D) is > 30 days
     # old. captured_at reflects when the pipeline observed the signal,
@@ -682,7 +756,7 @@ def _lead_to_json(lead: Lead, *, now: datetime) -> dict[str, Any]:
         fresh_sigs, key=lambda s: _signal_age_days(s, now)
     )[:SIGNAL_LIMIT_IN_JSON]
     top_sig = relevant[0] if relevant else None
-    cleaned_dm = _clean_dm_name(lead.dm_name)
+    cleaned_dm = _clean_dm_name(dm_name)
     return {
         "name": lead.name,
         "domain": lead.domain,
@@ -692,11 +766,11 @@ def _lead_to_json(lead: Lead, *, now: datetime) -> dict[str, Any]:
         "city": city,
         "state": state,
         "dm_name": cleaned_dm,
-        "dm_title": lead.dm_title,
-        "dm_email": lead.dm_email,
-        "dm_linkedin_url": lead.dm_linkedin_url,
+        "dm_title": dm_title,
+        "dm_email": dm_email,
+        "dm_linkedin_url": dm_linkedin,
         "contact_strength": _contact_strength(
-            lead.name, cleaned_dm, lead.dm_email, lead.dm_linkedin_url
+            lead.name, cleaned_dm, dm_email, dm_linkedin
         ),
         "score": lead.score,
         # Insight intentionally null — see _regen_copy. Field kept in

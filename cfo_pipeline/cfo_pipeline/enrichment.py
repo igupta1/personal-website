@@ -576,27 +576,37 @@ _INDUSTRY_PROMPT = """\
 Classify the company "{name}" into exactly one of these industry tags:
 {tags}
 
-Recent signals about this company: {signals}
+What the company actually does (from web lookup): {value_prop}
 
-Pick the single best-fitting tag.
+Recent signals about this company (these describe the LEAD's hiring /
+filing activity — NOT what they sell): {signals}
+
+Pick the single best-fitting tag based on the value_prop above.
+The signals are about who they're hiring or what they filed, not
+what they make — do not classify a supplement brand as fintech just
+because the signal is "job_posted_finance_lead".
 
 Rules:
 - Only use "fintech" for companies whose core product IS financial
   technology: payments, banking software, lending platforms,
   brokerage / trading tech, financial data services. A company
   whose name contains a financial-sounding word is NOT fintech.
+  "Suprannaturals" / "Capital Tea" / "Naturals Co" are NOT fintech.
 - Use "real_estate" for property management, REITs, real-estate
-  platforms, and farmland investment vehicles.
-- Use "ecommerce_retail" for DTC brands, supplement / apparel
-  brands, online retailers.
+  platforms, farmland investment vehicles.
+- Use "ecommerce_retail" for DTC brands (supplements, apparel,
+  beauty, food, beverage), online retailers, marketplaces.
 - Use "manufacturing" for hardware, semiconductors, industrial
   equipment, consumer-goods producers.
 - Use "logistics_transport" for trucking, fleet operators, freight,
-  delivery, including auto dealerships.
-- Use "unknown" when you cannot confidently identify what the
-  company does from name + signals. Do NOT guess "fintech" or
-  "other" as a soft default. UNKNOWN is the correct answer when
-  you're not sure.
+  delivery, auto dealerships.
+- Use "healthcare" for clinical, diagnostic, biotech, pharma,
+  health-services companies.
+- Use "software_saas" for B2B / B2C software products, dev tools,
+  AI infrastructure, AI agents, GPU compute, developer platforms.
+- Use "unknown" when value_prop is "unknown" or doesn't give you
+  enough to confidently pick. Do NOT guess "fintech" or "other" as
+  a soft default. UNKNOWN is the correct answer when you're not sure.
 """
 
 
@@ -604,11 +614,12 @@ class _IndustryOut(BaseModel):
     industry: Industry
 
 
-def classify_industry(lead: Lead) -> Industry:
+def classify_industry(lead: Lead, *, value_prop: str | None = None) -> Industry:
     tags = ", ".join(t.value for t in Industry)
     prompt = _INDUSTRY_PROMPT.format(
         name=lead.name,
         tags=tags,
+        value_prop=value_prop or lead.value_prop or "unknown",
         signals=_summarize_signals(lead),
     )
     out = llm.call_openai(prompt, response_model=_IndustryOut)
@@ -729,7 +740,10 @@ def enrich(conn: sqlite3.Connection, lead: Lead, *, force: bool = False) -> bool
             ),
         )
 
-    industry = classify_industry(lead)
+    # Pass the freshly-fetched value_prop into industry classification
+    # so SUPRANATURALS-style supplements brands don't get tagged
+    # 'fintech' because the only signal is a finance-lead hire.
+    industry = classify_industry(lead, value_prop=lookup.value_prop)
 
     updates: dict[str, object] = {
         "industry": industry.value,
