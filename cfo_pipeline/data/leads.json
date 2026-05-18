@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-18T12:22:30.739087",
+  "generated_at": "2026-05-18T15:46:13.641147",
   "leads": [
     {
       "name": "Sequence",
@@ -92,31 +92,121 @@
       ]
     },
     {
-      "name": "Vendelux",
-      "domain": null,
-      "industry": null,
-      "headcount": null,
-      "country": null,
-      "city": null,
-      "state": null,
-      "dm_name": "Alex Reynolds",
-      "dm_title": "Co-founder & CEO",
-      "dm_email": "alex.reynolds@vendelux.com",
-      "dm_linkedin_url": "http://www.linkedin.com/in/alexreynolds1",
+      "name": "Custom Manufacturing and Engineering",
+      "domain": "custom-mfg-eng.com",
+      "industry": "manufacturing",
+      "headcount": 55,
+      "country": "US",
+      "city": "Pinellas Park",
+      "state": "FL",
+      "dm_name": "Fred Munro",
+      "dm_title": "Vice President",
+      "dm_email": null,
+      "dm_linkedin_url": "http://www.linkedin.com/in/fred-munro-107151209",
       "contact_strength": "verified",
-      "score": 59.96897560946052,
+      "score": 59.98263790120419,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
         {
           "type": "job_posted_finance_lead",
-          "captured_at": "2026-05-18T11:50:07.338157",
-          "days_ago": 19,
+          "captured_at": "2026-05-18T15:28:05.380198",
+          "days_ago": 26,
           "payload": {
-            "title": "Head of Finance",
-            "url": "https://www.adzuna.com/land/ad/5713242030?se=yC-fua9S8RGt-ae4MVV1dg&utm_medium=api&utm_source=3aa14b35&v=2C3E514A2F462A1AB0830FA1133178BF94B25BE2",
-            "date_posted": "2026-04-28T22:43:26Z",
+            "title": "Senior Accountant - Manufacturing",
+            "url": "https://www.adzuna.com/land/ad/5706698381?se=_g4eL85S8RGXbrpurwFfpw&utm_medium=api&utm_source=3aa14b35&v=069A40284C1BC42806FDC7335CCE28813FE5B13A",
+            "date_posted": "2026-04-21T21:52:38Z",
             "site": "adzuna"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Allen Pools & Spas",
+      "domain": "allenpools-spas.com",
+      "industry": "other",
+      "headcount": 26,
+      "country": "US",
+      "city": "Williston",
+      "state": "VT",
+      "dm_name": "Ed Allen",
+      "dm_title": "owner",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "partial",
+      "score": 59.98083001269392,
+      "insight": null,
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-05-18T15:26:12.653653",
+          "days_ago": 0,
+          "payload": {
+            "title": "Assistant Controller",
+            "url": "https://www.indeed.com/viewjob?jk=861c267c4d9de81d",
+            "date_posted": "2026-05-18",
+            "site": "indeed"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Sentrimax Centrifuges",
+      "domain": "sentrimax.com",
+      "industry": "manufacturing",
+      "headcount": 34,
+      "country": "US",
+      "city": "Mansfield",
+      "state": "TX",
+      "dm_name": "Tom Maxwell",
+      "dm_title": "Chief Executive Officer & President",
+      "dm_email": "tjmaxwell@sentrimax.com",
+      "dm_linkedin_url": "http://www.linkedin.com/in/tom-maxwell-17432933",
+      "contact_strength": "verified",
+      "score": 59.98082998099899,
+      "insight": null,
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-05-18T15:26:12.653653",
+          "days_ago": 0,
+          "payload": {
+            "title": "Corporate Controller",
+            "url": "https://www.linkedin.com/jobs/view/4415137328",
+            "date_posted": "nan",
+            "site": "linkedin"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Center Industries Corporation",
+      "domain": "centerindustries.com",
+      "industry": "manufacturing",
+      "headcount": 38,
+      "country": "US",
+      "city": "Wichita",
+      "state": "KS",
+      "dm_name": "Peter Jonas",
+      "dm_title": "President",
+      "dm_email": "peterj@centerindustries.com",
+      "dm_linkedin_url": "http://www.linkedin.com/in/peter-jonas-84202134",
+      "contact_strength": "verified",
+      "score": 59.98082988883345,
+      "insight": null,
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-05-18T15:26:12.653653",
+          "days_ago": 1,
+          "payload": {
+            "title": "Finance Manager",
+            "url": "https://www.indeed.com/viewjob?jk=9e359c0d7acce597",
+            "date_posted": "2026-05-17",
+            "site": "indeed"
           }
         }
       ]
@@ -134,7 +224,7 @@
       "dm_email": "jaynicholas@oemlogisticsllc.com",
       "dm_linkedin_url": "http://www.linkedin.com/in/jay-nicholas-9a9676291",
       "contact_strength": "verified",
-      "score": 59.96722271133904,
+      "score": 59.77147951601469,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -154,7 +244,7 @@
     {
       "name": "Monstro",
       "domain": "monstro.com",
-      "industry": "unknown",
+      "industry": "fintech",
       "headcount": 37,
       "country": "US",
       "city": "New York",
@@ -164,7 +254,7 @@
       "dm_email": null,
       "dm_linkedin_url": "http://www.linkedin.com/in/josh-weisman",
       "contact_strength": "verified",
-      "score": 59.96722264063496,
+      "score": 59.771479448258674,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -184,7 +274,7 @@
     {
       "name": "Lumos Solar",
       "domain": "lumossolar.com",
-      "industry": "other",
+      "industry": "manufacturing",
       "headcount": 47,
       "country": "US",
       "city": "Lafayette",
@@ -194,7 +284,7 @@
       "dm_email": "scott@lumossolar.com",
       "dm_linkedin_url": "http://www.linkedin.com/in/scott-franklin-7a653b19",
       "contact_strength": "verified",
-      "score": 59.96722261221861,
+      "score": 59.77147942335565,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -302,66 +392,6 @@
       ]
     },
     {
-      "name": "Arketa",
-      "domain": "arketa.com",
-      "industry": "unknown",
-      "headcount": 55,
-      "country": "US",
-      "city": "New York",
-      "state": "NY",
-      "dm_name": "Rachel Fishman",
-      "dm_title": "Co-Founder & CEO",
-      "dm_email": "rachellfishman@arketa.com",
-      "dm_linkedin_url": "http://www.linkedin.com/in/rachelleafishman",
-      "contact_strength": "verified",
-      "score": 59.14206169219728,
-      "insight": null,
-      "trigger_type": "finance_hire",
-      "signals": [
-        {
-          "type": "job_posted_finance_lead",
-          "captured_at": "2026-05-17T21:24:44.945974",
-          "days_ago": 11,
-          "payload": {
-            "title": "Head of Finance",
-            "url": "https://www.adzuna.com/details/5721287684?utm_medium=api&utm_source=3aa14b35",
-            "date_posted": "2026-05-07T01:38:08Z",
-            "site": "adzuna"
-          }
-        }
-      ]
-    },
-    {
-      "name": "Nectar Allergy & Asthma",
-      "domain": "mynectar.com",
-      "industry": "healthcare",
-      "headcount": 21,
-      "country": "US",
-      "city": "New York City",
-      "state": "NY",
-      "dm_name": "Hersh Patel",
-      "dm_title": "Co-Founder",
-      "dm_email": "hersh@mynectar.com",
-      "dm_linkedin_url": "http://www.linkedin.com/in/hersh-patel-581a488",
-      "contact_strength": "verified",
-      "score": 59.1402802681964,
-      "insight": null,
-      "trigger_type": "finance_hire",
-      "signals": [
-        {
-          "type": "job_posted_finance_lead",
-          "captured_at": "2026-05-17T21:22:52.288111",
-          "days_ago": 11,
-          "payload": {
-            "title": "Sr. Manager/Director of FP&A",
-            "url": "https://www.linkedin.com/jobs/view/4410441025",
-            "date_posted": "2026-05-07",
-            "site": "linkedin"
-          }
-        }
-      ]
-    },
-    {
       "name": "Qualitypartssupply",
       "domain": "qualitypartssupply.com",
       "industry": "ecommerce_retail",
@@ -369,11 +399,11 @@
       "country": "US",
       "city": "Bruceville",
       "state": "TX",
-      "dm_name": "Jerry Hayes",
-      "dm_title": "General Manager",
+      "dm_name": null,
+      "dm_title": null,
       "dm_email": null,
       "dm_linkedin_url": null,
-      "contact_strength": "partial",
+      "contact_strength": "cold",
       "score": 59.04770673389847,
       "insight": null,
       "trigger_type": "finance_hire",
@@ -385,186 +415,6 @@
           "payload": {
             "title": "Experienced Business office Comptroller",
             "url": "https://www.indeed.com/viewjob?jk=9abefcd1f51a5ac5",
-            "date_posted": "2026-05-16",
-            "site": "indeed"
-          }
-        }
-      ]
-    },
-    {
-      "name": "Sniffspot",
-      "domain": "sniffspot.com",
-      "industry": "unknown",
-      "headcount": 26,
-      "country": "US",
-      "city": "Seattle",
-      "state": "WA",
-      "dm_name": "David Adams",
-      "dm_title": "Founder",
-      "dm_email": "david@sniffspot.com",
-      "dm_linkedin_url": "http://www.linkedin.com/in/david-a-85aa1526",
-      "contact_strength": "verified",
-      "score": 59.025164880548886,
-      "insight": null,
-      "trigger_type": "finance_hire",
-      "signals": [
-        {
-          "type": "job_posted_finance_lead",
-          "captured_at": "2026-05-17T19:21:26.403770",
-          "days_ago": 17,
-          "payload": {
-            "title": "Head of Finance",
-            "url": "https://www.adzuna.com/details/5715365934?utm_medium=api&utm_source=3aa14b35",
-            "date_posted": "2026-05-01T01:13:24Z",
-            "site": "adzuna"
-          }
-        }
-      ]
-    },
-    {
-      "name": "Hauler Hero",
-      "domain": "haulerhero.com",
-      "industry": "logistics_transport",
-      "headcount": 51,
-      "country": "US",
-      "city": "San Diego",
-      "state": "CA",
-      "dm_name": "Ben Sikma",
-      "dm_title": "President",
-      "dm_email": "ben@haulerhero.com",
-      "dm_linkedin_url": "http://www.linkedin.com/in/ben-sikma-9912662",
-      "contact_strength": "verified",
-      "score": 59.0251648694209,
-      "insight": null,
-      "trigger_type": "finance_hire",
-      "signals": [
-        {
-          "type": "job_posted_finance_lead",
-          "captured_at": "2026-05-17T19:21:26.403770",
-          "days_ago": 11,
-          "payload": {
-            "title": "Head of Finance",
-            "url": "https://www.adzuna.com/details/5721371003?utm_medium=api&utm_source=3aa14b35",
-            "date_posted": "2026-05-07T03:33:09Z",
-            "site": "adzuna"
-          }
-        }
-      ]
-    },
-    {
-      "name": "Aurelius Systems",
-      "domain": "aureliussystems.com",
-      "industry": "unknown",
-      "headcount": 22,
-      "country": "US",
-      "city": "San Francisco",
-      "state": "CA",
-      "dm_name": "Michael Laframboise",
-      "dm_title": "CEO",
-      "dm_email": "michael@aureliussystems.us",
-      "dm_linkedin_url": "http://www.linkedin.com/in/michael-laframboise",
-      "contact_strength": "verified",
-      "score": 59.025164846533535,
-      "insight": null,
-      "trigger_type": "finance_hire",
-      "signals": [
-        {
-          "type": "job_posted_finance_lead",
-          "captured_at": "2026-05-17T19:21:26.403770",
-          "days_ago": 11,
-          "payload": {
-            "title": "Head of Finance",
-            "url": "https://www.adzuna.com/details/5721324411?utm_medium=api&utm_source=3aa14b35",
-            "date_posted": "2026-05-07T02:27:29Z",
-            "site": "adzuna"
-          }
-        }
-      ]
-    },
-    {
-      "name": "Hyperbolic Labs",
-      "domain": "hyperbolic.xyz",
-      "industry": "unknown",
-      "headcount": 38,
-      "country": "US",
-      "city": "San Francisco",
-      "state": "CA",
-      "dm_name": "Jasper Zhang",
-      "dm_title": "CEO &amp; Cofounder",
-      "dm_email": "jasper@hyperbolic.ai",
-      "dm_linkedin_url": "http://www.linkedin.com/in/yuezhang95",
-      "contact_strength": "verified",
-      "score": 59.0251646639082,
-      "insight": null,
-      "trigger_type": "finance_hire",
-      "signals": [
-        {
-          "type": "job_posted_finance_lead",
-          "captured_at": "2026-05-17T19:21:26.403770",
-          "days_ago": 19,
-          "payload": {
-            "title": "Head of Finance",
-            "url": "https://www.adzuna.com/details/5713586936?utm_medium=api&utm_source=3aa14b35",
-            "date_posted": "2026-04-29T05:29:47Z",
-            "site": "adzuna"
-          }
-        }
-      ]
-    },
-    {
-      "name": "Brooklyn Waldorf School",
-      "domain": "brooklynwaldorf.org",
-      "industry": "education",
-      "headcount": 49,
-      "country": "US",
-      "city": "Brooklyn",
-      "state": "NY",
-      "dm_name": "Yoni Binus",
-      "dm_title": "Head of School",
-      "dm_email": null,
-      "dm_linkedin_url": null,
-      "contact_strength": "partial",
-      "score": 59.02516461510288,
-      "insight": null,
-      "trigger_type": "finance_hire",
-      "signals": [
-        {
-          "type": "job_posted_finance_lead",
-          "captured_at": "2026-05-17T19:21:26.403770",
-          "days_ago": 24,
-          "payload": {
-            "title": "Head of Finance & Operations",
-            "url": "https://www.adzuna.com/details/5708795140?utm_medium=api&utm_source=3aa14b35",
-            "date_posted": "2026-04-23T19:49:54Z",
-            "site": "adzuna"
-          }
-        }
-      ]
-    },
-    {
-      "name": "Hadley Designs",
-      "domain": "hadleydesigns.com",
-      "industry": "unknown",
-      "headcount": 14,
-      "country": "US",
-      "city": "Bedford",
-      "state": "TX",
-      "dm_name": "Joshua Hadley",
-      "dm_title": "Chief Executive Officer",
-      "dm_email": "josh@hadleydesigns.com",
-      "dm_linkedin_url": "http://www.linkedin.com/in/joshhadley",
-      "contact_strength": "verified",
-      "score": 59.02498938428463,
-      "insight": null,
-      "trigger_type": "finance_hire",
-      "signals": [
-        {
-          "type": "job_posted_finance_lead",
-          "captured_at": "2026-05-17T19:21:15.282300",
-          "days_ago": 2,
-          "payload": {
-            "title": "Head of Finance",
-            "url": "https://www.indeed.com/viewjob?jk=01d39a8bb5cf0303",
             "date_posted": "2026-05-16",
             "site": "indeed"
           }
@@ -602,126 +452,6 @@
       ]
     },
     {
-      "name": "Goodwood Barbecue Co",
-      "domain": "goodwoodbbq.com",
-      "industry": "hospitality_food",
-      "headcount": 34,
-      "country": "US",
-      "city": "Meridian",
-      "state": "ID",
-      "dm_name": "Steve Cooper",
-      "dm_title": "Restaurateur",
-      "dm_email": null,
-      "dm_linkedin_url": null,
-      "contact_strength": "partial",
-      "score": 59.023291431224195,
-      "insight": null,
-      "trigger_type": "finance_hire",
-      "signals": [
-        {
-          "type": "job_posted_finance_lead",
-          "captured_at": "2026-05-17T19:19:27.688108",
-          "days_ago": 3,
-          "payload": {
-            "title": "Assistant Controller/Senior Financial Accountant",
-            "url": "https://www.linkedin.com/jobs/view/4408688378",
-            "date_posted": "2026-05-15",
-            "site": "linkedin"
-          }
-        }
-      ]
-    },
-    {
-      "name": "Paces",
-      "domain": "paces.com",
-      "industry": "unknown",
-      "headcount": 74,
-      "country": "US",
-      "city": "Brooklyn",
-      "state": "NY",
-      "dm_name": "Paces Paces",
-      "dm_title": "Owner/CEO",
-      "dm_email": "intercom@paces.com",
-      "dm_linkedin_url": "http://www.linkedin.com/in/paces-house-paces-97813375",
-      "contact_strength": "verified",
-      "score": 59.02329140368131,
-      "insight": null,
-      "trigger_type": "finance_hire",
-      "signals": [
-        {
-          "type": "job_posted_finance_lead",
-          "captured_at": "2026-05-17T19:19:27.688108",
-          "days_ago": 2,
-          "payload": {
-            "title": "Head of Finance",
-            "url": "https://www.linkedin.com/jobs/view/4415143875",
-            "date_posted": "2026-05-16",
-            "site": "linkedin"
-          }
-        }
-      ]
-    },
-    {
-      "name": "E2B",
-      "domain": "e2b.dev",
-      "industry": "unknown",
-      "headcount": 28,
-      "country": "US",
-      "city": "San Francisco",
-      "state": "CA",
-      "dm_name": "Vasek Mlejnsky",
-      "dm_title": "Co-Founder & CEO",
-      "dm_email": "vasek@e2b.dev",
-      "dm_linkedin_url": "http://www.linkedin.com/in/mlejva",
-      "contact_strength": "verified",
-      "score": 59.023291374654754,
-      "insight": null,
-      "trigger_type": "finance_hire",
-      "signals": [
-        {
-          "type": "job_posted_finance_lead",
-          "captured_at": "2026-05-17T19:19:27.688108",
-          "days_ago": 17,
-          "payload": {
-            "title": "Head of Finance",
-            "url": "https://www.linkedin.com/jobs/view/4407215801",
-            "date_posted": "2026-05-01",
-            "site": "linkedin"
-          }
-        }
-      ]
-    },
-    {
-      "name": "Saint Rocco's Treats",
-      "domain": "saintroccostreats.shop",
-      "industry": "hospitality_food",
-      "headcount": 19,
-      "country": "US",
-      "city": "Pipersville",
-      "state": "PA",
-      "dm_name": "Kolby Rush",
-      "dm_title": "Co-Founder",
-      "dm_email": "kolby.rush@saintroccostreats.shop",
-      "dm_linkedin_url": "http://www.linkedin.com/in/kolby-rush-28498a158",
-      "contact_strength": "verified",
-      "score": 59.023291142379115,
-      "insight": null,
-      "trigger_type": "finance_hire",
-      "signals": [
-        {
-          "type": "job_posted_finance_lead",
-          "captured_at": "2026-05-17T19:19:27.688108",
-          "days_ago": 4,
-          "payload": {
-            "title": "Senior Accounting Manager",
-            "url": "https://www.linkedin.com/jobs/view/4414681779",
-            "date_posted": "2026-05-14",
-            "site": "linkedin"
-          }
-        }
-      ]
-    },
-    {
       "name": "Coveleigh Club",
       "domain": "coveleighclub.com",
       "industry": "hospitality_food",
@@ -752,9 +482,369 @@
       ]
     },
     {
+      "name": "Arketa",
+      "domain": "arketa.com",
+      "industry": "software_saas",
+      "headcount": 55,
+      "country": "US",
+      "city": "New York",
+      "state": "NY",
+      "dm_name": "Rachel Fishman",
+      "dm_title": "Co-Founder & CEO",
+      "dm_email": "rachellfishman@arketa.com",
+      "dm_linkedin_url": "http://www.linkedin.com/in/rachelleafishman",
+      "contact_strength": "verified",
+      "score": 58.9490123758563,
+      "insight": null,
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-05-17T21:24:44.945974",
+          "days_ago": 11,
+          "payload": {
+            "title": "Head of Finance",
+            "url": "https://www.adzuna.com/details/5721287684?utm_medium=api&utm_source=3aa14b35",
+            "date_posted": "2026-05-07T01:38:08Z",
+            "site": "adzuna"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Nectar Allergy & Asthma",
+      "domain": "mynectar.com",
+      "industry": "healthcare",
+      "headcount": 21,
+      "country": "US",
+      "city": "New York City",
+      "state": "NY",
+      "dm_name": "Hersh Patel",
+      "dm_title": "Co-Founder",
+      "dm_email": "hersh@mynectar.com",
+      "dm_linkedin_url": "http://www.linkedin.com/in/hersh-patel-581a488",
+      "contact_strength": "verified",
+      "score": 58.94723655195079,
+      "insight": null,
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-05-17T21:22:52.288111",
+          "days_ago": 11,
+          "payload": {
+            "title": "Sr. Manager/Director of FP&A",
+            "url": "https://www.linkedin.com/jobs/view/4410441025",
+            "date_posted": "2026-05-07",
+            "site": "linkedin"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Sniffspot",
+      "domain": "sniffspot.com",
+      "industry": "ecommerce_retail",
+      "headcount": 26,
+      "country": "US",
+      "city": "Seattle",
+      "state": "WA",
+      "dm_name": "David Adams",
+      "dm_title": "Founder",
+      "dm_email": "david@sniffspot.com",
+      "dm_linkedin_url": "http://www.linkedin.com/in/david-a-85aa1526",
+      "contact_strength": "verified",
+      "score": 58.83249695567248,
+      "insight": null,
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-05-17T19:21:26.403770",
+          "days_ago": 17,
+          "payload": {
+            "title": "Head of Finance",
+            "url": "https://www.adzuna.com/details/5715365934?utm_medium=api&utm_source=3aa14b35",
+            "date_posted": "2026-05-01T01:13:24Z",
+            "site": "adzuna"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Hauler Hero",
+      "domain": "haulerhero.com",
+      "industry": "software_saas",
+      "headcount": 51,
+      "country": "US",
+      "city": "San Diego",
+      "state": "CA",
+      "dm_name": "Ben Sikma",
+      "dm_title": "President",
+      "dm_email": "ben@haulerhero.com",
+      "dm_linkedin_url": "http://www.linkedin.com/in/ben-sikma-9912662",
+      "contact_strength": "verified",
+      "score": 58.83249694360538,
+      "insight": null,
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-05-17T19:21:26.403770",
+          "days_ago": 11,
+          "payload": {
+            "title": "Head of Finance",
+            "url": "https://www.adzuna.com/details/5721371003?utm_medium=api&utm_source=3aa14b35",
+            "date_posted": "2026-05-07T03:33:09Z",
+            "site": "adzuna"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Aurelius Systems",
+      "domain": "aureliussystems.com",
+      "industry": "software_saas",
+      "headcount": 22,
+      "country": "US",
+      "city": "San Francisco",
+      "state": "CA",
+      "dm_name": "Michael Laframboise",
+      "dm_title": "CEO",
+      "dm_email": "michael@aureliussystems.us",
+      "dm_linkedin_url": "http://www.linkedin.com/in/michael-laframboise",
+      "contact_strength": "verified",
+      "score": 58.8324969318372,
+      "insight": null,
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-05-17T19:21:26.403770",
+          "days_ago": 11,
+          "payload": {
+            "title": "Head of Finance",
+            "url": "https://www.adzuna.com/details/5721324411?utm_medium=api&utm_source=3aa14b35",
+            "date_posted": "2026-05-07T02:27:29Z",
+            "site": "adzuna"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Hyperbolic Labs",
+      "domain": "hyperbolic.xyz",
+      "industry": "software_saas",
+      "headcount": 38,
+      "country": "US",
+      "city": "San Francisco",
+      "state": "CA",
+      "dm_name": "Jasper Zhang",
+      "dm_title": "CEO &amp; Cofounder",
+      "dm_email": "jasper@hyperbolic.ai",
+      "dm_linkedin_url": "http://www.linkedin.com/in/yuezhang95",
+      "contact_strength": "verified",
+      "score": 58.83249691767762,
+      "insight": null,
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-05-17T19:21:26.403770",
+          "days_ago": 19,
+          "payload": {
+            "title": "Head of Finance",
+            "url": "https://www.adzuna.com/details/5713586936?utm_medium=api&utm_source=3aa14b35",
+            "date_posted": "2026-04-29T05:29:47Z",
+            "site": "adzuna"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Brooklyn Waldorf School",
+      "domain": "brooklynwaldorf.org",
+      "industry": "education",
+      "headcount": 49,
+      "country": "US",
+      "city": "BROOKLYN",
+      "state": "NY",
+      "dm_name": null,
+      "dm_title": null,
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "cold",
+      "score": 58.83249689110481,
+      "insight": null,
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-05-17T19:21:26.403770",
+          "days_ago": 24,
+          "payload": {
+            "title": "Head of Finance & Operations",
+            "url": "https://www.adzuna.com/details/5708795140?utm_medium=api&utm_source=3aa14b35",
+            "date_posted": "2026-04-23T19:49:54Z",
+            "site": "adzuna"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Hadley Designs",
+      "domain": "hadleydesigns.com",
+      "industry": "ecommerce_retail",
+      "headcount": 14,
+      "country": "US",
+      "city": "Bedford",
+      "state": "TX",
+      "dm_name": "Joshua Hadley",
+      "dm_title": "Chief Executive Officer",
+      "dm_email": "josh@hadleydesigns.com",
+      "dm_linkedin_url": "http://www.linkedin.com/in/joshhadley",
+      "contact_strength": "verified",
+      "score": 58.83232199677962,
+      "insight": null,
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-05-17T19:21:15.282300",
+          "days_ago": 2,
+          "payload": {
+            "title": "Head of Finance",
+            "url": "https://www.indeed.com/viewjob?jk=01d39a8bb5cf0303",
+            "date_posted": "2026-05-16",
+            "site": "indeed"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Goodwood Barbecue Co",
+      "domain": "goodwoodbbq.com",
+      "industry": "hospitality_food",
+      "headcount": 34,
+      "country": "US",
+      "city": "Meridian",
+      "state": "ID",
+      "dm_name": null,
+      "dm_title": null,
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "cold",
+      "score": 58.83062938778263,
+      "insight": null,
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-05-17T19:19:27.688108",
+          "days_ago": 3,
+          "payload": {
+            "title": "Assistant Controller/Senior Financial Accountant",
+            "url": "https://www.linkedin.com/jobs/view/4408688378",
+            "date_posted": "2026-05-15",
+            "site": "linkedin"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Paces",
+      "domain": "paces.com",
+      "industry": "software_saas",
+      "headcount": 74,
+      "country": "US",
+      "city": "Brooklyn",
+      "state": "NY",
+      "dm_name": null,
+      "dm_title": "Owner/CEO",
+      "dm_email": null,
+      "dm_linkedin_url": "http://www.linkedin.com/in/paces-house-paces-97813375",
+      "contact_strength": "cold",
+      "score": 58.83062936111627,
+      "insight": null,
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-05-17T19:19:27.688108",
+          "days_ago": 2,
+          "payload": {
+            "title": "Head of Finance",
+            "url": "https://www.linkedin.com/jobs/view/4415143875",
+            "date_posted": "2026-05-16",
+            "site": "linkedin"
+          }
+        }
+      ]
+    },
+    {
+      "name": "E2B",
+      "domain": "e2b.dev",
+      "industry": "software_saas",
+      "headcount": 28,
+      "country": "US",
+      "city": "San Francisco",
+      "state": "CA",
+      "dm_name": "Vasek Mlejnsky",
+      "dm_title": "Co-Founder & CEO",
+      "dm_email": "vasek@e2b.dev",
+      "dm_linkedin_url": "http://www.linkedin.com/in/mlejva",
+      "contact_strength": "verified",
+      "score": 58.83062933685697,
+      "insight": null,
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-05-17T19:19:27.688108",
+          "days_ago": 17,
+          "payload": {
+            "title": "Head of Finance",
+            "url": "https://www.linkedin.com/jobs/view/4407215801",
+            "date_posted": "2026-05-01",
+            "site": "linkedin"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Saint Rocco's Treats",
+      "domain": "saintroccostreats.shop",
+      "industry": "ecommerce_retail",
+      "headcount": 19,
+      "country": "US",
+      "city": "Pipersville",
+      "state": "PA",
+      "dm_name": "Kolby Rush",
+      "dm_title": "Co-Founder",
+      "dm_email": "kolby.rush@saintroccostreats.shop",
+      "dm_linkedin_url": "http://www.linkedin.com/in/kolby-rush-28498a158",
+      "contact_strength": "verified",
+      "score": 58.83062929903637,
+      "insight": null,
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-05-17T19:19:27.688108",
+          "days_ago": 4,
+          "payload": {
+            "title": "Senior Accounting Manager",
+            "url": "https://www.linkedin.com/jobs/view/4414681779",
+            "date_posted": "2026-05-14",
+            "site": "linkedin"
+          }
+        }
+      ]
+    },
+    {
       "name": "Prism Layer AI, Inc.",
       "domain": "prismlayer.ai",
-      "industry": "unknown",
+      "industry": "software_saas",
       "headcount": 4,
       "country": "US",
       "city": "Washington",
@@ -764,7 +854,7 @@
       "dm_email": "simone@prismlayer.ai",
       "dm_linkedin_url": "http://www.linkedin.com/in/simone-garreau-b3571b10",
       "contact_strength": "verified",
-      "score": 48.774517445582816,
+      "score": 48.61530949587501,
       "insight": null,
       "trigger_type": "form_d",
       "signals": [
@@ -790,6 +880,38 @@
             "link": "https://www.sec.gov/Archives/edgar/data/2133683/000213368326000001/0002133683-26-000001-index.htm",
             "biz_state": "DE",
             "biz_location": "Newark, DE"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Shape Memory Medical Inc.",
+      "domain": "shapemem.com",
+      "industry": "healthcare",
+      "headcount": 50,
+      "country": "US",
+      "city": "San Jose",
+      "state": "CA",
+      "dm_name": "Edward Ruppel",
+      "dm_title": "President & CEO",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "partial",
+      "score": 24.9928919420596,
+      "insight": null,
+      "trigger_type": "form_d",
+      "signals": [
+        {
+          "type": "funding_raised",
+          "captured_at": "2026-05-18T15:28:24.256870",
+          "days_ago": 0,
+          "payload": {
+            "title": "D - Shape Memory Medical Inc.",
+            "filing_type": "Form D",
+            "filed_on": "2026-05-18",
+            "link": "https://www.sec.gov/Archives/edgar/data/1630786/000163078626000001/0001630786-26-000001-index.htm",
+            "biz_state": "CA",
+            "biz_location": "San Jose, CA"
           }
         }
       ]
@@ -923,36 +1045,6 @@
       ]
     },
     {
-      "name": "Nectar Social",
-      "domain": "nectarsocial.com",
-      "industry": "unknown",
-      "headcount": 65,
-      "country": "US",
-      "city": "Palo Alto",
-      "state": "CA",
-      "dm_name": "Misbah Uraizee",
-      "dm_title": "Co-Founder & CEO",
-      "dm_email": "misbah@nectarsocial.com",
-      "dm_linkedin_url": "http://www.linkedin.com/in/misbahuraizee",
-      "contact_strength": "verified",
-      "score": 24.671825745978047,
-      "insight": null,
-      "trigger_type": "funding_event",
-      "signals": [
-        {
-          "type": "funding_raised",
-          "captured_at": "2026-05-17T22:38:48.545706",
-          "days_ago": 0,
-          "payload": {
-            "feed_title": "Marketing operating system Nectar Social raises $30M Series A led by Menlo",
-            "feed_url": "https://techcrunch.com/category/startups/feed/",
-            "link": "https://techcrunch.com/2026/05/16/marketing-operating-system-nectar-social-raises-30m-series-a-in-round-led-by-menlo/",
-            "published": "Sat, 16 May 2026 19:26:14 +0000"
-          }
-        }
-      ]
-    },
-    {
       "name": "Trellis Bioscience, Inc.",
       "domain": "trellisbio.com",
       "industry": "healthcare",
@@ -992,11 +1084,11 @@
       "country": "US",
       "city": "Los Angeles",
       "state": "CA",
-      "dm_name": "Phithi Nguyen",
-      "dm_title": "VP, Analytical Chemistry",
-      "dm_email": "pnguyen@athostx.com",
-      "dm_linkedin_url": "http://www.linkedin.com/in/phithi-nguyen-611a315a",
-      "contact_strength": "verified",
+      "dm_name": null,
+      "dm_title": null,
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "cold",
       "score": 24.5939678435162,
       "insight": null,
       "trigger_type": "form_d",
@@ -1113,9 +1205,39 @@
       ]
     },
     {
+      "name": "Nectar Social",
+      "domain": "nectarsocial.com",
+      "industry": "software_saas",
+      "headcount": 65,
+      "country": "US",
+      "city": "Palo Alto",
+      "state": "CA",
+      "dm_name": "Misbah Uraizee",
+      "dm_title": "Co-Founder & CEO",
+      "dm_email": "misbah@nectarsocial.com",
+      "dm_linkedin_url": "http://www.linkedin.com/in/misbahuraizee",
+      "contact_strength": "verified",
+      "score": 24.591292904187917,
+      "insight": null,
+      "trigger_type": "funding_event",
+      "signals": [
+        {
+          "type": "funding_raised",
+          "captured_at": "2026-05-17T22:38:48.545706",
+          "days_ago": 0,
+          "payload": {
+            "feed_title": "Marketing operating system Nectar Social raises $30M Series A led by Menlo",
+            "feed_url": "https://techcrunch.com/category/startups/feed/",
+            "link": "https://techcrunch.com/2026/05/16/marketing-operating-system-nectar-social-raises-30m-series-a-in-round-led-by-menlo/",
+            "published": "Sat, 16 May 2026 19:26:14 +0000"
+          }
+        }
+      ]
+    },
+    {
       "name": "Tugboat Solutions Inc.",
       "domain": "tugboat.claims",
-      "industry": "unknown",
+      "industry": "software_saas",
       "headcount": 11,
       "country": "US",
       "city": "Grand Forks",
@@ -1125,7 +1247,7 @@
       "dm_email": "aaron@tugboat.claims",
       "dm_linkedin_url": "http://www.linkedin.com/in/aaron-mooney-321408141",
       "contact_strength": "verified",
-      "score": 24.581795490412954,
+      "score": 24.501556521334095,
       "insight": null,
       "trigger_type": "form_d",
       "signals": [
