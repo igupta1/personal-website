@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-17T23:24:23.299349",
+  "generated_at": "2026-05-18T12:22:30.739087",
   "leads": [
     {
       "name": "Sequence",
@@ -21,71 +21,11 @@
         {
           "type": "job_posted_finance_lead",
           "captured_at": "2026-05-17T21:22:52.288111",
-          "days_ago": 10,
+          "days_ago": 11,
           "payload": {
             "title": "Head of Finance / Expert in Residence [XIR]",
             "url": "https://www.linkedin.com/jobs/view/4411415106",
             "date_posted": "2026-05-07",
-            "site": "linkedin"
-          }
-        }
-      ]
-    },
-    {
-      "name": "Foundation Health",
-      "domain": "foundationhealth.io",
-      "industry": "healthcare",
-      "headcount": 70,
-      "country": "US",
-      "city": "Menlo Park",
-      "state": "CA",
-      "dm_name": "Hai-Gwo Hwu",
-      "dm_title": "President",
-      "dm_email": null,
-      "dm_linkedin_url": "http://www.linkedin.com/in/hai-gwo-hwu-20a0656a",
-      "contact_strength": "verified",
-      "score": 59.99474402051258,
-      "insight": null,
-      "trigger_type": "finance_hire",
-      "signals": [
-        {
-          "type": "job_posted_finance_lead",
-          "captured_at": "2026-05-17T23:18:51.415472",
-          "days_ago": 24,
-          "payload": {
-            "title": "Head of Finance",
-            "url": "https://www.adzuna.com/details/5708009105?utm_medium=api&utm_source=3aa14b35",
-            "date_posted": "2026-04-23T02:02:45Z",
-            "site": "adzuna"
-          }
-        }
-      ]
-    },
-    {
-      "name": "Barti",
-      "domain": "barti.com",
-      "industry": "unknown",
-      "headcount": 44,
-      "country": "US",
-      "city": "San Francisco",
-      "state": "CA",
-      "dm_name": "Colton Calandrella",
-      "dm_title": "Co-Founder & CEO",
-      "dm_email": "colton@barti.com",
-      "dm_linkedin_url": "http://www.linkedin.com/in/coltoncalandrella",
-      "contact_strength": "verified",
-      "score": 59.99384704736236,
-      "insight": null,
-      "trigger_type": "finance_hire",
-      "signals": [
-        {
-          "type": "job_posted_finance_lead",
-          "captured_at": "2026-05-17T22:36:32.000708",
-          "days_ago": 2,
-          "payload": {
-            "title": "Director of Finance",
-            "url": "https://www.linkedin.com/jobs/view/4415534935",
-            "date_posted": "2026-05-15",
             "site": "linkedin"
           }
         }
@@ -111,7 +51,7 @@
         {
           "type": "job_posted_finance_lead",
           "captured_at": "2026-05-17T21:22:52.288111",
-          "days_ago": 16,
+          "days_ago": 17,
           "payload": {
             "title": "Accounting Manager",
             "url": "https://www.linkedin.com/jobs/view/4409132193",
@@ -141,7 +81,7 @@
         {
           "type": "job_posted_finance_lead",
           "captured_at": "2026-05-17T23:16:50.991154",
-          "days_ago": 12,
+          "days_ago": 13,
           "payload": {
             "title": "VP of Finance",
             "url": "https://www.linkedin.com/jobs/view/4410756964",
@@ -152,9 +92,159 @@
       ]
     },
     {
+      "name": "Vendelux",
+      "domain": null,
+      "industry": null,
+      "headcount": null,
+      "country": null,
+      "city": null,
+      "state": null,
+      "dm_name": "Alex Reynolds",
+      "dm_title": "Co-founder & CEO",
+      "dm_email": "alex.reynolds@vendelux.com",
+      "dm_linkedin_url": "http://www.linkedin.com/in/alexreynolds1",
+      "contact_strength": "verified",
+      "score": 59.96897560946052,
+      "insight": null,
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-05-18T11:50:07.338157",
+          "days_ago": 19,
+          "payload": {
+            "title": "Head of Finance",
+            "url": "https://www.adzuna.com/land/ad/5713242030?se=yC-fua9S8RGt-ae4MVV1dg&utm_medium=api&utm_source=3aa14b35&v=2C3E514A2F462A1AB0830FA1133178BF94B25BE2",
+            "date_posted": "2026-04-28T22:43:26Z",
+            "site": "adzuna"
+          }
+        }
+      ]
+    },
+    {
+      "name": "OEM LOGISTICS LLC",
+      "domain": "oemlogisticsllc.com",
+      "industry": "logistics_transport",
+      "headcount": 37,
+      "country": "US",
+      "city": "Scottsdale",
+      "state": "AZ",
+      "dm_name": "Jay Nicholas",
+      "dm_title": "President",
+      "dm_email": "jaynicholas@oemlogisticsllc.com",
+      "dm_linkedin_url": "http://www.linkedin.com/in/jay-nicholas-9a9676291",
+      "contact_strength": "verified",
+      "score": 59.96722271133904,
+      "insight": null,
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-05-18T11:48:18.004748",
+          "days_ago": 1,
+          "payload": {
+            "title": "Senior Controller",
+            "url": "https://www.linkedin.com/jobs/view/4412229943",
+            "date_posted": "2026-05-17",
+            "site": "linkedin"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Monstro",
+      "domain": "monstro.com",
+      "industry": "unknown",
+      "headcount": 37,
+      "country": "US",
+      "city": "New York",
+      "state": "NY",
+      "dm_name": "Josh Weisman",
+      "dm_title": "Chief Operating Officer",
+      "dm_email": null,
+      "dm_linkedin_url": "http://www.linkedin.com/in/josh-weisman",
+      "contact_strength": "verified",
+      "score": 59.96722264063496,
+      "insight": null,
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-05-18T11:48:18.004748",
+          "days_ago": 13,
+          "payload": {
+            "title": "SVP - Head of Finance & Accounting",
+            "url": "https://www.linkedin.com/jobs/view/4414202227",
+            "date_posted": "2026-05-05",
+            "site": "linkedin"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Lumos Solar",
+      "domain": "lumossolar.com",
+      "industry": "other",
+      "headcount": 47,
+      "country": "US",
+      "city": "Lafayette",
+      "state": "CO",
+      "dm_name": "Scott Franklin",
+      "dm_title": "Founder / President / CEO",
+      "dm_email": "scott@lumossolar.com",
+      "dm_linkedin_url": "http://www.linkedin.com/in/scott-franklin-7a653b19",
+      "contact_strength": "verified",
+      "score": 59.96722261221861,
+      "insight": null,
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-05-18T11:48:18.004748",
+          "days_ago": 0,
+          "payload": {
+            "title": "Controller",
+            "url": "https://www.indeed.com/viewjob?jk=bb7750e68dc85b96",
+            "date_posted": "2026-05-18",
+            "site": "indeed"
+          }
+        }
+      ]
+    },
+    {
+      "name": "San Francisco Compute Company",
+      "domain": "sfcompute.com",
+      "industry": "unknown",
+      "headcount": 44,
+      "country": "US",
+      "city": "San Francisco",
+      "state": "CA",
+      "dm_name": "Ethan Anderson",
+      "dm_title": "Co-Founder, Chief Operating Officer",
+      "dm_email": "ethan@sfcompute.com",
+      "dm_linkedin_url": "http://www.linkedin.com/in/ethan-anderson-yc",
+      "contact_strength": "verified",
+      "score": 59.76473936327146,
+      "insight": null,
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-05-17T19:19:27.688108",
+          "days_ago": 6,
+          "payload": {
+            "title": "Senior Accounting Manager",
+            "url": "https://www.linkedin.com/jobs/view/4413809409",
+            "date_posted": "2026-05-12",
+            "site": "linkedin"
+          }
+        }
+      ]
+    },
+    {
       "name": "Rebellion Fabrication",
       "domain": "rebellionfabrication.com",
-      "industry": "unknown",
+      "industry": "manufacturing",
       "headcount": 19,
       "country": "US",
       "city": "Wahoo",
@@ -164,17 +254,47 @@
       "dm_email": "rgredys@rebellionfabrication.com",
       "dm_linkedin_url": "http://www.linkedin.com/in/ross-gredys-94093019",
       "contact_strength": "verified",
-      "score": 59.99281211490156,
+      "score": 59.24853450933821,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
         {
           "type": "job_posted_finance_lead",
           "captured_at": "2026-05-17T23:16:50.991154",
-          "days_ago": 2,
+          "days_ago": 3,
           "payload": {
             "title": "Director of Finance",
             "url": "https://www.linkedin.com/jobs/view/4414708870",
+            "date_posted": "2026-05-15",
+            "site": "linkedin"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Barti",
+      "domain": "barti.com",
+      "industry": "unknown",
+      "headcount": 44,
+      "country": "US",
+      "city": "San Francisco",
+      "state": "CA",
+      "dm_name": "Colton Calandrella",
+      "dm_title": "Co-Founder & CEO",
+      "dm_email": "colton@barti.com",
+      "dm_linkedin_url": "http://www.linkedin.com/in/coltoncalandrella",
+      "contact_strength": "verified",
+      "score": 59.210220118932156,
+      "insight": null,
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-05-17T22:36:32.000708",
+          "days_ago": 3,
+          "payload": {
+            "title": "Director of Finance",
+            "url": "https://www.linkedin.com/jobs/view/4415534935",
             "date_posted": "2026-05-15",
             "site": "linkedin"
           }
@@ -194,14 +314,14 @@
       "dm_email": "rachellfishman@arketa.com",
       "dm_linkedin_url": "http://www.linkedin.com/in/rachelleafishman",
       "contact_strength": "verified",
-      "score": 59.88500201502589,
+      "score": 59.14206169219728,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
         {
           "type": "job_posted_finance_lead",
           "captured_at": "2026-05-17T21:24:44.945974",
-          "days_ago": 10,
+          "days_ago": 11,
           "payload": {
             "title": "Head of Finance",
             "url": "https://www.adzuna.com/details/5721287684?utm_medium=api&utm_source=3aa14b35",
@@ -224,19 +344,49 @@
       "dm_email": "hersh@mynectar.com",
       "dm_linkedin_url": "http://www.linkedin.com/in/hersh-patel-581a488",
       "contact_strength": "verified",
-      "score": 59.88319800118977,
+      "score": 59.1402802681964,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
         {
           "type": "job_posted_finance_lead",
           "captured_at": "2026-05-17T21:22:52.288111",
-          "days_ago": 10,
+          "days_ago": 11,
           "payload": {
             "title": "Sr. Manager/Director of FP&A",
             "url": "https://www.linkedin.com/jobs/view/4410441025",
             "date_posted": "2026-05-07",
             "site": "linkedin"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Qualitypartssupply",
+      "domain": "qualitypartssupply.com",
+      "industry": "ecommerce_retail",
+      "headcount": 13,
+      "country": "US",
+      "city": "Bruceville",
+      "state": "TX",
+      "dm_name": "Jerry Hayes",
+      "dm_title": "General Manager",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "partial",
+      "score": 59.04770673389847,
+      "insight": null,
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-05-17T02:16:18.957614",
+          "days_ago": 2,
+          "payload": {
+            "title": "Experienced Business office Comptroller",
+            "url": "https://www.indeed.com/viewjob?jk=9abefcd1f51a5ac5",
+            "date_posted": "2026-05-16",
+            "site": "indeed"
           }
         }
       ]
@@ -254,14 +404,14 @@
       "dm_email": "david@sniffspot.com",
       "dm_linkedin_url": "http://www.linkedin.com/in/david-a-85aa1526",
       "contact_strength": "verified",
-      "score": 59.76663658484414,
+      "score": 59.025164880548886,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
         {
           "type": "job_posted_finance_lead",
           "captured_at": "2026-05-17T19:21:26.403770",
-          "days_ago": 16,
+          "days_ago": 17,
           "payload": {
             "title": "Head of Finance",
             "url": "https://www.adzuna.com/details/5715365934?utm_medium=api&utm_source=3aa14b35",
@@ -284,14 +434,14 @@
       "dm_email": "ben@haulerhero.com",
       "dm_linkedin_url": "http://www.linkedin.com/in/ben-sikma-9912662",
       "contact_strength": "verified",
-      "score": 59.76663657170639,
+      "score": 59.0251648694209,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
         {
           "type": "job_posted_finance_lead",
           "captured_at": "2026-05-17T19:21:26.403770",
-          "days_ago": 10,
+          "days_ago": 11,
           "payload": {
             "title": "Head of Finance",
             "url": "https://www.adzuna.com/details/5721371003?utm_medium=api&utm_source=3aa14b35",
@@ -314,14 +464,14 @@
       "dm_email": "michael@aureliussystems.us",
       "dm_linkedin_url": "http://www.linkedin.com/in/michael-laframboise",
       "contact_strength": "verified",
-      "score": 59.7666365586006,
+      "score": 59.025164846533535,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
         {
           "type": "job_posted_finance_lead",
           "captured_at": "2026-05-17T19:21:26.403770",
-          "days_ago": 10,
+          "days_ago": 11,
           "payload": {
             "title": "Head of Finance",
             "url": "https://www.adzuna.com/details/5721324411?utm_medium=api&utm_source=3aa14b35",
@@ -344,14 +494,14 @@
       "dm_email": "jasper@hyperbolic.ai",
       "dm_linkedin_url": "http://www.linkedin.com/in/yuezhang95",
       "contact_strength": "verified",
-      "score": 59.76663654429612,
+      "score": 59.0251646639082,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
         {
           "type": "job_posted_finance_lead",
           "captured_at": "2026-05-17T19:21:26.403770",
-          "days_ago": 18,
+          "days_ago": 19,
           "payload": {
             "title": "Head of Finance",
             "url": "https://www.adzuna.com/details/5713586936?utm_medium=api&utm_source=3aa14b35",
@@ -374,7 +524,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 59.76663650336451,
+      "score": 59.02516461510288,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -404,14 +554,14 @@
       "dm_email": "josh@hadleydesigns.com",
       "dm_linkedin_url": "http://www.linkedin.com/in/joshhadley",
       "contact_strength": "verified",
-      "score": 59.7664588495125,
+      "score": 59.02498938428463,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
         {
           "type": "job_posted_finance_lead",
           "captured_at": "2026-05-17T19:21:15.282300",
-          "days_ago": 1,
+          "days_ago": 2,
           "payload": {
             "title": "Head of Finance",
             "url": "https://www.indeed.com/viewjob?jk=01d39a8bb5cf0303",
@@ -434,7 +584,7 @@
       "dm_email": "renee@azaleawang.com",
       "dm_linkedin_url": "http://www.linkedin.com/in/renee-cox-7974253b3",
       "contact_strength": "verified",
-      "score": 59.76473939108042,
+      "score": 59.02329144565066,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -464,48 +614,18 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 59.76473937655263,
+      "score": 59.023291431224195,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
         {
           "type": "job_posted_finance_lead",
           "captured_at": "2026-05-17T19:19:27.688108",
-          "days_ago": 2,
+          "days_ago": 3,
           "payload": {
             "title": "Assistant Controller/Senior Financial Accountant",
             "url": "https://www.linkedin.com/jobs/view/4408688378",
             "date_posted": "2026-05-15",
-            "site": "linkedin"
-          }
-        }
-      ]
-    },
-    {
-      "name": "San Francisco Compute Company",
-      "domain": "sfcompute.com",
-      "industry": "unknown",
-      "headcount": 44,
-      "country": "US",
-      "city": "San Francisco",
-      "state": "CA",
-      "dm_name": "Ethan Anderson",
-      "dm_title": "Co-Founder, Chief Operating Officer",
-      "dm_email": "ethan@sfcompute.com",
-      "dm_linkedin_url": "http://www.linkedin.com/in/ethan-anderson-yc",
-      "contact_strength": "verified",
-      "score": 59.76473936327146,
-      "insight": null,
-      "trigger_type": "finance_hire",
-      "signals": [
-        {
-          "type": "job_posted_finance_lead",
-          "captured_at": "2026-05-17T19:19:27.688108",
-          "days_ago": 5,
-          "payload": {
-            "title": "Senior Accounting Manager",
-            "url": "https://www.linkedin.com/jobs/view/4413809409",
-            "date_posted": "2026-05-12",
             "site": "linkedin"
           }
         }
@@ -524,14 +644,14 @@
       "dm_email": "intercom@paces.com",
       "dm_linkedin_url": "http://www.linkedin.com/in/paces-house-paces-97813375",
       "contact_strength": "verified",
-      "score": 59.764739329916694,
+      "score": 59.02329140368131,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
         {
           "type": "job_posted_finance_lead",
           "captured_at": "2026-05-17T19:19:27.688108",
-          "days_ago": 1,
+          "days_ago": 2,
           "payload": {
             "title": "Head of Finance",
             "url": "https://www.linkedin.com/jobs/view/4415143875",
@@ -554,14 +674,14 @@
       "dm_email": "vasek@e2b.dev",
       "dm_linkedin_url": "http://www.linkedin.com/in/mlejva",
       "contact_strength": "verified",
-      "score": 59.764739304505056,
+      "score": 59.023291374654754,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
         {
           "type": "job_posted_finance_lead",
           "captured_at": "2026-05-17T19:19:27.688108",
-          "days_ago": 16,
+          "days_ago": 17,
           "payload": {
             "title": "Head of Finance",
             "url": "https://www.linkedin.com/jobs/view/4407215801",
@@ -584,14 +704,14 @@
       "dm_email": "kolby.rush@saintroccostreats.shop",
       "dm_linkedin_url": "http://www.linkedin.com/in/kolby-rush-28498a158",
       "contact_strength": "verified",
-      "score": 59.7647392648693,
+      "score": 59.023291142379115,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
         {
           "type": "job_posted_finance_lead",
           "captured_at": "2026-05-17T19:19:27.688108",
-          "days_ago": 3,
+          "days_ago": 4,
           "payload": {
             "title": "Senior Accounting Manager",
             "url": "https://www.linkedin.com/jobs/view/4414681779",
@@ -614,48 +734,18 @@
       "dm_email": null,
       "dm_linkedin_url": "http://www.linkedin.com/in/mauro-piccininni-8452027",
       "contact_strength": "verified",
-      "score": 59.73519541095928,
+      "score": 58.9941139923662,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
         {
           "type": "job_posted_finance_lead",
           "captured_at": "2026-05-17T18:48:38.677561",
-          "days_ago": 0,
+          "days_ago": 1,
           "payload": {
             "title": "Financial Controller",
             "url": "https://www.indeed.com/viewjob?jk=55fae937c012b643",
             "date_posted": "2026-05-17",
-            "site": "indeed"
-          }
-        }
-      ]
-    },
-    {
-      "name": "Qualitypartssupply",
-      "domain": "qualitypartssupply.com",
-      "industry": "ecommerce_retail",
-      "headcount": 13,
-      "country": "US",
-      "city": "Bruceville",
-      "state": "TX",
-      "dm_name": "Jerry Hayes",
-      "dm_title": "General Manager",
-      "dm_email": null,
-      "dm_linkedin_url": null,
-      "contact_strength": "partial",
-      "score": 59.04770673389847,
-      "insight": null,
-      "trigger_type": "finance_hire",
-      "signals": [
-        {
-          "type": "job_posted_finance_lead",
-          "captured_at": "2026-05-17T02:16:18.957614",
-          "days_ago": 1,
-          "payload": {
-            "title": "Experienced Business office Comptroller",
-            "url": "https://www.indeed.com/viewjob?jk=9abefcd1f51a5ac5",
-            "date_posted": "2026-05-16",
             "site": "indeed"
           }
         }
@@ -674,14 +764,14 @@
       "dm_email": "simone@prismlayer.ai",
       "dm_linkedin_url": "http://www.linkedin.com/in/simone-garreau-b3571b10",
       "contact_strength": "verified",
-      "score": 49.38722111299772,
+      "score": 48.774517445582816,
       "insight": null,
       "trigger_type": "form_d",
       "signals": [
         {
           "type": "funding_raised",
           "captured_at": "2026-05-17T02:16:37.280618",
-          "days_ago": 0,
+          "days_ago": 1,
           "payload": {
             "title": "D - Prism Layer AI, Inc. (0002133683) (Filer)",
             "filing_type": "Form D",
@@ -692,7 +782,7 @@
         {
           "type": "funding_raised",
           "captured_at": "2026-05-17T18:50:57.861397",
-          "days_ago": 2,
+          "days_ago": 3,
           "payload": {
             "title": "D - Prism Layer AI, Inc.",
             "filing_type": "Form D",
@@ -700,6 +790,70 @@
             "link": "https://www.sec.gov/Archives/edgar/data/2133683/000213368326000001/0002133683-26-000001-index.htm",
             "biz_state": "DE",
             "biz_location": "Newark, DE"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Estately Operations LLC",
+      "domain": "estately.com",
+      "industry": "real_estate",
+      "headcount": 20,
+      "country": "US",
+      "city": "Seattle",
+      "state": "WA",
+      "dm_name": "Galen Ward",
+      "dm_title": "CEO",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "partial",
+      "score": 24.987204687935936,
+      "insight": null,
+      "trigger_type": "form_d",
+      "signals": [
+        {
+          "type": "funding_raised",
+          "captured_at": "2026-05-18T11:50:27.041613",
+          "days_ago": 3,
+          "payload": {
+            "title": "D - Estately Operations LLC",
+            "filing_type": "Form D",
+            "filed_on": "2026-05-15",
+            "link": "https://www.sec.gov/Archives/edgar/data/2131672/000090514826002406/0000905148-26-002406-index.htm",
+            "biz_state": "IL",
+            "biz_location": "Chicago, IL"
+          }
+        }
+      ]
+    },
+    {
+      "name": "NovaData Solutions Inc.",
+      "domain": "novadata-solutions.com",
+      "industry": "unknown",
+      "headcount": 10,
+      "country": "US",
+      "city": "Haverford",
+      "state": "PA",
+      "dm_name": "Anthony Troy",
+      "dm_title": "CEO",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "partial",
+      "score": 24.90291634678472,
+      "insight": null,
+      "trigger_type": "form_d",
+      "signals": [
+        {
+          "type": "funding_raised",
+          "captured_at": "2026-05-17T19:21:49.108796",
+          "days_ago": 4,
+          "payload": {
+            "title": "D - NovaData Solutions Inc.",
+            "filing_type": "Form D",
+            "filed_on": "2026-05-14",
+            "link": "https://www.sec.gov/Archives/edgar/data/1942528/000194252826000003/0001942528-26-000003-index.htm",
+            "biz_state": "PA",
+            "biz_location": "Haverford, PA"
           }
         }
       ]
@@ -717,14 +871,14 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 24.99793134414837,
+      "score": 24.687804052503935,
       "insight": null,
       "trigger_type": "form_d",
       "signals": [
         {
           "type": "funding_raised",
           "captured_at": "2026-05-17T23:19:09.573726",
-          "days_ago": 2,
+          "days_ago": 3,
           "payload": {
             "title": "D - KeyRooted Inc.",
             "filing_type": "Form D",
@@ -749,14 +903,14 @@
       "dm_email": "scritchfield@movatechnologies.com",
       "dm_linkedin_url": "http://www.linkedin.com/in/steven-critchfield-390a95275",
       "contact_strength": "verified",
-      "score": 24.98179382717208,
+      "score": 24.671866743238404,
       "insight": null,
       "trigger_type": "form_d",
       "signals": [
         {
           "type": "funding_raised",
           "captured_at": "2026-05-17T22:38:54.764914",
-          "days_ago": 2,
+          "days_ago": 3,
           "payload": {
             "title": "D - MOVA Technologies, Inc.",
             "filing_type": "Form D",
@@ -781,7 +935,7 @@
       "dm_email": "misbah@nectarsocial.com",
       "dm_linkedin_url": "http://www.linkedin.com/in/misbahuraizee",
       "contact_strength": "verified",
-      "score": 24.981752300028013,
+      "score": 24.671825745978047,
       "insight": null,
       "trigger_type": "funding_event",
       "signals": [
@@ -811,14 +965,14 @@
       "dm_email": "sryser@trellisbio.com",
       "dm_linkedin_url": "http://www.linkedin.com/in/stefanryser",
       "contact_strength": "verified",
-      "score": 24.902916380421782,
+      "score": 24.593967860320095,
       "insight": null,
       "trigger_type": "form_d",
       "signals": [
         {
           "type": "funding_raised",
           "captured_at": "2026-05-17T19:21:49.108796",
-          "days_ago": 2,
+          "days_ago": 3,
           "payload": {
             "title": "D - Trellis Bioscience, Inc.",
             "filing_type": "Form D",
@@ -843,14 +997,14 @@
       "dm_email": "pnguyen@athostx.com",
       "dm_linkedin_url": "http://www.linkedin.com/in/phithi-nguyen-611a315a",
       "contact_strength": "verified",
-      "score": 24.902916368441367,
+      "score": 24.5939678435162,
       "insight": null,
       "trigger_type": "form_d",
       "signals": [
         {
           "type": "funding_raised",
           "captured_at": "2026-05-17T19:21:49.108796",
-          "days_ago": 2,
+          "days_ago": 3,
           "payload": {
             "title": "D - Athos Therapeutics, Inc.",
             "filing_type": "Form D",
@@ -875,14 +1029,14 @@
       "dm_email": "hkm@medzero.com",
       "dm_linkedin_url": "http://www.linkedin.com/in/hmichalski",
       "contact_strength": "verified",
-      "score": 24.90291636246115,
+      "score": 24.593967837958747,
       "insight": null,
       "trigger_type": "form_d",
       "signals": [
         {
           "type": "funding_raised",
           "captured_at": "2026-05-17T19:21:49.108796",
-          "days_ago": 2,
+          "days_ago": 3,
           "payload": {
             "title": "D - MedZero, Inc.",
             "filing_type": "Form D",
@@ -907,14 +1061,14 @@
       "dm_email": "anu@ananya.health",
       "dm_linkedin_url": "http://www.linkedin.com/in/anuparvatiyar",
       "contact_strength": "verified",
-      "score": 24.902916357180178,
+      "score": 24.59396783243418,
       "insight": null,
       "trigger_type": "form_d",
       "signals": [
         {
           "type": "funding_raised",
           "captured_at": "2026-05-17T19:21:49.108796",
-          "days_ago": 2,
+          "days_ago": 3,
           "payload": {
             "title": "D - Ananya Health, Inc.",
             "filing_type": "Form D",
@@ -939,14 +1093,14 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 24.902916351672783,
+      "score": 24.59396782164154,
       "insight": null,
       "trigger_type": "form_d",
       "signals": [
         {
           "type": "funding_raised",
           "captured_at": "2026-05-17T19:21:49.108796",
-          "days_ago": 3,
+          "days_ago": 4,
           "payload": {
             "title": "D - Oakridge Dairy LLC",
             "filing_type": "Form D",
@@ -954,38 +1108,6 @@
             "link": "https://www.sec.gov/Archives/edgar/data/1673234/000167323426000001/0001673234-26-000001-index.htm",
             "biz_state": "CT",
             "biz_location": "Ellington, CT"
-          }
-        }
-      ]
-    },
-    {
-      "name": "NovaData Solutions Inc.",
-      "domain": "novadata-solutions.com",
-      "industry": "unknown",
-      "headcount": 10,
-      "country": "US",
-      "city": "Haverford",
-      "state": "PA",
-      "dm_name": "Anthony Troy",
-      "dm_title": "CEO",
-      "dm_email": null,
-      "dm_linkedin_url": null,
-      "contact_strength": "partial",
-      "score": 24.90291634678472,
-      "insight": null,
-      "trigger_type": "form_d",
-      "signals": [
-        {
-          "type": "funding_raised",
-          "captured_at": "2026-05-17T19:21:49.108796",
-          "days_ago": 3,
-          "payload": {
-            "title": "D - NovaData Solutions Inc.",
-            "filing_type": "Form D",
-            "filed_on": "2026-05-14",
-            "link": "https://www.sec.gov/Archives/edgar/data/1942528/000194252826000003/0001942528-26-000003-index.htm",
-            "biz_state": "PA",
-            "biz_location": "Haverford, PA"
           }
         }
       ]
@@ -1003,14 +1125,14 @@
       "dm_email": "aaron@tugboat.claims",
       "dm_linkedin_url": "http://www.linkedin.com/in/aaron-mooney-321408141",
       "contact_strength": "verified",
-      "score": 24.890591092898475,
+      "score": 24.581795490412954,
       "insight": null,
       "trigger_type": "form_d",
       "signals": [
         {
           "type": "funding_raised",
           "captured_at": "2026-05-17T18:50:57.861397",
-          "days_ago": 2,
+          "days_ago": 3,
           "payload": {
             "title": "D - Tugboat Solutions Inc.",
             "filing_type": "Form D",
