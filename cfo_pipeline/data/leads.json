@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-25T12:14:01.521280",
+  "generated_at": "2026-05-28T11:54:06.127266",
   "leads": [
     {
       "name": "Sequence",
@@ -21,7 +21,7 @@
         {
           "type": "job_posted_finance_lead",
           "captured_at": "2026-05-17T21:22:52.288111",
-          "days_ago": 18,
+          "days_ago": 21,
           "payload": {
             "title": "Head of Finance / Expert in Residence [XIR]",
             "url": "https://www.linkedin.com/jobs/view/4411415106",
@@ -51,7 +51,7 @@
         {
           "type": "job_posted_finance_lead",
           "captured_at": "2026-05-17T21:22:52.288111",
-          "days_ago": 24,
+          "days_ago": 27,
           "payload": {
             "title": "Accounting Manager",
             "url": "https://www.linkedin.com/jobs/view/4409132193",
@@ -81,11 +81,191 @@
         {
           "type": "job_posted_finance_lead",
           "captured_at": "2026-05-17T23:16:50.991154",
-          "days_ago": 20,
+          "days_ago": 23,
           "payload": {
             "title": "VP of Finance",
             "url": "https://www.linkedin.com/jobs/view/4410756964",
             "date_posted": "2026-05-05",
+            "site": "linkedin"
+          }
+        }
+      ]
+    },
+    {
+      "name": "My Guys Moving & Storage",
+      "domain": "myguysmovingrva.com",
+      "industry": "logistics_transport",
+      "headcount": 8,
+      "country": "US",
+      "city": "Richmond",
+      "state": "VA",
+      "dm_name": "Patrick Burks",
+      "dm_title": "CEO",
+      "dm_email": "pcburks@myguysmoving.com",
+      "dm_linkedin_url": "http://www.linkedin.com/in/pat-burks-70967187",
+      "contact_strength": "verified",
+      "score": 59.988423757769255,
+      "insight": null,
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-05-28T11:41:58.900842",
+          "days_ago": 1,
+          "payload": {
+            "title": "Assistant Controller",
+            "url": "https://www.indeed.com/viewjob?jk=828df20533cba5f9",
+            "date_posted": "2026-05-27",
+            "site": "indeed"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Coastal Cares",
+      "domain": "yourcoastalcares.com",
+      "industry": "construction",
+      "headcount": 15,
+      "country": "US",
+      "city": "Boca Raton",
+      "state": "FL",
+      "dm_name": "Morgan Mills",
+      "dm_title": "Managing Partner",
+      "dm_email": "morgan@yourcoastalcares.com",
+      "dm_linkedin_url": "http://www.linkedin.com/in/morgan-mills-518037270",
+      "contact_strength": "verified",
+      "score": 59.98842372143418,
+      "insight": null,
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-05-28T11:41:58.900842",
+          "days_ago": 1,
+          "payload": {
+            "title": "Office Manager/Controller",
+            "url": "https://www.indeed.com/viewjob?jk=ec1415b9c440254a",
+            "date_posted": "2026-05-27",
+            "site": "indeed"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Aspen Corporation",
+      "domain": "aspen-golf.com",
+      "industry": "construction",
+      "headcount": 42,
+      "country": "US",
+      "city": "Daniels",
+      "state": "WV",
+      "dm_name": "Donnie Adkins",
+      "dm_title": "President",
+      "dm_email": "dadkins@aspen-golf.com",
+      "dm_linkedin_url": "http://www.linkedin.com/in/donnie-adkins-ba796313",
+      "contact_strength": "verified",
+      "score": 59.98842370343508,
+      "insight": null,
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-05-28T11:41:58.900842",
+          "days_ago": 1,
+          "payload": {
+            "title": "Staff Accountant - Assistant Controller",
+            "url": "https://www.indeed.com/viewjob?jk=4ac3a9a8b6994c53",
+            "date_posted": "2026-05-27",
+            "site": "indeed"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Prelude",
+      "domain": "preludesecurity.com",
+      "industry": "software_saas",
+      "headcount": 38,
+      "country": "US",
+      "city": "Silver Spring",
+      "state": "MD",
+      "dm_name": "Spencer Thompson",
+      "dm_title": "CEO",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "partial",
+      "score": 59.98842366519101,
+      "insight": null,
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-05-28T11:41:58.900842",
+          "days_ago": 7,
+          "payload": {
+            "title": "Vice President Finance",
+            "url": "https://www.linkedin.com/jobs/view/4416581688",
+            "date_posted": "2026-05-21",
+            "site": "linkedin"
+          }
+        }
+      ]
+    },
+    {
+      "name": "LearnLux Financial Wellbeing",
+      "domain": "learnlux.com",
+      "industry": "education",
+      "headcount": 65,
+      "country": "US",
+      "city": "Boston",
+      "state": "MA",
+      "dm_name": "Michael Liebman",
+      "dm_title": "Co-Founder and COO",
+      "dm_email": "michael@learnlux.com",
+      "dm_linkedin_url": "http://www.linkedin.com/in/michaeljliebman",
+      "contact_strength": "verified",
+      "score": 59.98842365075323,
+      "insight": null,
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-05-28T11:41:58.900842",
+          "days_ago": 7,
+          "payload": {
+            "title": "Vice President Finance",
+            "url": "https://www.linkedin.com/jobs/view/4417751945",
+            "date_posted": "2026-05-21",
+            "site": "linkedin"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Alec's Ice Cream",
+      "domain": "alecsicecream.com",
+      "industry": "ecommerce_retail",
+      "headcount": 14,
+      "country": "US",
+      "city": "Petaluma",
+      "state": "CA",
+      "dm_name": "Alec Jaffe",
+      "dm_title": "Founder",
+      "dm_email": "alec@alecsicecream.com",
+      "dm_linkedin_url": "http://www.linkedin.com/in/alec-jaffe",
+      "contact_strength": "verified",
+      "score": 59.98842363848111,
+      "insight": null,
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-05-28T11:41:58.900842",
+          "days_ago": 0,
+          "payload": {
+            "title": "Vice President Finance",
+            "url": "https://www.linkedin.com/jobs/view/4418871331",
+            "date_posted": "nan",
             "site": "linkedin"
           }
         }
@@ -111,7 +291,7 @@
         {
           "type": "job_posted_finance_lead",
           "captured_at": "2026-05-20T10:57:52.143298",
-          "days_ago": 15,
+          "days_ago": 18,
           "payload": {
             "title": "Controller - Onsite Only",
             "url": "https://www.adzuna.com/details/5725158224?utm_medium=api&utm_source=3aa14b35",
@@ -141,7 +321,7 @@
         {
           "type": "job_posted_finance_lead",
           "captured_at": "2026-05-20T10:55:54.251402",
-          "days_ago": 5,
+          "days_ago": 8,
           "payload": {
             "title": "Plant Controller",
             "url": "https://www.indeed.com/viewjob?jk=b29838608f73725c",
@@ -171,7 +351,7 @@
         {
           "type": "job_posted_finance_lead",
           "captured_at": "2026-05-20T10:55:54.251402",
-          "days_ago": 6,
+          "days_ago": 9,
           "payload": {
             "title": "Assistant Accounting Manager",
             "url": "https://www.indeed.com/viewjob?jk=2374c78267ef6fb5",
@@ -201,7 +381,7 @@
         {
           "type": "job_posted_finance_lead",
           "captured_at": "2026-05-20T10:55:54.251402",
-          "days_ago": 6,
+          "days_ago": 9,
           "payload": {
             "title": "Vice President of Finance",
             "url": "https://www.linkedin.com/jobs/view/4415736577",
@@ -231,7 +411,7 @@
         {
           "type": "job_posted_finance_lead",
           "captured_at": "2026-05-20T10:55:54.251402",
-          "days_ago": 5,
+          "days_ago": 8,
           "payload": {
             "title": "Vice President Finance",
             "url": "https://www.linkedin.com/jobs/view/4416481803",
@@ -261,7 +441,7 @@
         {
           "type": "job_posted_finance_lead",
           "captured_at": "2026-05-24T10:01:43.686898",
-          "days_ago": 5,
+          "days_ago": 8,
           "payload": {
             "title": "Director of Finance",
             "url": "https://www.adzuna.com/land/ad/5734148040?se=wvnWmFdX8RGvjPD20Sc1wQ&utm_medium=api&utm_source=3aa14b35&v=1F3C4F127F4D0FE693787F2EA626B2D16FC5A8B5",
@@ -291,7 +471,7 @@
         {
           "type": "job_posted_finance_lead",
           "captured_at": "2026-05-25T11:56:02.489778",
-          "days_ago": 1,
+          "days_ago": 4,
           "payload": {
             "title": "Senior Director of Finance and Law Firm Operations",
             "url": "https://www.indeed.com/viewjob?jk=a5b368be3027be2b",
@@ -321,7 +501,7 @@
         {
           "type": "job_posted_finance_lead",
           "captured_at": "2026-05-24T09:59:14.008507",
-          "days_ago": 2,
+          "days_ago": 5,
           "payload": {
             "title": "Accounting Manager",
             "url": "https://www.indeed.com/viewjob?jk=d7e715d9b1875930",
@@ -351,7 +531,7 @@
         {
           "type": "job_posted_finance_lead",
           "captured_at": "2026-05-24T09:59:14.008507",
-          "days_ago": 5,
+          "days_ago": 8,
           "payload": {
             "title": "Senior Director or VP of Finance",
             "url": "https://www.linkedin.com/jobs/view/4416193855",
@@ -381,7 +561,7 @@
         {
           "type": "job_posted_finance_lead",
           "captured_at": "2026-05-24T09:59:14.008507",
-          "days_ago": 3,
+          "days_ago": 6,
           "payload": {
             "title": "FP&A Manager",
             "url": "https://www.indeed.com/viewjob?jk=fbf918ea18062822",
@@ -411,7 +591,7 @@
         {
           "type": "job_posted_finance_lead",
           "captured_at": "2026-05-18T15:26:12.653653",
-          "days_ago": 6,
+          "days_ago": 9,
           "payload": {
             "title": "Corporate Controller",
             "url": "https://www.linkedin.com/jobs/view/4415137328",
@@ -441,7 +621,7 @@
         {
           "type": "job_posted_finance_lead",
           "captured_at": "2026-05-18T15:26:12.653653",
-          "days_ago": 8,
+          "days_ago": 11,
           "payload": {
             "title": "Finance Manager",
             "url": "https://www.indeed.com/viewjob?jk=9e359c0d7acce597",
@@ -471,7 +651,7 @@
         {
           "type": "job_posted_finance_lead",
           "captured_at": "2026-05-23T09:59:24.171324",
-          "days_ago": 3,
+          "days_ago": 6,
           "payload": {
             "title": "Corporate Controller",
             "url": "https://www.adzuna.com/details/5736683251?utm_medium=api&utm_source=3aa14b35",
@@ -501,7 +681,7 @@
         {
           "type": "job_posted_finance_lead",
           "captured_at": "2026-05-23T09:57:29.698121",
-          "days_ago": 4,
+          "days_ago": 7,
           "payload": {
             "title": "Assistant Controller",
             "url": "https://www.indeed.com/viewjob?jk=b52f2664e2ec3fd1",
@@ -531,7 +711,7 @@
         {
           "type": "job_posted_finance_lead",
           "captured_at": "2026-05-22T10:56:53.643582",
-          "days_ago": 4,
+          "days_ago": 7,
           "payload": {
             "title": "Head of Finance",
             "url": "https://www.indeed.com/viewjob?jk=c50cedc9951d8580",
@@ -561,7 +741,7 @@
         {
           "type": "job_posted_finance_lead",
           "captured_at": "2026-05-22T10:54:49.088717",
-          "days_ago": 4,
+          "days_ago": 7,
           "payload": {
             "title": "Assistant Controller",
             "url": "https://www.indeed.com/viewjob?jk=4d4f1d217909da88",
@@ -591,7 +771,7 @@
         {
           "type": "job_posted_finance_lead",
           "captured_at": "2026-05-22T10:54:49.088717",
-          "days_ago": 4,
+          "days_ago": 7,
           "payload": {
             "title": "Sr. Accountant/Controller",
             "url": "https://www.indeed.com/viewjob?jk=57b04c271019f669",
@@ -621,7 +801,7 @@
         {
           "type": "job_posted_finance_lead",
           "captured_at": "2026-05-22T10:54:49.088717",
-          "days_ago": 3,
+          "days_ago": 6,
           "payload": {
             "title": "VP of Finance",
             "url": "https://www.linkedin.com/jobs/view/4416594916",
@@ -651,7 +831,7 @@
         {
           "type": "job_posted_finance_lead",
           "captured_at": "2026-05-19T11:24:33.789191",
-          "days_ago": 7,
+          "days_ago": 10,
           "payload": {
             "title": "Assistant Accounting Manager",
             "url": "https://www.indeed.com/viewjob?jk=d7537ea9036c9cf0",
@@ -681,42 +861,12 @@
         {
           "type": "job_posted_finance_lead",
           "captured_at": "2026-05-19T11:24:33.789191",
-          "days_ago": 7,
+          "days_ago": 10,
           "payload": {
             "title": "Assistant Accounting Manager (Bilingual Chinese Preferred)",
             "url": "https://www.indeed.com/viewjob?jk=acaa463e5ff871f8",
             "date_posted": "2026-05-18",
             "site": "indeed"
-          }
-        }
-      ]
-    },
-    {
-      "name": "Flyer Defense",
-      "domain": "flyerdefense.com",
-      "industry": "manufacturing",
-      "headcount": 64,
-      "country": "US",
-      "city": "Los Angeles",
-      "state": "CA",
-      "dm_name": "Oded Nechushtan",
-      "dm_title": "President",
-      "dm_email": "odedn@flyerdefense.com",
-      "dm_linkedin_url": "http://www.linkedin.com/in/oded-nechushtan-41858690",
-      "contact_strength": "verified",
-      "score": 59.947547494642606,
-      "insight": null,
-      "trigger_type": "finance_hire",
-      "signals": [
-        {
-          "type": "job_posted_finance_lead",
-          "captured_at": "2026-05-21T11:32:54.969897",
-          "days_ago": 30,
-          "payload": {
-            "title": "Senior Accountant",
-            "url": "https://www.adzuna.com/land/ad/5710082446?se=Rg_31QhV8RGz3PRHWpK20Q&utm_medium=api&utm_source=3aa14b35&v=E5F0A415254165E2E82D4767D135C6DF4B09B95E",
-            "date_posted": "2026-04-25T01:57:27Z",
-            "site": "adzuna"
           }
         }
       ]
@@ -741,7 +891,7 @@
         {
           "type": "job_posted_finance_lead",
           "captured_at": "2026-05-21T11:30:54.918904",
-          "days_ago": 5,
+          "days_ago": 8,
           "payload": {
             "title": "Assistant Controller",
             "url": "https://www.indeed.com/viewjob?jk=8c965c8d01e79e9b",
@@ -771,7 +921,7 @@
         {
           "type": "job_posted_finance_lead",
           "captured_at": "2026-05-21T11:30:54.918904",
-          "days_ago": 6,
+          "days_ago": 9,
           "payload": {
             "title": "Accounting Manager",
             "url": "https://www.linkedin.com/jobs/view/4415953290",
@@ -801,7 +951,7 @@
         {
           "type": "job_posted_finance_lead",
           "captured_at": "2026-05-18T11:48:18.004748",
-          "days_ago": 7,
+          "days_ago": 10,
           "payload": {
             "title": "Controller",
             "url": "https://www.indeed.com/viewjob?jk=bb7750e68dc85b96",
@@ -831,7 +981,7 @@
         {
           "type": "job_posted_finance_lead",
           "captured_at": "2026-05-17T19:19:27.688108",
-          "days_ago": 13,
+          "days_ago": 16,
           "payload": {
             "title": "Senior Accounting Manager",
             "url": "https://www.linkedin.com/jobs/view/4413809409",
@@ -861,7 +1011,7 @@
         {
           "type": "job_posted_finance_lead",
           "captured_at": "2026-05-17T23:16:50.991154",
-          "days_ago": 10,
+          "days_ago": 13,
           "payload": {
             "title": "Director of Finance",
             "url": "https://www.linkedin.com/jobs/view/4414708870",
@@ -891,7 +1041,7 @@
         {
           "type": "job_posted_finance_lead",
           "captured_at": "2026-05-17T22:36:32.000708",
-          "days_ago": 10,
+          "days_ago": 13,
           "payload": {
             "title": "Director of Finance",
             "url": "https://www.linkedin.com/jobs/view/4415534935",
@@ -921,7 +1071,7 @@
         {
           "type": "job_posted_finance_lead",
           "captured_at": "2026-05-17T02:16:18.957614",
-          "days_ago": 9,
+          "days_ago": 12,
           "payload": {
             "title": "Experienced Business office Comptroller",
             "url": "https://www.indeed.com/viewjob?jk=9abefcd1f51a5ac5",
@@ -951,7 +1101,7 @@
         {
           "type": "job_posted_finance_lead",
           "captured_at": "2026-05-17T19:19:27.688108",
-          "days_ago": 7,
+          "days_ago": 10,
           "payload": {
             "title": "Assistant Controller",
             "url": "https://www.linkedin.com/jobs/view/4415401354",
@@ -981,7 +1131,7 @@
         {
           "type": "job_posted_finance_lead",
           "captured_at": "2026-05-17T18:48:38.677561",
-          "days_ago": 8,
+          "days_ago": 11,
           "payload": {
             "title": "Financial Controller",
             "url": "https://www.indeed.com/viewjob?jk=55fae937c012b643",
@@ -1011,7 +1161,7 @@
         {
           "type": "job_posted_finance_lead",
           "captured_at": "2026-05-17T21:22:52.288111",
-          "days_ago": 18,
+          "days_ago": 21,
           "payload": {
             "title": "Sr. Manager/Director of FP&A",
             "url": "https://www.linkedin.com/jobs/view/4410441025",
@@ -1041,7 +1191,7 @@
         {
           "type": "job_posted_finance_lead",
           "captured_at": "2026-05-18T15:26:12.653653",
-          "days_ago": 7,
+          "days_ago": 10,
           "payload": {
             "title": "Assistant Controller",
             "url": "https://www.indeed.com/viewjob?jk=861c267c4d9de81d",
@@ -1071,7 +1221,7 @@
         {
           "type": "job_posted_finance_lead",
           "captured_at": "2026-05-22T10:57:06.932344",
-          "days_ago": 3,
+          "days_ago": 6,
           "payload": {
             "title": "Group Controller",
             "url": "https://www.adzuna.com/land/ad/5737230895?se=OpjI-cxV8RGUifme8P4dLA&utm_medium=api&utm_source=3aa14b35&v=E1857EBF1D44B825457FB4DDE273762F69016266",
@@ -1101,42 +1251,12 @@
         {
           "type": "job_posted_finance_lead",
           "captured_at": "2026-05-22T10:54:49.088717",
-          "days_ago": 4,
+          "days_ago": 7,
           "payload": {
             "title": "Assistant Controller",
             "url": "https://www.indeed.com/viewjob?jk=77893b431ffbce9f",
             "date_posted": "2026-05-21",
             "site": "indeed"
-          }
-        }
-      ]
-    },
-    {
-      "name": "Parker Institute for Cancer Immunotherapy",
-      "domain": "parkerici.org",
-      "industry": "healthcare",
-      "headcount": 56,
-      "country": "US",
-      "city": "San Francisco",
-      "state": "CA",
-      "dm_name": "Ira Mellman",
-      "dm_title": "President of Research",
-      "dm_email": null,
-      "dm_linkedin_url": "http://www.linkedin.com/in/ira-mellman-99a525179",
-      "contact_strength": "verified",
-      "score": 58.66280180400961,
-      "insight": null,
-      "trigger_type": "finance_hire",
-      "signals": [
-        {
-          "type": "job_posted_finance_lead",
-          "captured_at": "2026-05-22T10:54:49.088717",
-          "days_ago": 6,
-          "payload": {
-            "title": "Assistant Controller",
-            "url": "https://www.linkedin.com/jobs/view/4416964801",
-            "date_posted": "2026-05-19",
-            "site": "linkedin"
           }
         }
       ]
@@ -1161,7 +1281,7 @@
         {
           "type": "job_posted_finance_lead",
           "captured_at": "2026-05-19T11:26:31.314011",
-          "days_ago": 15,
+          "days_ago": 18,
           "payload": {
             "title": "Director of Finance",
             "url": "https://www.adzuna.com/land/ad/5724915983?se=WmOdmHVT8RG8Dpg80W0a8g&utm_medium=api&utm_source=3aa14b35&v=1579BB45979F8105E8E8FB58D7D65DBBEE708A65",
@@ -1191,7 +1311,7 @@
         {
           "type": "job_posted_finance_lead",
           "captured_at": "2026-05-19T11:24:33.789191",
-          "days_ago": 6,
+          "days_ago": 9,
           "payload": {
             "title": "Director of Finance - Twin Farms",
             "url": "https://www.linkedin.com/jobs/view/4416436215",
@@ -1221,7 +1341,7 @@
         {
           "type": "job_posted_finance_lead",
           "captured_at": "2026-05-24T10:01:30.795017",
-          "days_ago": 2,
+          "days_ago": 5,
           "payload": {
             "title": "Director of Finance & Operations",
             "url": "https://www.indeed.com/viewjob?jk=5f619d5ac46161f6",
@@ -1251,7 +1371,7 @@
         {
           "type": "job_posted_finance_lead",
           "captured_at": "2026-05-24T09:59:14.008507",
-          "days_ago": 2,
+          "days_ago": 5,
           "payload": {
             "title": "Mid-Level to Senior Finance Manager / Controller",
             "url": "https://www.indeed.com/viewjob?jk=f31b7bce3a85b4f9",
@@ -1281,7 +1401,7 @@
         {
           "type": "job_posted_finance_lead",
           "captured_at": "2026-05-17T21:24:44.945974",
-          "days_ago": 18,
+          "days_ago": 21,
           "payload": {
             "title": "Head of Finance",
             "url": "https://www.adzuna.com/details/5721287684?utm_medium=api&utm_source=3aa14b35",
@@ -1311,7 +1431,7 @@
         {
           "type": "job_posted_finance_lead",
           "captured_at": "2026-05-18T11:48:18.004748",
-          "days_ago": 8,
+          "days_ago": 11,
           "payload": {
             "title": "Senior Controller",
             "url": "https://www.linkedin.com/jobs/view/4412229943",
@@ -1341,7 +1461,7 @@
         {
           "type": "job_posted_finance_lead",
           "captured_at": "2026-05-17T19:19:27.688108",
-          "days_ago": 10,
+          "days_ago": 13,
           "payload": {
             "title": "Assistant Controller/Senior Financial Accountant",
             "url": "https://www.linkedin.com/jobs/view/4408688378",
@@ -1371,7 +1491,7 @@
         {
           "type": "job_posted_finance_lead",
           "captured_at": "2026-05-22T10:54:49.088717",
-          "days_ago": 10,
+          "days_ago": 13,
           "payload": {
             "title": "Accounting Manager",
             "url": "https://www.linkedin.com/jobs/view/4393059039",
@@ -1401,7 +1521,7 @@
         {
           "type": "job_posted_finance_lead",
           "captured_at": "2026-05-22T10:54:49.088717",
-          "days_ago": 17,
+          "days_ago": 20,
           "payload": {
             "title": "Senior Accountant",
             "url": "https://www.linkedin.com/jobs/view/4416941818",
@@ -1431,11 +1551,41 @@
         {
           "type": "job_posted_finance_lead",
           "captured_at": "2026-05-17T19:19:27.688108",
-          "days_ago": 9,
+          "days_ago": 12,
           "payload": {
             "title": "Head of Finance",
             "url": "https://www.linkedin.com/jobs/view/4415143875",
             "date_posted": "2026-05-16",
+            "site": "linkedin"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Parker Institute for Cancer Immunotherapy",
+      "domain": "parkerici.org",
+      "industry": "healthcare",
+      "headcount": 56,
+      "country": "US",
+      "city": "San Francisco",
+      "state": "CA",
+      "dm_name": "Ira Mellman",
+      "dm_title": "President of Research",
+      "dm_email": null,
+      "dm_linkedin_url": "http://www.linkedin.com/in/ira-mellman-99a525179",
+      "contact_strength": "verified",
+      "score": 52.183451658645566,
+      "insight": null,
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-05-22T10:54:49.088717",
+          "days_ago": 9,
+          "payload": {
+            "title": "Assistant Controller",
+            "url": "https://www.linkedin.com/jobs/view/4416964801",
+            "date_posted": "2026-05-19",
             "site": "linkedin"
           }
         }
@@ -1461,162 +1611,12 @@
         {
           "type": "job_posted_finance_lead",
           "captured_at": "2026-05-18T11:48:18.004748",
-          "days_ago": 20,
+          "days_ago": 23,
           "payload": {
             "title": "SVP - Head of Finance & Accounting",
             "url": "https://www.linkedin.com/jobs/view/4414202227",
             "date_posted": "2026-05-05",
             "site": "linkedin"
-          }
-        }
-      ]
-    },
-    {
-      "name": "Sniffspot",
-      "domain": "sniffspot.com",
-      "industry": "ecommerce_retail",
-      "headcount": 26,
-      "country": "US",
-      "city": "Seattle",
-      "state": "WA",
-      "dm_name": "David Adams",
-      "dm_title": "Founder",
-      "dm_email": "david@sniffspot.com",
-      "dm_linkedin_url": "http://www.linkedin.com/in/david-a-85aa1526",
-      "contact_strength": "verified",
-      "score": 50.21751830880624,
-      "insight": null,
-      "trigger_type": "finance_hire",
-      "signals": [
-        {
-          "type": "job_posted_finance_lead",
-          "captured_at": "2026-05-17T19:21:26.403770",
-          "days_ago": 24,
-          "payload": {
-            "title": "Head of Finance",
-            "url": "https://www.adzuna.com/details/5715365934?utm_medium=api&utm_source=3aa14b35",
-            "date_posted": "2026-05-01T01:13:24Z",
-            "site": "adzuna"
-          }
-        }
-      ]
-    },
-    {
-      "name": "Hauler Hero",
-      "domain": "haulerhero.com",
-      "industry": "software_saas",
-      "headcount": 51,
-      "country": "US",
-      "city": "San Diego",
-      "state": "CA",
-      "dm_name": "Ben Sikma",
-      "dm_title": "President",
-      "dm_email": "ben@haulerhero.com",
-      "dm_linkedin_url": "http://www.linkedin.com/in/ben-sikma-9912662",
-      "contact_strength": "verified",
-      "score": 50.2175182847145,
-      "insight": null,
-      "trigger_type": "finance_hire",
-      "signals": [
-        {
-          "type": "job_posted_finance_lead",
-          "captured_at": "2026-05-17T19:21:26.403770",
-          "days_ago": 18,
-          "payload": {
-            "title": "Head of Finance",
-            "url": "https://www.adzuna.com/details/5721371003?utm_medium=api&utm_source=3aa14b35",
-            "date_posted": "2026-05-07T03:33:09Z",
-            "site": "adzuna"
-          }
-        }
-      ]
-    },
-    {
-      "name": "Aurelius Systems",
-      "domain": "aureliussystems.com",
-      "industry": "software_saas",
-      "headcount": 22,
-      "country": "US",
-      "city": "San Francisco",
-      "state": "CA",
-      "dm_name": "Michael Laframboise",
-      "dm_title": "CEO",
-      "dm_email": "michael@aureliussystems.us",
-      "dm_linkedin_url": "http://www.linkedin.com/in/michael-laframboise",
-      "contact_strength": "verified",
-      "score": 50.21751827328637,
-      "insight": null,
-      "trigger_type": "finance_hire",
-      "signals": [
-        {
-          "type": "job_posted_finance_lead",
-          "captured_at": "2026-05-17T19:21:26.403770",
-          "days_ago": 18,
-          "payload": {
-            "title": "Head of Finance",
-            "url": "https://www.adzuna.com/details/5721324411?utm_medium=api&utm_source=3aa14b35",
-            "date_posted": "2026-05-07T02:27:29Z",
-            "site": "adzuna"
-          }
-        }
-      ]
-    },
-    {
-      "name": "Hyperbolic Labs",
-      "domain": "hyperbolic.xyz",
-      "industry": "software_saas",
-      "headcount": 38,
-      "country": "US",
-      "city": "San Francisco",
-      "state": "CA",
-      "dm_name": "Jasper Zhang",
-      "dm_title": "CEO &amp; Cofounder",
-      "dm_email": "jasper@hyperbolic.ai",
-      "dm_linkedin_url": "http://www.linkedin.com/in/yuezhang95",
-      "contact_strength": "verified",
-      "score": 50.217518261938814,
-      "insight": null,
-      "trigger_type": "finance_hire",
-      "signals": [
-        {
-          "type": "job_posted_finance_lead",
-          "captured_at": "2026-05-17T19:21:26.403770",
-          "days_ago": 26,
-          "payload": {
-            "title": "Head of Finance",
-            "url": "https://www.adzuna.com/details/5713586936?utm_medium=api&utm_source=3aa14b35",
-            "date_posted": "2026-04-29T05:29:47Z",
-            "site": "adzuna"
-          }
-        }
-      ]
-    },
-    {
-      "name": "Hadley Designs",
-      "domain": "hadleydesigns.com",
-      "industry": "ecommerce_retail",
-      "headcount": 14,
-      "country": "US",
-      "city": "Bedford",
-      "state": "TX",
-      "dm_name": "Joshua Hadley",
-      "dm_title": "Chief Executive Officer",
-      "dm_email": "josh@hadleydesigns.com",
-      "dm_linkedin_url": "http://www.linkedin.com/in/joshhadley",
-      "contact_strength": "verified",
-      "score": 50.217368946128644,
-      "insight": null,
-      "trigger_type": "finance_hire",
-      "signals": [
-        {
-          "type": "job_posted_finance_lead",
-          "captured_at": "2026-05-17T19:21:15.282300",
-          "days_ago": 9,
-          "payload": {
-            "title": "Head of Finance",
-            "url": "https://www.indeed.com/viewjob?jk=01d39a8bb5cf0303",
-            "date_posted": "2026-05-16",
-            "site": "indeed"
           }
         }
       ]
@@ -1641,12 +1641,162 @@
         {
           "type": "job_posted_finance_lead",
           "captured_at": "2026-05-17T19:19:27.688108",
-          "days_ago": 11,
+          "days_ago": 14,
           "payload": {
             "title": "Senior Accounting Manager",
             "url": "https://www.linkedin.com/jobs/view/4414681779",
             "date_posted": "2026-05-14",
             "site": "linkedin"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Sniffspot",
+      "domain": "sniffspot.com",
+      "industry": "ecommerce_retail",
+      "headcount": 26,
+      "country": "US",
+      "city": "Seattle",
+      "state": "WA",
+      "dm_name": "David Adams",
+      "dm_title": "Founder",
+      "dm_email": "david@sniffspot.com",
+      "dm_linkedin_url": "http://www.linkedin.com/in/david-a-85aa1526",
+      "contact_strength": "verified",
+      "score": 46.869618910717605,
+      "insight": null,
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-05-17T19:21:26.403770",
+          "days_ago": 27,
+          "payload": {
+            "title": "Head of Finance",
+            "url": "https://www.adzuna.com/details/5715365934?utm_medium=api&utm_source=3aa14b35",
+            "date_posted": "2026-05-01T01:13:24Z",
+            "site": "adzuna"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Hauler Hero",
+      "domain": "haulerhero.com",
+      "industry": "software_saas",
+      "headcount": 51,
+      "country": "US",
+      "city": "San Diego",
+      "state": "CA",
+      "dm_name": "Ben Sikma",
+      "dm_title": "President",
+      "dm_email": "ben@haulerhero.com",
+      "dm_linkedin_url": "http://www.linkedin.com/in/ben-sikma-9912662",
+      "contact_strength": "verified",
+      "score": 46.86961889103958,
+      "insight": null,
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-05-17T19:21:26.403770",
+          "days_ago": 21,
+          "payload": {
+            "title": "Head of Finance",
+            "url": "https://www.adzuna.com/details/5721371003?utm_medium=api&utm_source=3aa14b35",
+            "date_posted": "2026-05-07T03:33:09Z",
+            "site": "adzuna"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Aurelius Systems",
+      "domain": "aureliussystems.com",
+      "industry": "software_saas",
+      "headcount": 22,
+      "country": "US",
+      "city": "San Francisco",
+      "state": "CA",
+      "dm_name": "Michael Laframboise",
+      "dm_title": "CEO",
+      "dm_email": "michael@aureliussystems.us",
+      "dm_linkedin_url": "http://www.linkedin.com/in/michael-laframboise",
+      "contact_strength": "verified",
+      "score": 46.86961887984692,
+      "insight": null,
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-05-17T19:21:26.403770",
+          "days_ago": 21,
+          "payload": {
+            "title": "Head of Finance",
+            "url": "https://www.adzuna.com/details/5721324411?utm_medium=api&utm_source=3aa14b35",
+            "date_posted": "2026-05-07T02:27:29Z",
+            "site": "adzuna"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Hyperbolic Labs",
+      "domain": "hyperbolic.xyz",
+      "industry": "software_saas",
+      "headcount": 38,
+      "country": "US",
+      "city": "San Francisco",
+      "state": "CA",
+      "dm_name": "Jasper Zhang",
+      "dm_title": "CEO &amp; Cofounder",
+      "dm_email": "jasper@hyperbolic.ai",
+      "dm_linkedin_url": "http://www.linkedin.com/in/yuezhang95",
+      "contact_strength": "verified",
+      "score": 46.86961886752622,
+      "insight": null,
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-05-17T19:21:26.403770",
+          "days_ago": 29,
+          "payload": {
+            "title": "Head of Finance",
+            "url": "https://www.adzuna.com/details/5713586936?utm_medium=api&utm_source=3aa14b35",
+            "date_posted": "2026-04-29T05:29:47Z",
+            "site": "adzuna"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Hadley Designs",
+      "domain": "hadleydesigns.com",
+      "industry": "ecommerce_retail",
+      "headcount": 14,
+      "country": "US",
+      "city": "Bedford",
+      "state": "TX",
+      "dm_name": "Joshua Hadley",
+      "dm_title": "Chief Executive Officer",
+      "dm_email": "josh@hadleydesigns.com",
+      "dm_linkedin_url": "http://www.linkedin.com/in/joshhadley",
+      "contact_strength": "verified",
+      "score": 46.869479507286364,
+      "insight": null,
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-05-17T19:21:15.282300",
+          "days_ago": 12,
+          "payload": {
+            "title": "Head of Finance",
+            "url": "https://www.indeed.com/viewjob?jk=01d39a8bb5cf0303",
+            "date_posted": "2026-05-16",
+            "site": "indeed"
           }
         }
       ]
@@ -1664,14 +1814,14 @@
       "dm_email": "vasek@e2b.dev",
       "dm_linkedin_url": "http://www.linkedin.com/in/mlejva",
       "contact_strength": "verified",
-      "score": 50.21592403657653,
+      "score": 46.86813098878073,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
         {
           "type": "job_posted_finance_lead",
           "captured_at": "2026-05-17T19:19:27.688108",
-          "days_ago": 24,
+          "days_ago": 27,
           "payload": {
             "title": "Head of Finance",
             "url": "https://www.linkedin.com/jobs/view/4407215801",
@@ -1701,7 +1851,7 @@
         {
           "type": "funding_raised",
           "captured_at": "2026-05-17T02:16:37.280618",
-          "days_ago": 8,
+          "days_ago": 11,
           "payload": {
             "title": "D - Prism Layer AI, Inc. (0002133683) (Filer)",
             "filing_type": "Form D",
@@ -1712,7 +1862,7 @@
         {
           "type": "funding_raised",
           "captured_at": "2026-05-17T18:50:57.861397",
-          "days_ago": 10,
+          "days_ago": 13,
           "payload": {
             "title": "D - Prism Layer AI, Inc.",
             "filing_type": "Form D",
@@ -1744,7 +1894,7 @@
         {
           "type": "funding_raised",
           "captured_at": "2026-05-22T10:57:19.543879",
-          "days_ago": 3,
+          "days_ago": 6,
           "payload": {
             "feed_title": "You\u00a0don\u2019t\u00a0need\u00a0to be\u00a0an AI\u00a0startup\u00a0to\u00a0raise. Lucra has $20M to prove it.",
             "feed_url": "https://techcrunch.com/category/startups/feed/",
@@ -1755,7 +1905,7 @@
         {
           "type": "funding_raised",
           "captured_at": "2026-05-22T10:57:19.543879",
-          "days_ago": 3,
+          "days_ago": 6,
           "payload": {
             "feed_title": "How Lucra raised $20M as an eSports\u00a0play when every VC only wants AI",
             "feed_url": "https://techcrunch.com/category/startups/feed/",
@@ -1785,7 +1935,7 @@
         {
           "type": "funding_raised",
           "captured_at": "2026-05-22T10:57:36.077913",
-          "days_ago": 3,
+          "days_ago": 6,
           "payload": {
             "title": "D - 4L Data Intelligence, Inc.",
             "filing_type": "Form D",
@@ -1798,7 +1948,7 @@
         {
           "type": "funding_raised",
           "captured_at": "2026-05-20T10:58:20.408024",
-          "days_ago": 7,
+          "days_ago": 10,
           "payload": {
             "title": "D - 4L Data Intelligence, Inc.",
             "filing_type": "Form D",
@@ -1806,6 +1956,358 @@
             "link": "https://www.sec.gov/Archives/edgar/data/1915453/000191545326000001/0001915453-26-000001-index.htm",
             "biz_state": "CA",
             "biz_location": "San Ramon, CA"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Eckard Gardendale LLC",
+      "domain": "eckardenterprises.com",
+      "industry": "other",
+      "headcount": 70,
+      "country": "US",
+      "city": "Allen",
+      "state": "TX",
+      "dm_name": "Troy W. Eckard",
+      "dm_title": "Founder & Chairman",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "partial",
+      "score": 24.99630115167513,
+      "insight": null,
+      "trigger_type": "form_d",
+      "signals": [
+        {
+          "type": "funding_raised",
+          "captured_at": "2026-05-28T11:44:47.156976",
+          "days_ago": 0,
+          "payload": {
+            "title": "D - Eckard Gardendale LLC",
+            "filing_type": "Form D",
+            "filed_on": "2026-05-28",
+            "link": "https://www.sec.gov/Archives/edgar/data/2135785/000213578526000001/0002135785-26-000001-index.htm",
+            "biz_state": "TX",
+            "biz_location": "Allen, TX"
+          }
+        }
+      ]
+    },
+    {
+      "name": "ATS Systems, Inc.",
+      "domain": "atssystems.us",
+      "industry": "manufacturing",
+      "headcount": 60,
+      "country": "US",
+      "city": "Sewickley",
+      "state": "PA",
+      "dm_name": null,
+      "dm_title": null,
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "cold",
+      "score": 24.996301146360985,
+      "insight": null,
+      "trigger_type": "form_d",
+      "signals": [
+        {
+          "type": "funding_raised",
+          "captured_at": "2026-05-28T11:44:47.156976",
+          "days_ago": 0,
+          "payload": {
+            "title": "D - ATS Systems, Inc.",
+            "filing_type": "Form D",
+            "filed_on": "2026-05-28",
+            "link": "https://www.sec.gov/Archives/edgar/data/2137038/000213703826000001/0002137038-26-000001-index.htm",
+            "biz_state": "CA",
+            "biz_location": "Santee, CA"
+          }
+        }
+      ]
+    },
+    {
+      "name": "ORNN AI INC",
+      "domain": "ornn.trade",
+      "industry": "software_saas",
+      "headcount": 10,
+      "country": "US",
+      "city": "New York",
+      "state": "NY",
+      "dm_name": "Kush Bavaria",
+      "dm_title": "CEO",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "partial",
+      "score": 24.99630114116716,
+      "insight": null,
+      "trigger_type": "form_d",
+      "signals": [
+        {
+          "type": "funding_raised",
+          "captured_at": "2026-05-28T11:44:47.156976",
+          "days_ago": 1,
+          "payload": {
+            "title": "D - ORNN AI INC",
+            "filing_type": "Form D",
+            "filed_on": "2026-05-27",
+            "link": "https://www.sec.gov/Archives/edgar/data/2133586/000213358626000001/0002133586-26-000001-index.htm",
+            "biz_state": "NY",
+            "biz_location": "New York City, NY"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Haystack Collective, Inc.",
+      "domain": "haystackteam.com",
+      "industry": "software_saas",
+      "headcount": 50,
+      "country": "US",
+      "city": "Los Angeles",
+      "state": "CA",
+      "dm_name": null,
+      "dm_title": null,
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "cold",
+      "score": 24.99630113549874,
+      "insight": null,
+      "trigger_type": "form_d",
+      "signals": [
+        {
+          "type": "funding_raised",
+          "captured_at": "2026-05-28T11:44:47.156976",
+          "days_ago": 1,
+          "payload": {
+            "title": "D - Haystack Collective, Inc.",
+            "filing_type": "Form D",
+            "filed_on": "2026-05-27",
+            "link": "https://www.sec.gov/Archives/edgar/data/2136309/000213630926000001/0002136309-26-000001-index.htm",
+            "biz_state": "OR",
+            "biz_location": "Portland, OR"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Townbridge Income Strategy 2 LLC",
+      "domain": "townbridge.com",
+      "industry": "real_estate",
+      "headcount": 10,
+      "country": "US",
+      "city": "Austin",
+      "state": "TX",
+      "dm_name": "Aaron Levy",
+      "dm_title": "CEO",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "partial",
+      "score": 24.996301129288877,
+      "insight": null,
+      "trigger_type": "form_d",
+      "signals": [
+        {
+          "type": "funding_raised",
+          "captured_at": "2026-05-28T11:44:47.156976",
+          "days_ago": 1,
+          "payload": {
+            "title": "D - Townbridge Income Strategy 2 LLC",
+            "filing_type": "Form D",
+            "filed_on": "2026-05-27",
+            "link": "https://www.sec.gov/Archives/edgar/data/2125415/000212541526000001/0002125415-26-000001-index.htm",
+            "biz_state": "TX",
+            "biz_location": "Austin, TX"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Voltic Shipping Corp.",
+      "domain": "volticshipping.com",
+      "industry": "manufacturing",
+      "headcount": 10,
+      "country": "US",
+      "city": "Boston",
+      "state": "MA",
+      "dm_name": "Prosser Cathey",
+      "dm_title": "CEO",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "partial",
+      "score": 24.996301124175265,
+      "insight": null,
+      "trigger_type": "form_d",
+      "signals": [
+        {
+          "type": "funding_raised",
+          "captured_at": "2026-05-28T11:44:47.156976",
+          "days_ago": 1,
+          "payload": {
+            "title": "D - Voltic Shipping Corp.",
+            "filing_type": "Form D",
+            "filed_on": "2026-05-27",
+            "link": "https://www.sec.gov/Archives/edgar/data/2065890/000206589026000001/0002065890-26-000001-index.htm",
+            "biz_state": "PA",
+            "biz_location": "Laughlintown, PA"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Farm to People, P.B.C.",
+      "domain": "farmtopeople.com",
+      "industry": "ecommerce_retail",
+      "headcount": 40,
+      "country": "US",
+      "city": "Brooklyn",
+      "state": "NY",
+      "dm_name": "Michael Robinov",
+      "dm_title": "Co-Founder & CEO",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "partial",
+      "score": 24.99630111880096,
+      "insight": null,
+      "trigger_type": "form_d",
+      "signals": [
+        {
+          "type": "funding_raised",
+          "captured_at": "2026-05-28T11:44:47.156976",
+          "days_ago": 1,
+          "payload": {
+            "title": "D - Farm to People, P.B.C.",
+            "filing_type": "Form D",
+            "filed_on": "2026-05-27",
+            "link": "https://www.sec.gov/Archives/edgar/data/2137019/000213701926000001/0002137019-26-000001-index.htm",
+            "biz_state": "NY",
+            "biz_location": "Brooklyn, NY"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Kavia AI, Inc.",
+      "domain": "kavia.ai",
+      "industry": "software_saas",
+      "headcount": 20,
+      "country": "US",
+      "city": "San Francisco",
+      "state": "CA",
+      "dm_name": "Labeeb Ismail",
+      "dm_title": "Founder / CEO",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "partial",
+      "score": 24.996301113720772,
+      "insight": null,
+      "trigger_type": "form_d",
+      "signals": [
+        {
+          "type": "funding_raised",
+          "captured_at": "2026-05-28T11:44:47.156976",
+          "days_ago": 1,
+          "payload": {
+            "title": "D - Kavia AI, Inc.",
+            "filing_type": "Form D",
+            "filed_on": "2026-05-27",
+            "link": "https://www.sec.gov/Archives/edgar/data/2134925/000213492526000001/0002134925-26-000001-index.htm",
+            "biz_state": "CA",
+            "biz_location": "San Francisco, CA"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Litewave.AI, Inc",
+      "domain": "litewave.ai",
+      "industry": "healthcare",
+      "headcount": 10,
+      "country": "US",
+      "city": "San Francisco",
+      "state": "CA",
+      "dm_name": null,
+      "dm_title": null,
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "cold",
+      "score": 24.996301105699427,
+      "insight": null,
+      "trigger_type": "form_d",
+      "signals": [
+        {
+          "type": "funding_raised",
+          "captured_at": "2026-05-28T11:44:47.156976",
+          "days_ago": 1,
+          "payload": {
+            "title": "D - Litewave.AI, Inc",
+            "filing_type": "Form D",
+            "filed_on": "2026-05-27",
+            "link": "https://www.sec.gov/Archives/edgar/data/2060763/000206076326000002/0002060763-26-000002-index.htm",
+            "biz_state": "CA",
+            "biz_location": "San Francisco, CA"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Centese, Inc.",
+      "domain": "centese.com",
+      "industry": "healthcare",
+      "headcount": 20,
+      "country": "US",
+      "city": "Omaha",
+      "state": "NE",
+      "dm_name": "Evan Luxon",
+      "dm_title": "CEO",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "partial",
+      "score": 24.996301099583146,
+      "insight": null,
+      "trigger_type": "form_d",
+      "signals": [
+        {
+          "type": "funding_raised",
+          "captured_at": "2026-05-28T11:44:47.156976",
+          "days_ago": 2,
+          "payload": {
+            "title": "D - Centese, Inc.",
+            "filing_type": "Form D",
+            "filed_on": "2026-05-26",
+            "link": "https://www.sec.gov/Archives/edgar/data/2000790/000200079026000001/0002000790-26-000001-index.htm",
+            "biz_state": "NE",
+            "biz_location": "Omaha, NE"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Cancer IQ Inc.",
+      "domain": "cancer-iq.com",
+      "industry": "healthcare",
+      "headcount": 40,
+      "country": "US",
+      "city": "Chicago",
+      "state": "IL",
+      "dm_name": "Feyi Olopade Ayodele",
+      "dm_title": "CEO",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "partial",
+      "score": 24.99630108862732,
+      "insight": null,
+      "trigger_type": "form_d",
+      "signals": [
+        {
+          "type": "funding_raised",
+          "captured_at": "2026-05-28T11:44:47.156976",
+          "days_ago": 2,
+          "payload": {
+            "title": "D - Cancer IQ Inc.",
+            "filing_type": "Form D",
+            "filed_on": "2026-05-26",
+            "link": "https://www.sec.gov/Archives/edgar/data/1810038/000181003826000003/0001810038-26-000003-index.htm",
+            "biz_state": "IL",
+            "biz_location": "Chicago, IL"
           }
         }
       ]
@@ -1830,7 +2332,7 @@
         {
           "type": "funding_raised",
           "captured_at": "2026-05-20T10:58:20.408024",
-          "days_ago": 10,
+          "days_ago": 13,
           "payload": {
             "title": "D - Shortcut Mobile, Inc.",
             "filing_type": "Form D",
@@ -1862,7 +2364,7 @@
         {
           "type": "funding_raised",
           "captured_at": "2026-05-25T11:58:57.230615",
-          "days_ago": 3,
+          "days_ago": 6,
           "payload": {
             "title": "D - Junction Health, Inc.",
             "filing_type": "Form D",
@@ -1894,7 +2396,7 @@
         {
           "type": "funding_raised",
           "captured_at": "2026-05-25T11:58:57.230615",
-          "days_ago": 4,
+          "days_ago": 7,
           "payload": {
             "title": "D - beyondGREEN biotech Inc.",
             "filing_type": "Form D",
@@ -1926,7 +2428,7 @@
         {
           "type": "funding_raised",
           "captured_at": "2026-05-18T11:50:27.041613",
-          "days_ago": 10,
+          "days_ago": 13,
           "payload": {
             "title": "D - Estately Operations LLC",
             "filing_type": "Form D",
@@ -1958,7 +2460,7 @@
         {
           "type": "funding_raised",
           "captured_at": "2026-05-22T10:57:36.077913",
-          "days_ago": 4,
+          "days_ago": 7,
           "payload": {
             "title": "D - Cowboy Space Corp",
             "filing_type": "Form D",
@@ -1990,7 +2492,7 @@
         {
           "type": "funding_raised",
           "captured_at": "2026-05-22T10:57:36.077913",
-          "days_ago": 5,
+          "days_ago": 8,
           "payload": {
             "title": "D - TireTutor, Inc.",
             "filing_type": "Form D",
@@ -2022,7 +2524,7 @@
         {
           "type": "funding_raised",
           "captured_at": "2026-05-22T10:57:36.077913",
-          "days_ago": 5,
+          "days_ago": 8,
           "payload": {
             "title": "D - Blacksmith Software Inc.",
             "filing_type": "Form D",
@@ -2054,7 +2556,7 @@
         {
           "type": "funding_raised",
           "captured_at": "2026-05-22T10:57:36.077913",
-          "days_ago": 5,
+          "days_ago": 8,
           "payload": {
             "title": "D - Advanced Manufacturing Co of America, Inc.",
             "filing_type": "Form D",
@@ -2086,7 +2588,7 @@
         {
           "type": "funding_raised",
           "captured_at": "2026-05-21T11:33:24.125110",
-          "days_ago": 6,
+          "days_ago": 9,
           "payload": {
             "title": "D - Maisa AI Inc.",
             "filing_type": "Form D",
@@ -2118,7 +2620,7 @@
         {
           "type": "funding_raised",
           "captured_at": "2026-05-21T11:33:24.125110",
-          "days_ago": 6,
+          "days_ago": 9,
           "payload": {
             "title": "D - Commonwealth Glass Services LLC",
             "filing_type": "Form D",
@@ -2150,7 +2652,7 @@
         {
           "type": "funding_raised",
           "captured_at": "2026-05-17T19:21:49.108796",
-          "days_ago": 11,
+          "days_ago": 14,
           "payload": {
             "title": "D - NovaData Solutions Inc.",
             "filing_type": "Form D",
@@ -2182,7 +2684,7 @@
         {
           "type": "funding_raised",
           "captured_at": "2026-05-17T23:19:09.573726",
-          "days_ago": 10,
+          "days_ago": 13,
           "payload": {
             "title": "D - KeyRooted Inc.",
             "filing_type": "Form D",
@@ -2214,7 +2716,7 @@
         {
           "type": "funding_raised",
           "captured_at": "2026-05-17T22:38:54.764914",
-          "days_ago": 10,
+          "days_ago": 13,
           "payload": {
             "title": "D - MOVA Technologies, Inc.",
             "filing_type": "Form D",
@@ -2246,7 +2748,7 @@
         {
           "type": "funding_raised",
           "captured_at": "2026-05-17T19:21:49.108796",
-          "days_ago": 10,
+          "days_ago": 13,
           "payload": {
             "title": "D - Trellis Bioscience, Inc.",
             "filing_type": "Form D",
@@ -2278,7 +2780,7 @@
         {
           "type": "funding_raised",
           "captured_at": "2026-05-17T19:21:49.108796",
-          "days_ago": 10,
+          "days_ago": 13,
           "payload": {
             "title": "D - Athos Therapeutics, Inc.",
             "filing_type": "Form D",
@@ -2310,7 +2812,7 @@
         {
           "type": "funding_raised",
           "captured_at": "2026-05-17T19:21:49.108796",
-          "days_ago": 10,
+          "days_ago": 13,
           "payload": {
             "title": "D - MedZero, Inc.",
             "filing_type": "Form D",
@@ -2342,7 +2844,7 @@
         {
           "type": "funding_raised",
           "captured_at": "2026-05-17T19:21:49.108796",
-          "days_ago": 10,
+          "days_ago": 13,
           "payload": {
             "title": "D - Ananya Health, Inc.",
             "filing_type": "Form D",
@@ -2374,7 +2876,7 @@
         {
           "type": "funding_raised",
           "captured_at": "2026-05-17T19:21:49.108796",
-          "days_ago": 11,
+          "days_ago": 14,
           "payload": {
             "title": "D - Oakridge Dairy LLC",
             "filing_type": "Form D",
@@ -2406,7 +2908,7 @@
         {
           "type": "funding_raised",
           "captured_at": "2026-05-19T11:26:48.314786",
-          "days_ago": 7,
+          "days_ago": 10,
           "payload": {
             "title": "D - Remedium Bio Inc.",
             "filing_type": "Form D",
@@ -2438,7 +2940,7 @@
         {
           "type": "funding_raised",
           "captured_at": "2026-05-19T11:26:48.314786",
-          "days_ago": 7,
+          "days_ago": 10,
           "payload": {
             "title": "D - StreamLayer Inc.",
             "filing_type": "Form D",
@@ -2470,7 +2972,7 @@
         {
           "type": "funding_raised",
           "captured_at": "2026-05-19T11:26:48.314786",
-          "days_ago": 7,
+          "days_ago": 10,
           "payload": {
             "title": "D - Neuraville Inc",
             "filing_type": "Form D",
@@ -2502,7 +3004,7 @@
         {
           "type": "funding_raised",
           "captured_at": "2026-05-21T11:33:24.125110",
-          "days_ago": 5,
+          "days_ago": 8,
           "payload": {
             "title": "D - Yuj Medical, Inc.",
             "filing_type": "Form D",
@@ -2534,7 +3036,7 @@
         {
           "type": "funding_raised",
           "captured_at": "2026-05-21T11:33:24.125110",
-          "days_ago": 5,
+          "days_ago": 8,
           "payload": {
             "title": "D - Switched Source Inc.",
             "filing_type": "Form D",
@@ -2566,7 +3068,7 @@
         {
           "type": "funding_raised",
           "captured_at": "2026-05-21T11:33:24.125110",
-          "days_ago": 5,
+          "days_ago": 8,
           "payload": {
             "title": "D - Stone & Skillet Inc.",
             "filing_type": "Form D",
@@ -2598,7 +3100,7 @@
         {
           "type": "funding_raised",
           "captured_at": "2026-05-21T11:33:24.125110",
-          "days_ago": 5,
+          "days_ago": 8,
           "payload": {
             "title": "D - OxyDial Inc",
             "filing_type": "Form D",
@@ -2630,7 +3132,7 @@
         {
           "type": "funding_raised",
           "captured_at": "2026-05-21T11:33:24.125110",
-          "days_ago": 5,
+          "days_ago": 8,
           "payload": {
             "title": "D - authID Inc.  (AUID)",
             "filing_type": "Form D",
@@ -2662,7 +3164,7 @@
         {
           "type": "funding_raised",
           "captured_at": "2026-05-21T11:33:24.125110",
-          "days_ago": 5,
+          "days_ago": 8,
           "payload": {
             "title": "D - Sea Pharmaceuticals, LLC",
             "filing_type": "Form D",
@@ -2694,7 +3196,7 @@
         {
           "type": "funding_raised",
           "captured_at": "2026-05-21T11:33:24.125110",
-          "days_ago": 5,
+          "days_ago": 8,
           "payload": {
             "title": "D - Signature Athletics, Inc.",
             "filing_type": "Form D",
@@ -2726,7 +3228,7 @@
         {
           "type": "funding_raised",
           "captured_at": "2026-05-21T11:33:24.125110",
-          "days_ago": 5,
+          "days_ago": 8,
           "payload": {
             "title": "D - Carnivore Bar Inc",
             "filing_type": "Form D",
@@ -2758,7 +3260,7 @@
         {
           "type": "funding_raised",
           "captured_at": "2026-05-21T11:33:24.125110",
-          "days_ago": 5,
+          "days_ago": 8,
           "payload": {
             "title": "D - Transient.AI Inc.",
             "filing_type": "Form D",
@@ -2790,7 +3292,7 @@
         {
           "type": "funding_raised",
           "captured_at": "2026-05-21T11:33:24.125110",
-          "days_ago": 5,
+          "days_ago": 8,
           "payload": {
             "title": "D - Chalk Talk Solutions, Inc.",
             "filing_type": "Form D",
@@ -2822,7 +3324,7 @@
         {
           "type": "funding_raised",
           "captured_at": "2026-05-20T10:58:20.408024",
-          "days_ago": 6,
+          "days_ago": 9,
           "payload": {
             "title": "D - Flora Coatings, Inc.",
             "filing_type": "Form D",
@@ -2854,7 +3356,7 @@
         {
           "type": "funding_raised",
           "captured_at": "2026-05-20T10:58:20.408024",
-          "days_ago": 6,
+          "days_ago": 9,
           "payload": {
             "title": "D - FirstParty, Inc.",
             "filing_type": "Form D",
@@ -2886,7 +3388,7 @@
         {
           "type": "funding_raised",
           "captured_at": "2026-05-20T10:58:20.408024",
-          "days_ago": 6,
+          "days_ago": 9,
           "payload": {
             "title": "D - E DRAY 20/20, LLC",
             "filing_type": "Form D",
@@ -2918,7 +3420,7 @@
         {
           "type": "funding_raised",
           "captured_at": "2026-05-20T10:58:20.408024",
-          "days_ago": 6,
+          "days_ago": 9,
           "payload": {
             "title": "D - LightenUp Acquisition Co., LLC",
             "filing_type": "Form D",
@@ -2950,7 +3452,7 @@
         {
           "type": "funding_raised",
           "captured_at": "2026-05-20T10:58:20.408024",
-          "days_ago": 6,
+          "days_ago": 9,
           "payload": {
             "title": "D - Cambrian Network Inc.",
             "filing_type": "Form D",
@@ -2982,7 +3484,7 @@
         {
           "type": "funding_raised",
           "captured_at": "2026-05-20T10:58:20.408024",
-          "days_ago": 6,
+          "days_ago": 9,
           "payload": {
             "title": "D - 1080 Network, Inc.",
             "filing_type": "Form D",
@@ -3014,7 +3516,7 @@
         {
           "type": "funding_raised",
           "captured_at": "2026-05-24T10:02:28.361800",
-          "days_ago": 4,
+          "days_ago": 7,
           "payload": {
             "title": "D - Intalus, Inc.",
             "filing_type": "Form D",
@@ -3046,7 +3548,7 @@
         {
           "type": "funding_raised",
           "captured_at": "2026-05-24T10:02:28.361800",
-          "days_ago": 4,
+          "days_ago": 7,
           "payload": {
             "title": "D - Conexeu Sciences Inc.  (CNXU)",
             "filing_type": "Form D",
@@ -3078,7 +3580,7 @@
         {
           "type": "funding_raised",
           "captured_at": "2026-05-24T10:02:13.565698",
-          "days_ago": 1,
+          "days_ago": 4,
           "payload": {
             "feed_title": "From teen hacker to Iron Dome researcher, this founder raised $28M to fight AI phishing",
             "feed_url": "https://techcrunch.com/category/startups/feed/",
@@ -3108,7 +3610,7 @@
         {
           "type": "funding_raised",
           "captured_at": "2026-05-24T10:02:13.565698",
-          "days_ago": 1,
+          "days_ago": 4,
           "payload": {
             "feed_title": "Forget the feed: Status AI raises $17M to turn social media into interactive entertainment",
             "feed_url": "https://techcrunch.com/category/startups/feed/",
@@ -3138,7 +3640,7 @@
         {
           "type": "funding_raised",
           "captured_at": "2026-05-18T15:28:24.256870",
-          "days_ago": 7,
+          "days_ago": 10,
           "payload": {
             "title": "D - Shape Memory Medical Inc.",
             "filing_type": "Form D",
@@ -3170,7 +3672,7 @@
         {
           "type": "funding_raised",
           "captured_at": "2026-05-20T10:58:20.408024",
-          "days_ago": 5,
+          "days_ago": 8,
           "payload": {
             "title": "D - BRANCHLAB INC.",
             "filing_type": "Form D",
@@ -3202,7 +3704,7 @@
         {
           "type": "funding_raised",
           "captured_at": "2026-05-20T10:58:20.408024",
-          "days_ago": 5,
+          "days_ago": 8,
           "payload": {
             "title": "D - Loliware Inc.",
             "filing_type": "Form D",
@@ -3234,7 +3736,7 @@
         {
           "type": "funding_raised",
           "captured_at": "2026-05-20T10:58:20.408024",
-          "days_ago": 6,
+          "days_ago": 9,
           "payload": {
             "title": "D - Neurun, Inc.",
             "filing_type": "Form D",
@@ -3266,7 +3768,7 @@
         {
           "type": "funding_raised",
           "captured_at": "2026-05-23T09:59:51.219074",
-          "days_ago": 3,
+          "days_ago": 6,
           "payload": {
             "title": "D - Cedar Build, Inc.",
             "filing_type": "Form D",
@@ -3298,7 +3800,7 @@
         {
           "type": "funding_raised",
           "captured_at": "2026-05-23T09:59:51.219074",
-          "days_ago": 3,
+          "days_ago": 6,
           "payload": {
             "title": "D - Khloud, Inc.",
             "filing_type": "Form D",
@@ -3330,7 +3832,7 @@
         {
           "type": "funding_raised",
           "captured_at": "2026-05-23T09:59:51.219074",
-          "days_ago": 3,
+          "days_ago": 6,
           "payload": {
             "title": "D - Novascan Inc.",
             "filing_type": "Form D",
@@ -3362,7 +3864,7 @@
         {
           "type": "funding_raised",
           "captured_at": "2026-05-23T09:59:51.219074",
-          "days_ago": 3,
+          "days_ago": 6,
           "payload": {
             "title": "D - KYG Trade, Inc.",
             "filing_type": "Form D",
@@ -3394,7 +3896,7 @@
         {
           "type": "funding_raised",
           "captured_at": "2026-05-23T09:59:51.219074",
-          "days_ago": 4,
+          "days_ago": 7,
           "payload": {
             "title": "D - Omcare Inc.",
             "filing_type": "Form D",
@@ -3426,7 +3928,7 @@
         {
           "type": "funding_raised",
           "captured_at": "2026-05-17T18:50:57.861397",
-          "days_ago": 10,
+          "days_ago": 13,
           "payload": {
             "title": "D - Tugboat Solutions Inc.",
             "filing_type": "Form D",
@@ -3458,7 +3960,7 @@
         {
           "type": "funding_raised",
           "captured_at": "2026-05-22T10:57:36.077913",
-          "days_ago": 3,
+          "days_ago": 6,
           "payload": {
             "title": "D - Salt Athletic, Inc.",
             "filing_type": "Form D",
@@ -3490,7 +3992,7 @@
         {
           "type": "funding_raised",
           "captured_at": "2026-05-22T10:57:36.077913",
-          "days_ago": 3,
+          "days_ago": 6,
           "payload": {
             "title": "D - Alethian Corp",
             "filing_type": "Form D",
@@ -3522,7 +4024,7 @@
         {
           "type": "funding_raised",
           "captured_at": "2026-05-22T10:57:36.077913",
-          "days_ago": 4,
+          "days_ago": 7,
           "payload": {
             "title": "D - MINNOW TECHNOLOGIES, INC.",
             "filing_type": "Form D",
@@ -3554,7 +4056,7 @@
         {
           "type": "funding_raised",
           "captured_at": "2026-05-22T10:57:36.077913",
-          "days_ago": 4,
+          "days_ago": 7,
           "payload": {
             "title": "D - Reprise Biomedical, Inc.",
             "filing_type": "Form D",
@@ -3586,7 +4088,7 @@
         {
           "type": "funding_raised",
           "captured_at": "2026-05-21T11:33:24.125110",
-          "days_ago": 4,
+          "days_ago": 7,
           "payload": {
             "title": "D - SNOCHIP INC",
             "filing_type": "Form D",
@@ -3618,7 +4120,7 @@
         {
           "type": "funding_raised",
           "captured_at": "2026-05-17T22:38:48.545706",
-          "days_ago": 7,
+          "days_ago": 10,
           "payload": {
             "feed_title": "Marketing operating system Nectar Social raises $30M Series A led by Menlo",
             "feed_url": "https://techcrunch.com/category/startups/feed/",
