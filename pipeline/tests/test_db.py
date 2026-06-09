@@ -506,6 +506,86 @@ def test_dedup_signals_pass_collapses_existing_dups(tmp_path: Path) -> None:
     assert len(job_sigs) == 1
 
 
+def test_iter_leads_tolerates_legacy_unknown_signal_type(tmp_path: Path) -> None:
+    """A committed DB can carry signals whose `type` was later removed from
+    SignalType (e.g. the insurance-niche 'job_posted_ops_role', dropped when
+    insurance was decoupled). Reading such a lead must not raise — the stale
+    signal is dropped, valid ones survive. Regression for the nightly cron
+    crash in purge_disqualified -> iter_leads -> _row_to_lead."""
+    import json as _json
+
+    conn = init_db(tmp_path / "leads.db")
+    a = upsert_lead(conn, _candidate("Legacy Co", payload={"title": "IT Support"}))
+    assert a.id is not None
+
+    now = datetime.now(timezone.utc).replace(tzinfo=None)
+    good = {
+        "type": SignalType.JOB_IT_SUPPORT.value,
+        "source": SourceName.JOBS.value,
+        "captured_at": now.isoformat(),
+        "payload": {"title": "IT Support"},
+    }
+    legacy = {
+        "type": "job_posted_ops_role",  # no longer a member of SignalType
+        "source": SourceName.JOBS.value,
+        "captured_at": now.isoformat(),
+        "payload": {"title": "Operations Manager"},
+    }
+    conn.execute(
+        "UPDATE leads SET signals = ? WHERE id = ?",
+        (_json.dumps([good, legacy]), a.id),
+    )
+    conn.commit()
+
+    # get_lead must not raise; the bad signal is dropped.
+    result = get_lead(conn, lead_id=a.id)
+    assert result is not None
+    assert [s.type for s in result.signals] == [SignalType.JOB_IT_SUPPORT]
+
+    # iter_leads (the path that crashed the cron) must not raise either.
+    rows = list(iter_leads(conn))
+    assert len(rows) == 1
+    assert [s.type for s in rows[0].signals] == [SignalType.JOB_IT_SUPPORT]
+
+
+def test_append_signal_tolerates_legacy_unknown_signal_type(tmp_path: Path) -> None:
+    """Appending to a lead that already carries a legacy unknown-type signal
+    must not raise in the dedup scan (_append_signal_row)."""
+    import json as _json
+
+    conn = init_db(tmp_path / "leads.db")
+    a = upsert_lead(conn, _candidate("Legacy Append Co"))
+    assert a.id is not None
+
+    now = datetime.now(timezone.utc).replace(tzinfo=None)
+    legacy = {
+        "type": "job_posted_ops_role",
+        "source": SourceName.JOBS.value,
+        "captured_at": now.isoformat(),
+        "payload": {"title": "Ops"},
+    }
+    conn.execute(
+        "UPDATE leads SET signals = ? WHERE id = ?",
+        (_json.dumps([legacy]), a.id),
+    )
+    conn.commit()
+
+    append_signal(
+        conn,
+        a.id,
+        Signal(
+            type=SignalType.FUNDING_RAISED,
+            source=SourceName.FUNDING,
+            captured_at=now,
+            payload={"amount_usd": 1},
+        ),
+    )
+    result = get_lead(conn, lead_id=a.id)
+    assert result is not None
+    # Legacy signal dropped on read; the new valid one is present.
+    assert [s.type for s in result.signals] == [SignalType.FUNDING_RAISED]
+
+
 def test_delete_lead_removes_row_and_raises_on_missing(tmp_path: Path) -> None:
     conn = init_db(tmp_path / "leads.db")
     a = upsert_lead(conn, _candidate("Zeta Co"))

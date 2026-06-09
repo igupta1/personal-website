@@ -1,4 +1,5 @@
 import json
+import logging
 import re
 import sqlite3
 import unicodedata
@@ -7,6 +8,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
+from pydantic import ValidationError
 from rapidfuzz import fuzz, process
 
 from msp_pipeline.models import (
@@ -16,6 +18,8 @@ from msp_pipeline.models import (
     Signal,
     SignalType,
 )
+
+_log = logging.getLogger(__name__)
 
 _DDL = """
 CREATE TABLE IF NOT EXISTS leads (
@@ -140,10 +144,31 @@ def _name_key(name: str) -> str:
     return s
 
 
+def _parse_signals(raw_signals: list[Any], *, lead_id: Any = None) -> list[Signal]:
+    """Validate stored signals, dropping any that no longer fit the schema.
+
+    The committed leads.db outlives individual code versions, so a row can
+    carry a signal whose ``type`` has since been removed from SignalType
+    (e.g. the insurance-niche ``job_posted_ops_role``, dropped when insurance
+    was decoupled). One such legacy signal must not crash the whole run —
+    skip it with a warning instead of letting ``model_validate`` raise."""
+    out: list[Signal] = []
+    for s in raw_signals:
+        try:
+            out.append(Signal.model_validate(s))
+        except ValidationError:
+            sig_type = s.get("type") if isinstance(s, dict) else s
+            _log.warning(
+                "dropping unparseable signal on lead id=%s (type=%r)",
+                lead_id, sig_type,
+            )
+    return out
+
+
 def _row_to_lead(row: sqlite3.Row) -> Lead:
     data = dict(row)
     raw = data.get("signals") or "[]"
-    data["signals"] = [Signal.model_validate(s) for s in json.loads(raw)]
+    data["signals"] = _parse_signals(json.loads(raw), lead_id=data.get("id"))
     return Lead.model_validate(data)
 
 
@@ -163,6 +188,17 @@ def _get_lead_by_name_key(conn: sqlite3.Connection, name_key: str) -> Lead | Non
 # them, even if their payloads happen to be identical. Skipping these ensures
 # the M4 enrichment-skip logic still sees per-run timestamps.
 _NEVER_DEDUP: frozenset[SignalType] = frozenset({SignalType.ENRICHMENT_RUN})
+
+
+def _is_never_dedup(type_str: str) -> bool:
+    """Whether a stored signal-type string is a known never-dedup marker.
+    Unknown/legacy type strings (written by an older schema) are treated as
+    dedupable and, crucially, never raise here — callers iterate over raw
+    stored signals that may predate the current SignalType enum."""
+    try:
+        return SignalType(type_str) in _NEVER_DEDUP
+    except ValueError:
+        return False
 
 # Job-style signals carry URLs that often have per-fetch tracking suffixes
 # (Adzuna `?se=...`, Indeed `?jk=...`). Dedup on (type, title, url-path) so
@@ -225,7 +261,7 @@ def _append_signal_row(conn: sqlite3.Connection, lead_id: int, signal: Signal) -
     if signal.type not in _NEVER_DEDUP:
         new_key = _signal_dedup_key(new_dict)
         for s in existing:
-            if SignalType(s["type"]) in _NEVER_DEDUP:
+            if _is_never_dedup(s["type"]):
                 continue
             if _signal_dedup_key(s) == new_key:
                 return  # already on file; skip the append + DB write
@@ -248,7 +284,7 @@ def dedup_signals_pass(conn: sqlite3.Connection) -> int:
             seen: set[str] = set()
             deduped: list[dict[str, Any]] = []
             for sig in existing:
-                if SignalType(sig["type"]) in _NEVER_DEDUP:
+                if _is_never_dedup(sig["type"]):
                     deduped.append(sig)
                     continue
                 key = _signal_dedup_key(sig)
