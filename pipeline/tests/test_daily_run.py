@@ -228,6 +228,48 @@ def test_per_source_failure_isolated(
     assert {lead["name"] for lead in payload["niches"]["mssp"]} == {"Breach Co"}
 
 
+def test_full_run_rescores_preexisting_untouched_leads(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """A lead already in the DB with a stale (legacy) score must be re-scored
+    on a full run even when it gets no new signal — otherwise it stays pinned
+    to a niche its signals no longer fit. Here a breach-only lead carries a
+    bogus it_msp_score; after the run it must be gone from IT MSP (None) but
+    present in MSSP."""
+    db_path = tmp_path / "leads.db"
+    out_path = tmp_path / "leads.json"
+
+    conn = db.init_db(db_path)
+    lead = db.upsert_lead(
+        conn,
+        _candidate("Stale Breach Co", SignalType.BREACH_DISCLOSED, SourceName.BREACHES),
+    )
+    assert lead.id is not None
+    db.update_lead(
+        conn, lead.id,
+        industry="other", headcount=80, country="US",
+        it_msp_score=87.0,  # legacy leak: breach should never score IT MSP
+        mssp_score=87.0,
+    )
+    conn.close()
+
+    # No source returns anything, so the pre-existing lead is never "touched".
+    empty = MagicMock(return_value=[])
+    monkeypatch.setattr(daily_run.jobs, "fetch", empty)
+    monkeypatch.setattr(daily_run.funding, "fetch", empty)
+    monkeypatch.setattr(daily_run.breaches, "fetch", empty)
+    monkeypatch.setattr(
+        "msp_pipeline.outreach.generate",
+        MagicMock(return_value=Copy(insight="x" * 30)),
+    )
+
+    rc = daily_run.main(["--db-path", str(db_path), "--output-path", str(out_path)])
+    assert rc == 0
+    payload = json.loads(out_path.read_text())
+    assert "Stale Breach Co" not in {ld["name"] for ld in payload["niches"]["it_msp"]}
+    assert "Stale Breach Co" in {ld["name"] for ld in payload["niches"]["mssp"]}
+
+
 def test_copy_regen_threshold_gates_calls(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:

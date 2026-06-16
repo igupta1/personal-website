@@ -143,9 +143,14 @@ def main(argv: list[str] | None = None) -> int:
 
     merged = db.merge_duplicates(conn)
     log.info("merged %d duplicate leads", merged)
-    enriched_ids = [lid for lid in enriched_ids if db.get_lead(conn, lead_id=lid)]
 
-    score_changes = _rescore_all(conn, enriched_ids)
+    # Re-score EVERY lead, not only the ones touched this run. A niche score
+    # depends on recency decay (which changes daily) and on the current
+    # scoring rules, so an untouched lead still needs refreshing — otherwise a
+    # stale score keeps it pinned to a niche it no longer qualifies for (e.g. a
+    # breach lead lingering in IT MSP with an empty signal list).
+    all_ids = [lead.id for lead in db.iter_leads(conn) if lead.id is not None]
+    score_changes = _rescore_all(conn, all_ids)
     apollo_ids = _apollo_enrich_top_n(conn, n=args.apollo_top_n)
     copy_calls = _regen_copy(
         conn, score_changes,
