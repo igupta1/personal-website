@@ -1,4 +1,5 @@
 import logging
+import re
 from collections.abc import Callable
 from datetime import datetime, timezone
 
@@ -25,6 +26,34 @@ _USER_AGENT = "Mozilla/5.0 (compatible; msp-lead-magnet/0.1)"
 
 # (entity_name, date_str) extracted from a row, or None to skip the row.
 RowParser = Callable[[list[Tag]], tuple[str, str] | None]
+
+
+# State AGs sometimes list a breach under the reporting agent (a law firm or
+# breach-response vendor) "on behalf of" the company that was actually
+# breached. The lead is the breached company, not the agent — so we keep the
+# text after "on behalf of" and drop the agent prefix. When no real company
+# name follows (e.g. "...on behalf of its clients"), the row is unusable.
+_ON_BEHALF_RE = re.compile(r"\bon behalf of\b|\bo/?b/?o\b", re.IGNORECASE)
+_GENERIC_CLIENT_RE = re.compile(
+    r"^(?:its?|their|our|the|an?|multiple|numerous|several|various|certain|\d+)?\s*"
+    r"(?:client|customer|member|patient|individual|employee|consumer|policyholder|"
+    r"person|people|account\s*holder)s?\b",
+    re.IGNORECASE,
+)
+
+
+def _clean_breach_entity(entity: str) -> str | None:
+    entity = entity.strip()
+    m = _ON_BEHALF_RE.search(entity)
+    if m is None:
+        return entity or None
+    tail = entity[m.end():].strip().lstrip(",:").strip()
+    tail = re.sub(
+        r"^(?:its?|their|our|the)\s+clients?\b[,:]?\s*", "", tail, flags=re.IGNORECASE
+    ).strip()
+    if not tail or _GENERIC_CLIENT_RE.match(tail):
+        return None  # reporting agent only; no identifiable breached company
+    return tail
 
 
 def _utcnow() -> datetime:
@@ -68,14 +97,15 @@ def _fetch_html_table(
             if parsed is None:
                 continue
             entity, date_str = parsed
-            if not entity:
+            cleaned = _clean_breach_entity(entity) if entity else None
+            if not cleaned:
                 continue
             disclosure = _parse_us_date(date_str)
             if disclosure and disclosure < since:
                 continue
             candidates.append(
                 LeadCandidate(
-                    name=entity,
+                    name=cleaned,
                     domain=None,
                     initial_signal=Signal(
                         type=SignalType.BREACH_DISCLOSED,

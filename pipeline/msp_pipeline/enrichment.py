@@ -11,6 +11,7 @@ from __future__ import annotations
 import logging
 import re
 import sqlite3
+import unicodedata
 from datetime import datetime, timezone
 from enum import Enum
 
@@ -53,6 +54,24 @@ _BLOCKED_NAME_RES: tuple[re.Pattern[str], ...] = (
     ),
 )
 
+# Public-sector entities: county / municipal governments, school districts,
+# and special-purpose public authorities. The "State/City/County/Town of X"
+# form is in _BLOCKED_NAME_RES above; these catch the suffix and agency forms
+# ("Winona County", "X Township", "Jacksonville Transportation Authority",
+# "Chaffey Joint Union High School District"). A small MSP/MSSP/cloud shop
+# can't transact with these in a normal sales cycle (RFP / procurement).
+_GOV_NAME_RES: tuple[re.Pattern[str], ...] = (
+    re.compile(r"\bCounty\s*$", re.IGNORECASE),
+    re.compile(r"\b(?:Township|Borough|Municipality)\b", re.IGNORECASE),
+    re.compile(r"\b(?:School District|Public Schools|Board of Education)\b", re.IGNORECASE),
+    re.compile(
+        r"\b(?:Transit|Transportation|Housing|Port|Water|Sewer|Sanitation|Utility|Parks?)"
+        r"\s+(?:Authority|District)\b",
+        re.IGNORECASE,
+    ),
+    re.compile(r"\b(?:Sheriff|Police Department|Fire Department)\b", re.IGNORECASE),
+)
+
 # Mega-corps that should never appear in an SMB lead set. Match by domain
 # (more reliable than name).
 _BLOCKED_DOMAINS: frozenset[str] = frozenset({
@@ -71,7 +90,77 @@ _BLOCKED_DOMAINS: frozenset[str] = frozenset({
     "ibm.com",
     "intel.com",
     "cisco.com",
+    # Large enterprises that surfaced in the lead set with NULL headcount,
+    # so the >250 cap couldn't catch them. An SMB MSP/MSSP/cloud shop can't
+    # sell into these.
+    "capitalone.com",
+    "raytheon.com", "rtx.com",
+    "mlb.com",
+    "toyota.com",
+    "panasonic.com",
+    "manpowergroup.com", "manpower.com",
+    "adecco.com", "adeccogroup.com",
+    "bestwestern.com", "bwhhotelgroup.com",
+    "plannedparenthood.org",
+    "discord.com",
+    "swifttrans.com",
+    "delawarenorth.com",
+    "elevancehealth.com", "wellpoint.com",
+    "lacare.org",
+    "aaa.com", "ace.aaa.com", "calif.aaa.com",
 })
+
+# Enterprises that often arrive with NO domain (recruiter-posted roles, AG
+# breach rows) so the domain block can't see them. Matched against the
+# normalized company name as a whole-token sequence (see
+# ``_is_blocked_enterprise_name``) to avoid clipping a small business that
+# merely shares a word.
+_BLOCKED_ENTERPRISE_NAMES: tuple[str, ...] = (
+    "capital one",
+    "raytheon",
+    "major league baseball",
+    "toyota",
+    "panasonic",
+    "manpowergroup",
+    "manpower",
+    "adecco",
+    "best western",
+    "bwh hotels",
+    "planned parenthood",
+    "la care", "l a care",
+    "discord",
+    "swift transportation",
+    "delaware north",
+    "elevance", "wellpoint",
+    "dalio family office",
+    "automobile club of southern california",
+)
+
+# Staffing / recruiting / executive-search firms post roles on behalf of an
+# unnamed client — the lead would be the recruiter, not the hiring company.
+# This pure-code regex catches the obvious naming conventions before any LLM
+# call; the Gemini lookup's IS_RECRUITER flag (below) catches the rest.
+_RECRUITER_NAME_RES: tuple[re.Pattern[str], ...] = (
+    re.compile(
+        r"\b(staffing|recruit(?:ing|er|ers|ment)|headhunter|"
+        r"personnel\s+services?|talent\s+(?:group|agency|partners|solutions|acquisition))\b",
+        re.IGNORECASE,
+    ),
+    re.compile(
+        r"\b(?:executive\s+search|search\s+(?:group|partners?|associates|consultants|firm))\b",
+        re.IGNORECASE,
+    ),
+)
+
+# Specific recruiter brands whose names give no generic signal (no "Staffing"
+# / "Search" token). The user flagged these explicitly.
+_RECRUITER_NAMES: tuple[str, ...] = (
+    "jobot",
+    "tailored management",
+    "confidential careers",
+    "self opportunity",
+    "mackenzie stuart",
+)
 
 # Substrings inside the company NAME (not domain) that strongly suggest
 # the entity sells IT services itself (i.e. is a competitor, not a buyer).
@@ -121,11 +210,49 @@ def _is_it_vendor_name(name: str) -> bool:
     return any(p.search(name) for p in _IT_VENDOR_NAME_RES)
 
 
+def _normalize_name(name: str) -> list[str]:
+    s = unicodedata.normalize("NFKD", name).encode("ascii", "ignore").decode().lower()
+    s = re.sub(r"[^a-z0-9\s]", " ", s)
+    return s.split()
+
+
+def _is_blocked_enterprise_name(name: str) -> bool:
+    tokens = _normalize_name(name)
+    if not tokens:
+        return False
+    for phrase in _BLOCKED_ENTERPRISE_NAMES:
+        needle = phrase.split()
+        n = len(needle)
+        if n == 0:
+            continue
+        for i in range(len(tokens) - n + 1):
+            if tokens[i : i + n] == needle:
+                return True
+    return False
+
+
+def _is_recruiter_name(name: str) -> bool:
+    if any(p.search(name) for p in _RECRUITER_NAME_RES):
+        return True
+    normalized = " ".join(_normalize_name(name))
+    return any(brand in normalized for brand in _RECRUITER_NAMES)
+
+
+def _is_government_name(name: str) -> bool:
+    return any(p.search(name) for p in _GOV_NAME_RES)
+
+
 def _disqualification_reason(lead: Lead) -> str | None:
     if _domain_blocked(lead.domain):
         return f"blocked_domain={lead.domain}"
+    if _is_blocked_enterprise_name(lead.name):
+        return "blocked_enterprise_name"
+    if _is_government_name(lead.name):
+        return "government_entity"
     if _name_blocked(lead.name):
         return "blocked_name_pattern"
+    if _is_recruiter_name(lead.name):
+        return "recruiter_name"
     if _is_it_vendor_name(lead.name):
         return "it_vendor_name"
     if _looks_like_article_headline(lead.name):
@@ -171,6 +298,7 @@ class Industry(str, Enum):
     MANUFACTURING = "manufacturing"
     LOGISTICS_TRANSPORT = "logistics_transport"
     REAL_ESTATE = "real_estate"
+    INSURANCE = "insurance"
     LEGAL_PROFESSIONAL = "legal_professional"
     EDUCATION = "education"
     MEDIA_ENTERTAINMENT = "media_entertainment"
@@ -239,6 +367,9 @@ DOMAIN: <primary website domain like "acme.com" without https or path, or "unkno
 IS_IT_VENDOR: <"yes" if this company is itself an IT services / IT staffing / \
 IT consulting / managed-service-provider / cloud-consultancy / cybersecurity \
 firm (i.e. they SELL IT services), otherwise "no">
+IS_RECRUITER: <"yes" if this company is a staffing agency, recruiting / \
+executive-search firm, or RPO that posts jobs on behalf of OTHER client \
+companies (so the real hiring company is hidden), otherwise "no">
 DM_NAME: <full name of the most likely IT / security / technology decision \
 maker (CIO, CTO, CISO, VP/Director of IT, Head of IT). For very small \
 companies that don't have a tech exec, use the CEO / Founder / COO who \
@@ -261,6 +392,9 @@ _FIELD_RE = {
     "is_it_vendor": re.compile(
         r"^IS_IT_VENDOR:\s*(.+?)\s*$", re.MULTILINE | re.IGNORECASE
     ),
+    "is_recruiter": re.compile(
+        r"^IS_RECRUITER:\s*(.+?)\s*$", re.MULTILINE | re.IGNORECASE
+    ),
     "dm_name": re.compile(r"^DM_NAME:\s*(.+?)\s*$", re.MULTILINE | re.IGNORECASE),
     "dm_title": re.compile(r"^DM_TITLE:\s*(.+?)\s*$", re.MULTILINE | re.IGNORECASE),
     "value_prop": re.compile(r"^VALUE_PROP:\s*(.+?)\s*$", re.MULTILINE | re.IGNORECASE),
@@ -277,6 +411,7 @@ class _Lookup(BaseModel):
     country: str | None = None
     domain: str | None = None
     is_it_vendor: bool = False
+    is_recruiter: bool = False
     dm_name: str | None = None
     dm_title: str | None = None
     value_prop: str | None = None
@@ -324,6 +459,7 @@ def lookup_company(lead: Lead) -> _Lookup:
     country_raw = _parse_field(raw, "country")
     domain_raw = _parse_field(raw, "domain")
     vendor_raw = _parse_field(raw, "is_it_vendor")
+    recruiter_raw = _parse_field(raw, "is_recruiter")
     dm_name_raw = _parse_field(raw, "dm_name")
     dm_title_raw = _parse_field(raw, "dm_title")
     value_prop_raw = _parse_field(raw, "value_prop")
@@ -334,6 +470,7 @@ def lookup_company(lead: Lead) -> _Lookup:
         country=country_raw.upper() if country_raw else None,
         domain=_parse_domain(domain_raw),
         is_it_vendor=_parse_yesno(vendor_raw),
+        is_recruiter=_parse_yesno(recruiter_raw),
         dm_name=dm_name_raw,
         dm_title=dm_title_raw,
         value_prop=value_prop_raw,
@@ -347,10 +484,13 @@ _INDUSTRY_PROMPT = """\
 Classify the company "{name}" into exactly one of these industry tags:
 {tags}
 
+What they do: {value_prop}
 Recent signals about this company: {signals}
 
-Respond with the single best-fitting tag. Use "other" only when no other tag
-reasonably applies.
+Pick the tag that matches what the company actually sells. An insurance
+agency / carrier / brokerage is "insurance", NOT "fintech" (fintech is
+software that powers financial services). Respond with the single
+best-fitting tag. Use "other" only when no other tag reasonably applies.
 """
 
 
@@ -358,11 +498,12 @@ class _IndustryOut(BaseModel):
     industry: Industry
 
 
-def classify_industry(lead: Lead) -> Industry:
+def classify_industry(lead: Lead, *, value_prop: str | None = None) -> Industry:
     tags = ", ".join(t.value for t in Industry)
     prompt = _INDUSTRY_PROMPT.format(
         name=lead.name,
         tags=tags,
+        value_prop=value_prop or lead.value_prop or "unknown",
         signals=_summarize_signals(lead),
     )
     out = llm.call_openai(prompt, response_model=_IndustryOut)
@@ -429,11 +570,11 @@ def enrich(conn: sqlite3.Connection, lead: Lead, *, force: bool = False) -> bool
     )
 
     oversized = effective_headcount is not None and effective_headcount > 250
-    if lookup.country != "US" or oversized or lookup.is_it_vendor:
+    if lookup.country != "US" or oversized or lookup.is_it_vendor or lookup.is_recruiter:
         log.info(
-            "enrich: deleting lead %d (%s) — country=%r headcount=%r vendor=%s",
+            "enrich: deleting lead %d (%s) — country=%r headcount=%r vendor=%s recruiter=%s",
             lead.id, lead.name, lookup.country, effective_headcount,
-            lookup.is_it_vendor,
+            lookup.is_it_vendor, lookup.is_recruiter,
         )
         db.delete_lead(conn, lead.id)
         return False
@@ -450,7 +591,7 @@ def enrich(conn: sqlite3.Connection, lead: Lead, *, force: bool = False) -> bool
             ),
         )
 
-    industry = classify_industry(lead)
+    industry = classify_industry(lead, value_prop=lookup.value_prop)
 
     updates: dict[str, object] = {
         "industry": industry.value,

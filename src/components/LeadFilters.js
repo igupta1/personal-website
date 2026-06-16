@@ -8,6 +8,7 @@ const INDUSTRY_LABELS = {
   manufacturing: "Manufacturing",
   logistics_transport: "Logistics / Transport",
   real_estate: "Real Estate",
+  insurance: "Insurance",
   legal_professional: "Legal / Professional",
   education: "Education",
   media_entertainment: "Media / Entertainment",

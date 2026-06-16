@@ -134,6 +134,22 @@ def test_is_funding_title_blocks_acquisitions_lawsuits_valuations() -> None:
     )
 
 
+def test_is_funding_title_blocks_stock_moves_and_pump_hype() -> None:
+    # Stock-price-movement headlines are not funding rounds.
+    assert not funding_module._is_funding_title(
+        "Kodiak AI stock tumbling 37% after going public"
+    )
+    assert not funding_module._is_funding_title("XYZ Corp shares plunge after earnings")
+    assert not funding_module._is_funding_title("Acme Inc stock plummets on weak guidance")
+    # Promotional / pump-and-dump hyperbole.
+    assert not funding_module._is_funding_title(
+        "Dominari Securities Raises $200,000,000 in World's Largest IPO"
+    )
+    # A genuine round with no price-move language still passes.
+    assert funding_module._is_funding_title("Acme raises $25M Series B")
+    assert funding_module._is_funding_title("Beta Inc secures $10M seed funding")
+
+
 def test_company_from_headline_extracts_company() -> None:
     assert funding_module._company_from_headline(
         "Altara secures $7M to bridge the data gap"

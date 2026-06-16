@@ -58,6 +58,7 @@ def _lookup_response(
     country: str = "US",
     domain: str = "acme.com",
     is_it_vendor: str = "no",
+    is_recruiter: str = "no",
     dm_name: str = "Sarah Johnson",
     dm_title: str = "Director of IT",
     value_prop: str = "Sells industrial widgets to manufacturing plants.",
@@ -69,6 +70,7 @@ def _lookup_response(
         f"COUNTRY: {country}\n"
         f"DOMAIN: {domain}\n"
         f"IS_IT_VENDOR: {is_it_vendor}\n"
+        f"IS_RECRUITER: {is_recruiter}\n"
         f"DM_NAME: {dm_name}\n"
         f"DM_TITLE: {dm_title}\n"
         f"VALUE_PROP: {value_prop}\n"
@@ -431,6 +433,103 @@ def test_enrich_deletes_it_vendor_lead(
     assert enrich(conn, lead) is False
     assert db.get_lead(conn, lead_id=lead.id) is None
     openai_mock.assert_not_called()
+
+
+@pytest.mark.parametrize(
+    "name",
+    [
+        "Toyota North America",
+        "Panasonic North America",
+        "Capital One",
+        "Raytheon Technologies",
+        "Best Western International",
+        "ManpowerGroup",
+        "Planned Parenthood of Greater New York",
+        "Automobile Club of Southern California",
+        "Dalio Family Office",
+    ],
+)
+def test_disqualifies_enterprise_name(name: str) -> None:
+    lead = Lead(name=name, name_key="x", signals=[])
+    assert enrichment._disqualification_reason(lead) == "blocked_enterprise_name"
+
+
+@pytest.mark.parametrize(
+    "name",
+    [
+        "James Search Group",
+        "The Everest Search Group",
+        "Grayson Search Partners",
+        "Jobot",
+        "Tailored Management",
+        "Diati Staffing",
+        "Acme Executive Search",
+    ],
+)
+def test_disqualifies_recruiter_name(name: str) -> None:
+    lead = Lead(name=name, name_key="x", signals=[])
+    assert enrichment._disqualification_reason(lead) == "recruiter_name"
+
+
+@pytest.mark.parametrize(
+    "name",
+    [
+        "Winona County",
+        "Jacksonville Transportation Authority",
+        "Chaffey Joint Union High School District",
+        "Las Lomitas Elementary School District",
+        "Springfield Township",
+        "Metropolitan Transit Authority",
+        "Clark County Sheriff",
+    ],
+)
+def test_disqualifies_government_entity(name: str) -> None:
+    lead = Lead(name=name, name_key="x", signals=[])
+    assert enrichment._disqualification_reason(lead) == "government_entity"
+
+
+def test_does_not_disqualify_normal_smb_names() -> None:
+    # Includes near-misses for the gov filter: a business that merely contains
+    # "County" mid-name, and a private water company without "District".
+    for name in [
+        "Capital City Auto",
+        "Sandhills Medical Foundation",
+        "Pioneer Legal LLP",
+        "Orange County Choppers",
+        "Dutchess County Bank",
+    ]:
+        lead = Lead(name=name, name_key="x", signals=[])
+        assert enrichment._disqualification_reason(lead) is None
+
+
+def test_enrich_deletes_recruiter_lead(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """A company Gemini flags as a staffing / recruiting firm is deleted —
+    the real hiring company is hidden behind the recruiter."""
+    conn = db.init_db(tmp_path / "leads.db")
+    lead = _insert_lead(conn, "Mystery Recruiter Co")
+    assert lead.id is not None
+
+    openai_mock = MagicMock()
+    monkeypatch.setattr(
+        enrichment.llm,
+        "call_gemini",
+        MagicMock(
+            return_value=_lookup_response(
+                headcount="40", country="US", is_recruiter="yes"
+            )
+        ),
+    )
+    monkeypatch.setattr(enrichment.llm, "call_openai", openai_mock)
+
+    assert enrich(conn, lead) is False
+    assert db.get_lead(conn, lead_id=lead.id) is None
+    openai_mock.assert_not_called()
+
+
+def test_insurance_is_a_valid_industry() -> None:
+    assert Industry("insurance") is Industry.INSURANCE
 
 
 def test_enrich_writes_domain(

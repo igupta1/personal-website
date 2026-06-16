@@ -301,6 +301,121 @@ def dedup_signals_pass(conn: sqlite3.Connection) -> int:
     return modified
 
 
+# Scalar fields filled onto a merge survivor from the rows being merged away,
+# when the survivor's own value is missing. Lets the enriched duplicate donate
+# its domain / headcount / DM data to the row we keep.
+_MERGE_FILL_FIELDS = (
+    "domain", "industry", "headcount", "country",
+    "dm_name", "dm_title", "dm_email", "dm_linkedin_url", "value_prop",
+)
+
+
+def _normalize_domain(domain: str | None) -> str | None:
+    if not domain:
+        return None
+    d = domain.strip().lower()
+    d = re.sub(r"^https?://", "", d)
+    d = d.split("/")[0]
+    d = re.sub(r"^www\.", "", d).rstrip("/")
+    return d or None
+
+
+def _is_prefix_subset(short_tokens: list[str], long_tokens: list[str]) -> bool:
+    """True when ``short_tokens`` is a strict leading token-subsequence of
+    ``long_tokens`` AND specific enough to be a confident match: at least two
+    tokens, or a single token of >= 7 chars. Catches "offchain" ⊂ "offchain
+    labs" and "sandhills medical" ⊂ "sandhills medical foundation" without
+    collapsing generic short names like "acme" ⊂ "acme logistics"."""
+    if not (0 < len(short_tokens) < len(long_tokens)):
+        return False
+    if long_tokens[: len(short_tokens)] != short_tokens:
+        return False
+    return len(short_tokens) >= 2 or len(short_tokens[0]) >= 7
+
+
+def merge_duplicates(conn: sqlite3.Connection) -> int:
+    """Merge leads that are the same company under different names. Two leads
+    merge when they share a normalized domain, or when one name_key is a
+    confident leading-subsequence of the other (see ``_is_prefix_subset``).
+
+    The lowest-id row survives; the others donate their signals (deduped) and
+    any scalar field the survivor is missing, then are deleted. Returns the
+    number of rows removed. Run after enrichment (so domains are populated)
+    and before scoring."""
+    rows = conn.execute("SELECT id, name_key, domain FROM leads ORDER BY id").fetchall()
+    if len(rows) < 2:
+        return 0
+
+    parent: dict[int, int] = {row["id"]: row["id"] for row in rows}
+
+    def find(x: int) -> int:
+        while parent[x] != x:
+            parent[x] = parent[parent[x]]
+            x = parent[x]
+        return x
+
+    def union(a: int, b: int) -> None:
+        ra, rb = find(a), find(b)
+        if ra != rb:
+            parent[max(ra, rb)] = min(ra, rb)
+
+    by_domain: dict[str, list[int]] = {}
+    for row in rows:
+        dom = _normalize_domain(row["domain"])
+        if dom:
+            by_domain.setdefault(dom, []).append(row["id"])
+    for ids in by_domain.values():
+        for other in ids[1:]:
+            union(ids[0], other)
+
+    tokenized = [(row["id"], row["name_key"].split()) for row in rows]
+    for i_id, i_tok in tokenized:
+        for j_id, j_tok in tokenized:
+            if i_id != j_id and _is_prefix_subset(i_tok, j_tok):
+                union(i_id, j_id)
+
+    groups: dict[int, list[int]] = {}
+    for lead_id in parent:
+        groups.setdefault(find(lead_id), []).append(lead_id)
+
+    removed = 0
+    with conn:
+        for members in groups.values():
+            if len(members) < 2:
+                continue
+            members.sort()
+            survivor = members[0]
+            survivor_row = dict(
+                conn.execute("SELECT * FROM leads WHERE id = ?", (survivor,)).fetchone()
+            )
+            fills: dict[str, Any] = {}
+            for other in members[1:]:
+                other_row = conn.execute(
+                    "SELECT * FROM leads WHERE id = ?", (other,)
+                ).fetchone()
+                if other_row is None:
+                    continue
+                for field in _MERGE_FILL_FIELDS:
+                    if survivor_row.get(field) is None and fills.get(field) is None:
+                        if other_row[field] is not None:
+                            fills[field] = other_row[field]
+                for sig in _parse_signals(json.loads(other_row["signals"]), lead_id=other):
+                    _append_signal_row(conn, survivor, sig)
+                _log.info(
+                    "merge: folding lead %d into %d (name_key=%r)",
+                    other, survivor, other_row["name_key"],
+                )
+                conn.execute("DELETE FROM leads WHERE id = ?", (other,))
+                removed += 1
+            if fills:
+                set_parts = ", ".join(f"{k} = ?" for k in fills) + ", updated_at = ?"
+                conn.execute(
+                    f"UPDATE leads SET {set_parts} WHERE id = ?",
+                    [*fills.values(), _utcnow(), survivor],
+                )
+    return removed
+
+
 def init_db(path: Path) -> sqlite3.Connection:
     conn = sqlite3.connect(path, detect_types=sqlite3.PARSE_DECLTYPES)
     conn.row_factory = sqlite3.Row

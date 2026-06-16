@@ -140,8 +140,19 @@ def test_main_end_to_end_smoke(
     payload = json.loads(out_path.read_text())
     assert "generated_at" in payload
     assert set(payload["niches"].keys()) == {"it_msp", "mssp", "cloud"}
+
+    # Each lead appears only in the niches its signal qualifies for:
+    # Acme (security) -> MSSP, Beta (funding) -> IT MSP + Cloud,
+    # Gamma (breach) -> MSSP.
+    names_by_niche = {
+        niche: {lead["name"] for lead in leads}
+        for niche, leads in payload["niches"].items()
+    }
+    assert names_by_niche["it_msp"] == {"Beta Inc"}
+    assert names_by_niche["mssp"] == {"Acme Co", "Gamma LLC"}
+    assert names_by_niche["cloud"] == {"Beta Inc"}
+
     for leads in payload["niches"].values():
-        assert len(leads) == 3
         for lead in leads:
             assert set(lead.keys()) >= {
                 "name",
@@ -154,6 +165,7 @@ def test_main_end_to_end_smoke(
                 "insight",
                 "signals",
             }
+            assert lead["score"] is not None
             assert lead["country"] == "US"
             assert lead["city"] == "Boston"
             assert lead["state"] == "MA"
@@ -210,8 +222,10 @@ def test_per_source_failure_isolated(
     )
     assert rc == 0
     payload = json.loads(out_path.read_text())
-    names = {lead["name"] for lead in payload["niches"]["it_msp"]}
-    assert names == {"Funding Co", "Breach Co"}
+    # jobs source failed; funding (Funding Co) and breaches (Breach Co)
+    # survived. Funding qualifies IT MSP; the breach qualifies MSSP only.
+    assert {lead["name"] for lead in payload["niches"]["it_msp"]} == {"Funding Co"}
+    assert {lead["name"] for lead in payload["niches"]["mssp"]} == {"Breach Co"}
 
 
 def test_copy_regen_threshold_gates_calls(
@@ -258,9 +272,10 @@ def test_copy_regen_threshold_gates_calls(
         conn, [cold.id, hot.id], model="gpt-4o-mini"
     )
     assert len(rescored) == 2
-    # Hot Co crosses threshold in IT MSP + MSSP at minimum; Cloud may be
-    # right at the boundary depending on micro-decay. Cold Co never crosses.
-    assert copy_calls >= 2
+    # Hot Co (breach + security) qualifies MSSP only and crosses there; its
+    # signals don't fit IT MSP or Cloud. Cold Co's stale exec hire stays
+    # below threshold in IT MSP. So exactly Hot Co gets copy generated.
+    assert copy_calls >= 1
     called_names = {call.args[0].name for call in generate_mock.call_args_list}
     assert called_names == {"Hot Co"}
 
@@ -286,11 +301,14 @@ def test_json_output_shape(tmp_path: Path) -> None:
     assert "generated_at" in output
     assert set(output["niches"].keys()) == {"it_msp", "mssp", "cloud"}
 
+    # Only leads with a non-NULL niche score appear. Alpha + Beta have an
+    # it_msp_score; Gamma (NULL) is dropped. No lead has an mssp/cloud score.
     it_leads = output["niches"]["it_msp"]
-    assert len(it_leads) == 3
-    assert [lead["name"] for lead in it_leads] == ["Alpha", "Beta", "Gamma"]
+    assert [lead["name"] for lead in it_leads] == ["Alpha", "Beta"]
     assert it_leads[0]["score"] == 80.0
-    assert it_leads[2]["score"] is None
+    assert it_leads[1]["score"] == 30.0
+    assert output["niches"]["mssp"] == []
+    assert output["niches"]["cloud"] == []
 
 
 def test_lead_to_json_signals_filtered_and_capped() -> None:

@@ -45,7 +45,17 @@ _NON_FUNDING_PATTERN = re.compile(
     r"venture\s+(?:capital|fund|funds)|growth-stage\s+funds?|"
     r"for\s+(?:new\s+|two\s+|three\s+)?(?:growth-stage\s+|venture\s+)?funds?\b|"
     # REIT investment announcements ("NHI Announces $X SHOP Investment")
-    r"announces.*\binvestment\b|REIT\b)",
+    r"announces.*\binvestment\b|REIT\b|"
+    # Stock-price-movement headlines are not funding rounds — a falling (or
+    # spiking) share price is not a buying signal. Catches the "Kodiak AI
+    # stock tumbling 37%" misclassification.
+    r"\b(?:tumbl(?:es|ed|ing)?|plunge[sd]?|plunging|plummet(?:s|ed|ing)?|"
+    r"slump(?:s|ed|ing)?|nosedive[sd]?|crater(?:s|ed|ing)?)\b|"
+    r"\b(?:stock|shares?)\s+(?:tumbl|plung|plummet|slump|soar|surg|jump|drop|"
+    r"fall|rise|sink|crash|dip)|"
+    # Promotional / pump-and-dump hyperbole — "World's Largest IPO" on a
+    # micro-cap is PR noise, not a real round.
+    r"world'?s\s+largest)",
     re.IGNORECASE,
 )
 
@@ -137,9 +147,13 @@ Rules for is_real_buying_signal:
 - FALSE: routine investor relations (earnings calls, conference call
   schedules, dividend announcements), class actions, lawsuits,
   regulatory inquiries, "encouraged to inquire" shareholder notices,
-  share price milestones / valuation hits.
+  share price milestones / valuation hits, stock-price movements (a
+  share price tumbling, plunging, or surging), and promotional /
+  pump-and-dump hyperbole on micro-caps.
 - Example FALSE: "Stellus Capital Schedules First Quarter Conference Call"
 - Example FALSE: "X Inc Hits $5B Valuation"
+- Example FALSE: "Kodiak AI stock tumbling 37% after going public"
+- Example FALSE: "Dominari Securities Raises $200,000,000 in World's Largest IPO"
 
 Rules for is_vc_or_fund:
 - TRUE if the entity raising money IS a VC firm, growth fund, or

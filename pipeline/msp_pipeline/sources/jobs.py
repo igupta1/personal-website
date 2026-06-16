@@ -61,8 +61,9 @@ _HN_COMPANY_PATTERN = re.compile(r"\s+at\s+(.+?)(?:\s*[-–|(]|\s*$)", re.IGNORE
 # outreach. The is_it_vendor enrichment check catches the rest of the
 # vendors that don't have an obvious naming convention.
 _RECRUITER_NAME_PATTERN = re.compile(
-    r"\b(staffing|recruit(?:ing|er|ers|ment)|"
-    r"personnel\s+services?|talent\s+(?:group|agency|partners|solutions)|"
+    r"\b(staffing|recruit(?:ing|er|ers|ment)|headhunter|jobot|"
+    r"personnel\s+services?|talent\s+(?:group|agency|partners|solutions|acquisition)|"
+    r"executive\s+search|search\s+(?:group|partners?|associates|consultants)|"
     r"\btalent$)",
     re.IGNORECASE,
 )

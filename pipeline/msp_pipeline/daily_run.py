@@ -41,18 +41,6 @@ SIGNAL_LIMIT_IN_JSON = 6
 APOLLO_TOP_N_DEFAULT = 30
 
 
-_SCORING_SIGNAL_TYPES: frozenset[SignalType] = frozenset(
-    {
-        SignalType.JOB_IT_SUPPORT,
-        SignalType.JOB_IT_LEADERSHIP,
-        SignalType.JOB_SECURITY,
-        SignalType.JOB_CLOUD_DEVOPS,
-        SignalType.EXEC_HIRED,
-        SignalType.FUNDING_RAISED,
-        SignalType.BREACH_DISCLOSED,
-    }
-)
-
 _NICHE_SCORE_COL: dict[NicheName, str] = {
     NicheName.IT_MSP: "it_msp_score",
     NicheName.MSSP: "mssp_score",
@@ -104,6 +92,9 @@ def main(argv: list[str] | None = None) -> int:
         purged = enrichment.purge_disqualified(conn)
         log.info("purged %d disqualified leads", purged)
 
+        merged = db.merge_duplicates(conn)
+        log.info("merged %d duplicate leads", merged)
+
         all_ids = [lead.id for lead in db.iter_leads(conn) if lead.id is not None]
         log.info("re-scoring %d leads", len(all_ids))
 
@@ -149,6 +140,9 @@ def main(argv: list[str] | None = None) -> int:
 
     purged = enrichment.purge_disqualified(conn)
     log.info("purged %d disqualified leads", purged)
+
+    merged = db.merge_duplicates(conn)
+    log.info("merged %d duplicate leads", merged)
     enriched_ids = [lid for lid in enriched_ids if db.get_lead(conn, lead_id=lid)]
 
     score_changes = _rescore_all(conn, enriched_ids)
@@ -233,17 +227,17 @@ def _enrich_all(
 
 def _rescore_all(
     conn: sqlite3.Connection, lead_ids: list[int]
-) -> dict[int, dict[NicheName, tuple[float | None, float]]]:
+) -> dict[int, dict[NicheName, tuple[float | None, float | None]]]:
     """Compute fresh scores for each lead and persist them. Returns
     per-lead per-niche (old, new) pairs so the regen stage can apply
     threshold-crossing logic without re-reading the pre-update state."""
-    changes: dict[int, dict[NicheName, tuple[float | None, float]]] = {}
+    changes: dict[int, dict[NicheName, tuple[float | None, float | None]]] = {}
     for lead_id in lead_ids:
         lead = db.get_lead(conn, lead_id=lead_id)
         if lead is None:
             continue
         new_scores = scoring.score(lead)
-        per_niche: dict[NicheName, tuple[float | None, float]] = {}
+        per_niche: dict[NicheName, tuple[float | None, float | None]] = {}
         updates: dict[str, Any] = {}
         for niche, new in new_scores.items():
             col = _NICHE_SCORE_COL[niche]
@@ -351,7 +345,7 @@ def _apollo_enrich_top_n(conn: sqlite3.Connection, *, n: int) -> set[int]:
 
 def _regen_copy(
     conn: sqlite3.Connection,
-    score_changes: dict[int, dict[NicheName, tuple[float | None, float]]],
+    score_changes: dict[int, dict[NicheName, tuple[float | None, float | None]]],
     *,
     force_regen_ids: set[int],
     model: str,
@@ -369,6 +363,11 @@ def _regen_copy(
         updates: dict[str, Any] = {}
         for niche, (old, new) in per_niche.items():
             insight_col = _NICHE_INSIGHT_COL[niche]
+            if new is None:
+                # Lead no longer qualifies for this niche; drop stale insight.
+                if getattr(lead, insight_col) is not None:
+                    updates[insight_col] = None
+                continue
             insight_missing = getattr(lead, insight_col) is None
             should_regen = new >= INSIGHT_THRESHOLD and (
                 insight_missing
@@ -416,9 +415,15 @@ def _build_output(conn: sqlite3.Connection) -> dict[str, Any]:
     return {
         "generated_at": now.isoformat(),
         "niches": {
+            # Only leads with a non-NULL score for this niche appear in its
+            # slice. A NULL score means the lead carries no signal that fits
+            # this niche (see scoring.SIGNAL_WEIGHTS) — so it belongs on a
+            # different dashboard, or none. This is the niche-matching filter:
+            # it lives in the pipeline, not the UI.
             niche.value: [
                 _lead_to_json(lead, niche, now=now)
                 for lead in db.iter_leads(conn, niche=niche)
+                if getattr(lead, _NICHE_SCORE_COL[niche]) is not None
             ]
             for niche in NicheName
         },
@@ -441,9 +446,12 @@ def _lead_to_json(
     lead: Lead, niche: NicheName, *, now: datetime
 ) -> dict[str, Any]:
     city, state = _city_state(lead)
+    # Only signals that qualify the lead for THIS niche render on its cards.
+    # A Cloud card shows cloud/DevOps + funding signals; the breach that lead
+    # may also carry stays off the Cloud dashboard entirely.
     relevant = sorted(
-        (s for s in lead.signals if s.type in _SCORING_SIGNAL_TYPES),
-        key=lambda s: s.captured_at,
+        (s for s in lead.signals if scoring.signal_matches_niche(s, niche)),
+        key=scoring.effective_date,
         reverse=True,
     )[:SIGNAL_LIMIT_IN_JSON]
     return {
@@ -465,10 +473,13 @@ def _lead_to_json(
 
 
 def _signal_to_json(s: Signal, now: datetime) -> dict[str, Any]:
+    # Age is measured from the event date, not our capture time. For breaches
+    # that's the disclosure date, so a breach reported two weeks ago reads
+    # "14d ago" instead of "0 days ago" (the latter was the literal bug).
     return {
         "type": s.type.value,
         "captured_at": s.captured_at.isoformat(),
-        "days_ago": max(0, (now - s.captured_at).days),
+        "days_ago": max(0, (now - scoring.effective_date(s)).days),
         "payload": s.payload,
     }
 

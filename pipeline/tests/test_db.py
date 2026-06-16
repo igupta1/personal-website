@@ -13,6 +13,7 @@ from msp_pipeline.db import (
     get_lead,
     init_db,
     iter_leads,
+    merge_duplicates,
     update_lead,
     upsert_lead,
 )
@@ -607,3 +608,55 @@ def test_name_key_unicode_and_legal_suffixes() -> None:
         _name_key("LLC")
     with pytest.raises(ValueError):
         _name_key("")
+
+
+# --- merge_duplicates ------------------------------------------------------
+
+
+def test_merge_duplicates_by_prefix_name(tmp_path: Path) -> None:
+    conn = init_db(tmp_path / "leads.db")
+    a = upsert_lead(conn, _candidate("Offchain", payload={"title": "IT role A"}))
+    b = upsert_lead(conn, _candidate("Offchain Labs", payload={"title": "IT role B"}))
+    assert a.id is not None and b.id is not None
+    assert a.id != b.id  # fuzzy upsert left them separate
+
+    removed = merge_duplicates(conn)
+    assert removed == 1
+
+    survivor = get_lead(conn, lead_id=min(a.id, b.id))
+    assert survivor is not None
+    assert get_lead(conn, lead_id=max(a.id, b.id)) is None
+    job_sigs = [s for s in survivor.signals if s.type == SignalType.JOB_IT_SUPPORT]
+    assert len(job_sigs) == 2  # both postings folded onto the survivor
+
+
+def test_merge_duplicates_by_domain(tmp_path: Path) -> None:
+    conn = init_db(tmp_path / "leads.db")
+    a = upsert_lead(conn, _candidate("Northwind Traders", payload={"title": "a"}))
+    b = upsert_lead(conn, _candidate("Aperture Co", payload={"title": "b"}))
+    assert a.id is not None and b.id is not None
+    # Same company under two names — only the domain reveals it.
+    update_lead(conn, a.id, domain="shared-co.com")
+    update_lead(conn, b.id, domain="https://www.shared-co.com/careers")
+
+    removed = merge_duplicates(conn)
+    assert removed == 1
+    survivor = get_lead(conn, lead_id=min(a.id, b.id))
+    assert survivor is not None
+    assert survivor.domain is not None
+    assert get_lead(conn, lead_id=max(a.id, b.id)) is None
+    assert len([s for s in survivor.signals if s.type == SignalType.JOB_IT_SUPPORT]) == 2
+
+
+def test_merge_duplicates_leaves_distinct_companies(tmp_path: Path) -> None:
+    conn = init_db(tmp_path / "leads.db")
+    a = upsert_lead(conn, _candidate("Acme"))
+    b = upsert_lead(conn, _candidate("Acme Logistics"))
+    assert a.id is not None and b.id is not None
+    update_lead(conn, a.id, domain="acme.com")
+    update_lead(conn, b.id, domain="acmelogistics.com")
+
+    # "acme" is too short/generic to be a confident prefix; domains differ.
+    assert merge_duplicates(conn) == 0
+    assert get_lead(conn, lead_id=a.id) is not None
+    assert get_lead(conn, lead_id=b.id) is not None

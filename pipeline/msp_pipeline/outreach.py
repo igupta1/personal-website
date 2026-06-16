@@ -17,7 +17,7 @@ from datetime import datetime, timezone
 
 from pydantic import BaseModel, Field
 
-from msp_pipeline import llm
+from msp_pipeline import llm, scoring
 from msp_pipeline.models import Lead, NicheName, Signal, SignalType
 
 
@@ -68,6 +68,14 @@ list of leads, not to the lead being pitched.
 
 Avoid generic phrasing like "growing companies" or "highlighting the
 need for IT support". Lead with the concrete signal.
+
+Refer to timing naturally ("recently", or by the reported date shown in
+the signal) — do NOT restate raw day counts or write phrases like
+"0 days ago" / "just 0 days ago". Do NOT repeat sensational or
+promotional headline wording verbatim (e.g. "World's Largest IPO") and
+do NOT frame a negative event (a stock decline, a layoff) as growth;
+describe the funding factually — round and amount only when they look
+plausible.
 """
 
 
@@ -86,7 +94,7 @@ def generate(
         headcount=_describe_headcount(lead.headcount),
         location=_describe_location(lead),
         score=score,
-        signals=_describe_signals(lead),
+        signals=_describe_signals(lead, niche=niche),
     )
     return llm.call_openai(prompt, response_model=Copy, model=model)
 
@@ -112,8 +120,8 @@ _SIGNAL_PAYLOAD_FIELDS: dict[SignalType, tuple[str, ...]] = {
     SignalType.JOB_SECURITY: ("title", "location"),
     SignalType.JOB_CLOUD_DEVOPS: ("title", "location"),
     SignalType.EXEC_HIRED: ("title", "location"),
-    SignalType.FUNDING_RAISED: ("title", "amount_usd", "round"),
-    SignalType.BREACH_DISCLOSED: ("disclosed_on", "records_affected", "title"),
+    SignalType.FUNDING_RAISED: ("feed_title", "title", "amount_usd", "round"),
+    SignalType.BREACH_DISCLOSED: ("agency", "reported_date"),
 }
 
 
@@ -151,19 +159,30 @@ def _format_signal(sig: Signal, days_ago: int) -> str:
         if val:
             parts.append(f"{field}={val!r}")
     detail = f" - {'; '.join(parts)}" if parts else ""
-    return f"- {sig.type.value} ({days_ago}d ago){detail}"
+    when = "today" if days_ago == 0 else f"{days_ago}d ago"
+    return f"- {sig.type.value} ({when}){detail}"
 
 
 def _describe_signals(
-    lead: Lead, *, limit: int = 6, now: datetime | None = None
+    lead: Lead,
+    *,
+    niche: NicheName | None = None,
+    limit: int = 6,
+    now: datetime | None = None,
 ) -> str:
-    relevant = [s for s in lead.signals if s.type in _SCORING_SIGNAL_TYPES]
-    relevant.sort(key=lambda s: s.captured_at, reverse=True)
+    # When a niche is given, describe only the signals that fit it, so the
+    # per-niche insight can't reference an off-niche signal (e.g. a breach in
+    # a Cloud insight). Falls back to all scoring signals when none given.
+    if niche is not None:
+        relevant = [s for s in lead.signals if scoring.signal_matches_niche(s, niche)]
+    else:
+        relevant = [s for s in lead.signals if s.type in _SCORING_SIGNAL_TYPES]
+    relevant.sort(key=scoring.effective_date, reverse=True)
     if not relevant:
         return "(no recent signals on file)"
     if now is None:
         now = datetime.now(timezone.utc).replace(tzinfo=None)
     return "\n".join(
-        _format_signal(s, max(0, (now - s.captured_at).days))
+        _format_signal(s, max(0, (now - scoring.effective_date(s)).days))
         for s in relevant[:limit]
     )

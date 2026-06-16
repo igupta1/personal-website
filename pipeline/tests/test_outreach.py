@@ -137,7 +137,7 @@ def test_describe_signals_skips_missing_payload_fields() -> None:
         signals=[_signal(type=SignalType.JOB_SECURITY, captured_at=_now(), payload={})]
     )
     out = _describe_signals(lead, now=_now())
-    assert out == "- job_posted_security (0d ago)"
+    assert out == "- job_posted_security (today)"
 
 
 def test_describe_signals_limits_and_orders() -> None:

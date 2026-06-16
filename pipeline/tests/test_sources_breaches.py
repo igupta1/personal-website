@@ -85,3 +85,18 @@ def test_breaches_fetch_aggregates_and_continues_on_failure() -> None:
          patch.object(breaches_module, "_fetch_from_wa_ag", return_value=[c]):
         names = {x.name for x in breaches_module.fetch(since=datetime(2020, 1, 1))}
     assert names == {"ME Co", "WA Co"}
+
+
+def test_clean_breach_entity_extracts_company_behind_agent() -> None:
+    clean = breaches_module._clean_breach_entity
+    # Reporting agent "on behalf of" the breached company -> keep the company.
+    assert (
+        clean("Cornick, Garber & Sandler, LLP on behalf of Voxx International Corporation")
+        == "Voxx International Corporation"
+    )
+    assert clean("Smith Law Group o/b/o Acme Widgets, Inc.") == "Acme Widgets, Inc."
+    # No identifiable company behind the agent -> drop the row.
+    assert clean("Some Breach Response Firm on behalf of its clients") is None
+    assert clean("Law Firm LLP on behalf of multiple individuals") is None
+    # Ordinary entity is returned unchanged.
+    assert clean("Sandhills Medical Foundation") == "Sandhills Medical Foundation"
