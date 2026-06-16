@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-16T18:00:19.659566",
+  "generated_at": "2026-06-16T18:14:49.473953",
   "niches": {
     "it_msp": [
       {
@@ -14,7 +14,7 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 46.137580329206784,
+        "score": 46.12643222393913,
         "insight": "VigorCare Pediatric Services has posted job openings for both an IT Support Specialist and an IT Support Engineer.",
         "signals": [
           {
@@ -53,7 +53,7 @@
         "dm_title": "Director of Information Technology",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 39.737730302832844,
+        "score": 39.728128468440154,
         "insight": "With the recent job posting for a Director of IT, Aradius Group is signaling a potential need for enhanced IT support services.",
         "signals": [
           {
@@ -81,7 +81,7 @@
         "dm_title": "President",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 38.869209640302415,
+        "score": 38.85981767865267,
         "insight": "Cogent Analytics recently posted a job for a Director of IT, indicating a potential need for IT managed services.",
         "signals": [
           {
@@ -98,6 +98,34 @@
         ]
       },
       {
+        "name": "PennyMac",
+        "domain": "pennymac.com",
+        "industry": "fintech",
+        "headcount": null,
+        "country": "US",
+        "city": "Westlake Village",
+        "state": "CA",
+        "dm_name": "David Spector",
+        "dm_title": "Chairman and Chief Executive Officer",
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": 34.99512242195775,
+        "insight": "PennyMac recently hired an Assistant VP of IT Project Management Operations, indicating a potential need for IT support services.",
+        "signals": [
+          {
+            "type": "exec_hired",
+            "captured_at": "2026-06-16T18:06:06.459685",
+            "days_ago": 0,
+            "payload": {
+              "title": "Assistant VP IT Project Management Operations",
+              "url": "https://www.adzuna.com/land/ad/5760888766?se=6kJ_Ea5p8RGHcblSVmFK6Q&utm_medium=api&utm_source=3aa14b35&v=EC27D57CB778AB487A2CA65A9352F8445FD27661",
+              "date_posted": "2026-06-11T23:19:13Z",
+              "site": "adzuna"
+            }
+          }
+        ]
+      },
+      {
         "name": "Wightman",
         "domain": "wightman.ca",
         "industry": "construction",
@@ -109,7 +137,7 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 34.99697413738437,
+        "score": 34.98851780430083,
         "insight": "Recently, Wightman posted a job opening for an IT Help Desk Technician, indicating a need for IT support.",
         "signals": [
           {
@@ -134,10 +162,10 @@
         "city": "Tarrytown",
         "state": "NY",
         "dm_name": "Clay Rosenberg",
-        "dm_title": "Co-Founder & CEO",
+        "dm_title": "CEO",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 34.9969741314696,
+        "score": 34.98851779517819,
         "insight": "Ultrafabrics recently posted a job for a Help Desk Technician, indicating an immediate need for IT support.",
         "signals": [
           {
@@ -157,15 +185,15 @@
         "name": "Shaw Development, LLC",
         "domain": "shawdev.com",
         "industry": "manufacturing",
-        "headcount": null,
+        "headcount": 250,
         "country": "US",
         "city": "Bonita Springs",
         "state": "FL",
         "dm_name": "Andrew Sexton",
-        "dm_title": "President and CEO",
+        "dm_title": "CEO",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 34.98935395799237,
+        "score": 34.980899470058,
         "insight": "Shaw Development, LLC recently posted a job for an IT Help Desk Technician, indicating a growing need for IT support.",
         "signals": [
           {
@@ -193,7 +221,7 @@
         "dm_title": "CEO",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 34.989237511354986,
+        "score": 34.980783052951466,
         "insight": "Alanric Food Distributors recently posted a job opening for a Help Desk Technician I, indicating a need for IT support.",
         "signals": [
           {
@@ -210,34 +238,6 @@
         ]
       },
       {
-        "name": "SpaceX",
-        "domain": "spacex.com",
-        "industry": "manufacturing",
-        "headcount": null,
-        "country": "US",
-        "city": "Starbase",
-        "state": "TX",
-        "dm_name": "Elon Musk",
-        "dm_title": "CEO, Chairman & CTO",
-        "dm_email": null,
-        "dm_linkedin_url": null,
-        "score": 34.9892375047959,
-        "insight": "Recently, SpaceX posted a job opening for an IT Support Technician, indicating an immediate need for IT support.",
-        "signals": [
-          {
-            "type": "job_posted_it_support",
-            "captured_at": "2026-06-16T17:40:33.878008",
-            "days_ago": 0,
-            "payload": {
-              "title": "IT Support Technician",
-              "url": "https://www.linkedin.com/jobs/view/4423096543",
-              "date_posted": "2026-06-04",
-              "site": "linkedin"
-            }
-          }
-        ]
-      },
-      {
         "name": "LiveTrends Design Group",
         "domain": "livetrends.com",
         "industry": "other",
@@ -249,7 +249,7 @@
         "dm_title": "Founder & CEO",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 34.98923749833975,
+        "score": 34.98078304356891,
         "insight": "The company recently posted a job for an IT Support Technician, indicating an immediate need for IT assistance.",
         "signals": [
           {
@@ -269,15 +269,15 @@
         "name": "All Heart Homecare Agency",
         "domain": "allheartcare.com",
         "industry": "healthcare",
-        "headcount": null,
+        "headcount": 50,
         "country": "US",
         "city": "Brooklyn",
         "state": "NY",
-        "dm_name": "Albert Finkelshteyn",
-        "dm_title": "Founder and Executive Co-Chairman",
+        "dm_name": null,
+        "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 34.77051403439351,
+        "score": 34.76211243433364,
         "insight": "All Heart Homecare Agency posted a job for an IT Support Professional, indicating their immediate need for IT assistance.",
         "signals": [
           {
@@ -305,7 +305,7 @@
         "dm_title": "CEO",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 34.01082273107003,
+        "score": 34.002604696945724,
         "insight": "Dominari Securities has recently raised funding, indicating a potential need for enhanced IT support as they scale.",
         "signals": [
           {
@@ -333,7 +333,7 @@
         "dm_title": "CEO and Founder",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 34.010661781568814,
+        "score": 34.0024437890444,
         "insight": "SupplyHouse just posted a job for an IT Support Technician, indicating an immediate need for IT managed services.",
         "signals": [
           {
@@ -361,7 +361,7 @@
         "dm_title": "CEO",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 34.01066177528413,
+        "score": 34.00244378118817,
         "insight": "Bessemer Management Company recently posted a job for an IT Support Manager, indicating an immediate need for IT services.",
         "signals": [
           {
@@ -389,7 +389,7 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 33.75614151376846,
+        "score": 33.74798501537147,
         "insight": "Bristol Alliance of Companies has posted a job for a Director of IT, indicating a need for enhanced IT leadership.",
         "signals": [
           {
@@ -417,7 +417,7 @@
         "dm_title": "CEO",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 33.75614148921503,
+        "score": 33.747985007745505,
         "insight": "Ironmark is seeking a new Director of IT Infrastructure, indicating a potential need for enhanced IT support services.",
         "signals": [
           {
@@ -445,7 +445,7 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 33.4924707342408,
+        "score": 33.48437797213119,
         "insight": "Prairie's Edge Casino Resort just posted a job for an IT Director, indicating a need for enhanced IT leadership and support.",
         "signals": [
           {
@@ -463,17 +463,17 @@
       },
       {
         "name": "Gumenick Management Company LC",
-        "domain": "gumenickproperties.com",
+        "domain": "gumenick.com",
         "industry": "real_estate",
         "headcount": null,
         "country": "US",
         "city": "Richmond",
         "state": "VA",
-        "dm_name": "Wayne A. Chasen",
-        "dm_title": "President and Chief Executive Officer",
+        "dm_name": null,
+        "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 33.14925239966205,
+        "score": 33.141242556208645,
         "insight": "Gumenick Management Company LC is actively hiring a Help Desk Associate, indicating a need for IT support.",
         "signals": [
           {
@@ -495,13 +495,13 @@
         "industry": "fintech",
         "headcount": 160,
         "country": "US",
-        "city": "Bridgewater",
+        "city": "Raynham",
         "state": "MA",
-        "dm_name": "Ben Lord",
-        "dm_title": "Chief Information & Technology Officer",
+        "dm_name": "C. A.",
+        "dm_title": "Vice President Information Security",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 33.14925239364292,
+        "score": 33.14124254871092,
         "insight": "Bluestone Bank recently posted a job for a Sr. Desktop Support Specialist, indicating a need for enhanced IT support.",
         "signals": [
           {
@@ -529,7 +529,7 @@
         "dm_title": "Co-founder and CEO",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 33.14916098831555,
+        "score": 33.141151167747466,
         "insight": "The Shade Store is actively seeking an IT Support Specialist, indicating an immediate need for IT assistance.",
         "signals": [
           {
@@ -540,34 +540,6 @@
               "title": "IT Support Specialist",
               "url": "https://www.linkedin.com/jobs/view/4401675218",
               "date_posted": "2026-06-02",
-              "site": "linkedin"
-            }
-          }
-        ]
-      },
-      {
-        "name": "Tactacam",
-        "domain": "tactacam.com",
-        "industry": "other",
-        "headcount": null,
-        "country": "US",
-        "city": "Decorah",
-        "state": "IA",
-        "dm_name": "Jeff Peel",
-        "dm_title": "CEO & Co-founder",
-        "dm_email": null,
-        "dm_linkedin_url": null,
-        "score": 32.37338269290426,
-        "insight": "Tactacam is currently hiring an IT Help Desk Technician, indicating an immediate need for IT support services.",
-        "signals": [
-          {
-            "type": "job_posted_it_support",
-            "captured_at": "2026-06-13T08:57:42.614211",
-            "days_ago": 3,
-            "payload": {
-              "title": "IT Help Desk Technician",
-              "url": "https://www.linkedin.com/jobs/view/4427591094",
-              "date_posted": "2026-06-11",
               "site": "linkedin"
             }
           }
@@ -585,7 +557,7 @@
         "dm_title": "CEO",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 32.37338268673165,
+        "score": 32.365560327226426,
         "insight": "They recently posted a job for a Jr. IT Support Specialist, indicating an immediate need for IT support services.",
         "signals": [
           {
@@ -613,7 +585,7 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 32.37338267424794,
+        "score": 32.36556031247809,
         "insight": "The recent hiring of a Chief Information Officer (CIO) at SAHARA Las Vegas indicates a potential need for enhanced IT management services.",
         "signals": [
           {
@@ -641,7 +613,7 @@
         "dm_title": "Chief Executive Officer",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 31.672008144700676,
+        "score": 31.66435525183467,
         "insight": "Alpha Baking Co., Inc. recently posted a job for a Help Desk Analyst, indicating a current need for IT support services.",
         "signals": [
           {
@@ -660,16 +632,16 @@
       {
         "name": "Allen Control Systems",
         "domain": "allencontrolsystems.com",
-        "industry": "manufacturing",
-        "headcount": null,
+        "industry": "other",
+        "headcount": 50,
         "country": "US",
         "city": "Austin",
         "state": "TX",
-        "dm_name": "Mike Wior",
+        "dm_name": "Steven Simoni",
         "dm_title": "CEO",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 31.672008138983657,
+        "score": 31.664355244831953,
         "insight": "Allen Control Systems just hired a VP of IT and Cybersecurity, indicating a focus on strengthening their IT infrastructure.",
         "signals": [
           {
@@ -686,34 +658,6 @@
         ]
       },
       {
-        "name": "Crew Carwash",
-        "domain": "crewcarwash.com",
-        "industry": "other",
-        "headcount": null,
-        "country": "US",
-        "city": "Fishers",
-        "state": "IN",
-        "dm_name": null,
-        "dm_title": null,
-        "dm_email": null,
-        "dm_linkedin_url": null,
-        "score": 31.67190477645956,
-        "insight": "Crew Carwash is actively seeking to hire an IT Support Specialist, indicating a direct need for IT support services.",
-        "signals": [
-          {
-            "type": "job_posted_it_support",
-            "captured_at": "2026-06-12T10:12:23.779019",
-            "days_ago": 4,
-            "payload": {
-              "title": "IT Support Specialist",
-              "url": "https://www.linkedin.com/jobs/view/4426009658",
-              "date_posted": "2026-06-10",
-              "site": "linkedin"
-            }
-          }
-        ]
-      },
-      {
         "name": "GreenTrees",
         "domain": "greentreesmi.com",
         "industry": "other",
@@ -725,7 +669,7 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 30.954106621554843,
+        "score": 30.946627183915957,
         "insight": "GreenTrees recently raised funding, indicating potential expansion and a need for enhanced IT support services.",
         "signals": [
           {
@@ -753,7 +697,7 @@
         "dm_title": "Chief Executive Officer",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 30.95389052972051,
+        "score": 30.946411146555125,
         "insight": "Keel has posted a job for a Desktop Support Specialist, indicating a need for IT support services.",
         "signals": [
           {
@@ -781,7 +725,7 @@
         "dm_title": "CEO and founder",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 30.235426141320506,
+        "score": 30.228120362431007,
         "insight": "Evotrex recently raised funding, indicating they may be ready to enhance their IT capabilities to support growth.",
         "signals": [
           {
@@ -809,7 +753,7 @@
         "dm_title": "EVP Chief Information Officer",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 30.235193558428755,
+        "score": 30.227887838567415,
         "insight": "Oak Valley Community Bank recently posted a job for an IT Help Desk Specialist, indicating a need for IT support.",
         "signals": [
           {
@@ -828,7 +772,7 @@
       {
         "name": "FOCO",
         "domain": "foco.com",
-        "industry": "other",
+        "industry": "ecommerce_retail",
         "headcount": null,
         "country": "US",
         "city": "Piscataway",
@@ -837,7 +781,7 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 30.235193552728525,
+        "score": 30.22788783178538,
         "insight": "FOCO recently posted a job for an IT Help Desk Analyst, indicating their need for enhanced IT support.",
         "signals": [
           {
@@ -856,7 +800,7 @@
       {
         "name": "Chesapeake Containment",
         "domain": "ccsliners.com",
-        "industry": "other",
+        "industry": "construction",
         "headcount": 70,
         "country": "US",
         "city": "Statesville",
@@ -865,7 +809,7 @@
         "dm_title": "President",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 29.53674634492019,
+        "score": 29.529609393005934,
         "insight": "Chesapeake Containment recently posted a job for a Help Desk Technician, indicating a current need for IT support.",
         "signals": [
           {
@@ -893,7 +837,7 @@
         "dm_title": "Chief Executive Officer, RENK Americas",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 29.536746338956704,
+        "score": 29.529609386396356,
         "insight": "RENK America posted a job for an IT Support Specialist, indicating a potential need for external IT managed services.",
         "signals": [
           {
@@ -921,7 +865,7 @@
         "dm_title": "Founder & CEO",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 29.306056397168163,
+        "score": 29.298975194308778,
         "insight": "UPLIFT Desk recently appointed a VP of IT, indicating a potential need for enhanced IT support services.",
         "signals": [
           {
@@ -949,7 +893,7 @@
         "dm_title": "President and CEO",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 29.305911957765794,
+        "score": 29.298830782841865,
         "insight": "COMMUNITY RESOURCE CREDIT UNION recently posted a job for a Help Desk I position, indicating their need for IT support in Baytown, TX.",
         "signals": [
           {
@@ -966,34 +910,6 @@
         ]
       },
       {
-        "name": "Sunny",
-        "domain": "sunnyperiod.com",
-        "industry": "software_saas",
-        "headcount": null,
-        "country": "US",
-        "city": "Indianapolis",
-        "state": "IN",
-        "dm_name": "Drew Jarvis",
-        "dm_title": "CEO",
-        "dm_email": null,
-        "dm_linkedin_url": null,
-        "score": 29.30591195115143,
-        "insight": "Sunny is hiring for an IT Helpdesk Support Specialist, indicating their immediate need for IT support.",
-        "signals": [
-          {
-            "type": "job_posted_it_support",
-            "captured_at": "2026-06-09T01:33:28.876602",
-            "days_ago": 7,
-            "payload": {
-              "title": "IT Helpdesk Support Specialist",
-              "url": "https://www.linkedin.com/jobs/view/4424447958",
-              "date_posted": "2026-06-04",
-              "site": "linkedin"
-            }
-          }
-        ]
-      },
-      {
         "name": "Workscapes, Inc.",
         "domain": "workscapes.com",
         "industry": "other",
@@ -1005,7 +921,7 @@
         "dm_title": "CEO",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 29.3059119450543,
+        "score": 29.29883077466209,
         "insight": "Workscapes, Inc. recently posted a job for an IT Support Engineer, indicating a need for enhanced IT support services.",
         "signals": [
           {
@@ -1033,7 +949,7 @@
         "dm_title": "Chief Executive Officer (CEO)",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 29.305911938988523,
+        "score": 29.298830767728088,
         "insight": "Honest Health has posted a job for an IT Support Engineer, indicating an immediate need for IT support services.",
         "signals": [
           {
@@ -1061,7 +977,7 @@
         "dm_title": "Founder & Executive Chairman",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 18.92881602754459,
+        "score": 18.924242292038855,
         "insight": null,
         "signals": [
           {
@@ -1089,7 +1005,7 @@
         "dm_title": "CEO",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 18.07270797158062,
+        "score": 18.068341096729213,
         "insight": null,
         "signals": [
           {
@@ -1117,7 +1033,7 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 16.77161866682433,
+        "score": 16.76756614933575,
         "insight": null,
         "signals": [
           {
@@ -1145,7 +1061,7 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 16.562763121170452,
+        "score": 16.558761070662655,
         "insight": null,
         "signals": [
           {
@@ -1173,7 +1089,7 @@
         "dm_title": "President and Chief Executive Officer",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 16.464710079067004,
+        "score": 16.460731757205252,
         "insight": null,
         "signals": [
           {
@@ -1201,7 +1117,7 @@
         "dm_title": "CEO",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 16.18146017301504,
+        "score": 16.17755027621967,
         "insight": null,
         "signals": [
           {
@@ -1229,7 +1145,7 @@
         "dm_title": "President",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 16.181460169358544,
+        "score": 16.177550272477532,
         "insight": null,
         "signals": [
           {
@@ -1257,7 +1173,7 @@
         "dm_title": "CEO",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 16.18146016616939,
+        "score": 16.177550268726748,
         "insight": null,
         "signals": [
           {
@@ -1285,7 +1201,7 @@
         "dm_title": "Co-Founder",
         "dm_email": "chris@aligneddentalpartners.com",
         "dm_linkedin_url": "http://www.linkedin.com/in/chris-mcclure",
-        "score": 16.08479333636797,
+        "score": 16.080906813818807,
         "insight": null,
         "signals": [
           {
@@ -1313,7 +1229,7 @@
         "dm_title": "Founder & CEO",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 15.813571053703479,
+        "score": 15.80975005112609,
         "insight": null,
         "signals": [
           {
@@ -1341,7 +1257,7 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 15.813571049521164,
+        "score": 15.809750047105444,
         "insight": null,
         "signals": [
           {
@@ -1369,7 +1285,7 @@
         "dm_title": "Director of IT / Information Security Officer",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 15.813571046125412,
+        "score": 15.809750043389197,
         "insight": null,
         "signals": [
           {
@@ -1397,7 +1313,7 @@
         "dm_title": "Co-Founder & CEO",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 15.451295952861901,
+        "score": 15.44756248532718,
         "insight": null,
         "signals": [
           {
@@ -1425,7 +1341,7 @@
         "dm_title": "CEO",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 15.45129594984971,
+        "score": 15.4475624817663,
         "insight": null,
         "signals": [
           {
@@ -1453,7 +1369,7 @@
         "dm_title": "General Manager",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 15.451244265546439,
+        "score": 15.447510814668943,
         "insight": null,
         "signals": [
           {
@@ -1481,7 +1397,7 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 15.451244262517728,
+        "score": 15.447510811145255,
         "insight": null,
         "signals": [
           {
@@ -1509,7 +1425,7 @@
         "dm_title": "Chief EMS and CEO",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 15.451244259365058,
+        "score": 15.447510807080409,
         "insight": null,
         "signals": [
           {
@@ -1537,7 +1453,7 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 15.451244256253707,
+        "score": 15.44751080313123,
         "insight": null,
         "signals": [
           {
@@ -1565,7 +1481,7 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 15.112794771197887,
+        "score": 15.109143101971181,
         "insight": null,
         "signals": [
           {
@@ -1593,7 +1509,7 @@
         "dm_title": "Sr. Director of Strategic Partnerships | Private Equity | Accounting & Finance | Human Resources | IT | Executive Leadership | The Most Important Thing to Know About our Team is That we are Here to Serve.",
         "dm_email": null,
         "dm_linkedin_url": "http://www.linkedin.com/in/hagenbarlow",
-        "score": 14.882927402773838,
+        "score": 14.879331308544824,
         "insight": null,
         "signals": [
           {
@@ -1621,7 +1537,7 @@
         "dm_title": "CEO",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 14.74603181831853,
+        "score": 14.742468769410088,
         "insight": null,
         "signals": [
           {
@@ -1649,7 +1565,7 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 14.745953099423899,
+        "score": 14.742390070710947,
         "insight": null,
         "signals": [
           {
@@ -1677,7 +1593,7 @@
         "dm_title": "CEO",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 14.406687844892462,
+        "score": 14.403206797000275,
         "insight": null,
         "signals": [
           {
@@ -1705,7 +1621,7 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 14.40662132599886,
+        "score": 14.403140294849635,
         "insight": null,
         "signals": [
           {
@@ -1733,7 +1649,7 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 14.406575748752845,
+        "score": 14.403094728993782,
         "insight": null,
         "signals": [
           {
@@ -1761,7 +1677,7 @@
         "dm_title": "Owner",
         "dm_email": "carmen@vanguardnaples.com",
         "dm_linkedin_url": "http://www.linkedin.com/in/carmen-falbo-4b07473b",
-        "score": 13.76424267566936,
+        "score": 13.760916863702855,
         "insight": null,
         "signals": [
           {
@@ -1789,7 +1705,7 @@
         "dm_title": "Chief Operating Officer",
         "dm_email": "clayton.coleman@j-mack.com",
         "dm_linkedin_url": "http://www.linkedin.com/in/colemanr",
-        "score": 13.448371486361017,
+        "score": 13.445122002919762,
         "insight": null,
         "signals": [
           {
@@ -1817,7 +1733,7 @@
         "dm_title": "Vice President of Technology",
         "dm_email": "lmisgen@ztrip.com",
         "dm_linkedin_url": "http://www.linkedin.com/in/lukemisgen",
-        "score": 13.448371483120717,
+        "score": 13.4451219994789,
         "insight": null,
         "signals": [
           {
@@ -1845,7 +1761,7 @@
         "dm_title": "Head of Civil Engineering",
         "dm_email": "david.stone@mackenziestuart.com",
         "dm_linkedin_url": "http://www.linkedin.com/in/david-stone-7a07689",
-        "score": 13.448371479923575,
+        "score": 13.445121995358496,
         "insight": null,
         "signals": [
           {
@@ -1873,7 +1789,7 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 13.13751892047302,
+        "score": 13.13434455002525,
         "insight": null,
         "signals": [
           {
@@ -1901,7 +1817,7 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 13.137518917571112,
+        "score": 13.134344546843053,
         "insight": null,
         "signals": [
           {
@@ -1929,7 +1845,7 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 13.137518914577859,
+        "score": 13.13434454314454,
         "insight": null,
         "signals": [
           {
@@ -1957,7 +1873,7 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 13.137479744299847,
+        "score": 13.134305384470126,
         "insight": null,
         "signals": [
           {
@@ -1985,7 +1901,7 @@
         "dm_title": "VP and Chief Technology Officer",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 13.02251840715681,
+        "score": 13.019371831579459,
         "insight": null,
         "signals": [
           {
@@ -2013,7 +1929,7 @@
         "dm_title": "Chief Medical Officer",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 13.022518399638189,
+        "score": 13.019371827641754,
         "insight": null,
         "signals": [
           {
@@ -2041,7 +1957,7 @@
         "dm_title": "Chief Executive Officer",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 13.022518396531842,
+        "score": 13.019371824362075,
         "insight": null,
         "signals": [
           {
@@ -2060,6 +1976,45 @@
     ],
     "mssp": [
       {
+        "name": "Nuclear",
+        "domain": "thenuclearcompany.com",
+        "industry": "manufacturing",
+        "headcount": 160,
+        "country": "US",
+        "city": "Lexington",
+        "state": "KY",
+        "dm_name": null,
+        "dm_title": null,
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": 79.98857480718466,
+        "insight": "Nuclear recently posted two security job openings, indicating a need for enhanced security measures.",
+        "signals": [
+          {
+            "type": "job_posted_security",
+            "captured_at": "2026-06-16T18:05:53.535102",
+            "days_ago": 0,
+            "payload": {
+              "title": "Staff Cloud Security Engineer",
+              "url": "https://www.indeed.com/viewjob?jk=76c82b4d0fe8a689",
+              "date_posted": "2026-06-16",
+              "site": "indeed"
+            }
+          },
+          {
+            "type": "job_posted_security",
+            "captured_at": "2026-06-16T18:05:53.535102",
+            "days_ago": 0,
+            "payload": {
+              "title": "Staff Application Security Engineer",
+              "url": "https://www.indeed.com/viewjob?jk=59a2ed81d845d51d",
+              "date_posted": "2026-06-16",
+              "site": "indeed"
+            }
+          }
+        ]
+      },
+      {
         "name": "RCI Internet Services",
         "domain": "rcihospitality.com",
         "industry": "other",
@@ -2071,7 +2026,7 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 61.18328918325186,
+        "score": 61.16850550738582,
         "insight": "Following recent breaches disclosed to multiple agencies, RCI Internet Services may require enhanced SOC monitoring and compliance support.",
         "signals": [
           {
@@ -2106,7 +2061,7 @@
         "dm_title": "President",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 57.69158188855141,
+        "score": 57.67764191246127,
         "insight": "The company recently disclosed two data breaches to regulatory agencies, indicating a pressing need for enhanced security measures.",
         "signals": [
           {
@@ -2141,7 +2096,7 @@
         "dm_title": "President & Owner",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 54.27147320569085,
+        "score": 54.25835962701037,
         "insight": "The company recently hired a Chief Information Security Officer, indicating a strengthened focus on security measures.",
         "signals": [
           {
@@ -2180,7 +2135,7 @@
         "dm_title": "Owner",
         "dm_email": "philip.hu@transglobalus.com",
         "dm_linkedin_url": "http://www.linkedin.com/in/philip-hu-88730413",
-        "score": 47.724621597840795,
+        "score": 47.71309004264773,
         "insight": "Recently disclosed breaches at TransGlobal Insurance Agency highlight the urgent need for enhanced SOC monitoring and compliance support.",
         "signals": [
           {
@@ -2224,7 +2179,7 @@
         "dm_title": "Chief Executive Officer",
         "dm_email": "aduke@sandhillsmedical.org",
         "dm_linkedin_url": "http://www.linkedin.com/in/amanda-duke-0969748",
-        "score": 47.00862247840243,
+        "score": 46.99726399496172,
         "insight": "Sandhills Medical Foundation recently disclosed a breach, highlighting the need for improved security measures.",
         "signals": [
           {
@@ -2250,16 +2205,16 @@
       {
         "name": "American Future Technology Corporation d/b/a iBUYPOWER",
         "domain": "ibuypower.com",
-        "industry": "other",
-        "headcount": null,
+        "industry": "manufacturing",
+        "headcount": 160,
         "country": "US",
         "city": "City of Industry",
         "state": "CA",
-        "dm_name": null,
-        "dm_title": null,
+        "dm_name": "Sandy Chiu",
+        "dm_title": "CEO",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 40.322857183698844,
+        "score": 40.313113985504856,
         "insight": "American Future Technology Corporation disclosed a breach today, highlighting their urgent need for enhanced SOC monitoring and compliance support.",
         "signals": [
           {
@@ -2275,7 +2230,7 @@
       },
       {
         "name": "Virta Medical PC",
-        "domain": "virtahealth.com",
+        "domain": null,
         "industry": "healthcare",
         "headcount": null,
         "country": "US",
@@ -2285,7 +2240,7 @@
         "dm_title": "CEO & Co-Founder",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 40.322857024735065,
+        "score": 40.3131137983455,
         "insight": "Virta Medical PC recently disclosed a breach to the California agency, highlighting an urgent need for enhanced SOC monitoring.",
         "signals": [
           {
@@ -2300,36 +2255,10 @@
         ]
       },
       {
-        "name": "the West Series of Lockton Companies, LLC",
-        "domain": "lockton.com",
-        "industry": "insurance",
-        "headcount": null,
-        "country": "US",
-        "city": "Denver",
-        "state": "CO",
-        "dm_name": null,
-        "dm_title": null,
-        "dm_email": null,
-        "dm_linkedin_url": null,
-        "score": 40.322856964565624,
-        "insight": "Recently disclosing a breach at ca_ag may prompt the West Series of Lockton Companies to enhance their security measures.",
-        "signals": [
-          {
-            "type": "breach_disclosed",
-            "captured_at": "2026-06-16T17:54:48.922679",
-            "days_ago": 4,
-            "payload": {
-              "agency": "ca_ag",
-              "reported_date": "06/12/2026"
-            }
-          }
-        ]
-      },
-      {
         "name": "OLH Inc.",
         "domain": "olhinc.com",
         "industry": "construction",
-        "headcount": 50,
+        "headcount": 70,
         "country": "US",
         "city": "Augusta",
         "state": "GA",
@@ -2337,7 +2266,7 @@
         "dm_title": "CEO",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 39.99654183487726,
+        "score": 39.986877470023714,
         "insight": "Recently, OLH Inc. posted a job for an Associate Computer Security Engineer, indicating a focus on improving their cybersecurity posture.",
         "signals": [
           {
@@ -2356,16 +2285,16 @@
       {
         "name": "Antenna Research Associates",
         "domain": "ara-inc.com",
-        "industry": "manufacturing",
+        "industry": "other",
         "headcount": 220,
         "country": "US",
         "city": "Laurel",
         "state": "MD",
-        "dm_name": "Logen Thiran",
-        "dm_title": "CEO",
+        "dm_name": "Adil Karim",
+        "dm_title": "Chief Technology Officer",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 39.98769999063856,
+        "score": 39.978037755002234,
         "insight": "Antenna Research Associates recently posted a job for a Security System Administrator, indicating a need for enhanced security measures.",
         "signals": [
           {
@@ -2383,17 +2312,17 @@
       },
       {
         "name": "American Equipment HR LLC",
-        "domain": "americanequipmentholdings.com",
-        "industry": "other",
+        "domain": "amquipinc.com",
+        "industry": "manufacturing",
         "headcount": null,
         "country": "US",
-        "city": "Farmington",
-        "state": "NY",
-        "dm_name": null,
-        "dm_title": null,
+        "city": "Salt Lake City",
+        "state": "UT",
+        "dm_name": "Lynda Tschudy",
+        "dm_title": "VP Human Resources",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 39.73786524983315,
+        "score": 39.72826338123958,
         "insight": "American Equipment HR LLC recently posted a job for a Director of IT Operations and Security, indicating a focus on enhancing their security posture.",
         "signals": [
           {
@@ -2421,7 +2350,7 @@
         "dm_title": "Founder & CEO",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 39.40188193747524,
+        "score": 39.39236128252659,
         "insight": "They recently disclosed a breach, indicating an urgent need for enhanced SOC monitoring and compliance support.",
         "signals": [
           {
@@ -2447,7 +2376,7 @@
         "dm_title": "President",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 39.40188192874025,
+        "score": 39.392361273551444,
         "insight": "Marsicovetere & Levine Law Group, P.C. disclosed a breach yesterday, highlighting their urgent need for SOC monitoring and compliance support.",
         "signals": [
           {
@@ -2473,7 +2402,7 @@
         "dm_title": "President, MaineHealth Behavioral Health",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 39.40188192062694,
+        "score": 39.3923612643656,
         "insight": "Maine Health Behavioral Health recently disclosed a breach, indicating a need for enhanced SOC monitoring and compliance support.",
         "signals": [
           {
@@ -2499,7 +2428,7 @@
         "dm_title": "President",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 39.4018819129351,
+        "score": 39.392361255422045,
         "insight": "Caldwell Sutter Capital, Inc. disclosed a breach, indicating an urgent need for SOC monitoring and compliance support.",
         "signals": [
           {
@@ -2515,7 +2444,7 @@
       },
       {
         "name": "Clinical Registry Solutions",
-        "domain": "clinicalreg.com",
+        "domain": "clinicalregistrysolutions.com",
         "industry": "healthcare",
         "headcount": null,
         "country": "US",
@@ -2525,7 +2454,7 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 39.40188182141273,
+        "score": 39.39236115355611,
         "insight": "Clinical Registry Solutions recently disclosed a breach, indicating an urgent need for improved SOC monitoring and compliance support.",
         "signals": [
           {
@@ -2551,7 +2480,7 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 38.501941799705186,
+        "score": 38.49263858801403,
         "insight": "VRChat, Inc. recently disclosed a breach, indicating an urgent need for enhanced SOC monitoring and compliance support.",
         "signals": [
           {
@@ -2577,7 +2506,7 @@
         "dm_title": "Vice President Of Digital Technology",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 38.50194179195221,
+        "score": 38.49263857907916,
         "insight": "Beusa Energy, LLC disclosed a breach, indicating an urgent need for enhanced SOC monitoring and compliance support.",
         "signals": [
           {
@@ -2603,7 +2532,7 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 38.50194178221209,
+        "score": 38.49263857044282,
         "insight": "McCoyd, Parkas & Ronan LLP disclosed a breach, indicating an urgent need for enhanced SOC monitoring and compliance support.",
         "signals": [
           {
@@ -2613,32 +2542,6 @@
             "payload": {
               "agency": "me_ag",
               "reported_date": "2026-06-10"
-            }
-          }
-        ]
-      },
-      {
-        "name": "Casino, LLC dba Larry Flynt's Lucky Lady Casino",
-        "domain": "luckyladyla.com",
-        "industry": "hospitality_food",
-        "headcount": null,
-        "country": "US",
-        "city": "Gardena",
-        "state": "CA",
-        "dm_name": null,
-        "dm_title": null,
-        "dm_email": null,
-        "dm_linkedin_url": null,
-        "score": 38.50194173393364,
-        "insight": "Casino, LLC dba Larry Flynt's Lucky Lady Casino recently disclosed a data breach, indicating an urgent need for enhanced SOC monitoring and compliance support.",
-        "signals": [
-          {
-            "type": "breach_disclosed",
-            "captured_at": "2026-06-12T10:12:50.537838",
-            "days_ago": 6,
-            "payload": {
-              "agency": "ca_ag",
-              "reported_date": "06/10/2026"
             }
           }
         ]
@@ -2655,7 +2558,7 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 37.62255628171822,
+        "score": 37.61346555154016,
         "insight": "Magna Legal Services, LLC recently disclosed a breach, indicating an urgent need for SOC monitoring and compliance support.",
         "signals": [
           {
@@ -2677,11 +2580,11 @@
         "country": "US",
         "city": "Encino",
         "state": "CA",
-        "dm_name": "Barry S. Pearlman",
-        "dm_title": "Managing Partner",
+        "dm_name": "Barry Pearlman",
+        "dm_title": "Founding Partner",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 37.622556161932614,
+        "score": 37.613465445885524,
         "insight": "Pearlman, Brown & Wax LLP recently disclosed a breach, indicating an urgent need for improved SOC monitoring and compliance support.",
         "signals": [
           {
@@ -2707,7 +2610,7 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 36.99815283297532,
+        "score": 36.98921307453209,
         "insight": "Express recently posted a job for a Director of Information Security & Governance, indicating a focus on enhancing security.",
         "signals": [
           {
@@ -2735,7 +2638,7 @@
         "dm_title": "CEO and President",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 36.99815161389996,
+        "score": 36.989211767142535,
         "insight": "FinWise Bank recently posted a job for a Cyber Security Engineer - Team Lead, indicating a focus on strengthening their security posture.",
         "signals": [
           {
@@ -2763,7 +2666,7 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 36.76325594595881,
+        "score": 36.75437285235593,
         "insight": "CNO Services, LLC recently disclosed a breach, indicating an urgent need for enhanced SOC monitoring and compliance support.",
         "signals": [
           {
@@ -2789,7 +2692,7 @@
         "dm_title": "CEO",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 36.76325583691167,
+        "score": 36.75437274191979,
         "insight": "OEConnection LLC recently disclosed a breach, highlighting their urgent need for enhanced SOC monitoring and compliance support.",
         "signals": [
           {
@@ -2811,11 +2714,11 @@
         "country": "US",
         "city": "Santa Ana",
         "state": "CA",
-        "dm_name": "Peg Corley",
-        "dm_title": "Executive Director",
+        "dm_name": null,
+        "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 34.30133093933346,
+        "score": 34.29304273227871,
         "insight": "Gay & Lesbian Community Services Center of Orange County disclosed a breach, creating an urgent need for SOC monitoring and security support.",
         "signals": [
           {
@@ -2841,7 +2744,7 @@
         "dm_title": "CEO",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 34.30133085243045,
+        "score": 34.29304264135247,
         "insight": "Walker Advertising, LLC disclosed a breach yesterday, indicating an urgent need for SOC monitoring and compliance support.",
         "signals": [
           {
@@ -2867,7 +2770,7 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 34.30133084544996,
+        "score": 34.29304263366753,
         "insight": "Tarter Krinsky & Drogin LLP recently disclosed a breach, indicating an urgent need for enhanced SOC monitoring and compliance support.",
         "signals": [
           {
@@ -2893,7 +2796,7 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 34.301330837414596,
+        "score": 34.29304262565245,
         "insight": "Rockville disclosed a breach today, highlighting their immediate need for enhanced SOC monitoring and compliance support.",
         "signals": [
           {
@@ -2908,32 +2811,6 @@
         ]
       },
       {
-        "name": "Plaza Home Mortgage, Inc.",
-        "domain": "plazahomemortgage.com",
-        "industry": "fintech",
-        "headcount": null,
-        "country": "US",
-        "city": "San Diego",
-        "state": "CA",
-        "dm_name": null,
-        "dm_title": null,
-        "dm_email": null,
-        "dm_linkedin_url": null,
-        "score": 34.301330602664564,
-        "insight": "Plaza Home Mortgage recently disclosed a breach, indicating an urgent need for enhanced SOC monitoring and compliance support.",
-        "signals": [
-          {
-            "type": "breach_disclosed",
-            "captured_at": "2026-06-11T10:23:40.088051",
-            "days_ago": 11,
-            "payload": {
-              "agency": "ca_ag",
-              "reported_date": "06/05/2026"
-            }
-          }
-        ]
-      },
-      {
         "name": "Towerpoint Wealth, LLC",
         "domain": "towerpointwealth.com",
         "industry": "fintech",
@@ -2941,11 +2818,11 @@
         "country": "US",
         "city": "Sacramento",
         "state": "CA",
-        "dm_name": "Joseph Eschleman",
-        "dm_title": "President",
+        "dm_name": null,
+        "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 34.30133052297137,
+        "score": 34.29304231179876,
         "insight": "Towerpoint Wealth, LLC disclosed a breach, indicating an urgent need for SOC monitoring and compliance support.",
         "signals": [
           {
@@ -2971,7 +2848,7 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 33.51788735045298,
+        "score": 33.50978844128088,
         "insight": "Othon, Inc. recently disclosed a breach, indicating an urgent need for enhanced SOC monitoring and compliance support.",
         "signals": [
           {
@@ -2997,7 +2874,7 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 33.51788734289694,
+        "score": 33.50978843246314,
         "insight": "Asplundh Engineering Services recently disclosed a breach, indicating an urgent need for SOC monitoring and compliance support.",
         "signals": [
           {
@@ -3023,7 +2900,7 @@
         "dm_title": "CTO and Co-Founder",
         "dm_email": "harry@offchainlabs.com",
         "dm_linkedin_url": "http://www.linkedin.com/in/hkalodner",
-        "score": 33.442220333845555,
+        "score": 33.43413979871475,
         "insight": "The company recently posted job openings for a Security Engineer and a Senior Security Engineer (GRC), indicating a growing focus on security.",
         "signals": [
           {
@@ -3062,7 +2939,7 @@
         "dm_title": "Vice President of Information Technology",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 32.75233771793695,
+        "score": 32.74442378287626,
         "insight": "Clarinda Regional Health Center disclosed a recent breach, highlighting an urgent need for SOC monitoring and compliance support.",
         "signals": [
           {
@@ -3088,7 +2965,7 @@
         "dm_title": "Chief Information Officer",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 32.004273302956975,
+        "score": 31.996540125585778,
         "insight": "Singleton Schreiber, LLP disclosed a breach yesterday, indicating an urgent need for enhanced SOC monitoring and compliance support.",
         "signals": [
           {
@@ -3114,7 +2991,7 @@
         "dm_title": "President and CEO",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 32.00427329637548,
+        "score": 31.99654011775663,
         "insight": "Waveny Lifecare Network disclosed a breach, indicating a critical need for enhanced SOC monitoring and compliance support.",
         "signals": [
           {
@@ -3140,7 +3017,7 @@
         "dm_title": "Founder & Chief Executive Officer",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 32.00427328402554,
+        "score": 31.99654010279996,
         "insight": "D.B. Root & Company, LLC just disclosed a breach, indicating an urgent need for enhanced SOC monitoring and compliance support.",
         "signals": [
           {
@@ -3166,7 +3043,7 @@
         "dm_title": "Managing Partner",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 31.27329479756713,
+        "score": 31.26573825253969,
         "insight": "Fong, Ko & Associates LLP disclosed a data breach, indicating an urgent need for enhanced SOC monitoring and compliance support.",
         "signals": [
           {
@@ -3192,7 +3069,7 @@
         "dm_title": "President",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 31.273294665916172,
+        "score": 31.2657381094994,
         "insight": "The company recently disclosed a breach to the agency 'me_ag', indicating an urgent need for improved security measures.",
         "signals": [
           {
@@ -3218,7 +3095,7 @@
         "dm_title": "Chief Executive Officer",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 31.273294659259193,
+        "score": 31.265738102342368,
         "insight": "Recently disclosed a breach on June 1, 2026, highlighting CGP&H, LLC's urgent need for improved security monitoring services.",
         "signals": [
           {
@@ -3244,7 +3121,7 @@
         "dm_title": "President",
         "dm_email": "rstulman@us1031.com",
         "dm_linkedin_url": "http://www.linkedin.com/in/ryan-stulman-mba",
-        "score": 30.662696443160605,
+        "score": 30.65528752599644,
         "insight": "Following multiple data breaches disclosed to the agency 'me_ag' in May and April, the company is likely seeking enhanced security solutions.",
         "signals": [
           {
@@ -3279,7 +3156,7 @@
         "dm_title": "CEO",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 30.559011749543856,
+        "score": 30.551627796743606,
         "insight": "Recently disclosed a breach to the California Agency, indicating a potential need for enhanced SOC monitoring and compliance support.",
         "signals": [
           {
@@ -3297,7 +3174,7 @@
         "name": "Triplemoon",
         "domain": "triplemoon.com",
         "industry": "healthcare",
-        "headcount": 20,
+        "headcount": null,
         "country": "US",
         "city": "Dallas",
         "state": "TX",
@@ -3305,7 +3182,7 @@
         "dm_title": "Founder & CEO",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 29.99077498738091,
+        "score": 29.983528309179682,
         "insight": "Triplemoon recently hired a Virtual Chief Information Security Officer (vCISO), indicating their focus on enhancing security protocols.",
         "signals": [
           {
@@ -3333,7 +3210,7 @@
         "dm_title": "Chief Executive Officer",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 29.17901577893118,
+        "score": 29.171965273880396,
         "insight": "Texollini, Inc. disclosed a breach to California's agency, highlighting their urgent need for enhanced SOC monitoring and compliance support.",
         "signals": [
           {
@@ -3359,7 +3236,7 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 29.17901577123743,
+        "score": 29.17196526694521,
         "insight": "Recently disclosed a breach to the California agency, highlighting IMA Diligence Services' need for enhanced security solutions.",
         "signals": [
           {
@@ -3385,7 +3262,7 @@
         "dm_title": "Chief Executive Officer",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 29.17901566494509,
+        "score": 29.171965147424473,
         "insight": "After recently disclosing a breach, Ohio ENT & Allergy Physicians may need enhanced SOC monitoring and compliance support.",
         "signals": [
           {
@@ -3411,7 +3288,7 @@
         "dm_title": "CEO",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 29.17901565920209,
+        "score": 29.171965140302067,
         "insight": "Following a breach disclosed to the agency 'me_ag' on May 29, 2026, KerberRose S.C. may seek enhanced SOC monitoring and compliance support.",
         "signals": [
           {
@@ -3437,7 +3314,7 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 28.51256611778798,
+        "score": 28.505676644548394,
         "insight": "They disclosed a breach to the California agency on May 28, 2026, signaling a need for enhanced security services.",
         "signals": [
           {
@@ -3463,7 +3340,7 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 28.512566111939783,
+        "score": 28.5056766380994,
         "insight": "La Perouse LLC, a medical billing service, disclosed a breach to CA agency recently, indicating a critical need for enhanced security.",
         "signals": [
           {
@@ -3489,7 +3366,7 @@
         "dm_title": "Director, Information Technology",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 28.51256610478012,
+        "score": 28.505676631017696,
         "insight": "Recently disclosed a breach to the CA Attorney General, highlighting their urgent need for enhanced SOC monitoring and compliance support.",
         "signals": [
           {
@@ -3515,7 +3392,7 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 28.512566098375313,
+        "score": 28.50567662440862,
         "insight": "Following a breach disclosed to the CA agency on May 28, 2026, Johnson-Peltier Electric, Inc. may seek enhanced security solutions.",
         "signals": [
           {
@@ -3541,7 +3418,7 @@
         "dm_title": "CPA",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 28.512566014922204,
+        "score": 28.5056765277194,
         "insight": "Following a breach disclosed on May 28, 2026, Charles P. Elliott, P.C. may be seeking enhanced SOC monitoring and compliance support.",
         "signals": [
           {
@@ -3567,7 +3444,7 @@
         "dm_title": "Managing Partner",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 28.512565950416647,
+        "score": 28.505676468862774,
         "insight": "Smith & James, CPAs recently disclosed a breach to the California Attorney General, highlighting their need for improved security measures.",
         "signals": [
           {
@@ -3593,7 +3470,7 @@
         "dm_title": "CEO",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 28.51256590956313,
+        "score": 28.505676423750284,
         "insight": "Recently disclosed a breach by the agency 'me_ag', underlining their need for enhanced cybersecurity solutions.",
         "signals": [
           {
@@ -3619,7 +3496,7 @@
         "dm_title": "President & Designated Broker",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 27.86133810178609,
+        "score": 27.854605969825695,
         "insight": "They disclosed a breach to the agency 'me_ag' on May 27, 2026, signaling a crucial need for enhanced security monitoring.",
         "signals": [
           {
@@ -3645,7 +3522,7 @@
         "dm_title": "CEO",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 27.86133809679417,
+        "score": 27.854605963047273,
         "insight": "Perma-Chink Systems, Inc. disclosed a breach to the agency \u2018me_ag\u2019 on May 27, 2026, indicating a pressing need for enhanced security measures.",
         "signals": [
           {
@@ -3671,7 +3548,7 @@
         "dm_title": "Managing Partner",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 27.861338091437176,
+        "score": 27.85460595659659,
         "insight": "After a breach disclosed on May 27, 2026, Edwards, Faust & Smith likely needs SOC monitoring and compliance support.",
         "signals": [
           {
@@ -3697,7 +3574,7 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 27.74861371544121,
+        "score": 27.741908832753328,
         "insight": "Gulf Copper recently appointed a Chief Information Security Officer, indicating a focus on enhancing their cybersecurity posture.",
         "signals": [
           {
@@ -3725,7 +3602,7 @@
         "dm_title": "Director, IT Security and Compliance",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 27.147346945058537,
+        "score": 27.140787344832308,
         "insight": "Civeo North America recently hired a Chief Information Security Officer, indicating a heightened focus on security measures.",
         "signals": [
           {
@@ -3753,7 +3630,7 @@
         "dm_title": "CEO",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 25.119353080546,
+        "score": 25.113283509567715,
         "insight": "Recently hiring a CISO indicates Lumafield's commitment to enhancing their cybersecurity posture.",
         "signals": [
           {
@@ -3781,7 +3658,7 @@
         "dm_title": "CEO",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 21.11494604409034,
+        "score": 21.10984404879981,
         "insight": "After disclosing a breach to the California agency on May 15, 2026, US Tiger Securities may need enhanced SOC monitoring and compliance support.",
         "signals": [
           {
@@ -3807,7 +3684,7 @@
         "dm_title": "President",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 20.63268003739496,
+        "score": 20.627694573116557,
         "insight": "Carlysle Engineering, Inc recently disclosed a breach to an agency, indicating a need for enhanced security monitoring.",
         "signals": [
           {
@@ -3833,7 +3710,7 @@
         "dm_title": "Senior Director, Information Technology",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 20.632680032776772,
+        "score": 20.62769456843881,
         "insight": "Following a breach disclosed recently to the agency 'me_ag', Cornick, Garber & Sandler, LLP may seek enhanced SOC monitoring.",
         "signals": [
           {
@@ -3859,7 +3736,7 @@
         "dm_title": "CEO",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 20.161429025473748,
+        "score": 20.156557454629947,
         "insight": "Recently disclosed a breach to me_ag, highlighting the company\u2019s urgent need for enhanced SOC monitoring and compliance support.",
         "signals": [
           {
@@ -3885,7 +3762,7 @@
         "dm_title": "CEO",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 20.161429020470408,
+        "score": 20.156557449848822,
         "insight": "Following a breach disclosed to the agency 'me_ag' on May 13, 2026, they may require enhanced SOC monitoring and compliance support.",
         "signals": [
           {
@@ -3911,7 +3788,7 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 20.161429015472464,
+        "score": 20.15655744500301,
         "insight": "The Dental Studies Institute recently disclosed a breach, indicating a potential need for enhanced cybersecurity measures.",
         "signals": [
           {
@@ -3937,7 +3814,7 @@
         "dm_title": "Founder & CEO",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 19.25097131418858,
+        "score": 19.246319736200363,
         "insight": null,
         "signals": [
           {
@@ -3963,7 +3840,7 @@
         "dm_title": "Partner",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 19.250971310013508,
+        "score": 19.246319731629992,
         "insight": null,
         "signals": [
           {
@@ -3989,7 +3866,7 @@
         "dm_title": "President",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 19.250971306111282,
+        "score": 19.24631972658612,
         "insight": null,
         "signals": [
           {
@@ -4015,7 +3892,7 @@
         "dm_title": "Founder & CEO",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 19.250971302404682,
+        "score": 19.246319722144424,
         "insight": null,
         "signals": [
           {
@@ -4041,7 +3918,7 @@
         "dm_title": "President",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 19.250971261338655,
+        "score": 19.246319684423447,
         "insight": null,
         "signals": [
           {
@@ -4067,7 +3944,7 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 18.928872126326844,
+        "score": 18.924298352600236,
         "insight": null,
         "signals": [
           {
@@ -4095,7 +3972,7 @@
         "dm_title": "Chief Financial Officer",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 18.92887212217101,
+        "score": 18.92429834844034,
         "insight": null,
         "signals": [
           {
@@ -4123,7 +4000,7 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 18.92881603666108,
+        "score": 18.924242300763474,
         "insight": null,
         "signals": [
           {
@@ -4151,7 +4028,7 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 18.381628384629426,
+        "score": 18.377186875441534,
         "insight": null,
         "signals": [
           {
@@ -4177,7 +4054,7 @@
         "dm_title": "Founder",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 18.38162837942383,
+        "score": 18.37718687031583,
         "insight": null,
         "signals": [
           {
@@ -4203,7 +4080,7 @@
         "dm_title": "President/CEO",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 17.961791465488062,
+        "score": 17.95745140771014,
         "insight": null,
         "signals": [
           {
@@ -4229,7 +4106,7 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 17.961791448662087,
+        "score": 17.957451388376708,
         "insight": null,
         "signals": [
           {
@@ -4255,7 +4132,7 @@
         "dm_title": "President",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 17.96179144472818,
+        "score": 17.9574513838675,
         "insight": null,
         "signals": [
           {
@@ -4281,7 +4158,7 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 17.961791440909554,
+        "score": 17.957451378460284,
         "insight": null,
         "signals": [
           {
@@ -4307,7 +4184,7 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 17.96179141666247,
+        "score": 17.95745135152986,
         "insight": null,
         "signals": [
           {
@@ -4333,7 +4210,7 @@
         "dm_title": "CEO",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 17.658564860549955,
+        "score": 17.654298056467713,
         "insight": null,
         "signals": [
           {
@@ -4361,7 +4238,7 @@
         "dm_title": "CEO",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 17.551543625755766,
+        "score": 17.54730269571357,
         "insight": null,
         "signals": [
           {
@@ -4387,7 +4264,7 @@
         "dm_title": "Managing Director",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 17.551543619503896,
+        "score": 17.547302691110268,
         "insight": null,
         "signals": [
           {
@@ -4413,7 +4290,7 @@
         "dm_title": "Managing Partner",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 17.551543615303128,
+        "score": 17.547302686117483,
         "insight": null,
         "signals": [
           {
@@ -4439,7 +4316,7 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 17.551543577134797,
+        "score": 17.547302646541254,
         "insight": null,
         "signals": [
           {
@@ -4465,7 +4342,7 @@
         "dm_title": "Chief Executive Officer",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 17.551543553422743,
+        "score": 17.547302617565293,
         "insight": null,
         "signals": [
           {
@@ -4491,7 +4368,7 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 17.271765448862382,
+        "score": 17.267592112188655,
         "insight": null,
         "signals": [
           {
@@ -4519,7 +4396,7 @@
         "dm_title": "Vice President Information Technology Operations",
         "dm_email": "nleslie@firstharvestcu.com",
         "dm_linkedin_url": "http://www.linkedin.com/in/ned-leslie-31576b4",
-        "score": 17.15066583913294,
+        "score": 17.146521775192777,
         "insight": null,
         "signals": [
           {
@@ -4545,7 +4422,7 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 16.758944141500955,
+        "score": 16.754894724488214,
         "insight": null,
         "signals": [
           {
@@ -4571,7 +4448,7 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 16.758944137839453,
+        "score": 16.75489472041987,
         "insight": null,
         "signals": [
           {
@@ -4597,7 +4474,7 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 16.75894413420036,
+        "score": 16.75489471600204,
         "insight": null,
         "signals": [
           {
@@ -4623,7 +4500,7 @@
         "dm_title": "President & COO",
         "dm_email": "john@empireexpress.com",
         "dm_linkedin_url": "http://www.linkedin.com/in/john-phillips-86646a24",
-        "score": 16.758944130866016,
+        "score": 16.754894711508037,
         "insight": null,
         "signals": [
           {
@@ -4649,7 +4526,7 @@
         "dm_title": "Chief Executive Officer",
         "dm_email": "jshultz@radialentertainment.com",
         "dm_linkedin_url": "http://www.linkedin.com/in/shultz",
-        "score": 16.75894412691769,
+        "score": 16.754894707009555,
         "insight": null,
         "signals": [
           {
@@ -4675,7 +4552,7 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 16.75894401644971,
+        "score": 16.754894598369454,
         "insight": null,
         "signals": [
           {
@@ -4701,7 +4578,7 @@
         "dm_title": "President & Chief Executive Officer",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 16.758943993736754,
+        "score": 16.754894571262074,
         "insight": null,
         "signals": [
           {
@@ -4727,7 +4604,7 @@
         "dm_title": "President & CEO",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 16.464710082686235,
+        "score": 16.460731761360638,
         "insight": null,
         "signals": [
           {
@@ -4755,7 +4632,7 @@
         "dm_title": "VP & Chief Operating Officer",
         "dm_email": "ace@jetter.com",
         "dm_linkedin_url": "http://www.linkedin.com/in/acjetter",
-        "score": 16.37616939006136,
+        "score": 16.372212473785503,
         "insight": null,
         "signals": [
           {
@@ -4781,7 +4658,7 @@
         "dm_title": "President and Chief Executive Officer",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 16.376169146844866,
+        "score": 16.37221220999322,
         "insight": null,
         "signals": [
           {
@@ -4807,7 +4684,7 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 16.08484521781009,
+        "score": 16.080958682389536,
         "insight": null,
         "signals": [
           {
@@ -4835,7 +4712,7 @@
         "dm_title": "VP of Technology",
         "dm_email": "anush.mohan@synthbee.com",
         "dm_linkedin_url": "http://www.linkedin.com/in/anushmohan",
-        "score": 15.730563053831613,
+        "score": 15.726762125997043,
         "insight": null,
         "signals": [
           {
@@ -4863,7 +4740,7 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 15.369567398804183,
+        "score": 15.365853700541036,
         "insight": null,
         "signals": [
           {
@@ -4891,7 +4768,7 @@
         "dm_title": "Chief Executive Officer",
         "dm_email": "allan.penksa@flygainesville.com",
         "dm_linkedin_url": "http://www.linkedin.com/in/allan-penksa-0b589510",
-        "score": 15.279506395534328,
+        "score": 15.275814477232249,
         "insight": null,
         "signals": [
           {
@@ -4917,7 +4794,7 @@
         "dm_title": "Co-Founder & CEO",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 15.279506061032844,
+        "score": 15.275814101483379,
         "insight": null,
         "signals": [
           {
@@ -4943,7 +4820,7 @@
         "dm_title": "CEO",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 15.279506045322124,
+        "score": 15.275814082692262,
         "insight": null,
         "signals": [
           {
@@ -4969,7 +4846,7 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 15.279506041321914,
+        "score": 15.275814078603148,
         "insight": null,
         "signals": [
           {
@@ -4995,7 +4872,7 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 14.93052180057284,
+        "score": 14.926914182035766,
         "insight": null,
         "signals": [
           {
@@ -5021,7 +4898,7 @@
         "dm_title": "IT Manager",
         "dm_email": "bwoolwine@qualichem.com",
         "dm_linkedin_url": "http://www.linkedin.com/in/brandon-woolwine-55371641",
-        "score": 14.58950839034739,
+        "score": 14.585983192971806,
         "insight": null,
         "signals": [
           {
@@ -5047,7 +4924,7 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 14.589508387218393,
+        "score": 14.585983189188267,
         "insight": null,
         "signals": [
           {
@@ -5073,7 +4950,7 @@
         "dm_title": "Managing Partner",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 14.25628354797346,
+        "score": 14.252838865411642,
         "insight": null,
         "signals": [
           {
@@ -5099,7 +4976,7 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 14.25628343657937,
+        "score": 14.252838731133755,
         "insight": null,
         "signals": [
           {
@@ -5125,7 +5002,7 @@
         "dm_title": "President/CEO",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 14.256283323828075,
+        "score": 14.252838615829347,
         "insight": null,
         "signals": [
           {
@@ -5151,7 +5028,7 @@
         "dm_title": "President",
         "dm_email": "melanie.hawkins@churchill-claims.com",
         "dm_linkedin_url": "http://www.linkedin.com/in/melanie-hawkins-0a848568",
-        "score": 13.930669578270313,
+        "score": 13.927303572472065,
         "insight": null,
         "signals": [
           {
@@ -5177,7 +5054,7 @@
         "dm_title": "President / CEO",
         "dm_email": "tconwell@credittechnologies.com",
         "dm_linkedin_url": "http://www.linkedin.com/in/thomasconwell",
-        "score": 13.930669395845594,
+        "score": 13.927303367968422,
         "insight": null,
         "signals": [
           {
@@ -5203,7 +5080,7 @@
         "dm_title": "CEO",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 13.869822996817947,
+        "score": 13.866471655842005,
         "insight": null,
         "signals": [
           {
@@ -5231,7 +5108,7 @@
         "dm_title": "Chief Executive Officer",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 13.869822990382763,
+        "score": 13.866471649667949,
         "insight": null,
         "signals": [
           {
@@ -5259,7 +5136,7 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 12.997774307276316,
+        "score": 12.994633702184181,
         "insight": null,
         "signals": [
           {
@@ -5285,7 +5162,7 @@
         "dm_title": "President & CEO",
         "dm_email": null,
         "dm_linkedin_url": "http://www.linkedin.com/in/gary-werschmidt-578540177",
-        "score": 12.997774304075072,
+        "score": 12.994633698681389,
         "insight": null,
         "signals": [
           {
@@ -5311,7 +5188,7 @@
         "dm_title": "Information Technology Director",
         "dm_email": "rtaylor@twulocal100.org",
         "dm_linkedin_url": "http://www.linkedin.com/in/robert-l-taylor-7164a448",
-        "score": 12.99777425539249,
+        "score": 12.99463364850242,
         "insight": null,
         "signals": [
           {
@@ -5337,7 +5214,7 @@
         "dm_title": "Founder & CEO",
         "dm_email": "andrew@betterpatienttransfers.com",
         "dm_linkedin_url": "http://www.linkedin.com/in/andrew-heuerman-171833122",
-        "score": 12.997774166685646,
+        "score": 12.994633553061613,
         "insight": null,
         "signals": [
           {
@@ -5363,7 +5240,7 @@
         "dm_title": "Chief Executive Officer",
         "dm_email": "jcriste@marincancercare.com",
         "dm_linkedin_url": "http://www.linkedin.com/in/joel-criste-14095a6",
-        "score": 12.700904753438769,
+        "score": 12.697835891046052,
         "insight": null,
         "signals": [
           {
@@ -5389,7 +5266,7 @@
         "dm_title": "Chief Executive Officer",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 12.639426413018406,
+        "score": 12.636372379032814,
         "insight": null,
         "signals": [
           {
@@ -5417,7 +5294,7 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 12.410815657592213,
+        "score": 12.407816877001892,
         "insight": null,
         "signals": [
           {
@@ -5443,7 +5320,7 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 12.41081565241477,
+        "score": 12.407816873385196,
         "insight": null,
         "signals": [
           {
@@ -5469,7 +5346,7 @@
         "dm_title": "Owner",
         "dm_email": null,
         "dm_linkedin_url": "http://www.linkedin.com/in/brian-gaster-669411a2",
-        "score": 12.410815649328217,
+        "score": 12.407816870355791,
         "insight": null,
         "signals": [
           {
@@ -5495,7 +5372,7 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 12.127352224333439,
+        "score": 12.124421938158426,
         "insight": null,
         "signals": [
           {
@@ -5521,7 +5398,7 @@
         "dm_title": "President and CEO",
         "dm_email": "wsawyers@atlasmanagement.us",
         "dm_linkedin_url": "http://www.linkedin.com/in/warren-sawyers-b3706243",
-        "score": 12.063595005189075,
+        "score": 12.060680113521615,
         "insight": null,
         "signals": [
           {
@@ -5549,7 +5426,7 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 11.527212645521466,
+        "score": 11.524427358771023,
         "insight": null,
         "signals": [
           {
@@ -5577,7 +5454,7 @@
         "dm_title": "Chief Information Officer",
         "dm_email": "manderson@pamhealth.com",
         "dm_linkedin_url": "http://www.linkedin.com/in/mike-anderson-18418a4",
-        "score": 11.527175552003836,
+        "score": 11.524390278552325,
         "insight": null,
         "signals": [
           {
@@ -5607,7 +5484,7 @@
         "dm_title": "President",
         "dm_email": "aburkett@akina-inc.com",
         "dm_linkedin_url": "http://www.linkedin.com/in/amy-burkett-pmp-29392a15a",
-        "score": 46.10870215710357,
+        "score": 46.09756105526009,
         "insight": "Recently posted multiple DevOps Engineer 3 positions focused on AWS and Kubernetes, indicating a need for cloud consultancy services.",
         "signals": [
           {
@@ -5646,34 +5523,6 @@
         ]
       },
       {
-        "name": "Crash Champions Collision Repair Team",
-        "domain": "crashchampions.com",
-        "industry": "other",
-        "headcount": null,
-        "country": "US",
-        "city": "Westmont",
-        "state": "IL",
-        "dm_name": "Dustin Ashcraft",
-        "dm_title": "CTO",
-        "dm_email": null,
-        "dm_linkedin_url": null,
-        "score": 39.99654182617088,
-        "insight": "Crash Champions Collision Repair Team recently posted a job for a DevOps Engineer, indicating a need for cloud infrastructure expertise.",
-        "signals": [
-          {
-            "type": "job_posted_cloud_devops",
-            "captured_at": "2026-06-16T17:54:20.641291",
-            "days_ago": 0,
-            "payload": {
-              "title": "DevOps Engineer",
-              "url": "https://www.indeed.com/viewjob?jk=8b5b235e65b04433",
-              "date_posted": "2026-06-15",
-              "site": "indeed"
-            }
-          }
-        ]
-      },
-      {
         "name": "Splashlight",
         "domain": "splashlight.com",
         "industry": "software_saas",
@@ -5685,7 +5534,7 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 39.7377303179651,
+        "score": 39.728128487212786,
         "insight": "Splashlight recently posted a job for a DevOps Engineer, indicating a potential need for cloud services and optimization.",
         "signals": [
           {
@@ -5713,7 +5562,7 @@
         "dm_title": "Founder & CEO",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 39.737730310292704,
+        "score": 39.72812847822487,
         "insight": "Mach Industries recently posted a job for a DevOps Engineer, indicating a need to enhance their cloud infrastructure.",
         "signals": [
           {
@@ -5741,7 +5590,7 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 38.86920964759923,
+        "score": 38.859817687683154,
         "insight": "DRUM Associates recently posted a job for a DevOps Engineer, indicating a potential need for cloud migration and optimization services.",
         "signals": [
           {
@@ -5769,7 +5618,7 @@
         "dm_title": "President and CEO",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 36.99815163453877,
+        "score": 36.98921179376077,
         "insight": "They posted a job for a Senior Manager, SRE Risk Advisory and Oversight, indicating a need for cloud expertise.",
         "signals": [
           {
@@ -5797,7 +5646,7 @@
         "dm_title": "CEO",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 36.998151606934606,
+        "score": 36.989211757923584,
         "insight": "Clever Real Estate's recent job posting for a DevOps Engineer suggests a need for cloud migration and optimization support.",
         "signals": [
           {
@@ -5819,13 +5668,13 @@
         "industry": "fintech",
         "headcount": null,
         "country": "US",
-        "city": "New York",
+        "city": "New York City",
         "state": "NY",
         "dm_name": null,
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 35.37587488407081,
+        "score": 35.36732701693573,
         "insight": "The Clearing House posted a job for a DevOps Junior Engineer, indicating a potential need for cloud migration and optimization support.",
         "signals": [
           {
@@ -5853,7 +5702,7 @@
         "dm_title": "CTO and Co-Founder",
         "dm_email": "harry@offchainlabs.com",
         "dm_linkedin_url": "http://www.linkedin.com/in/hkalodner",
-        "score": 34.55450812382439,
+        "score": 34.54615883020588,
         "insight": "The company recently posted a job for a Site Reliability Engineer, indicating a current need for cloud solutions.",
         "signals": [
           {
@@ -5881,7 +5730,7 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 34.55450691027036,
+        "score": 34.546157513883045,
         "insight": "ClickUp is hiring a GTM DevOps Engineer, indicating a focus on cloud infrastructure enhancements.",
         "signals": [
           {
@@ -5909,7 +5758,7 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 33.75614152099909,
+        "score": 33.74798502297939,
         "insight": "TWIA's recent job posting for a Lead DevOps Engineer indicates a strategic move to enhance their cloud infrastructure.",
         "signals": [
           {
@@ -5937,7 +5786,7 @@
         "dm_title": "CEO",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 33.492470766287106,
+        "score": 33.48437800493983,
         "insight": "JITSU is seeking a Senior DevOps/Platform Engineer, indicating a potential need for cloud consultancy support.",
         "signals": [
           {
@@ -5965,7 +5814,7 @@
         "dm_title": "CEO",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 33.49247075848601,
+        "score": 33.48437799693466,
         "insight": "Happy Returns has posted a job for a remote DevOps Engineer, indicating a potential need for cloud consultancy services.",
         "signals": [
           {
@@ -5993,7 +5842,7 @@
         "dm_title": "CEO",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 33.49247075139247,
+        "score": 33.484377988732504,
         "insight": "Yotta Energy recently posted a job for a DevOps Engineer II, indicating their need to enhance cloud infrastructure.",
         "signals": [
           {
@@ -6021,7 +5870,7 @@
         "dm_title": "Managing Partner and Chief Investment Officer",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 33.49247074251659,
+        "score": 33.48437798006472,
         "insight": "STG is hiring a Cloud Engineer, indicating a need for cloud consultancy to enhance their AWS/GCP/Azure capabilities.",
         "signals": [
           {
@@ -6049,7 +5898,7 @@
         "dm_title": "CEO and Founder",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 32.798695172507905,
+        "score": 32.790770081491615,
         "insight": "Wolfe, LLC is looking to enhance their cloud capabilities after recently hiring a VP of DevOps and posting for a DevOps Engineer.",
         "signals": [
           {
@@ -6088,7 +5937,7 @@
         "dm_title": "CEO",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 27.208658184856024,
+        "score": 27.20208375755658,
         "insight": "Dominari Securities recently raised funding, indicating potential growth and a need for cloud migration solutions.",
         "signals": [
           {
@@ -6116,7 +5965,7 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 24.763285297243872,
+        "score": 24.757301747132768,
         "insight": "GreenTrees recently raised funding, indicating they may require cloud consultancy to scale their operations.",
         "signals": [
           {
@@ -6144,7 +5993,7 @@
         "dm_title": "CEO and founder",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 24.188340913056404,
+        "score": 24.182496289944805,
         "insight": "Evotrex recently raised funding, indicating a potential need for cloud migration and optimization as they scale their operations.",
         "signals": [
           {
@@ -6172,7 +6021,7 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 18.928872134577773,
+        "score": 18.92429836172467,
         "insight": null,
         "signals": [
           {
@@ -6200,7 +6049,7 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 18.928872130184025,
+        "score": 18.924298357134617,
         "insight": null,
         "signals": [
           {
@@ -6228,7 +6077,7 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 18.92881603666108,
+        "score": 18.924242300763474,
         "insight": null,
         "signals": [
           {
@@ -6256,7 +6105,7 @@
         "dm_title": "President and Trustee",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 18.928816032287592,
+        "score": 18.92424229627465,
         "insight": null,
         "signals": [
           {
@@ -6284,7 +6133,7 @@
         "dm_title": "Chairman and Chief Executive Officer (CEO)",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 18.49309731643536,
+        "score": 18.488628861838436,
         "insight": null,
         "signals": [
           {
@@ -6312,7 +6161,7 @@
         "dm_title": "CEO",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 18.072652620537944,
+        "score": 18.06828575980984,
         "insight": null,
         "signals": [
           {
@@ -6340,7 +6189,7 @@
         "dm_title": "Chairman",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 17.658564857239682,
+        "score": 17.654298051770244,
         "insight": null,
         "signals": [
           {
@@ -6368,7 +6217,7 @@
         "dm_title": "CEO",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 17.271765445435253,
+        "score": 17.267592108198993,
         "insight": null,
         "signals": [
           {
@@ -6396,7 +6245,7 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 16.46465799440509,
+        "score": 16.46067968592075,
         "insight": null,
         "signals": [
           {
@@ -6424,7 +6273,7 @@
         "dm_title": "Vice President",
         "dm_email": null,
         "dm_linkedin_url": "http://www.linkedin.com/in/james-rogers-43995b191",
-        "score": 15.730510222630961,
+        "score": 15.726709299066513,
         "insight": null,
         "signals": [
           {
@@ -6452,7 +6301,7 @@
         "dm_title": "IT Project Manager",
         "dm_email": "sallgood@revelationpharma.com",
         "dm_linkedin_url": "http://www.linkedin.com/in/shawnallgood",
-        "score": 15.730510219400278,
+        "score": 15.726709295113245,
         "insight": null,
         "signals": [
           {
@@ -6480,7 +6329,7 @@
         "dm_title": "Senior Vice President Information Technology Services",
         "dm_email": "cmarco@netdes.com",
         "dm_linkedin_url": "http://www.linkedin.com/in/carmen-marco-2b58157",
-        "score": 15.369616864028588,
+        "score": 15.365903150156209,
         "insight": null,
         "signals": [
           {
@@ -6508,7 +6357,7 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 15.369616857464742,
+        "score": 15.3659031407792,
         "insight": null,
         "signals": [
           {
@@ -6536,7 +6385,7 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 15.36956739231023,
+        "score": 15.365853692893994,
         "insight": null,
         "signals": [
           {
@@ -6564,7 +6413,7 @@
         "dm_title": "Vice President Strategy and Analytics",
         "dm_email": "clowe@marlins.com",
         "dm_linkedin_url": "http://www.linkedin.com/in/christian-lowe-mba-mspa-712b753",
-        "score": 15.369567388882405,
+        "score": 15.365853688850635,
         "insight": null,
         "signals": [
           {
@@ -6592,7 +6441,7 @@
         "dm_title": "Chief Information Officer",
         "dm_email": "bdodd@dlrdmv.com",
         "dm_linkedin_url": "http://www.linkedin.com/in/bdodd",
-        "score": 15.36956738225693,
+        "score": 15.36585368122003,
         "insight": null,
         "signals": [
           {
@@ -6620,7 +6469,7 @@
         "dm_title": "Information Technology Site Manager",
         "dm_email": "dbernal@edgesource.com",
         "dm_linkedin_url": "http://www.linkedin.com/in/diego-bernal-pmp-46a23a73",
-        "score": 15.36956737886199,
+        "score": 15.365853677390346,
         "insight": null,
         "signals": [
           {
@@ -6648,7 +6497,7 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 15.014307327954876,
+        "score": 15.010679473965705,
         "insight": null,
         "signals": [
           {
@@ -6676,7 +6525,7 @@
         "dm_title": "Chief Technology Officer",
         "dm_email": "dustin.jackson@videoamp.com",
         "dm_linkedin_url": "http://www.linkedin.com/in/dustin-jackson-6a00716",
-        "score": 15.014262560626007,
+        "score": 15.010634721568273,
         "insight": null,
         "signals": [
           {
@@ -6704,7 +6553,7 @@
         "dm_title": "Chief Technology Officer & Chief Operating Officer",
         "dm_email": "msewell@way2b1.com",
         "dm_linkedin_url": "http://www.linkedin.com/in/michaelsewell",
-        "score": 15.014262557165004,
+        "score": 15.010634717859228,
         "insight": null,
         "signals": [
           {
@@ -6732,7 +6581,7 @@
         "dm_title": "Co-Founder & COO",
         "dm_email": "jamie@knock.com",
         "dm_linkedin_url": "http://www.linkedin.com/in/jamieglenn",
-        "score": 15.014262554049303,
+        "score": 15.010634713608283,
         "insight": null,
         "signals": [
           {
@@ -6760,7 +6609,7 @@
         "dm_title": "CEO",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 11.796825454654824,
+        "score": 11.793975015528071,
         "insight": null,
         "signals": [
           {
@@ -6788,7 +6637,7 @@
         "dm_title": "CEO",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 11.52535027591397,
+        "score": 11.52256543760022,
         "insight": null,
         "signals": [
           {
