@@ -9,6 +9,11 @@ on:
         description: "Per-source candidate cap (empty = no cap; e.g. 3 for a quick smoke)"
         required: false
         default: ""
+      reenrich:
+        description: "Force re-enrichment on every lead (re-runs the Gemini lookup against all rows, refreshing industry / DM / recruiter / headcount per the current prompt)"
+        type: boolean
+        required: false
+        default: false
 
 permissions:
   contents: write
@@ -51,8 +56,12 @@ jobs:
           LEADS_UPLOAD_URL:     https://www.ishaangpta.com/api/upload-leads
           LEADS_UPLOAD_API_KEY: ${{ secrets.LEADS_UPLOAD_API_KEY }}
           LIMIT:                ${{ inputs.limit }}
+          REENRICH:             ${{ inputs.reenrich }}
         run: |
           args=("--upload")
+          if [[ "$REENRICH" == "true" ]]; then
+            args+=("--reenrich")
+          fi
           if [[ -n "$LIMIT" ]]; then
             args+=("--limit" "$LIMIT")
           fi
@@ -64,6 +73,7 @@ jobs:
           git config user.name  "leads-cron[bot]"
           git config user.email "leads-cron[bot]@users.noreply.github.com"
           if [[ -n "$(git status --porcelain pipeline/data/leads.db pipeline/data/leads.json)" ]]; then
+            git pull --rebase --autostash origin master || true
             git add pipeline/data/leads.db pipeline/data/leads.json
             git commit -m "cron: nightly lead refresh ($(date -u +%Y-%m-%d))"
             git push
