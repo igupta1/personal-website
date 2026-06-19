@@ -53,8 +53,21 @@ _NICHE_INSIGHT_COL: dict[NicheName, str] = {
 }
 
 
+# Raw agency codes that must never survive in a prospect-facing insight. A
+# stored insight containing one was generated before outreach.py learned to
+# render readable agency names; force its regeneration (see _regen_copy).
+_RAW_AGENCY_CODES: tuple[str, ...] = tuple(breaches.AGENCY_DISPLAY_NAMES)
+
+
 def _utcnow() -> datetime:
     return datetime.now(timezone.utc).replace(tzinfo=None)
+
+
+def _insight_has_raw_agency_code(text: str | None) -> bool:
+    if not text:
+        return False
+    low = text.lower()
+    return any(code in low for code in _RAW_AGENCY_CODES)
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -373,9 +386,15 @@ def _regen_copy(
                 if getattr(lead, insight_col) is not None:
                     updates[insight_col] = None
                 continue
-            insight_missing = getattr(lead, insight_col) is None
+            existing_insight = getattr(lead, insight_col)
+            insight_missing = existing_insight is None
+            # A stored insight that still leaks a raw agency code ("me_ag")
+            # predates the readable-name fix — refresh it even when the score
+            # barely moved, so the leak self-heals on the next run.
+            stale_agency_code = _insight_has_raw_agency_code(existing_insight)
             should_regen = new >= INSIGHT_THRESHOLD and (
                 insight_missing
+                or stale_agency_code
                 or old is None
                 or old < INSIGHT_THRESHOLD  # first crossing-from-below
                 or abs(new - old) > INSIGHT_DELTA_THRESHOLD

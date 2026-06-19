@@ -447,6 +447,12 @@ def test_enrich_deletes_it_vendor_lead(
         "Planned Parenthood of Greater New York",
         "Automobile Club of Southern California",
         "Dalio Family Office",
+        # Large orgs that slipped the SMB cap with NULL / unverified headcount.
+        "PennyMac Loan Services",
+        "PennyMac Financial Services, Inc.",
+        "GM Financial",
+        "General Motors Financial Company",
+        "Miami Marlins",
     ],
 )
 def test_disqualifies_enterprise_name(name: str) -> None:
@@ -500,6 +506,98 @@ def test_does_not_disqualify_normal_smb_names() -> None:
     ]:
         lead = Lead(name=name, name_key="x", signals=[])
         assert enrichment._disqualification_reason(lead) is None
+
+
+# --- recruiter detection by domain / email ---------------------------------
+
+
+def test_is_recruiter_domain_matches_brand() -> None:
+    assert enrichment._is_recruiter_domain("mackenziestuart.com")
+    assert enrichment._is_recruiter_domain("careers.mackenziestuart.com")
+    assert enrichment._is_recruiter_domain("jobot.com")
+    # Ordinary SMB domains and blanks are left alone.
+    assert not enrichment._is_recruiter_domain("chiefrivernursery.com")
+    assert not enrichment._is_recruiter_domain("")
+    assert not enrichment._is_recruiter_domain(None)
+
+
+def test_disqualifies_recruiter_by_email_domain() -> None:
+    # The displayed name ("MACKENZIE") gives no recruiter signal, but the
+    # contact email's domain reveals the staffing brand (Mackenzie Stuart).
+    lead = Lead(
+        name="MACKENZIE",
+        name_key="mackenzie",
+        dm_email="david.stone@mackenziestuart.com",
+        signals=[],
+    )
+    assert enrichment._disqualification_reason(lead) == "recruiter_name"
+
+
+def test_keeps_smb_with_ordinary_email_domain() -> None:
+    lead = Lead(
+        name="Chief River Nursery",
+        name_key="chief",
+        domain="chiefrivernursery.com",
+        dm_email="owner@chiefrivernursery.com",
+        signals=[],
+    )
+    assert enrichment._disqualification_reason(lead) is None
+
+
+# --- bogus funding-headline purge ------------------------------------------
+
+
+def _funding_signal(feed_title: str) -> Signal:
+    return _signal(
+        type=SignalType.FUNDING_RAISED,
+        source=SourceName.FUNDING,
+        payload={"feed_title": feed_title},
+    )
+
+
+@pytest.mark.parametrize(
+    "feed_title",
+    [
+        "Dominari Securities Raises $200,000,000.00 in World's Largest IPO",
+        "Kodiak AI raises $100M at a steep discount, sending its stock tumbling 37%",
+    ],
+)
+def test_disqualifies_bogus_funding_only_lead(feed_title: str) -> None:
+    lead = Lead(name="Bogus Co", name_key="bogus", signals=[_funding_signal(feed_title)])
+    assert enrichment._disqualification_reason(lead) == "bogus_funding_signal"
+
+
+def test_keeps_real_funding_lead() -> None:
+    lead = Lead(
+        name="Real Co",
+        name_key="real",
+        signals=[_funding_signal("Real Co raises $25M Series B")],
+    )
+    assert enrichment._disqualification_reason(lead) is None
+
+
+def test_keeps_lead_with_bogus_funding_but_other_qualifying_signal() -> None:
+    # A genuine security posting keeps the lead even though a junk funding
+    # headline rode in on the same company — drop the headline, not the lead.
+    lead = Lead(
+        name="Mixed Co",
+        name_key="mixed",
+        signals=[
+            _funding_signal("Mixed Co stock tumbling 50% after earnings"),
+            _signal(
+                type=SignalType.JOB_SECURITY,
+                source=SourceName.JOBS,
+                payload={"title": "Security Engineer"},
+            ),
+        ],
+    )
+    assert enrichment._disqualification_reason(lead) is None
+
+
+def test_keeps_lead_with_unreadable_funding_headline() -> None:
+    # A blank headline can't be judged bogus; keep the lead conservatively.
+    lead = Lead(name="Blank Co", name_key="blank", signals=[_funding_signal("")])
+    assert enrichment._disqualification_reason(lead) is None
 
 
 def test_enrich_deletes_recruiter_lead(

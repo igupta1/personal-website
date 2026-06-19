@@ -132,6 +132,51 @@ def test_describe_signals_includes_payload_fields() -> None:
     assert "Boston, MA" in out
 
 
+def test_describe_signals_renders_readable_agency_not_raw_code() -> None:
+    # The breach payload stores a raw scraper code ("me_ag"); the prompt the
+    # LLM sees must show the readable agency name so the insight can't leak it.
+    lead = _lead(
+        name="Chief River Nursery",
+        signals=[
+            _signal(
+                type=SignalType.BREACH_DISCLOSED,
+                source=SourceName.BREACHES,
+                captured_at=_now(),
+                payload={"agency": "me_ag", "reported_date": "2026-04-22"},
+            )
+        ],
+    )
+    out = _describe_signals(lead, niche=NicheName.MSSP, now=_now())
+    assert "the Maine Attorney General" in out
+    assert "me_ag" not in out
+
+
+def test_generate_prompt_uses_readable_agency_name(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    captured: dict[str, str] = {}
+
+    def fake_call_openai(prompt: str, **kwargs: Any) -> Copy:
+        captured["prompt"] = prompt
+        return Copy(insight="x" * 30)
+
+    monkeypatch.setattr(outreach.llm, "call_openai", fake_call_openai)
+    lead = _lead(
+        name="Chief River Nursery",
+        signals=[
+            _signal(
+                type=SignalType.BREACH_DISCLOSED,
+                source=SourceName.BREACHES,
+                captured_at=_now(),
+                payload={"agency": "me_ag", "reported_date": "2026-04-22"},
+            )
+        ],
+    )
+    generate(lead, NicheName.MSSP, 60.0)
+    assert "the Maine Attorney General" in captured["prompt"]
+    assert "me_ag" not in captured["prompt"]
+
+
 def test_describe_signals_skips_missing_payload_fields() -> None:
     lead = _lead(
         signals=[_signal(type=SignalType.JOB_SECURITY, captured_at=_now(), payload={})]

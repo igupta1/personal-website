@@ -150,6 +150,17 @@ def test_is_funding_title_blocks_stock_moves_and_pump_hype() -> None:
     assert funding_module._is_funding_title("Beta Inc secures $10M seed funding")
 
 
+def test_is_buying_signal_title_public_wrapper() -> None:
+    # Public predicate reused by the enrichment purge — mirrors _is_funding_title.
+    assert funding_module.is_buying_signal_title("Acme raises $25M Series B")
+    assert not funding_module.is_buying_signal_title(
+        "Dominari Securities Raises $200,000,000 in World's Largest IPO"
+    )
+    assert not funding_module.is_buying_signal_title(
+        "Kodiak AI raises $100M at a steep discount, sending its stock tumbling 37%"
+    )
+
+
 def test_company_from_headline_extracts_company() -> None:
     assert funding_module._company_from_headline(
         "Altara secures $7M to bridge the data gap"

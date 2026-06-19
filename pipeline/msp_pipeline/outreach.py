@@ -19,6 +19,7 @@ from pydantic import BaseModel, Field
 
 from msp_pipeline import llm, scoring
 from msp_pipeline.models import Lead, NicheName, Signal, SignalType
+from msp_pipeline.sources import breaches
 
 
 class Copy(BaseModel):
@@ -156,8 +157,14 @@ def _format_signal(sig: Signal, days_ago: int) -> str:
     parts: list[str] = []
     for field in fields:
         val = sig.payload.get(field)
-        if val:
-            parts.append(f"{field}={val!r}")
+        if not val:
+            continue
+        # The breach payload stores a raw agency code ("me_ag"); render the
+        # readable name so the LLM names "the Maine Attorney General" rather
+        # than leaking the scraper code into the prospect-facing insight.
+        if sig.type == SignalType.BREACH_DISCLOSED and field == "agency":
+            val = breaches.agency_display_name(str(val))
+        parts.append(f"{field}={val!r}")
     detail = f" - {'; '.join(parts)}" if parts else ""
     when = "today" if days_ago == 0 else f"{days_ago}d ago"
     return f"- {sig.type.value} ({when}){detail}"

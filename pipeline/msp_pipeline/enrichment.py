@@ -19,6 +19,7 @@ from pydantic import BaseModel
 
 from msp_pipeline import db, llm
 from msp_pipeline.models import Lead, Signal, SignalType, SourceName
+from msp_pipeline.sources import funding
 
 log = logging.getLogger(__name__)
 
@@ -108,6 +109,11 @@ _BLOCKED_DOMAINS: frozenset[str] = frozenset({
     "elevancehealth.com", "wellpoint.com",
     "lacare.org",
     "aaa.com", "ace.aaa.com", "calif.aaa.com",
+    # Large orgs that slipped the >250 cap with NULL/unverified headcount:
+    # a national mortgage lender, an auto-finance arm, and an MLB club.
+    "pennymac.com", "pennymacusa.com",
+    "gmfinancial.com",
+    "marlins.com",
 })
 
 # Enterprises that often arrive with NO domain (recruiter-posted roles, AG
@@ -134,6 +140,11 @@ _BLOCKED_ENTERPRISE_NAMES: tuple[str, ...] = (
     "elevance", "wellpoint",
     "dalio family office",
     "automobile club of southern california",
+    # Large orgs that arrived with no domain + NULL headcount, so neither the
+    # domain block nor the >250 cap could catch them.
+    "pennymac",
+    "gm financial", "general motors",
+    "miami marlins",
 )
 
 # Staffing / recruiting / executive-search firms post roles on behalf of an
@@ -193,6 +204,42 @@ def _looks_like_article_headline(name: str) -> bool:
     return any(p.search(name) for p in _HEADLINE_NAME_PATTERNS)
 
 
+# Qualifying scoring signals OTHER than funding. A lead carrying any of these
+# stands on its own merit, so it's never dropped for a bad funding headline.
+_NON_FUNDING_QUALIFYING_SIGNALS: frozenset[SignalType] = frozenset({
+    SignalType.JOB_IT_SUPPORT,
+    SignalType.JOB_IT_LEADERSHIP,
+    SignalType.JOB_SECURITY,
+    SignalType.JOB_CLOUD_DEVOPS,
+    SignalType.EXEC_HIRED,
+    SignalType.BREACH_DISCLOSED,
+})
+
+
+def _has_only_bogus_funding_signal(lead: Lead) -> bool:
+    """True when a lead's ONLY qualifying signal is a funding headline the
+    funding source would now reject — fake-IPO hype ("...World's Largest IPO"),
+    a share-price move ("...stock tumbling 37%"), etc. These were ingested
+    before the funding-title guard existed and render the raw headline on the
+    card as if it were a real raise. A lead with any other qualifying signal is
+    kept on that signal's merit."""
+    funding_titles = [
+        str(s.payload.get("feed_title") or "").strip()
+        for s in lead.signals
+        if s.type == SignalType.FUNDING_RAISED
+    ]
+    if not funding_titles:
+        return False
+    if any(s.type in _NON_FUNDING_QUALIFYING_SIGNALS for s in lead.signals):
+        return False
+    # Drop only when EVERY funding headline we can read is one the source
+    # rejects; a blank/unreadable headline is left alone, conservatively.
+    return all(
+        bool(title) and not funding.is_buying_signal_title(title)
+        for title in funding_titles
+    )
+
+
 def _domain_blocked(domain: str | None) -> bool:
     if not domain:
         return False
@@ -238,6 +285,28 @@ def _is_recruiter_name(name: str) -> bool:
     return any(brand in normalized for brand in _RECRUITER_NAMES)
 
 
+def _email_domain(email: str | None) -> str | None:
+    if not email or "@" not in email:
+        return None
+    return email.rsplit("@", 1)[1].strip().lower() or None
+
+
+def _is_recruiter_domain(domain: str | None) -> bool:
+    """True when a website / email domain belongs to a known recruiter brand.
+    Catches leads like "MACKENZIE" whose displayed name carries no recruiter
+    signal but whose contact email (david.stone@mackenziestuart.com) does."""
+    if not domain:
+        return False
+    host = domain.lower().strip().rstrip("/").split("/")[0]
+    labels = host.split(".")
+    if len(labels) > 1:
+        labels = labels[:-1]  # drop the TLD: "mackenziestuart.com" -> name
+    flat = re.sub(r"[^a-z0-9]", "", "".join(labels))
+    if not flat:
+        return False
+    return any(brand.replace(" ", "") in flat for brand in _RECRUITER_NAMES)
+
+
 def _is_government_name(name: str) -> bool:
     return any(p.search(name) for p in _GOV_NAME_RES)
 
@@ -251,7 +320,11 @@ def _disqualification_reason(lead: Lead) -> str | None:
         return "government_entity"
     if _name_blocked(lead.name):
         return "blocked_name_pattern"
-    if _is_recruiter_name(lead.name):
+    if (
+        _is_recruiter_name(lead.name)
+        or _is_recruiter_domain(lead.domain)
+        or _is_recruiter_domain(_email_domain(lead.dm_email))
+    ):
         return "recruiter_name"
     if _is_it_vendor_name(lead.name):
         return "it_vendor_name"
@@ -261,6 +334,8 @@ def _disqualification_reason(lead: Lead) -> str | None:
         return f"oversized={lead.headcount}"
     if lead.headcount == 0:
         return "zero_headcount"
+    if _has_only_bogus_funding_signal(lead):
+        return "bogus_funding_signal"
     return None
 
 

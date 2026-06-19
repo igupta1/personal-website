@@ -184,6 +184,17 @@ def _is_funding_title(title: str) -> bool:
     return bool(_FUNDING_TITLE_PATTERN.search(title))
 
 
+def is_buying_signal_title(title: str) -> bool:
+    """Public predicate: True when a funding headline reads like a real
+    buying signal (a genuine raise / round), and False for IR noise, share-
+    price moves, acquisitions, lawsuits, or pump-and-dump hype.
+
+    The enrichment purge reuses this to drop leads ingested *before* this
+    guard existed — their stored headline still renders on the card as if it
+    were a real raise (e.g. "...World's Largest IPO", "...stock tumbling 37%")."""
+    return _is_funding_title(title)
+
+
 def _fetch_from_rss(feed_url: str, since: datetime) -> list[LeadCandidate]:
     captured_at = _utcnow()
     candidates: list[LeadCandidate] = []

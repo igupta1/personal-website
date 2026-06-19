@@ -87,6 +87,18 @@ def test_breaches_fetch_aggregates_and_continues_on_failure() -> None:
     assert names == {"ME Co", "WA Co"}
 
 
+def test_agency_display_name_maps_codes_and_falls_back() -> None:
+    f = breaches_module.agency_display_name
+    assert f("me_ag") == "the Maine Attorney General"
+    assert f("ca_ag") == "the California Attorney General"
+    assert f("wa_ag") == "the Washington State Attorney General"
+    # Case-insensitive; unknown / missing codes degrade to a generic regulator.
+    assert f("ME_AG") == "the Maine Attorney General"
+    assert f("xx_ag") == "a state regulator"
+    assert f("") == "a state regulator"
+    assert f(None) == "a state regulator"
+
+
 def test_clean_breach_entity_extracts_company_behind_agent() -> None:
     clean = breaches_module._clean_breach_entity
     # Reporting agent "on behalf of" the breached company -> keep the company.

@@ -24,6 +24,31 @@ _WA_AG_URL = "https://www.atg.wa.gov/data-breach-notifications"
 
 _USER_AGENT = "Mozilla/5.0 (compatible; msp-lead-magnet/0.1)"
 
+# Human-readable names for the raw agency codes we stamp onto a breach
+# signal's payload. Consumers (the insight-copy prompt in ``outreach.py``, the
+# stale-insight check in ``daily_run.py``) map the code to one of these so the
+# raw "me_ag" / "ca_ag" string never reaches a prospect-facing summary. The
+# React card has its own short-form labels (``AGENCY_LABELS`` in LeadCard.js);
+# these longer forms read naturally inside a sentence.
+AGENCY_DISPLAY_NAMES: dict[str, str] = {
+    "ca_ag": "the California Attorney General",
+    "me_ag": "the Maine Attorney General",
+    "wa_ag": "the Washington State Attorney General",
+}
+
+# Fallback for any agency code we don't have a name for — keeps the summary
+# readable instead of leaking a raw scraper code.
+_AGENCY_FALLBACK = "a state regulator"
+
+
+def agency_display_name(code: str | None) -> str:
+    """Map a raw breach-agency code (``me_ag``) to a readable name for use in
+    prose. Unknown / missing codes degrade to ``"a state regulator"``."""
+    if not code:
+        return _AGENCY_FALLBACK
+    return AGENCY_DISPLAY_NAMES.get(code.strip().lower(), _AGENCY_FALLBACK)
+
+
 # (entity_name, date_str) extracted from a row, or None to skip the row.
 RowParser = Callable[[list[Tag]], tuple[str, str] | None]
 

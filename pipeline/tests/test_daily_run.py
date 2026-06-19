@@ -328,6 +328,72 @@ def test_copy_regen_threshold_gates_calls(
     assert copy_calls2 == 0
 
 
+def test_insight_has_raw_agency_code() -> None:
+    f = daily_run._insight_has_raw_agency_code
+    assert f("Disclosed a breach to the agency 'me_ag' recently.")
+    assert f("Breach reported via CA_AG last month")  # case-insensitive
+    assert not f("Disclosed a breach to the Maine Attorney General.")
+    assert not f("")
+    assert not f(None)
+
+
+def test_regen_refreshes_insight_leaking_raw_agency_code(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """A stored insight that still leaks a raw agency code is regenerated even
+    when the niche score barely moved (so neither the threshold-crossing nor
+    the delta rule would fire on its own)."""
+    conn = db.init_db(tmp_path / "leads.db")
+    lead = db.upsert_lead(
+        conn,
+        _candidate("Chief River Nursery", SignalType.BREACH_DISCLOSED, SourceName.BREACHES),
+    )
+    assert lead.id is not None
+    reported = (_now() - timedelta(days=2)).strftime("%Y-%m-%d")
+    conn.execute(
+        "UPDATE leads SET signals = ? WHERE id = ?",
+        (
+            json.dumps([
+                {
+                    "type": SignalType.BREACH_DISCLOSED.value,
+                    "source": SourceName.BREACHES.value,
+                    "captured_at": _now().isoformat(),
+                    "payload": {"agency": "me_ag", "reported_date": reported},
+                }
+            ]),
+            lead.id,
+        ),
+    )
+    conn.commit()
+    # Pre-store a leaked insight and a matching score so only the stale-code
+    # rule can trigger regeneration (recent breach scores ~45 in MSSP).
+    db.update_lead(
+        conn,
+        lead.id,
+        industry="other",
+        headcount=80,
+        country="US",
+        mssp_score=45.0,
+        mssp_insight="Disclosed a breach to the agency 'me_ag' recently.",
+    )
+
+    generate_mock = MagicMock(
+        return_value=Copy(insight="Disclosed a breach to the Maine Attorney General.")
+    )
+    monkeypatch.setattr("msp_pipeline.outreach.generate", generate_mock)
+
+    daily_run._rescore_and_regen_copy(conn, [lead.id], model="gpt-4o-mini")
+
+    regen_niches = {
+        call.args[1] for call in generate_mock.call_args_list if call.args[0].id == lead.id
+    }
+    assert NicheName.MSSP in regen_niches
+    after = db.get_lead(conn, lead_id=lead.id)
+    assert after is not None
+    assert "me_ag" not in (after.mssp_insight or "")
+    assert after.mssp_insight == "Disclosed a breach to the Maine Attorney General."
+
+
 def test_json_output_shape(tmp_path: Path) -> None:
     conn = db.init_db(tmp_path / "leads.db")
 
