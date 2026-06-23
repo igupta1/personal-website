@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-21T09:56:02.409303",
+  "generated_at": "2026-06-23T09:48:40.213329",
   "niches": {
     "it_msp": [
       {
@@ -14,13 +14,13 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 41.42418382670418,
+        "score": 39.558273084135465,
         "insight": "VigorCare Pediatric Services has posted job openings for both an IT Support Specialist and an IT Support Engineer.",
         "signals": [
           {
             "type": "job_posted_it_support",
             "captured_at": "2026-06-13T08:57:42.614211",
-            "days_ago": 8,
+            "days_ago": 10,
             "payload": {
               "title": "IT Support Specialist",
               "url": "https://www.indeed.com/viewjob?jk=b1e45f69f821acee",
@@ -31,7 +31,7 @@
           {
             "type": "job_posted_it_support",
             "captured_at": "2026-05-07T08:33:45.474163",
-            "days_ago": 45,
+            "days_ago": 47,
             "payload": {
               "title": "IT Support Engineer",
               "url": "https://www.indeed.com/viewjob?jk=653d44adbadcc7b5",
@@ -53,13 +53,13 @@
         "dm_title": "President and Chief Executive Officer",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 39.048387967923915,
+        "score": 37.289492673605444,
         "insight": "Fortera Federal Credit Union recently posted a job for a Director of IT Infrastructure, indicating their focus on enhancing IT capabilities.",
         "signals": [
           {
             "type": "job_posted_it_leadership",
             "captured_at": "2026-06-20T08:55:21.493480",
-            "days_ago": 1,
+            "days_ago": 3,
             "payload": {
               "title": "Director of IT Infrastructure",
               "url": "https://www.adzuna.com/land/ad/5769584098?se=kOh_x4Vs8RGp9-BRSJNbpg&utm_medium=api&utm_source=3aa14b35&v=A6E2EE1999FD7B601B09C6C4DBD071A95A14622F",
@@ -81,18 +81,158 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 38.21182789756593,
+        "score": 36.490614605718584,
         "insight": "They recently posted a job for a Director of IT Architecture, indicating a potential need for IT support services.",
         "signals": [
           {
             "type": "job_posted_it_leadership",
             "captured_at": "2026-06-19T10:25:37.762815",
-            "days_ago": 1,
+            "days_ago": 3,
             "payload": {
               "title": "Director of IT Architecture",
               "url": "https://www.adzuna.com/land/ad/5768288122?se=tDq4Oslr8RG9auKyc94d5w&utm_medium=api&utm_source=3aa14b35&v=24F0E9903D0052D8C59396F109012DA8835E0EA0",
               "date_posted": "2026-06-18T13:37:01Z",
               "site": "adzuna"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Aperion Care",
+        "domain": "aperioncare.com",
+        "industry": "healthcare",
+        "headcount": null,
+        "country": "US",
+        "city": "Lincolnwood",
+        "state": "IL",
+        "dm_name": "Lisa Ulbert",
+        "dm_title": "CEO",
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": 34.994193286739524,
+        "insight": "Aperion Care recently hired a Vice President of IT, signaling a potential need for managed IT services.",
+        "signals": [
+          {
+            "type": "exec_hired",
+            "captured_at": "2026-06-23T09:38:11.363521",
+            "days_ago": 0,
+            "payload": {
+              "title": "Vice President of IT - MultiFacility Skilled Nursing Operator",
+              "url": "https://www.adzuna.com/land/ad/5773265491?se=RvMWQ-du8RG3pc9h1tgKVA&utm_medium=api&utm_source=3aa14b35&v=D2098EC0706F9820F9F3685C594D258FC40AF0AD",
+              "date_posted": "2026-06-23T03:02:14Z",
+              "site": "adzuna"
+            }
+          }
+        ]
+      },
+      {
+        "name": "VDS Consulting Group",
+        "domain": null,
+        "industry": "other",
+        "headcount": null,
+        "country": "US",
+        "city": null,
+        "state": null,
+        "dm_name": "George Bowman",
+        "dm_title": "Founder",
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": 34.99419327903783,
+        "insight": "Recently, VDS Consulting Group hired a new Chief Information Officer (CIO), indicating a potential need for enhanced IT support.",
+        "signals": [
+          {
+            "type": "exec_hired",
+            "captured_at": "2026-06-23T09:38:11.363521",
+            "days_ago": 0,
+            "payload": {
+              "title": "Chief Information Officer (CIO)",
+              "url": "https://www.adzuna.com/details/5771148191?utm_medium=api&utm_source=3aa14b35",
+              "date_posted": "2026-06-20T18:42:43Z",
+              "site": "adzuna"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Grand Hotel",
+        "domain": "grandhotel.com",
+        "industry": "hospitality_food",
+        "headcount": null,
+        "country": "US",
+        "city": "Mackinac Island",
+        "state": "MI",
+        "dm_name": "David Jurcak",
+        "dm_title": "President",
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": 34.99407784157139,
+        "insight": "Grand Hotel recently posted a job for an IT Support Specialist, indicating an immediate need for IT support services.",
+        "signals": [
+          {
+            "type": "job_posted_it_support",
+            "captured_at": "2026-06-23T09:37:59.022112",
+            "days_ago": 0,
+            "payload": {
+              "title": "IT Support Specialist",
+              "url": "https://www.linkedin.com/jobs/view/4429701839",
+              "date_posted": "2026-06-16",
+              "site": "linkedin"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Tactacam",
+        "domain": "tactacam.com",
+        "industry": "other",
+        "headcount": null,
+        "country": "US",
+        "city": "Caledonia",
+        "state": "MN",
+        "dm_name": "Jeff Peel",
+        "dm_title": "CEO and Founder",
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": 34.99407783418789,
+        "insight": "Tactacam recently posted a job for an IT Help Desk Technician, indicating an immediate need for IT support.",
+        "signals": [
+          {
+            "type": "job_posted_it_support",
+            "captured_at": "2026-06-23T09:37:59.022112",
+            "days_ago": 0,
+            "payload": {
+              "title": "IT Help Desk Technician",
+              "url": "https://www.linkedin.com/jobs/view/4427591094",
+              "date_posted": "2026-06-11",
+              "site": "linkedin"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Spring Fertility",
+        "domain": "springfertility.com",
+        "industry": "healthcare",
+        "headcount": null,
+        "country": "US",
+        "city": "San Francisco",
+        "state": "CA",
+        "dm_name": null,
+        "dm_title": null,
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": 34.99407782651429,
+        "insight": "The company recently posted a job for an IT Support Technician.",
+        "signals": [
+          {
+            "type": "job_posted_it_support",
+            "captured_at": "2026-06-23T09:37:59.022112",
+            "days_ago": 0,
+            "payload": {
+              "title": "IT Support Technician",
+              "url": "https://www.linkedin.com/jobs/view/4429713269",
+              "date_posted": "2026-06-16",
+              "site": "linkedin"
             }
           }
         ]
@@ -109,13 +249,13 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 36.503322980086175,
+        "score": 34.859067569954384,
         "insight": "The company recently posted a job for a Director of IT, indicating a need for enhanced IT leadership.",
         "signals": [
           {
             "type": "job_posted_it_leadership",
             "captured_at": "2026-06-17T10:54:47.861032",
-            "days_ago": 3,
+            "days_ago": 5,
             "payload": {
               "title": "Director of IT",
               "url": "https://www.linkedin.com/jobs/view/4429795047",
@@ -137,13 +277,13 @@
         "dm_title": "Director of Information Technology",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 35.67813975453513,
+        "score": 34.07105392828023,
         "insight": "With the recent job posting for a Director of IT, Aradius Group is signaling a potential need for enhanced IT support services.",
         "signals": [
           {
             "type": "job_posted_it_leadership",
             "captured_at": "2026-06-16T11:09:44.490964",
-            "days_ago": 4,
+            "days_ago": 6,
             "payload": {
               "title": "Director of IT",
               "url": "https://www.linkedin.com/jobs/view/4427783095",
@@ -165,13 +305,13 @@
         "dm_title": "CEO",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 34.99647675689708,
+        "score": 33.42009572124193,
         "insight": "Robertson Fuel Systems recently posted a job for an IT Support Technician, indicating their need for enhanced IT support.",
         "signals": [
           {
             "type": "job_posted_it_support",
             "captured_at": "2026-06-21T09:49:43.373135",
-            "days_ago": 0,
+            "days_ago": 1,
             "payload": {
               "title": "IT Support Technician",
               "url": "https://www.indeed.com/viewjob?jk=a7d9014cbc4e96ad",
@@ -193,13 +333,13 @@
         "dm_title": "President",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 34.898346823137445,
+        "score": 33.32638597551589,
         "insight": "Cogent Analytics recently posted a job for a Director of IT, indicating a potential need for IT managed services.",
         "signals": [
           {
             "type": "job_posted_it_leadership",
             "captured_at": "2026-06-15T12:12:27.119283",
-            "days_ago": 5,
+            "days_ago": 7,
             "payload": {
               "title": "Director of IT",
               "url": "https://www.linkedin.com/jobs/view/4428162312",
@@ -221,13 +361,13 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 34.16722981820692,
+        "score": 32.628201376473,
         "insight": "They recently posted a job for a Help Desk Technician, indicating an immediate need for IT support.",
         "signals": [
           {
             "type": "job_posted_it_support",
             "captured_at": "2026-06-20T08:55:09.486440",
-            "days_ago": 1,
+            "days_ago": 3,
             "payload": {
               "title": "Help Desk Technician",
               "url": "https://www.indeed.com/viewjob?jk=80f0346f39c61d09",
@@ -249,13 +389,13 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 34.167229810212106,
+        "score": 32.628201369475256,
         "insight": "They recently posted a job for an IT Support Specialist, indicating a clear need for IT support services.",
         "signals": [
           {
             "type": "job_posted_it_support",
             "captured_at": "2026-06-20T08:55:09.486440",
-            "days_ago": 1,
+            "days_ago": 3,
             "payload": {
               "title": "IT Support Specialist",
               "url": "https://www.indeed.com/viewjob?jk=2b4b5b3e78f31798",
@@ -277,13 +417,13 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 33.435437737882104,
+        "score": 31.929372126432792,
         "insight": "Recently raising $9M to enhance their AI solution, Probably could benefit from managed IT services for scaling operations.",
         "signals": [
           {
             "type": "funding_raised",
             "captured_at": "2026-06-19T10:25:47.642292",
-            "days_ago": 1,
+            "days_ago": 3,
             "payload": {
               "feed_title": "Probably raises $9M to build a more reliable kind of AI",
               "feed_url": "https://techcrunch.com/category/startups/feed/",
@@ -305,13 +445,13 @@
         "dm_title": "Chief Executive Officer",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 33.43523580404056,
+        "score": 31.929179291358093,
         "insight": "Headlight recently posted a job for an IT Support Specialist, indicating their immediate need for IT support services.",
         "signals": [
           {
             "type": "job_posted_it_support",
             "captured_at": "2026-06-19T10:25:25.053583",
-            "days_ago": 1,
+            "days_ago": 3,
             "payload": {
               "title": "IT Support Specialist",
               "url": "https://www.linkedin.com/jobs/view/4430744743",
@@ -333,13 +473,13 @@
         "dm_title": "Founder & CEO",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 32.67062151901715,
+        "score": 31.199006284061685,
         "insight": "Recently, 100 Thieves, Inc. posted a job for an IT Support Contractor, indicating their immediate need for IT assistance.",
         "signals": [
           {
             "type": "job_posted_it_support",
             "captured_at": "2026-06-18T10:23:36.035902",
-            "days_ago": 2,
+            "days_ago": 4,
             "payload": {
               "title": "IT Support Contractor",
               "url": "https://www.adzuna.com/land/ad/5767642326?se=iNuDxP9q8RG_XcdlzGzLnw&utm_medium=api&utm_source=3aa14b35&v=60518AB664DFCDF02E1F66CC2C64F5EAFBDB3931",
@@ -361,13 +501,13 @@
         "dm_title": "CEO",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 32.67029334818984,
+        "score": 31.19869289720252,
         "insight": "Recently, LEV DIAGNOSTICS LLC posted a job for 'Computer IT Support', indicating a current need for IT assistance.",
         "signals": [
           {
             "type": "job_posted_it_support",
             "captured_at": "2026-06-18T10:22:58.469575",
-            "days_ago": 2,
+            "days_ago": 4,
             "payload": {
               "title": "Computer IT support",
               "url": "https://www.linkedin.com/jobs/view/4425716944",
@@ -389,13 +529,13 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 32.670293339924996,
+        "score": 31.198692887382705,
         "insight": "Recently posting for an IT Support Specialist indicates a pressing need for IT assistance at Kdc LLC.",
         "signals": [
           {
             "type": "job_posted_it_support",
             "captured_at": "2026-06-18T10:22:58.469575",
-            "days_ago": 2,
+            "days_ago": 4,
             "payload": {
               "title": "IT Support Specialist",
               "url": "https://www.indeed.com/viewjob?jk=d48c2bf55dfac867",
@@ -417,13 +557,13 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 31.940407624760773,
+        "score": 30.501684138033244,
         "insight": "Recently posted a job for a Temporary Desktop Support Technician, indicating immediate IT support needs at Spirit Halloween.",
         "signals": [
           {
             "type": "job_posted_it_support",
             "captured_at": "2026-06-17T10:54:47.861032",
-            "days_ago": 3,
+            "days_ago": 5,
             "payload": {
               "title": "Temporary Desktop Support Technician",
               "url": "https://www.indeed.com/viewjob?jk=cc7ce92970f9deeb",
@@ -445,13 +585,13 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 31.42169732114754,
+        "score": 30.006338615380095,
         "insight": "Recently, Wightman posted a job opening for an IT Help Desk Technician, indicating a need for IT support.",
         "signals": [
           {
             "type": "job_posted_it_support",
             "captured_at": "2026-06-16T17:54:20.641291",
-            "days_ago": 4,
+            "days_ago": 6,
             "payload": {
               "title": "IT Help Desk Technician",
               "url": "https://www.linkedin.com/jobs/view/4427636501",
@@ -473,13 +613,13 @@
         "dm_title": "CEO",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 31.421697313148144,
+        "score": 30.00633860816631,
         "insight": "Ultrafabrics recently posted a job for a Help Desk Technician, indicating an immediate need for IT support.",
         "signals": [
           {
             "type": "job_posted_it_support",
             "captured_at": "2026-06-16T17:54:20.641291",
-            "days_ago": 4,
+            "days_ago": 6,
             "payload": {
               "title": "Help Desk Technician",
               "url": "https://www.linkedin.com/jobs/view/4428060017",
@@ -501,13 +641,13 @@
         "dm_title": "CEO",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 31.4148556221347,
+        "score": 29.999805092644603,
         "insight": "Shaw Development, LLC recently posted a job for an IT Help Desk Technician, indicating a growing need for IT support.",
         "signals": [
           {
             "type": "job_posted_it_support",
             "captured_at": "2026-06-16T17:40:46.326669",
-            "days_ago": 4,
+            "days_ago": 6,
             "payload": {
               "title": "IT Help Desk Technician",
               "url": "https://www.adzuna.com/land/ad/5765695358?se=_FHEgapp8RGkqKbDwZjUHw&utm_medium=api&utm_source=3aa14b35&v=9EC069A87DC4ED8EEA29D93842EA980AE5D6B948",
@@ -529,13 +669,13 @@
         "dm_title": "CEO",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 31.414751073151137,
+        "score": 29.999705291745258,
         "insight": "Alanric Food Distributors recently posted a job opening for a Help Desk Technician I, indicating a need for IT support.",
         "signals": [
           {
             "type": "job_posted_it_support",
             "captured_at": "2026-06-16T17:40:33.878008",
-            "days_ago": 4,
+            "days_ago": 6,
             "payload": {
               "title": "Help Desk Technician I (Tier 1 Support)",
               "url": "https://www.indeed.com/viewjob?jk=5474ed67e8bf60c1",
@@ -557,13 +697,13 @@
         "dm_title": "Founder & CEO",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 31.414751065758374,
+        "score": 29.999705284621317,
         "insight": "The company recently posted a job for an IT Support Technician, indicating an immediate need for IT assistance.",
         "signals": [
           {
             "type": "job_posted_it_support",
             "captured_at": "2026-06-16T17:40:33.878008",
-            "days_ago": 4,
+            "days_ago": 6,
             "payload": {
               "title": "IT Support Technician",
               "url": "https://www.linkedin.com/jobs/view/4429225812",
@@ -585,13 +725,13 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 31.218372308810682,
+        "score": 29.812172207152052,
         "insight": "All Heart Homecare Agency posted a job for an IT Support Professional, indicating their immediate need for IT assistance.",
         "signals": [
           {
             "type": "job_posted_it_support",
             "captured_at": "2026-06-16T11:09:44.490964",
-            "days_ago": 4,
+            "days_ago": 6,
             "payload": {
               "title": "IT Support Professional",
               "url": "https://www.linkedin.com/jobs/view/4426407975",
@@ -613,13 +753,13 @@
         "dm_title": "CEO and Founder",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 30.536146255441743,
+        "score": 29.160676336205402,
         "insight": "SupplyHouse just posted a job for an IT Support Technician, indicating an immediate need for IT managed services.",
         "signals": [
           {
             "type": "job_posted_it_support",
             "captured_at": "2026-06-15T12:12:38.482912",
-            "days_ago": 5,
+            "days_ago": 7,
             "payload": {
               "title": "IT Support Technician",
               "url": "https://www.adzuna.com/land/ad/5749791358?se=Quf1gLNo8RGUNNZ23C2q3w&utm_medium=api&utm_source=3aa14b35&v=B64555B222D766D7C1AAD2D1045D1889EF8E118E",
@@ -641,13 +781,13 @@
         "dm_title": "CEO",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 30.536146247161508,
+        "score": 29.160676329943538,
         "insight": "Bessemer Management Company recently posted a job for an IT Support Manager, indicating an immediate need for IT services.",
         "signals": [
           {
             "type": "job_posted_it_support",
             "captured_at": "2026-06-15T12:12:38.482912",
-            "days_ago": 5,
+            "days_ago": 7,
             "payload": {
               "title": "IT Support Manager",
               "url": "https://www.adzuna.com/land/ad/5763575460?se=Quf1gLNo8RGUNNZ23C2q3w&utm_medium=api&utm_source=3aa14b35&v=DDDAF9BEF22545BE4F296C6B87170CCFA1D033F6",
@@ -669,13 +809,13 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 30.307627698718115,
+        "score": 28.942451137375457,
         "insight": "Bristol Alliance of Companies has posted a job for a Director of IT, indicating a need for enhanced IT leadership.",
         "signals": [
           {
             "type": "job_posted_it_leadership",
             "captured_at": "2026-06-09T09:42:12.714848",
-            "days_ago": 12,
+            "days_ago": 14,
             "payload": {
               "title": "Director of IT",
               "url": "https://www.linkedin.com/jobs/view/4421580394",
@@ -697,13 +837,13 @@
         "dm_title": "CEO",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 30.307627692120803,
+        "score": 28.94245113087409,
         "insight": "Ironmark is seeking a new Director of IT Infrastructure, indicating a potential need for enhanced IT support services.",
         "signals": [
           {
             "type": "job_posted_it_leadership",
             "captured_at": "2026-06-09T09:42:12.714848",
-            "days_ago": 12,
+            "days_ago": 14,
             "payload": {
               "title": "Director of IT Infrastructure",
               "url": "https://www.linkedin.com/jobs/view/4420616155",
@@ -725,13 +865,13 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 30.070893455332623,
+        "score": 28.71638033759139,
         "insight": "Prairie's Edge Casino Resort just posted a job for an IT Director, indicating a need for enhanced IT leadership and support.",
         "signals": [
           {
             "type": "job_posted_it_leadership",
             "captured_at": "2026-06-09T01:33:28.876602",
-            "days_ago": 12,
+            "days_ago": 14,
             "payload": {
               "title": "IT Director",
               "url": "https://www.indeed.com/viewjob?jk=6c4f5377e110a09b",
@@ -753,13 +893,13 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 29.76273811676172,
+        "score": 28.422105586761504,
         "insight": "Gumenick Management Company LC is actively hiring a Help Desk Associate, indicating a need for IT support.",
         "signals": [
           {
             "type": "job_posted_it_support",
             "captured_at": "2026-06-14T09:33:46.630654",
-            "days_ago": 7,
+            "days_ago": 9,
             "payload": {
               "title": "Help Desk Associate",
               "url": "https://www.adzuna.com/land/ad/5763071864?se=wHO5JNRn8RGfB72z_DrYeQ&utm_medium=api&utm_source=3aa14b35&v=6C876612308F3DACC0F21F70A900CB957225EDEF",
@@ -781,13 +921,13 @@
         "dm_title": "Vice President Information Security",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 29.762738110314856,
+        "score": 28.422105580050193,
         "insight": "Bluestone Bank recently posted a job for a Sr. Desktop Support Specialist, indicating a need for enhanced IT support.",
         "signals": [
           {
             "type": "job_posted_it_support",
             "captured_at": "2026-06-14T09:33:46.630654",
-            "days_ago": 7,
+            "days_ago": 9,
             "payload": {
               "title": "Sr. Desktop Support Specialist",
               "url": "https://www.adzuna.com/details/5762483692?utm_medium=api&utm_source=3aa14b35",
@@ -809,13 +949,13 @@
         "dm_title": "Co-founder and CEO",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 29.762656044948507,
+        "score": 28.42202721141034,
         "insight": "The Shade Store is actively seeking an IT Support Specialist, indicating an immediate need for IT assistance.",
         "signals": [
           {
             "type": "job_posted_it_support",
             "captured_at": "2026-06-14T09:33:36.318063",
-            "days_ago": 7,
+            "days_ago": 9,
             "payload": {
               "title": "IT Support Specialist",
               "url": "https://www.linkedin.com/jobs/view/4401675218",
@@ -837,13 +977,13 @@
         "dm_title": "CEO",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 29.066130943103268,
+        "score": 27.75687638207695,
         "insight": "They recently posted a job for a Jr. IT Support Specialist, indicating an immediate need for IT support services.",
         "signals": [
           {
             "type": "job_posted_it_support",
             "captured_at": "2026-06-13T08:57:42.614211",
-            "days_ago": 8,
+            "days_ago": 10,
             "payload": {
               "title": "Jr. IT Support Specialist",
               "url": "https://www.linkedin.com/jobs/view/4426683340",
@@ -865,13 +1005,13 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 29.0661309358046,
+        "score": 27.75687637515901,
         "insight": "The recent hiring of a Chief Information Officer (CIO) at SAHARA Las Vegas indicates a potential need for enhanced IT management services.",
         "signals": [
           {
             "type": "exec_hired",
             "captured_at": "2026-06-13T08:57:42.614211",
-            "days_ago": 8,
+            "days_ago": 10,
             "payload": {
               "title": "Chief Information Officer (CIO)",
               "url": "https://www.linkedin.com/jobs/view/4428194307",
@@ -893,13 +1033,13 @@
         "dm_title": "Chief Executive Officer",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 28.436408557466404,
+        "score": 27.155519188627398,
         "insight": "Alpha Baking Co., Inc. recently posted a job for a Help Desk Analyst, indicating a current need for IT support services.",
         "signals": [
           {
             "type": "job_posted_it_support",
             "captured_at": "2026-06-12T10:12:35.985169",
-            "days_ago": 8,
+            "days_ago": 10,
             "payload": {
               "title": "Help Desk Analyst",
               "url": "https://www.adzuna.com/land/ad/5759653661?se=dtBAPEdm8RG0NKjG0ezNeg&utm_medium=api&utm_source=3aa14b35&v=D522730EA5E9A528BCFB534153675F992C4382F2",
@@ -921,13 +1061,13 @@
         "dm_title": "CEO",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 28.436408550394308,
+        "score": 27.155519182963136,
         "insight": "Allen Control Systems just hired a VP of IT and Cybersecurity, indicating a focus on strengthening their IT infrastructure.",
         "signals": [
           {
             "type": "exec_hired",
             "captured_at": "2026-06-12T10:12:35.985169",
-            "days_ago": 8,
+            "days_ago": 10,
             "payload": {
               "title": "VP of IT and Cybersecurity",
               "url": "https://www.adzuna.com/details/5760876625?utm_medium=api&utm_source=3aa14b35",
@@ -949,13 +1089,13 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 27.79184755911055,
+        "score": 26.539991785690184,
         "insight": "GreenTrees recently raised funding, indicating potential expansion and a need for enhanced IT support services.",
         "signals": [
           {
             "type": "funding_raised",
             "captured_at": "2026-06-11T10:23:39.042122",
-            "days_ago": 9,
+            "days_ago": 11,
             "payload": {
               "feed_title": "Climate Impact Partners secures a historic one million tonne carbon removals purchase from GreenTrees' Mississippi Alluvial Valley ARR Project",
               "feed_url": "https://www.prnewswire.com/rss/financial-services-latest-news/financial-services-latest-news-list.rss",
@@ -977,13 +1117,13 @@
         "dm_title": "Chief Executive Officer",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 27.79165354701046,
+        "score": 26.539806511072797,
         "insight": "Keel has posted a job for a Desktop Support Specialist, indicating a need for IT support services.",
         "signals": [
           {
             "type": "job_posted_it_support",
             "captured_at": "2026-06-11T10:23:12.935155",
-            "days_ago": 9,
+            "days_ago": 11,
             "payload": {
               "title": "Desktop Support Specialist",
               "url": "https://www.linkedin.com/jobs/view/4415677629",
@@ -1005,13 +1145,13 @@
         "dm_title": "CEO and founder",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 27.14658719802963,
+        "score": 25.923796521646626,
         "insight": "Evotrex recently raised funding, indicating they may be ready to enhance their IT capabilities to support growth.",
         "signals": [
           {
             "type": "funding_raised",
             "captured_at": "2026-06-10T09:59:33.801997",
-            "days_ago": 10,
+            "days_ago": 12,
             "payload": {
               "feed_title": "Evotrex raises $30M to build the RV that doesn\u2019t need a charging station",
               "feed_url": "https://techcrunch.com/category/startups/feed/",
@@ -1033,13 +1173,13 @@
         "dm_title": "EVP Chief Information Officer",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 27.146378378260373,
+        "score": 25.923597108466538,
         "insight": "Oak Valley Community Bank recently posted a job for an IT Help Desk Specialist, indicating a need for IT support.",
         "signals": [
           {
             "type": "job_posted_it_support",
             "captured_at": "2026-06-10T09:59:05.034229",
-            "days_ago": 10,
+            "days_ago": 12,
             "payload": {
               "title": "IT Help Desk Specialist- Oakdale- Headquarters",
               "url": "https://www.indeed.com/viewjob?jk=b04722f76fbc2ad4",
@@ -1061,13 +1201,13 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 27.146378372365717,
+        "score": 25.923597102345198,
         "insight": "FOCO recently posted a job for an IT Help Desk Analyst, indicating their need for enhanced IT support.",
         "signals": [
           {
             "type": "job_posted_it_support",
             "captured_at": "2026-06-10T09:59:05.034229",
-            "days_ago": 10,
+            "days_ago": 12,
             "payload": {
               "title": "IT Help Desk Analyst - End User Support",
               "url": "https://www.linkedin.com/jobs/view/4422900715",
@@ -1089,13 +1229,13 @@
         "dm_title": "President",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 26.519284252813417,
+        "score": 25.324749805117744,
         "insight": "Chesapeake Containment recently posted a job for a Help Desk Technician, indicating a current need for IT support.",
         "signals": [
           {
             "type": "job_posted_it_support",
             "captured_at": "2026-06-09T09:42:28.229850",
-            "days_ago": 12,
+            "days_ago": 14,
             "payload": {
               "title": "Help Desk Technician",
               "url": "https://www.adzuna.com/details/5756811555?utm_medium=api&utm_source=3aa14b35",
@@ -1117,13 +1257,13 @@
         "dm_title": "Chief Executive Officer, RENK Americas",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 26.519284246693253,
+        "score": 25.32474979954415,
         "insight": "RENK America posted a job for an IT Support Specialist, indicating a potential need for external IT managed services.",
         "signals": [
           {
             "type": "job_posted_it_support",
             "captured_at": "2026-06-09T09:42:28.229850",
-            "days_ago": 12,
+            "days_ago": 14,
             "payload": {
               "title": "IT Support Specialist",
               "url": "https://www.adzuna.com/land/ad/5745118710?se=SJvih-dj8RGUHeXkscxH9A&utm_medium=api&utm_source=3aa14b35&v=1182ABB1E38285B477B08977048E9F59CE7013A3",
@@ -1145,13 +1285,13 @@
         "dm_title": "Founder & CEO",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 26.312161515172868,
+        "score": 25.12695669208818,
         "insight": "UPLIFT Desk recently appointed a VP of IT, indicating a potential need for enhanced IT support services.",
         "signals": [
           {
             "type": "exec_hired",
             "captured_at": "2026-06-09T01:33:47.317101",
-            "days_ago": 12,
+            "days_ago": 14,
             "payload": {
               "title": "VP of IT",
               "url": "https://www.adzuna.com/details/5751235370?utm_medium=api&utm_source=3aa14b35",
@@ -1173,13 +1313,13 @@
         "dm_title": "President and CEO",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 26.312031822684272,
+        "score": 25.12683284230035,
         "insight": "COMMUNITY RESOURCE CREDIT UNION recently posted a job for a Help Desk I position, indicating their need for IT support in Baytown, TX.",
         "signals": [
           {
             "type": "job_posted_it_support",
             "captured_at": "2026-06-09T01:33:28.876602",
-            "days_ago": 12,
+            "days_ago": 14,
             "payload": {
               "title": "Help Desk I-Onsite Role (Baytown, Tx)",
               "url": "https://www.indeed.com/viewjob?jk=97a86acd3f72927e",
@@ -1201,13 +1341,13 @@
         "dm_title": "CEO",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 26.312031816386778,
+        "score": 25.12683283605806,
         "insight": "Workscapes, Inc. recently posted a job for an IT Support Engineer, indicating a need for enhanced IT support services.",
         "signals": [
           {
             "type": "job_posted_it_support",
             "captured_at": "2026-06-09T01:33:28.876602",
-            "days_ago": 12,
+            "days_ago": 14,
             "payload": {
               "title": "IT Support Engineer",
               "url": "https://www.linkedin.com/jobs/view/4423584121",
@@ -1229,13 +1369,13 @@
         "dm_title": "Chief Executive Officer (CEO)",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 26.312031810490353,
+        "score": 25.126832830178618,
         "insight": "Honest Health has posted a job for an IT Support Engineer, indicating an immediate need for IT support services.",
         "signals": [
           {
             "type": "job_posted_it_support",
             "captured_at": "2026-06-09T01:33:28.876602",
-            "days_ago": 12,
+            "days_ago": 14,
             "payload": {
               "title": "IT Support Engineer",
               "url": "https://www.linkedin.com/jobs/view/4421251384",
@@ -1257,13 +1397,13 @@
         "dm_title": "Founder & Executive Chairman",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 16.99505582793861,
+        "score": 16.229530646342656,
         "insight": null,
         "signals": [
           {
             "type": "job_posted_it_leadership",
             "captured_at": "2026-05-15T08:48:58.034970",
-            "days_ago": 37,
+            "days_ago": 39,
             "payload": {
               "title": "Director of IT",
               "url": "https://www.linkedin.com/jobs/view/4414253574",
@@ -1285,13 +1425,13 @@
         "dm_title": "CEO",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 16.22640742823442,
+        "score": 15.495505237477822,
         "insight": null,
         "signals": [
           {
             "type": "job_posted_it_leadership",
             "captured_at": "2026-05-13T08:44:26.339652",
-            "days_ago": 39,
+            "days_ago": 41,
             "payload": {
               "title": "Director of IT",
               "url": "https://www.adzuna.com/land/ad/5727766171?se=0HuS9qdO8RGQz7TsmflU2w&utm_medium=api&utm_source=3aa14b35&v=7F0BD44B341B3BBA10D0513BDC7F237379FB74FA",
@@ -1313,13 +1453,13 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 15.058236876703443,
+        "score": 14.379953756859134,
         "insight": null,
         "signals": [
           {
             "type": "job_posted_it_support",
             "captured_at": "2026-05-15T21:50:08.752953",
-            "days_ago": 36,
+            "days_ago": 38,
             "payload": {
               "title": "Desktop Support Engineer",
               "url": "https://www.indeed.com/viewjob?jk=a19d0cfc49fe19a7",
@@ -1341,13 +1481,13 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 14.870717930889837,
+        "score": 14.200881411643566,
         "insight": null,
         "signals": [
           {
             "type": "job_posted_it_support",
             "captured_at": "2026-05-15T08:49:09.120779",
-            "days_ago": 37,
+            "days_ago": 39,
             "payload": {
               "title": "IT Support Associate",
               "url": "https://www.adzuna.com/land/ad/5728649318?se=KnXx8DpQ8RGD8MZJ4ev-Ow&utm_medium=api&utm_source=3aa14b35&v=368B4174FA802B393A26C008ABAAA64597D7D7F8",
@@ -1369,13 +1509,13 @@
         "dm_title": "President and Chief Executive Officer",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 14.782681980124089,
+        "score": 14.116810925653834,
         "insight": null,
         "signals": [
           {
             "type": "job_posted_it_leadership",
             "captured_at": "2026-05-09T07:56:49.271362",
-            "days_ago": 43,
+            "days_ago": 45,
             "payload": {
               "title": "Director of IT Architecture",
               "url": "https://www.adzuna.com/land/ad/5721259224?se=JGHTpXxL8RGnMap5hKkm1g&utm_medium=api&utm_source=3aa14b35&v=96B9C8A3546C269632B3966CC0D1E58CD6FFD3C7",
@@ -1397,13 +1537,13 @@
         "dm_title": "CEO",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 14.528368739522708,
+        "score": 13.873952993042307,
         "insight": null,
         "signals": [
           {
             "type": "job_posted_it_support",
             "captured_at": "2026-05-14T08:37:33.826819",
-            "days_ago": 38,
+            "days_ago": 40,
             "payload": {
               "title": "IT Support Technician \u2013 School Systems & User Support",
               "url": "https://www.indeed.com/viewjob?jk=cc6987f72b2c53dd",
@@ -1425,13 +1565,13 @@
         "dm_title": "President",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 14.52836873565699,
+        "score": 13.873952989729146,
         "insight": null,
         "signals": [
           {
             "type": "job_posted_it_support",
             "captured_at": "2026-05-14T08:37:33.826819",
-            "days_ago": 38,
+            "days_ago": 40,
             "payload": {
               "title": "IT Help Desk",
               "url": "https://www.indeed.com/viewjob?jk=9ec4aef909da20d5",
@@ -1453,13 +1593,13 @@
         "dm_title": "CEO",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 14.528368732374041,
+        "score": 13.87395298669054,
         "insight": null,
         "signals": [
           {
             "type": "job_posted_it_support",
             "captured_at": "2026-05-14T08:37:33.826819",
-            "days_ago": 38,
+            "days_ago": 40,
             "payload": {
               "title": "IT Support Technician",
               "url": "https://www.linkedin.com/jobs/view/4414150730",
@@ -1481,13 +1621,13 @@
         "dm_title": "Co-Founder",
         "dm_email": "chris@aligneddentalpartners.com",
         "dm_linkedin_url": "http://www.linkedin.com/in/chris-mcclure",
-        "score": 14.441577375417774,
+        "score": 13.791071034399753,
         "insight": null,
         "signals": [
           {
             "type": "job_posted_it_leadership",
             "captured_at": "2026-05-08T07:41:51.457583",
-            "days_ago": 44,
+            "days_ago": 46,
             "payload": {
               "title": "IT Director- Healthcare",
               "url": "https://www.linkedin.com/jobs/view/4411682564",
@@ -1509,13 +1649,13 @@
         "dm_title": "Founder & CEO",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 14.198063026561114,
+        "score": 13.558525566812506,
         "insight": null,
         "signals": [
           {
             "type": "job_posted_it_support",
             "captured_at": "2026-05-13T08:44:14.886041",
-            "days_ago": 39,
+            "days_ago": 41,
             "payload": {
               "title": "Help Desk Analyst",
               "url": "https://www.linkedin.com/jobs/view/4409988415",
@@ -1537,13 +1677,13 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 14.198063023349006,
+        "score": 13.558525563498533,
         "insight": null,
         "signals": [
           {
             "type": "job_posted_it_support",
             "captured_at": "2026-05-13T08:44:14.886041",
-            "days_ago": 39,
+            "days_ago": 41,
             "payload": {
               "title": "IT Support Specialist",
               "url": "https://www.linkedin.com/jobs/view/4412956014",
@@ -1565,13 +1705,13 @@
         "dm_title": "Director of IT / Information Security Officer",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 14.198063019343365,
+        "score": 13.558525560543512,
         "insight": null,
         "signals": [
           {
             "type": "job_posted_it_support",
             "captured_at": "2026-05-13T08:44:14.886041",
-            "days_ago": 39,
+            "days_ago": 41,
             "payload": {
               "title": "IT Support Specialist",
               "url": "https://www.indeed.com/viewjob?jk=d878c04b2b639001",
@@ -1593,13 +1733,13 @@
         "dm_title": "Co-Founder & CEO",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 13.872797807002495,
+        "score": 13.247911592323268,
         "insight": null,
         "signals": [
           {
             "type": "job_posted_it_support",
             "captured_at": "2026-05-12T08:39:50.450461",
-            "days_ago": 40,
+            "days_ago": 42,
             "payload": {
               "title": "Application/Database Developer/IT Support",
               "url": "https://www.adzuna.com/details/5725838709?utm_medium=api&utm_source=3aa14b35",
@@ -1621,13 +1761,13 @@
         "dm_title": "CEO",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 13.872797803723,
+        "score": 13.247911589517427,
         "insight": null,
         "signals": [
           {
             "type": "exec_hired",
             "captured_at": "2026-05-12T08:39:50.450461",
-            "days_ago": 40,
+            "days_ago": 42,
             "payload": {
               "title": "VP of IT",
               "url": "https://www.adzuna.com/details/5723235728?utm_medium=api&utm_source=3aa14b35",
@@ -1649,13 +1789,13 @@
         "dm_title": "General Manager",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 13.872751403822583,
+        "score": 13.24786727718455,
         "insight": null,
         "signals": [
           {
             "type": "job_posted_it_support",
             "captured_at": "2026-05-12T08:39:37.936748",
-            "days_ago": 40,
+            "days_ago": 42,
             "payload": {
               "title": "IT Support",
               "url": "https://www.indeed.com/viewjob?jk=01d14ec0d797d510",
@@ -1677,13 +1817,13 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 13.872751400068244,
+        "score": 13.247867274399976,
         "insight": null,
         "signals": [
           {
             "type": "job_posted_it_support",
             "captured_at": "2026-05-12T08:39:37.936748",
-            "days_ago": 40,
+            "days_ago": 42,
             "payload": {
               "title": "IT Help Desk Technician",
               "url": "https://www.linkedin.com/jobs/view/4411763484",
@@ -1705,13 +1845,13 @@
         "dm_title": "Chief EMS and CEO",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 13.872751396900057,
+        "score": 13.247867271466605,
         "insight": null,
         "signals": [
           {
             "type": "job_posted_it_support",
             "captured_at": "2026-05-12T08:39:37.936748",
-            "days_ago": 40,
+            "days_ago": 42,
             "payload": {
               "title": "IT Support Specialist",
               "url": "https://www.indeed.com/viewjob?jk=aac5fa6e7284f3dc",
@@ -1733,13 +1873,13 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 13.872751393553797,
+        "score": 13.247867268540322,
         "insight": null,
         "signals": [
           {
             "type": "job_posted_it_support",
             "captured_at": "2026-05-12T08:39:37.936748",
-            "days_ago": 40,
+            "days_ago": 42,
             "payload": {
               "title": "IT Support Specialist",
               "url": "https://www.indeed.com/viewjob?jk=e80df16a60f0d736",
@@ -1761,13 +1901,13 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 13.568877793986418,
+        "score": 12.957681329377722,
         "insight": null,
         "signals": [
           {
             "type": "job_posted_it_support",
             "captured_at": "2026-05-11T09:39:16.945467",
-            "days_ago": 41,
+            "days_ago": 43,
             "payload": {
               "title": "IT Support Technician",
               "url": "https://www.linkedin.com/jobs/view/4387866229",
@@ -1789,13 +1929,13 @@
         "dm_title": "Sr. Director of Strategic Partnerships | Private Equity | Accounting & Finance | Human Resources | IT | Executive Leadership | The Most Important Thing to Know About our Team is That we are Here to Serve.",
         "dm_email": null,
         "dm_linkedin_url": "http://www.linkedin.com/in/hagenbarlow",
-        "score": 13.362493575224388,
+        "score": 12.760593466635953,
         "insight": null,
         "signals": [
           {
             "type": "job_posted_it_leadership",
             "captured_at": "2026-05-04T23:01:46.127486",
-            "days_ago": 47,
+            "days_ago": 49,
             "payload": {
               "title": "Interim Director of IT",
               "url": "https://www.adzuna.com/land/ad/5718222787?se=fnxJPA1I8RGldLZhYZiz6Q&utm_medium=api&utm_source=3aa14b35&v=CE66AC6A2276C4E0A5173DB442EEB967E174D723",
@@ -1817,13 +1957,13 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 13.239512515058552,
+        "score": 12.643151978859496,
         "insight": null,
         "signals": [
           {
             "type": "job_posted_it_support",
             "captured_at": "2026-05-10T08:07:46.896712",
-            "days_ago": 42,
+            "days_ago": 44,
             "payload": {
               "title": "Level 1 IT Support Technician",
               "url": "https://www.indeed.com/viewjob?jk=f7b65e7d9fada4e8",
@@ -1845,13 +1985,13 @@
         "dm_title": "CEO",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 12.934906462039944,
+        "score": 12.352266599104633,
         "insight": null,
         "signals": [
           {
             "type": "funding_raised",
             "captured_at": "2026-05-09T07:57:06.539973",
-            "days_ago": 43,
+            "days_ago": 45,
             "payload": {
               "feed_title": "TriSpan Closes Continuation Vehicle for Maman",
               "feed_url": "https://www.prnewswire.com/rss/financial-services-latest-news/financial-services-latest-news-list.rss",
@@ -1873,13 +2013,13 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 12.934846738717185,
+        "score": 12.352209565516302,
         "insight": null,
         "signals": [
           {
             "type": "job_posted_it_support",
             "captured_at": "2026-05-09T07:56:49.271362",
-            "days_ago": 43,
+            "days_ago": 45,
             "payload": {
               "title": "Help Desk Technician Intern",
               "url": "https://www.adzuna.com/land/ad/5722725889?se=EFtkonxL8RGnMap5hKkm1g&utm_medium=api&utm_source=3aa14b35&v=AEFDC5ADA7D94C8A7131D66EEAB006394A75198E",
@@ -1901,13 +2041,13 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 12.934805817381996,
+        "score": 12.352170487732216,
         "insight": null,
         "signals": [
           {
             "type": "job_posted_it_support",
             "captured_at": "2026-05-09T07:56:37.439236",
-            "days_ago": 43,
+            "days_ago": 45,
             "payload": {
               "title": "IT Support Specialist (Part-Time)",
               "url": "https://www.linkedin.com/jobs/view/4388509300",
@@ -1929,13 +2069,13 @@
         "dm_title": "Owner",
         "dm_email": "carmen@vanguardnaples.com",
         "dm_linkedin_url": "http://www.linkedin.com/in/carmen-falbo-4b07473b",
-        "score": 12.358093230612033,
+        "score": 11.80143533717463,
         "insight": null,
         "signals": [
           {
             "type": "job_posted_it_support",
             "captured_at": "2026-05-07T08:33:58.038098",
-            "days_ago": 45,
+            "days_ago": 47,
             "payload": {
               "title": "IT Support Specialist",
               "url": "https://www.adzuna.com/land/ad/5721153018?se=Dr9pfu9J8RG3JZg8AVaeSA&utm_medium=api&utm_source=3aa14b35&v=FA989265803D6F68C294EFABF247762A4D3BFC51",
@@ -1957,13 +2097,13 @@
         "dm_title": "Chief Operating Officer",
         "dm_email": "clayton.coleman@j-mack.com",
         "dm_linkedin_url": "http://www.linkedin.com/in/colemanr",
-        "score": 12.074491310719118,
+        "score": 11.530607973392,
         "insight": null,
         "signals": [
           {
             "type": "job_posted_it_support",
             "captured_at": "2026-05-06T08:27:02.213469",
-            "days_ago": 46,
+            "days_ago": 48,
             "payload": {
               "title": "IT Support Technician (Entry Level)",
               "url": "https://www.linkedin.com/jobs/view/4410717566",
@@ -1985,13 +2125,13 @@
         "dm_title": "Vice President of Technology",
         "dm_email": "lmisgen@ztrip.com",
         "dm_linkedin_url": "http://www.linkedin.com/in/lukemisgen",
-        "score": 12.074491307725896,
+        "score": 11.530607970959124,
         "insight": null,
         "signals": [
           {
             "type": "job_posted_it_support",
             "captured_at": "2026-05-06T08:27:02.213469",
-            "days_ago": 46,
+            "days_ago": 48,
             "payload": {
               "title": "IT Support",
               "url": "https://www.linkedin.com/jobs/view/4408538417",
@@ -2013,13 +2153,13 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 11.795395317320589,
+        "score": 11.264083578591421,
         "insight": null,
         "signals": [
           {
             "type": "job_posted_it_support",
             "captured_at": "2026-05-05T08:09:31.653253",
-            "days_ago": 47,
+            "days_ago": 49,
             "payload": {
               "title": "Help Desk Operator",
               "url": "https://www.adzuna.com/land/ad/5718917188?se=dAchv1lI8RG-rcJmfw1P3Q&utm_medium=api&utm_source=3aa14b35&v=132C32EB82F0C017DD4E8E8A196A3AE6707B518B",
@@ -2041,13 +2181,13 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 11.795395314566886,
+        "score": 11.264083575823197,
         "insight": null,
         "signals": [
           {
             "type": "job_posted_it_support",
             "captured_at": "2026-05-05T08:09:31.653253",
-            "days_ago": 47,
+            "days_ago": 49,
             "payload": {
               "title": "Help Desk Technician",
               "url": "https://www.adzuna.com/land/ad/5707336525?se=dAchv1lI8RG-rcJmfw1P3Q&utm_medium=api&utm_source=3aa14b35&v=545FC526F88B03AD1D98DB4F3A8497318DB11786",
@@ -2069,13 +2209,13 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 11.795395311734321,
+        "score": 11.264083573464628,
         "insight": null,
         "signals": [
           {
             "type": "job_posted_it_support",
             "captured_at": "2026-05-05T08:09:31.653253",
-            "days_ago": 47,
+            "days_ago": 49,
             "payload": {
               "title": "IT Support Specialist",
               "url": "https://www.adzuna.com/land/ad/5714204223?se=uDCLv1lI8RG-rcJmfw1P3Q&utm_medium=api&utm_source=3aa14b35&v=88FA58D31087D3CA1848DBBF5E9E466347A2D19F",
@@ -2097,13 +2237,13 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 11.795360143199042,
+        "score": 11.264049988873952,
         "insight": null,
         "signals": [
           {
             "type": "job_posted_it_support",
             "captured_at": "2026-05-05T08:09:20.498690",
-            "days_ago": 47,
+            "days_ago": 49,
             "payload": {
               "title": "IT Support Technician- IT Admin- Full Time",
               "url": "https://www.linkedin.com/jobs/view/4410073488",
@@ -2125,13 +2265,13 @@
         "dm_title": "VP and Chief Technology Officer",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 11.692143204637395,
+        "score": 11.16548235133224,
         "insight": null,
         "signals": [
           {
             "type": "job_posted_it_support",
             "captured_at": "2026-05-04T23:01:33.755742",
-            "days_ago": 47,
+            "days_ago": 49,
             "payload": {
               "title": "IT Support Specialist (Help Desk)",
               "url": "https://www.linkedin.com/jobs/view/4406422539",
@@ -2153,13 +2293,13 @@
         "dm_title": "Chief Medical Officer",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 11.692143201323105,
+        "score": 11.165482348427009,
         "insight": null,
         "signals": [
           {
             "type": "job_posted_it_support",
             "captured_at": "2026-05-04T23:01:33.755742",
-            "days_ago": 47,
+            "days_ago": 49,
             "payload": {
               "title": "IT Support Technician",
               "url": "https://www.linkedin.com/jobs/view/4408553766",
@@ -2181,13 +2321,13 @@
         "dm_title": "Chief Executive Officer",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 11.692143198371511,
+        "score": 11.16548234559941,
         "insight": null,
         "signals": [
           {
             "type": "job_posted_it_support",
             "captured_at": "2026-05-04T23:01:33.755742",
-            "days_ago": 47,
+            "days_ago": 49,
             "payload": {
               "title": "IT Support Specialist (Entry-Level)",
               "url": "https://www.linkedin.com/jobs/view/4405162384",
@@ -2211,13 +2351,13 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 71.83433150305723,
+        "score": 68.59862639968044,
         "insight": "Nuclear recently posted two security job openings, indicating a need for enhanced security measures.",
         "signals": [
           {
             "type": "job_posted_security",
             "captured_at": "2026-06-16T18:05:53.535102",
-            "days_ago": 4,
+            "days_ago": 6,
             "payload": {
               "title": "Staff Cloud Security Engineer",
               "url": "https://www.indeed.com/viewjob?jk=76c82b4d0fe8a689",
@@ -2228,7 +2368,7 @@
           {
             "type": "job_posted_security",
             "captured_at": "2026-06-16T18:05:53.535102",
-            "days_ago": 4,
+            "days_ago": 6,
             "payload": {
               "title": "Staff Application Security Engineer",
               "url": "https://www.indeed.com/viewjob?jk=59a2ed81d845d51d",
@@ -2250,13 +2390,13 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 54.93282907448706,
+        "score": 52.45843510031663,
         "insight": "Following recent breaches disclosed to multiple agencies, RCI Internet Services may require enhanced SOC monitoring and compliance support.",
         "signals": [
           {
             "type": "breach_disclosed",
             "captured_at": "2026-06-09T01:34:05.871171",
-            "days_ago": 19,
+            "days_ago": 21,
             "payload": {
               "agency": "me_ag",
               "reported_date": "2026-06-02"
@@ -2265,7 +2405,7 @@
           {
             "type": "breach_disclosed",
             "captured_at": "2026-06-09T01:34:03.443822",
-            "days_ago": 23,
+            "days_ago": 25,
             "payload": {
               "agency": "ca_ag",
               "reported_date": "05/29/2026"
@@ -2285,13 +2425,13 @@
         "dm_title": "President",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 51.79783317295329,
+        "score": 49.46465194532628,
         "insight": "The company recently disclosed two data breaches to regulatory agencies, indicating a pressing need for enhanced security measures.",
         "signals": [
           {
             "type": "breach_disclosed",
             "captured_at": "2026-06-09T01:34:05.871171",
-            "days_ago": 23,
+            "days_ago": 25,
             "payload": {
               "agency": "me_ag",
               "reported_date": "2026-05-29"
@@ -2300,7 +2440,7 @@
           {
             "type": "breach_disclosed",
             "captured_at": "2026-06-09T01:34:03.443822",
-            "days_ago": 24,
+            "days_ago": 26,
             "payload": {
               "agency": "ca_ag",
               "reported_date": "05/28/2026"
@@ -2320,13 +2460,13 @@
         "dm_title": "President & Owner",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 48.727121428903814,
+        "score": 46.53225730618594,
         "insight": "The company recently hired a Chief Information Security Officer, indicating a strengthened focus on security measures.",
         "signals": [
           {
             "type": "exec_hired",
             "captured_at": "2026-06-15T12:12:38.482912",
-            "days_ago": 5,
+            "days_ago": 7,
             "payload": {
               "title": "Chief Information Security Officer (CISO)",
               "url": "https://www.adzuna.com/details/5758966473?utm_medium=api&utm_source=3aa14b35",
@@ -2337,7 +2477,7 @@
           {
             "type": "exec_hired",
             "captured_at": "2026-06-09T01:33:47.317101",
-            "days_ago": 12,
+            "days_ago": 14,
             "payload": {
               "title": "Chief Information Security Officer (CISO) with Security Clearance",
               "url": "https://www.adzuna.com/land/ad/5753366344?se=CCcBRKNj8RG2wNkbN7u12A&utm_medium=api&utm_source=3aa14b35&v=08B94794DBB7CC7DBD3FA9C849F0BB696B2AACE3",
@@ -2359,13 +2499,13 @@
         "dm_title": "Owner",
         "dm_email": "philip.hu@transglobalus.com",
         "dm_linkedin_url": "http://www.linkedin.com/in/philip-hu-88730413",
-        "score": 42.849093622260995,
+        "score": 40.91899925645144,
         "insight": "Recently disclosed breaches at TransGlobal Insurance Agency highlight the urgent need for enhanced SOC monitoring and compliance support.",
         "signals": [
           {
             "type": "breach_disclosed",
             "captured_at": "2026-05-07T08:34:11.918561",
-            "days_ago": 47,
+            "days_ago": 49,
             "payload": {
               "agency": "wa_ag",
               "reported_date": "05/05/2026"
@@ -2374,7 +2514,7 @@
           {
             "type": "breach_disclosed",
             "captured_at": "2026-05-07T08:34:10.599934",
-            "days_ago": 48,
+            "days_ago": 50,
             "payload": {
               "agency": "me_ag",
               "reported_date": "2026-05-04"
@@ -2383,7 +2523,7 @@
           {
             "type": "breach_disclosed",
             "captured_at": "2026-05-07T08:34:07.883198",
-            "days_ago": 53,
+            "days_ago": 55,
             "payload": {
               "agency": "ca_ag",
               "reported_date": "04/29/2026"
@@ -2403,13 +2543,13 @@
         "dm_title": "Chief Executive Officer",
         "dm_email": "aduke@sandhillsmedical.org",
         "dm_linkedin_url": "http://www.linkedin.com/in/amanda-duke-0969748",
-        "score": 42.206240668550464,
+        "score": 40.30510292865056,
         "insight": "Sandhills Medical Foundation recently disclosed a breach, highlighting the need for improved security measures.",
         "signals": [
           {
             "type": "breach_disclosed",
             "captured_at": "2026-06-09T01:34:05.871171",
-            "days_ago": 18,
+            "days_ago": 20,
             "payload": {
               "agency": "me_ag",
               "reported_date": "2026-06-03"
@@ -2418,7 +2558,7 @@
           {
             "type": "breach_disclosed",
             "captured_at": "2026-05-04T23:01:56.641858",
-            "days_ago": 54,
+            "days_ago": 56,
             "payload": {
               "agency": "me_ag",
               "reported_date": "2026-04-28"
@@ -2438,13 +2578,13 @@
         "dm_title": "President",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 41.5868893710476,
+        "score": 39.71364983082061,
         "insight": "Recently, Richard D. Jones, A Professional Law Corporation disclosed a breach to the California agency, highlighting an urgent need for SOC monitoring.",
         "signals": [
           {
             "type": "breach_disclosed",
             "captured_at": "2026-06-19T10:25:57.366458",
-            "days_ago": 3,
+            "days_ago": 5,
             "payload": {
               "agency": "ca_ag",
               "reported_date": "06/18/2026"
@@ -2464,13 +2604,13 @@
         "dm_title": "President & CEO",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 40.637043484433036,
+        "score": 38.8065888049441,
         "insight": "Recently disclosed a breach on 06/17/2026, indicating a critical need for enhanced security measures at Alcott HR.",
         "signals": [
           {
             "type": "breach_disclosed",
             "captured_at": "2026-06-19T10:25:57.366458",
-            "days_ago": 4,
+            "days_ago": 6,
             "payload": {
               "agency": "ca_ag",
               "reported_date": "06/17/2026"
@@ -2490,13 +2630,13 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 40.637043475174295,
+        "score": 38.8065887959156,
         "insight": "Following a breach disclosure reported on June 17, 2026, AssuranceAmerica is in need of enhanced SOC monitoring and compliance support.",
         "signals": [
           {
             "type": "breach_disclosed",
             "captured_at": "2026-06-19T10:25:57.366458",
-            "days_ago": 4,
+            "days_ago": 6,
             "payload": {
               "agency": "ca_ag",
               "reported_date": "06/17/2026"
@@ -2516,13 +2656,13 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 39.995973427512254,
+        "score": 38.19439510185032,
         "insight": "Daniels Manufacturing Corporation recently posted a job for a Cyber Security Engineer, signaling their need for enhanced security measures.",
         "signals": [
           {
             "type": "job_posted_security",
             "captured_at": "2026-06-21T09:49:43.373135",
-            "days_ago": 0,
+            "days_ago": 1,
             "payload": {
               "title": "Cyber Security Engineer",
               "url": "https://www.indeed.com/viewjob?jk=90928a7c904f9a79",
@@ -2544,13 +2684,13 @@
         "dm_title": "Co-Founder & CEO",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 39.99597341879531,
+        "score": 38.19439509317875,
         "insight": "Notion recently posted a job for a Security Engineer, Detection and Response, indicating a potential need for enhanced security services.",
         "signals": [
           {
             "type": "job_posted_security",
             "captured_at": "2026-06-21T09:49:43.373135",
-            "days_ago": 0,
+            "days_ago": 1,
             "payload": {
               "title": "Security Engineer, Detection and Response",
               "url": "https://www.linkedin.com/jobs/view/4425967896",
@@ -2572,13 +2712,13 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 39.04826261498271,
+        "score": 37.28937296626343,
         "insight": "Roku recently posted a job for a Security Engineer, indicating their current focus on strengthening cybersecurity measures.",
         "signals": [
           {
             "type": "job_posted_security",
             "captured_at": "2026-06-20T08:55:09.486440",
-            "days_ago": 1,
+            "days_ago": 3,
             "payload": {
               "title": "Security Engineer",
               "url": "https://www.linkedin.com/jobs/view/4390024564",
@@ -2600,13 +2740,13 @@
         "dm_title": "CEO",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 38.211698052053066,
+        "score": 36.490490610829845,
         "insight": "MRO Corporation recently posted a job for a Senior Security Advisor, indicating a need for enhanced security support.",
         "signals": [
           {
             "type": "job_posted_security",
             "captured_at": "2026-06-19T10:25:25.053583",
-            "days_ago": 1,
+            "days_ago": 3,
             "payload": {
               "title": "Senior Security Advisor, Identity",
               "url": "https://www.indeed.com/viewjob?jk=df65492920541cd3",
@@ -2628,13 +2768,13 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 38.211698035744355,
+        "score": 36.49049059393838,
         "insight": "Affirm recently posted a job for a Director, Information Technology & Security, indicating a push for enhanced security measures.",
         "signals": [
           {
             "type": "job_posted_security",
             "captured_at": "2026-06-19T10:25:25.053583",
-            "days_ago": 1,
+            "days_ago": 3,
             "payload": {
               "title": "Director, Information Technology & Security",
               "url": "https://www.linkedin.com/jobs/view/4368029799",
@@ -2656,13 +2796,13 @@
         "dm_title": "CEO",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 36.203490324780404,
+        "score": 34.572740605711864,
         "insight": "American Future Technology Corporation disclosed a breach today, highlighting their urgent need for enhanced SOC monitoring and compliance support.",
         "signals": [
           {
             "type": "breach_disclosed",
             "captured_at": "2026-06-13T08:58:07.806701",
-            "days_ago": 9,
+            "days_ago": 11,
             "payload": {
               "agency": "ca_ag",
               "reported_date": "06/12/2026"
@@ -2682,13 +2822,13 @@
         "dm_title": "CEO & Co-Founder",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 36.203490156371394,
+        "score": 34.57274040875776,
         "insight": "Virta Medical PC recently disclosed a breach to the California agency, highlighting an urgent need for enhanced SOC monitoring.",
         "signals": [
           {
             "type": "breach_disclosed",
             "captured_at": "2026-06-16T17:41:01.017203",
-            "days_ago": 9,
+            "days_ago": 11,
             "payload": {
               "agency": "ca_ag",
               "reported_date": "06/12/2026"
@@ -2708,13 +2848,13 @@
         "dm_title": "CEO",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 35.910511206143575,
+        "score": 34.29295840158381,
         "insight": "Recently, OLH Inc. posted a job for an Associate Computer Security Engineer, indicating a focus on improving their cybersecurity posture.",
         "signals": [
           {
             "type": "job_posted_security",
             "captured_at": "2026-06-16T17:54:20.641291",
-            "days_ago": 4,
+            "days_ago": 6,
             "payload": {
               "title": "ASSOCIATE COMPUTER SECURITY ENGINEER \u2013\u00a0CYBER SECURITY - 1544 (2) - SRS- Aiken, SC",
               "url": "https://www.indeed.com/viewjob?jk=5b4fbfd7b8939a09",
@@ -2736,13 +2876,13 @@
         "dm_title": "Chief Technology Officer",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 35.90257263722963,
+        "score": 34.285377460281225,
         "insight": "Antenna Research Associates recently posted a job for a Security System Administrator, indicating a need for enhanced security measures.",
         "signals": [
           {
             "type": "job_posted_security",
             "captured_at": "2026-06-16T17:40:33.878008",
-            "days_ago": 4,
+            "days_ago": 6,
             "payload": {
               "title": "Security System Administrator",
               "url": "https://www.indeed.com/viewjob?jk=cd9d7b649b0f9178",
@@ -2764,13 +2904,13 @@
         "dm_title": "VP Human Resources",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 35.67826091320018,
+        "score": 34.071169630240725,
         "insight": "American Equipment HR LLC recently posted a job for a Director of IT Operations and Security, indicating a focus on enhancing their security posture.",
         "signals": [
           {
             "type": "job_posted_security",
             "captured_at": "2026-06-16T11:09:57.190654",
-            "days_ago": 4,
+            "days_ago": 6,
             "payload": {
               "title": "Director, IT Operations and Security",
               "url": "https://www.adzuna.com/land/ad/5765175735?se=Pkn77XNp8RGjKJIWHOfiKg&utm_medium=api&utm_source=3aa14b35&v=16F7CDE6B50D011BD1FD55CFF91129D6F9C22463",
@@ -2792,13 +2932,13 @@
         "dm_title": "Founder & CEO",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 35.37660156133107,
+        "score": 33.783098190829875,
         "insight": "They recently disclosed a breach, indicating an urgent need for enhanced SOC monitoring and compliance support.",
         "signals": [
           {
             "type": "breach_disclosed",
             "captured_at": "2026-06-12T10:12:53.134621",
-            "days_ago": 10,
+            "days_ago": 12,
             "payload": {
               "agency": "me_ag",
               "reported_date": "2026-06-11"
@@ -2818,13 +2958,13 @@
         "dm_title": "President",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 35.37660155287353,
+        "score": 33.78309818292495,
         "insight": "Marsicovetere & Levine Law Group, P.C. disclosed a breach yesterday, highlighting their urgent need for SOC monitoring and compliance support.",
         "signals": [
           {
             "type": "breach_disclosed",
             "captured_at": "2026-06-12T10:12:53.134621",
-            "days_ago": 10,
+            "days_ago": 12,
             "payload": {
               "agency": "me_ag",
               "reported_date": "2026-06-11"
@@ -2844,13 +2984,13 @@
         "dm_title": "President, MaineHealth Behavioral Health",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 35.37660152199499,
+        "score": 33.783098174315356,
         "insight": "Maine Health Behavioral Health recently disclosed a breach, indicating a need for enhanced SOC monitoring and compliance support.",
         "signals": [
           {
             "type": "breach_disclosed",
             "captured_at": "2026-06-12T10:12:53.134621",
-            "days_ago": 10,
+            "days_ago": 12,
             "payload": {
               "agency": "me_ag",
               "reported_date": "2026-06-11"
@@ -2870,13 +3010,13 @@
         "dm_title": "President",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 35.37660151339554,
+        "score": 33.7830981665098,
         "insight": "Caldwell Sutter Capital, Inc. disclosed a breach, indicating an urgent need for SOC monitoring and compliance support.",
         "signals": [
           {
             "type": "breach_disclosed",
             "captured_at": "2026-06-12T10:12:53.134621",
-            "days_ago": 10,
+            "days_ago": 12,
             "payload": {
               "agency": "me_ag",
               "reported_date": "2026-06-11"
@@ -2896,13 +3036,13 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 35.37660143140281,
+        "score": 33.78309808690039,
         "insight": "Clinical Registry Solutions recently disclosed a breach, indicating an urgent need for improved SOC monitoring and compliance support.",
         "signals": [
           {
             "type": "breach_disclosed",
             "captured_at": "2026-06-14T09:34:00.706049",
-            "days_ago": 10,
+            "days_ago": 12,
             "payload": {
               "agency": "ca_ag",
               "reported_date": "06/11/2026"
@@ -2922,13 +3062,13 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 34.5685989436221,
+        "score": 33.01149123140537,
         "insight": "VRChat, Inc. recently disclosed a breach, indicating an urgent need for enhanced SOC monitoring and compliance support.",
         "signals": [
           {
             "type": "breach_disclosed",
             "captured_at": "2026-06-11T10:23:42.391808",
-            "days_ago": 11,
+            "days_ago": 13,
             "payload": {
               "agency": "me_ag",
               "reported_date": "2026-06-10"
@@ -2948,13 +3088,13 @@
         "dm_title": "Vice President Of Digital Technology",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 34.56859893276934,
+        "score": 33.01149122419301,
         "insight": "Beusa Energy, LLC disclosed a breach, indicating an urgent need for enhanced SOC monitoring and compliance support.",
         "signals": [
           {
             "type": "breach_disclosed",
             "captured_at": "2026-06-11T10:23:42.391808",
-            "days_ago": 11,
+            "days_ago": 13,
             "payload": {
               "agency": "me_ag",
               "reported_date": "2026-06-10"
@@ -2974,13 +3114,13 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 34.568598923663735,
+        "score": 33.011491217051265,
         "insight": "McCoyd, Parkas & Ronan LLP disclosed a breach, indicating an urgent need for enhanced SOC monitoring and compliance support.",
         "signals": [
           {
             "type": "breach_disclosed",
             "captured_at": "2026-06-11T10:23:42.391808",
-            "days_ago": 11,
+            "days_ago": 13,
             "payload": {
               "agency": "me_ag",
               "reported_date": "2026-06-10"
@@ -3000,13 +3140,13 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 34.56859848322088,
+        "score": 33.011490789491354,
         "insight": "Following a breach disclosed to California's regulatory agency on June 10, 2026, the company may require enhanced SOC monitoring.",
         "signals": [
           {
             "type": "breach_disclosed",
             "captured_at": "2026-06-18T10:23:54.098066",
-            "days_ago": 11,
+            "days_ago": 13,
             "payload": {
               "agency": "ca_ag",
               "reported_date": "06/10/2026"
@@ -3026,13 +3166,13 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 33.77905109923099,
+        "score": 32.25750776806009,
         "insight": "Magna Legal Services, LLC recently disclosed a breach, indicating an urgent need for SOC monitoring and compliance support.",
         "signals": [
           {
             "type": "breach_disclosed",
             "captured_at": "2026-06-10T09:59:42.404313",
-            "days_ago": 12,
+            "days_ago": 14,
             "payload": {
               "agency": "me_ag",
               "reported_date": "2026-06-09"
@@ -3052,13 +3192,13 @@
         "dm_title": "Founding Partner",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 33.779050991511006,
+        "score": 32.25750767896833,
         "insight": "Pearlman, Brown & Wax LLP recently disclosed a breach, indicating an urgent need for improved SOC monitoring and compliance support.",
         "signals": [
           {
             "type": "breach_disclosed",
             "captured_at": "2026-06-12T10:12:50.537838",
-            "days_ago": 12,
+            "days_ago": 14,
             "payload": {
               "agency": "ca_ag",
               "reported_date": "06/09/2026"
@@ -3078,13 +3218,13 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 33.21843655582361,
+        "score": 31.72214546309378,
         "insight": "Express recently posted a job for a Director of Information Security & Governance, indicating a focus on enhancing security.",
         "signals": [
           {
             "type": "job_posted_security",
             "captured_at": "2026-06-13T08:57:42.614211",
-            "days_ago": 8,
+            "days_ago": 10,
             "payload": {
               "title": "Director Information Security & Governance",
               "url": "https://www.indeed.com/viewjob?jk=1756367b7d98db0f",
@@ -3106,13 +3246,13 @@
         "dm_title": "CEO and President",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 33.21843534019265,
+        "score": 31.722144413780534,
         "insight": "FinWise Bank recently posted a job for a Cyber Security Engineer - Team Lead, indicating a focus on strengthening their security posture.",
         "signals": [
           {
             "type": "job_posted_security",
             "captured_at": "2026-06-13T08:57:42.614211",
-            "days_ago": 8,
+            "days_ago": 10,
             "payload": {
               "title": "Cyber Security Engineer - Team Lead",
               "url": "https://www.indeed.com/viewjob?jk=abbfbfd4a334ac5d",
@@ -3134,13 +3274,13 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 33.007536544851334,
+        "score": 31.52074530908053,
         "insight": "CNO Services, LLC recently disclosed a breach, indicating an urgent need for enhanced SOC monitoring and compliance support.",
         "signals": [
           {
             "type": "breach_disclosed",
             "captured_at": "2026-06-09T09:42:44.548433",
-            "days_ago": 13,
+            "days_ago": 15,
             "payload": {
               "agency": "me_ag",
               "reported_date": "2026-06-08"
@@ -3160,13 +3300,13 @@
         "dm_title": "CEO",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 33.007536433156936,
+        "score": 31.520745213543854,
         "insight": "OEConnection LLC recently disclosed a breach, highlighting their urgent need for enhanced SOC monitoring and compliance support.",
         "signals": [
           {
             "type": "breach_disclosed",
             "captured_at": "2026-06-11T10:23:42.391808",
-            "days_ago": 13,
+            "days_ago": 15,
             "payload": {
               "agency": "me_ag",
               "reported_date": "2026-06-08"
@@ -3186,13 +3326,13 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 30.797120828290236,
+        "score": 29.409895528881275,
         "insight": "Gay & Lesbian Community Services Center of Orange County disclosed a breach, creating an urgent need for SOC monitoring and security support.",
         "signals": [
           {
             "type": "breach_disclosed",
             "captured_at": "2026-06-09T01:34:03.443822",
-            "days_ago": 16,
+            "days_ago": 18,
             "payload": {
               "agency": "ca_ag",
               "reported_date": "06/05/2026"
@@ -3212,13 +3352,13 @@
         "dm_title": "CEO",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 30.79712073294552,
+        "score": 29.40989544903065,
         "insight": "Walker Advertising, LLC disclosed a breach yesterday, indicating an urgent need for SOC monitoring and compliance support.",
         "signals": [
           {
             "type": "breach_disclosed",
             "captured_at": "2026-06-09T01:34:05.871171",
-            "days_ago": 16,
+            "days_ago": 18,
             "payload": {
               "agency": "me_ag",
               "reported_date": "2026-06-05"
@@ -3238,13 +3378,13 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 30.7971207260193,
+        "score": 29.409895441795097,
         "insight": "Tarter Krinsky & Drogin LLP recently disclosed a breach, indicating an urgent need for enhanced SOC monitoring and compliance support.",
         "signals": [
           {
             "type": "breach_disclosed",
             "captured_at": "2026-06-09T01:34:05.871171",
-            "days_ago": 16,
+            "days_ago": 18,
             "payload": {
               "agency": "me_ag",
               "reported_date": "2026-06-05"
@@ -3264,13 +3404,13 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 30.79712071858246,
+        "score": 29.4098954352595,
         "insight": "Rockville disclosed a breach today, highlighting their immediate need for enhanced SOC monitoring and compliance support.",
         "signals": [
           {
             "type": "breach_disclosed",
             "captured_at": "2026-06-09T01:34:05.871171",
-            "days_ago": 16,
+            "days_ago": 18,
             "payload": {
               "agency": "me_ag",
               "reported_date": "2026-06-05"
@@ -3290,13 +3430,13 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 30.797120424436155,
+        "score": 29.409895168094543,
         "insight": "Towerpoint Wealth, LLC disclosed a breach, indicating an urgent need for SOC monitoring and compliance support.",
         "signals": [
           {
             "type": "breach_disclosed",
             "captured_at": "2026-06-12T10:12:50.537838",
-            "days_ago": 16,
+            "days_ago": 18,
             "payload": {
               "agency": "ca_ag",
               "reported_date": "06/05/2026"
@@ -3316,13 +3456,13 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 30.09371350240329,
+        "score": 28.7381724887479,
         "insight": "Othon, Inc. recently disclosed a breach, indicating an urgent need for enhanced SOC monitoring and compliance support.",
         "signals": [
           {
             "type": "breach_disclosed",
             "captured_at": "2026-06-09T01:34:05.871171",
-            "days_ago": 17,
+            "days_ago": 19,
             "payload": {
               "agency": "me_ag",
               "reported_date": "2026-06-04"
@@ -3342,13 +3482,13 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 30.093713495104115,
+        "score": 28.738172481716035,
         "insight": "Asplundh Engineering Services recently disclosed a breach, indicating an urgent need for SOC monitoring and compliance support.",
         "signals": [
           {
             "type": "breach_disclosed",
             "captured_at": "2026-06-09T01:34:05.871171",
-            "days_ago": 17,
+            "days_ago": 19,
             "payload": {
               "agency": "me_ag",
               "reported_date": "2026-06-04"
@@ -3368,13 +3508,13 @@
         "dm_title": "CTO and Co-Founder",
         "dm_email": "harry@offchainlabs.com",
         "dm_linkedin_url": "http://www.linkedin.com/in/hkalodner",
-        "score": 30.025776677117776,
+        "score": 28.67329571628938,
         "insight": "The company recently posted job openings for a Security Engineer and a Senior Security Engineer (GRC), indicating a growing focus on security.",
         "signals": [
           {
             "type": "job_posted_security",
             "captured_at": "2026-05-13T08:44:14.886041",
-            "days_ago": 39,
+            "days_ago": 41,
             "payload": {
               "title": "Security Engineer",
               "url": "https://www.linkedin.com/jobs/view/4413486582",
@@ -3385,7 +3525,7 @@
           {
             "type": "job_posted_security",
             "captured_at": "2026-05-06T08:27:02.213469",
-            "days_ago": 46,
+            "days_ago": 48,
             "payload": {
               "title": "Senior Security Engineer (GRC)",
               "url": "https://www.linkedin.com/jobs/view/4410768701",
@@ -3407,13 +3547,13 @@
         "dm_title": "Vice President of Information Technology",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 29.406372108192638,
+        "score": 28.081791695446512,
         "insight": "Clarinda Regional Health Center disclosed a recent breach, highlighting an urgent need for SOC monitoring and compliance support.",
         "signals": [
           {
             "type": "breach_disclosed",
             "captured_at": "2026-06-09T01:34:05.871171",
-            "days_ago": 18,
+            "days_ago": 20,
             "payload": {
               "agency": "me_ag",
               "reported_date": "2026-06-03"
@@ -3433,13 +3573,13 @@
         "dm_title": "Acting Chief Executive Officer",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 29.286196973595388,
+        "score": 27.967029737770662,
         "insight": "With the recent hiring of a CISO, DataCT may be looking to enhance their cybersecurity measures.",
         "signals": [
           {
             "type": "exec_hired",
             "captured_at": "2026-06-20T08:55:09.486440",
-            "days_ago": 1,
+            "days_ago": 3,
             "payload": {
               "title": "CISO",
               "url": "https://www.indeed.com/viewjob?jk=28cfe3107afcb39c",
@@ -3461,13 +3601,13 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 29.286196967486696,
+        "score": 27.967029730875133,
         "insight": "TurboVets, Inc. recently hired a Chief Information Security Officer, signaling their commitment to enhancing security measures.",
         "signals": [
           {
             "type": "exec_hired",
             "captured_at": "2026-06-20T08:55:09.486440",
-            "days_ago": 1,
+            "days_ago": 3,
             "payload": {
               "title": "Chief Information Security Officer",
               "url": "https://www.linkedin.com/jobs/view/4428285637",
@@ -3489,13 +3629,13 @@
         "dm_title": "Chief Information Officer",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 28.73472965483105,
+        "score": 27.44040269969528,
         "insight": "Singleton Schreiber, LLP disclosed a breach yesterday, indicating an urgent need for enhanced SOC monitoring and compliance support.",
         "signals": [
           {
             "type": "breach_disclosed",
             "captured_at": "2026-06-09T01:34:05.871171",
-            "days_ago": 19,
+            "days_ago": 21,
             "payload": {
               "agency": "me_ag",
               "reported_date": "2026-06-02"
@@ -3515,13 +3655,13 @@
         "dm_title": "President and CEO",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 28.734729648460863,
+        "score": 27.440402693186424,
         "insight": "Waveny Lifecare Network disclosed a breach, indicating a critical need for enhanced SOC monitoring and compliance support.",
         "signals": [
           {
             "type": "breach_disclosed",
             "captured_at": "2026-06-09T01:34:05.871171",
-            "days_ago": 19,
+            "days_ago": 21,
             "payload": {
               "agency": "me_ag",
               "reported_date": "2026-06-02"
@@ -3541,13 +3681,13 @@
         "dm_title": "Founder & Chief Executive Officer",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 28.73472963449103,
+        "score": 27.440402680579645,
         "insight": "D.B. Root & Company, LLC just disclosed a breach, indicating an urgent need for enhanced SOC monitoring and compliance support.",
         "signals": [
           {
             "type": "breach_disclosed",
             "captured_at": "2026-06-09T01:34:05.871171",
-            "days_ago": 19,
+            "days_ago": 21,
             "payload": {
               "agency": "me_ag",
               "reported_date": "2026-06-02"
@@ -3567,13 +3707,13 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 28.65877353283973,
+        "score": 27.367867951645376,
         "insight": "Recently hiring a Deputy Chief Information Security Officer suggests The TCW Group, Inc. is prioritizing cybersecurity needs.",
         "signals": [
           {
             "type": "exec_hired",
             "captured_at": "2026-06-19T10:25:25.053583",
-            "days_ago": 1,
+            "days_ago": 3,
             "payload": {
               "title": "Deputy Chief Information Security Officer",
               "url": "https://www.indeed.com/viewjob?jk=3e433c3485b7499b",
@@ -3595,13 +3735,13 @@
         "dm_title": "Managing Partner",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 28.078427634668397,
+        "score": 26.81366313308858,
         "insight": "Fong, Ko & Associates LLP disclosed a data breach, indicating an urgent need for enhanced SOC monitoring and compliance support.",
         "signals": [
           {
             "type": "breach_disclosed",
             "captured_at": "2026-06-09T01:34:03.443822",
-            "days_ago": 20,
+            "days_ago": 22,
             "payload": {
               "agency": "ca_ag",
               "reported_date": "06/01/2026"
@@ -3621,13 +3761,13 @@
         "dm_title": "President",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 28.078427496531322,
+        "score": 26.813663010818015,
         "insight": "Recently disclosed a breach to the Maine Attorney General, highlighting the need for enhanced security services.",
         "signals": [
           {
             "type": "breach_disclosed",
             "captured_at": "2026-06-09T01:34:05.871171",
-            "days_ago": 20,
+            "days_ago": 22,
             "payload": {
               "agency": "me_ag",
               "reported_date": "2026-06-01"
@@ -3647,13 +3787,13 @@
         "dm_title": "Chief Executive Officer",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 28.078427488031505,
+        "score": 26.813663004579716,
         "insight": "Recently disclosed a breach on June 1, 2026, highlighting CGP&H, LLC's urgent need for improved security monitoring services.",
         "signals": [
           {
             "type": "breach_disclosed",
             "captured_at": "2026-06-09T01:34:05.871171",
-            "days_ago": 20,
+            "days_ago": 22,
             "payload": {
               "agency": "me_ag",
               "reported_date": "2026-06-01"
@@ -3673,13 +3813,13 @@
         "dm_title": "Founder",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 28.003108570099254,
+        "score": 26.741736753283746,
         "insight": "NightSea recently hired a Chief Information Security Officer (CISO) to enhance their cybersecurity strategy.",
         "signals": [
           {
             "type": "exec_hired",
             "captured_at": "2026-06-18T10:22:58.469575",
-            "days_ago": 2,
+            "days_ago": 4,
             "payload": {
               "title": "Chief Information Security Officer (CISO) - Cryptocurrency",
               "url": "https://www.indeed.com/viewjob?jk=faba3273ffaaadbe",
@@ -3701,13 +3841,13 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 28.003108562865332,
+        "score": 26.74173674674038,
         "insight": "With the recent hiring of a Chief Information Security Officer, GVW Group is positioning itself to enhance its cybersecurity posture.",
         "signals": [
           {
             "type": "exec_hired",
             "captured_at": "2026-06-18T10:22:58.469575",
-            "days_ago": 2,
+            "days_ago": 4,
             "payload": {
               "title": "Chief Information Security Officer",
               "url": "https://www.linkedin.com/jobs/view/4425712085",
@@ -3729,13 +3869,13 @@
         "dm_title": "President",
         "dm_email": "rstulman@us1031.com",
         "dm_linkedin_url": "http://www.linkedin.com/in/ryan-stulman-mba",
-        "score": 27.530207808208804,
+        "score": 26.290137236615756,
         "insight": "Recently disclosed breaches to the Maine Attorney General highlight a critical need for improved SOC monitoring at U.S. 1031 Exchange Services.",
         "signals": [
           {
             "type": "breach_disclosed",
             "captured_at": "2026-05-09T07:57:13.098372",
-            "days_ago": 44,
+            "days_ago": 46,
             "payload": {
               "agency": "me_ag",
               "reported_date": "2026-05-08"
@@ -3744,7 +3884,7 @@
           {
             "type": "breach_disclosed",
             "captured_at": "2026-05-04T23:01:56.641858",
-            "days_ago": 59,
+            "days_ago": 61,
             "payload": {
               "agency": "me_ag",
               "reported_date": "2026-04-23"
@@ -3764,13 +3904,13 @@
         "dm_title": "CEO",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 27.437115453794632,
+        "score": 26.20123821424716,
         "insight": "Recently disclosed a breach to the California Agency, indicating a potential need for enhanced SOC monitoring and compliance support.",
         "signals": [
           {
             "type": "breach_disclosed",
             "captured_at": "2026-06-09T01:34:03.443822",
-            "days_ago": 21,
+            "days_ago": 23,
             "payload": {
               "agency": "ca_ag",
               "reported_date": "05/31/2026"
@@ -3790,13 +3930,13 @@
         "dm_title": "Founder & CEO",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 26.926929471463158,
+        "score": 25.714033055004652,
         "insight": "Triplemoon recently hired a Virtual Chief Information Security Officer (vCISO), indicating their focus on enhancing security protocols.",
         "signals": [
           {
             "type": "exec_hired",
             "captured_at": "2026-06-16T17:40:33.878008",
-            "days_ago": 4,
+            "days_ago": 6,
             "payload": {
               "title": "Virtual Chief Information Security Officer (vCISO)",
               "url": "https://www.linkedin.com/jobs/view/4429554436",
@@ -3818,13 +3958,13 @@
         "dm_title": "Chief Executive Officer",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 26.198099312256605,
+        "score": 25.018032308179002,
         "insight": "Texollini, Inc. disclosed a breach to California's agency, highlighting their urgent need for enhanced SOC monitoring and compliance support.",
         "signals": [
           {
             "type": "breach_disclosed",
             "captured_at": "2026-06-09T01:34:03.443822",
-            "days_ago": 23,
+            "days_ago": 25,
             "payload": {
               "agency": "ca_ag",
               "reported_date": "05/29/2026"
@@ -3844,13 +3984,13 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 26.198099300942175,
+        "score": 25.01803230241868,
         "insight": "Recently disclosed a breach to the California agency, highlighting IMA Diligence Services' need for enhanced security solutions.",
         "signals": [
           {
             "type": "breach_disclosed",
             "captured_at": "2026-06-09T01:34:03.443822",
-            "days_ago": 23,
+            "days_ago": 25,
             "payload": {
               "agency": "ca_ag",
               "reported_date": "05/29/2026"
@@ -3870,13 +4010,13 @@
         "dm_title": "Chief Executive Officer",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 26.19809918990661,
+        "score": 25.01803220161639,
         "insight": "After recently disclosing a breach, Ohio ENT & Allergy Physicians may need enhanced SOC monitoring and compliance support.",
         "signals": [
           {
             "type": "breach_disclosed",
             "captured_at": "2026-06-09T01:34:05.871171",
-            "days_ago": 23,
+            "days_ago": 25,
             "payload": {
               "agency": "me_ag",
               "reported_date": "2026-05-29"
@@ -3896,13 +4036,13 @@
         "dm_title": "CEO",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 26.198099183377163,
+        "score": 25.018032195508173,
         "insight": "Recently disclosed a breach to the Maine Attorney General, indicating a need for enhanced SOC monitoring and compliance support.",
         "signals": [
           {
             "type": "breach_disclosed",
             "captured_at": "2026-06-09T01:34:05.871171",
-            "days_ago": 23,
+            "days_ago": 25,
             "payload": {
               "agency": "me_ag",
               "reported_date": "2026-05-29"
@@ -3922,13 +4062,13 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 25.599733871377975,
+        "score": 24.44661964242529,
         "insight": "They disclosed a breach to the California agency on May 28, 2026, signaling a need for enhanced security services.",
         "signals": [
           {
             "type": "breach_disclosed",
             "captured_at": "2026-06-09T01:34:03.443822",
-            "days_ago": 24,
+            "days_ago": 26,
             "payload": {
               "agency": "ca_ag",
               "reported_date": "05/28/2026"
@@ -3948,13 +4088,13 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 25.599733864648524,
+        "score": 24.446619636783456,
         "insight": "La Perouse LLC, a medical billing service, disclosed a breach to CA agency recently, indicating a critical need for enhanced security.",
         "signals": [
           {
             "type": "breach_disclosed",
             "captured_at": "2026-06-09T01:34:03.443822",
-            "days_ago": 24,
+            "days_ago": 26,
             "payload": {
               "agency": "ca_ag",
               "reported_date": "05/28/2026"
@@ -3974,13 +4114,13 @@
         "dm_title": "Director, Information Technology",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 25.5997338582066,
+        "score": 24.44661963016101,
         "insight": "Recently disclosed a breach to the CA Attorney General, highlighting their urgent need for enhanced SOC monitoring and compliance support.",
         "signals": [
           {
             "type": "breach_disclosed",
             "captured_at": "2026-06-09T01:34:03.443822",
-            "days_ago": 24,
+            "days_ago": 26,
             "payload": {
               "agency": "ca_ag",
               "reported_date": "05/28/2026"
@@ -4000,13 +4140,13 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 25.59973385151823,
+        "score": 24.446619624447266,
         "insight": "Following a breach disclosed to the CA agency on May 28, 2026, Johnson-Peltier Electric, Inc. may seek enhanced security solutions.",
         "signals": [
           {
             "type": "breach_disclosed",
             "captured_at": "2026-06-09T01:34:03.443822",
-            "days_ago": 24,
+            "days_ago": 26,
             "payload": {
               "agency": "ca_ag",
               "reported_date": "05/28/2026"
@@ -4026,13 +4166,13 @@
         "dm_title": "CPA",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 25.59973376528135,
+        "score": 24.446619544690208,
         "insight": "Following a breach disclosed on May 28, 2026, Charles P. Elliott, P.C. may be seeking enhanced SOC monitoring and compliance support.",
         "signals": [
           {
             "type": "breach_disclosed",
             "captured_at": "2026-06-09T01:34:05.871171",
-            "days_ago": 24,
+            "days_ago": 26,
             "payload": {
               "agency": "me_ag",
               "reported_date": "2026-05-28"
@@ -4052,13 +4192,13 @@
         "dm_title": "Managing Partner",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 25.599733712739628,
+        "score": 24.446619493286132,
         "insight": "Smith & James, CPAs recently disclosed a breach to the California Attorney General, highlighting their need for improved security measures.",
         "signals": [
           {
             "type": "breach_disclosed",
             "captured_at": "2026-06-09T09:42:42.297616",
-            "days_ago": 24,
+            "days_ago": 26,
             "payload": {
               "agency": "ca_ag",
               "reported_date": "05/28/2026"
@@ -4078,13 +4218,13 @@
         "dm_title": "CEO",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 25.599733667933695,
+        "score": 24.446619453839077,
         "insight": "Following a recent data breach disclosed to the Maine Attorney General, First Advantage Corporation may seek enhanced SOC monitoring.",
         "signals": [
           {
             "type": "breach_disclosed",
             "captured_at": "2026-06-10T09:59:42.404313",
-            "days_ago": 24,
+            "days_ago": 26,
             "payload": {
               "agency": "me_ag",
               "reported_date": "2026-05-28"
@@ -4104,13 +4244,13 @@
         "dm_title": "President & Designated Broker",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 25.01503503238158,
+        "score": 23.888257976730024,
         "insight": "Recently disclosed a breach to the Maine Attorney General, indicating a potential need for enhanced security services.",
         "signals": [
           {
             "type": "breach_disclosed",
             "captured_at": "2026-06-09T01:34:05.871171",
-            "days_ago": 25,
+            "days_ago": 27,
             "payload": {
               "agency": "me_ag",
               "reported_date": "2026-05-27"
@@ -4130,13 +4270,13 @@
         "dm_title": "CEO",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 25.015035026347682,
+        "score": 23.888257970808205,
         "insight": "Recently disclosed a breach to the Maine Attorney General, indicating a pressing need for enhanced cybersecurity solutions.",
         "signals": [
           {
             "type": "breach_disclosed",
             "captured_at": "2026-06-09T01:34:05.871171",
-            "days_ago": 25,
+            "days_ago": 27,
             "payload": {
               "agency": "me_ag",
               "reported_date": "2026-05-27"
@@ -4156,13 +4296,13 @@
         "dm_title": "Managing Partner",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 25.01503502066163,
+        "score": 23.888257965065264,
         "insight": "After a breach disclosed on May 27, 2026, Edwards, Faust & Smith likely needs SOC monitoring and compliance support.",
         "signals": [
           {
             "type": "breach_disclosed",
             "captured_at": "2026-06-09T01:34:05.871171",
-            "days_ago": 25,
+            "days_ago": 27,
             "payload": {
               "agency": "me_ag",
               "reported_date": "2026-05-27"
@@ -4182,13 +4322,13 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 24.913826510521044,
+        "score": 23.79160831613782,
         "insight": "Gulf Copper recently appointed a Chief Information Security Officer, indicating a focus on enhancing their cybersecurity posture.",
         "signals": [
           {
             "type": "exec_hired",
             "captured_at": "2026-06-13T08:57:42.614211",
-            "days_ago": 8,
+            "days_ago": 10,
             "payload": {
               "title": "Chief Information Security Officer",
               "url": "https://www.linkedin.com/jobs/view/4426928590",
@@ -4210,13 +4350,13 @@
         "dm_title": "Director, IT Security and Compliance",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 24.373984923531225,
+        "score": 23.2760833333788,
         "insight": "Civeo North America recently hired a Chief Information Security Officer, indicating a heightened focus on security measures.",
         "signals": [
           {
             "type": "exec_hired",
             "captured_at": "2026-06-12T10:12:23.779019",
-            "days_ago": 8,
+            "days_ago": 10,
             "payload": {
               "title": "Chief Information Security Officer",
               "url": "https://www.linkedin.com/jobs/view/4415377857",
@@ -4238,13 +4378,13 @@
         "dm_title": "CEO",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 22.55317011771675,
+        "score": 21.537285278218377,
         "insight": "Recently hiring a CISO indicates Lumafield's commitment to enhancing their cybersecurity posture.",
         "signals": [
           {
             "type": "exec_hired",
             "captured_at": "2026-06-09T01:33:28.876602",
-            "days_ago": 12,
+            "days_ago": 14,
             "payload": {
               "title": "Chief Information Security Officer (CISO)",
               "url": "https://www.linkedin.com/jobs/view/4425018032",
@@ -4266,13 +4406,13 @@
         "dm_title": "CEO",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 18.957851680665534,
+        "score": 18.103914339960337,
         "insight": null,
         "signals": [
           {
             "type": "breach_disclosed",
             "captured_at": "2026-05-15T21:50:51.075092",
-            "days_ago": 37,
+            "days_ago": 39,
             "payload": {
               "agency": "ca_ag",
               "reported_date": "05/15/2026"
@@ -4292,13 +4432,13 @@
         "dm_title": "President",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 18.524853776725127,
+        "score": 17.690420388587764,
         "insight": null,
         "signals": [
           {
             "type": "breach_disclosed",
             "captured_at": "2026-05-15T08:49:33.569316",
-            "days_ago": 38,
+            "days_ago": 40,
             "payload": {
               "agency": "me_ag",
               "reported_date": "2026-05-14"
@@ -4318,13 +4458,13 @@
         "dm_title": "Senior Director, Information Technology",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 18.524853772420208,
+        "score": 17.69042038418345,
         "insight": null,
         "signals": [
           {
             "type": "breach_disclosed",
             "captured_at": "2026-05-15T08:49:33.569316",
-            "days_ago": 38,
+            "days_ago": 40,
             "payload": {
               "agency": "me_ag",
               "reported_date": "2026-05-14"
@@ -4344,13 +4484,13 @@
         "dm_title": "CEO",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 18.101745578596223,
+        "score": 17.286370670988056,
         "insight": null,
         "signals": [
           {
             "type": "breach_disclosed",
             "captured_at": "2026-05-14T08:38:06.112600",
-            "days_ago": 39,
+            "days_ago": 41,
             "payload": {
               "agency": "me_ag",
               "reported_date": "2026-05-13"
@@ -4370,13 +4510,13 @@
         "dm_title": "CEO",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 18.101745574442877,
+        "score": 17.286370667086512,
         "insight": null,
         "signals": [
           {
             "type": "breach_disclosed",
             "captured_at": "2026-05-14T08:38:06.112600",
-            "days_ago": 39,
+            "days_ago": 41,
             "payload": {
               "agency": "me_ag",
               "reported_date": "2026-05-13"
@@ -4396,13 +4536,13 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 18.101745570023287,
+        "score": 17.286370662805904,
         "insight": null,
         "signals": [
           {
             "type": "breach_disclosed",
             "captured_at": "2026-05-14T08:38:06.112600",
-            "days_ago": 39,
+            "days_ago": 41,
             "payload": {
               "agency": "me_ag",
               "reported_date": "2026-05-13"
@@ -4422,13 +4562,13 @@
         "dm_title": "Founder & CEO",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 17.284299868454603,
+        "score": 16.50574597762302,
         "insight": null,
         "signals": [
           {
             "type": "breach_disclosed",
             "captured_at": "2026-05-12T08:40:16.517516",
-            "days_ago": 41,
+            "days_ago": 43,
             "payload": {
               "agency": "me_ag",
               "reported_date": "2026-05-11"
@@ -4448,13 +4588,13 @@
         "dm_title": "Partner",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 17.28429985855862,
+        "score": 16.505745974056563,
         "insight": null,
         "signals": [
           {
             "type": "breach_disclosed",
             "captured_at": "2026-05-12T08:40:16.517516",
-            "days_ago": 41,
+            "days_ago": 43,
             "payload": {
               "agency": "me_ag",
               "reported_date": "2026-05-11"
@@ -4474,13 +4614,13 @@
         "dm_title": "President",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 17.284299854038174,
+        "score": 16.505745970106094,
         "insight": null,
         "signals": [
           {
             "type": "breach_disclosed",
             "captured_at": "2026-05-12T08:40:16.517516",
-            "days_ago": 41,
+            "days_ago": 43,
             "payload": {
               "agency": "me_ag",
               "reported_date": "2026-05-11"
@@ -4500,13 +4640,13 @@
         "dm_title": "Founder & CEO",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 17.284299849614793,
+        "score": 16.5057459661468,
         "insight": null,
         "signals": [
           {
             "type": "breach_disclosed",
             "captured_at": "2026-05-12T08:40:16.517516",
-            "days_ago": 41,
+            "days_ago": 43,
             "payload": {
               "agency": "me_ag",
               "reported_date": "2026-05-11"
@@ -4526,13 +4666,13 @@
         "dm_title": "President",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 17.284299815619022,
+        "score": 16.50574592757345,
         "insight": null,
         "signals": [
           {
             "type": "breach_disclosed",
             "captured_at": "2026-05-13T08:44:45.603936",
-            "days_ago": 41,
+            "days_ago": 43,
             "payload": {
               "agency": "me_ag",
               "reported_date": "2026-05-11"
@@ -4552,13 +4692,13 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 16.99510619469208,
+        "score": 16.22957874534859,
         "insight": null,
         "signals": [
           {
             "type": "job_posted_security",
             "captured_at": "2026-05-15T08:49:09.120779",
-            "days_ago": 37,
+            "days_ago": 39,
             "payload": {
               "title": "Director, IT Security",
               "url": "https://www.adzuna.com/details/5720045803?utm_medium=api&utm_source=3aa14b35",
@@ -4580,13 +4720,13 @@
         "dm_title": "Chief Financial Officer",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 16.995106190410883,
+        "score": 16.22957874177237,
         "insight": null,
         "signals": [
           {
             "type": "job_posted_security",
             "captured_at": "2026-05-15T08:49:09.120779",
-            "days_ago": 37,
+            "days_ago": 39,
             "payload": {
               "title": "Director, IT Security",
               "url": "https://www.adzuna.com/details/5726581016?utm_medium=api&utm_source=3aa14b35",
@@ -4608,13 +4748,13 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 16.99505583584199,
+        "score": 16.22953065368605,
         "insight": null,
         "signals": [
           {
             "type": "job_posted_security",
             "captured_at": "2026-05-15T08:48:58.034970",
-            "days_ago": 37,
+            "days_ago": 39,
             "payload": {
               "title": "Senior Security Engineer",
               "url": "https://www.linkedin.com/jobs/view/4414298431",
@@ -4636,13 +4776,13 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 16.50376869223739,
+        "score": 15.760373016646545,
         "insight": null,
         "signals": [
           {
             "type": "breach_disclosed",
             "captured_at": "2026-05-10T08:08:20.710630",
-            "days_ago": 43,
+            "days_ago": 45,
             "payload": {
               "agency": "me_ag",
               "reported_date": "2026-05-09"
@@ -4662,13 +4802,13 @@
         "dm_title": "Founder",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 16.503768688455104,
+        "score": 15.760373012596311,
         "insight": null,
         "signals": [
           {
             "type": "breach_disclosed",
             "captured_at": "2026-05-10T08:08:20.710630",
-            "days_ago": 43,
+            "days_ago": 45,
             "payload": {
               "agency": "me_ag",
               "reported_date": "2026-05-09"
@@ -4688,13 +4828,13 @@
         "dm_title": "President/CEO",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 16.12682213991972,
+        "score": 15.400405642943873,
         "insight": null,
         "signals": [
           {
             "type": "breach_disclosed",
             "captured_at": "2026-05-09T07:57:09.802162",
-            "days_ago": 44,
+            "days_ago": 46,
             "payload": {
               "agency": "ca_ag",
               "reported_date": "05/08/2026"
@@ -4714,13 +4854,13 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 16.12682212465743,
+        "score": 15.40040562830728,
         "insight": null,
         "signals": [
           {
             "type": "breach_disclosed",
             "captured_at": "2026-05-09T07:57:13.098372",
-            "days_ago": 44,
+            "days_ago": 46,
             "payload": {
               "agency": "me_ag",
               "reported_date": "2026-05-08"
@@ -4740,13 +4880,13 @@
         "dm_title": "President",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 16.126822120905466,
+        "score": 15.4004056245184,
         "insight": null,
         "signals": [
           {
             "type": "breach_disclosed",
             "captured_at": "2026-05-09T07:57:13.098372",
-            "days_ago": 44,
+            "days_ago": 46,
             "payload": {
               "agency": "me_ag",
               "reported_date": "2026-05-08"
@@ -4766,13 +4906,13 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 16.126822116912003,
+        "score": 15.400405620960152,
         "insight": null,
         "signals": [
           {
             "type": "breach_disclosed",
             "captured_at": "2026-05-09T07:57:13.098372",
-            "days_ago": 44,
+            "days_ago": 46,
             "payload": {
               "agency": "me_ag",
               "reported_date": "2026-05-08"
@@ -4792,13 +4932,13 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 16.12682209804006,
+        "score": 15.400405603424243,
         "insight": null,
         "signals": [
           {
             "type": "breach_disclosed",
             "captured_at": "2026-05-10T08:08:17.613417",
-            "days_ago": 44,
+            "days_ago": 46,
             "payload": {
               "agency": "ca_ag",
               "reported_date": "05/08/2026"
@@ -4818,13 +4958,13 @@
         "dm_title": "CEO",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 15.854573017006938,
+        "score": 15.14041973223155,
         "insight": null,
         "signals": [
           {
             "type": "job_posted_security",
             "captured_at": "2026-05-12T08:39:37.936748",
-            "days_ago": 40,
+            "days_ago": 42,
             "payload": {
               "title": "Sr. Security Engineer",
               "url": "https://www.indeed.com/viewjob?jk=cabcfd901000ef45",
@@ -4846,13 +4986,13 @@
         "dm_title": "CEO",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 15.758485050652013,
+        "score": 15.04865992685633,
         "insight": null,
         "signals": [
           {
             "type": "breach_disclosed",
             "captured_at": "2026-05-08T07:42:13.610247",
-            "days_ago": 45,
+            "days_ago": 47,
             "payload": {
               "agency": "ca_ag",
               "reported_date": "05/07/2026"
@@ -4872,13 +5012,13 @@
         "dm_title": "Managing Director",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 15.758485046888824,
+        "score": 15.04865992350008,
         "insight": null,
         "signals": [
           {
             "type": "breach_disclosed",
             "captured_at": "2026-05-08T07:42:16.913744",
-            "days_ago": 45,
+            "days_ago": 47,
             "payload": {
               "agency": "me_ag",
               "reported_date": "2026-05-07"
@@ -4898,13 +5038,13 @@
         "dm_title": "Managing Partner",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 15.758485042965491,
+        "score": 15.048659919918467,
         "insight": null,
         "signals": [
           {
             "type": "breach_disclosed",
             "captured_at": "2026-05-08T07:42:16.913744",
-            "days_ago": 45,
+            "days_ago": 47,
             "payload": {
               "agency": "me_ag",
               "reported_date": "2026-05-07"
@@ -4924,13 +5064,13 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 15.758485009568744,
+        "score": 15.0486598885331,
         "insight": null,
         "signals": [
           {
             "type": "breach_disclosed",
             "captured_at": "2026-05-09T07:57:09.802162",
-            "days_ago": 45,
+            "days_ago": 47,
             "payload": {
               "agency": "ca_ag",
               "reported_date": "05/07/2026"
@@ -4950,13 +5090,13 @@
         "dm_title": "Chief Executive Officer",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 15.758484987111801,
+        "score": 15.048659867111855,
         "insight": null,
         "signals": [
           {
             "type": "breach_disclosed",
             "captured_at": "2026-05-09T07:57:13.098372",
-            "days_ago": 45,
+            "days_ago": 47,
             "payload": {
               "agency": "me_ag",
               "reported_date": "2026-05-07"
@@ -4976,13 +5116,13 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 15.507288903962808,
+        "score": 14.808778658827382,
         "insight": null,
         "signals": [
           {
             "type": "job_posted_security",
             "captured_at": "2026-05-11T09:39:16.945467",
-            "days_ago": 41,
+            "days_ago": 43,
             "payload": {
               "title": "Information Security Officer - Governance, Risk, and Compliance",
               "url": "https://www.indeed.com/viewjob?jk=6ad15a94f8dc355e",
@@ -5004,13 +5144,13 @@
         "dm_title": "Vice President Information Technology Operations",
         "dm_email": "nleslie@firstharvestcu.com",
         "dm_linkedin_url": "http://www.linkedin.com/in/ned-leslie-31576b4",
-        "score": 15.398560776515975,
+        "score": 14.70494807978888,
         "insight": null,
         "signals": [
           {
             "type": "breach_disclosed",
             "captured_at": "2026-05-07T08:34:10.599934",
-            "days_ago": 46,
+            "days_ago": 48,
             "payload": {
               "agency": "me_ag",
               "reported_date": "2026-05-06"
@@ -5030,13 +5170,13 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 15.046857204772293,
+        "score": 14.369086637551435,
         "insight": null,
         "signals": [
           {
             "type": "breach_disclosed",
             "captured_at": "2026-05-06T08:27:27.350212",
-            "days_ago": 47,
+            "days_ago": 49,
             "payload": {
               "agency": "me_ag",
               "reported_date": "2026-05-05"
@@ -5056,13 +5196,13 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 15.04685720097785,
+        "score": 14.369086634381333,
         "insight": null,
         "signals": [
           {
             "type": "breach_disclosed",
             "captured_at": "2026-05-06T08:27:27.350212",
-            "days_ago": 47,
+            "days_ago": 49,
             "payload": {
               "agency": "me_ag",
               "reported_date": "2026-05-05"
@@ -5082,13 +5222,13 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 15.04685719748117,
+        "score": 14.36908663133803,
         "insight": null,
         "signals": [
           {
             "type": "breach_disclosed",
             "captured_at": "2026-05-06T08:27:27.350212",
-            "days_ago": 47,
+            "days_ago": 49,
             "payload": {
               "agency": "me_ag",
               "reported_date": "2026-05-05"
@@ -5108,13 +5248,13 @@
         "dm_title": "President & COO",
         "dm_email": "john@empireexpress.com",
         "dm_linkedin_url": "http://www.linkedin.com/in/john-phillips-86646a24",
-        "score": 15.046857193465417,
+        "score": 14.369086627998856,
         "insight": null,
         "signals": [
           {
             "type": "breach_disclosed",
             "captured_at": "2026-05-06T08:27:27.350212",
-            "days_ago": 47,
+            "days_ago": 49,
             "payload": {
               "agency": "me_ag",
               "reported_date": "2026-05-05"
@@ -5134,13 +5274,13 @@
         "dm_title": "Chief Executive Officer",
         "dm_email": "jshultz@radialentertainment.com",
         "dm_linkedin_url": "http://www.linkedin.com/in/shultz",
-        "score": 15.046857189562335,
+        "score": 14.369086624432967,
         "insight": null,
         "signals": [
           {
             "type": "breach_disclosed",
             "captured_at": "2026-05-06T08:27:27.350212",
-            "days_ago": 47,
+            "days_ago": 49,
             "payload": {
               "agency": "me_ag",
               "reported_date": "2026-05-05"
@@ -5160,13 +5300,13 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 15.04685709820198,
+        "score": 14.36908654096124,
         "insight": null,
         "signals": [
           {
             "type": "breach_disclosed",
             "captured_at": "2026-05-09T07:57:09.802162",
-            "days_ago": 47,
+            "days_ago": 49,
             "payload": {
               "agency": "ca_ag",
               "reported_date": "05/05/2026"
@@ -5186,13 +5326,13 @@
         "dm_title": "President & Chief Executive Officer",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 15.046857076606253,
+        "score": 14.369086520757106,
         "insight": null,
         "signals": [
           {
             "type": "breach_disclosed",
             "captured_at": "2026-05-09T07:57:13.098372",
-            "days_ago": 47,
+            "days_ago": 49,
             "payload": {
               "agency": "me_ag",
               "reported_date": "2026-05-05"
@@ -5212,13 +5352,13 @@
         "dm_title": "President & CEO",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 14.782681983974458,
+        "score": 14.116810928632377,
         "insight": null,
         "signals": [
           {
             "type": "job_posted_security",
             "captured_at": "2026-05-09T07:56:49.271362",
-            "days_ago": 43,
+            "days_ago": 45,
             "payload": {
               "title": "Director, IT Infrastructure and Security",
               "url": "https://www.adzuna.com/land/ad/5715255388?se=JGHTpXxL8RGnMap5hKkm1g&utm_medium=api&utm_source=3aa14b35&v=9186F2AD5C5AAC70BAD4B53ECE76ADEAFF5081C8",
@@ -5240,13 +5380,13 @@
         "dm_title": "VP & Chief Operating Officer",
         "dm_email": "ace@jetter.com",
         "dm_linkedin_url": "http://www.linkedin.com/in/acjetter",
-        "score": 14.703186568101172,
+        "score": 14.04089629246649,
         "insight": null,
         "signals": [
           {
             "type": "breach_disclosed",
             "captured_at": "2026-05-05T08:09:43.860213",
-            "days_ago": 48,
+            "days_ago": 50,
             "payload": {
               "agency": "me_ag",
               "reported_date": "2026-05-04"
@@ -5266,13 +5406,13 @@
         "dm_title": "President and Chief Executive Officer",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 14.703186333846721,
+        "score": 14.040896101648224,
         "insight": null,
         "signals": [
           {
             "type": "breach_disclosed",
             "captured_at": "2026-05-11T09:39:49.168226",
-            "days_ago": 48,
+            "days_ago": 50,
             "payload": {
               "agency": "me_ag",
               "reported_date": "2026-05-04"
@@ -5292,13 +5432,13 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 14.441623956950881,
+        "score": 13.79111551758174,
         "insight": null,
         "signals": [
           {
             "type": "job_posted_security",
             "captured_at": "2026-05-08T07:42:03.520100",
-            "days_ago": 44,
+            "days_ago": 46,
             "payload": {
               "title": "Director of Engineering & Security",
               "url": "https://www.adzuna.com/land/ad/5722410774?se=OqIaarFK8RGeYJz9IZgogA&utm_medium=api&utm_source=3aa14b35&v=95EA270730A580B8BEFF850B4F5F538539C3121E",
@@ -5320,13 +5460,13 @@
         "dm_title": "VP of Technology",
         "dm_email": "anush.mohan@synthbee.com",
         "dm_linkedin_url": "http://www.linkedin.com/in/anushmohan",
-        "score": 14.123535116254072,
+        "score": 13.487354668225414,
         "insight": null,
         "signals": [
           {
             "type": "job_posted_security",
             "captured_at": "2026-05-07T08:33:58.038098",
-            "days_ago": 45,
+            "days_ago": 47,
             "payload": {
               "title": "Facility Security Officer with Security Clearance",
               "url": "https://www.adzuna.com/land/ad/5715010436?se=xrNage9J8RG9yII_B8yfHA&utm_medium=api&utm_source=3aa14b35&v=0DA514AF1A3ABED815C6C48A0AC2CB833A5E2C05",
@@ -5348,13 +5488,13 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 13.799418630928395,
+        "score": 13.177837675256892,
         "insight": null,
         "signals": [
           {
             "type": "job_posted_security",
             "captured_at": "2026-05-06T08:27:02.213469",
-            "days_ago": 46,
+            "days_ago": 48,
             "payload": {
               "title": "FCC - Security Engineer / SIEM Engineer",
               "url": "https://www.linkedin.com/jobs/view/4408412247",
@@ -5376,13 +5516,13 @@
         "dm_title": "Chief Executive Officer",
         "dm_email": "allan.penksa@flygainesville.com",
         "dm_linkedin_url": "http://www.linkedin.com/in/allan-penksa-0b589510",
-        "score": 13.718558218513774,
+        "score": 13.100619535620602,
         "insight": null,
         "signals": [
           {
             "type": "breach_disclosed",
             "captured_at": "2026-05-04T23:01:56.641858",
-            "days_ago": 51,
+            "days_ago": 53,
             "payload": {
               "agency": "me_ag",
               "reported_date": "2026-05-01"
@@ -5402,13 +5542,13 @@
         "dm_title": "Co-Founder & CEO",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 13.71855790039584,
+        "score": 13.100619267250739,
         "insight": null,
         "signals": [
           {
             "type": "breach_disclosed",
             "captured_at": "2026-05-12T08:40:14.312754",
-            "days_ago": 51,
+            "days_ago": 53,
             "payload": {
               "agency": "ca_ag",
               "reported_date": "05/01/2026"
@@ -5428,13 +5568,13 @@
         "dm_title": "CEO",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 13.718557878641114,
+        "score": 13.100619245764758,
         "insight": null,
         "signals": [
           {
             "type": "breach_disclosed",
             "captured_at": "2026-05-12T08:40:16.517516",
-            "days_ago": 51,
+            "days_ago": 53,
             "payload": {
               "agency": "me_ag",
               "reported_date": "2026-05-01"
@@ -5454,13 +5594,13 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 13.718557875166963,
+        "score": 13.100619242359512,
         "insight": null,
         "signals": [
           {
             "type": "breach_disclosed",
             "captured_at": "2026-05-12T08:40:16.517516",
-            "days_ago": 51,
+            "days_ago": 53,
             "payload": {
               "agency": "me_ag",
               "reported_date": "2026-05-01"
@@ -5480,13 +5620,13 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 13.405225751693695,
+        "score": 12.801400827575614,
         "insight": null,
         "signals": [
           {
             "type": "breach_disclosed",
             "captured_at": "2026-05-07T08:34:11.918561",
-            "days_ago": 52,
+            "days_ago": 54,
             "payload": {
               "agency": "wa_ag",
               "reported_date": "04/30/2026"
@@ -5506,13 +5646,13 @@
         "dm_title": "IT Manager",
         "dm_email": "bwoolwine@qualichem.com",
         "dm_linkedin_url": "http://www.linkedin.com/in/brandon-woolwine-55371641",
-        "score": 13.099050129544484,
+        "score": 12.509016566748675,
         "insight": null,
         "signals": [
           {
             "type": "breach_disclosed",
             "captured_at": "2026-05-04T23:01:56.641858",
-            "days_ago": 53,
+            "days_ago": 55,
             "payload": {
               "agency": "me_ag",
               "reported_date": "2026-04-29"
@@ -5532,13 +5672,13 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 13.099050126258742,
+        "score": 12.509016563597559,
         "insight": null,
         "signals": [
           {
             "type": "breach_disclosed",
             "captured_at": "2026-05-04T23:01:56.641858",
-            "days_ago": 53,
+            "days_ago": 55,
             "payload": {
               "agency": "me_ag",
               "reported_date": "2026-04-29"
@@ -5558,13 +5698,13 @@
         "dm_title": "Managing Partner",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 12.79986740154752,
+        "score": 12.223310224400908,
         "insight": null,
         "signals": [
           {
             "type": "breach_disclosed",
             "captured_at": "2026-05-04T23:01:56.641858",
-            "days_ago": 54,
+            "days_ago": 56,
             "payload": {
               "agency": "me_ag",
               "reported_date": "2026-04-28"
@@ -5584,13 +5724,13 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 12.799867302587664,
+        "score": 12.22331013825675,
         "insight": null,
         "signals": [
           {
             "type": "breach_disclosed",
             "captured_at": "2026-05-06T08:27:24.730892",
-            "days_ago": 54,
+            "days_ago": 56,
             "payload": {
               "agency": "ca_ag",
               "reported_date": "04/28/2026"
@@ -5610,13 +5750,13 @@
         "dm_title": "President/CEO",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 12.799867205750017,
+        "score": 12.223310050396506,
         "insight": null,
         "signals": [
           {
             "type": "breach_disclosed",
             "captured_at": "2026-05-09T07:57:09.802162",
-            "days_ago": 54,
+            "days_ago": 56,
             "payload": {
               "agency": "ca_ag",
               "reported_date": "04/28/2026"
@@ -5636,13 +5776,13 @@
         "dm_title": "President",
         "dm_email": "melanie.hawkins@churchill-claims.com",
         "dm_linkedin_url": "http://www.linkedin.com/in/melanie-hawkins-0a848568",
-        "score": 12.507518022757452,
+        "score": 11.944129429907395,
         "insight": null,
         "signals": [
           {
             "type": "breach_disclosed",
             "captured_at": "2026-05-04T23:01:56.641858",
-            "days_ago": 55,
+            "days_ago": 57,
             "payload": {
               "agency": "me_ag",
               "reported_date": "2026-04-27"
@@ -5662,13 +5802,13 @@
         "dm_title": "President / CEO",
         "dm_email": "tconwell@credittechnologies.com",
         "dm_linkedin_url": "http://www.linkedin.com/in/thomasconwell",
-        "score": 12.507517864454533,
+        "score": 11.944129291182376,
         "insight": null,
         "signals": [
           {
             "type": "breach_disclosed",
             "captured_at": "2026-05-08T07:42:16.913744",
-            "days_ago": 55,
+            "days_ago": 57,
             "payload": {
               "agency": "me_ag",
               "reported_date": "2026-04-27"
@@ -5688,13 +5828,13 @@
         "dm_title": "CEO",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 12.45288748213136,
+        "score": 11.891959699983694,
         "insight": null,
         "signals": [
           {
             "type": "exec_hired",
             "captured_at": "2026-05-14T08:37:33.826819",
-            "days_ago": 38,
+            "days_ago": 40,
             "payload": {
               "title": "Head Of Information Security",
               "url": "https://www.indeed.com/viewjob?jk=97a8a550f0696d94",
@@ -5716,13 +5856,13 @@
         "dm_title": "Chief Executive Officer",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 12.45288747573086,
+        "score": 11.89195969467925,
         "insight": null,
         "signals": [
           {
             "type": "exec_hired",
             "captured_at": "2026-05-14T08:37:33.826819",
-            "days_ago": 38,
+            "days_ago": 40,
             "payload": {
               "title": "Chief Information Security Officer",
               "url": "https://www.linkedin.com/jobs/view/4405488774",
@@ -5744,13 +5884,13 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 11.669926954652766,
+        "score": 11.144266810723387,
         "insight": null,
         "signals": [
           {
             "type": "breach_disclosed",
             "captured_at": "2026-05-04T23:01:56.641858",
-            "days_ago": 58,
+            "days_ago": 60,
             "payload": {
               "agency": "me_ag",
               "reported_date": "2026-04-24"
@@ -5770,13 +5910,13 @@
         "dm_title": "President & CEO",
         "dm_email": null,
         "dm_linkedin_url": "http://www.linkedin.com/in/gary-werschmidt-578540177",
-        "score": 11.669926951934595,
+        "score": 11.144266808130634,
         "insight": null,
         "signals": [
           {
             "type": "breach_disclosed",
             "captured_at": "2026-05-04T23:01:56.641858",
-            "days_ago": 58,
+            "days_ago": 60,
             "payload": {
               "agency": "me_ag",
               "reported_date": "2026-04-24"
@@ -5796,13 +5936,13 @@
         "dm_title": "Information Technology Director",
         "dm_email": "rtaylor@twulocal100.org",
         "dm_linkedin_url": "http://www.linkedin.com/in/robert-l-taylor-7164a448",
-        "score": 11.669926910001115,
+        "score": 11.144266769969477,
         "insight": null,
         "signals": [
           {
             "type": "breach_disclosed",
             "captured_at": "2026-05-05T08:09:43.860213",
-            "days_ago": 58,
+            "days_ago": 60,
             "payload": {
               "agency": "me_ag",
               "reported_date": "2026-04-24"
@@ -5822,13 +5962,13 @@
         "dm_title": "Founder & CEO",
         "dm_email": "andrew@betterpatienttransfers.com",
         "dm_linkedin_url": "http://www.linkedin.com/in/andrew-heuerman-171833122",
-        "score": 11.669926831966828,
+        "score": 11.144266704065856,
         "insight": null,
         "signals": [
           {
             "type": "breach_disclosed",
             "captured_at": "2026-05-07T08:34:10.599934",
-            "days_ago": 58,
+            "days_ago": 60,
             "payload": {
               "agency": "me_ag",
               "reported_date": "2026-04-24"
@@ -5848,13 +5988,13 @@
         "dm_title": "Chief Executive Officer",
         "dm_email": "jcriste@marincancercare.com",
         "dm_linkedin_url": "http://www.linkedin.com/in/joel-criste-14095a6",
-        "score": 11.403385474688712,
+        "score": 10.889731423714139,
         "insight": null,
         "signals": [
           {
             "type": "breach_disclosed",
             "captured_at": "2026-05-04T23:01:54.411532",
-            "days_ago": 59,
+            "days_ago": 61,
             "payload": {
               "agency": "ca_ag",
               "reported_date": "04/23/2026"
@@ -5874,13 +6014,13 @@
         "dm_title": "Chief Executive Officer",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 11.348187740104267,
+        "score": 10.837020027570896,
         "insight": null,
         "signals": [
           {
             "type": "exec_hired",
             "captured_at": "2026-05-10T08:07:58.152595",
-            "days_ago": 42,
+            "days_ago": 44,
             "payload": {
               "title": "Chief Information Security Officer (CISO)",
               "url": "https://www.adzuna.com/details/5724003914?utm_medium=api&utm_source=3aa14b35",
@@ -5902,13 +6042,13 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 11.142931762873395,
+        "score": 10.641009588757381,
         "insight": null,
         "signals": [
           {
             "type": "breach_disclosed",
             "captured_at": "2026-05-04T23:01:56.641858",
-            "days_ago": 60,
+            "days_ago": 62,
             "payload": {
               "agency": "me_ag",
               "reported_date": "2026-04-22"
@@ -5928,13 +6068,13 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 11.1429317601707,
+        "score": 10.641009586321555,
         "insight": null,
         "signals": [
           {
             "type": "breach_disclosed",
             "captured_at": "2026-05-04T23:01:56.641858",
-            "days_ago": 60,
+            "days_ago": 62,
             "payload": {
               "agency": "me_ag",
               "reported_date": "2026-04-22"
@@ -5954,13 +6094,13 @@
         "dm_title": "Owner",
         "dm_email": null,
         "dm_linkedin_url": "http://www.linkedin.com/in/brian-gaster-669411a2",
-        "score": 11.14293175719088,
+        "score": 10.641009583888568,
         "insight": null,
         "signals": [
           {
             "type": "breach_disclosed",
             "captured_at": "2026-05-04T23:01:56.641858",
-            "days_ago": 60,
+            "days_ago": 62,
             "payload": {
               "agency": "me_ag",
               "reported_date": "2026-04-22"
@@ -5980,13 +6120,13 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 10.888426841305927,
+        "score": 10.39796858665413,
         "insight": null,
         "signals": [
           {
             "type": "breach_disclosed",
             "captured_at": "2026-05-04T23:01:56.641858",
-            "days_ago": 61,
+            "days_ago": 63,
             "payload": {
               "agency": "me_ag",
               "reported_date": "2026-04-21"
@@ -6006,13 +6146,13 @@
         "dm_title": "President and CEO",
         "dm_email": "wsawyers@atlasmanagement.us",
         "dm_linkedin_url": "http://www.linkedin.com/in/warren-sawyers-b3706243",
-        "score": 10.831183034100622,
+        "score": 10.343303278092815,
         "insight": null,
         "signals": [
           {
             "type": "exec_hired",
             "captured_at": "2026-05-08T07:41:51.457583",
-            "days_ago": 44,
+            "days_ago": 46,
             "payload": {
               "title": "Chief Information Security Officer",
               "url": "https://www.indeed.com/viewjob?jk=e30831756f792724",
@@ -6034,13 +6174,13 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 10.349597277363149,
+        "score": 9.883410064434484,
         "insight": null,
         "signals": [
           {
             "type": "exec_hired",
             "captured_at": "2026-05-06T08:27:14.254137",
-            "days_ago": 46,
+            "days_ago": 48,
             "payload": {
               "title": "Sr. Director, Dep CISO GRC & Security, Orthopedics",
               "url": "https://www.adzuna.com/details/5717546582?utm_medium=api&utm_source=3aa14b35",
@@ -6062,13 +6202,13 @@
         "dm_title": "Chief Information Officer",
         "dm_email": "manderson@pamhealth.com",
         "dm_linkedin_url": "http://www.linkedin.com/in/mike-anderson-18418a4",
-        "score": 10.349563975739775,
+        "score": 9.883378258660139,
         "insight": null,
         "signals": [
           {
             "type": "exec_hired",
             "captured_at": "2026-05-06T08:27:02.213469",
-            "days_ago": 46,
+            "days_ago": 48,
             "payload": {
               "title": "Chief Information Security Officer (CISO) | PAM Health Corporate",
               "url": "https://www.indeed.com/viewjob?jk=d03c3973622cd37c",
@@ -6081,6 +6221,90 @@
     ],
     "cloud": [
       {
+        "name": "Teza Technologies",
+        "domain": "teza.com",
+        "industry": "fintech",
+        "headcount": null,
+        "country": "US",
+        "city": "Chicago",
+        "state": "IL",
+        "dm_name": "Misha Malyshev",
+        "dm_title": "Founder and Chief Executive Officer",
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": 39.993231792714816,
+        "insight": "Teza Technologies recently posted a job for a DevOps Engineer, indicating their need for cloud expertise.",
+        "signals": [
+          {
+            "type": "job_posted_cloud_devops",
+            "captured_at": "2026-06-23T09:37:59.022112",
+            "days_ago": 0,
+            "payload": {
+              "title": "DevOps Engineer",
+              "url": "https://www.linkedin.com/jobs/view/4422042103",
+              "date_posted": "2026-06-20",
+              "site": "linkedin"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Crash Champions",
+        "domain": "crashchampions.com",
+        "industry": "other",
+        "headcount": null,
+        "country": "US",
+        "city": "Westmont",
+        "state": "IL",
+        "dm_name": "Mark Miller",
+        "dm_title": "Chief Information Officer",
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": 39.993231784255144,
+        "insight": "The company recently posted a job for a DevOps Engineer, indicating a likely need for cloud migration and optimization services.",
+        "signals": [
+          {
+            "type": "job_posted_cloud_devops",
+            "captured_at": "2026-06-23T09:37:59.022112",
+            "days_ago": 0,
+            "payload": {
+              "title": "DevOps Engineer",
+              "url": "https://www.linkedin.com/jobs/view/4428066669",
+              "date_posted": "2026-06-16",
+              "site": "linkedin"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Investigative Case Management powered by Tapestrii",
+        "domain": "tapestri.io",
+        "industry": "other",
+        "headcount": null,
+        "country": "US",
+        "city": "Naperville",
+        "state": "IL",
+        "dm_name": "Walter Harrison",
+        "dm_title": "Founder",
+        "dm_email": null,
+        "dm_linkedin_url": null,
+        "score": 39.993231774501396,
+        "insight": "They recently posted a job for a DevOps Engineer, indicating a potential need for cloud consultancy in their infrastructure.",
+        "signals": [
+          {
+            "type": "job_posted_cloud_devops",
+            "captured_at": "2026-06-23T09:37:59.022112",
+            "days_ago": 0,
+            "payload": {
+              "title": "DevOps Engineer\nOmaha, Nebraska, United States",
+              "url": "https://www.linkedin.com/jobs/view/4426224178",
+              "date_posted": "2026-06-11",
+              "site": "linkedin"
+            }
+          }
+        ]
+      },
+      {
         "name": "Akina, Inc.",
         "domain": null,
         "industry": "software_saas",
@@ -6092,13 +6316,13 @@
         "dm_title": "President",
         "dm_email": "aburkett@akina-inc.com",
         "dm_linkedin_url": "http://www.linkedin.com/in/amy-burkett-pmp-29392a15a",
-        "score": 41.3982558533848,
+        "score": 39.533512998611286,
         "insight": "Recently posted multiple DevOps Engineer 3 positions focused on AWS and Kubernetes, indicating a need for cloud consultancy services.",
         "signals": [
           {
             "type": "job_posted_cloud_devops",
             "captured_at": "2026-05-06T08:27:02.213469",
-            "days_ago": 46,
+            "days_ago": 48,
             "payload": {
               "title": "DevOps Engineer 3 - (Terraform, GitLab, Docker)",
               "url": "https://www.indeed.com/viewjob?jk=2d1c0ac2c4179b16",
@@ -6109,7 +6333,7 @@
           {
             "type": "job_posted_cloud_devops",
             "captured_at": "2026-05-06T08:27:02.213469",
-            "days_ago": 46,
+            "days_ago": 48,
             "payload": {
               "title": "DevOps Engineer 3 - (AWS, Docker, Kubernetes)",
               "url": "https://www.indeed.com/viewjob?jk=4053ab228ed70b53",
@@ -6120,7 +6344,7 @@
           {
             "type": "job_posted_cloud_devops",
             "captured_at": "2026-05-06T08:27:02.213469",
-            "days_ago": 46,
+            "days_ago": 48,
             "payload": {
               "title": "DevOps Engineer 3 - (Kubernetes, AWS, IaC)",
               "url": "https://www.indeed.com/viewjob?jk=591c0f7e90c9678b",
@@ -6142,13 +6366,13 @@
         "dm_title": "Chief Technology Officer, E-Gaming",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 39.048262606722936,
+        "score": 37.28937295770759,
         "insight": "Arrow International, Inc. is hiring for a Senior DevOps Engineer, indicating their intent to enhance their cloud capabilities.",
         "signals": [
           {
             "type": "job_posted_cloud_devops",
             "captured_at": "2026-06-20T08:55:09.486440",
-            "days_ago": 1,
+            "days_ago": 3,
             "payload": {
               "title": "Senior DevOps Engineer",
               "url": "https://www.indeed.com/viewjob?jk=653ee7669e672671",
@@ -6170,13 +6394,13 @@
         "dm_title": "CEO",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 39.04826259865111,
+        "score": 37.28937294954065,
         "insight": "Recently posting for a Cloud Engineer, Prescient Edge indicates a growing need for cloud expertise within their operations.",
         "signals": [
           {
             "type": "job_posted_cloud_devops",
             "captured_at": "2026-06-20T08:55:09.486440",
-            "days_ago": 1,
+            "days_ago": 3,
             "payload": {
               "title": "Cloud Engineer",
               "url": "https://www.linkedin.com/jobs/view/4429903582",
@@ -6198,13 +6422,13 @@
         "dm_title": "Founder and CEO",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 37.337853154326645,
+        "score": 35.6560071739565,
         "insight": "Trustar Bank recently posted a job for a Cloud Engineer (Azure), indicating their focus on enhancing cloud capabilities.",
         "signals": [
           {
             "type": "job_posted_cloud_devops",
             "captured_at": "2026-06-18T10:23:36.035902",
-            "days_ago": 2,
+            "days_ago": 4,
             "payload": {
               "title": "Cloud Engineer (Azure)",
               "url": "https://www.adzuna.com/land/ad/5754589624?se=LJavxv9q8RG_XcdlzGzLnw&utm_medium=api&utm_source=3aa14b35&v=560AF8FBCC106CAA9639F5040548B5481C9401F5",
@@ -6226,13 +6450,13 @@
         "dm_title": "CEO",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 36.50332298921331,
+        "score": 34.85906757843735,
         "insight": "ClassWallet recently posted a job for a DevOps Engineer, indicating a potential need for cloud optimization services.",
         "signals": [
           {
             "type": "job_posted_cloud_devops",
             "captured_at": "2026-06-17T10:54:47.861032",
-            "days_ago": 3,
+            "days_ago": 5,
             "payload": {
               "title": "DevOps Engineer",
               "url": "https://www.linkedin.com/jobs/view/4429593309",
@@ -6254,13 +6478,13 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 35.67813977274885,
+        "score": 34.07105394333194,
         "insight": "Splashlight recently posted a job for a DevOps Engineer, indicating a potential need for cloud services and optimization.",
         "signals": [
           {
             "type": "job_posted_cloud_devops",
             "captured_at": "2026-06-16T11:09:44.490964",
-            "days_ago": 4,
+            "days_ago": 6,
             "payload": {
               "title": "DevOps Engineer",
               "url": "https://www.linkedin.com/jobs/view/4425533727",
@@ -6282,13 +6506,13 @@
         "dm_title": "Founder & CEO",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 35.678139764095185,
+        "score": 34.071053936079416,
         "insight": "Mach Industries recently posted a job for a DevOps Engineer, indicating a need to enhance their cloud infrastructure.",
         "signals": [
           {
             "type": "job_posted_cloud_devops",
             "captured_at": "2026-06-16T11:09:44.490964",
-            "days_ago": 4,
+            "days_ago": 6,
             "payload": {
               "title": "DevOps Engineer",
               "url": "https://www.linkedin.com/jobs/view/4405048987",
@@ -6310,13 +6534,13 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 34.89834683102336,
+        "score": 33.326385982832704,
         "insight": "DRUM Associates recently posted a job for a DevOps Engineer, indicating a potential need for cloud migration and optimization services.",
         "signals": [
           {
             "type": "job_posted_cloud_devops",
             "captured_at": "2026-06-15T12:12:27.119283",
-            "days_ago": 5,
+            "days_ago": 7,
             "payload": {
               "title": "DevOps Engineer",
               "url": "https://www.linkedin.com/jobs/view/4421880360",
@@ -6338,13 +6562,13 @@
         "dm_title": "CEO",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 33.21843533284624,
+        "score": 31.72214440606094,
         "insight": "Clever Real Estate's recent job posting for a DevOps Engineer suggests a need for cloud migration and optimization support.",
         "signals": [
           {
             "type": "job_posted_cloud_devops",
             "captured_at": "2026-06-13T08:57:42.614211",
-            "days_ago": 8,
+            "days_ago": 10,
             "payload": {
               "title": "DevOps Engineer",
               "url": "https://www.indeed.com/viewjob?jk=0db1c27506cffeee",
@@ -6366,13 +6590,13 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 31.761889758218715,
+        "score": 30.331207434785835,
         "insight": "The Clearing House posted a job for a DevOps Junior Engineer, indicating a potential need for cloud migration and optimization support.",
         "signals": [
           {
             "type": "job_posted_cloud_devops",
             "captured_at": "2026-06-11T10:23:12.935155",
-            "days_ago": 9,
+            "days_ago": 11,
             "payload": {
               "title": "DevOps Junior Engineer",
               "url": "https://www.linkedin.com/jobs/view/4423565050",
@@ -6394,13 +6618,13 @@
         "dm_title": "CTO and Co-Founder",
         "dm_email": "harry@offchainlabs.com",
         "dm_linkedin_url": "http://www.linkedin.com/in/hkalodner",
-        "score": 31.024433597896135,
+        "score": 29.626969138846306,
         "insight": "The company recently posted a job for a Site Reliability Engineer, indicating a current need for cloud solutions.",
         "signals": [
           {
             "type": "job_posted_cloud_devops",
             "captured_at": "2026-06-10T09:59:05.034229",
-            "days_ago": 10,
+            "days_ago": 12,
             "payload": {
               "title": "Site Reliability Engineer",
               "url": "https://www.linkedin.com/jobs/view/4425640652",
@@ -6422,13 +6646,13 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 31.02443241856688,
+        "score": 29.626968109526448,
         "insight": "ClickUp is hiring a GTM DevOps Engineer, indicating a focus on cloud infrastructure enhancements.",
         "signals": [
           {
             "type": "job_posted_cloud_devops",
             "captured_at": "2026-06-10T09:59:05.034229",
-            "days_ago": 10,
+            "days_ago": 12,
             "payload": {
               "title": "GTM DevOps Engineer",
               "url": "https://www.indeed.com/viewjob?jk=63688985684ac528",
@@ -6450,13 +6674,13 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 30.307627706231266,
+        "score": 28.942451143861355,
         "insight": "TWIA's recent job posting for a Lead DevOps Engineer indicates a strategic move to enhance their cloud infrastructure.",
         "signals": [
           {
             "type": "job_posted_cloud_devops",
             "captured_at": "2026-06-09T09:42:12.714848",
-            "days_ago": 12,
+            "days_ago": 14,
             "payload": {
               "title": "Lead DevOps Engineer",
               "url": "https://www.indeed.com/viewjob?jk=7d98d15f9a14b332",
@@ -6478,13 +6702,13 @@
         "dm_title": "CEO",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 30.070893483035572,
+        "score": 28.716380364476528,
         "insight": "JITSU is seeking a Senior DevOps/Platform Engineer, indicating a potential need for cloud consultancy support.",
         "signals": [
           {
             "type": "job_posted_cloud_devops",
             "captured_at": "2026-06-09T01:33:28.876602",
-            "days_ago": 12,
+            "days_ago": 14,
             "payload": {
               "title": "Senior DevOps/Platform Engineer",
               "url": "https://www.indeed.com/viewjob?jk=dc401e882f1b7d3b",
@@ -6506,13 +6730,13 @@
         "dm_title": "CEO",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 30.070893475468523,
+        "score": 28.71638035785699,
         "insight": "Happy Returns has posted a job for a remote DevOps Engineer, indicating a potential need for cloud consultancy services.",
         "signals": [
           {
             "type": "job_posted_cloud_devops",
             "captured_at": "2026-06-09T01:33:28.876602",
-            "days_ago": 12,
+            "days_ago": 14,
             "payload": {
               "title": "DevOps Engineer (Remote)",
               "url": "https://www.linkedin.com/jobs/view/4424974243",
@@ -6534,13 +6758,13 @@
         "dm_title": "CEO",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 30.070893469011203,
+        "score": 28.716380350492567,
         "insight": "Yotta Energy recently posted a job for a DevOps Engineer II, indicating their need to enhance cloud infrastructure.",
         "signals": [
           {
             "type": "job_posted_cloud_devops",
             "captured_at": "2026-06-09T01:33:28.876602",
-            "days_ago": 12,
+            "days_ago": 14,
             "payload": {
               "title": "DevOps Engineer II",
               "url": "https://www.linkedin.com/jobs/view/4419601999",
@@ -6562,13 +6786,13 @@
         "dm_title": "Managing Partner and Chief Investment Officer",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 30.070893462264394,
+        "score": 28.71638034371945,
         "insight": "STG is hiring a Cloud Engineer, indicating a need for cloud consultancy to enhance their AWS/GCP/Azure capabilities.",
         "signals": [
           {
             "type": "job_posted_cloud_devops",
             "captured_at": "2026-06-09T01:33:28.876602",
-            "days_ago": 12,
+            "days_ago": 14,
             "payload": {
               "title": "Cloud Engineer",
               "url": "https://www.linkedin.com/jobs/view/4384373150",
@@ -6590,13 +6814,13 @@
         "dm_title": "CEO and Founder",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 29.447993722378698,
+        "score": 28.121538486654615,
         "insight": "Wolfe, LLC is looking to enhance their cloud capabilities after recently hiring a VP of DevOps and posting for a DevOps Engineer.",
         "signals": [
           {
             "type": "job_posted_cloud_devops",
             "captured_at": "2026-05-15T08:49:09.120779",
-            "days_ago": 37,
+            "days_ago": 39,
             "payload": {
               "title": "DevOps Engineer",
               "url": "https://www.adzuna.com/land/ad/5730114859?se=EIzA8jpQ8RGD8MZJ4ev-Ow&utm_medium=api&utm_source=3aa14b35&v=75ED0C17101D761585A644E94606F78CDEE9D7CF",
@@ -6607,7 +6831,7 @@
           {
             "type": "exec_hired",
             "captured_at": "2026-05-14T08:37:33.826819",
-            "days_ago": 38,
+            "days_ago": 40,
             "payload": {
               "title": "VP of DevOps",
               "url": "https://www.indeed.com/viewjob?jk=d1b6de65729ec2e9",
@@ -6629,13 +6853,13 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 26.74835019030568,
+        "score": 25.543497701146233,
         "insight": "Recently raising $9M in funding, Probably is likely looking to enhance their cloud infrastructure capabilities.",
         "signals": [
           {
             "type": "funding_raised",
             "captured_at": "2026-06-19T10:25:47.642292",
-            "days_ago": 1,
+            "days_ago": 3,
             "payload": {
               "feed_title": "Probably raises $9M to build a more reliable kind of AI",
               "feed_url": "https://techcrunch.com/category/startups/feed/",
@@ -6657,13 +6881,13 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 22.23347804728844,
+        "score": 21.231993428552148,
         "insight": "GreenTrees recently raised funding, indicating they may require cloud consultancy to scale their operations.",
         "signals": [
           {
             "type": "funding_raised",
             "captured_at": "2026-06-11T10:23:39.042122",
-            "days_ago": 9,
+            "days_ago": 11,
             "payload": {
               "feed_title": "Climate Impact Partners secures a historic one million tonne carbon removals purchase from GreenTrees' Mississippi Alluvial Valley ARR Project",
               "feed_url": "https://www.prnewswire.com/rss/financial-services-latest-news/financial-services-latest-news-list.rss",
@@ -6685,13 +6909,13 @@
         "dm_title": "CEO and founder",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 21.717269758423704,
+        "score": 20.7390372173173,
         "insight": "Evotrex recently raised funding, indicating a potential need for cloud migration and optimization as they scale their operations.",
         "signals": [
           {
             "type": "funding_raised",
             "captured_at": "2026-06-10T09:59:33.801997",
-            "days_ago": 10,
+            "days_ago": 12,
             "payload": {
               "feed_title": "Evotrex raises $30M to build the RV that doesn\u2019t need a charging station",
               "feed_url": "https://techcrunch.com/category/startups/feed/",
@@ -6713,13 +6937,13 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 16.995106202650014,
+        "score": 16.229578752279703,
         "insight": null,
         "signals": [
           {
             "type": "job_posted_cloud_devops",
             "captured_at": "2026-05-15T08:49:09.120779",
-            "days_ago": 37,
+            "days_ago": 39,
             "payload": {
               "title": "Devops Engineer",
               "url": "https://www.adzuna.com/land/ad/5728818897?se=EIzA8jpQ8RGD8MZJ4ev-Ow&utm_medium=api&utm_source=3aa14b35&v=6B69AE70A8230815707A5B1D8BEC15CFC29BDC62",
@@ -6741,13 +6965,13 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 16.995106198500615,
+        "score": 16.229578748825,
         "insight": null,
         "signals": [
           {
             "type": "job_posted_cloud_devops",
             "captured_at": "2026-05-15T08:49:09.120779",
-            "days_ago": 37,
+            "days_ago": 39,
             "payload": {
               "title": "DevOps Engineer (Remote) (Hiring Immediately)",
               "url": "https://www.adzuna.com/land/ad/5729817476?se=EIzA8jpQ8RGD8MZJ4ev-Ow&utm_medium=api&utm_source=3aa14b35&v=7EC4F448F784D2352F8D5DD980CB3577EE863DA3",
@@ -6769,13 +6993,13 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 16.99505583584199,
+        "score": 16.22953065368605,
         "insight": null,
         "signals": [
           {
             "type": "job_posted_cloud_devops",
             "captured_at": "2026-05-15T08:48:58.034970",
-            "days_ago": 37,
+            "days_ago": 39,
             "payload": {
               "title": "DevOps Engineer",
               "url": "https://www.linkedin.com/jobs/view/4414988794",
@@ -6797,13 +7021,13 @@
         "dm_title": "President and Trustee",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 16.99505583199256,
+        "score": 16.229530649966613,
         "insight": null,
         "signals": [
           {
             "type": "job_posted_cloud_devops",
             "captured_at": "2026-05-15T08:48:58.034970",
-            "days_ago": 37,
+            "days_ago": 39,
             "payload": {
               "title": "Jr DevOps Engineer",
               "url": "https://www.linkedin.com/jobs/view/4404704093",
@@ -6825,13 +7049,13 @@
         "dm_title": "Chairman and Chief Executive Officer (CEO)",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 16.603849963640556,
+        "score": 15.855946255993631,
         "insight": null,
         "signals": [
           {
             "type": "job_posted_cloud_devops",
             "captured_at": "2026-05-14T08:37:33.826819",
-            "days_ago": 38,
+            "days_ago": 40,
             "payload": {
               "title": "DevOps Engineer",
               "url": "https://www.indeed.com/viewjob?jk=ff03bab2be9ed39f",
@@ -6853,13 +7077,13 @@
         "dm_title": "CEO",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 16.22635773237864,
+        "score": 15.495457780121853,
         "insight": null,
         "signals": [
           {
             "type": "job_posted_cloud_devops",
             "captured_at": "2026-05-13T08:44:14.886041",
-            "days_ago": 39,
+            "days_ago": 41,
             "payload": {
               "title": "Senior DevOps Engineer",
               "url": "https://www.indeed.com/viewjob?jk=b2e24ee36e8cb7cb",
@@ -6881,13 +7105,13 @@
         "dm_title": "Chairman",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 15.85457301346671,
+        "score": 15.14041972897225,
         "insight": null,
         "signals": [
           {
             "type": "job_posted_cloud_devops",
             "captured_at": "2026-05-12T08:39:37.936748",
-            "days_ago": 40,
+            "days_ago": 42,
             "payload": {
               "title": "DevOps Developer",
               "url": "https://www.indeed.com/viewjob?jk=31fda60428da4af6",
@@ -6909,13 +7133,13 @@
         "dm_title": "CEO",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 15.50728890013934,
+        "score": 14.808778655231581,
         "insight": null,
         "signals": [
           {
             "type": "job_posted_cloud_devops",
             "captured_at": "2026-05-11T09:39:16.945467",
-            "days_ago": 41,
+            "days_ago": 43,
             "payload": {
               "title": "DevOps Engineer",
               "url": "https://www.linkedin.com/jobs/view/4409900489",
@@ -6937,13 +7161,13 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 14.782635216129423,
+        "score": 14.116766268209567,
         "insight": null,
         "signals": [
           {
             "type": "job_posted_cloud_devops",
             "captured_at": "2026-05-09T07:56:37.439236",
-            "days_ago": 43,
+            "days_ago": 45,
             "payload": {
               "title": "DevOps Engineer",
               "url": "https://www.linkedin.com/jobs/view/4402046792",
@@ -6965,13 +7189,13 @@
         "dm_title": "Vice President",
         "dm_email": null,
         "dm_linkedin_url": "http://www.linkedin.com/in/james-rogers-43995b191",
-        "score": 14.12348767459283,
+        "score": 13.487309362097864,
         "insight": null,
         "signals": [
           {
             "type": "job_posted_cloud_devops",
             "captured_at": "2026-05-07T08:33:45.474163",
-            "days_ago": 45,
+            "days_ago": 47,
             "payload": {
               "title": "DevOps Engineer",
               "url": "https://www.linkedin.com/jobs/view/4409928072",
@@ -6993,13 +7217,13 @@
         "dm_title": "IT Project Manager",
         "dm_email": "sallgood@revelationpharma.com",
         "dm_linkedin_url": "http://www.linkedin.com/in/shawnallgood",
-        "score": 14.123487671390043,
+        "score": 13.487309359176397,
         "insight": null,
         "signals": [
           {
             "type": "job_posted_cloud_devops",
             "captured_at": "2026-05-07T08:33:45.474163",
-            "days_ago": 45,
+            "days_ago": 47,
             "payload": {
               "title": "DevOps / AgentOps Engineer",
               "url": "https://www.linkedin.com/jobs/view/4409941614",
@@ -7021,13 +7245,13 @@
         "dm_title": "Senior Vice President Information Technology Services",
         "dm_email": "cmarco@netdes.com",
         "dm_linkedin_url": "http://www.linkedin.com/in/carmen-marco-2b58157",
-        "score": 13.799463039576603,
+        "score": 13.177880088675462,
         "insight": null,
         "signals": [
           {
             "type": "job_posted_cloud_devops",
             "captured_at": "2026-05-06T08:27:14.254137",
-            "days_ago": 46,
+            "days_ago": 48,
             "payload": {
               "title": "AWS Systems Administrator",
               "url": "https://www.adzuna.com/land/ad/5712371613?se=cOX4YyVJ8RGEdJdPO2uqbQ&utm_medium=api&utm_source=3aa14b35&v=2643A97A4B2BB1CC5904F5309BCF0AAEC1A946A6",
@@ -7049,13 +7273,13 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 13.799463033008008,
+        "score": 13.177880082931337,
         "insight": null,
         "signals": [
           {
             "type": "job_posted_cloud_devops",
             "captured_at": "2026-05-06T08:27:14.254137",
-            "days_ago": 46,
+            "days_ago": 48,
             "payload": {
               "title": "Cloud Engineer",
               "url": "https://www.adzuna.com/land/ad/5719658116?se=CjvLZSVJ8RGEYOtM3JQkZw&utm_medium=api&utm_source=3aa14b35&v=17349A9713F325473EB5D341ECC0B23455C644CE",
@@ -7077,13 +7301,13 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 13.799418624972395,
+        "score": 13.17783766912515,
         "insight": null,
         "signals": [
           {
             "type": "job_posted_cloud_devops",
             "captured_at": "2026-05-06T08:27:02.213469",
-            "days_ago": 46,
+            "days_ago": 48,
             "payload": {
               "title": "DevOps Engineer",
               "url": "https://www.indeed.com/viewjob?jk=64248c84feaf3863",
@@ -7105,13 +7329,13 @@
         "dm_title": "Chief Information Officer",
         "dm_email": "bdodd@dlrdmv.com",
         "dm_linkedin_url": "http://www.linkedin.com/in/bdodd",
-        "score": 13.799418613894376,
+        "score": 13.177837663402192,
         "insight": null,
         "signals": [
           {
             "type": "job_posted_cloud_devops",
             "captured_at": "2026-05-06T08:27:02.213469",
-            "days_ago": 46,
+            "days_ago": 48,
             "payload": {
               "title": "DevOps Engineer",
               "url": "https://www.linkedin.com/jobs/view/4410519687",
@@ -7133,13 +7357,13 @@
         "dm_title": "Information Technology Site Manager",
         "dm_email": "dbernal@edgesource.com",
         "dm_linkedin_url": "http://www.linkedin.com/in/diego-bernal-pmp-46a23a73",
-        "score": 13.799418610466173,
+        "score": 13.177837660248223,
         "insight": null,
         "signals": [
           {
             "type": "job_posted_cloud_devops",
             "captured_at": "2026-05-06T08:27:02.213469",
-            "days_ago": 46,
+            "days_ago": 48,
             "payload": {
               "title": "Junior DevOps Engineer",
               "url": "https://www.linkedin.com/jobs/view/4407427089",
@@ -7161,13 +7385,13 @@
         "dm_title": null,
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 13.480451781771443,
+        "score": 12.873238366775244,
         "insight": null,
         "signals": [
           {
             "type": "job_posted_cloud_devops",
             "captured_at": "2026-05-05T08:09:31.653253",
-            "days_ago": 47,
+            "days_ago": 49,
             "payload": {
               "title": "DevOps Engineer Manager",
               "url": "https://www.adzuna.com/land/ad/5716885449?se=blP8wFlI8RGSdISXQQQjPQ&utm_medium=api&utm_source=3aa14b35&v=C44F8A3EC47190FA2FF187E9B3E9C1E145EEFA70",
@@ -7189,13 +7413,13 @@
         "dm_title": "Chief Technology Officer",
         "dm_email": "dustin.jackson@videoamp.com",
         "dm_linkedin_url": "http://www.linkedin.com/in/dustin-jackson-6a00716",
-        "score": 13.480411589271457,
+        "score": 12.873199984496072,
         "insight": null,
         "signals": [
           {
             "type": "job_posted_cloud_devops",
             "captured_at": "2026-05-05T08:09:20.498690",
-            "days_ago": 47,
+            "days_ago": 49,
             "payload": {
               "title": "Intermediate DevOps Engineer",
               "url": "https://www.indeed.com/viewjob?jk=d20bc9cdccd3580f",
@@ -7217,13 +7441,13 @@
         "dm_title": "Chief Technology Officer & Chief Operating Officer",
         "dm_email": "msewell@way2b1.com",
         "dm_linkedin_url": "http://www.linkedin.com/in/michaelsewell",
-        "score": 13.480411586319041,
+        "score": 12.87319998134616,
         "insight": null,
         "signals": [
           {
             "type": "job_posted_cloud_devops",
             "captured_at": "2026-05-05T08:09:20.498690",
-            "days_ago": 47,
+            "days_ago": 49,
             "payload": {
               "title": "Staff Devops Engineer",
               "url": "https://www.indeed.com/viewjob?jk=8afb48daad810f58",
@@ -7245,13 +7469,13 @@
         "dm_title": "Co-Founder & COO",
         "dm_email": "jamie@knock.com",
         "dm_linkedin_url": "http://www.linkedin.com/in/jamieglenn",
-        "score": 13.480411582980903,
+        "score": 12.873199978464767,
         "insight": null,
         "signals": [
           {
             "type": "job_posted_cloud_devops",
             "captured_at": "2026-05-05T08:09:20.498690",
-            "days_ago": 47,
+            "days_ago": 49,
             "payload": {
               "title": "DevOps Engineer",
               "url": "https://www.linkedin.com/jobs/view/4410293359",
@@ -7273,13 +7497,13 @@
         "dm_title": "CEO",
         "dm_email": null,
         "dm_linkedin_url": null,
-        "score": 10.347925169631955,
+        "score": 9.881813279283707,
         "insight": null,
         "signals": [
           {
             "type": "funding_raised",
             "captured_at": "2026-05-09T07:57:06.539973",
-            "days_ago": 43,
+            "days_ago": 45,
             "payload": {
               "feed_title": "TriSpan Closes Continuation Vehicle for Maman",
               "feed_url": "https://www.prnewswire.com/rss/financial-services-latest-news/financial-services-latest-news-list.rss",
