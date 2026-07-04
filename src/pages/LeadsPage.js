@@ -153,6 +153,9 @@ export default function LeadsPage({ niche, title, subtitle, apiPath }) {
                 const labels = [
                   ["motor_carrier", "motor carrier"],
                   ["federal_contract", "federal contract"],
+                  ["fractional_cfo_sought", "fractional CFO wanted"],
+                  ["finance_hire", "finance hire"],
+                  ["form_d", "Form D"],
                   ["funding_event", "funding event"],
                   ["new_entity", "new entity"],
                 ];

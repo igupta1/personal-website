@@ -40,6 +40,7 @@ const TRIGGER_TYPES = [
   { value: "federal_contract", label: "Federal contract (cyber / E&O / GL)" },
   { value: "new_entity", label: "New business filing" },
   // CFO niche
+  { value: "fractional_cfo_sought", label: "Fractional / interim CFO posting (in-market)" },
   { value: "finance_hire", label: "Finance lead hire (Controller / VP Finance)" },
   { value: "form_d", label: "Form D filing (post-funding board prep)" },
   // Shared

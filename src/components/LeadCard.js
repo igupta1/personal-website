@@ -28,6 +28,7 @@ const SIGNAL_KIND_META = {
   job_posted_fleet_role:    { label: "Fleet",         pill: "bg-yellow-500/15 text-yellow-300 ring-yellow-400/30" },
   job_posted_finance_ops:   { label: "Finance / HR",  pill: "bg-teal-500/15 text-teal-300 ring-teal-400/30" },
   job_posted_finance_lead:  { label: "Finance lead",  pill: "bg-emerald-500/15 text-emerald-300 ring-emerald-400/30" },
+  job_posted_fractional_cfo:{ label: "Fractional CFO wanted", pill: "bg-fuchsia-500/15 text-fuchsia-300 ring-fuchsia-400/30" },
   exec_hired:               { label: "Exec hire",     pill: "bg-purple-500/15 text-purple-300 ring-purple-400/30" },
   funding_raised:           { label: "Funding",       pill: "bg-emerald-500/15 text-emerald-300 ring-emerald-400/30" },
   breach_disclosed:         { label: "Breach",        pill: "bg-amber-500/15 text-amber-300 ring-amber-400/30" },
@@ -107,6 +108,16 @@ function SignalRow({ signal }) {
       }
       if (payload.state) bits.push(payload.state);
       if (bits.length) extra = bits.join(" · ");
+    }
+    // Form D filings carry the mined offering amount — the single
+    // most useful qualifier on a funding-only card.
+    if (payload.filing_type === "Form D") {
+      const amt = Number(payload.offering_amount);
+      if (Number.isFinite(amt) && amt > 0) {
+        extra = amt >= 1_000_000
+          ? `$${(amt / 1_000_000).toFixed(1)}M offering`
+          : `$${Math.round(amt / 1000)}K offering`;
+      }
     }
   } else if (signal.type === "breach_disclosed") {
     const agencyLabel = AGENCY_LABELS[payload.agency] || payload.agency || "state AG";
