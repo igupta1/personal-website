@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-05T20:00:30.782587",
+  "generated_at": "2026-07-05T22:44:42.362461",
   "leads": [
     {
       "name": "Dr. Schulze's American Botanical Pharmacy",
@@ -14,7 +14,7 @@
       "dm_email": "aloef@herbdoc.com",
       "dm_linkedin_url": "http://www.linkedin.com/in/adam-loef-96154b51",
       "contact_strength": "verified",
-      "score": 95.63330113174074,
+      "score": 95.61047068692824,
       "insight": null,
       "trigger_type": "fractional_cfo_sought",
       "signals": [
@@ -55,7 +55,7 @@
       "dm_email": "nina.j@ladyfreethinker.org",
       "dm_linkedin_url": "http://www.linkedin.com/in/ninajackel",
       "contact_strength": "verified",
-      "score": 94.83330112291667,
+      "score": 94.81047068402778,
       "insight": null,
       "trigger_type": "fractional_cfo_sought",
       "signals": [
@@ -85,7 +85,7 @@
       "dm_email": null,
       "dm_linkedin_url": "http://www.linkedin.com/in/k-m-roy-0aaa8333",
       "contact_strength": "verified",
-      "score": 94.63330113433102,
+      "score": 94.61047068169907,
       "insight": null,
       "trigger_type": "fractional_cfo_sought",
       "signals": [
@@ -103,36 +103,6 @@
       ]
     },
     {
-      "name": "3Dt Holdings",
-      "domain": "3dtholdings.com",
-      "industry": "healthcare",
-      "headcount": null,
-      "country": "US",
-      "city": "San Diego",
-      "state": "CA",
-      "dm_name": "Ghassan Kassab",
-      "dm_title": "Founder",
-      "dm_email": null,
-      "dm_linkedin_url": null,
-      "contact_strength": "partial",
-      "score": 93.23329890336574,
-      "insight": null,
-      "trigger_type": "fractional_cfo_sought",
-      "signals": [
-        {
-          "type": "job_posted_fractional_cfo",
-          "captured_at": "2026-07-05T19:42:35.517870",
-          "days_ago": 13,
-          "payload": {
-            "title": "Chief Financial Officer",
-            "url": "https://www.fractionaljobs.io/jobs/chief-financial-officer-at-3dt-holdings",
-            "date_posted": "2026-06-22",
-            "site": "fractionaljobs"
-          }
-        }
-      ]
-    },
-    {
       "name": "Aeroshield",
       "domain": "aeroshield.tech",
       "industry": "manufacturing",
@@ -145,7 +115,7 @@
       "dm_email": "strobach@aeroshield.tech",
       "dm_linkedin_url": "http://www.linkedin.com/in/elise-strobach",
       "contact_strength": "verified",
-      "score": 93.23329890175464,
+      "score": 93.21047067945834,
       "insight": null,
       "trigger_type": "fractional_cfo_sought",
       "signals": [
@@ -175,7 +145,7 @@
       "dm_email": "tovah@itsbodily.com",
       "dm_linkedin_url": "http://www.linkedin.com/in/tovah-h-7905286",
       "contact_strength": "verified",
-      "score": 93.23329889528704,
+      "score": 93.21047067728472,
       "insight": null,
       "trigger_type": "fractional_cfo_sought",
       "signals": [
@@ -205,7 +175,7 @@
       "dm_email": "james@usebump.com",
       "dm_linkedin_url": "http://www.linkedin.com/in/james-jones-jr-esq",
       "contact_strength": "verified",
-      "score": 93.23329889378009,
+      "score": 93.21047067223843,
       "insight": null,
       "trigger_type": "fractional_cfo_sought",
       "signals": [
@@ -225,7 +195,7 @@
     {
       "name": "Dizpot",
       "domain": "dizpot.com",
-      "industry": "ecommerce_retail",
+      "industry": "other",
       "headcount": 28,
       "country": "US",
       "city": "Phoenix",
@@ -235,7 +205,7 @@
       "dm_email": "jeff@dizpot.com",
       "dm_linkedin_url": "http://www.linkedin.com/in/jeff-scrabeck-7a6a9b219",
       "contact_strength": "verified",
-      "score": 93.23329887374769,
+      "score": 93.21047066964351,
       "insight": null,
       "trigger_type": "fractional_cfo_sought",
       "signals": [
@@ -265,7 +235,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 93.23329886871991,
+      "score": 93.21047066727778,
       "insight": null,
       "trigger_type": "fractional_cfo_sought",
       "signals": [
@@ -295,7 +265,7 @@
       "dm_email": "michael@fabriccryptography.com",
       "dm_linkedin_url": "http://www.linkedin.com/in/michaelzgao",
       "contact_strength": "verified",
-      "score": 93.23329886075,
+      "score": 93.21047066443056,
       "insight": null,
       "trigger_type": "fractional_cfo_sought",
       "signals": [
@@ -315,7 +285,7 @@
     {
       "name": "Food Systems For The Future",
       "domain": "foodsystemsforthefuture.org",
-      "industry": "hospitality_food",
+      "industry": "government_nonprofit",
       "headcount": 10,
       "country": "US",
       "city": "Chicago",
@@ -325,7 +295,7 @@
       "dm_email": "ertharin@fsfinstitute.net",
       "dm_linkedin_url": "http://www.linkedin.com/in/ertharin-cousin-0695205",
       "contact_strength": "verified",
-      "score": 93.23329885533565,
+      "score": 93.2104706622662,
       "insight": null,
       "trigger_type": "fractional_cfo_sought",
       "signals": [
@@ -355,7 +325,7 @@
       "dm_email": "bobbijo@healinghouse.org",
       "dm_linkedin_url": "http://www.linkedin.com/in/bobbi-jo-reed-3ba3044b",
       "contact_strength": "verified",
-      "score": 93.23329885020833,
+      "score": 93.21047065818519,
       "insight": null,
       "trigger_type": "fractional_cfo_sought",
       "signals": [
@@ -375,17 +345,17 @@
     {
       "name": "Herrmann Global",
       "domain": "herrmanglobal.com",
-      "industry": "other",
+      "industry": "media_entertainment",
       "headcount": 50,
       "country": "US",
-      "city": "Lake Lure",
-      "state": "NC",
+      "city": "Lander",
+      "state": "WY",
       "dm_name": "Florian Herrmann",
       "dm_title": "Founder & CEO",
       "dm_email": "florian@herrmannglobal.com",
       "dm_linkedin_url": "http://www.linkedin.com/in/florianherrmann",
       "contact_strength": "verified",
-      "score": 93.2332988485625,
+      "score": 93.21047065611111,
       "insight": null,
       "trigger_type": "fractional_cfo_sought",
       "signals": [
@@ -415,7 +385,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 93.23329883645138,
+      "score": 93.21047065376389,
       "insight": null,
       "trigger_type": "fractional_cfo_sought",
       "signals": [
@@ -445,7 +415,7 @@
       "dm_email": "courtney@luckylabcoffee.com",
       "dm_linkedin_url": "http://www.linkedin.com/in/courtneyhutton",
       "contact_strength": "verified",
-      "score": 93.23329883278241,
+      "score": 93.21047065112963,
       "insight": null,
       "trigger_type": "fractional_cfo_sought",
       "signals": [
@@ -475,7 +445,7 @@
       "dm_email": "sarah@modsprout.com",
       "dm_linkedin_url": "http://www.linkedin.com/in/sarah-burrows-ab73325",
       "contact_strength": "verified",
-      "score": 93.23329882945139,
+      "score": 93.21047064883797,
       "insight": null,
       "trigger_type": "fractional_cfo_sought",
       "signals": [
@@ -505,7 +475,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 92.87435668549769,
+      "score": 92.85152620223612,
       "insight": null,
       "trigger_type": "fractional_cfo_sought",
       "signals": [
@@ -535,7 +505,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 91.99610769887963,
+      "score": 91.9732789656713,
       "insight": null,
       "trigger_type": "fractional_cfo_sought",
       "signals": [
@@ -565,7 +535,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 91.23330112827315,
+      "score": 91.21047064226852,
       "insight": null,
       "trigger_type": "fractional_cfo_sought",
       "signals": [
@@ -595,7 +565,7 @@
       "dm_email": "marie.kallstrom@maestroshield.com",
       "dm_linkedin_url": "http://www.linkedin.com/in/mariekallstrom",
       "contact_strength": "verified",
-      "score": 91.03330112644908,
+      "score": 91.01047064008796,
       "insight": null,
       "trigger_type": "fractional_cfo_sought",
       "signals": [
@@ -625,7 +595,7 @@
       "dm_email": null,
       "dm_linkedin_url": "http://www.linkedin.com/in/shamia-abd-elaziz-836b73385",
       "contact_strength": "verified",
-      "score": 90.96672936555787,
+      "score": 90.94389887774537,
       "insight": null,
       "trigger_type": "fractional_cfo_sought",
       "signals": [
@@ -655,7 +625,7 @@
       "dm_email": "lindsey@rollingreens.com",
       "dm_linkedin_url": "http://www.linkedin.com/in/lindsey-cunningham-513951112",
       "contact_strength": "verified",
-      "score": 90.63330112124537,
+      "score": 90.61047063425463,
       "insight": null,
       "trigger_type": "fractional_cfo_sought",
       "signals": [
@@ -685,7 +655,7 @@
       "dm_email": "mike@easywm.com",
       "dm_linkedin_url": "http://www.linkedin.com/in/minas-martirosyan-92577335",
       "contact_strength": "verified",
-      "score": 90.43330111955092,
+      "score": 90.41047063106944,
       "insight": null,
       "trigger_type": "fractional_cfo_sought",
       "signals": [
@@ -715,7 +685,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 90.43330111783102,
+      "score": 90.41047062881019,
       "insight": null,
       "trigger_type": "fractional_cfo_sought",
       "signals": [
@@ -740,12 +710,12 @@
       "country": "US",
       "city": "Houston",
       "state": "TX",
-      "dm_name": null,
-      "dm_title": null,
+      "dm_name": "Que Ewing",
+      "dm_title": "Founder",
       "dm_email": null,
-      "dm_linkedin_url": null,
-      "contact_strength": "cold",
-      "score": 89.23329890825694,
+      "dm_linkedin_url": "http://www.linkedin.com/in/que-ewing",
+      "contact_strength": "verified",
+      "score": 89.21047062139121,
       "insight": null,
       "trigger_type": "fractional_cfo_sought",
       "signals": [
@@ -775,7 +745,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 89.23329890664351,
+      "score": 89.21047061894213,
       "insight": null,
       "trigger_type": "fractional_cfo_sought",
       "signals": [
@@ -796,16 +766,16 @@
       "name": "2020 Onsite",
       "domain": "2020onsite.com",
       "industry": "healthcare",
-      "headcount": 60,
+      "headcount": 68,
       "country": "US",
       "city": "Everett",
       "state": "MA",
-      "dm_name": "Sonali Bloom",
-      "dm_title": "CEO",
-      "dm_email": null,
-      "dm_linkedin_url": null,
-      "contact_strength": "partial",
-      "score": 89.23329890508796,
+      "dm_name": "Jessica McKenzie",
+      "dm_title": "Vice President, Life Sciences",
+      "dm_email": "jmckenzie@2020onsite.com",
+      "dm_linkedin_url": "http://www.linkedin.com/in/jessicamckenziemays",
+      "contact_strength": "verified",
+      "score": 89.21047061617593,
       "insight": null,
       "trigger_type": "fractional_cfo_sought",
       "signals": [
@@ -835,7 +805,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 89.23329890006481,
+      "score": 89.21047061316204,
       "insight": null,
       "trigger_type": "fractional_cfo_sought",
       "signals": [
@@ -865,7 +835,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 89.23329889844908,
+      "score": 89.21047061058796,
       "insight": null,
       "trigger_type": "fractional_cfo_sought",
       "signals": [
@@ -895,7 +865,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 89.23329889688657,
+      "score": 89.21047060799306,
       "insight": null,
       "trigger_type": "fractional_cfo_sought",
       "signals": [
@@ -925,7 +895,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 89.23329889210416,
+      "score": 89.2104706058611,
       "insight": null,
       "trigger_type": "fractional_cfo_sought",
       "signals": [
@@ -955,7 +925,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "cold",
-      "score": 89.23329888990047,
+      "score": 89.21047060361343,
       "insight": null,
       "trigger_type": "fractional_cfo_sought",
       "signals": [
@@ -985,7 +955,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 89.2332988882824,
+      "score": 89.2104706011088,
       "insight": null,
       "trigger_type": "fractional_cfo_sought",
       "signals": [
@@ -1015,7 +985,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 89.23329888661574,
+      "score": 89.21047059805323,
       "insight": null,
       "trigger_type": "fractional_cfo_sought",
       "signals": [
@@ -1045,7 +1015,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 89.23329888489121,
+      "score": 89.21047059581481,
       "insight": null,
       "trigger_type": "fractional_cfo_sought",
       "signals": [
@@ -1075,7 +1045,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "cold",
-      "score": 89.2332988817199,
+      "score": 89.2104705897037,
       "insight": null,
       "trigger_type": "fractional_cfo_sought",
       "signals": [
@@ -1105,7 +1075,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 89.23329888013194,
+      "score": 89.21047058737732,
       "insight": null,
       "trigger_type": "fractional_cfo_sought",
       "signals": [
@@ -1135,7 +1105,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 89.23329887849538,
+      "score": 89.2104705849838,
       "insight": null,
       "trigger_type": "fractional_cfo_sought",
       "signals": [
@@ -1165,7 +1135,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "cold",
-      "score": 89.23329887699538,
+      "score": 89.21047058280092,
       "insight": null,
       "trigger_type": "fractional_cfo_sought",
       "signals": [
@@ -1195,7 +1165,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 89.23329887534953,
+      "score": 89.21047058017592,
       "insight": null,
       "trigger_type": "fractional_cfo_sought",
       "signals": [
@@ -1225,7 +1195,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 89.2332988721088,
+      "score": 89.21047057798611,
       "insight": null,
       "trigger_type": "fractional_cfo_sought",
       "signals": [
@@ -1255,7 +1225,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 89.23329887051158,
+      "score": 89.21047057593287,
       "insight": null,
       "trigger_type": "fractional_cfo_sought",
       "signals": [
@@ -1285,7 +1255,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 89.23329886540509,
+      "score": 89.21047057116898,
       "insight": null,
       "trigger_type": "fractional_cfo_sought",
       "signals": [
@@ -1315,7 +1285,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 89.23329885895139,
+      "score": 89.21047056545602,
       "insight": null,
       "trigger_type": "fractional_cfo_sought",
       "signals": [
@@ -1345,7 +1315,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 89.233298857375,
+      "score": 89.21047056245834,
       "insight": null,
       "trigger_type": "fractional_cfo_sought",
       "signals": [
@@ -1375,7 +1345,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "cold",
-      "score": 89.23329885351852,
+      "score": 89.2104705602338,
       "insight": null,
       "trigger_type": "fractional_cfo_sought",
       "signals": [
@@ -1405,7 +1375,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 89.23329884694675,
+      "score": 89.2104705579375,
       "insight": null,
       "trigger_type": "fractional_cfo_sought",
       "signals": [
@@ -1435,7 +1405,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 89.23329884334028,
+      "score": 89.21047055322686,
       "insight": null,
       "trigger_type": "fractional_cfo_sought",
       "signals": [
@@ -1465,7 +1435,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 89.23329884173148,
+      "score": 89.21047054984028,
       "insight": null,
       "trigger_type": "fractional_cfo_sought",
       "signals": [
@@ -1476,66 +1446,6 @@
           "payload": {
             "title": "Chief Financial Officer",
             "url": "https://www.fractionaljobs.io/jobs/chief-financial-officer-at-iv-nutrition",
-            "date_posted": "2026-06-22",
-            "site": "fractionaljobs"
-          }
-        }
-      ]
-    },
-    {
-      "name": "Lifesitenews",
-      "domain": "lifesitenews.com",
-      "industry": "government_nonprofit",
-      "headcount": null,
-      "country": "US",
-      "city": "Front Royal",
-      "state": "VA",
-      "dm_name": "John-Henry Westen",
-      "dm_title": "Founder and Chief Executive Officer",
-      "dm_email": null,
-      "dm_linkedin_url": null,
-      "contact_strength": "partial",
-      "score": 89.2332988399074,
-      "insight": null,
-      "trigger_type": "fractional_cfo_sought",
-      "signals": [
-        {
-          "type": "job_posted_fractional_cfo",
-          "captured_at": "2026-07-05T19:42:35.517870",
-          "days_ago": 13,
-          "payload": {
-            "title": "Chief Financial Officer",
-            "url": "https://www.fractionaljobs.io/jobs/chief-financial-officer-at-lifesitenews",
-            "date_posted": "2026-06-22",
-            "site": "fractionaljobs"
-          }
-        }
-      ]
-    },
-    {
-      "name": "Lifesitenews 07Cfc",
-      "domain": "lifesitenews.com",
-      "industry": "media_entertainment",
-      "headcount": null,
-      "country": "US",
-      "city": "Front Royal",
-      "state": "VA",
-      "dm_name": "John-Henry Westen",
-      "dm_title": "CEO",
-      "dm_email": null,
-      "dm_linkedin_url": null,
-      "contact_strength": "partial",
-      "score": 89.23329883808333,
-      "insight": null,
-      "trigger_type": "fractional_cfo_sought",
-      "signals": [
-        {
-          "type": "job_posted_fractional_cfo",
-          "captured_at": "2026-07-05T19:42:35.517870",
-          "days_ago": 13,
-          "payload": {
-            "title": "Chief Financial Officer",
-            "url": "https://www.fractionaljobs.io/jobs/chief-financial-officer-at-lifesitenews-07cfc",
             "date_posted": "2026-06-22",
             "site": "fractionaljobs"
           }
@@ -1555,7 +1465,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 89.23329883465509,
+      "score": 89.21047054676852,
       "insight": null,
       "trigger_type": "fractional_cfo_sought",
       "signals": [
@@ -1585,7 +1495,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 89.23329883107176,
+      "score": 89.21047054320138,
       "insight": null,
       "trigger_type": "fractional_cfo_sought",
       "signals": [
@@ -1615,7 +1525,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "cold",
-      "score": 89.23329882595601,
+      "score": 89.2104705373588,
       "insight": null,
       "trigger_type": "fractional_cfo_sought",
       "signals": [
@@ -1645,7 +1555,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "cold",
-      "score": 89.23329882241899,
+      "score": 89.21047053240046,
       "insight": null,
       "trigger_type": "fractional_cfo_sought",
       "signals": [
@@ -1675,7 +1585,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 89.23329882070833,
+      "score": 89.21047053027084,
       "insight": null,
       "trigger_type": "fractional_cfo_sought",
       "signals": [
@@ -1705,7 +1615,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 89.23329881869213,
+      "score": 89.2104705273426,
       "insight": null,
       "trigger_type": "fractional_cfo_sought",
       "signals": [
@@ -1735,7 +1645,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "cold",
-      "score": 89.23329881126621,
+      "score": 89.21047052226852,
       "insight": null,
       "trigger_type": "fractional_cfo_sought",
       "signals": [
@@ -1765,7 +1675,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 89.23329880584723,
+      "score": 89.21047051416436,
       "insight": null,
       "trigger_type": "fractional_cfo_sought",
       "signals": [
@@ -1776,6 +1686,66 @@
           "payload": {
             "title": "Chief Financial Officer",
             "url": "https://www.fractionaljobs.io/jobs/chief-financial-officer-at-plutus-health-ddb8f",
+            "date_posted": "2026-06-22",
+            "site": "fractionaljobs"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Panoptyc",
+      "domain": "panoptyc.com",
+      "industry": "software_saas",
+      "headcount": null,
+      "country": "US",
+      "city": "Spokane",
+      "state": "WA",
+      "dm_name": "Mac Bolak",
+      "dm_title": "CEO",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "partial",
+      "score": 89.21046736858565,
+      "insight": null,
+      "trigger_type": "fractional_cfo_sought",
+      "signals": [
+        {
+          "type": "job_posted_fractional_cfo",
+          "captured_at": "2026-07-05T22:18:02.504597",
+          "days_ago": 13,
+          "payload": {
+            "title": "Chief Financial Officer",
+            "url": "https://www.fractionaljobs.io/jobs/chief-financial-officer-at-panoptyc",
+            "date_posted": "2026-06-22",
+            "site": "fractionaljobs"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Perfeos",
+      "domain": "perfeos.com",
+      "industry": "media_entertainment",
+      "headcount": null,
+      "country": "US",
+      "city": "Miami",
+      "state": "FL",
+      "dm_name": null,
+      "dm_title": null,
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "cold",
+      "score": 89.21046736077315,
+      "insight": null,
+      "trigger_type": "fractional_cfo_sought",
+      "signals": [
+        {
+          "type": "job_posted_fractional_cfo",
+          "captured_at": "2026-07-05T22:18:02.504597",
+          "days_ago": 13,
+          "payload": {
+            "title": "Chief Financial Officer",
+            "url": "https://www.fractionaljobs.io/jobs/chief-financial-officer-at-perfeos",
             "date_posted": "2026-06-22",
             "site": "fractionaljobs"
           }
@@ -1795,7 +1765,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 86.4333011104213,
+      "score": 86.41047050700463,
       "insight": null,
       "trigger_type": "fractional_cfo_sought",
       "signals": [
@@ -1825,7 +1795,7 @@
       "dm_email": "vitali@conexwest.com",
       "dm_linkedin_url": "http://www.linkedin.com/in/mrvitaly",
       "contact_strength": "verified",
-      "score": 85.78682657160648,
+      "score": 85.7639959674213,
       "insight": null,
       "trigger_type": "fractional_cfo_sought",
       "signals": [
@@ -1855,7 +1825,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 85.4476668476713,
+      "score": 85.42483624188657,
       "insight": null,
       "trigger_type": "fractional_cfo_sought",
       "signals": [
@@ -1873,56 +1843,26 @@
       ]
     },
     {
-      "name": "Profit with Law",
-      "domain": "profitwithlaw.com",
-      "industry": "legal_professional",
-      "headcount": null,
-      "country": null,
-      "city": null,
-      "state": null,
-      "dm_name": "Moshe Rosenblum-Amsel",
-      "dm_title": "Chief Executive Officer",
-      "dm_email": "mamsel@dreambuilderfinancial.com",
-      "dm_linkedin_url": "http://www.linkedin.com/in/mosheamsel",
-      "contact_strength": "verified",
-      "score": 80.0,
-      "insight": null,
-      "trigger_type": "fractional_cfo_sought",
-      "signals": [
-        {
-          "type": "job_posted_fractional_cfo",
-          "captured_at": "2026-07-04T22:14:55.933668",
-          "days_ago": 60,
-          "payload": {
-            "title": "Fractional Controller - Cfo",
-            "url": "https://www.adzuna.com/details/5719906935?utm_medium=api&utm_source=3aa14b35",
-            "date_posted": "2026-05-05T20:24:49Z",
-            "site": "adzuna"
-          }
-        }
-      ]
-    },
-    {
       "name": "Syscon Inc",
       "domain": "syscon-inc.com",
       "industry": "construction",
       "headcount": 24,
       "country": "US",
-      "city": "Hinsdale",
-      "state": "IL",
+      "city": "Scottsdale",
+      "state": "AZ",
       "dm_name": "Lawrence Wendt",
       "dm_title": "Co-founder",
       "dm_email": "lawendt@syscon-inc.com",
       "dm_linkedin_url": "http://www.linkedin.com/in/lawrenceawendt",
       "contact_strength": "verified",
-      "score": 71.64277350309723,
+      "score": 71.59711228860648,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
         {
           "type": "job_posted_finance_lead",
           "captured_at": "2026-07-05T10:25:48.313831",
-          "days_ago": 0,
+          "days_ago": 1,
           "payload": {
             "title": "Finance Manager",
             "url": "https://www.adzuna.com/land/ad/5788683101?se=xk6LKVx48RGw99DSBwaIyw&utm_medium=api&utm_source=3aa14b35&v=8B71049B4725BDA0D9C4D51299B82B7D497817BE",
@@ -1966,11 +1906,41 @@
         {
           "type": "job_posted_finance_lead",
           "captured_at": "2026-07-04T10:17:38.845644",
-          "days_ago": 28,
+          "days_ago": 29,
           "payload": {
             "title": "Region Finance Manager - Commercial",
             "url": "https://www.adzuna.com/land/ad/5755030084?se=7rdk6ZF38RG-cvvra3L-5Q&utm_medium=api&utm_source=3aa14b35&v=91285AFD86DF950B972F548ECB0776B68CAE5B2E",
             "date_posted": "2026-06-06T22:35:03Z",
+            "site": "adzuna"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Galvanized Highway Guardrail, Strut, & Fence Products",
+      "domain": "gregoryindustries.com",
+      "industry": "manufacturing",
+      "headcount": null,
+      "country": "US",
+      "city": "North Canton",
+      "state": "OH",
+      "dm_name": "Jeff Grover",
+      "dm_title": "Executive Vice President of Highway Products",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "partial",
+      "score": 70.47999654094907,
+      "insight": null,
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-07-04T10:17:38.845644",
+          "days_ago": 3,
+          "payload": {
+            "title": "VP of Finance",
+            "url": "https://www.adzuna.com/details/5785171666?utm_medium=api&utm_source=3aa14b35",
+            "date_posted": "2026-07-02T03:32:36Z",
             "site": "adzuna"
           }
         }
@@ -1989,7 +1959,7 @@
       "dm_email": "courtland@plasticlabs.ai",
       "dm_linkedin_url": "http://www.linkedin.com/in/courtlandleer",
       "contact_strength": "verified",
-      "score": 68.06660220349536,
+      "score": 68.02094097921297,
       "insight": null,
       "trigger_type": "form_d",
       "signals": [
@@ -2022,17 +1992,17 @@
     {
       "name": "Beck Oil Company of Illinois",
       "domain": "gotobecks.com",
-      "industry": "hospitality_food",
+      "industry": "logistics_transport",
       "headcount": 43,
       "country": "US",
-      "city": "Princeton",
+      "city": "Peru",
       "state": "IL",
       "dm_name": "Brandon Stakelbeck",
       "dm_title": "Business Owner",
       "dm_email": "brandon@gotobecks.com",
       "dm_linkedin_url": "http://www.linkedin.com/in/brandon-stakelbeck-b3720417b",
       "contact_strength": "verified",
-      "score": 66.7041623852963,
+      "score": 66.6585011599537,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -2073,7 +2043,7 @@
       "dm_email": "danielle@bespoke2112.com",
       "dm_linkedin_url": "http://www.linkedin.com/in/danielle-mandelbaum-anderman-20190010",
       "contact_strength": "verified",
-      "score": 65.47725884314352,
+      "score": 65.4315976168889,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -2114,7 +2084,7 @@
       "dm_email": "andrew@enduranceenergy.com",
       "dm_linkedin_url": "http://www.linkedin.com/in/egonredd",
       "contact_strength": "verified",
-      "score": 65.39419478568982,
+      "score": 65.34853355643982,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -2144,7 +2114,7 @@
       "dm_email": "pat@reflection.games",
       "dm_linkedin_url": "http://www.linkedin.com/in/patrick-wylie",
       "contact_strength": "verified",
-      "score": 65.26660218985185,
+      "score": 65.22094095802315,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -2175,6 +2145,36 @@
       ]
     },
     {
+      "name": "AeroVect",
+      "domain": "aerovect.com",
+      "industry": "logistics_transport",
+      "headcount": 50,
+      "country": "US",
+      "city": "San Francisco",
+      "state": "CA",
+      "dm_name": "Raymond Wang",
+      "dm_title": "CEO",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "partial",
+      "score": 65.22093494147222,
+      "insight": null,
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-07-05T22:08:24.628717",
+          "days_ago": 1,
+          "payload": {
+            "title": "Controller",
+            "url": "https://www.linkedin.com/jobs/view/4436912718",
+            "date_posted": "2026-07-04",
+            "site": "linkedin"
+          }
+        }
+      ]
+    },
+    {
       "name": "Range Mental Health Center",
       "domain": "rangementalhealth.org",
       "industry": "healthcare",
@@ -2187,7 +2187,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 64.88526999754167,
+      "score": 64.83961224131019,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -2217,7 +2217,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 64.86660217899075,
+      "score": 64.82094093945832,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -2247,7 +2247,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 64.70431976072223,
+      "score": 64.65865851820371,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -2277,7 +2277,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 64.70423179462037,
+      "score": 64.6585705509213,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -2307,7 +2307,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 64.46660216184722,
+      "score": 64.42094091678241,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -2337,7 +2337,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 64.46660215868981,
+      "score": 64.42094089597686,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -2367,7 +2367,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 64.4666021550324,
+      "score": 64.42094089101388,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -2397,7 +2397,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 64.06660213222685,
+      "score": 64.02094087230556,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -2427,7 +2427,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 64.06660212877777,
+      "score": 64.02094086741667,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -2457,7 +2457,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 64.06660212562036,
+      "score": 64.02094086260185,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -2487,7 +2487,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 64.06660212243519,
+      "score": 64.02094085831945,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -2505,6 +2505,66 @@
       ]
     },
     {
+      "name": "Insight Restoration",
+      "domain": "insightrestoration.com",
+      "industry": "construction",
+      "headcount": 10,
+      "country": "US",
+      "city": "Plymouth",
+      "state": "MN",
+      "dm_name": "Gregory F Jackson",
+      "dm_title": "Owner",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "partial",
+      "score": 64.0209401137037,
+      "insight": null,
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-07-02T10:44:22.502581",
+          "days_ago": 4,
+          "payload": {
+            "title": "Senior Accountant / Assistant Controller",
+            "url": "https://www.indeed.com/viewjob?jk=d811cc8ad4431019",
+            "date_posted": "2026-07-01",
+            "site": "indeed"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Seattle Chamber Music Society",
+      "domain": "seattlechambermusic.org",
+      "industry": "media_entertainment",
+      "headcount": 20,
+      "country": "US",
+      "city": "Seattle",
+      "state": "WA",
+      "dm_name": "John Holloway",
+      "dm_title": "CEO",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "partial",
+      "score": 64.02094008131945,
+      "insight": null,
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-07-04T22:09:28.770489",
+          "days_ago": 4,
+          "payload": {
+            "title": "Controller",
+            "url": "https://www.indeed.com/viewjob?jk=7a94eb118c591403",
+            "date_posted": "2026-07-01",
+            "site": "indeed"
+          }
+        }
+      ]
+    },
+    {
       "name": "SecureStrux, LLC",
       "domain": "securestrux.com",
       "industry": "other",
@@ -2517,14 +2577,14 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 64.01622248127315,
+      "score": 63.97056122401852,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
         {
           "type": "job_posted_finance_lead",
           "captured_at": "2026-07-04T10:17:38.845644",
-          "days_ago": 4,
+          "days_ago": 5,
           "payload": {
             "title": "Senior Accountant with Security Clearance",
             "url": "https://www.adzuna.com/land/ad/5782663182?se=eL-xAJJ38RGW6tOQdfbCNQ&utm_medium=api&utm_source=3aa14b35&v=3690E4EF5DF64934DF5DAC4B254C4882F8C1E95D",
@@ -2547,7 +2607,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 63.66660210020834,
+      "score": 63.62094083765741,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -2577,7 +2637,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "cold",
-      "score": 63.666602093189816,
+      "score": 63.62094083289352,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -2607,7 +2667,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 63.26660208617592,
+      "score": 63.2209408235463,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -2637,7 +2697,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 62.675412241564814,
+      "score": 62.62975099938889,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -2667,7 +2727,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 62.66569464200463,
+      "score": 62.62003339674074,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -2693,11 +2753,11 @@
       "city": "Knoxville",
       "state": "TN",
       "dm_name": "Misty Mayes",
-      "dm_title": "Founder and CEO",
+      "dm_title": "Founder",
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 62.63288270768055,
+      "score": 62.5872232049537,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -2727,7 +2787,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 62.4666020460463,
+      "score": 62.42094079286111,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -2757,7 +2817,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 62.133930742671296,
+      "score": 62.08826949164815,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -2787,7 +2847,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 62.06660203264815,
+      "score": 62.020940783722224,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -2817,7 +2877,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 62.06660202941204,
+      "score": 62.020940778185185,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -2847,7 +2907,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 62.06660202625463,
+      "score": 62.02094077269908,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -2865,6 +2925,36 @@
       ]
     },
     {
+      "name": "FreshPure Waters",
+      "domain": "freshpure.com",
+      "industry": "ecommerce_retail",
+      "headcount": 10,
+      "country": "US",
+      "city": "Santa Fe",
+      "state": "NM",
+      "dm_name": "Chris Donnelly",
+      "dm_title": "President",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "partial",
+      "score": 61.800595555837965,
+      "insight": null,
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-06-25T10:46:45.667638",
+          "days_ago": 10,
+          "payload": {
+            "title": "Controller",
+            "url": "https://www.linkedin.com/jobs/view/4431863298",
+            "date_posted": "nan",
+            "site": "linkedin"
+          }
+        }
+      ]
+    },
+    {
       "name": "Christ Community Chapel",
       "domain": "ccc.chapel",
       "industry": "government_nonprofit",
@@ -2877,7 +2967,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "cold",
-      "score": 61.687939983074074,
+      "score": 61.642278729333334,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -2907,7 +2997,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 61.666602013902775,
+      "score": 61.62094075418055,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -2937,7 +3027,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 61.66660201013889,
+      "score": 61.62094074891667,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -2967,7 +3057,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "cold",
-      "score": 61.66659873510648,
+      "score": 61.62094072903704,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -2985,6 +3075,66 @@
       ]
     },
     {
+      "name": "Quantum Space",
+      "domain": "quantumspace.us",
+      "industry": "other",
+      "headcount": 70,
+      "country": "US",
+      "city": "Rockville",
+      "state": "MD",
+      "dm_name": "Jim Bridenstine",
+      "dm_title": "CEO",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "partial",
+      "score": 61.62093489938426,
+      "insight": null,
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-07-05T22:10:54.381699",
+          "days_ago": 0,
+          "payload": {
+            "title": "Program Controller",
+            "url": "https://www.indeed.com/viewjob?jk=5d06d9d680e5b983",
+            "date_posted": "2026-07-05",
+            "site": "indeed"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Scentiment",
+      "domain": "scentiment.com",
+      "industry": "ecommerce_retail",
+      "headcount": null,
+      "country": "US",
+      "city": "Miami",
+      "state": "FL",
+      "dm_name": null,
+      "dm_title": null,
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "cold",
+      "score": 61.39188376176389,
+      "insight": null,
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-07-04T10:15:23.696487",
+          "days_ago": 1,
+          "payload": {
+            "title": "Financial Controller",
+            "url": "https://www.linkedin.com/jobs/view/4435457913",
+            "date_posted": "nan",
+            "site": "linkedin"
+          }
+        }
+      ]
+    },
+    {
       "name": "Market of Choice",
       "domain": "marketofchoice.com",
       "industry": "ecommerce_retail",
@@ -2997,7 +3147,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 61.33433347176852,
+      "score": 61.28867219739815,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -3009,36 +3159,6 @@
             "title": "Senior Accountant",
             "url": "https://www.adzuna.com/land/ad/5787742544?se=XofJWPZ38RG-cvvra3L-5Q&utm_medium=api&utm_source=3aa14b35&v=938BC8706422275D5C1B81C4E6B4DCD145D5CAF0",
             "date_posted": "2026-07-04T04:03:50Z",
-            "site": "adzuna"
-          }
-        }
-      ]
-    },
-    {
-      "name": "Berks Career and Technology Center",
-      "domain": "berkscareer.com",
-      "industry": "education",
-      "headcount": 67,
-      "country": "US",
-      "city": "Leesport",
-      "state": "PA",
-      "dm_name": null,
-      "dm_title": null,
-      "dm_email": null,
-      "dm_linkedin_url": null,
-      "contact_strength": "cold",
-      "score": 61.332680690694446,
-      "insight": null,
-      "trigger_type": "finance_hire",
-      "signals": [
-        {
-          "type": "job_posted_finance_lead",
-          "captured_at": "2026-07-04T10:17:38.845644",
-          "days_ago": 1,
-          "payload": {
-            "title": "Director of Finance",
-            "url": "https://www.adzuna.com/land/ad/5787716345?se=5MRUxJF38RGW6tOQdfbCNQ&utm_medium=api&utm_source=3aa14b35&v=D2C69910A15938FF21BC71CDA499B53ACB4F81D4",
-            "date_posted": "2026-07-04T03:57:53Z",
             "site": "adzuna"
           }
         }
@@ -3057,7 +3177,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 61.28328715893518,
+      "score": 61.237625876324074,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -3087,7 +3207,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "cold",
-      "score": 61.2680788224537,
+      "score": 61.222417538337965,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -3117,7 +3237,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 61.26660196423611,
+      "score": 61.22094068164352,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -3135,6 +3255,66 @@
       ]
     },
     {
+      "name": "American Medical Administrators",
+      "domain": "amadministrators.com",
+      "industry": "healthcare",
+      "headcount": null,
+      "country": "US",
+      "city": "Chesterfield",
+      "state": "MO",
+      "dm_name": "Jonathan Loutzenhiser",
+      "dm_title": "CEO",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "partial",
+      "score": 61.22094067694907,
+      "insight": null,
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-07-04T22:12:12.129764",
+          "days_ago": 1,
+          "payload": {
+            "title": "Director of Accounting",
+            "url": "https://www.indeed.com/viewjob?jk=5f8e8355ef5c275c",
+            "date_posted": "2026-07-04",
+            "site": "indeed"
+          }
+        }
+      ]
+    },
+    {
+      "name": "American Medical Associates",
+      "domain": "americanmedicalassociates.us",
+      "industry": "healthcare",
+      "headcount": null,
+      "country": "US",
+      "city": "Chandler",
+      "state": "AZ",
+      "dm_name": null,
+      "dm_title": null,
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "cold",
+      "score": 61.22094067101852,
+      "insight": null,
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-07-04T22:12:12.129764",
+          "days_ago": 1,
+          "payload": {
+            "title": "Controller",
+            "url": "https://www.indeed.com/viewjob?jk=58b958632b633d38",
+            "date_posted": "2026-07-04",
+            "site": "indeed"
+          }
+        }
+      ]
+    },
+    {
       "name": "Farsight",
       "domain": "farsight-ai.com",
       "industry": "fintech",
@@ -3147,7 +3327,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 61.26659875178241,
+      "score": 61.22094061653241,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -3177,7 +3357,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 60.946018580745374,
+      "score": 60.90035726880556,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -3189,6 +3369,36 @@
             "title": "Director of Finance and Operations",
             "url": "https://www.adzuna.com/details/5773342860?utm_medium=api&utm_source=3aa14b35",
             "date_posted": "2026-06-23T04:45:54Z",
+            "site": "adzuna"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Alpha Supported Living Services",
+      "domain": "alphasls.org",
+      "industry": "government_nonprofit",
+      "headcount": null,
+      "country": "US",
+      "city": "Bothell",
+      "state": "WA",
+      "dm_name": "Scott Livengood",
+      "dm_title": "CEO",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "partial",
+      "score": 60.89512920235648,
+      "insight": null,
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-07-05T22:14:20.637278",
+          "days_ago": 2,
+          "payload": {
+            "title": "Director of Finance",
+            "url": "https://www.adzuna.com/details/5786605541?utm_medium=api&utm_source=3aa14b35",
+            "date_posted": "2026-07-03T04:27:06Z",
             "site": "adzuna"
           }
         }
@@ -3207,7 +3417,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 60.8769537565,
+      "score": 60.83129244061111,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -3237,7 +3447,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 60.86901856830092,
+      "score": 60.823357250328705,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -3267,7 +3477,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 60.86864356530093,
+      "score": 60.82298224569445,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -3297,7 +3507,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "cold",
-      "score": 60.86660188626389,
+      "score": 60.820940570819445,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -3327,7 +3537,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 60.866601879902774,
+      "score": 60.82094056262037,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -3357,7 +3567,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 60.86660187636574,
+      "score": 60.820940556115744,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -3375,6 +3585,66 @@
       ]
     },
     {
+      "name": "All Current Electrical Sales",
+      "domain": "allcurrent.com",
+      "industry": "manufacturing",
+      "headcount": null,
+      "country": "US",
+      "city": "Moorestown",
+      "state": "NJ",
+      "dm_name": "Robert Nabrzeski",
+      "dm_title": "CEO",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "partial",
+      "score": 60.82094055049537,
+      "insight": null,
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-07-04T22:12:12.129764",
+          "days_ago": 2,
+          "payload": {
+            "title": "Accounting Manager",
+            "url": "https://www.indeed.com/viewjob?jk=a4b0684e029f82dc",
+            "date_posted": "2026-07-03",
+            "site": "indeed"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Cintra",
+      "domain": "cintra.es",
+      "industry": "logistics_transport",
+      "headcount": null,
+      "country": "US",
+      "city": "Austin",
+      "state": "TX",
+      "dm_name": null,
+      "dm_title": null,
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "cold",
+      "score": 60.82094054527778,
+      "insight": null,
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-07-04T22:12:12.129764",
+          "days_ago": 2,
+          "payload": {
+            "title": "Finance Manager (Digital Finance)",
+            "url": "https://www.indeed.com/viewjob?jk=aef25a844ad56189",
+            "date_posted": "2026-07-03",
+            "site": "indeed"
+          }
+        }
+      ]
+    },
+    {
       "name": "Mid Jersey Association of Realtors",
       "domain": "midjerseyaor.com",
       "industry": "real_estate",
@@ -3387,7 +3657,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 60.86660184058333,
+      "score": 60.820940536189816,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -3417,7 +3687,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 60.86660183750463,
+      "score": 60.82094053190278,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -3447,7 +3717,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "cold",
-      "score": 60.86659872835185,
+      "score": 60.820940431796295,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -3465,6 +3735,36 @@
       ]
     },
     {
+      "name": "Stepful",
+      "domain": "stepful.com",
+      "industry": "healthcare",
+      "headcount": null,
+      "country": "US",
+      "city": "New York",
+      "state": "NY",
+      "dm_name": "Carl Madi",
+      "dm_title": "CEO",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "partial",
+      "score": 60.820934935759254,
+      "insight": null,
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-07-05T22:08:24.628717",
+          "days_ago": 2,
+          "payload": {
+            "title": "Controller",
+            "url": "https://www.linkedin.com/jobs/view/4408500864",
+            "date_posted": "2026-07-03",
+            "site": "linkedin"
+          }
+        }
+      ]
+    },
+    {
       "name": "Paynada",
       "domain": "paynada.com",
       "industry": "fintech",
@@ -3477,7 +3777,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 60.862270004277775,
+      "score": 60.81661172411111,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -3507,7 +3807,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 60.70424992126389,
+      "score": 60.65858857086111,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -3537,7 +3837,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "cold",
-      "score": 60.504046210875,
+      "score": 60.45838486319907,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -3567,7 +3867,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 60.49187491152315,
+      "score": 60.446213561800924,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -3597,7 +3897,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 60.468472130583336,
+      "score": 60.422810779569446,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -3615,6 +3915,126 @@
       ]
     },
     {
+      "name": "Florida Sheriffs Youth Ranches",
+      "domain": "youthranches.org",
+      "industry": "government_nonprofit",
+      "headcount": null,
+      "country": "US",
+      "city": "Live Oak",
+      "state": "FL",
+      "dm_name": "Maria Knapp",
+      "dm_title": "President",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "partial",
+      "score": 60.42094040437963,
+      "insight": null,
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-07-04T10:15:23.696487",
+          "days_ago": 3,
+          "payload": {
+            "title": "Accounting Manager",
+            "url": "https://www.indeed.com/viewjob?jk=4dd7c21e4fa23f3e",
+            "date_posted": "2026-07-02",
+            "site": "indeed"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Polysport USA",
+      "domain": "polysportusa.com",
+      "industry": "manufacturing",
+      "headcount": null,
+      "country": "US",
+      "city": "Destin",
+      "state": "FL",
+      "dm_name": null,
+      "dm_title": null,
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "cold",
+      "score": 60.42094038376389,
+      "insight": null,
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-07-04T10:15:23.696487",
+          "days_ago": 3,
+          "payload": {
+            "title": "Financial Controller",
+            "url": "https://www.linkedin.com/jobs/view/4436458452",
+            "date_posted": "2026-07-02",
+            "site": "linkedin"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Sun City Summerlin Community Association",
+      "domain": "suncitysummerlin.com",
+      "industry": "real_estate",
+      "headcount": null,
+      "country": "US",
+      "city": "Las Vegas",
+      "state": "NV",
+      "dm_name": null,
+      "dm_title": null,
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "cold",
+      "score": 60.42094037824074,
+      "insight": null,
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-07-04T10:15:23.696487",
+          "days_ago": 3,
+          "payload": {
+            "title": "Assistant Controller",
+            "url": "https://www.indeed.com/viewjob?jk=1a687d862feaeb27",
+            "date_posted": "2026-07-02",
+            "site": "indeed"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Orthopaedic Solutions Management",
+      "domain": "ortho-solutions.com",
+      "industry": "healthcare",
+      "headcount": null,
+      "country": "US",
+      "city": "Tampa",
+      "state": "FL",
+      "dm_name": "Mike Doyle",
+      "dm_title": "Chief Executive Officer",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "partial",
+      "score": 60.42094037380556,
+      "insight": null,
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-07-04T10:15:23.696487",
+          "days_ago": 3,
+          "payload": {
+            "title": "Assistant Controller",
+            "url": "https://www.indeed.com/viewjob?jk=da88dcead875452b",
+            "date_posted": "2026-07-02",
+            "site": "indeed"
+          }
+        }
+      ]
+    },
+    {
       "name": "W\u00fcrth Industry USA",
       "domain": "wurthindustry.com",
       "industry": "manufacturing",
@@ -3627,7 +4047,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "cold",
-      "score": 60.4666017226713,
+      "score": 60.420940369351854,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -3657,7 +4077,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 60.46660171963889,
+      "score": 60.420940364625,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -3687,7 +4107,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "cold",
-      "score": 60.46660171594445,
+      "score": 60.42094035884722,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -3705,6 +4125,36 @@
       ]
     },
     {
+      "name": "Jewish Community High School of the Bay",
+      "domain": "jchsofthebay.org",
+      "industry": "education",
+      "headcount": 50,
+      "country": "US",
+      "city": "San Francisco",
+      "state": "CA",
+      "dm_name": null,
+      "dm_title": null,
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "cold",
+      "score": 60.420940354912034,
+      "insight": null,
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-06-23T11:23:08.474235",
+          "days_ago": 13,
+          "payload": {
+            "title": "Director of Finance & Operations",
+            "url": "https://www.indeed.com/viewjob?jk=60b1e78aa8ccb274",
+            "date_posted": "2026-06-22",
+            "site": "indeed"
+          }
+        }
+      ]
+    },
+    {
       "name": "F&F Properties",
       "domain": "fandfinc.com",
       "industry": "real_estate",
@@ -3717,7 +4167,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 60.4666017090463,
+      "score": 60.42094035039815,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -3747,7 +4197,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 60.466601705949074,
+      "score": 60.42094034406482,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -3759,6 +4209,66 @@
             "title": "Financial Controller - Freight/Logistics Industry Experience Required",
             "url": "https://www.indeed.com/viewjob?jk=1158df49514de687",
             "date_posted": "2026-06-22",
+            "site": "indeed"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Topline Pro",
+      "domain": "toplinepro.com",
+      "industry": "software_saas",
+      "headcount": null,
+      "country": "US",
+      "city": "New York",
+      "state": "NY",
+      "dm_name": "Nick Ornitz",
+      "dm_title": "CEO",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "partial",
+      "score": 60.42094033292592,
+      "insight": null,
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-07-04T22:09:28.770489",
+          "days_ago": 3,
+          "payload": {
+            "title": "Head of Finance",
+            "url": "https://www.linkedin.com/jobs/view/4401978561",
+            "date_posted": "2026-07-02",
+            "site": "linkedin"
+          }
+        }
+      ]
+    },
+    {
+      "name": "ENTREGA",
+      "domain": "entrega.us",
+      "industry": "software_saas",
+      "headcount": null,
+      "country": "US",
+      "city": "Troy",
+      "state": "MI",
+      "dm_name": "Todd Roleston",
+      "dm_title": "CEO",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "partial",
+      "score": 60.42094024589815,
+      "insight": null,
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-07-04T22:12:12.129764",
+          "days_ago": 3,
+          "payload": {
+            "title": "Project Finance Manager",
+            "url": "https://www.indeed.com/viewjob?jk=097c0031548b18cd",
+            "date_posted": "2026-07-02",
             "site": "indeed"
           }
         }
@@ -3777,7 +4287,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "cold",
-      "score": 60.46660165626389,
+      "score": 60.42094024026852,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -3807,7 +4317,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "cold",
-      "score": 60.4666016532037,
+      "score": 60.42094023575926,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -3825,6 +4335,36 @@
       ]
     },
     {
+      "name": "Cartwheel",
+      "domain": "getcartwheel.com",
+      "industry": "media_entertainment",
+      "headcount": null,
+      "country": "US",
+      "city": "New York",
+      "state": "NY",
+      "dm_name": "Mani Themadathil",
+      "dm_title": "Founder & CEO",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "partial",
+      "score": 60.420934928453704,
+      "insight": null,
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-07-05T22:08:24.628717",
+          "days_ago": 3,
+          "payload": {
+            "title": "Controller",
+            "url": "https://www.linkedin.com/jobs/view/4417378226",
+            "date_posted": "2026-07-02",
+            "site": "linkedin"
+          }
+        }
+      ]
+    },
+    {
       "name": "Orchid Health",
       "domain": "orchidhealth.org",
       "industry": "healthcare",
@@ -3837,14 +4377,14 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 60.42899976408333,
+      "score": 60.383338329504625,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
         {
           "type": "job_posted_finance_lead",
           "captured_at": "2026-07-04T10:17:38.845644",
-          "days_ago": 3,
+          "days_ago": 4,
           "payload": {
             "title": "Director of Finance",
             "url": "https://www.adzuna.com/details/5784724232?utm_medium=api&utm_source=3aa14b35",
@@ -3867,14 +4407,14 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "cold",
-      "score": 60.41199512815741,
+      "score": 60.36633368947685,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
         {
           "type": "job_posted_finance_lead",
           "captured_at": "2026-07-05T10:25:48.313831",
-          "days_ago": 3,
+          "days_ago": 4,
           "payload": {
             "title": "Director of Finance",
             "url": "https://www.adzuna.com/land/ad/5784645050?se=YticEFx48RGzsb4CM2L8uw&utm_medium=api&utm_source=3aa14b35&v=191928AFF349B6BA7109748D296CB3DD705B3755",
@@ -3897,7 +4437,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 60.30335623016204,
+      "score": 60.25769478705092,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -3927,7 +4467,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 60.303212708657405,
+      "score": 60.25755126390741,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -3957,7 +4497,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 60.21993029530093,
+      "score": 60.17426884660648,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -3987,7 +4527,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 60.185768249194446,
+      "score": 60.14010680081481,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -4017,7 +4557,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 60.11630241514352,
+      "score": 60.07064382715741,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -4047,7 +4587,7 @@
       "dm_email": "milan@lootlabs.xyz",
       "dm_linkedin_url": "http://www.linkedin.com/in/milanharrisdev",
       "contact_strength": "verified",
-      "score": 60.090883983625,
+      "score": 60.04522252556481,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -4077,7 +4617,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 60.06660154561574,
+      "score": 60.020940091398145,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -4095,6 +4635,36 @@
       ]
     },
     {
+      "name": "HUNTER LANDSCAPE",
+      "domain": "hunterlandscape.net",
+      "industry": "other",
+      "headcount": null,
+      "country": "US",
+      "city": "Placentia",
+      "state": "CA",
+      "dm_name": null,
+      "dm_title": null,
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "cold",
+      "score": 60.02094008616667,
+      "insight": null,
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-07-04T22:09:28.770489",
+          "days_ago": 4,
+          "payload": {
+            "title": "Senior Accountant / Project Accountant (Leadership Track)",
+            "url": "https://www.indeed.com/viewjob?jk=2e9d0301da37f784",
+            "date_posted": "2026-07-01",
+            "site": "indeed"
+          }
+        }
+      ]
+    },
+    {
       "name": "Arkansas Coalition Against Domestic Violence",
       "domain": "domesticpeace.com",
       "industry": "government_nonprofit",
@@ -4107,7 +4677,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "cold",
-      "score": 60.06660151805093,
+      "score": 60.02094007463889,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -4137,7 +4707,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 60.06659873189815,
+      "score": 60.02094005891204,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -4167,7 +4737,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 59.93221723871759,
+      "score": 59.88655577586111,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -4197,7 +4767,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 59.87851816150926,
+      "score": 59.83285669684722,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -4209,6 +4779,36 @@
             "title": "FP&A Sr. Manager",
             "url": "https://www.adzuna.com/details/5782274374?utm_medium=api&utm_source=3aa14b35",
             "date_posted": "2026-06-30T12:42:54Z",
+            "site": "adzuna"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Serrato Corporation",
+      "domain": "serratocorp.com",
+      "industry": "education",
+      "headcount": null,
+      "country": "US",
+      "city": "Tucson",
+      "state": "AZ",
+      "dm_name": "Ramon Serrato",
+      "dm_title": "Chief Executive Officer",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "partial",
+      "score": 59.82980575427778,
+      "insight": null,
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-07-01T11:31:48.689223",
+          "days_ago": 5,
+          "payload": {
+            "title": "Finance Manager",
+            "url": "https://www.adzuna.com/land/ad/5782260860?se=4regdkB18RG4KvsvFcTNXw&utm_medium=api&utm_source=3aa14b35&v=2E5A4B72ED4C4B22ED70BCE3D1556432FED77EBC",
+            "date_posted": "2026-06-30T12:31:55Z",
             "site": "adzuna"
           }
         }
@@ -4227,7 +4827,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 59.666601474773145,
+      "score": 59.62094000901852,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -4257,7 +4857,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 59.666601471638884,
+      "score": 59.620940004828704,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -4287,7 +4887,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "cold",
-      "score": 59.66660146831018,
+      "score": 59.62093999981019,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -4317,7 +4917,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "cold",
-      "score": 59.66660146495833,
+      "score": 59.62093999483796,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -4347,7 +4947,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 59.66660146186574,
+      "score": 59.62093998911574,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -4377,7 +4977,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 59.66660145882871,
+      "score": 59.62093998398611,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -4407,7 +5007,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 59.666601455736114,
+      "score": 59.62093997980092,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -4425,6 +5025,96 @@
       ]
     },
     {
+      "name": "Rex",
+      "domain": "rex.com",
+      "industry": "real_estate",
+      "headcount": null,
+      "country": "US",
+      "city": "Austin",
+      "state": "TX",
+      "dm_name": "Peter Rex",
+      "dm_title": "Founder and CEO",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "partial",
+      "score": 59.62093997486574,
+      "insight": null,
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-07-04T22:09:28.770489",
+          "days_ago": 5,
+          "payload": {
+            "title": "Head of Finance",
+            "url": "https://www.linkedin.com/jobs/view/4425932028",
+            "date_posted": "2026-06-30",
+            "site": "linkedin"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Skyways",
+      "domain": "skyways.com",
+      "industry": "logistics_transport",
+      "headcount": null,
+      "country": "US",
+      "city": "Austin",
+      "state": "TX",
+      "dm_name": "Charles Acknin",
+      "dm_title": "CEO",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "partial",
+      "score": 59.62093997033333,
+      "insight": null,
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-07-04T22:09:28.770489",
+          "days_ago": 5,
+          "payload": {
+            "title": "Senior Controller",
+            "url": "https://www.linkedin.com/jobs/view/4435342607",
+            "date_posted": "2026-06-30",
+            "site": "linkedin"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Brassica",
+      "domain": "brassicas.com",
+      "industry": "hospitality_food",
+      "headcount": null,
+      "country": "US",
+      "city": "Columbus",
+      "state": "OH",
+      "dm_name": "Kevin Malhame",
+      "dm_title": "Founder CEO",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "partial",
+      "score": 59.62093996623611,
+      "insight": null,
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-07-04T22:12:12.129764",
+          "days_ago": 5,
+          "payload": {
+            "title": "Senior Accountant",
+            "url": "https://www.linkedin.com/jobs/view/4435351366",
+            "date_posted": "2026-06-30",
+            "site": "linkedin"
+          }
+        }
+      ]
+    },
+    {
       "name": "Friendship Service Center, INC",
       "domain": "fsc-ct.org",
       "industry": "government_nonprofit",
@@ -4437,7 +5127,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "cold",
-      "score": 59.66660141549537,
+      "score": 59.62093996198611,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -4467,7 +5157,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 59.46958303324074,
+      "score": 59.42392157894908,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -4485,6 +5175,47 @@
       ]
     },
     {
+      "name": "9amHealth",
+      "domain": "join9am.com",
+      "industry": "healthcare",
+      "headcount": null,
+      "country": "US",
+      "city": "Encinitas",
+      "state": "CA",
+      "dm_name": "Frank Westermann",
+      "dm_title": "Co-CEO",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "partial",
+      "score": 59.24883347200926,
+      "insight": null,
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-07-04T22:16:12.971435",
+          "days_ago": 11,
+          "payload": {
+            "title": "FP&A Manager",
+            "url": "https://www.adzuna.com/details/5774413082?utm_medium=api&utm_source=3aa14b35",
+            "date_posted": "2026-06-24T01:40:25Z",
+            "site": "adzuna"
+          }
+        },
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-07-04T22:09:28.770489",
+          "days_ago": 13,
+          "payload": {
+            "title": "Controller",
+            "url": "https://www.indeed.com/viewjob?jk=c7356243df4f0b96",
+            "date_posted": "2026-06-22",
+            "site": "indeed"
+          }
+        }
+      ]
+    },
+    {
       "name": "CRV Surveillance",
       "domain": "crvsurveillance.com",
       "industry": "other",
@@ -4497,7 +5228,7 @@
       "dm_email": "cvarden@crvsurveillance.com",
       "dm_linkedin_url": "http://www.linkedin.com/in/corey-varden-36943528",
       "contact_strength": "verified",
-      "score": 59.268717139648146,
+      "score": 59.22305568398611,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -4527,7 +5258,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "cold",
-      "score": 59.26660138958796,
+      "score": 59.22093993789352,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -4557,7 +5288,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 59.26660138646759,
+      "score": 59.220939932583335,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -4587,7 +5318,7 @@
       "dm_email": "peter@pickletourneys.com",
       "dm_linkedin_url": "http://www.linkedin.com/in/pete-cook",
       "contact_strength": "verified",
-      "score": 59.266601383305556,
+      "score": 59.220939927129635,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -4617,7 +5348,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 59.26660138025463,
+      "score": 59.220939921185185,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -4635,6 +5366,36 @@
       ]
     },
     {
+      "name": "The Institute for Human Services, Inc.",
+      "domain": "ihshawaii.org",
+      "industry": "government_nonprofit",
+      "headcount": null,
+      "country": "US",
+      "city": "Honolulu",
+      "state": "HI",
+      "dm_name": null,
+      "dm_title": null,
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "cold",
+      "score": 59.22093991531018,
+      "insight": null,
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-07-04T22:12:12.129764",
+          "days_ago": 6,
+          "payload": {
+            "title": "Finance Director",
+            "url": "https://www.linkedin.com/jobs/view/4434195500",
+            "date_posted": "2026-06-29",
+            "site": "linkedin"
+          }
+        }
+      ]
+    },
+    {
       "name": "Community Foundation Partnership, Inc.",
       "domain": "cfpartner.org",
       "industry": "government_nonprofit",
@@ -4647,7 +5408,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 59.26660135543055,
+      "score": 59.22093990639352,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -4677,7 +5438,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 59.26660135234722,
+      "score": 59.22093990181018,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -4695,6 +5456,36 @@
       ]
     },
     {
+      "name": "Granica",
+      "domain": "granica.ai",
+      "industry": "software_saas",
+      "headcount": 40,
+      "country": "US",
+      "city": "Mountain View",
+      "state": "CA",
+      "dm_name": "Rahul Ponnala",
+      "dm_title": "CEO",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "partial",
+      "score": 59.220939300333335,
+      "insight": null,
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-07-05T10:19:07.629820",
+          "days_ago": 16,
+          "payload": {
+            "title": "Head of Finance \u2014 Strategic Finance & Corporate Development",
+            "url": "https://www.linkedin.com/jobs/view/4326323256",
+            "date_posted": "2026-06-19",
+            "site": "linkedin"
+          }
+        }
+      ]
+    },
+    {
       "name": "Business Group on Health",
       "domain": "businessgrouphealth.org",
       "industry": "healthcare",
@@ -4707,7 +5498,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 59.14104579241204,
+      "score": 59.09538434127778,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -4737,7 +5528,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 58.894499492476854,
+      "score": 58.84883804037037,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -4767,7 +5558,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "cold",
-      "score": 58.893957822388884,
+      "score": 58.848296367231484,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -4797,7 +5588,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "cold",
-      "score": 58.893323559962965,
+      "score": 58.84766209047223,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -4827,7 +5618,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 58.8932865197963,
+      "score": 58.847625047875,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -4857,7 +5648,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 58.866601328175925,
+      "score": 58.82093985845833,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -4887,7 +5678,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 58.866601324925924,
+      "score": 58.82093985414352,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -4917,7 +5708,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 58.866601321717596,
+      "score": 58.82093984659722,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -4947,7 +5738,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 58.86536520450463,
+      "score": 58.81970372852315,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -4977,7 +5768,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 58.669360568745375,
+      "score": 58.62369908746759,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -4989,6 +5780,36 @@
             "title": "Senior Accountant",
             "url": "https://www.adzuna.com/land/ad/5779222994?se=Opz1pdxy8RG03p_b2NRIZw&utm_medium=api&utm_source=3aa14b35&v=1B8DC1535C65C0B063927FE1C8B020BDE1D9B835",
             "date_posted": "2026-06-27T12:09:56Z",
+            "site": "adzuna"
+          }
+        }
+      ]
+    },
+    {
+      "name": "CARE",
+      "domain": "care.org",
+      "industry": "government_nonprofit",
+      "headcount": null,
+      "country": "US",
+      "city": "Atlanta",
+      "state": "GA",
+      "dm_name": "Michelle Nunn",
+      "dm_title": "President and CEO",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "partial",
+      "score": 58.60197181622222,
+      "insight": null,
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-07-05T22:14:20.637278",
+          "days_ago": 8,
+          "payload": {
+            "title": "VP of Finance",
+            "url": "https://www.adzuna.com/details/5779157086?utm_medium=api&utm_source=3aa14b35",
+            "date_posted": "2026-06-27T10:51:44Z",
             "site": "adzuna"
           }
         }
@@ -5007,7 +5828,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 58.607094061504625,
+      "score": 58.56143518488426,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -5037,7 +5858,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "cold",
-      "score": 58.569520000694446,
+      "score": 58.52386110709259,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -5067,7 +5888,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "cold",
-      "score": 58.486189260083336,
+      "score": 58.44052775451852,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -5097,7 +5918,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 58.46660129403241,
+      "score": 58.42093978601389,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -5127,7 +5948,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 58.46660128800926,
+      "score": 58.420939780981485,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -5145,6 +5966,36 @@
       ]
     },
     {
+      "name": "Tim Tebow Foundation",
+      "domain": "timtebowfoundation.org",
+      "industry": "government_nonprofit",
+      "headcount": 50,
+      "country": "US",
+      "city": "Jacksonville",
+      "state": "FL",
+      "dm_name": "Tim Tebow",
+      "dm_title": "Founder",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "partial",
+      "score": 58.42093977487963,
+      "insight": null,
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-07-04T22:12:12.129764",
+          "days_ago": 18,
+          "payload": {
+            "title": "Director of Accounting Operations",
+            "url": "https://www.indeed.com/viewjob?jk=312e89733a4c9af6",
+            "date_posted": "2026-06-17",
+            "site": "indeed"
+          }
+        }
+      ]
+    },
+    {
       "name": "Simply Hygiene",
       "domain": "simplyhygiene.org",
       "industry": "ecommerce_retail",
@@ -5157,7 +6008,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "cold",
-      "score": 58.466598724870366,
+      "score": 58.420939770416666,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -5169,6 +6020,66 @@
             "title": "Director of Finance And Operations",
             "url": "https://www.linkedin.com/jobs/view/4433482451",
             "date_posted": "2026-06-27",
+            "site": "linkedin"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Del Mar Vacations",
+      "domain": "thisisdelmar.com",
+      "industry": "hospitality_food",
+      "headcount": 50,
+      "country": "US",
+      "city": "Orleans",
+      "state": "MA",
+      "dm_name": "Luke Chapman",
+      "dm_title": "Founder and Owner",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "partial",
+      "score": 58.420939218444445,
+      "insight": null,
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-07-04T22:09:28.770489",
+          "days_ago": 18,
+          "payload": {
+            "title": "Financial Controller",
+            "url": "https://www.indeed.com/viewjob?jk=841a43ac09623619",
+            "date_posted": "2026-06-17",
+            "site": "indeed"
+          }
+        }
+      ]
+    },
+    {
+      "name": "4AIR",
+      "domain": "4air.aero",
+      "industry": "other",
+      "headcount": 20,
+      "country": "US",
+      "city": "Cleveland",
+      "state": "OH",
+      "dm_name": "Kennedy Ricci",
+      "dm_title": "President",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "partial",
+      "score": 58.42093920929167,
+      "insight": null,
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-07-04T22:12:12.129764",
+          "days_ago": 18,
+          "payload": {
+            "title": "Senior Accountant",
+            "url": "https://www.linkedin.com/jobs/view/4430127636",
+            "date_posted": "2026-06-17",
             "site": "linkedin"
           }
         }
@@ -5187,7 +6098,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 58.18638829923148,
+      "score": 58.14072679125,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -5199,6 +6110,47 @@
             "title": "Head of Finance",
             "url": "https://www.adzuna.com/land/ad/5777593636?se=vmXvuJF38RG-cvvra3L-5Q&utm_medium=api&utm_source=3aa14b35&v=1A7F8CF90A53D2BC39A21D3CC5BC89D43829F5FA",
             "date_posted": "2026-06-26T07:11:14Z",
+            "site": "adzuna"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Warp",
+      "domain": "warp.dev",
+      "industry": "software_saas",
+      "headcount": 40,
+      "country": "US",
+      "city": "New York",
+      "state": "NY",
+      "dm_name": "Zach Lloyd",
+      "dm_title": "Founder & CEO",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "partial",
+      "score": 58.086689403152775,
+      "insight": null,
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-07-05T22:14:20.637278",
+          "days_ago": 24,
+          "payload": {
+            "title": "Head of Finance",
+            "url": "https://www.adzuna.com/details/5759705067?utm_medium=api&utm_source=3aa14b35",
+            "date_posted": "2026-06-11T03:56:43Z",
+            "site": "adzuna"
+          }
+        },
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-07-05T22:14:20.637278",
+          "days_ago": 24,
+          "payload": {
+            "title": "Controller",
+            "url": "https://www.adzuna.com/details/5759693206?utm_medium=api&utm_source=3aa14b35",
+            "date_posted": "2026-06-11T03:25:35Z",
             "site": "adzuna"
           }
         }
@@ -5217,7 +6169,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 58.066601255800926,
+      "score": 58.020939749050925,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -5247,7 +6199,7 @@
       "dm_email": "gregg.kaplan@daymarkwp.com",
       "dm_linkedin_url": "http://www.linkedin.com/in/kaplangregg",
       "contact_strength": "verified",
-      "score": 58.066601249648144,
+      "score": 58.020939744393516,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -5259,6 +6211,36 @@
             "title": "Financial Controller",
             "url": "https://www.linkedin.com/jobs/view/4428867297",
             "date_posted": "2026-06-16",
+            "site": "linkedin"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Iron Oak Apparel Co.",
+      "domain": "ironoaktx.com",
+      "industry": "ecommerce_retail",
+      "headcount": null,
+      "country": "US",
+      "city": "Schulenburg",
+      "state": "TX",
+      "dm_name": "Beau Daniels",
+      "dm_title": "Owner",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "partial",
+      "score": 58.02093492421759,
+      "insight": null,
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-07-05T22:08:24.628717",
+          "days_ago": 9,
+          "payload": {
+            "title": "Financial Controller",
+            "url": "https://www.linkedin.com/jobs/view/4433241559",
+            "date_posted": "2026-06-26",
             "site": "linkedin"
           }
         }
@@ -5277,7 +6259,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 58.05442529839352,
+      "score": 58.008763784856484,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -5307,14 +6289,14 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 58.042885734972224,
+      "score": 57.997226740773144,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
         {
           "type": "job_posted_finance_lead",
           "captured_at": "2026-07-05T19:38:11.023029",
-          "days_ago": 9,
+          "days_ago": 10,
           "payload": {
             "title": "FP&A Manager",
             "url": "https://www.adzuna.com/details/5777167427?utm_medium=api&utm_source=3aa14b35",
@@ -5337,14 +6319,14 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 58.01335585062037,
+      "score": 57.96769432739815,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
         {
           "type": "job_posted_finance_lead",
           "captured_at": "2026-07-04T22:16:12.971435",
-          "days_ago": 9,
+          "days_ago": 10,
           "payload": {
             "title": "Head of Finance & Accounting",
             "url": "https://www.adzuna.com/details/5777020988?utm_medium=api&utm_source=3aa14b35",
@@ -5367,7 +6349,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 57.98032343991204,
+      "score": 57.934661914648146,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -5397,7 +6379,7 @@
       "dm_email": "dmytels@saltcreekcap.com",
       "dm_linkedin_url": "http://www.linkedin.com/in/danmytels",
       "contact_strength": "verified",
-      "score": 57.84316708673148,
+      "score": 57.797505561939815,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -5426,6 +6408,36 @@
       ]
     },
     {
+      "name": "CORPORATE COVERAGE COMPANY",
+      "domain": "corporatecoverage.com",
+      "industry": "other",
+      "headcount": null,
+      "country": "US",
+      "city": "Lutherville",
+      "state": "MD",
+      "dm_name": "Melanie Epstein",
+      "dm_title": "Principal",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "partial",
+      "score": 57.76769430361574,
+      "insight": null,
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-06-26T10:56:55.693512",
+          "days_ago": 10,
+          "payload": {
+            "title": "Controller",
+            "url": "https://www.adzuna.com/details/5776249641?utm_medium=api&utm_source=3aa14b35",
+            "date_posted": "2026-06-25T08:48:19Z",
+            "site": "adzuna"
+          }
+        }
+      ]
+    },
+    {
       "name": "North American Savings Bank",
       "domain": "nasb.com",
       "industry": "fintech",
@@ -5438,7 +6450,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 57.75465675038426,
+      "score": 57.708995220805555,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -5468,7 +6480,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 57.670633596,
+      "score": 57.62497206076852,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -5486,6 +6498,96 @@
       ]
     },
     {
+      "name": "Launch Fulfillment",
+      "domain": "launchfulfillment.com",
+      "industry": "logistics_transport",
+      "headcount": 60,
+      "country": "US",
+      "city": "Springville",
+      "state": "UT",
+      "dm_name": null,
+      "dm_title": null,
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "cold",
+      "score": 57.62093964786111,
+      "insight": null,
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-07-04T22:09:28.770489",
+          "days_ago": 10,
+          "payload": {
+            "title": "Corporate Controller",
+            "url": "https://www.indeed.com/viewjob?jk=61eb4ae4eff07f3a",
+            "date_posted": "2026-06-25",
+            "site": "indeed"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Relatable",
+      "domain": "relatable.io",
+      "industry": "logistics_transport",
+      "headcount": null,
+      "country": "US",
+      "city": "Nashville",
+      "state": "TN",
+      "dm_name": null,
+      "dm_title": null,
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "cold",
+      "score": 57.62093964274537,
+      "insight": null,
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-07-04T22:12:12.129764",
+          "days_ago": 10,
+          "payload": {
+            "title": "Manager FP&A",
+            "url": "https://www.linkedin.com/jobs/view/4433392492",
+            "date_posted": "2026-06-25",
+            "site": "linkedin"
+          }
+        }
+      ]
+    },
+    {
+      "name": "ICON HEALTH",
+      "domain": "iconhealthco.com",
+      "industry": "healthcare",
+      "headcount": null,
+      "country": "US",
+      "city": "Stamford",
+      "state": "CT",
+      "dm_name": "Duncan Sibson",
+      "dm_title": "CEO",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "partial",
+      "score": 57.620939638347224,
+      "insight": null,
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-07-04T22:12:12.129764",
+          "days_ago": 10,
+          "payload": {
+            "title": "Financial Controller",
+            "url": "https://www.indeed.com/viewjob?jk=17f1224f37caa32a",
+            "date_posted": "2026-06-25",
+            "site": "indeed"
+          }
+        }
+      ]
+    },
+    {
       "name": "Nanobiosym",
       "domain": "nanobiosym.com",
       "industry": "healthcare",
@@ -5498,7 +6600,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 57.66659874509722,
+      "score": 57.6209396215,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -5528,7 +6630,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 57.497013185111115,
+      "score": 57.45135165326852,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -5558,7 +6660,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 57.36953170061111,
+      "score": 57.32387016760648,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -5588,7 +6690,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 57.28908262336574,
+      "score": 57.24342108808796,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -5606,6 +6708,96 @@
       ]
     },
     {
+      "name": "D.A. Collins Construction - Kubricky Construction",
+      "domain": "kubricky.com",
+      "industry": "construction",
+      "headcount": null,
+      "country": "US",
+      "city": "Wilton",
+      "state": "NY",
+      "dm_name": "Donald Agnew Collins",
+      "dm_title": "Founder",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "partial",
+      "score": 57.22093960079167,
+      "insight": null,
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-06-25T10:46:45.667638",
+          "days_ago": 11,
+          "payload": {
+            "title": "Assistant Controller - Materials",
+            "url": "https://www.indeed.com/viewjob?jk=092ff863bd383c2e",
+            "date_posted": "2026-06-24",
+            "site": "indeed"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Solen Software Group",
+      "domain": "solensoftwaregroup.com",
+      "industry": "software_saas",
+      "headcount": null,
+      "country": "US",
+      "city": "Salt Lake City",
+      "state": "UT",
+      "dm_name": "Alexander Spencer",
+      "dm_title": "Founder & CEO",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "partial",
+      "score": 57.220939594375,
+      "insight": null,
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-07-04T10:15:23.696487",
+          "days_ago": 11,
+          "payload": {
+            "title": "Controller",
+            "url": "https://www.linkedin.com/jobs/view/4432851871",
+            "date_posted": "2026-06-24",
+            "site": "linkedin"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Flint Hills Resources",
+      "domain": "fhr.com",
+      "industry": "manufacturing",
+      "headcount": null,
+      "country": "US",
+      "city": "Wichita",
+      "state": "KS",
+      "dm_name": "Francis Murphy",
+      "dm_title": "CEO",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "partial",
+      "score": 57.22093958752778,
+      "insight": null,
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-07-04T22:12:12.129764",
+          "days_ago": 11,
+          "payload": {
+            "title": "Finance Manager",
+            "url": "https://www.linkedin.com/jobs/view/4419626746",
+            "date_posted": "2026-06-24",
+            "site": "linkedin"
+          }
+        }
+      ]
+    },
+    {
       "name": "McCormick Distilling Co.",
       "domain": "mccormickdistilling.com",
       "industry": "manufacturing",
@@ -5618,7 +6810,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "cold",
-      "score": 57.26660108545833,
+      "score": 57.2209395829213,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -5648,7 +6840,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 57.26660108224537,
+      "score": 57.220939577856484,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -5666,6 +6858,36 @@
       ]
     },
     {
+      "name": "National Association of School Psychologists",
+      "domain": "nasponline.org",
+      "industry": "education",
+      "headcount": null,
+      "country": "US",
+      "city": "Bethesda",
+      "state": "MD",
+      "dm_name": null,
+      "dm_title": null,
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "cold",
+      "score": 57.09984235116204,
+      "insight": null,
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-07-02T10:46:23.850501",
+          "days_ago": 12,
+          "payload": {
+            "title": "Director of Finance",
+            "url": "https://www.adzuna.com/land/ad/5773866993?se=Lm-wSgN28RGp05Sv09Lkbg&utm_medium=api&utm_source=3aa14b35&v=EF6CA12348FEF414D21FFD7BB7A0B184DACC0053",
+            "date_posted": "2026-06-23T16:44:03Z",
+            "site": "adzuna"
+          }
+        }
+      ]
+    },
+    {
       "name": "Lawyers On Demand",
       "domain": "lodlaw.com",
       "industry": "legal_professional",
@@ -5678,7 +6900,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 57.072737576699076,
+      "score": 57.02707845599537,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -5708,7 +6930,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 57.07042515014352,
+      "score": 57.024763631458335,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -5726,6 +6948,36 @@
       ]
     },
     {
+      "name": "Hengli America Corporation",
+      "domain": "hengliamerica.com",
+      "industry": "manufacturing",
+      "headcount": 60,
+      "country": "US",
+      "city": "Bolingbrook",
+      "state": "IL",
+      "dm_name": null,
+      "dm_title": null,
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "cold",
+      "score": 56.82093954061574,
+      "insight": null,
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-06-24T10:54:24.651590",
+          "days_ago": 12,
+          "payload": {
+            "title": "Finance and Accounting Manager",
+            "url": "https://www.indeed.com/viewjob?jk=4d77231af08a4023",
+            "date_posted": "2026-06-23",
+            "site": "indeed"
+          }
+        }
+      ]
+    },
+    {
       "name": "Hawaii Coffee Company",
       "domain": "hawaiicoffeecompany.com",
       "industry": "ecommerce_retail",
@@ -5738,7 +6990,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 56.86660104421759,
+      "score": 56.820939535212965,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -5768,7 +7020,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 56.866601041175926,
+      "score": 56.820939527689816,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -5779,6 +7031,66 @@
           "payload": {
             "title": "Senior Accountant",
             "url": "https://www.linkedin.com/jobs/view/4432415606",
+            "date_posted": "2026-06-23",
+            "site": "linkedin"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Andreessen Horowitz",
+      "domain": "a16z.com",
+      "industry": "other",
+      "headcount": null,
+      "country": "US",
+      "city": "Menlo Park",
+      "state": "CA",
+      "dm_name": "Marc Andreessen",
+      "dm_title": "Co-founder",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "partial",
+      "score": 56.820939510592595,
+      "insight": null,
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-07-04T22:09:28.770489",
+          "days_ago": 12,
+          "payload": {
+            "title": "Partner 36, Corporate Controller",
+            "url": "https://www.linkedin.com/jobs/view/4432448882",
+            "date_posted": "2026-06-23",
+            "site": "linkedin"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Invest Nebraska",
+      "domain": "investnebraska.com",
+      "industry": "government_nonprofit",
+      "headcount": null,
+      "country": "US",
+      "city": "Lincoln",
+      "state": "NE",
+      "dm_name": "Dan Hoffman",
+      "dm_title": "CEO",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "partial",
+      "score": 56.820939502555554,
+      "insight": null,
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-07-04T22:12:12.129764",
+          "days_ago": 12,
+          "payload": {
+            "title": "Finance Manager",
+            "url": "https://www.linkedin.com/jobs/view/4432456027",
             "date_posted": "2026-06-23",
             "site": "linkedin"
           }
@@ -5798,7 +7110,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 56.86659874184722,
+      "score": 56.820939493944444,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -5810,6 +7122,246 @@
             "title": "Financial Controller",
             "url": "https://www.linkedin.com/jobs/view/4429463416",
             "date_posted": "2026-06-23",
+            "site": "linkedin"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Pylon",
+      "domain": "usepylon.com",
+      "industry": "software_saas",
+      "headcount": null,
+      "country": "US",
+      "city": "San Francisco",
+      "state": "CA",
+      "dm_name": "Marty Kausas",
+      "dm_title": "CEO",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "partial",
+      "score": 56.82093488782407,
+      "insight": null,
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-07-05T22:10:54.381699",
+          "days_ago": 12,
+          "payload": {
+            "title": "Head of Finance",
+            "url": "https://www.linkedin.com/jobs/view/4430838830",
+            "date_posted": "2026-06-23",
+            "site": "linkedin"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Archer",
+      "domain": "archer.com",
+      "industry": "other",
+      "headcount": null,
+      "country": "US",
+      "city": "San Jose",
+      "state": "CA",
+      "dm_name": "Adam Goldstein",
+      "dm_title": "CEO",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "partial",
+      "score": 56.820934881365744,
+      "insight": null,
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-07-05T22:10:54.381699",
+          "days_ago": 12,
+          "payload": {
+            "title": "Senior Director, Corporate FP&A",
+            "url": "https://www.linkedin.com/jobs/view/4326970513",
+            "date_posted": "2026-06-23",
+            "site": "linkedin"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Roli Roti",
+      "domain": "roliroti.com",
+      "industry": "hospitality_food",
+      "headcount": null,
+      "country": "US",
+      "city": "San Francisco",
+      "state": "CA",
+      "dm_name": "Thomas Odermatt",
+      "dm_title": "Founder",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "partial",
+      "score": 56.79680985986574,
+      "insight": null,
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-06-24T10:56:17.143381",
+          "days_ago": 13,
+          "payload": {
+            "title": "Accounting Manager",
+            "url": "https://www.adzuna.com/land/ad/5773107160?se=KOcgV7tv8RGIWorTphsLOQ&utm_medium=api&utm_source=3aa14b35&v=3C225E5C8D20282068B57185FA6D7AB63A8292E5",
+            "date_posted": "2026-06-22T22:33:08Z",
+            "site": "adzuna"
+          }
+        }
+      ]
+    },
+    {
+      "name": "4 Horn Management",
+      "domain": "4horninvestments.com",
+      "industry": "other",
+      "headcount": 30,
+      "country": "US",
+      "city": "La Porte",
+      "state": "TX",
+      "dm_name": "Rhett Lasserre",
+      "dm_title": "Co-Founder & President",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "partial",
+      "score": 56.444369209328705,
+      "insight": null,
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-07-04T10:17:38.845644",
+          "days_ago": 23,
+          "payload": {
+            "title": "Assistant Controller",
+            "url": "https://www.adzuna.com/details/5761015876?utm_medium=api&utm_source=3aa14b35",
+            "date_posted": "2026-06-12T01:24:21Z",
+            "site": "adzuna"
+          }
+        }
+      ]
+    },
+    {
+      "name": "The Contemporary Austin",
+      "domain": "thecontemporaryaustin.org",
+      "industry": "media_entertainment",
+      "headcount": null,
+      "country": "US",
+      "city": "Austin",
+      "state": "TX",
+      "dm_name": "sharon maidenberg",
+      "dm_title": "Executive Director and CEO",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "partial",
+      "score": 56.42285615048148,
+      "insight": null,
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-06-22T13:40:37.110424",
+          "days_ago": 13,
+          "payload": {
+            "title": "Director of Finance",
+            "url": "https://www.adzuna.com/land/ad/5772252888?se=lCm19T9u8RGG7YcE4aLLAA&utm_medium=api&utm_source=3aa14b35&v=6B4BB284DAB59B0424655D0EB63C348B139A9318",
+            "date_posted": "2026-06-22T00:06:54Z",
+            "site": "adzuna"
+          }
+        }
+      ]
+    },
+    {
+      "name": "NuvoEgg",
+      "domain": "nuvoegg.com",
+      "industry": "other",
+      "headcount": null,
+      "country": null,
+      "city": null,
+      "state": null,
+      "dm_name": null,
+      "dm_title": null,
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "cold",
+      "score": 56.42093947928241,
+      "insight": null,
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-06-22T13:38:33.819799",
+          "days_ago": 13,
+          "payload": {
+            "title": "Corporate Controller",
+            "url": "https://www.indeed.com/viewjob?jk=8aaddcb8c68fee81",
+            "date_posted": "2026-06-22",
+            "site": "indeed"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Panthalassa",
+      "domain": "panthalassa.com",
+      "industry": "software_saas",
+      "headcount": null,
+      "country": "US",
+      "city": "Portland",
+      "state": "OR",
+      "dm_name": "Garth Sheldon-Coulson",
+      "dm_title": "Co-founder & CEO",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "partial",
+      "score": 56.42093947438426,
+      "insight": null,
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-07-04T10:15:23.696487",
+          "days_ago": 13,
+          "payload": {
+            "title": "Director of Accounting and Corporate Controller",
+            "url": "https://www.linkedin.com/jobs/view/4343397939",
+            "date_posted": "2026-06-22",
+            "site": "linkedin"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Centaurus Farms",
+      "domain": "centaurusfarms.com",
+      "industry": "real_estate",
+      "headcount": null,
+      "country": "US",
+      "city": "Monticello",
+      "state": "KY",
+      "dm_name": null,
+      "dm_title": null,
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "cold",
+      "score": 56.420939465337966,
+      "insight": null,
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-07-04T10:15:23.696487",
+          "days_ago": 13,
+          "payload": {
+            "title": "Controller",
+            "url": "https://www.linkedin.com/jobs/view/4429847931",
+            "date_posted": "2026-06-22",
             "site": "linkedin"
           }
         }
@@ -5828,7 +7380,7 @@
       "dm_email": "cwells@tpqc.org",
       "dm_linkedin_url": "http://www.linkedin.com/in/caitlinbwells",
       "contact_strength": "verified",
-      "score": 56.46660097785648,
+      "score": 56.42093945775,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -5858,7 +7410,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "cold",
-      "score": 56.466600974638894,
+      "score": 56.420939453060186,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -5888,7 +7440,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 56.466600971574074,
+      "score": 56.42093944883333,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -5906,6 +7458,36 @@
       ]
     },
     {
+      "name": "Stein's Aircraft Services, LLC",
+      "domain": "steinsaircraftservices.com",
+      "industry": "logistics_transport",
+      "headcount": null,
+      "country": "US",
+      "city": "Kenosha",
+      "state": "WI",
+      "dm_name": "Michael Stein",
+      "dm_title": "Founder",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "partial",
+      "score": 56.420939444541666,
+      "insight": null,
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-07-04T22:09:28.770489",
+          "days_ago": 13,
+          "payload": {
+            "title": "controller",
+            "url": "https://www.indeed.com/viewjob?jk=4f5ab7024fe0c746",
+            "date_posted": "2026-06-22",
+            "site": "indeed"
+          }
+        }
+      ]
+    },
+    {
       "name": "American Association of Advertising Agencies, Inc",
       "domain": "aaaa.org",
       "industry": "other",
@@ -5918,7 +7500,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 56.46660096512037,
+      "score": 56.420939437986114,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -5936,6 +7518,36 @@
       ]
     },
     {
+      "name": "Ardent Global Logistics",
+      "domain": "ardentgloballogistics.com",
+      "industry": "logistics_transport",
+      "headcount": null,
+      "country": "US",
+      "city": "Virginia Beach",
+      "state": "VA",
+      "dm_name": "Jason Cook",
+      "dm_title": "Founder and Managing Director",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "partial",
+      "score": 56.420939426703704,
+      "insight": null,
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-07-05T10:19:07.629820",
+          "days_ago": 13,
+          "payload": {
+            "title": "Controller",
+            "url": "https://www.linkedin.com/jobs/view/4431791905",
+            "date_posted": "2026-06-22",
+            "site": "linkedin"
+          }
+        }
+      ]
+    },
+    {
       "name": "Empathy",
       "domain": "empathy.com",
       "industry": "healthcare",
@@ -5948,7 +7560,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 56.46660095265741,
+      "score": 56.42093942266666,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -5959,6 +7571,66 @@
           "payload": {
             "title": "Financial Controller",
             "url": "https://www.linkedin.com/jobs/view/4430599656",
+            "date_posted": "2026-06-22",
+            "site": "linkedin"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Solarcore\u00ae",
+      "domain": "solarcore.tech",
+      "industry": "manufacturing",
+      "headcount": 30,
+      "country": "US",
+      "city": "Portland",
+      "state": "OR",
+      "dm_name": "Michael Markesbery",
+      "dm_title": "Co-Founder and CEO",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "partial",
+      "score": 56.42093863842592,
+      "insight": null,
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-07-04T22:12:12.129764",
+          "days_ago": 23,
+          "payload": {
+            "title": "Vice President Finance",
+            "url": "https://www.linkedin.com/jobs/view/4426926089",
+            "date_posted": "2026-06-12",
+            "site": "linkedin"
+          }
+        }
+      ]
+    },
+    {
+      "name": "SXSW",
+      "domain": "sxsw.com",
+      "industry": "media_entertainment",
+      "headcount": null,
+      "country": "US",
+      "city": "Austin",
+      "state": "TX",
+      "dm_name": "Roland Swenson",
+      "dm_title": "CEO",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "partial",
+      "score": 56.42093478927315,
+      "insight": null,
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-07-05T22:10:54.381699",
+          "days_ago": 13,
+          "payload": {
+            "title": "Senior Accountant",
+            "url": "https://www.linkedin.com/jobs/view/4432012622",
             "date_posted": "2026-06-22",
             "site": "linkedin"
           }
@@ -5978,7 +7650,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 56.14048520586111,
+      "score": 56.09482367381944,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -5996,6 +7668,66 @@
       ]
     },
     {
+      "name": "Giffen Spinal Care",
+      "domain": "nuccadrgiffen.com",
+      "industry": "healthcare",
+      "headcount": null,
+      "country": "US",
+      "city": "Palatine",
+      "state": "IL",
+      "dm_name": null,
+      "dm_title": null,
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "cold",
+      "score": 56.02093940963889,
+      "insight": null,
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-06-22T13:38:33.819799",
+          "days_ago": 14,
+          "payload": {
+            "title": "Financial Controller",
+            "url": "https://www.indeed.com/viewjob?jk=af687c74c9e925dd",
+            "date_posted": "2026-06-21",
+            "site": "indeed"
+          }
+        }
+      ]
+    },
+    {
+      "name": "REFLECTION",
+      "domain": "reflection.ai",
+      "industry": "software_saas",
+      "headcount": null,
+      "country": "US",
+      "city": "New York",
+      "state": "NY",
+      "dm_name": "Misha Laskin",
+      "dm_title": "CEO",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "partial",
+      "score": 56.020939405574076,
+      "insight": null,
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-06-22T13:38:33.819799",
+          "days_ago": 14,
+          "payload": {
+            "title": "Strategic Finance Manager",
+            "url": "https://www.indeed.com/viewjob?jk=c25525bb2a5a20c7",
+            "date_posted": "2026-06-21",
+            "site": "indeed"
+          }
+        }
+      ]
+    },
+    {
       "name": "Tavern Research",
       "domain": "tavernresearch.com",
       "industry": "software_saas",
@@ -6008,7 +7740,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 56.0666009314213,
+      "score": 56.02093940176389,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -6038,7 +7770,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "cold",
-      "score": 56.066598748300926,
+      "score": 56.020939398023145,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -6068,7 +7800,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "cold",
-      "score": 56.06659871472222,
+      "score": 56.02093939311574,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -6098,7 +7830,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 55.78565184774537,
+      "score": 55.73999030595833,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -6128,7 +7860,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "cold",
-      "score": 55.77500832608796,
+      "score": 55.729346783,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -6158,7 +7890,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 55.69358239712963,
+      "score": 55.64792085287963,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -6188,7 +7920,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 55.66682776412037,
+      "score": 55.62116621914815,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -6218,7 +7950,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 55.66660090321759,
+      "score": 55.620939347032404,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -6248,7 +7980,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 55.66660090024537,
+      "score": 55.62093934290278,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -6266,6 +7998,36 @@
       ]
     },
     {
+      "name": "Beyond Podiatry",
+      "domain": "beyond-podiatry.com",
+      "industry": "healthcare",
+      "headcount": null,
+      "country": "US",
+      "city": "New Baltimore",
+      "state": "MI",
+      "dm_name": null,
+      "dm_title": null,
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "cold",
+      "score": 55.62093933802778,
+      "insight": null,
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-07-04T22:09:28.770489",
+          "days_ago": 15,
+          "payload": {
+            "title": "Financial Controller--Healthcare Services",
+            "url": "https://www.indeed.com/viewjob?jk=166c9b6dbc978264",
+            "date_posted": "2026-06-20",
+            "site": "indeed"
+          }
+        }
+      ]
+    },
+    {
       "name": "Alpha Energy Solutions, LLC",
       "domain": "alphaenergyco.com",
       "industry": "construction",
@@ -6278,7 +8040,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 55.37461477587963,
+      "score": 55.328953223087964,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -6308,7 +8070,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 55.28983236493981,
+      "score": 55.24417081180555,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -6328,9 +8090,9 @@
     {
       "name": "EcoCleaners",
       "domain": "ecocleaners.us",
-      "industry": "ecommerce_retail",
+      "industry": "other",
       "headcount": 19,
-      "country": "US",
+      "country": null,
       "city": "Houston",
       "state": "TX",
       "dm_name": "Won Cho",
@@ -6338,7 +8100,7 @@
       "dm_email": null,
       "dm_linkedin_url": "http://www.linkedin.com/in/won-cho-2030516",
       "contact_strength": "verified",
-      "score": 55.26660086714815,
+      "score": 55.22093932137963,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -6368,7 +8130,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 55.26660086402778,
+      "score": 55.22093931725,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -6379,6 +8141,96 @@
           "payload": {
             "title": "Finance Manager",
             "url": "https://www.linkedin.com/jobs/view/4408343883",
+            "date_posted": "2026-06-09",
+            "site": "linkedin"
+          }
+        }
+      ]
+    },
+    {
+      "name": "The W.W. Reynolds Companies, Inc.",
+      "domain": "wwreynolds.com",
+      "industry": "real_estate",
+      "headcount": null,
+      "country": "US",
+      "city": "Boulder",
+      "state": "CO",
+      "dm_name": "Bill Reynolds",
+      "dm_title": "Founder",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "partial",
+      "score": 55.2209393132963,
+      "insight": null,
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-07-04T22:12:12.129764",
+          "days_ago": 16,
+          "payload": {
+            "title": "Head of Finance",
+            "url": "https://www.linkedin.com/jobs/view/4428057339",
+            "date_posted": "2026-06-19",
+            "site": "linkedin"
+          }
+        }
+      ]
+    },
+    {
+      "name": "IndiMade Brands",
+      "domain": "indimade.com",
+      "industry": "ecommerce_retail",
+      "headcount": null,
+      "country": "US",
+      "city": null,
+      "state": null,
+      "dm_name": "Sam",
+      "dm_title": null,
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "partial",
+      "score": 55.22093930956019,
+      "insight": null,
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-07-04T22:12:12.129764",
+          "days_ago": 16,
+          "payload": {
+            "title": "Senior Accountant",
+            "url": "https://www.linkedin.com/jobs/view/4430021326",
+            "date_posted": "2026-06-19",
+            "site": "linkedin"
+          }
+        }
+      ]
+    },
+    {
+      "name": "MaverickX",
+      "domain": "maverickx.com",
+      "industry": "manufacturing",
+      "headcount": 30,
+      "country": "US",
+      "city": "Austin",
+      "state": "TX",
+      "dm_name": "Eric Herrera",
+      "dm_title": "CEO",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "partial",
+      "score": 55.220938529,
+      "insight": null,
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-07-05T10:19:07.629820",
+          "days_ago": 26,
+          "payload": {
+            "title": "Finance Manager",
+            "url": "https://www.linkedin.com/jobs/view/4422709213",
             "date_posted": "2026-06-09",
             "site": "linkedin"
           }
@@ -6398,7 +8250,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 55.143670281421294,
+      "score": 55.09800874043518,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -6428,7 +8280,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "cold",
-      "score": 55.14297583357407,
+      "score": 55.09731429049074,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -6440,6 +8292,36 @@
             "title": "Director of Finance",
             "url": "https://www.adzuna.com/details/5768379887?utm_medium=api&utm_source=3aa14b35",
             "date_posted": "2026-06-18T16:34:57Z",
+            "site": "adzuna"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Harrison LLP",
+      "domain": "harrisonllp.com",
+      "industry": "legal_professional",
+      "headcount": null,
+      "country": "US",
+      "city": null,
+      "state": null,
+      "dm_name": null,
+      "dm_title": null,
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "cold",
+      "score": 55.08406901268056,
+      "insight": null,
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-07-05T22:14:20.637278",
+          "days_ago": 17,
+          "payload": {
+            "title": "Accounting Manager - Chicago",
+            "url": "https://www.adzuna.com/land/ad/5768342894?se=OF8iFr948RG-2tHAxNAnZQ&utm_medium=api&utm_source=3aa14b35&v=55D325F6954001FEEE883534FD91629E8B57664B",
+            "date_posted": "2026-06-18T15:47:17Z",
             "site": "adzuna"
           }
         }
@@ -6458,7 +8340,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 55.129725826796296,
+      "score": 55.08406428104166,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -6488,7 +8370,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 54.894411008768515,
+      "score": 54.848749461601855,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -6506,6 +8388,36 @@
       ]
     },
     {
+      "name": "Greenbrook Medical",
+      "domain": "greenbrookmedical.com",
+      "industry": "healthcare",
+      "headcount": null,
+      "country": "US",
+      "city": "New Port Richey",
+      "state": "FL",
+      "dm_name": "Neil Machhar",
+      "dm_title": "CEO",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "partial",
+      "score": 54.82093927263889,
+      "insight": null,
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-06-26T10:54:51.327470",
+          "days_ago": 17,
+          "payload": {
+            "title": "Vice President of Finance",
+            "url": "https://www.linkedin.com/jobs/view/4427874523",
+            "date_posted": "2026-06-18",
+            "site": "linkedin"
+          }
+        }
+      ]
+    },
+    {
       "name": "Boyd Sleep",
       "domain": "boydsleep.com",
       "industry": "manufacturing",
@@ -6518,7 +8430,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 54.86660080089815,
+      "score": 54.82093926868981,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -6548,7 +8460,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 54.86660079750463,
+      "score": 54.82093926468519,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -6566,6 +8478,66 @@
       ]
     },
     {
+      "name": "Keelson Management LLC",
+      "domain": "keelsonmanagement.com",
+      "industry": "other",
+      "headcount": 50,
+      "country": "US",
+      "city": "Scottsdale",
+      "state": "AZ",
+      "dm_name": null,
+      "dm_title": null,
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "cold",
+      "score": 54.820939260708336,
+      "insight": null,
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-06-09T11:20:31.005338",
+          "days_ago": 27,
+          "payload": {
+            "title": "Assistant Controller",
+            "url": "https://www.indeed.com/viewjob?jk=e3f4dcbc714f8247",
+            "date_posted": "2026-06-08",
+            "site": "indeed"
+          }
+        }
+      ]
+    },
+    {
+      "name": "LangeTwins",
+      "domain": "langetwins.com",
+      "industry": "hospitality_food",
+      "headcount": null,
+      "country": "US",
+      "city": "Acampo",
+      "state": "CA",
+      "dm_name": "Marissa Lange",
+      "dm_title": "President",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "partial",
+      "score": 54.82093925509722,
+      "insight": null,
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-07-04T22:09:28.770489",
+          "days_ago": 17,
+          "payload": {
+            "title": "Controller",
+            "url": "https://www.indeed.com/viewjob?jk=b3ca07b30b127fd5",
+            "date_posted": "2026-06-18",
+            "site": "indeed"
+          }
+        }
+      ]
+    },
+    {
       "name": "ACG Systems",
       "domain": "acgsys.com",
       "industry": "software_saas",
@@ -6578,7 +8550,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "cold",
-      "score": 54.86660074357407,
+      "score": 54.820939250291666,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -6608,7 +8580,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 54.55054981152778,
+      "score": 54.504888314587966,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -6638,7 +8610,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 54.473054438134255,
+      "score": 54.427392940231485,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -6656,6 +8628,36 @@
       ]
     },
     {
+      "name": "M2 Ingredients",
+      "domain": "m2ingredients.com",
+      "industry": "ecommerce_retail",
+      "headcount": 70,
+      "country": "US",
+      "city": "Vista",
+      "state": "CA",
+      "dm_name": "Jeff Rogers",
+      "dm_title": "CEO",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "partial",
+      "score": 54.420939231703706,
+      "insight": null,
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-06-23T11:21:29.835816",
+          "days_ago": 18,
+          "payload": {
+            "title": "Senior Accountant",
+            "url": "https://www.linkedin.com/jobs/view/4428732838",
+            "date_posted": "2026-06-17",
+            "site": "linkedin"
+          }
+        }
+      ]
+    },
+    {
       "name": "Tremendous",
       "domain": "tremendous.com",
       "industry": "fintech",
@@ -6668,7 +8670,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 54.46660071623148,
+      "score": 54.42093922344444,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -6679,6 +8681,36 @@
           "payload": {
             "title": "Head of Finance",
             "url": "https://www.linkedin.com/jobs/view/4428731849",
+            "date_posted": "2026-06-17",
+            "site": "linkedin"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Candid Health",
+      "domain": "joincandidhealth.com",
+      "industry": "healthcare",
+      "headcount": null,
+      "country": "US",
+      "city": "San Francisco",
+      "state": "CA",
+      "dm_name": "Nick Perry",
+      "dm_title": "CEO",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "partial",
+      "score": 54.42093921335648,
+      "insight": null,
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-07-04T22:09:28.770489",
+          "days_ago": 18,
+          "payload": {
+            "title": "Controller (Director Level)",
+            "url": "https://www.linkedin.com/jobs/view/4428417432",
             "date_posted": "2026-06-17",
             "site": "linkedin"
           }
@@ -6698,7 +8730,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "cold",
-      "score": 54.4666006894676,
+      "score": 54.42093919918982,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -6728,7 +8760,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 54.466598721601855,
+      "score": 54.420939188342594,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -6758,7 +8790,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 54.46659871824074,
+      "score": 54.42093918457871,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -6776,6 +8808,66 @@
       ]
     },
     {
+      "name": "Shinkei",
+      "domain": "shinkei.systems",
+      "industry": "manufacturing",
+      "headcount": 60,
+      "country": "US",
+      "city": "El Segundo",
+      "state": "CA",
+      "dm_name": "Saif Khawaja",
+      "dm_title": "CEO",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "partial",
+      "score": 54.42093491856482,
+      "insight": null,
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-07-05T22:08:24.628717",
+          "days_ago": 18,
+          "payload": {
+            "title": "Controller",
+            "url": "https://www.linkedin.com/jobs/view/4406808338",
+            "date_posted": "2026-06-17",
+            "site": "linkedin"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Project Canary",
+      "domain": "projectcanary.com",
+      "industry": "other",
+      "headcount": null,
+      "country": "US",
+      "city": "Denver",
+      "state": "CO",
+      "dm_name": "William Foiles",
+      "dm_title": "CEO",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "partial",
+      "score": 54.234513254111114,
+      "insight": null,
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-06-23T11:23:21.358997",
+          "days_ago": 19,
+          "payload": {
+            "title": "Finance / FP&A Manager",
+            "url": "https://www.adzuna.com/land/ad/5765700485?se=GnYI9vVu8RGpv4AJ0rh9IA&utm_medium=api&utm_source=3aa14b35&v=4C9B6B480BF218B1FFC6404A573E164002C865D3",
+            "date_posted": "2026-06-16T12:48:52Z",
+            "site": "adzuna"
+          }
+        }
+      ]
+    },
+    {
       "name": "Clayens US LLC",
       "domain": "clayens.com",
       "industry": "manufacturing",
@@ -6788,7 +8880,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 54.26799419873148,
+      "score": 54.22233269412037,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -6806,6 +8898,36 @@
       ]
     },
     {
+      "name": "Krause Group",
+      "domain": "krausegroup.com",
+      "industry": "other",
+      "headcount": null,
+      "country": "US",
+      "city": "Des Moines",
+      "state": "IA",
+      "dm_name": "Kyle J. Krause",
+      "dm_title": "Founder & CEO",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "partial",
+      "score": 54.02093916749074,
+      "insight": null,
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-07-02T10:44:22.502581",
+          "days_ago": 19,
+          "payload": {
+            "title": "Head of Finance",
+            "url": "https://www.linkedin.com/jobs/view/4428061485",
+            "date_posted": "2026-06-16",
+            "site": "linkedin"
+          }
+        }
+      ]
+    },
+    {
       "name": "UZIN UTZ North America",
       "domain": "uzin-utz.com",
       "industry": "manufacturing",
@@ -6818,7 +8940,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 54.06660065843056,
+      "score": 54.020939163189816,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -6838,7 +8960,7 @@
     {
       "name": "Fragile",
       "domain": "fragile.co",
-      "industry": "software_saas",
+      "industry": "ecommerce_retail",
       "headcount": 47,
       "country": "US",
       "city": "San Francisco",
@@ -6848,7 +8970,7 @@
       "dm_email": "kgothatso@fragile.co",
       "dm_linkedin_url": "http://www.linkedin.com/in/kgothatso-sikhonde-924b3a1b7",
       "contact_strength": "verified",
-      "score": 54.06660065542593,
+      "score": 54.020939159125,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -6986,6 +9108,66 @@
       ]
     },
     {
+      "name": "Summerfield Management",
+      "domain": "summerfieldmanagement.com",
+      "industry": "real_estate",
+      "headcount": null,
+      "country": "US",
+      "city": "Seattle",
+      "state": "WA",
+      "dm_name": "Tate Summerfield",
+      "dm_title": "Co-Owner",
+      "dm_email": "tate@summerfieldasset.com",
+      "dm_linkedin_url": "http://www.linkedin.com/in/tate-summerfield-7780076",
+      "contact_strength": "verified",
+      "score": 53.62093870959259,
+      "insight": null,
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-06-15T14:27:51.867446",
+          "days_ago": 20,
+          "payload": {
+            "title": "Property Accounting Manager | Remote | $90,000/yr DOE",
+            "url": "https://www.indeed.com/viewjob?jk=6e8727aa04728ab5",
+            "date_posted": "2026-06-15",
+            "site": "indeed"
+          }
+        }
+      ]
+    },
+    {
+      "name": "American Forests",
+      "domain": "americanforests.org",
+      "industry": "government_nonprofit",
+      "headcount": null,
+      "country": "US",
+      "city": "Washington",
+      "state": "DC",
+      "dm_name": "Hilary Franz",
+      "dm_title": "President and CEO",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "partial",
+      "score": 53.28100422833333,
+      "insight": null,
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-07-05T22:13:12.939927",
+          "days_ago": 21,
+          "payload": {
+            "title": "Controller",
+            "url": "https://www.adzuna.com/details/5763409158?utm_medium=api&utm_source=3aa14b35",
+            "date_posted": "2026-06-14T03:36:15Z",
+            "site": "adzuna"
+          }
+        }
+      ]
+    },
+    {
       "name": "Taco Bamba Taqueria",
       "domain": "tacobamba.com",
       "industry": "hospitality_food",
@@ -6998,7 +9180,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 53.2974058826713,
+      "score": 53.25174425129167,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -7016,6 +9198,36 @@
       ]
     },
     {
+      "name": "Schiciano, Johnston & Bialek, LLC",
+      "domain": "schicianocpa.com",
+      "industry": "legal_professional",
+      "headcount": null,
+      "country": "US",
+      "city": "Chagrin Falls",
+      "state": "OH",
+      "dm_name": null,
+      "dm_title": null,
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "cold",
+      "score": 53.220938691,
+      "insight": null,
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-07-04T22:09:28.770489",
+          "days_ago": 21,
+          "payload": {
+            "title": "Senior Accountant",
+            "url": "https://www.indeed.com/viewjob?jk=a60956d613f89743",
+            "date_posted": "2026-06-14",
+            "site": "indeed"
+          }
+        }
+      ]
+    },
+    {
       "name": "VictoriaMetrics",
       "domain": "victoriametrics.com",
       "industry": "software_saas",
@@ -7028,7 +9240,7 @@
       "dm_email": "dlazerka@victoriametrics.com",
       "dm_linkedin_url": "http://www.linkedin.com/in/dlazerka",
       "contact_strength": "verified",
-      "score": 52.866600312083335,
+      "score": 52.820938673097224,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -7058,7 +9270,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 52.86660030902778,
+      "score": 52.8209386689537,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -7088,7 +9300,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 52.72985493281482,
+      "score": 52.68419329321759,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -7118,7 +9330,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 52.51316974168056,
+      "score": 52.46750810225463,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -7148,7 +9360,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 52.466600291296295,
+      "score": 52.42093864843518,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -7178,7 +9390,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 52.46660027589815,
+      "score": 52.42093862810185,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -7208,14 +9420,14 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "cold",
-      "score": 52.42592897065741,
+      "score": 52.38026731621759,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
         {
           "type": "job_posted_finance_lead",
           "captured_at": "2026-07-05T10:25:48.313831",
-          "days_ago": 23,
+          "days_ago": 24,
           "payload": {
             "title": "Senior Accountant",
             "url": "https://www.adzuna.com/land/ad/5760770410?se=LNTXRlx48RGV5bVn93ur0w&utm_medium=api&utm_source=3aa14b35&v=EC173CE045DB8878ABBC4E7112157FB3F0082120",
@@ -7238,7 +9450,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 52.285211375175926,
+      "score": 52.23954971765741,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -7268,7 +9480,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "cold",
-      "score": 52.17602155731481,
+      "score": 52.13035989773148,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -7298,7 +9510,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 52.14223914296759,
+      "score": 52.09657747992593,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -7328,7 +9540,7 @@
       "dm_email": "jim.hurley@inca.digital",
       "dm_linkedin_url": "http://www.linkedin.com/in/jimmhurley",
       "contact_strength": "verified",
-      "score": 52.06660025093518,
+      "score": 52.02093858663889,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -7358,14 +9570,14 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 52.03105856908796,
+      "score": 51.98539691190741,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
         {
           "type": "job_posted_finance_lead",
           "captured_at": "2026-07-04T10:17:38.845644",
-          "days_ago": 24,
+          "days_ago": 25,
           "payload": {
             "title": "Assistant Controller",
             "url": "https://www.adzuna.com/details/5759326672?utm_medium=api&utm_source=3aa14b35",
@@ -7388,7 +9600,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 51.931660417912035,
+      "score": 51.88599875955093,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -7400,6 +9612,36 @@
             "title": "Director of Finance",
             "url": "https://www.adzuna.com/details/5758728192?utm_medium=api&utm_source=3aa14b35",
             "date_posted": "2026-06-10T15:54:13Z",
+            "site": "adzuna"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Crescendo.ai",
+      "domain": "crescendo.ai",
+      "industry": "software_saas",
+      "headcount": null,
+      "country": "US",
+      "city": "San Francisco",
+      "state": "CA",
+      "dm_name": "Matt Price",
+      "dm_title": "CEO",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "partial",
+      "score": 51.83585143504167,
+      "insight": null,
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-07-05T22:14:20.637278",
+          "days_ago": 25,
+          "payload": {
+            "title": "Vice President, FP&A",
+            "url": "https://www.adzuna.com/details/5758653196?utm_medium=api&utm_source=3aa14b35",
+            "date_posted": "2026-06-10T12:53:42Z",
             "site": "adzuna"
           }
         }
@@ -7418,7 +9660,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 51.758558563166666,
+      "score": 51.71289690367129,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -7448,7 +9690,7 @@
       "dm_email": "seyed@verse.inc",
       "dm_linkedin_url": "http://www.linkedin.com/in/seyed-h-madaeni-ph-d-5697a749",
       "contact_strength": "verified",
-      "score": 51.666600223949075,
+      "score": 51.62093856124537,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -7459,6 +9701,36 @@
           "payload": {
             "title": "Director of Finance",
             "url": "https://www.linkedin.com/jobs/view/4427102182",
+            "date_posted": "2026-06-10",
+            "site": "linkedin"
+          }
+        }
+      ]
+    },
+    {
+      "name": "True Independent Holdings",
+      "domain": "trueindependentholdings.com",
+      "industry": "other",
+      "headcount": null,
+      "country": null,
+      "city": null,
+      "state": null,
+      "dm_name": "Jack Miller",
+      "dm_title": "CEO",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "partial",
+      "score": 51.62093855611111,
+      "insight": null,
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-07-04T22:09:28.770489",
+          "days_ago": 25,
+          "payload": {
+            "title": "Corporate Controller",
+            "url": "https://www.linkedin.com/jobs/view/4422756974",
             "date_posted": "2026-06-10",
             "site": "linkedin"
           }
@@ -7478,7 +9750,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 51.66660020840741,
+      "score": 51.620938551569445,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -7508,19 +9780,49 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 51.63041964981481,
+      "score": 51.584757991671296,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
         {
           "type": "job_posted_finance_lead",
           "captured_at": "2026-07-04T22:16:12.971435",
-          "days_ago": 25,
+          "days_ago": 26,
           "payload": {
             "title": "Assistant Controller",
             "url": "https://www.adzuna.com/details/5757917057?utm_medium=api&utm_source=3aa14b35",
             "date_posted": "2026-06-09T21:49:45Z",
             "site": "adzuna"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Wilson Kester",
+      "domain": "wilsonkester.com",
+      "industry": "legal_professional",
+      "headcount": null,
+      "country": "US",
+      "city": "Traverse City",
+      "state": "MI",
+      "dm_name": "Shelley A. Kester",
+      "dm_title": "CEO & Founder",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "partial",
+      "score": 51.22093854336574,
+      "insight": null,
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-07-04T10:14:43.763445",
+          "days_ago": 26,
+          "payload": {
+            "title": "Financial Controller",
+            "url": "https://www.indeed.com/viewjob?jk=d11fc768c1fc5cd1",
+            "date_posted": "2026-06-09",
+            "site": "indeed"
           }
         }
       ]
@@ -7538,7 +9840,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 51.26660019314815,
+      "score": 51.22093853752778,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -7556,6 +9858,36 @@
       ]
     },
     {
+      "name": "Sierra Bullets",
+      "domain": "sierrabullets.com",
+      "industry": "manufacturing",
+      "headcount": null,
+      "country": "US",
+      "city": "Sedalia",
+      "state": "MO",
+      "dm_name": "Jim Bruno",
+      "dm_title": "CEO",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "partial",
+      "score": 50.80779037654167,
+      "insight": null,
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-06-22T13:40:37.110424",
+          "days_ago": 27,
+          "payload": {
+            "title": "Assistant Controller",
+            "url": "https://www.adzuna.com/land/ad/5755931085?se=Nq5J9D9u8RG-C6DUZsghXQ&utm_medium=api&utm_source=3aa14b35&v=2800F420B071697F242D81E29D2778932608CC1C",
+            "date_posted": "2026-06-07T23:12:40Z",
+            "site": "adzuna"
+          }
+        }
+      ]
+    },
+    {
       "name": "Cazenovia Recovery Systems",
       "domain": "cazenoviarecovery.org",
       "industry": "healthcare",
@@ -7568,7 +9900,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 50.5749936803287,
+      "score": 50.529332033925925,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -7598,7 +9930,7 @@
       "dm_email": "erik@freeform.co",
       "dm_linkedin_url": "http://www.linkedin.com/in/erikpalitsch",
       "contact_strength": "verified",
-      "score": 50.06660015581481,
+      "score": 50.020938506712966,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -7628,7 +9960,7 @@
       "dm_email": "hoffman@summerconsultants.com",
       "dm_linkedin_url": "http://www.linkedin.com/in/james-hoffman-pe-leed-ap-cem-facec-962b3824",
       "contact_strength": "verified",
-      "score": 50.066600149796294,
+      "score": 50.020938502027775,
       "insight": null,
       "trigger_type": "finance_hire",
       "signals": [
@@ -7641,36 +9973,6 @@
             "url": "https://www.indeed.com/viewjob?jk=9df3a42427b8a50a",
             "date_posted": "2026-06-06",
             "site": "indeed"
-          }
-        }
-      ]
-    },
-    {
-      "name": "Volunteers Of America Of Alaska",
-      "domain": "voaak.org",
-      "industry": "government_nonprofit",
-      "headcount": null,
-      "country": "US",
-      "city": "Anchorage",
-      "state": "AK",
-      "dm_name": "Julia Luey",
-      "dm_title": "President and CEO",
-      "dm_email": null,
-      "dm_linkedin_url": null,
-      "contact_strength": "partial",
-      "score": 50.044725146782405,
-      "insight": null,
-      "trigger_type": "finance_hire",
-      "signals": [
-        {
-          "type": "job_posted_finance_lead",
-          "captured_at": "2026-07-04T22:16:12.971435",
-          "days_ago": 29,
-          "payload": {
-            "title": "Controller & Accounting Manager",
-            "url": "https://www.adzuna.com/details/5753894029?utm_medium=api&utm_source=3aa14b35",
-            "date_posted": "2026-06-05T22:41:15Z",
-            "site": "adzuna"
           }
         }
       ]
@@ -7730,6 +10032,36 @@
             "title": "Director of Finance",
             "url": "https://www.adzuna.com/details/5752779179?utm_medium=api&utm_source=3aa14b35",
             "date_posted": "2026-06-05T00:18:36Z",
+            "site": "adzuna"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Volunteers Of America Of Alaska",
+      "domain": "voaak.org",
+      "industry": "government_nonprofit",
+      "headcount": null,
+      "country": "US",
+      "city": "Anchorage",
+      "state": "AK",
+      "dm_name": "Julia Luey",
+      "dm_title": "President and CEO",
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "partial",
+      "score": 50.0,
+      "insight": null,
+      "trigger_type": "finance_hire",
+      "signals": [
+        {
+          "type": "job_posted_finance_lead",
+          "captured_at": "2026-07-04T22:16:12.971435",
+          "days_ago": 30,
+          "payload": {
+            "title": "Controller & Accounting Manager",
+            "url": "https://www.adzuna.com/details/5753894029?utm_medium=api&utm_source=3aa14b35",
+            "date_posted": "2026-06-05T22:41:15Z",
             "site": "adzuna"
           }
         }
@@ -7815,7 +10147,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 23.466599969921297,
+      "score": 23.42093826737037,
       "insight": null,
       "trigger_type": "form_d",
       "signals": [
@@ -7837,17 +10169,17 @@
     {
       "name": "Bito Inc",
       "domain": "bito.ai",
-      "industry": null,
+      "industry": "unknown",
       "headcount": 37,
-      "country": null,
-      "city": null,
-      "state": null,
+      "country": "US",
+      "city": "Menlo Park",
+      "state": "CA",
       "dm_name": null,
       "dm_title": null,
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "cold",
-      "score": 23.466598677699075,
+      "score": 23.42093826076852,
       "insight": null,
       "trigger_type": "funding_event",
       "signals": [
@@ -7882,7 +10214,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 23.06659995965741,
+      "score": 23.020938256064817,
       "insight": null,
       "trigger_type": "form_d",
       "signals": [
@@ -7904,17 +10236,17 @@
     {
       "name": "Rentberry Inc.",
       "domain": "rentberry.com",
-      "industry": null,
+      "industry": "unknown",
       "headcount": 39,
-      "country": null,
-      "city": null,
-      "state": null,
+      "country": "US",
+      "city": "SAN FRANCISCO",
+      "state": "CA",
       "dm_name": null,
       "dm_title": null,
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "cold",
-      "score": 22.266598622101853,
+      "score": 22.220938251453703,
       "insight": null,
       "trigger_type": "funding_event",
       "signals": [
@@ -7939,17 +10271,17 @@
     {
       "name": "Scandinavian Market LLC",
       "domain": "bjorkcafe.com",
-      "industry": null,
+      "industry": "unknown",
       "headcount": 20,
-      "country": null,
-      "city": null,
-      "state": null,
+      "country": "US",
+      "city": "NEW YORK",
+      "state": "NY",
       "dm_name": null,
       "dm_title": null,
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "cold",
-      "score": 20.666598609087963,
+      "score": 20.620938247328702,
       "insight": null,
       "trigger_type": "funding_event",
       "signals": [
@@ -7974,17 +10306,17 @@
     {
       "name": "Influence Mobile, Inc",
       "domain": "influencemobile.com",
-      "industry": null,
+      "industry": "unknown",
       "headcount": 30,
-      "country": null,
-      "city": null,
-      "state": null,
+      "country": "US",
+      "city": "Seattle",
+      "state": "WA",
       "dm_name": null,
       "dm_title": null,
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "cold",
-      "score": 20.26659859300926,
+      "score": 20.220938242601854,
       "insight": null,
       "trigger_type": "funding_event",
       "signals": [
@@ -8009,17 +10341,17 @@
     {
       "name": "Boss Tech, Inc",
       "domain": "boss.tech",
-      "industry": null,
+      "industry": "unknown",
       "headcount": 27,
-      "country": null,
-      "city": null,
-      "state": null,
+      "country": "US",
+      "city": "PHILADELPHIA",
+      "state": "PA",
       "dm_name": null,
       "dm_title": null,
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "cold",
-      "score": 19.866598581837962,
+      "score": 19.82093823799537,
       "insight": null,
       "trigger_type": "funding_event",
       "signals": [
@@ -8042,6 +10374,41 @@
       ]
     },
     {
+      "name": "Arctic 7, Inc.",
+      "domain": "arctic7.com",
+      "industry": null,
+      "headcount": 25,
+      "country": null,
+      "city": null,
+      "state": null,
+      "dm_name": null,
+      "dm_title": null,
+      "dm_email": null,
+      "dm_linkedin_url": null,
+      "contact_strength": "cold",
+      "score": 19.820934748546296,
+      "insight": null,
+      "trigger_type": "funding_event",
+      "signals": [
+        {
+          "type": "funding_raised",
+          "captured_at": "2026-07-05T22:17:37.833515",
+          "days_ago": 12,
+          "payload": {
+            "title": "Reg CF raise - Arctic 7, Inc.",
+            "filing_type": "Form C",
+            "filed_on": "2026-06-23",
+            "link": "https://www.sec.gov/Archives/edgar/data/2095549/000209554926000004/0002095549-26-000004-index.htm",
+            "biz_state": "TX",
+            "biz_location": "Austin",
+            "offering_amount": 1234998.49,
+            "revenue_amount": 7722203.0,
+            "current_employees": 25
+          }
+        }
+      ]
+    },
+    {
       "name": "Tagup, Inc.",
       "domain": "tagup.io",
       "industry": "software_saas",
@@ -8054,7 +10421,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 19.466599979212965,
+      "score": 19.42093823412037,
       "insight": null,
       "trigger_type": "form_d",
       "signals": [
@@ -8086,7 +10453,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 19.466599976083334,
+      "score": 19.42093822954167,
       "insight": null,
       "trigger_type": "form_d",
       "signals": [
@@ -8118,7 +10485,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 19.46659997300463,
+      "score": 19.42093822438426,
       "insight": null,
       "trigger_type": "form_d",
       "signals": [
@@ -8140,17 +10507,17 @@
     {
       "name": "Moon Five Technologies",
       "domain": "moonfive.tech",
-      "industry": null,
+      "industry": "unknown",
       "headcount": 5,
-      "country": null,
-      "city": null,
-      "state": null,
+      "country": "US",
+      "city": "BERKELEY",
+      "state": "CA",
       "dm_name": null,
       "dm_title": null,
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "cold",
-      "score": 19.466598674416666,
+      "score": 19.420938211060186,
       "insight": null,
       "trigger_type": "funding_event",
       "signals": [
@@ -8175,17 +10542,17 @@
     {
       "name": "CGB Green Liberty Notes LLC",
       "domain": "invest.ctgreenbank.com",
-      "industry": null,
+      "industry": "unknown",
       "headcount": null,
-      "country": null,
-      "city": null,
-      "state": null,
+      "country": "US",
+      "city": "HARTFORD",
+      "state": "CT",
       "dm_name": null,
       "dm_title": null,
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "cold",
-      "score": 19.46659866738426,
+      "score": 19.42093820499074,
       "insight": null,
       "trigger_type": "funding_event",
       "signals": [
@@ -8220,7 +10587,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "cold",
-      "score": 19.466598575185184,
+      "score": 19.42093820014815,
       "insight": null,
       "trigger_type": "funding_event",
       "signals": [
@@ -8255,7 +10622,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "cold",
-      "score": 19.46659856525926,
+      "score": 19.42093819203241,
       "insight": null,
       "trigger_type": "funding_event",
       "signals": [
@@ -8290,7 +10657,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 19.066599966939815,
+      "score": 19.020938186555554,
       "insight": null,
       "trigger_type": "form_d",
       "signals": [
@@ -8322,7 +10689,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 19.066599962930553,
+      "score": 19.020938180328706,
       "insight": null,
       "trigger_type": "form_d",
       "signals": [
@@ -8344,17 +10711,17 @@
     {
       "name": "THORN SPIRITS LLC",
       "domain": "drinklongball.com",
-      "industry": null,
+      "industry": "unknown",
       "headcount": 2,
-      "country": null,
-      "city": null,
-      "state": null,
+      "country": "US",
+      "city": "San Diego",
+      "state": "CA",
       "dm_name": null,
       "dm_title": null,
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "cold",
-      "score": 19.066598656222222,
+      "score": 19.02093815101389,
       "insight": null,
       "trigger_type": "funding_event",
       "signals": [
@@ -8379,17 +10746,17 @@
     {
       "name": "VidAngel Entertainment, Inc.",
       "domain": "vidangel.com",
-      "industry": null,
+      "industry": "media_entertainment",
       "headcount": 69,
-      "country": null,
-      "city": null,
-      "state": null,
+      "country": "US",
+      "city": "LEHI",
+      "state": "UT",
       "dm_name": null,
       "dm_title": null,
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "cold",
-      "score": 19.06659865287037,
+      "score": 19.02093814622222,
       "insight": null,
       "trigger_type": "funding_event",
       "signals": [
@@ -8424,7 +10791,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 18.666599956421297,
+      "score": 18.620938141175927,
       "insight": null,
       "trigger_type": "form_d",
       "signals": [
@@ -8456,7 +10823,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 18.66659995301389,
+      "score": 18.620938136476852,
       "insight": null,
       "trigger_type": "form_d",
       "signals": [
@@ -8488,7 +10855,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "cold",
-      "score": 18.666599949324073,
+      "score": 18.620938132166664,
       "insight": null,
       "trigger_type": "form_d",
       "signals": [
@@ -8520,7 +10887,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 18.666599946050926,
+      "score": 18.620938127115743,
       "insight": null,
       "trigger_type": "form_d",
       "signals": [
@@ -8552,7 +10919,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 18.66659994287037,
+      "score": 18.620938122046297,
       "insight": null,
       "trigger_type": "form_d",
       "signals": [
@@ -8584,7 +10951,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 18.666599939666668,
+      "score": 18.620938116041664,
       "insight": null,
       "trigger_type": "form_d",
       "signals": [
@@ -8616,7 +10983,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 18.666599936375,
+      "score": 18.620938112185186,
       "insight": null,
       "trigger_type": "form_d",
       "signals": [
@@ -8648,7 +11015,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 18.666599933069445,
+      "score": 18.620938107907406,
       "insight": null,
       "trigger_type": "form_d",
       "signals": [
@@ -8680,7 +11047,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 18.266599929768518,
+      "score": 18.220938101402776,
       "insight": null,
       "trigger_type": "form_d",
       "signals": [
@@ -8712,7 +11079,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "cold",
-      "score": 18.266599926435184,
+      "score": 18.22093809688889,
       "insight": null,
       "trigger_type": "form_d",
       "signals": [
@@ -8744,7 +11111,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 18.266599922819445,
+      "score": 18.22093809074074,
       "insight": null,
       "trigger_type": "form_d",
       "signals": [
@@ -8776,7 +11143,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 18.266599919625,
+      "score": 18.220938086305555,
       "insight": null,
       "trigger_type": "form_d",
       "signals": [
@@ -8798,17 +11165,17 @@
     {
       "name": "20Slash20, Inc.",
       "domain": "theeyedrink.com",
-      "industry": null,
+      "industry": "unknown",
       "headcount": 2,
-      "country": null,
-      "city": null,
-      "state": null,
+      "country": "US",
+      "city": "WEST COVINA",
+      "state": "CA",
       "dm_name": null,
       "dm_title": null,
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "cold",
-      "score": 18.266598638685185,
+      "score": 18.220938081675925,
       "insight": null,
       "trigger_type": "funding_event",
       "signals": [
@@ -8833,17 +11200,17 @@
     {
       "name": "Martinson Machine LLC",
       "domain": "martinsonmachine.com",
-      "industry": null,
+      "industry": "unknown",
       "headcount": 4,
-      "country": null,
-      "city": null,
-      "state": null,
+      "country": "US",
+      "city": "GAINESVILLE",
+      "state": "FL",
       "dm_name": null,
       "dm_title": null,
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "cold",
-      "score": 18.26659863200926,
+      "score": 18.220938077435186,
       "insight": null,
       "trigger_type": "funding_event",
       "signals": [
@@ -8868,17 +11235,17 @@
     {
       "name": "Barricade Therapeutics Corp.",
       "domain": "barricadetherapeutics.com",
-      "industry": null,
+      "industry": "healthcare",
       "headcount": null,
-      "country": null,
-      "city": null,
-      "state": null,
+      "country": "US",
+      "city": "Fort Worth",
+      "state": "TX",
       "dm_name": null,
       "dm_title": null,
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "cold",
-      "score": 18.26659862839815,
+      "score": 18.22093807373148,
       "insight": null,
       "trigger_type": "funding_event",
       "signals": [
@@ -8913,7 +11280,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 18.042269934763887,
+      "score": 17.99660808772685,
       "insight": null,
       "trigger_type": "funding_event",
       "signals": [
@@ -8943,7 +11310,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 17.866599485810184,
+      "score": 17.820938064699074,
       "insight": null,
       "trigger_type": "form_d",
       "signals": [
@@ -8991,7 +11358,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "cold",
-      "score": 17.866598552171297,
+      "score": 17.820938059212963,
       "insight": null,
       "trigger_type": "funding_event",
       "signals": [
@@ -9026,7 +11393,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 17.637424202930553,
+      "score": 17.591762343685186,
       "insight": null,
       "trigger_type": "form_d",
       "signals": [
@@ -9056,7 +11423,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "cold",
-      "score": 17.46659854565741,
+      "score": 17.420938044777778,
       "insight": null,
       "trigger_type": "funding_event",
       "signals": [
@@ -9091,7 +11458,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "cold",
-      "score": 17.46659854212963,
+      "score": 17.420938038930554,
       "insight": null,
       "trigger_type": "funding_event",
       "signals": [
@@ -9126,7 +11493,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 17.066599905703704,
+      "score": 17.020938033425924,
       "insight": null,
       "trigger_type": "form_d",
       "signals": [
@@ -9158,7 +11525,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 17.066599902407408,
+      "score": 17.020938027921297,
       "insight": null,
       "trigger_type": "form_d",
       "signals": [
@@ -9190,7 +11557,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 17.066599898967592,
+      "score": 17.02093802171759,
       "insight": null,
       "trigger_type": "form_d",
       "signals": [
@@ -9222,7 +11589,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 17.066599895819444,
+      "score": 17.020938016907408,
       "insight": null,
       "trigger_type": "form_d",
       "signals": [
@@ -9254,7 +11621,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 17.066599892726853,
+      "score": 17.020938011430555,
       "insight": null,
       "trigger_type": "form_d",
       "signals": [
@@ -9276,17 +11643,17 @@
     {
       "name": "Chattooga Brewing LLC",
       "domain": "chattoogabrewco.com",
-      "industry": null,
+      "industry": "unknown",
       "headcount": null,
-      "country": null,
-      "city": null,
-      "state": null,
+      "country": "US",
+      "city": "Trion",
+      "state": "GA",
       "dm_name": null,
       "dm_title": null,
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "cold",
-      "score": 17.06659861563426,
+      "score": 17.020938007569445,
       "insight": null,
       "trigger_type": "funding_event",
       "signals": [
@@ -9321,7 +11688,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 16.846894482430557,
+      "score": 16.80123259710185,
       "insight": null,
       "trigger_type": "form_d",
       "signals": [
@@ -9351,7 +11718,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 16.84689447887963,
+      "score": 16.801232592805555,
       "insight": null,
       "trigger_type": "form_d",
       "signals": [
@@ -9381,7 +11748,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 16.666599878898147,
+      "score": 16.620937990800925,
       "insight": null,
       "trigger_type": "form_d",
       "signals": [
@@ -9426,7 +11793,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 16.666599875611112,
+      "score": 16.62093798540741,
       "insight": null,
       "trigger_type": "form_d",
       "signals": [
@@ -9448,17 +11815,17 @@
     {
       "name": "Vineyard To Vintage LLC",
       "domain": "vineyardtovintage.com",
-      "industry": null,
+      "industry": "unknown",
       "headcount": null,
-      "country": null,
-      "city": null,
-      "state": null,
+      "country": "US",
+      "city": "SACRAMENTO",
+      "state": "CA",
       "dm_name": null,
       "dm_title": null,
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "cold",
-      "score": 16.666598612162037,
+      "score": 16.62093798051852,
       "insight": null,
       "trigger_type": "funding_event",
       "signals": [
@@ -9483,17 +11850,17 @@
     {
       "name": "Solar Faithful",
       "domain": "solarfaithful.org",
-      "industry": null,
+      "industry": "unknown",
       "headcount": 11,
-      "country": null,
-      "city": null,
-      "state": null,
+      "country": "US",
+      "city": "Muskegon",
+      "state": "MI",
       "dm_name": null,
       "dm_title": null,
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "cold",
-      "score": 16.66659860586574,
+      "score": 16.62093797637963,
       "insight": null,
       "trigger_type": "funding_event",
       "signals": [
@@ -9528,7 +11895,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "cold",
-      "score": 16.666598502800927,
+      "score": 16.620937971430557,
       "insight": null,
       "trigger_type": "funding_event",
       "signals": [
@@ -9563,7 +11930,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "cold",
-      "score": 16.666598492824072,
+      "score": 16.620937966967592,
       "insight": null,
       "trigger_type": "funding_event",
       "signals": [
@@ -9598,7 +11965,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 16.44898049815278,
+      "score": 16.40331858675926,
       "insight": null,
       "trigger_type": "funding_event",
       "signals": [
@@ -9618,17 +11985,17 @@
     {
       "name": "Stoke Factory, Inc.",
       "domain": "thestokefactory.com",
-      "industry": null,
+      "industry": "unknown",
       "headcount": 8,
-      "country": null,
-      "city": null,
-      "state": null,
+      "country": "US",
+      "city": "New Braunfels",
+      "state": "TX",
       "dm_name": null,
       "dm_title": null,
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "cold",
-      "score": 16.266598602569445,
+      "score": 16.22093792034722,
       "insight": null,
       "trigger_type": "funding_event",
       "signals": [
@@ -9653,17 +12020,17 @@
     {
       "name": "HighTide Energy Inc.",
       "domain": "accelevatesolutions.com",
-      "industry": null,
+      "industry": "unknown",
       "headcount": 7,
-      "country": null,
-      "city": null,
-      "state": null,
+      "country": "US",
+      "city": "SCOTTSDALE",
+      "state": "AZ",
       "dm_name": null,
       "dm_title": null,
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "cold",
-      "score": 16.26659859951389,
+      "score": 16.220937913685184,
       "insight": null,
       "trigger_type": "funding_event",
       "signals": [
@@ -9698,7 +12065,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 16.056518259189815,
+      "score": 16.010856319162038,
       "insight": null,
       "trigger_type": "form_d",
       "signals": [
@@ -9728,7 +12095,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 16.056518255759258,
+      "score": 16.01085629798611,
       "insight": null,
       "trigger_type": "form_d",
       "signals": [
@@ -9758,7 +12125,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 15.866599842537036,
+      "score": 15.820937881527778,
       "insight": null,
       "trigger_type": "form_d",
       "signals": [
@@ -9790,7 +12157,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 15.86659983927315,
+      "score": 15.820937877092593,
       "insight": null,
       "trigger_type": "form_d",
       "signals": [
@@ -9822,7 +12189,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 15.866599835870371,
+      "score": 15.820937873074076,
       "insight": null,
       "trigger_type": "form_d",
       "signals": [
@@ -9854,7 +12221,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 15.866599832217592,
+      "score": 15.820937868675927,
       "insight": null,
       "trigger_type": "form_d",
       "signals": [
@@ -9886,7 +12253,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 15.866599828935186,
+      "score": 15.82093786386574,
       "insight": null,
       "trigger_type": "form_d",
       "signals": [
@@ -9908,17 +12275,17 @@
     {
       "name": "Normopharm Inc",
       "domain": "normotim.com",
-      "industry": null,
+      "industry": "unknown",
       "headcount": 2,
-      "country": null,
-      "city": null,
-      "state": null,
+      "country": "US",
+      "city": "Dover",
+      "state": "DE",
       "dm_name": null,
       "dm_title": null,
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "cold",
-      "score": 15.866598585773149,
+      "score": 15.820937857375,
       "insight": null,
       "trigger_type": "funding_event",
       "signals": [
@@ -9943,17 +12310,17 @@
     {
       "name": "MAGFAST, LLC",
       "domain": "magfast.com",
-      "industry": null,
+      "industry": "unknown",
       "headcount": 2,
-      "country": null,
-      "city": null,
-      "state": null,
+      "country": "US",
+      "city": "Cornwall on Hudson",
+      "state": "NY",
       "dm_name": null,
       "dm_title": null,
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "cold",
-      "score": 15.866598578550926,
+      "score": 15.820937852768518,
       "insight": null,
       "trigger_type": "funding_event",
       "signals": [
@@ -9988,7 +12355,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 15.69463988800926,
+      "score": 15.648977909930556,
       "insight": null,
       "trigger_type": "form_d",
       "signals": [
@@ -10018,7 +12385,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 15.69463988487963,
+      "score": 15.648977904856482,
       "insight": null,
       "trigger_type": "form_d",
       "signals": [
@@ -10048,7 +12415,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "partial",
-      "score": 15.466599270037037,
+      "score": 15.420937670189815,
       "insight": null,
       "trigger_type": "funding_event",
       "signals": [
@@ -10086,17 +12453,17 @@
     {
       "name": "Tatleaux Browns Mills Landfill Solar, LLC",
       "domain": "tatleauxsolar.com",
-      "industry": null,
+      "industry": "unknown",
       "headcount": null,
-      "country": null,
-      "city": null,
-      "state": null,
+      "country": "US",
+      "city": "Princeton",
+      "state": "NJ",
       "dm_name": null,
       "dm_title": null,
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "cold",
-      "score": 15.466598680944443,
+      "score": 15.420937665106482,
       "insight": null,
       "trigger_type": "funding_event",
       "signals": [
@@ -10121,17 +12488,17 @@
     {
       "name": "VADE NUTRITION INC",
       "domain": "vade-nutrition.com",
-      "industry": null,
+      "industry": "unknown",
       "headcount": 3,
-      "country": null,
-      "city": null,
-      "state": null,
+      "country": "US",
+      "city": "Howell",
+      "state": "MI",
       "dm_name": null,
       "dm_title": null,
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "cold",
-      "score": 15.46659867074537,
+      "score": 15.420937659060185,
       "insight": null,
       "trigger_type": "funding_event",
       "signals": [
@@ -10156,17 +12523,17 @@
     {
       "name": "Bull Moose Trading Co. LLC",
       "domain": "rockwellsgas.com",
-      "industry": null,
+      "industry": "unknown",
       "headcount": 2,
-      "country": null,
-      "city": null,
-      "state": null,
+      "country": "US",
+      "city": "GAINESBORO",
+      "state": "TN",
       "dm_name": null,
       "dm_title": null,
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "cold",
-      "score": 15.46659866411111,
+      "score": 15.42093765386111,
       "insight": null,
       "trigger_type": "funding_event",
       "signals": [
@@ -10201,7 +12568,7 @@
       "dm_email": null,
       "dm_linkedin_url": null,
       "contact_strength": "cold",
-      "score": 15.466598571962962,
+      "score": 15.420937648939816,
       "insight": null,
       "trigger_type": "funding_event",
       "signals": [
@@ -10219,41 +12586,6 @@
             "offering_amount": 75000.0,
             "revenue_amount": 0.0,
             "current_employees": 10
-          }
-        }
-      ]
-    },
-    {
-      "name": "Tequila Cabal, Inc.",
-      "domain": "tequilacabal.com",
-      "industry": null,
-      "headcount": null,
-      "country": null,
-      "city": null,
-      "state": null,
-      "dm_name": null,
-      "dm_title": null,
-      "dm_email": null,
-      "dm_linkedin_url": null,
-      "contact_strength": "cold",
-      "score": 15.466598568879629,
-      "insight": null,
-      "trigger_type": "funding_event",
-      "signals": [
-        {
-          "type": "funding_raised",
-          "captured_at": "2026-07-05T19:41:52.603372",
-          "days_ago": 13,
-          "payload": {
-            "title": "Reg CF raise - Tequila Cabal, Inc.",
-            "filing_type": "Form C",
-            "filed_on": "2026-06-22",
-            "link": "https://www.sec.gov/Archives/edgar/data/2094898/000209489826000010/0002094898-26-000010-index.htm",
-            "biz_state": "CA",
-            "biz_location": "Los Angeles",
-            "offering_amount": 1234998.58,
-            "revenue_amount": 842582.0,
-            "current_employees": 1
           }
         }
       ]
