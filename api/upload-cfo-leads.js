@@ -6,8 +6,13 @@
 
 const { put } = require('@vercel/blob');
 
-const BLOB_KEY = 'cfo-leads-current.json';
-const MAX_BODY_BYTES = 5 * 1024 * 1024;
+// `kind=current` (default) -> the curated /cfo page feed.
+// `kind=inventory`        -> the full queryable lead inventory (/api/leads).
+const BLOB_KEYS = {
+  current: 'cfo-leads-current.json',
+  inventory: 'cfo-leads-inventory.json',
+};
+const MAX_BODY_BYTES = 8 * 1024 * 1024;
 
 module.exports = async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -31,6 +36,9 @@ module.exports = async function handler(req, res) {
   if (!Array.isArray(body.leads)) {
     return res.status(400).json({ error: 'body.leads must be an array' });
   }
+
+  const kind = (req.query && req.query.kind === 'inventory') ? 'inventory' : 'current';
+  const BLOB_KEY = BLOB_KEYS[kind];
 
   try {
     const json = JSON.stringify(body);
