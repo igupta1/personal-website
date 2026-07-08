@@ -48,3 +48,11 @@ insurance_pipeline/**/*.pyc
 insurance_pipeline/**/*.egg-info/
 insurance_pipeline/data/smoke/
 
+# --- System B (system_b/) ---
+system_b/.venv/
+system_b/.pytest_cache/
+system_b/.mypy_cache/
+system_b/**/__pycache__/
+system_b/**/*.pyc
+system_b/**/*.egg-info/
+
