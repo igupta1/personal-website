@@ -55,4 +55,7 @@ system_b/.mypy_cache/
 system_b/**/__pycache__/
 system_b/**/*.pyc
 system_b/**/*.egg-info/
+system_b/logs/
+system_b/apollo-contacts-export.csv
+system_b/review_cards.txt
 
