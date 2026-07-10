@@ -18,44 +18,11 @@
 .env.test.local
 .env.production.local
 
-# Secrets / API keys - ignore .env files everywhere
+# Secrets / API keys
 .env
-**/venv/
+.vercel
+.env*.local
 
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-.vercel
-.env*.local
-
-# --- Python pipeline (pipeline/) ---
-pipeline/.venv/
-pipeline/.pytest_cache/
-pipeline/.mypy_cache/
-pipeline/.ruff_cache/
-pipeline/**/__pycache__/
-pipeline/**/*.pyc
-pipeline/**/*.egg-info/
-pipeline/data/smoke/
-
-# --- Python pipeline (insurance_pipeline/) ---
-insurance_pipeline/.venv/
-insurance_pipeline/.pytest_cache/
-insurance_pipeline/.mypy_cache/
-insurance_pipeline/.ruff_cache/
-insurance_pipeline/**/__pycache__/
-insurance_pipeline/**/*.pyc
-insurance_pipeline/**/*.egg-info/
-insurance_pipeline/data/smoke/
-
-# --- System B (system_b/) ---
-system_b/.venv/
-system_b/.pytest_cache/
-system_b/.mypy_cache/
-system_b/**/__pycache__/
-system_b/**/*.pyc
-system_b/**/*.egg-info/
-system_b/logs/
-system_b/apollo-contacts-export.csv
-system_b/review_cards.txt
-
