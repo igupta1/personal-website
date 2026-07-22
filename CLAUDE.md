@@ -5,8 +5,10 @@ Ishaan's personal website + its lead-magnet API. Deployed on Vercel.
 ## Stack
 - Create React App, React 19, React Router v7, Tailwind CSS.
 - Pages in `src/pages/`, components in `src/components/`.
-- Routes (`src/App.js`): `/`→About, `/gtm`→AITools, plus lead pages
-  `/it-msps`, `/mssps`, `/cloud`, `/insurance`, `/cfo`.
+- Routes (`src/App.js`): `/`→About, `/gtm`→AITools. (The lead pages
+  `/it-msps`, `/mssps`, `/cloud`, `/insurance`, `/cfo` and their shared
+  `LeadsPage`/`LeadCard`/`LeadFilters` components were removed; unknown paths
+  redirect to `/`.)
 
 ## API (`api/`, Vercel serverless)
 - `upload-*` — the lead pipelines POST inventories here (→ Vercel Blob).
